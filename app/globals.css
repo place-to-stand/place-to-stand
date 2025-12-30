@@ -8,10 +8,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   @apply bg-ink font-sans text-ink antialiased;
+  overflow-x: hidden;
 }
 
 @keyframes pts-gradient-shift {

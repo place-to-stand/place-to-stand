@@ -36,7 +36,7 @@ export function PageParticles() {
     let height = 0
     let dpr = 1
 
-    const particleCount = 1184
+    const particleCount = 1500
     const particles: Particle[] = Array.from(
       { length: particleCount },
       (_, i) => {
@@ -48,7 +48,7 @@ export function PageParticles() {
           radius: 0.35 + z * 1.05,
           vx: (Math.random() - 0.5) * (0.00002 + z * 0.00005),
           vy: (Math.random() - 0.5) * (0.000015 + z * 0.00004),
-          color: i % 2 === 0 ? '#ffffff' : '#9CA3AF',
+          color: i % 2 === 0 ? '#ffffff' : '#7E7B7B',
         }
       }
     )

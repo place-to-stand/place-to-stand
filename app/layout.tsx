@@ -58,14 +58,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang='en' className='scroll-smooth' suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen bg-ink text-ink',
+          'min-h-screen overflow-x-hidden bg-ink text-ink',
           afacad.variable,
           bebasNeue.variable,
           sourceSans.variable
         )}
       >
         <div
-          className='pts-animated-gradient bg-gradientSite pointer-events-none fixed inset-0 z-0'
+          className='pts-animated-gradient pointer-events-none fixed inset-0 z-0 bg-gradientSite'
           aria-hidden
         />
         <div
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <PageParticles />
 
-        <div className='relative z-10 flex min-h-screen flex-col'>
+        <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
           <Header />
           {children}
           <Footer />
