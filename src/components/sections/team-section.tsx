@@ -26,7 +26,7 @@ const team = [
 
 export function TeamSection() {
   return (
-    <AnimatedSection id='team' className='flex flex-col gap-20'>
+    <AnimatedSection id='team' className='flex flex-col gap-20 !pt-8'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           Team

@@ -46,7 +46,7 @@ export function HowWeWorkSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStep(prev => (prev + 1) % steps.length)
-    }, 1500)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
 
@@ -65,37 +65,47 @@ export function HowWeWorkSection() {
         </p> */}
       </div>
 
-      <ol className='grid gap-6 md:grid-cols-5'>
-        {steps.map((step, index) => {
-          const isActive = index === activeStep
-          return (
-            <li
-              key={step.number}
-              className={cn(
-                'relative flex flex-col gap-4 overflow-hidden rounded-xl p-5 text-ink transition-all duration-500 ease-in-out',
-                isActive
-                  ? 'z-10 scale-105 bg-white shadow-xl ring-1 ring-black/5'
-                  : 'bg-white/50 shadow-sm backdrop-blur hover:bg-white/80'
-              )}
-            >
-              <span
-                className={cn(
-                  'text-sm font-semibold uppercase tracking-[0.1em] transition-colors',
-                  isActive ? 'text-ink' : 'text-ink/60'
-                )}
-              >
-                {step.number}
-              </span>
-              <h3 className='font-headline text-2xl uppercase leading-none'>
-                {step.title}
-              </h3>
-              <p className={cn('text-base !leading-snug transition-colors', isActive ? 'text-ink/90' : 'text-ink/70')}>
-                {step.description}
-              </p>
-            </li>
-          )
-        })}
-      </ol>
+      <div className='relative'>
+        {/* Cards grid */}
+        <ol className='relative grid gap-6 md:grid-cols-5'>
+          {steps.map((step, index) => {
+            const isActive = index === activeStep
+            return (
+              <li key={step.number} className='relative flex h-full flex-col'>
+                {/* Card content */}
+                <div
+                  className={cn(
+                    'relative flex h-full flex-col gap-4 rounded-xl p-5 will-change-transform',
+                    isActive
+                      ? 'bg-white shadow-lg -translate-y-1 transition-all duration-[2500ms] ease-out'
+                      : 'bg-white/40 shadow-sm backdrop-blur hover:bg-white/80 translate-y-0 transition-all duration-[2500ms] ease-in'
+                  )}
+                >
+                  <span
+                    className={cn(
+                      'text-sm font-semibold uppercase tracking-[0.1em] transition-colors',
+                      isActive ? 'text-ink' : 'text-ink/60'
+                    )}
+                  >
+                    {step.number}
+                  </span>
+                  <h3 className='font-headline text-2xl uppercase leading-none'>
+                    {step.title}
+                  </h3>
+                  <p
+                    className={cn(
+                      'text-base !leading-snug transition-colors',
+                      isActive ? 'text-ink/90' : 'text-ink/70'
+                    )}
+                  >
+                    {step.description}
+                  </p>
+                </div>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
 
       <div className='mx-auto w-full max-w-3xl'>
         <div className='rounded-2xl bg-gradientPrimary p-[1px]'>
