@@ -83,7 +83,7 @@ export function WorkSection() {
           our partners.
         </p>
       </div>
-      <div className='grid gap-6 md:grid-cols-2'>
+      <div className='grid gap-4 md:grid-cols-3'>
         {projects.map(project => (
           <a
             key={project.title}
@@ -91,7 +91,7 @@ export function WorkSection() {
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group flex flex-col overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-md backdrop-blur transition duration-500 hover:-translate-y-1 hover:shadow-xl focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/40'
+            className='group flex flex-col overflow-hidden rounded-xl border border-ink bg-white/50 text-ink no-underline shadow-sm backdrop-blur transition-all duration-300 ease-out hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/30'
           >
             <div className='relative aspect-video w-full overflow-hidden'>
               <Image
@@ -101,16 +101,16 @@ export function WorkSection() {
                 className='object-cover'
               />
             </div>
-            <div className='flex grow flex-col justify-between gap-3 p-6'>
-              <div className='flex flex-col gap-3'>
-                <h3 className='font-headline text-2xl font-semibold uppercase leading-none'>
+            <div className='flex grow flex-col justify-between gap-3 p-4'>
+              <div className='flex flex-col gap-2'>
+                <h3 className='font-headline text-xl font-semibold uppercase leading-none'>
                   {project.title}
                 </h3>
-                <p className='text-base !leading-snug text-ink/60'>
+                <p className='text-sm !leading-snug text-ink/85'>
                   {project.description}
                 </p>
               </div>
-              <span className='inline-flex items-center gap-2 text-sm font-semibold uppercase text-ink transition group-hover:text-ink/70 group-focus-visible:text-ink/70'>
+              <span className='inline-flex items-center gap-2 text-xs font-semibold uppercase text-ink'>
                 View Project
                 <span
                   aria-hidden

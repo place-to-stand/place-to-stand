@@ -1,35 +1,33 @@
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
-
-const hashHref = (hash: string) => ({ pathname: '/', hash })
+import { hashHref } from '@/src/components/layout/nav-links'
 
 export function HeroSection() {
   return (
     <AnimatedSection
       id='home'
-      className='relative flex max-w-none flex-col items-center gap-6 overflow-hidden bg-gradientPrimary px-8 pb-28 pt-[200px] text-center text-ink shadow-xl md:pb-44 md:pt-[260px]'
+      data-pts-hero
+      className='relative isolate flex min-h-[100svh] max-w-none flex-col items-center justify-center gap-6 overflow-hidden px-8 pb-40 pt-28 text-center text-ink'
     >
-      <div
-        className='absolute inset-0 -z-10 bg-[radial-gradient(circle,_rgba(255,255,255,0.65)_0%,_rgba(255,255,255,0)_60%)]'
-        aria-hidden
-      />
-      <h1 className='max-w-3xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-6xl'>
-        Your lever in the digital world
-      </h1>
-      <p className='max-w-2xl text-base text-ink/80 md:text-lg'>
-        Businesses don’t need to be huge to make big moves; they just need the
-        right tools and a solid foundation. Place To Stand is the strategic,
-        design, and development partner building experiences that help ambitious
-        businesses move forward.
-      </p>
-      <div className='mt-4 flex flex-col items-center gap-4 sm:flex-row'>
-        <Button asChild size='lg'>
-          <Link href={hashHref('work')}>See Our Work</Link>
-        </Button>
-        <Button asChild variant='outline' size='lg'>
-          <Link href={hashHref('contact')}>Talk With Us</Link>
-        </Button>
+      <div className='relative z-10 flex w-full flex-col items-center gap-6 text-center'>
+        <h1 className='max-w-3xl text-balance text-center font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-6xl'>
+          You know your business. We know the tech.
+        </h1>
+        <p className='text-balance text-base md:text-lg'>
+          We build modern systems that save your business time and money.
+        </p>
+        <p className='text-balance font-headline text-sm font-extrabold uppercase tracking-[0.1em] text-ink md:text-base'>
+          Custom use-cases built in weeks • Your private Portal • flat-rate
+          pricing
+        </p>
+        <div className='mt-4 flex flex-col items-center gap-4 sm:flex-row'>
+          <Button asChild size='lg'>
+            <Link href={hashHref('use-cases')} data-pts-hero-cta>
+              See what we can build for you ↓
+            </Link>
+          </Button>
+        </div>
       </div>
     </AnimatedSection>
   )

@@ -1,9 +1,7 @@
 export const NAV_LINKS = [
-  { hash: 'services', label: 'Services' },
+  { hash: 'use-cases', label: 'Use Cases' },
   { hash: 'work', label: 'Work' },
-  { hash: 'how-we-work', label: 'How We Work' },
-  { hash: 'team', label: 'Team' },
-  { hash: 'faq', label: 'FAQ' },
+  { hash: 'how-it-works', label: 'How It Works' },
   { hash: 'contact', label: 'Contact' },
 ]
 

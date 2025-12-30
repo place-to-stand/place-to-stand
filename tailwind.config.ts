@@ -8,7 +8,10 @@ const config: Config = {
     extend: {
       backgroundImage: {
         gradientPrimary:
-          'linear-gradient(135deg, #BE93C5 0%, #A3A6C7 50%, #7BC6CC 100%)',
+          // 'linear-gradient(135deg, #444aaa 0%, #d7a5d9 23%, #c4cae0 76%, #94e0e4 100%)',
+          'linear-gradient(35deg, #6a9ea1ff 0%, #5b6483ff 23%, #704571ff 78%, #3a3e79ff 100%)',
+        gradientSite:
+          'linear-gradient(45deg, #444aaa 0%, #d7a5d9 27%, #c4cae0 52%, #94e0e4 100%)',
       },
       colors: {
         accent: '#A3A6C7',
@@ -32,9 +35,14 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        'fade-down': {
+          '0%': { opacity: '0', transform: 'translateY(-18px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
-        'fade-up': 'fade-up 0.7s ease forwards',
+        'fade-up': 'fade-up 4.0s ease forwards',
+        'fade-down': 'fade-down 4.0s ease forwards',
       },
     },
   },

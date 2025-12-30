@@ -16,7 +16,10 @@ export function AnimatedSection({
   return (
     <section
       id={id}
-      className={cn('mx-auto w-full max-w-6xl px-6 py-32', className)}
+      className={cn(
+        'motion-safe:animate-fade-down mx-auto w-full max-w-6xl px-6 py-40 opacity-0 motion-reduce:opacity-100 md:py-28',
+        className
+      )}
       {...props}
     >
       {children}

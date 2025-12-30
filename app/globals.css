@@ -11,7 +11,50 @@ html {
 }
 
 body {
-  @apply bg-ink-light text-ink font-sans antialiased;
+  @apply bg-ink font-sans text-ink antialiased;
+}
+
+@keyframes pts-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pts-animated-gradient {
+  background-size: 200% 200%;
+  animation: pts-gradient-shift 12s ease infinite;
+}
+
+@keyframes pts-header-pop {
+  0% {
+    transform: scale(0.995);
+  }
+  70% {
+    transform: scale(1.006);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pts-header-pop {
+  animation: pts-header-pop 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pts-animated-gradient {
+    animation: none;
+  }
+
+  .pts-header-pop {
+    animation: none;
+  }
 }
 
 a {

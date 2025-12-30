@@ -82,7 +82,7 @@ export function ContactSection() {
         </p>
       </div>
       <div className='grid gap-8 md:grid-cols-2'>
-        <div className='relative w-full gap-10 rounded-xl border border-ink/10 bg-white/80 p-10'>
+        <div className='relative w-full gap-10 rounded-xl border border-ink/10 bg-white/50 p-10'>
           <form
             noValidate
             onSubmit={onSubmit}

@@ -96,9 +96,9 @@ export function ServicesSection() {
       </div>
       <div className='grid gap-6 md:grid-cols-2 xl:grid-cols-3'>
         {services.map(({ title, description, icon: Icon }) => (
-          <Card key={title} className='border border-ink/10'>
+          <Card key={title}>
             <CardHeader className='mb-2 gap-5'>
-              <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink/80 text-ink-light'>
+              <div className='flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-ink/20 bg-white/25 text-ink'>
                 <Icon className='h-4 w-4' aria-hidden />
               </div>
               <CardTitle>{title}</CardTitle>

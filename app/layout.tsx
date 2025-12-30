@@ -7,6 +7,7 @@ import { cn } from '@/src/lib/utils'
 import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
+import { PageParticles } from '@/src/components/sections/page-particles'
 
 const afacad = Afacad({
   subsets: ['latin'],
@@ -54,16 +55,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en' className='scroll-smooth'>
+    <html lang='en' className='scroll-smooth' suppressHydrationWarning>
       <body
         className={cn(
-          'min-h-screen bg-ink-light text-ink',
+          'min-h-screen bg-ink text-ink',
           afacad.variable,
           bebasNeue.variable,
           sourceSans.variable
         )}
       >
-        <div className='relative flex min-h-screen flex-col bg-ink-light'>
+        <div
+          className='pts-animated-gradient bg-gradientSite pointer-events-none fixed inset-0 z-0'
+          aria-hidden
+        />
+        <div
+          className='pointer-events-none fixed inset-0 z-0 bg-ink/10'
+          aria-hidden
+        />
+
+        <PageParticles />
+
+        <div className='relative z-10 flex min-h-screen flex-col'>
           <Header />
           {children}
           <Footer />

@@ -51,8 +51,8 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
     <div
       className={cn(
-        'mx-auto max-w-4xl overflow-hidden rounded-xl border border-ink/10 bg-white/80 shadow-sm transition-all duration-300 ease-out hover:border-ink/60',
-        isOpen ? 'border-ink/10 shadow-md' : ''
+        'mx-auto max-w-4xl overflow-hidden rounded-xl border border-ink bg-white/50 text-ink shadow-sm backdrop-blur transition-all duration-300 ease-out hover:bg-white',
+        isOpen ? 'shadow-md' : ''
       )}
     >
       <button
@@ -61,13 +61,13 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold uppercase tracking-[0.05em] text-ink transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink/40'
+        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold uppercase tracking-[0.05em] text-ink transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-light/30'
       >
         <span className='text-balance'>{question}</span>
         <ChevronDown
           aria-hidden
           className={cn(
-            'h-5 w-5 shrink-0 text-ink/50 transition-transform duration-300 ease-out',
+            'h-5 w-5 shrink-0 text-ink transition-transform duration-300 ease-out',
             isOpen && 'rotate-180 text-ink'
           )}
         />
@@ -79,13 +79,13 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         aria-hidden={!isOpen}
         className={cn(
           'grid overflow-hidden border-t border-transparent transition-all duration-500 ease-in-out',
-          isOpen ? 'grid-rows-[1fr] border-ink/10' : 'grid-rows-[0fr] opacity-0'
+          isOpen ? 'grid-rows-[1fr] border-ink' : 'grid-rows-[0fr] opacity-0'
         )}
       >
         <div className='overflow-hidden'>
           <div
             className={cn(
-              'px-6 py-6 text-base text-ink/70 transition-opacity duration-300 ease-out',
+              'px-6 py-6 text-base text-ink transition-opacity duration-300 ease-out',
               isOpen ? 'opacity-100' : 'opacity-0'
             )}
           >
@@ -98,8 +98,6 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
 }
 
 export function FaqSection() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
-
   return (
     <AnimatedSection id='faq' className='flex flex-col gap-20'>
       <div className='flex flex-col items-center gap-4 text-center'>
@@ -115,18 +113,30 @@ export function FaqSection() {
           to answer them!
         </p>
       </div>
-      <div className='flex flex-col gap-4'>
-        {faqs.map((faq, index) => (
-          <FAQItem
-            key={faq.question}
-            {...faq}
-            isOpen={activeIndex === index}
-            onToggle={() =>
-              setActiveIndex(prev => (prev === index ? null : index))
-            }
-          />
-        ))}
-      </div>
+      <FaqAccordion />
     </AnimatedSection>
+  )
+}
+
+type FaqAccordionProps = {
+  className?: string
+}
+
+export function FaqAccordion({ className }: FaqAccordionProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0)
+
+  return (
+    <div className={cn('flex flex-col gap-4', className)}>
+      {faqs.map((faq, index) => (
+        <FAQItem
+          key={faq.question}
+          {...faq}
+          isOpen={activeIndex === index}
+          onToggle={() =>
+            setActiveIndex(prev => (prev === index ? null : index))
+          }
+        />
+      ))}
+    </div>
   )
 }
