@@ -15,27 +15,27 @@ const faqs: FAQ[] = [
   {
     question: 'What types of businesses do you partner with?',
     answer:
-      'We specialize in helping brands of all sizes that are ready to upgrade their digital presence—whether you sell products, offer services, or operate as a hybrid. If you are growth-minded and want a partner who can cover strategy through execution, we are a fit.',
+      "We help brands of all sizes ready to upgrade their digital presence—product-based, service-based, or hybrid. If you're growth-minded and want a partner covering strategy through execution, we're a fit.",
   },
   {
     question: 'What is typically included in an engagement?',
     answer:
-      'Every project is tailored, but most engagements include customer research, brand and experience strategy, UX/UI design, production-ready web development, and launch support. We also coordinate with your internal team or outside partners to keep workstream momentum moving forward.',
+      'Every project is tailored, but most include customer research, brand strategy, UX/UI design, production-ready development, and launch support. We coordinate with your team or partners to keep things moving.',
   },
   {
     question: 'How long does a project usually take?',
     answer:
-      'This varies from project to project but a focused sprint, such as a landing page or campaign site, can usually ship in 2-4 weeks if all of the assets are ready to go. Full-funnel initiatives that cover brand, product, and marketing touchpoints usually span 8–12 weeks. We partner with you to determine the milestones so you always know what is shipping when.',
+      "Focused sprints like landing pages ship in 2–4 weeks with assets ready. Full-funnel initiatives spanning brand, product, and marketing typically take 8–12 weeks. We set milestones together so you always know what's shipping when.",
   },
   {
     question: 'How do you price your services?',
     answer:
-      'We can scope work based on specific deliverables or billable hours with a client specified cap. After an alignment call, we deliver a fixed investment range with clear inclusions, optional add-ons, and payment schedule so you can plan confidently and avoid surprise invoices.',
+      'We scope work by deliverables or capped hourly. After an alignment call, you get a fixed investment range with clear inclusions, add-ons, and payment schedule—no surprise invoices.',
   },
   {
     question: 'Do you stay involved after launch?',
     answer:
-      'Short awnswer is yes! If needed, we can stand up dashboards, measure performance, and schedule optimization cycles so you keep seeing lift after launch. Many clients keep us on retainer for ongoing experiments, new features, and marketing rollouts.',
+      'Yes! We can set up dashboards, measure performance, and run optimization cycles to keep momentum post-launch. Many clients retain us for ongoing experiments, features, and marketing rollouts.',
   },
 ]
 
