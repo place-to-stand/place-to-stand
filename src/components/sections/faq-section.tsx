@@ -20,7 +20,7 @@ const faqs: FAQ[] = [
   {
     question: 'What is typically included in an engagement?',
     answer:
-      'Every project is tailored, but most include customer research, brand strategy, UX/UI design, production-ready development, and launch support. We coordinate with your team or partners to keep things moving.',
+      "It depends on what you need, but we usually cover the full picture—research to understand your customers, brand and design work, building the actual product, and helping you launch. We'll work alongside your team to make sure nothing stalls.",
   },
   {
     question: 'How long does a project usually take?',
