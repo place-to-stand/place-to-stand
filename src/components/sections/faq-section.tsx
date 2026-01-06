@@ -15,7 +15,7 @@ const faqs: FAQ[] = [
   {
     question: 'What types of businesses do you partner with?',
     answer:
-      "We help brands of all sizes ready to upgrade their digital presence—product-based, service-based, or hybrid. If you're growth-minded and want a partner covering strategy through execution, we're a fit.",
+      'Businesses of all sizes. We are focused on solving real-world problems. If you are looking for a growth partner to unlock your business. Let us know.',
   },
   {
     question: 'What is typically included in an engagement?',
