@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nRedesign work section cards with clean image + sliding caption\n\n- Clean portfolio images with no overlays\n- Fixed-height caption bar with favicon, title, and sliding description\n- Hover reveals description with arrow, title slides out\n- Flat cards by default with shadow-2xl on hover\n- Responsive adjustments for mobile/desktop\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
-      "Bash(git push)"
-    ]
-  }
-}
