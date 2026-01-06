@@ -1,6 +1,6 @@
 export const NAV_LINKS = [
   { hash: 'use-cases', label: 'Use Cases' },
-  { hash: 'work', label: 'Work' },
+  { hash: 'clients', label: 'Clients' },
   { hash: 'how-it-works', label: 'How It Works' },
   { hash: 'contact', label: 'Contact' },
 ]

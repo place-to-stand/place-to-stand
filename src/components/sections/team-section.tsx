@@ -39,11 +39,11 @@ export function TeamSection() {
           measurable impact.
         </p>
       </div>
-      <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-4'>
+      <div className='grid grid-cols-2 gap-4 md:gap-6 lg:grid-cols-4'>
         {team.map(member => (
           <article
             key={member.name}
-            className='group flex flex-col gap-6 rounded-xl border border-ink bg-white/25 p-6 text-center text-ink shadow-sm backdrop-blur transition-all duration-300 ease-out hover:bg-white/15'
+            className='group flex flex-col gap-3 rounded-xl border border-ink bg-white/25 p-3 text-center text-ink shadow-sm backdrop-blur transition-all duration-300 ease-out hover:bg-white/15 md:gap-6 md:p-6'
           >
             <div className='relative mx-auto aspect-square w-full overflow-hidden rounded-full border border-ink/20'>
               <Image
@@ -53,11 +53,11 @@ export function TeamSection() {
                 className='object-cover transition duration-700 group-hover:scale-105'
               />
             </div>
-            <div className='space-y-1'>
-              <h3 className='font-headline text-2xl uppercase leading-none'>
+            <div className='space-y-0.5 md:space-y-1'>
+              <h3 className='font-headline text-base uppercase leading-none md:text-2xl'>
                 {member.name}
               </h3>
-              <p className='text-sm text-ink/70'>{member.title}</p>
+              <p className='text-xs text-ink/70 md:text-sm'>{member.title}</p>
             </div>
           </article>
         ))}

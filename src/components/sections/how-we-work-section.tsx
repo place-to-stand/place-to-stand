@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { hashHref } from '@/src/components/layout/nav-links'
-import { FaqAccordion } from '@/src/components/sections/faq-section'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
 import Link from 'next/link'
@@ -11,32 +10,21 @@ import Link from 'next/link'
 const steps = [
   {
     number: '01',
-    title: 'Discovery Call',
+    title: 'Discover',
     description:
-      'A focused call to understand your time-suck and what success looks like.',
+      "What's holding your business back? We'll propose a custom solution.",
   },
   {
     number: '02',
-    title: 'Transparent Estimate',
+    title: 'Build',
     description:
-      'Clear scope, clear milestones, and a realistic timeline. No surprise invoices.',
+      'Buy flat-rate blocks, track progress and approve builds in your task tracking Portal.',
   },
   {
     number: '03',
-    title: 'Buy Hour Blocks',
+    title: 'Iterate',
     description:
-      'One flat rate. Start anytime. Keep control of spend as you scale.',
-  },
-  {
-    number: '04',
-    title: 'Watch It Happen Live',
-    description:
-      'Everything ships through your private Portal so progress stays visible and concrete.',
-  },
-  {
-    number: '05',
-    title: 'Top Up Anytime',
-    description: 'Add more hours with one click. Unused time never expires.',
+      'Refine and adapt your unique system. Unused blocks never expire.',
   },
 ]
 
@@ -51,65 +39,59 @@ export function HowWeWorkSection() {
   }, [])
 
   return (
-    <AnimatedSection id='how-it-works' className='flex flex-col gap-20'>
+    <AnimatedSection id='how-it-works' className='flex flex-col gap-10'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
-          How it works + pricing
+          How it works
         </span>
         <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           Dead-simple process. Zero surprises.
         </h2>
-        {/* <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
-          Buy time in blocks, watch progress in your Portal, and scale up only
-          when it’s working.
-        </p> */}
+        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/80'>
+          We are selling real-world solutions, not just automations.
+        </p>
       </div>
 
-      <div className='relative'>
-        {/* Cards grid */}
-        <ol className='relative grid gap-6 md:grid-cols-5'>
-          {steps.map((step, index) => {
-            const isActive = index === activeStep
-            return (
-              <li key={step.number} className='relative flex h-full flex-col'>
-                {/* Card content */}
-                <div
-                  className={cn(
-                    'relative flex h-full flex-col gap-4 rounded-xl p-5 will-change-transform',
-                    isActive
-                      ? 'bg-white shadow-lg -translate-y-1 transition-all duration-[2500ms] ease-out'
-                      : 'bg-white/40 shadow-sm backdrop-blur hover:bg-white/80 translate-y-0 transition-all duration-[2500ms] ease-in'
-                  )}
-                >
-                  <span
-                    className={cn(
-                      'text-sm font-semibold uppercase tracking-[0.1em] transition-colors',
-                      isActive ? 'text-ink' : 'text-ink/60'
-                    )}
-                  >
-                    {step.number}
-                  </span>
-                  <h3 className='font-headline text-2xl uppercase leading-none'>
-                    {step.title}
-                  </h3>
-                  <p
-                    className={cn(
-                      'text-base !leading-snug transition-colors',
-                      isActive ? 'text-ink/90' : 'text-ink/70'
-                    )}
-                  >
-                    {step.description}
-                  </p>
-                </div>
-              </li>
-            )
-          })}
-        </ol>
-      </div>
+      <ol className='flex w-full flex-col gap-5 md:flex-row md:items-stretch md:gap-6 lg:gap-8'>
+        {steps.map((step, index) => {
+          const isActive = index === activeStep
+          return (
+            <li
+              key={step.number}
+              className={cn(
+                'flex flex-col gap-2 rounded-xl px-6 py-6 will-change-transform md:w-1/3 md:gap-3 lg:py-8',
+                isActive
+                  ? 'duration-[2500ms] border border-ink bg-white shadow-lg transition-all ease-out md:-translate-y-1'
+                  : 'duration-[2500ms] translate-y-0 border border-transparent bg-white/40 shadow-sm backdrop-blur transition-all ease-in hover:bg-white/80'
+              )}
+            >
+              <span
+                className={cn(
+                  'text-xs font-semibold uppercase tracking-[0.1em] transition-colors md:text-sm',
+                  isActive ? 'text-ink' : 'text-ink/60'
+                )}
+              >
+                {step.number}
+              </span>
+              <h3 className='text-balance font-headline text-lg uppercase leading-none md:text-2xl'>
+                {step.title}
+              </h3>
+              <p
+                className={cn(
+                  'text-xs !leading-snug transition-colors md:text-base',
+                  isActive ? 'text-ink/90' : 'text-ink/70'
+                )}
+              >
+                {step.description}
+              </p>
+            </li>
+          )
+        })}
+      </ol>
 
       <div className='mx-auto w-full max-w-3xl'>
-        <div className='rounded-2xl bg-gradientPrimary p-[1px]'>
-          <div className='flex flex-col gap-6 rounded-2xl border border-ink/40 bg-ink/70 p-10 text-center text-ink-light shadow-xl backdrop-blur'>
+        <div className='rounded-2xl bg-ink/80 p-[1px]'>
+          <div className='flex flex-col gap-6 rounded-2xl border border-ink/40 p-10 text-center text-ink-light shadow-xl'>
             <p className='text-sm font-extrabold uppercase tracking-[0.1em] text-ink-light/70'>
               One flat rate • Hour blocks • Start anytime
             </p>
@@ -126,18 +108,6 @@ export function HowWeWorkSection() {
             </Button>
           </div>
         </div>
-      </div>
-
-      <div className='flex flex-col gap-10'>
-        <div className='flex flex-col items-center gap-4 text-center'>
-          <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
-            FAQ
-          </span>
-          <h3 className='max-w-4xl text-balance font-headline text-2xl font-semibold uppercase !leading-[.9] text-ink md:text-4xl'>
-            The answers you’re looking for
-          </h3>
-        </div>
-        <FaqAccordion />
       </div>
     </AnimatedSection>
   )

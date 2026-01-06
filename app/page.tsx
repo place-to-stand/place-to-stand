@@ -2,9 +2,9 @@ import { HeroSection } from '@/src/components/sections/hero-section'
 import { UseCasesSection } from '@/src/components/sections/use-cases-section'
 
 import { HowWeWorkSection } from '@/src/components/sections/how-we-work-section'
-import { WorkSection } from '@/src/components/sections/work-section'
+import { ClientsSection } from '@/src/components/sections/clients-section'
 import { ContactSection } from '@/src/components/sections/contact-section'
-import { TeamSection } from '@/src/components/sections/team-section'
+import { FaqSection } from '@/src/components/sections/faq-section'
 
 export default function HomePage() {
   return (
@@ -12,10 +12,10 @@ export default function HomePage() {
       <HeroSection />
       <UseCasesSection />
 
-      <WorkSection />
+      <ClientsSection />
       <HowWeWorkSection />
       <ContactSection />
-      <TeamSection />
+      <FaqSection />
     </main>
   )
 }

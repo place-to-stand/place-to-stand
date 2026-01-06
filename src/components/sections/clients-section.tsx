@@ -68,24 +68,24 @@ const projects: Project[] = [
   },
 ]
 
-export function WorkSection() {
+export function ClientsSection() {
   return (
-    <AnimatedSection id='work' className='flex flex-col gap-8 md:gap-20'>
+    <AnimatedSection id='clients' className='flex flex-col gap-8 md:gap-10'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
-          Work
+          Clients
         </span>
         <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           Select projects that moved the needle
         </h2>
-        <p className='max-w-xl text-balance text-base !leading-snug text-ink/60 md:text-lg'>
+        <p className='max-w-xl text-balance text-base !leading-snug text-ink/80 md:text-lg'>
           A look at the product, marketing, and brand experiences we craft with
           our partners.
         </p>
       </div>
 
-      {/* 2x2 Grid */}
-      <div className='grid grid-cols-2 gap-3 md:gap-4'>
+      {/* Grid: 1 col on mobile, 2 cols on md+ */}
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6'>
         {projects.map(project => (
           <a
             key={project.title}
@@ -93,7 +93,7 @@ export function WorkSection() {
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group relative overflow-hidden rounded-xl no-underline shadow-none transition-all duration-300 ease-out hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/30'
+            className='group relative overflow-hidden rounded-xl border border-ink no-underline shadow-sm transition-all duration-300 ease-out hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/30'
           >
             {/* Clean image area */}
             <div className='relative aspect-video w-full overflow-hidden'>

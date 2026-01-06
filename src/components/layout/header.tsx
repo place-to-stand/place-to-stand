@@ -111,7 +111,7 @@ export function Header() {
             <Link href={hashHref('home')} className='flex items-center gap-3'>
               <span
                 className={cn(
-                  'font-logo text-2xl font-semibold uppercase tracking-[0.025em] transition-colors duration-700',
+                  'font-logo font-semibold uppercase tracking-[0.025em] transition-colors duration-700 md:text-xl lg:text-2xl',
                   'text-ink'
                 )}
               >
@@ -119,14 +119,14 @@ export function Header() {
               </span>
             </Link>
 
-            <nav className='hidden items-center gap-5 md:flex'>
+            <nav className='hidden items-center gap-2 md:flex md:text-sm lg:gap-5 lg:text-base'>
               {NAV_LINKS.map(item => (
                 <Link
                   key={item.hash}
                   href={hashHref(item.hash)}
                   className={cn(
                     'font-semibold uppercase tracking-[0.1em] transition-all duration-500',
-                    'text-ink/70 border-transparent border-b-2 hover:text-ink hover:border-ink'
+                    'border-b-2 border-transparent text-ink/70 hover:border-ink hover:text-ink'
                   )}
                 >
                   {item.label}
@@ -167,7 +167,7 @@ export function Header() {
                     pastHero ? 'pointer-events-auto' : 'pointer-events-none'
                   )}
                 >
-                  <Button asChild size='sm' className='px-11'>
+                  <Button asChild size='sm' className='md:px-9 lg:px-11'>
                     <Link
                       href={hashHref('contact')}
                       aria-hidden={!pastHero}

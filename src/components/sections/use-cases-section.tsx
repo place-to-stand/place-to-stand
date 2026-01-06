@@ -75,16 +75,22 @@ export function UseCasesSection() {
   }
 
   return (
-    <AnimatedSection id='use-cases' className='flex flex-col gap-8 md:gap-12'>
+    <AnimatedSection id='use-cases' className='flex flex-col gap-8 md:gap-8'>
       <div className='flex flex-col items-center gap-4 text-center'>
+        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+          Use-cases
+        </span>
         <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           Real products helping businesses
         </h2>
+        <p className='max-w-xl text-balance text-base !leading-snug text-ink/80 md:text-lg'>
+          Custom solutions we've built for real-world business needs.
+        </p>
       </div>
 
       <div className='flex flex-col items-center gap-6'>
         {/* Thumbnails Navigation */}
-        <div className='flex w-full max-w-4xl gap-2 overflow-x-auto px-4 pb-2 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:pb-0'>
+        <div className='grid w-full max-w-4xl grid-cols-4 gap-2 md:gap-4 md:px-0'>
           {useCases.map((useCase, index) => {
             const isActive = activeIndex === index
             return (
@@ -92,27 +98,27 @@ export function UseCasesSection() {
                 key={useCase.title}
                 onClick={() => handleSetActiveIndex(index)}
                 className={cn(
-                  'relative min-w-[140px] flex-1 rounded-xl border-2 p-3 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink',
+                  'relative flex-1 rounded-lg border-2 p-1.5 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:p-3',
                   isActive
-                    ? 'scale-105 border-ink bg-ink text-white shadow-lg ring-1 ring-ink/20'
+                    ? 'border-ink bg-ink text-white shadow-lg ring-1 ring-ink/20 md:scale-105'
                     : 'border-transparent bg-white/50 hover:bg-white hover:shadow-sm'
                 )}
               >
                 <div className='flex flex-col gap-0.5'>
                   <span
                     className={cn(
-                      'text-xs font-bold uppercase tracking-wider',
+                      'hidden text-xs font-bold uppercase tracking-wider md:block',
                       isActive ? 'text-white/70' : 'text-ink/60'
                     )}
                   >
                     0{index + 1}
                   </span>
-                  <h3 className='font-headline text-sm font-bold leading-tight md:text-base'>
+                  <h3 className='text-balance font-headline text-[13px] font-bold leading-tight md:text-base'>
                     {useCase.title}
                   </h3>
                   <p
                     className={cn(
-                      'text-[10px] font-medium opacity-80',
+                      'hidden font-medium opacity-80 md:block md:text-[10px]',
                       isActive ? 'text-white/90' : 'text-ink/70'
                     )}
                   >
@@ -123,7 +129,7 @@ export function UseCasesSection() {
                 {isActive && (
                   <motion.div
                     layoutId='active-connector'
-                    className='absolute -bottom-4 left-1/2 -ml-2.5 flex -translate-x-1/2 justify-center'
+                    className='absolute -bottom-4 left-1/2 hidden -translate-x-1/2 justify-center md:flex'
                     initial={false}
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   >
@@ -181,7 +187,7 @@ export function UseCasesSection() {
                     zIndex: useCases.length - Math.abs(activeOffset),
                   }}
                   className={cn(
-                    'absolute inset-0 flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-2xl md:flex-row',
+                    'absolute inset-0 flex flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row',
                     !isVisible && 'pointer-events-none'
                   )}
                 >
@@ -219,16 +225,16 @@ export function UseCasesSection() {
                   </div>
 
                   {/* Content Side (Overlay or Sidebar) */}
-                  <div className='flex flex-col justify-center gap-4 bg-white p-6 md:w-[25%] md:p-8'>
-                    <div className='space-y-2'>
-                      <div className='inline-flex items-center rounded-full border border-ink px-3 py-1 text-sm font-bold uppercase tracking-wider text-ink/70'>
+                  <div className='flex flex-col justify-center gap-2 bg-white p-4 md:w-[25%] md:gap-4 md:p-8'>
+                    <div className='space-y-1 md:space-y-2'>
+                      <div className='inline-flex items-center rounded-full border border-ink px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-ink/70 md:px-3 md:py-1 md:text-sm'>
                         {useCase.metric}
                       </div>
-                      <h3 className='font-headline text-3xl font-bold uppercase text-ink md:text-4xl'>
+                      <h3 className='font-headline text-xl font-bold uppercase text-ink md:text-4xl'>
                         {useCase.title}
                       </h3>
                     </div>
-                    <p className='text-lg leading-relaxed text-ink/70'>
+                    <p className='text-sm leading-relaxed text-ink/70 md:text-lg'>
                       {useCase.description}
                     </p>
                     {index === activeIndex && (

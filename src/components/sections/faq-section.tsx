@@ -99,7 +99,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
 
 export function FaqSection() {
   return (
-    <AnimatedSection id='faq' className='flex flex-col gap-20'>
+    <AnimatedSection id='faq' className='flex flex-col gap-10'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           FAQ
@@ -107,7 +107,7 @@ export function FaqSection() {
         <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
           The answers you’re looking for
         </h2>
-        <p className='max-w-2xl text-balance text-lg !leading-snug text-ink/60'>
+        <p className='max-w-2xl text-balance text-lg !leading-snug text-ink/80'>
           The essentials that most clients ask us before we kick off a new
           engagement. Please reach out if you have other questions. We’re happy
           to answer them!
@@ -126,7 +126,7 @@ export function FaqAccordion({ className }: FaqAccordionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(0)
 
   return (
-    <div className={cn('flex flex-col gap-4', className)}>
+    <div className={cn('flex flex-col gap-4 pb-12', className)}>
       {faqs.map((faq, index) => (
         <FAQItem
           key={faq.question}
