@@ -1,79 +1,52 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { cn } from '@/src/lib/utils'
 import { Play } from 'lucide-react'
 
-const useCases = [
+export const useCases = [
   {
-    title: 'Task Tracker',
-    metric: 'One screen overview',
+    title: 'Portal',
+    metric: 'Business overview',
     description:
-      'Get instant snapshots of task statuses. Instantly know what’s working and what’s blocked.',
-    videoSrc: '/videos/test-video-screenrun.mp4',
+      "Get instant snapshots of task statuses. Instantly know what's working and what's blocked. Open integration environment.",
+    imageSrc: '/use-case-portal.png',
   },
   {
-    title: 'Research Tool',
-    metric: '18h → 45m',
+    title: 'Fullfillment Manager',
+    metric: '5hr → 1hr',
     description:
-      'Research tool that saves scouting companies hours of daily research. They book faster and more often.',
-    videoSrc: '/videos/demo-research.mp4',
+      'Portal integration with a custom Shopify app. Streamlines order fulfillment and inventory management for custom made home products.',
+    imageSrc: '/use-case-up-the-wall-portal.png',
   },
   {
-    title: 'Email Digester',
-    metric: '200 emails → 5 bullets',
-    description: 'Auto-digests Gmail, Slack, support tickets, and DMs',
-    videoSrc: '/videos/demo-email.mp4',
+    title: 'Artist Research Tool',
+    metric: '10hrs → 1hr',
+    description: 'Booking agency cut research time from 10 hours to 1 hour.',
+    imageSrc: '/use-case-up-the-wall-shopify.png',
   },
   {
     title: 'Marketplace',
-    metric: 'Launched in 12 days',
-    description: 'Automated Marketplace, or custom Shopify Portal integration',
-    videoSrc: '/videos/demo-marketplace.mp4',
+    metric: 'Manually emailing → Automated purchasing',
+    description:
+      'Transformed a manual purchasing and emailing process into an automated purchasing marketplace.',
+    imageSrc: undefined,
   },
 ] as const
 
-export function UseCasesSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [taskTrackerDurationSeconds, setTaskTrackerDurationSeconds] = useState<
-    number | null
-  >(null)
-  const [hasSeenSection, setHasSeenSection] = useState(false)
-  const taskTrackerVideoRef = useRef<HTMLVideoElement | null>(null)
+interface UseCasesSectionProps {
+  activeIndex: number
+  onActiveIndexChange: (index: number) => void
+  onOpenLightbox: () => void
+}
 
-  useEffect(() => {
-    const section = document.getElementById('use-cases')
-    if (!section) return
-
-    const observer = new IntersectionObserver(
-      entries => {
-        const isIntersecting = entries.some(entry => entry.isIntersecting)
-        if (!isIntersecting) return
-        setHasSeenSection(true)
-        observer.disconnect()
-      },
-      { threshold: 0.2 }
-    )
-
-    observer.observe(section)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const activeUseCase = useCases[activeIndex]
-    if (!hasSeenSection) return
-    if (activeUseCase.title !== 'Task Tracker') return
-    taskTrackerVideoRef.current?.play().catch(() => {
-      // Autoplay can still be blocked in some environments; controls remain available.
-    })
-  }, [activeIndex, hasSeenSection])
-
-  const handleSetActiveIndex = (newIndex: number) => {
-    setActiveIndex(newIndex)
-  }
-
+export function UseCasesSection({
+  activeIndex,
+  onActiveIndexChange,
+  onOpenLightbox,
+}: UseCasesSectionProps) {
   return (
     <AnimatedSection id='use-cases' className='flex flex-col gap-8 md:gap-8'>
       <div className='flex flex-col items-center gap-4 text-center'>
@@ -96,7 +69,7 @@ export function UseCasesSection() {
             return (
               <button
                 key={useCase.title}
-                onClick={() => handleSetActiveIndex(index)}
+                onClick={() => onActiveIndexChange(index)}
                 className={cn(
                   'relative flex-1 rounded-lg border-2 p-1.5 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:p-3',
                   isActive
@@ -118,7 +91,7 @@ export function UseCasesSection() {
                   </h3>
                   <p
                     className={cn(
-                      'hidden font-medium opacity-80 md:block md:text-[10px]',
+                      'hidden font-medium opacity-90 md:block md:text-[13px]',
                       isActive ? 'text-white/90' : 'text-ink/70'
                     )}
                   >
@@ -151,21 +124,14 @@ export function UseCasesSection() {
         </div>
 
         {/* Carousel / Player Area */}
-        <div
-          className='relative w-full md:aspect-[2.2/1]'
-          style={{ perspective: '1200px' }}
-        >
+        <div className='relative w-full' style={{ perspective: '1200px' }}>
           <div
-            className='relative h-[360px] w-full md:h-full'
+            className='relative w-full'
             style={{ transformStyle: 'preserve-3d' }}
           >
             {useCases.map((useCase, index) => {
               const activeOffset = index - activeIndex
-              const isVisible = Math.abs(activeOffset) <= 1
-              const progressDurationSeconds =
-                useCase.title === 'Task Tracker'
-                  ? (taskTrackerDurationSeconds ?? 5)
-                  : 5
+              const isActive = activeOffset === 0
 
               return (
                 <motion.div
@@ -176,7 +142,7 @@ export function UseCasesSection() {
                     z: Math.abs(activeOffset) * -50,
                     rotateY: activeOffset * -15,
                     scale: 1 - Math.abs(activeOffset) * 0.05,
-                    opacity: activeOffset === 0 ? 1 : 0,
+                    opacity: isActive ? 1 : 0,
                   }}
                   transition={{
                     duration: 0.76,
@@ -187,33 +153,28 @@ export function UseCasesSection() {
                     zIndex: useCases.length - Math.abs(activeOffset),
                   }}
                   className={cn(
-                    'absolute inset-0 flex flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row',
-                    !isVisible && 'pointer-events-none'
+                    'flex flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row',
+                    !isActive && 'pointer-events-none absolute inset-0'
                   )}
                 >
-                  {/* Video Side */}
-                  <div className='relative flex flex-1 items-center justify-center bg-ink'>
-                    {activeOffset === 0 && useCase.title === 'Task Tracker' ? (
-                      <video
-                        key={`${useCase.videoSrc}-${activeIndex}`}
-                        ref={taskTrackerVideoRef}
-                        className='h-full w-full object-cover'
-                        src={useCase.videoSrc}
-                        controls
-                        autoPlay={hasSeenSection}
-                        muted
-                        loop
-                        playsInline
-                        preload='metadata'
-                        onLoadedMetadata={e => {
-                          const duration = e.currentTarget.duration
-                          if (Number.isFinite(duration) && duration > 0) {
-                            setTaskTrackerDurationSeconds(duration)
-                          }
-                        }}
+                  {/* Image Side */}
+                  <button
+                    type='button'
+                    className='relative cursor-zoom-in md:flex-1'
+                    onClick={onOpenLightbox}
+                    aria-label={`View ${useCase.title} in lightbox`}
+                  >
+                    {useCase.imageSrc ? (
+                      <Image
+                        src={useCase.imageSrc}
+                        alt={useCase.title}
+                        width={0}
+                        height={0}
+                        sizes='100vw'
+                        className='h-auto w-full'
                       />
                     ) : (
-                      <div className='absolute inset-0 flex items-center justify-center'>
+                      <div className='flex aspect-video items-center justify-center bg-ink'>
                         <div className='text-center opacity-40'>
                           <Play className='mx-auto mb-4 h-20 w-20 fill-white' />
                           <p className='text-sm font-bold uppercase tracking-widest text-white/50'>
@@ -222,7 +183,7 @@ export function UseCasesSection() {
                         </div>
                       </div>
                     )}
-                  </div>
+                  </button>
 
                   {/* Content Side (Overlay or Sidebar) */}
                   <div className='flex flex-col justify-center gap-2 bg-white p-4 md:w-[25%] md:gap-4 md:p-8'>
@@ -237,20 +198,6 @@ export function UseCasesSection() {
                     <p className='text-sm leading-relaxed text-ink/70 md:text-lg'>
                       {useCase.description}
                     </p>
-                    {index === activeIndex && (
-                      <div className='mt-4 h-1 w-full rounded-full bg-ink/10'>
-                        <motion.div
-                          key={`${useCase.title}-${activeIndex}-${progressDurationSeconds}`}
-                          className='h-full rounded-full bg-ink'
-                          initial={{ width: 0 }}
-                          animate={{ width: '100%' }}
-                          transition={{
-                            duration: progressDurationSeconds,
-                            ease: 'linear',
-                          }}
-                        />
-                      </div>
-                    )}
                   </div>
                 </motion.div>
               )
