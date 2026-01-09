@@ -17,7 +17,7 @@ const buttonVariants = cva(
         ghost:
           'bg-transparent text-ink/70 hover:text-ink/100 focus-visible:ring-ink/40',
         outline:
-          'bg-transparent border border-ink/30 text-ink/80 hover:bg-ink/5 focus-visible:ring-ink/40 hover:border-ink/60',
+          'relative isolate bg-transparent border border-ink/30 text-ink/80 focus-visible:ring-ink/40 transition-all duration-300 hover:border-ink/90 hover:text-white before:absolute before:inset-0 before:-z-10 before:bg-gradientPrimary before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
       },
       size: {
         sm: 'h-9 px-4',

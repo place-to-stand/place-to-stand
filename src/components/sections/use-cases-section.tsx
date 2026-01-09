@@ -29,7 +29,7 @@ export const useCases = [
   },
   {
     title: 'Marketplace',
-    metric: 'Manually emailing → Automated purchasing',
+    metric: 'Manual → Automated purchasing',
     description:
       'Transformed a manual purchasing and emailing process into an automated purchasing marketplace.',
     imageSrc: undefined,
@@ -71,7 +71,7 @@ export function UseCasesSection({
                 key={useCase.title}
                 onClick={() => onActiveIndexChange(index)}
                 className={cn(
-                  'relative flex-1 rounded-lg border-2 p-1.5 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:p-3',
+                  'relative flex-1 rounded-lg border-2 px-1.5 py-1 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:px-3 md:py-2',
                   isActive
                     ? 'border-ink bg-ink text-white shadow-lg ring-1 ring-ink/20 md:scale-105'
                     : 'border-transparent bg-white/50 hover:bg-white hover:shadow-sm'
@@ -102,7 +102,7 @@ export function UseCasesSection({
                 {isActive && (
                   <motion.div
                     layoutId='active-connector'
-                    className='absolute -bottom-4 left-1/2 hidden -translate-x-1/2 justify-center md:flex'
+                    className='absolute -bottom-4 left-0 right-0 hidden justify-center md:flex'
                     initial={false}
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   >

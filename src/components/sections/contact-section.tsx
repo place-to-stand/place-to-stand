@@ -116,7 +116,7 @@ export function ContactSection() {
   })
 
   return (
-    <AnimatedSection id='contact' className='flex flex-col gap-10 md:gap-12'>
+    <AnimatedSection id='contact' className='flex flex-col gap-10 py-24'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           Contact
@@ -365,7 +365,7 @@ export function ContactSection() {
             className='flex w-full items-center justify-center px-8 py-4'
           >
             <a
-              href='https://calendar.google.com/calendar/appointments/schedules/AcZssZ0IvygeLpVOdv1HQkUQLSHv6H-P6Wm6F7KGySphJhsFUNWU8Y6wQhXh4q8iE_YH02hL4ZBUr2-f?gv=true'
+              href='https://calendar.app.google/sKeXakpFVXRJkRjH7'
               target='_blank'
               rel='noopener noreferrer'
               className='w-full text-center'
