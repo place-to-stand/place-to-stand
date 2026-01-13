@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
 
+// Tailwind configuration for Place to Stand
 const config: Config = {
   darkMode: ['class'],
   content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
