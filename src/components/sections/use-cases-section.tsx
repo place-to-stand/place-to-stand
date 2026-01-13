@@ -33,7 +33,7 @@ export const useCases = [
     metric: '20 hrs → 2 hrs',
     description:
       'Agentic booking platform for hospitality agency. Fully automated flows from email to booking hotels.',
-    imageSrc: '/valise-big.webp',
+    imageSrc: '/valise-dashboard-light.png',
   },
 ] as const
 

@@ -263,6 +263,7 @@ export function ContactSection() {
                   </h3>
                   <p className='text-xs text-ink/70'>{member.title}</p>
                 </div>
+{/* Social links - commented out for now, will add later
                 <div className='absolute inset-x-0 bottom-3 flex justify-center gap-2 md:bottom-4'>
                   {member.socials.x && (
                     <a
@@ -356,6 +357,7 @@ export function ContactSection() {
                     </a>
                   )}
                 </div>
+                */}
               </article>
             ))}
           </div>
