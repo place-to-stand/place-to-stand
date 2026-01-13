@@ -120,7 +120,7 @@ export default function HomePage() {
         {/* Image container */}
         <div
           key={activeIndex}
-          className='relative overflow-hidden rounded-2xl animate-[fadeIn_0.2s_ease-out]'
+          className='relative max-h-[80vh] max-w-[90vw] overflow-hidden rounded-2xl animate-[fadeIn_0.2s_ease-out]'
           onClick={e => e.stopPropagation()}
         >
           {useCases[activeIndex].imageSrc ? (
@@ -130,7 +130,8 @@ export default function HomePage() {
               width={0}
               height={0}
               sizes='90vw'
-              className='h-auto w-full rounded-2xl'
+              quality={100}
+              className='h-auto max-h-[80vh] w-[90vw] rounded-2xl'
             />
           ) : (
             <div className='flex aspect-video h-[70vh] max-w-[90vw] items-center justify-center rounded-2xl bg-ink'>
@@ -144,13 +145,16 @@ export default function HomePage() {
           )}
 
           {/* Title overlay */}
-          <div className='absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6'>
+          <div className='absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6'>
             <p className='text-sm font-bold uppercase tracking-wider text-white/70'>
               {useCases[activeIndex].metric}
             </p>
             <h3 className='font-headline text-2xl font-bold uppercase text-white md:text-3xl'>
               {useCases[activeIndex].title}
             </h3>
+            <p className='mt-2 max-w-xl text-sm text-white/80 md:text-base'>
+              {useCases[activeIndex].description}
+            </p>
           </div>
         </div>
       </div>

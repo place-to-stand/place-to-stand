@@ -48,7 +48,7 @@ export function HowWeWorkSection() {
           Dead-simple process. Zero surprises.
         </h2>
         <p className='max-w-xl text-balance text-lg !leading-snug text-ink/80'>
-          We are selling real-world solutions, not just automations.
+          We are selling bespoke end-to-end solutions, not just automations.
         </p>
       </div>
 

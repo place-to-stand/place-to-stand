@@ -13,8 +13,7 @@ export function HeroSection() {
       <div className='relative z-10 flex w-full flex-col items-center gap-6 text-center'>
         <h1 className='max-w-3xl text-center font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-balance md:text-6xl'>
           You know your business.
-          <br className='md:hidden' />
-          {' '}We know the tech.
+          <br className='md:hidden' /> We know the tech.
         </h1>
         <p className='text-balance text-base md:text-lg'>
           We build modern systems that save your business time and money.

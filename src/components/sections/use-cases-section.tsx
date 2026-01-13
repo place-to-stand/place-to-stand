@@ -9,30 +9,31 @@ import { Play } from 'lucide-react'
 export const useCases = [
   {
     title: 'Portal',
-    metric: 'Business overview',
+    metric: '1hr → 10min',
     description:
-      "Get instant snapshots of task statuses. Instantly know what's working and what's blocked. Open integration environment.",
+      'Turn weekly meetings into check-ins. Business activity tracked by AI and summarized for instant insights.',
     imageSrc: '/use-case-portal.png',
   },
   {
     title: 'Fullfillment Manager',
     metric: '5hr → 1hr',
     description:
-      'Portal integration with a custom Shopify app. Streamlines order fulfillment and inventory management for custom made home products.',
+      'Streamlined order fulfillment and inventory management for custom made home products.',
     imageSrc: '/use-case-up-the-wall-portal.png',
   },
   {
-    title: 'Artist Research Tool',
+    title: 'Agentic Research Tool',
     metric: '10hrs → 1hr',
-    description: 'Booking agency cut research time from 10 hours to 1 hour.',
-    imageSrc: '/use-case-up-the-wall-shopify.png',
+    description:
+      'Artist research agency cut research time from 10 hours to 1 hour.',
+    imageSrc: '/use-case-kendall-big.webp',
   },
   {
-    title: 'Marketplace',
-    metric: 'Manual → Automated purchasing',
+    title: 'Booking Platform',
+    metric: '20 hrs → 2 hrs',
     description:
-      'Transformed a manual purchasing and emailing process into an automated purchasing marketplace.',
-    imageSrc: undefined,
+      'Agentic booking platform for hospitality agency. Fully automated flows from email to booking hotels.',
+    imageSrc: '/valise-big.webp',
   },
 ] as const
 
@@ -71,13 +72,13 @@ export function UseCasesSection({
                 key={useCase.title}
                 onClick={() => onActiveIndexChange(index)}
                 className={cn(
-                  'relative flex-1 rounded-lg border-2 px-1.5 py-1 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:px-3 md:py-2',
+                  'relative flex-1 rounded-lg border-2 px-1.5 py-3 text-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:px-3 md:py-2 md:text-left',
                   isActive
                     ? 'border-ink bg-ink text-white shadow-lg ring-1 ring-ink/20 md:scale-105'
                     : 'border-transparent bg-white/50 hover:bg-white hover:shadow-sm'
                 )}
               >
-                <div className='flex flex-col gap-0.5'>
+                <div className='flex flex-col items-center justify-center gap-0.5 md:items-start md:justify-start'>
                   <span
                     className={cn(
                       'hidden text-xs font-bold uppercase tracking-wider md:block',
@@ -86,7 +87,7 @@ export function UseCasesSection({
                   >
                     0{index + 1}
                   </span>
-                  <h3 className='text-balance font-headline text-[13px] font-bold leading-tight md:text-base'>
+                  <h3 className='text-balance font-headline text-[13px] font-bold leading-none md:text-base md:leading-tight'>
                     {useCase.title}
                   </h3>
                   <p
@@ -102,17 +103,17 @@ export function UseCasesSection({
                 {isActive && (
                   <motion.div
                     layoutId='active-connector'
-                    className='absolute -bottom-4 left-0 right-0 hidden justify-center md:flex'
+                    className='absolute -bottom-3 left-0 right-0 flex justify-center md:-bottom-4'
                     initial={false}
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   >
                     <svg
-                      width='24'
-                      height='12'
+                      width='16'
+                      height='8'
                       viewBox='0 0 24 12'
                       fill='none'
                       xmlns='http://www.w3.org/2000/svg'
-                      className='text-ink'
+                      className='text-ink md:h-[12px] md:w-[24px]'
                     >
                       <path d='M0 0H24L12 12L0 0Z' fill='currentColor' />
                     </svg>
@@ -158,11 +159,21 @@ export function UseCasesSection({
                   )}
                 >
                   {/* Image Side */}
-                  <button
-                    type='button'
-                    className='relative cursor-zoom-in md:flex-1'
-                    onClick={onOpenLightbox}
+                  <div
+                    className='relative cursor-default md:flex-1 md:cursor-zoom-in'
+                    onClick={() => {
+                      if (window.innerWidth >= 768) {
+                        onOpenLightbox()
+                      }
+                    }}
+                    role='button'
+                    tabIndex={0}
                     aria-label={`View ${useCase.title} in lightbox`}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter' && window.innerWidth >= 768) {
+                        onOpenLightbox()
+                      }
+                    }}
                   >
                     {useCase.imageSrc ? (
                       <Image
@@ -171,6 +182,7 @@ export function UseCasesSection({
                         width={0}
                         height={0}
                         sizes='100vw'
+                        quality={100}
                         className='h-auto w-full'
                       />
                     ) : (
@@ -183,19 +195,19 @@ export function UseCasesSection({
                         </div>
                       </div>
                     )}
-                  </button>
+                  </div>
 
                   {/* Content Side (Overlay or Sidebar) */}
-                  <div className='flex flex-col justify-center gap-2 bg-white p-4 md:w-[25%] md:gap-4 md:p-8'>
+                  <div className='flex flex-col justify-center gap-1 bg-white px-4 py-3 md:w-[35%] md:gap-4 md:p-8 lg:w-[25%]'>
                     <div className='space-y-1 md:space-y-2'>
                       <div className='inline-flex items-center rounded-full border border-ink px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-ink/70 md:px-3 md:py-1 md:text-sm'>
                         {useCase.metric}
                       </div>
-                      <h3 className='font-headline text-xl font-bold uppercase text-ink md:text-4xl'>
+                      <h3 className='font-headline text-xl font-bold uppercase text-ink md:text-2xl lg:text-4xl'>
                         {useCase.title}
                       </h3>
                     </div>
-                    <p className='text-sm leading-relaxed text-ink/70 md:text-lg'>
+                    <p className='text-sm leading-snug text-ink/70 md:text-lg'>
                       {useCase.description}
                     </p>
                   </div>
