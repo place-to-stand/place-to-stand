@@ -11,6 +11,14 @@ const optionalUrl = z
   .string()
   .trim()
   .optional()
+  .transform(value => {
+    if (!value) return value
+    // Add https:// if no protocol present
+    if (!/^https?:\/\//i.test(value)) {
+      return `https://${value}`
+    }
+    return value
+  })
   .refine(value => !value || z.string().url().safeParse(value).success, {
     message: 'Please enter a valid URL.',
   })
