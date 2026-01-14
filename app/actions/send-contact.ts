@@ -177,8 +177,8 @@ export async function sendContact(
       const portalPayload = {
         name: trimmedName || name,
         email,
-        company: trimmedCompany ?? null,
-        website: trimmedWebsite ?? null,
+        company: trimmedCompany || null,
+        website: trimmedWebsite || null,
         message: trimmedMessage || null,
         sourceDetail: WEBSITE_SOURCE_DETAIL,
       }
