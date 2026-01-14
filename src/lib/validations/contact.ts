@@ -7,21 +7,12 @@ const optionalString = z
   .optional()
   .or(z.literal(''))
 
+// Website validation happens server-side after URL normalization
 const optionalUrl = z
   .string()
   .trim()
+  .max(256, 'Must be 256 characters or fewer.')
   .optional()
-  .transform(value => {
-    if (!value) return value
-    // Add https:// if no protocol present
-    if (!/^https?:\/\//i.test(value)) {
-      return `https://${value}`
-    }
-    return value
-  })
-  .refine(value => !value || z.string().url().safeParse(value).success, {
-    message: 'Please enter a valid URL.',
-  })
   .or(z.literal(''))
 
 export const contactSchema = z.object({
