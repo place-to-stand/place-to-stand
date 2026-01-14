@@ -17,6 +17,15 @@ export type ContactActionResult =
       errors?: Partial<Record<keyof ContactFormValues, string[]>>
     }
 
+function normalizeUrl(value: string): string {
+  const trimmed = value.trim()
+  // Add https:// if no protocol present
+  if (trimmed && !/^https?:\/\//i.test(trimmed)) {
+    return `https://${trimmed}`
+  }
+  return trimmed
+}
+
 function isValidUrl(value: string): boolean {
   try {
     new URL(value)
@@ -97,13 +106,16 @@ export async function sendContact(
   const [firstName, ...restOfName] = trimmedName.split(/\s+/)
   const lastName = restOfName.join(' ').trim()
   const trimmedCompany = company?.trim() || null
-  const trimmedWebsite = website?.trim() || null
+  const rawWebsite = website?.trim() || null
   const trimmedMessage = message.trim()
   const greetingName = firstName || trimmedName || 'there'
 
-  // Only include website if it's a valid URL, otherwise send null
+  // Normalize website (add https:// if missing) then validate
+  const normalizedWebsite = rawWebsite ? normalizeUrl(rawWebsite) : null
   const validatedWebsite =
-    trimmedWebsite && isValidUrl(trimmedWebsite) ? trimmedWebsite : null
+    normalizedWebsite && isValidUrl(normalizedWebsite) ? normalizedWebsite : null
+  // Keep original for display in emails
+  const trimmedWebsite = rawWebsite
 
   const detailLines = [`Name: ${name}`, `Email: ${email}`]
 
