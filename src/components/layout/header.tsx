@@ -139,7 +139,7 @@ export function Header() {
                 <Button
                   asChild
                   size='sm'
-                  variant={pastHero ? 'default' : 'outline'}
+                  variant={pastHero ? 'primary' : 'outline'}
                   className={cn(
                     'transition-colors duration-300',
                     pastHero ? 'md:px-9 lg:px-11' : 'border-ink/60 px-11'
