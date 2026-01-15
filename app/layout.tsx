@@ -8,6 +8,7 @@ import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
 import { PageParticles } from '@/src/components/sections/page-particles'
+import { PostHogProvider } from '@/src/components/posthog-provider'
 
 const afacad = Afacad({
   subsets: ['latin'],
@@ -64,24 +65,26 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           sourceSans.variable
         )}
       >
-        <div
-          className='pts-animated-gradient pointer-events-none fixed inset-0 z-0 bg-gradientSite'
-          aria-hidden
-        />
-        <div
-          className='pointer-events-none fixed inset-0 z-0 bg-ink/10'
-          aria-hidden
-        />
+        <PostHogProvider>
+          <div
+            className='pts-animated-gradient pointer-events-none fixed inset-0 z-0 bg-gradientSite'
+            aria-hidden
+          />
+          <div
+            className='pointer-events-none fixed inset-0 z-0 bg-ink/10'
+            aria-hidden
+          />
 
-        <PageParticles />
+          <PageParticles />
 
-        <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
-          <Header />
-          {children}
-          <Footer />
-        </div>
-        <Toaster />
-        <Analytics />
+          <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
+            <Header />
+            {children}
+            <Footer />
+          </div>
+          <Toaster />
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   )

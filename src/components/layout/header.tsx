@@ -135,48 +135,18 @@ export function Header() {
             </nav>
 
             <div className='flex items-center gap-3'>
-              <div className='relative hidden md:inline-flex'>
-                <motion.div
-                  transition={layoutTransition}
-                  animate={{ opacity: pastHero ? 0 : 1 }}
+              <div className='hidden md:inline-flex'>
+                <Button
+                  asChild
+                  size='sm'
+                  variant={pastHero ? 'primary' : 'outline'}
                   className={cn(
-                    pastHero ? 'pointer-events-none' : 'pointer-events-auto'
+                    'transition-colors duration-300',
+                    pastHero ? 'md:px-9 lg:px-11' : 'border-ink/60 px-11'
                   )}
                 >
-                  <Button
-                    asChild
-                    size='sm'
-                    variant='outline'
-                    className='border-ink/60 px-11'
-                  >
-                    <Link
-                      href={hashHref('contact')}
-                      aria-hidden={pastHero}
-                      tabIndex={pastHero ? -1 : 0}
-                    >
-                      Start a Project
-                    </Link>
-                  </Button>
-                </motion.div>
-
-                <motion.div
-                  transition={layoutTransition}
-                  animate={{ opacity: pastHero ? 1 : 0 }}
-                  className={cn(
-                    'absolute inset-0 flex items-center justify-center',
-                    pastHero ? 'pointer-events-auto' : 'pointer-events-none'
-                  )}
-                >
-                  <Button asChild size='sm' className='md:px-9 lg:px-11'>
-                    <Link
-                      href={hashHref('contact')}
-                      aria-hidden={!pastHero}
-                      tabIndex={pastHero ? 0 : -1}
-                    >
-                      Start a Project
-                    </Link>
-                  </Button>
-                </motion.div>
+                  <Link href={hashHref('contact')}>Start a Project</Link>
+                </Button>
               </div>
 
               <button
