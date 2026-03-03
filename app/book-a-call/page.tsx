@@ -16,7 +16,7 @@ export default function BookACallLandingIndexPage() {
             Select a messaging variant
           </h1>
           <p className='text-balance text-base text-ink/80 md:text-lg'>
-            Four conversion-focused variants for small business owners.
+            {landingVariants.length} conversion-focused variants for small business owners.
           </p>
         </div>
 
@@ -28,7 +28,11 @@ export default function BookACallLandingIndexPage() {
               </CardHeader>
               <CardContent className='space-y-4'>
                 <p className='font-semibold text-ink'>{variant.headline}</p>
+                <p className='text-sm font-medium text-ink/70'>{variant.audience}</p>
                 <p>{variant.subheadline}</p>
+                <p className='text-sm text-ink/60'>
+                  Route: /book-a-call/{variant.slug}
+                </p>
                 <Button asChild variant='outline'>
                   <Link href={`/book-a-call/${variant.slug}`}>Open variant</Link>
                 </Button>

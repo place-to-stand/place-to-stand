@@ -205,6 +205,102 @@ export const landingVariants: LandingVariant[] = [
     ],
     ctaLabel: 'Book a call and identify your highest-ROI automations',
   },
+  {
+    slug: 'never-miss-a-lead',
+    audience: 'For owners tired of watching good leads go cold',
+    eyebrow: 'Variant I · Never-miss-a-lead message',
+    headline: 'Respond faster and stop losing leads between touchpoints.',
+    subheadline:
+      'We build a follow-up system that routes every inquiry, triggers timed responses, and escalates exceptions so your team can book more calls without manually chasing every lead.',
+    outcomeBullets: [
+      'Set response-time standards and automated follow-up sequences',
+      'Route inbound leads by service, urgency, and location',
+      'Create escalation rules for leads that stall or go silent',
+    ],
+    painPoints: [
+      'Leads wait too long before getting a first response',
+      'Follow-up depends on memory and whoever is available',
+      'Deals slip because there is no ownership of next steps',
+    ],
+    differentiators: [
+      'Built around lead-to-call conversion, not generic automation',
+      'Clear owner assignment at every stage of follow-up',
+      'Simple dashboard-style visibility into lead status',
+    ],
+    ctaLabel: 'Book a call and close your follow-up gaps',
+  },
+  {
+    slug: 'ai-coo',
+    audience: 'For small teams drowning in Slack, email, and scattered docs',
+    eyebrow: 'Variant J · AI COO message',
+    headline: 'Give your business an AI operations lead that never drops context.',
+    subheadline:
+      'We implement an AI COO layer that tracks priorities, summarizes blockers, and keeps your team aligned so projects move forward without constant owner intervention.',
+    outcomeBullets: [
+      'Unify updates from communication and project systems',
+      'Automatically surface blockers and overdue dependencies',
+      'Create daily and weekly leadership summaries with clear action items',
+    ],
+    painPoints: [
+      'Important updates are spread across too many tools',
+      'The owner becomes the default project coordinator',
+      'Execution slows because no one sees full context',
+    ],
+    differentiators: [
+      'Ops-first implementation tailored for owner-led companies',
+      'Human escalation rules to keep decisions in the right hands',
+      'Practical rollout without forcing a full tool migration',
+    ],
+    ctaLabel: 'Book a call to set up your AI COO workflow',
+  },
+  {
+    slug: 'overnight-execution',
+    audience: 'For owners who need more done without extending work hours',
+    eyebrow: 'Variant K · Overnight execution message',
+    headline: 'Wake up to completed work, not another unfinished task list.',
+    subheadline:
+      'We set up queued workflows and scheduled automations that run after hours so reporting, follow-up prep, and repetitive ops work are handled before your day starts.',
+    outcomeBullets: [
+      'Schedule recurring workflows for end-of-day and overnight runs',
+      'Auto-generate morning briefs and priority action queues',
+      'Reduce manual prep time before sales and operations start',
+    ],
+    painPoints: [
+      'Critical admin tasks eat the first hours of every morning',
+      'Teams start the day without clear priorities or context',
+      'Too much routine work is still waiting in owner inboxes',
+    ],
+    differentiators: [
+      'Workflow scheduling built around your actual business rhythm',
+      'Clear logs and summaries so every run is auditable',
+      'Focused automation that adds output without adding chaos',
+    ],
+    ctaLabel: 'Book a call to launch overnight workflows',
+  },
+  {
+    slug: 'approval-first-automation',
+    audience: 'For owners who want automation but need control and guardrails',
+    eyebrow: 'Variant L · Approval-first automation message',
+    headline: 'Automate routine work while keeping sensitive actions under approval.',
+    subheadline:
+      'We design approval-first workflows so repetitive tasks run automatically, while high-risk actions require a quick human yes before execution.',
+    outcomeBullets: [
+      'Classify tasks by risk and automate low-risk actions first',
+      'Require approvals for high-impact communications and changes',
+      'Create audit trails for every automated and approved action',
+    ],
+    painPoints: [
+      'You want automation but do not trust black-box execution',
+      'Teams hesitate to adopt AI because of compliance concerns',
+      'Manual reviews are inconsistent and difficult to track',
+    ],
+    differentiators: [
+      'Control-first architecture designed for real-world operations',
+      'Transparent approvals with full action history',
+      'Balanced approach: faster execution without losing oversight',
+    ],
+    ctaLabel: 'Book a call to build approval-first automation',
+  },
 ]
 
 export const landingVariantMap = Object.fromEntries(
