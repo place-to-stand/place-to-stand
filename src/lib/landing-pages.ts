@@ -109,6 +109,102 @@ export const landingVariants: LandingVariant[] = [
     ],
     ctaLabel: 'Book a call to simplify and scale',
   },
+  {
+    slug: 'ai-coworker',
+    audience: 'For owners who need another operator without another payroll line',
+    eyebrow: 'Variant E · AI co-worker message',
+    headline: 'Add an AI co-worker that handles repetitive work every day.',
+    subheadline:
+      'We build an AI-enabled workflow layer that helps your team respond faster, follow up consistently, and keep projects moving without constant manual effort.',
+    outcomeBullets: [
+      'Pinpoint the top 2 to 3 tasks your AI co-worker should own first',
+      'Define handoff rules so people stay in control of final decisions',
+      'Launch practical automations your team can trust and use daily',
+    ],
+    painPoints: [
+      'Your team spends hours on repetitive admin and follow-up',
+      'Important requests stall when owners are pulled into operations',
+      'You need more output without adding immediate headcount',
+    ],
+    differentiators: [
+      'Human-first implementation with clear review checkpoints',
+      'Automations mapped to your current tools and workflows',
+      'Fast rollout focused on immediate operational relief',
+    ],
+    ctaLabel: 'Book a call to design your AI co-worker',
+  },
+  {
+    slug: 'automation-pipeline',
+    audience: 'For service businesses losing momentum between lead and close',
+    eyebrow: 'Variant F · Workflow automation message',
+    headline: 'Automate your lead-to-booking workflow from first click to follow-up.',
+    subheadline:
+      'We connect forms, CRM, messaging, and scheduling so your pipeline keeps moving automatically while your team focuses on high-value conversations.',
+    outcomeBullets: [
+      'Map your current funnel and identify where leads drop off',
+      'Set up trigger-based follow-up flows across your key channels',
+      'Improve speed-to-lead without creating more admin work',
+    ],
+    painPoints: [
+      'Leads go cold because follow-up is inconsistent',
+      'Manual handoffs cause delays and missed opportunities',
+      'Different tools create disconnected customer experiences',
+    ],
+    differentiators: [
+      'End-to-end workflow mapping before implementation',
+      'Simple, visible automations your team can monitor easily',
+      'Conversion-focused setup designed around booking calls',
+    ],
+    ctaLabel: 'Book a call to automate your pipeline',
+  },
+  {
+    slug: 'ops-systemization',
+    audience: 'For owners whose business is stuck in tribal knowledge',
+    eyebrow: 'Variant G · Systemization message',
+    headline: 'Turn ad-hoc tasks into repeatable workflows your team can run.',
+    subheadline:
+      'We document, standardize, and automate core processes so results are consistent, onboarding is faster, and operations are less dependent on any one person.',
+    outcomeBullets: [
+      'Identify high-friction processes worth systemizing first',
+      'Create clear SOP-backed workflows with automation support',
+      'Reduce bottlenecks when key people are unavailable',
+    ],
+    painPoints: [
+      'Processes exist in DMs, memory, and scattered docs',
+      'Delivery quality depends too much on who is available that day',
+      'Scaling output currently means owner oversight on everything',
+    ],
+    differentiators: [
+      'Operational design grounded in real small-business constraints',
+      'Clear ownership model for every workflow step',
+      'Build-first approach that balances speed and maintainability',
+    ],
+    ctaLabel: 'Book a call to systemize operations',
+  },
+  {
+    slug: 'automation-roi',
+    audience: 'For owners who want measurable return from AI and automation',
+    eyebrow: 'Variant H · Automation ROI message',
+    headline: 'Use automation to increase margin without burning out your team.',
+    subheadline:
+      'We prioritize workflow changes that reduce admin drag, improve conversion, and create capacity so your business can grow with less operational strain.',
+    outcomeBullets: [
+      'Estimate time and cost savings for top automation opportunities',
+      'Prioritize quick wins that impact revenue operations first',
+      'Set practical success metrics to track after launch',
+    ],
+    painPoints: [
+      'You are spending on tools but cannot tie them to business outcomes',
+      'Admin load keeps growing faster than revenue',
+      'Your team is busy, but not always focused on highest-value work',
+    ],
+    differentiators: [
+      'ROI-led planning from discovery through implementation',
+      'No over-engineered stack or enterprise-only complexity',
+      'Focused execution designed for owner-led businesses',
+    ],
+    ctaLabel: 'Book a call and uncover automation ROI',
+  },
 ]
 
 export const landingVariantMap = Object.fromEntries(
