@@ -338,7 +338,7 @@ export function ContactSection() {
             className='flex w-full items-center justify-center px-8 py-4'
           >
             <a
-              href='https://calendar.app.google/sKeXakpFVXRJkRjH7'
+              href='https://calendar.app.google/FryhbCprv4Yj6yzN8'
               target='_blank'
               rel='noopener noreferrer'
               className='w-full text-center'

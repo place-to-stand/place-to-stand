@@ -2,8 +2,9 @@ import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card'
-import { type LandingVariant, bookingLink } from '@/src/lib/landing-pages'
+import { type LandingVariant } from '@/src/lib/landing-pages'
 import { LandingSessionMarker } from '@/src/components/landing-session-marker'
+import { BookCallLink } from '@/src/components/book-call-link'
 
 type LandingVariantPageProps = {
   variant: LandingVariant
@@ -28,11 +29,12 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
             {variant.subheadline}
           </p>
           <div className='mt-4 flex w-full flex-col items-center justify-center gap-4 sm:flex-row'>
-            <Button asChild size='lg' className='w-full sm:w-auto'>
-              <a href={bookingLink} target='_blank' rel='noopener noreferrer'>
-                {variant.ctaLabel}
-              </a>
-            </Button>
+            <BookCallLink
+              label={variant.ctaLabel}
+              variantSlug={variant.slug}
+              placement='hero'
+              className='w-full sm:w-auto'
+            />
             <Button asChild size='lg' variant='outline' className='w-full sm:w-auto'>
               <Link href='/#contact'>Ask a question first</Link>
             </Button>
@@ -99,11 +101,12 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
             We&apos;ll review your goals, identify the highest-impact opportunities,
             and outline next steps tailored to your business.
           </p>
-          <Button asChild size='lg' className='mt-2 w-full sm:w-auto'>
-            <a href={bookingLink} target='_blank' rel='noopener noreferrer'>
-              Book your call
-            </a>
-          </Button>
+          <BookCallLink
+            label='Book your call'
+            variantSlug={variant.slug}
+            placement='bottom'
+            className='mt-2 w-full sm:w-auto'
+          />
         </div>
       </AnimatedSection>
     </main>
