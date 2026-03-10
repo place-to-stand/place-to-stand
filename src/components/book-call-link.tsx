@@ -27,6 +27,14 @@ export function BookCallLink({
       placement,
       label,
     })
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', {
+        send_to: 'AW-18004452791/4aXfCKGLl4YcELfLmIlD',
+        value: 1.0,
+        currency: 'USD',
+      })
+    }
   }
 
   return (
