@@ -10,7 +10,7 @@ export type LandingVariant = {
   ctaLabel: string
 }
 
-export const bookingLink = 'https://calendar.app.google/sKeXakpFVXRJkRjH7'
+export const bookingLink = 'https://calendar.app.google/FryhbCprv4Yj6yzN8'
 
 export const landingVariants: LandingVariant[] = [
   {
@@ -161,7 +161,7 @@ export const landingVariants: LandingVariant[] = [
     slug: 'ops-systemization',
     audience: 'For owners whose operations still live in people, not process',
     eyebrow: 'Variant G · Systemization message',
-    headline: 'Turn tribal knowledge into workflows your team can run.',
+    headline: 'Turn undocumented know-how into workflows your team can run.',
     subheadline:
       'We document and automate your core operating tasks so quality stays consistent, onboarding is faster, and progress does not depend on one person remembering every step.',
     outcomeBullets: [
@@ -300,6 +300,78 @@ export const landingVariants: LandingVariant[] = [
       'Balanced approach: faster execution without losing oversight',
     ],
     ctaLabel: 'Book a call to build approval-first automation',
+  },
+  {
+    slug: 'always-on',
+    audience: 'For owners who need their business producing even when they step away',
+    eyebrow: 'Variant M · Always-on business message',
+    headline: 'Keep making money while you are asleep.',
+    subheadline:
+      'Your business should not pause when you close your laptop. We build automated workflows that handle lead response, follow-up, and routine operations around the clock so revenue keeps moving whether you are at your desk or not.',
+    outcomeBullets: [
+      'Automate lead capture and first response so no inquiry waits overnight',
+      'Schedule follow-up sequences that run on your behalf 24/7',
+      'Wake up to booked calls and completed tasks instead of a backlog',
+    ],
+    painPoints: [
+      'Leads go cold overnight because no one is there to respond',
+      'Revenue stalls every time the owner steps away from the business',
+      'Evenings and weekends mean missed opportunities, not rest',
+    ],
+    differentiators: [
+      'Always-on workflows built around your real business hours and off-hours',
+      'No extra staff required to keep operations running after hours',
+      'Simple visibility into what happened while you were away',
+    ],
+    ctaLabel: 'Book a call to keep your business running 24/7',
+  },
+  {
+    slug: 'scale-without-hiring',
+    audience: 'For owners who feel stuck between growing and hiring',
+    eyebrow: 'Variant N · Scale-without-hiring message',
+    headline: 'Scale your business without adding headcount.',
+    subheadline:
+      'Before you post another job listing, let us find the hours your team is losing to repetitive tasks. We build workflows that give everyone time back so you can grow with the people you already have.',
+    outcomeBullets: [
+      'Audit where your team spends time on low-value repetitive work',
+      'Automate the tasks that are eating capacity across your staff',
+      'Free up hours per person per week without changing roles or adding hires',
+    ],
+    painPoints: [
+      'Growth feels impossible without hiring, but hiring is expensive and slow',
+      'Every team member is stretched thin on tasks that could be automated',
+      'You are paying skilled people to do work a system could handle',
+    ],
+    differentiators: [
+      'Capacity-first approach: find hidden hours before adding headcount',
+      'Automation scoped to real team bottlenecks, not generic templates',
+      'Fast implementation so your team feels relief in weeks, not months',
+    ],
+    ctaLabel: 'Book a call to find capacity without hiring',
+  },
+  {
+    slug: 'ai-opportunity-audit',
+    audience: 'For owners curious about AI but unsure where to start',
+    eyebrow: 'Variant O · AI opportunity audit',
+    headline: 'Find out exactly where AI can save you time and money.',
+    subheadline:
+      'We run a focused audit of your operations to identify the specific AI and automation opportunities with the highest payoff for your business, then give you a clear, prioritized action plan.',
+    outcomeBullets: [
+      'Walk through your current workflows and identify AI-ready tasks',
+      'Get a scored list of opportunities ranked by impact and effort',
+      'Leave with a practical roadmap you can act on immediately',
+    ],
+    painPoints: [
+      'You know AI could help but do not know where it fits your business',
+      'Past automation efforts felt generic and did not stick',
+      'You are worried about investing in the wrong tools or approach',
+    ],
+    differentiators: [
+      'Tailored to your business, not a one-size-fits-all AI pitch',
+      'Focused on operational ROI, not hype or experimentation',
+      'Actionable output: a ranked plan, not a slide deck',
+    ],
+    ctaLabel: 'Book your free AI opportunity audit',
   },
 ]
 
