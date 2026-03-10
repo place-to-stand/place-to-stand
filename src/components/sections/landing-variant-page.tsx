@@ -3,6 +3,7 @@ import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card'
 import { type LandingVariant, bookingLink } from '@/src/lib/landing-pages'
+import { LandingSessionMarker } from '@/src/components/landing-session-marker'
 
 type LandingVariantPageProps = {
   variant: LandingVariant
@@ -11,6 +12,7 @@ type LandingVariantPageProps = {
 export function LandingVariantPage({ variant }: LandingVariantPageProps) {
   return (
     <main className='flex-1'>
+      <LandingSessionMarker />
       <AnimatedSection className='relative isolate flex min-h-[100svh] max-w-none flex-col items-center justify-center gap-8 px-6 pb-24 pt-32 text-center'>
         <div className='mx-auto flex w-full max-w-4xl flex-col items-center gap-6'>
           <p className='font-headline text-sm font-semibold uppercase tracking-[0.14em] text-ink/60'>

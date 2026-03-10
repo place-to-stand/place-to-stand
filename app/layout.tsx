@@ -9,6 +9,7 @@ import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
 import { PageParticles } from '@/src/components/sections/page-particles'
 import { PostHogProvider } from '@/src/components/posthog-provider'
+import { FloatingBookCta } from '@/src/components/floating-book-cta'
 
 const afacad = Afacad({
   subsets: ['latin'],
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
             <Footer />
           </div>
+          <FloatingBookCta />
           <Toaster />
           <Analytics />
         </PostHogProvider>
