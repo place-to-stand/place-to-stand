@@ -9,7 +9,7 @@ const team = [
   },
   {
     name: 'Damon Bodine',
-    title: 'Project Manager & AI Strategist',
+    title: 'Senior AI Engineer',
     image: '/1587649018078.jpeg',
   },
   {
