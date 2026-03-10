@@ -26,17 +26,29 @@ export function CaseStudiesSection() {
             href={`/case-studies/${cs.slug}`}
             className='group relative overflow-hidden rounded-xl border border-ink no-underline shadow-sm transition-all duration-300 ease-out hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/30'
           >
-            <div className='grid md:grid-cols-2'>
-              <div className='relative aspect-video w-full overflow-hidden'>
+            {/* Full-width image with centered logo */}
+            <div className='relative aspect-[21/9] w-full overflow-hidden'>
+              <Image
+                src={cs.image}
+                alt={`${cs.client} platform`}
+                fill
+                className='object-cover transition-transform duration-700 group-hover:scale-105'
+              />
+              <div className='absolute inset-0 bg-ink/60' />
+              <div className='absolute inset-0 flex items-center justify-center'>
                 <Image
-                  src={cs.image}
-                  alt={`${cs.client} project`}
-                  fill
-                  className='object-cover transition-transform duration-700 group-hover:scale-105'
+                  src={cs.logo}
+                  alt={cs.client}
+                  width={360}
+                  height={120}
+                  className='h-20 w-auto md:h-32'
                 />
               </div>
+            </div>
 
-              <div className='flex flex-col justify-center gap-4 bg-white/95 p-6 md:p-8'>
+            {/* Details bar */}
+            <div className='flex flex-col gap-4 bg-white/95 p-6 md:flex-row md:items-center md:justify-between md:p-8'>
+              <div className='flex flex-col gap-2 md:max-w-xl'>
                 <div className='flex items-center gap-2'>
                   <span className='text-xs font-semibold uppercase tracking-wider text-ink/50'>
                     {cs.client}
@@ -46,51 +58,47 @@ export function CaseStudiesSection() {
                     {cs.industry}
                   </span>
                 </div>
-
                 <h3 className='font-headline text-xl font-semibold uppercase !leading-[.95] text-ink md:text-2xl'>
                   {cs.title}
                 </h3>
-
-                <p className='line-clamp-3 text-sm !leading-snug text-ink/70 md:text-base'>
-                  {cs.summary}
-                </p>
-
-                <div className='flex flex-wrap gap-3'>
-                  {cs.stats.map(stat => (
-                    <div
-                      key={stat.label}
-                      className='rounded-lg border border-ink/10 bg-white px-3 py-2'
-                    >
-                      <p className='text-[10px] font-semibold uppercase tracking-wider text-ink/50'>
-                        {stat.label}
-                      </p>
-                      <p className='text-sm font-semibold text-ink'>
-                        <span className='text-ink/40 line-through'>
-                          {stat.before}
-                        </span>{' '}
-                        → {stat.after}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className='mt-1 flex items-center gap-2 text-sm font-semibold text-ink/70 transition-colors group-hover:text-ink'>
-                  Read the full case study
-                  <svg
-                    className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    stroke='currentColor'
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M17 8l4 4m0 0l-4 4m4-4H3'
-                    />
-                  </svg>
-                </div>
               </div>
+
+              <div className='flex flex-wrap gap-3'>
+                {cs.stats.map(stat => (
+                  <div
+                    key={stat.label}
+                    className='rounded-lg border border-ink/10 bg-white px-3 py-2'
+                  >
+                    <p className='text-[10px] font-semibold uppercase tracking-wider text-ink/50'>
+                      {stat.label}
+                    </p>
+                    <p className='text-sm font-semibold text-ink'>
+                      <span className='text-ink/40 line-through'>
+                        {stat.before}
+                      </span>{' '}
+                      → {stat.after}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Read more strip */}
+            <div className='flex items-center gap-2 border-t border-ink/10 bg-white/95 px-6 py-3 text-sm font-semibold text-ink/70 transition-colors group-hover:text-ink md:px-8'>
+              Read the full case study
+              <svg
+                className='h-4 w-4 transition-transform duration-300 group-hover:translate-x-1'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M17 8l4 4m0 0l-4 4m4-4H3'
+                />
+              </svg>
             </div>
           </Link>
         ))}
