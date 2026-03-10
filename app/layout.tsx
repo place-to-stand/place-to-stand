@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import Script from 'next/script'
 import { Afacad, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -58,6 +59,20 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className='scroll-smooth' suppressHydrationWarning>
+      <head>
+        <Script
+          src='https://www.googletagmanager.com/gtag/js?id=AW-18004452791'
+          strategy='afterInteractive'
+        />
+        <Script id='google-ads' strategy='afterInteractive'>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18004452791');
+          `}
+        </Script>
+      </head>
       <body
         className={cn(
           'min-h-screen overflow-x-hidden bg-ink text-ink',
