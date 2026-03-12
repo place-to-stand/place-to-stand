@@ -13,6 +13,7 @@ const variants = [
   { id: '8', path: '/v8' },
   { id: '9', path: '/v9' },
   { id: '10', path: '/v10' },
+  { id: '11', path: '/v11' },
 ]
 
 export function CaseStudyNav() {
