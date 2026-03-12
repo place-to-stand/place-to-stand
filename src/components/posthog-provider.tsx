@@ -13,6 +13,8 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         person_profiles: 'identified_only',
         capture_pageview: false, // We capture manually for route changes
         capture_pageleave: true,
+        autocapture: true,
+        capture_dead_clicks: true,
       })
     }
   }, [])

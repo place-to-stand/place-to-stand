@@ -1,4 +1,5 @@
 import { CaseStudyNav } from '@/src/components/case-study-nav'
+import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
 
 export default function CaseStudyLayout({
   children,
@@ -7,6 +8,7 @@ export default function CaseStudyLayout({
 }) {
   return (
     <>
+      <ScrollDepthTracker />
       {children}
       <CaseStudyNav />
     </>
