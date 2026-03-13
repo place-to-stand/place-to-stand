@@ -45,3 +45,8 @@ coverage/
 .claude/settings.local.json
 .vercel
 .env*.local
+
+# Ads CLI
+scripts/ads/.credentials.json
+scripts/ads/.token.json
+scripts/ads/.venv/

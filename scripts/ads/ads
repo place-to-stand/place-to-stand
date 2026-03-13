@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Auto-create venv if missing
+if [ ! -d "$SCRIPT_DIR/.venv" ]; then
+  echo "Creating virtual environment..."
+  python3 -m venv "$SCRIPT_DIR/.venv"
+  "$SCRIPT_DIR/.venv/bin/pip" install -q -r "$SCRIPT_DIR/requirements.txt"
+fi
+
+exec "$SCRIPT_DIR/.venv/bin/python" "$SCRIPT_DIR/ads-cli.py" "$@"
