@@ -16,8 +16,8 @@ def load_config(env_path: str | None = None) -> dict:
 
     values = dotenv_values(env_path)
 
-    developer_token = values.get("GOOGLE_ADS_DEVELOPER_TOKEN", "")
-    customer_id = values.get("GOOGLE_ADS_CUSTOMER_ID", "")
+    developer_token = values.get("GOOGLE_ADS_DEVELOPER_TOKEN", "") or values.get("GOOGLE_DEVELOPER_TOKEN", "")
+    customer_id = (values.get("GOOGLE_ADS_CUSTOMER_ID", "") or "").replace("-", "")
 
     if not developer_token:
         raise MissingConfigError(
