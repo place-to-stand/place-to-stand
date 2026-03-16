@@ -1,0 +1,23 @@
+Generate Google Ads Responsive Search Ad copy for the variant above.
+
+Requirements:
+- 15 headlines (max 30 characters each, strictly enforced)
+- 4 descriptions (max 90 characters each, strictly enforced)
+- 5 alternative headlines to swap in (max 30 characters each)
+- 2 alternative descriptions to swap in (max 90 characters each)
+
+Creative direction:
+- Use the variant's pain points, differentiators, and audience as source material
+- Match the tone of the existing headline and subheadline
+- Include at least one headline with a number or stat
+- Include at least one headline as a question
+- CTA descriptions should reference booking a call
+- Vary headline approaches: benefit, pain, question, urgency, social proof
+
+Output as JSON:
+{
+  "headlines": ["...", ...],        // exactly 15
+  "descriptions": ["...", ...],     // exactly 4
+  "alt_headlines": ["...", ...],    // exactly 5
+  "alt_descriptions": ["...", ...]  // exactly 2
+}
