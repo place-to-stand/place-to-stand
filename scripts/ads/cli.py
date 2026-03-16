@@ -332,3 +332,49 @@ def cmd_copy_list(copy_dir: str = COPY_DIR):
             "last_updated": c["last_updated"],
         })
     print(tabulate(records, headers="keys", tablefmt="simple"))
+
+
+def cmd_deploy(variant: str, dry_run: bool, copy_dir: str = COPY_DIR,
+               client=None, customer_id: str = None):
+    """Deploy ad copy to Google Ads (scaffolded — blocked until Basic Access)."""
+    copy_data = load_copy(copy_dir, variant)
+    if copy_data is None:
+        print(f"No saved copy for '{variant}'. Run `ads copy save` first.", file=sys.stderr)
+        sys.exit(1)
+
+    active = get_active_version(copy_data)
+    if active is None:
+        print(f"No active version for '{variant}'. Run `ads copy save --activate` first.", file=sys.stderr)
+        sys.exit(1)
+
+    final_url = copy_data.get("final_url", f"https://placetostandagency.com/book-a-call/{variant}")
+
+    # Preview
+    print(f"── AD PREVIEW: {variant} ──────────────────────")
+    print(f"Final URL: {final_url}")
+    print(f"Version:   {active['version']} ({active['status']})")
+    print()
+    print("Headlines:")
+    for i, h in enumerate(active["headlines"]):
+        print(f"  {i+1:2d}. {h} ({len(h)} chars)")
+    print()
+    print("Descriptions:")
+    for i, d in enumerate(active["descriptions"]):
+        print(f"  {i+1}. {d} ({len(d)} chars)")
+    print("──────────────────────────────────────────────────")
+
+    if dry_run:
+        print("[DRY RUN] Preview only.")
+        return
+
+    # Try to find the ad group (requires ads_writer.py from Phase 3)
+    try:
+        from ads_writer import find_ad_group_by_url
+    except ImportError:
+        print("Deploy requires ads_writer.py (Phase 3). Run the optimization plan first.", file=sys.stderr)
+        sys.exit(1)
+
+    # Blocked until Basic Access
+    print()
+    print("Deploy is blocked until Google Ads Basic Access is approved.")
+    print("Use --dry-run to preview, or deploy manually from Google Ads console.")

@@ -13,7 +13,7 @@ for mod in ["google_ads", "posthog_api", "google.ads.googleads.client"]:
     if mod not in sys.modules:
         sys.modules[mod] = MagicMock()
 
-from cli import cmd_copy_show, cmd_copy_save, cmd_copy_list
+from cli import cmd_copy_show, cmd_copy_save, cmd_copy_list, cmd_deploy
 
 
 SAMPLE_VARIANT = {
@@ -124,3 +124,71 @@ def test_copy_list_empty(mock_list, capsys):
 
     output = capsys.readouterr().out
     assert "No saved" in output or "no copy" in output.lower()
+
+
+@patch("cli.load_copy")
+@patch("cli.get_active_version")
+def test_deploy_preview(mock_active, mock_load, capsys):
+    mock_load.return_value = {"variant": "fast-start", "final_url": "https://placetostandagency.com/book-a-call/fast-start", "versions": []}
+    mock_active.return_value = {
+        "version": 1,
+        "status": "active",
+        "headlines": [f"Headline {i}" for i in range(15)],
+        "descriptions": [f"Description {i}" for i in range(4)],
+        "alt_headlines": [f"Alt {i}" for i in range(5)],
+        "alt_descriptions": [f"Alt desc {i}" for i in range(2)],
+    }
+
+    cmd_deploy(variant="fast-start", dry_run=True, copy_dir="/fake", client=None, customer_id=None)
+
+    output = capsys.readouterr().out
+    assert "fast-start" in output
+    assert "Headline 0" in output
+
+
+@patch("cli.load_copy", return_value=None)
+def test_deploy_no_copy(mock_load, capsys):
+    with pytest.raises(SystemExit):
+        cmd_deploy(variant="fast-start", dry_run=False, copy_dir="/fake", client=None, customer_id=None)
+
+    output = capsys.readouterr().err
+    assert "No saved copy" in output
+
+
+@patch("cli.load_copy")
+@patch("cli.get_active_version", return_value=None)
+def test_deploy_no_active(mock_active, mock_load, capsys):
+    mock_load.return_value = {"variant": "fast-start", "versions": []}
+
+    with pytest.raises(SystemExit):
+        cmd_deploy(variant="fast-start", dry_run=False, copy_dir="/fake", client=None, customer_id=None)
+
+    output = capsys.readouterr().err
+    assert "No active version" in output
+
+
+@patch("cli.load_copy")
+@patch("cli.get_active_version")
+def test_deploy_no_ads_writer(mock_active, mock_load, capsys, monkeypatch):
+    mock_load.return_value = {"variant": "fast-start", "final_url": "https://placetostandagency.com/book-a-call/fast-start", "versions": []}
+    mock_active.return_value = {
+        "version": 1, "status": "active",
+        "headlines": [f"H{i}" for i in range(15)],
+        "descriptions": [f"D{i}" for i in range(4)],
+        "alt_headlines": [f"AH{i}" for i in range(5)],
+        "alt_descriptions": [f"AD{i}" for i in range(2)],
+    }
+    # Make ads_writer import fail
+    import builtins
+    real_import = builtins.__import__
+    def mock_import(name, *args, **kwargs):
+        if name == "ads_writer":
+            raise ImportError("No module named 'ads_writer'")
+        return real_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, "__import__", mock_import)
+
+    with pytest.raises(SystemExit):
+        cmd_deploy(variant="fast-start", dry_run=False, copy_dir="/fake", client=None, customer_id=None)
+
+    output = capsys.readouterr().err
+    assert "ads_writer.py" in output
