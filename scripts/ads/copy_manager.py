@@ -140,3 +140,112 @@ def format_variant_output(variant: dict, guide_text: str) -> str:
     lines.append(guide_text)
     lines.append("──────────────────────────────────────────────────")
     return "\n".join(lines)
+
+
+# RSA field specs: (field_name, expected_count, max_chars)
+RSA_FIELDS = [
+    ("headlines", 15, 30),
+    ("descriptions", 4, 90),
+    ("alt_headlines", 5, 30),
+    ("alt_descriptions", 2, 90),
+]
+
+
+def validate_copy(copy: dict) -> list[str]:
+    """Validate RSA copy against character limits and counts.
+
+    Returns list of error strings. Empty list means valid.
+    """
+    errors = []
+    for field, expected_count, max_chars in RSA_FIELDS:
+        if field not in copy:
+            errors.append(f"Missing field: {field}")
+            continue
+        items = copy[field]
+        if len(items) != expected_count:
+            errors.append(f"{field}: expected {expected_count} items, got {len(items)}")
+        for i, item in enumerate(items):
+            if len(item) > max_chars:
+                errors.append(f"{field}[{i}]: {len(item)} chars (max {max_chars}) — \"{item}\"")
+    return errors
+
+
+def save_copy(copy_dir: str, variant: str, copy: dict, activate: bool) -> int:
+    """Save ad copy to a versioned JSON file. Returns the version number."""
+    os.makedirs(copy_dir, exist_ok=True)
+    file_path = os.path.join(copy_dir, f"{variant}.json")
+
+    if os.path.exists(file_path):
+        with open(file_path) as f:
+            data = json.load(f)
+    else:
+        data = {
+            "variant": variant,
+            "final_url": f"{BASE_URL}/book-a-call/{variant}",
+            "versions": [],
+        }
+
+    if activate:
+        for v in data["versions"]:
+            if v["status"] == "active":
+                v["status"] = "archived"
+
+    version_num = len(data["versions"]) + 1
+    data["versions"].append({
+        "version": version_num,
+        "created": datetime.now(timezone.utc).isoformat(),
+        "status": "active" if activate else "draft",
+        "headlines": copy["headlines"],
+        "descriptions": copy["descriptions"],
+        "alt_headlines": copy["alt_headlines"],
+        "alt_descriptions": copy["alt_descriptions"],
+    })
+
+    with open(file_path, "w") as f:
+        json.dump(data, f, indent=2)
+
+    return version_num
+
+
+def load_copy(copy_dir: str, variant: str) -> dict | None:
+    """Load copy file for a variant. Returns None if not found."""
+    file_path = os.path.join(copy_dir, f"{variant}.json")
+    if not os.path.exists(file_path):
+        return None
+    with open(file_path) as f:
+        return json.load(f)
+
+
+def get_active_version(copy_data: dict) -> dict | None:
+    """Return the active version from copy data, or None."""
+    for v in copy_data.get("versions", []):
+        if v["status"] == "active":
+            return v
+    return None
+
+
+def list_copies(copy_dir: str) -> list[dict]:
+    """List all saved copy files with summary info."""
+    if not os.path.exists(copy_dir):
+        return []
+
+    result = []
+    for filename in sorted(os.listdir(copy_dir)):
+        if not filename.endswith(".json"):
+            continue
+        file_path = os.path.join(copy_dir, filename)
+        with open(file_path) as f:
+            data = json.load(f)
+
+        active = get_active_version(data)
+        versions = data.get("versions", [])
+        last_updated = versions[-1]["created"] if versions else "N/A"
+
+        result.append({
+            "variant": data["variant"],
+            "total_versions": len(versions),
+            "active_version": active["version"] if active else None,
+            "last_updated": last_updated,
+        })
+
+    return result

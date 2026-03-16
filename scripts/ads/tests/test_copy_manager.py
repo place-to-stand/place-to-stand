@@ -6,7 +6,7 @@ import tempfile
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from copy_manager import parse_variant, format_variant_output, get_all_slugs, load_guide
+from copy_manager import parse_variant, format_variant_output, get_all_slugs, load_guide, validate_copy, save_copy, load_copy, list_copies
 
 
 # Minimal TS content for testing (matches real structure)
@@ -134,3 +134,120 @@ def test_format_variant_output(tmp_path):
     assert "Leads sit too long" in output
     assert "GUIDE HERE" in output
     assert "placetostandagency.com/book-a-call/fast-start" in output
+
+
+def _valid_copy():
+    """Helper: returns copy data that passes all validation rules."""
+    return {
+        "headlines": [f"Headline {i:02d} here" for i in range(15)],
+        "descriptions": [f"Description {i} that is valid and under ninety characters easily." for i in range(4)],
+        "alt_headlines": [f"Alt headline {i}" for i in range(5)],
+        "alt_descriptions": ["Alt description one is valid.", "Alt description two is valid."],
+    }
+
+
+def test_validate_copy_passes_valid():
+    errors = validate_copy(_valid_copy())
+    assert errors == []
+
+
+def test_validate_copy_wrong_headline_count():
+    copy = _valid_copy()
+    copy["headlines"] = copy["headlines"][:10]
+    errors = validate_copy(copy)
+    assert any("headlines" in e and "15" in e for e in errors)
+
+
+def test_validate_copy_headline_too_long():
+    copy = _valid_copy()
+    copy["headlines"][0] = "This headline is way too long and exceeds the thirty character limit"
+    errors = validate_copy(copy)
+    assert any("headlines[0]" in e for e in errors)
+
+
+def test_validate_copy_description_too_long():
+    copy = _valid_copy()
+    copy["descriptions"][0] = "x" * 91
+    errors = validate_copy(copy)
+    assert any("descriptions[0]" in e for e in errors)
+
+
+def test_validate_copy_missing_field():
+    copy = _valid_copy()
+    del copy["alt_headlines"]
+    errors = validate_copy(copy)
+    assert any("alt_headlines" in e for e in errors)
+
+
+def test_save_and_load_copy(tmp_path):
+    copy = _valid_copy()
+    copy_dir = tmp_path / "copy"
+    save_copy(str(copy_dir), "fast-start", copy, activate=False)
+
+    loaded = load_copy(str(copy_dir), "fast-start")
+    assert loaded is not None
+    assert loaded["variant"] == "fast-start"
+    assert len(loaded["versions"]) == 1
+    assert loaded["versions"][0]["status"] == "draft"
+    assert loaded["versions"][0]["headlines"] == copy["headlines"]
+
+
+def test_save_copy_appends_version(tmp_path):
+    copy = _valid_copy()
+    copy_dir = tmp_path / "copy"
+    save_copy(str(copy_dir), "fast-start", copy, activate=False)
+    save_copy(str(copy_dir), "fast-start", copy, activate=False)
+
+    loaded = load_copy(str(copy_dir), "fast-start")
+    assert len(loaded["versions"]) == 2
+    assert loaded["versions"][1]["version"] == 2
+
+
+def test_save_copy_activate(tmp_path):
+    copy = _valid_copy()
+    copy_dir = tmp_path / "copy"
+    save_copy(str(copy_dir), "fast-start", copy, activate=True)
+
+    loaded = load_copy(str(copy_dir), "fast-start")
+    assert loaded["versions"][0]["status"] == "active"
+
+
+def test_save_copy_activate_archives_previous(tmp_path):
+    copy = _valid_copy()
+    copy_dir = tmp_path / "copy"
+    save_copy(str(copy_dir), "fast-start", copy, activate=True)
+    save_copy(str(copy_dir), "fast-start", copy, activate=True)
+
+    loaded = load_copy(str(copy_dir), "fast-start")
+    assert loaded["versions"][0]["status"] == "archived"
+    assert loaded["versions"][1]["status"] == "active"
+
+
+def test_load_copy_not_found(tmp_path):
+    result = load_copy(str(tmp_path / "copy"), "nonexistent")
+    assert result is None
+
+
+def test_list_copies(tmp_path):
+    copy = _valid_copy()
+    copy_dir = tmp_path / "copy"
+    save_copy(str(copy_dir), "fast-start", copy, activate=True)
+    save_copy(str(copy_dir), "done-for-you", copy, activate=False)
+
+    result = list_copies(str(copy_dir))
+    assert len(result) == 2
+    slugs = [r["variant"] for r in result]
+    assert "fast-start" in slugs
+    assert "done-for-you" in slugs
+
+    fs = [r for r in result if r["variant"] == "fast-start"][0]
+    assert fs["total_versions"] == 1
+    assert fs["active_version"] == 1
+
+    dfy = [r for r in result if r["variant"] == "done-for-you"][0]
+    assert dfy["active_version"] is None
+
+
+def test_list_copies_empty(tmp_path):
+    result = list_copies(str(tmp_path / "copy"))
+    assert result == []
