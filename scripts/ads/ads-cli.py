@@ -4,7 +4,7 @@
 Usage:
     python scripts/ads/ads-cli.py status
     python scripts/ads/ads-cli.py report --days 7
-    python scripts/ads/ads-cli.py variants --days 30
+    python scripts/ads/ads-cli.py copy show fast-start
 """
 
 import sys
@@ -12,14 +12,21 @@ import sys
 from cli import (
     build_parser, cmd_report, cmd_variants, cmd_status,
     cmd_funnel_report, cmd_funnel_full, cmd_funnel_alerts,
+    cmd_copy_show, cmd_copy_save, cmd_copy_list, cmd_deploy,
 )
-from config import load_config, MissingConfigError
-from auth import get_google_ads_client
 
 
-def main():
-    parser = build_parser()
-    args = parser.parse_args()
+# Commands that require Google Ads authentication
+ADS_AUTH_COMMANDS = {"report", "variants", "status", "funnel", "deploy", "recommend"}
+
+# Commands that require PostHog API key
+POSTHOG_COMMANDS = {"funnel"}
+
+
+def _get_auth(args_command):
+    """Load config and authenticate with Google Ads. Only called for commands that need it."""
+    from config import load_config, MissingConfigError
+    from auth import get_google_ads_client
 
     try:
         cfg = load_config()
@@ -40,7 +47,27 @@ def main():
         print("Token may be expired — re-run to open browser login.", file=sys.stderr)
         sys.exit(1)
 
+    return cfg, client
+
+
+def main():
+    parser = build_parser()
+    args = parser.parse_args()
+
     try:
+        # ── Local-only commands (no auth needed) ──
+        if args.command == "copy":
+            if args.copy_command == "show":
+                cmd_copy_show(args.variant, args.json)
+            elif args.copy_command == "save":
+                cmd_copy_save(args.variant, args.file, args.activate)
+            elif args.copy_command == "list":
+                cmd_copy_list()
+            return
+
+        # ── Commands that need Google Ads auth ──
+        cfg, client = _get_auth(args.command)
+
         if args.command == "report":
             cmd_report(client, cfg["customer_id"], args.days, args.json)
         elif args.command == "variants":
@@ -79,6 +106,9 @@ def main():
                 clicks = fetch_cta_clicks(posthog_key, start)
 
                 cmd_funnel_alerts(ads_data, pv, scrolls, clicks)
+
+        elif args.command == "deploy":
+            cmd_deploy(args.variant, args.dry_run, client=client, customer_id=cfg["customer_id"])
         else:
             parser.print_help()
             sys.exit(1)
