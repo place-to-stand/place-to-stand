@@ -50,3 +50,4 @@ coverage/
 scripts/ads/.credentials.json
 scripts/ads/.token.json
 scripts/ads/.venv/
+scripts/ads/copy/
