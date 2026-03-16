@@ -2,12 +2,18 @@
 
 import argparse
 import json
+import os
 import sys
 from datetime import date
 
 from tabulate import tabulate
 
 from formatting import date_range_clause, format_cost, format_ctr, format_cpc
+from copy_manager import (
+    parse_variant, get_all_slugs, load_guide, format_variant_output,
+    validate_copy, save_copy, load_copy, get_active_version, list_copies,
+    LANDING_PAGES_PATH, COPY_DIR,
+)
 from google_ads import (
     build_report_query,
     build_variants_query,
@@ -50,6 +56,26 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_funnel_alerts = funnel_sub.add_parser("alerts", help="Funnel anomaly alerts")
     p_funnel_alerts.add_argument("--days", type=int, default=7, choices=[7, 14, 30])
+
+    # copy (ad copy management)
+    p_copy = sub.add_parser("copy", help="Ad copy management")
+    copy_sub = p_copy.add_subparsers(dest="copy_command", required=True)
+
+    p_copy_show = copy_sub.add_parser("show", help="Show variant data + prompt guide")
+    p_copy_show.add_argument("variant", help="Variant slug (e.g. fast-start)")
+    p_copy_show.add_argument("--json", action="store_true", default=False)
+
+    p_copy_save = copy_sub.add_parser("save", help="Save and validate ad copy")
+    p_copy_save.add_argument("variant", help="Variant slug (e.g. fast-start)")
+    p_copy_save.add_argument("--file", default=None, help="Path to JSON file with copy (reads stdin if omitted)")
+    p_copy_save.add_argument("--activate", action="store_true", default=False)
+
+    p_copy_list = copy_sub.add_parser("list", help="List saved ad copy")
+
+    # deploy
+    p_deploy = sub.add_parser("deploy", help="Deploy ad copy to Google Ads")
+    p_deploy.add_argument("variant", help="Variant slug (e.g. fast-start)")
+    p_deploy.add_argument("--dry-run", action="store_true", default=False)
 
     return parser
 
@@ -249,3 +275,60 @@ def cmd_funnel_alerts(
             print(a)
     else:
         print("No alerts — funnel looks healthy.")
+
+
+def cmd_copy_show(variant: str, as_json: bool, ts_path: str = LANDING_PAGES_PATH):
+    """Show variant data + prompt guide for ad copy generation."""
+    if not os.path.exists(ts_path):
+        print(f"landing-pages.ts not found at {ts_path}", file=sys.stderr)
+        sys.exit(1)
+
+    data = parse_variant(ts_path, variant)
+    if data is None:
+        slugs = get_all_slugs(ts_path)
+        print(f"Unknown variant '{variant}'. Available: {', '.join(slugs)}", file=sys.stderr)
+        sys.exit(1)
+
+    if as_json:
+        print(json.dumps(data, indent=2))
+    else:
+        guide = load_guide()
+        print(format_variant_output(data, guide))
+
+
+def cmd_copy_save(variant: str, file_path: str | None, activate: bool, copy_dir: str = COPY_DIR):
+    """Validate and save ad copy from a JSON file or stdin."""
+    if file_path:
+        with open(file_path) as f:
+            copy = json.load(f)
+    else:
+        copy = json.load(sys.stdin)
+
+    errors = validate_copy(copy)
+    if errors:
+        print("Validation failed:", file=sys.stderr)
+        for e in errors:
+            print(f"  {e}", file=sys.stderr)
+        sys.exit(1)
+
+    version = save_copy(copy_dir, variant, copy, activate)
+    status = "active" if activate else "draft"
+    print(f"Saved version {version} for '{variant}' (status: {status})")
+
+
+def cmd_copy_list(copy_dir: str = COPY_DIR):
+    """List all saved ad copy with version info."""
+    copies = list_copies(copy_dir)
+    if not copies:
+        print("No saved copy. Run `ads copy save` first.")
+        return
+
+    records = []
+    for c in copies:
+        records.append({
+            "variant": c["variant"],
+            "versions": c["total_versions"],
+            "active": c["active_version"] or "none",
+            "last_updated": c["last_updated"],
+        })
+    print(tabulate(records, headers="keys", tablefmt="simple"))
