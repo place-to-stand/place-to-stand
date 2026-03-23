@@ -13,6 +13,7 @@ import { HowWeWorkSection } from '@/src/components/sections/how-we-work-section'
 import { ClientsSection } from '@/src/components/sections/clients-section'
 import { ContactSection } from '@/src/components/sections/contact-section'
 import { FaqSection } from '@/src/components/sections/faq-section'
+import { CaseStudiesSection } from '@/src/components/sections/case-studies-section'
 
 export default function HomePage() {
   const [lightboxOpen, setLightboxOpen] = useState(false)
@@ -69,6 +70,7 @@ export default function HomePage() {
         onOpenLightbox={() => setLightboxOpen(true)}
       />
       <ClientsSection />
+      <CaseStudiesSection />
       <HowWeWorkSection />
       <ContactSection />
       <FaqSection />
