@@ -2,11 +2,8 @@ import type { MetadataRoute } from 'next'
 
 const sections = [
   'home',
-  'about',
-  'services',
-  'how-we-work',
-  'team',
-  'work',
+  'clients',
+  'how-it-works',
   'contact',
 ]
 
@@ -22,6 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
   const standalonePages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/case-studies`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/rsvp`,
       lastModified,

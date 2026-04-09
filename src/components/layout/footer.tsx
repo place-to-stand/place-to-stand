@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { NAV_LINKS, hashHref } from '@/src/components/layout/nav-links'
+import { NAV_LINKS, navLinkHref } from '@/src/components/layout/nav-links'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -23,8 +23,8 @@ export function Footer() {
           <div className='flex flex-col gap-2 text-left'>
             {NAV_LINKS.map(link => (
               <Link
-                key={link.hash}
-                href={hashHref(link.hash)}
+                key={link.label}
+                href={navLinkHref(link)}
                 className='text-xs font-semibold tracking-[0.1em] text-ink-light/70 transition hover:text-white'
               >
                 {link.label}

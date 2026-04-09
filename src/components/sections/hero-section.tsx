@@ -24,8 +24,8 @@ export function HeroSection() {
         </p>
         <div className='mt-4 flex flex-col items-center gap-4 sm:flex-row'>
           <Button asChild size='lg'>
-            <Link href={hashHref('use-cases')} data-pts-hero-cta>
-              See what we can build for you ↓
+            <Link href='/case-studies' data-pts-hero-cta>
+              See our case studies →
             </Link>
           </Button>
         </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { motion, useReducedMotion, type Transition } from 'framer-motion'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-import { NAV_LINKS, hashHref } from '@/src/components/layout/nav-links'
+import { NAV_LINKS, hashHref, navLinkHref } from '@/src/components/layout/nav-links'
 
 export function Header() {
   const shouldReduceMotion = useReducedMotion()
@@ -122,8 +122,8 @@ export function Header() {
             <nav className='hidden items-center gap-2 md:flex md:text-sm lg:gap-5 lg:text-base'>
               {NAV_LINKS.map(item => (
                 <Link
-                  key={item.hash}
-                  href={hashHref(item.hash)}
+                  key={item.label}
+                  href={navLinkHref(item)}
                   className={cn(
                     'font-semibold uppercase tracking-[0.1em] transition-all duration-500',
                     'border-b-2 border-transparent text-ink/70 hover:border-ink hover:text-ink'
@@ -191,8 +191,8 @@ export function Header() {
             >
               {NAV_LINKS.map(item => (
                 <Link
-                  key={item.hash}
-                  href={hashHref(item.hash)}
+                  key={item.label}
+                  href={navLinkHref(item)}
                   className='rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink-light/80 transition hover:bg-white/10 hover:text-ink-light'
                   onClick={() => setMobileOpen(false)}
                 >
