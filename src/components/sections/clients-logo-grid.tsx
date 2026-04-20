@@ -1,65 +1,90 @@
-import Link from 'next/link'
+'use client'
+
+import { useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { projects } from '@/src/lib/case-studies'
 
-export function ClientsLogoGrid() {
+function Dot({ className = '' }: { className?: string }) {
   return (
-    <AnimatedSection id='clients' className='flex flex-col gap-8 md:gap-10'>
+    <span
+      className={`absolute h-2 w-2 rounded-full bg-ink/15 ${className}`}
+      aria-hidden='true'
+    />
+  )
+}
+
+export function ClientsLogoGrid() {
+  const [paused, setPaused] = useState(false)
+  // Double the list so the scroll animation loops seamlessly
+  const logos = [...projects, ...projects]
+
+  return (
+    <AnimatedSection
+      id='clients'
+      className='flex min-h-[100svh] max-w-none flex-col items-center justify-center gap-8 bg-white px-0 md:gap-12'
+    >
+      {/* Heading */}
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
-          Clients
-        </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
-          Trusted by ambitious brands
+        <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold !leading-tight text-ink md:text-5xl lg:text-6xl'>
+          Trusted by Ambitious Brands
         </h2>
-        <p className='max-w-xl text-balance text-base !leading-snug text-ink/80 md:text-lg'>
-          A look at the partners we craft product, marketing, and brand
-          experiences with.
+        <p className='max-w-xl text-balance text-base !leading-snug text-ink/60 md:text-lg'>
+          We work with some of the most exciting brands building their next
+          chapter online. Here are a few who trust us with their digital
+          presence.
         </p>
       </div>
 
-      <div className='grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4'>
-        {projects.map(project => (
-          <a
-            key={project.title}
-            href={project.href}
-            target='_blank'
-            rel='noreferrer noopener'
-            aria-label={`Visit ${project.title} (opens in a new tab)`}
-            className='flex items-center gap-3 rounded-xl border border-ink/10 bg-white/60 px-4 py-4 no-underline transition-all duration-300 hover:border-ink/30 hover:bg-white hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink/30'
-          >
-            <img
-              src={`https://www.google.com/s2/favicons?domain=${new URL(project.href).hostname}&sz=64`}
-              alt=''
-              className='h-7 w-7 shrink-0 md:h-8 md:w-8'
-            />
-            <span className='font-headline text-sm font-semibold uppercase leading-tight text-ink md:text-base'>
-              {project.title}
-            </span>
-          </a>
-        ))}
-      </div>
+      {/* Scrolling logo grid */}
+      <div className='relative w-full max-w-6xl overflow-hidden'>
+        {/* Fade edges */}
+        <div className='pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-white to-transparent md:w-32' />
+        <div className='pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-white to-transparent md:w-32' />
 
-      <div className='flex justify-center'>
-        <Link
-          href='/case-studies'
-          className='inline-flex items-center gap-2 rounded-full border-2 border-ink px-6 py-2.5 font-headline text-sm font-semibold uppercase tracking-wider text-ink transition-all duration-300 hover:bg-ink hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink'
-        >
-          View all case studies
-          <svg
-            className='h-4 w-4'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-            strokeWidth={2}
+        {/* Row with border grid */}
+        <div className='relative border-y border-ink/10'>
+          <Dot className='-top-1 left-0' />
+          <Dot className='-top-1 right-0' />
+          <Dot className='-bottom-1 left-0' />
+          <Dot className='-bottom-1 right-0' />
+
+          <div
+            className='flex w-max items-stretch'
+            style={{
+              animation: 'scroll 90s linear infinite',
+              animationPlayState: paused ? 'paused' : 'running',
+            }}
           >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M17 8l4 4m0 0l-4 4m4-4H3'
-            />
-          </svg>
-        </Link>
+            {logos.map((project, i) => (
+              <a
+                key={`${project.title}-${i}`}
+                href={project.href}
+                target='_blank'
+                rel='noreferrer noopener'
+                aria-label={`Visit ${project.title}`}
+                className='group relative flex h-28 w-48 shrink-0 flex-col items-center justify-center gap-2 border-r border-ink/10 bg-white px-6 transition-all duration-300 hover:bg-ink/[0.03] md:h-36 md:w-60'
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
+              >
+                <Dot className='-right-1 -top-1' />
+                <Dot className='-bottom-1 -right-1' />
+
+                {/* Arrow indicator on hover */}
+                <ArrowUpRight className='absolute right-3 top-3 h-4 w-4 text-ink/0 transition-all duration-300 group-hover:text-ink/40' />
+
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${new URL(project.href).hostname}&sz=64`}
+                  alt=''
+                  className='h-10 w-10 shrink-0 md:h-12 md:w-12'
+                />
+                <span className='font-headline text-[11px] font-semibold uppercase leading-tight text-ink/70 md:text-xs'>
+                  {project.title}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </AnimatedSection>
   )

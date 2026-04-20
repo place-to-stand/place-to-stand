@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
@@ -38,16 +39,19 @@ export const useCases = [
 ] as const
 
 interface UseCasesSectionProps {
-  activeIndex: number
-  onActiveIndexChange: (index: number) => void
-  onOpenLightbox: () => void
+  activeIndex?: number
+  onActiveIndexChange?: (index: number) => void
+  onOpenLightbox?: () => void
 }
 
 export function UseCasesSection({
-  activeIndex,
+  activeIndex: controlledIndex,
   onActiveIndexChange,
   onOpenLightbox,
-}: UseCasesSectionProps) {
+}: UseCasesSectionProps = {}) {
+  const [internalIndex, setInternalIndex] = useState(0)
+  const activeIndex = controlledIndex ?? internalIndex
+  const setActiveIndex = onActiveIndexChange ?? setInternalIndex
   return (
     <AnimatedSection id='use-cases' className='flex flex-col gap-8 md:gap-8'>
       <div className='flex flex-col items-center gap-4 text-center'>
@@ -70,7 +74,7 @@ export function UseCasesSection({
             return (
               <button
                 key={useCase.title}
-                onClick={() => onActiveIndexChange(index)}
+                onClick={() => setActiveIndex(index)}
                 className={cn(
                   'relative flex-1 rounded-lg border-2 px-1.5 py-3 text-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:px-3 md:py-2 md:text-left',
                   isActive
@@ -163,7 +167,7 @@ export function UseCasesSection({
                     className='relative cursor-default md:flex-1 md:cursor-zoom-in'
                     onClick={() => {
                       if (window.innerWidth >= 768) {
-                        onOpenLightbox()
+                        onOpenLightbox?.()
                       }
                     }}
                     role='button'
@@ -171,7 +175,7 @@ export function UseCasesSection({
                     aria-label={`View ${useCase.title} in lightbox`}
                     onKeyDown={e => {
                       if (e.key === 'Enter' && window.innerWidth >= 768) {
-                        onOpenLightbox()
+                        onOpenLightbox?.()
                       }
                     }}
                   >

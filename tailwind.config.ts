@@ -25,9 +25,9 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-bebas-neue)'],
-        logo: ['var(--font-afacad)'],
-        sans: ['var(--font-source-sans)'],
-        headline: ['var(--font-afacad)'],
+        logo: ['var(--font-ovo)'],
+        sans: ['var(--font-work-sans)'],
+        headline: ['var(--font-ovo)'],
       },
       lineHeight: {
         tighter: '1.2',
@@ -49,6 +49,10 @@ const config: Config = {
           '100%': {
             transform: 'translateX(110%)',
           },
+        },
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
       animation: {

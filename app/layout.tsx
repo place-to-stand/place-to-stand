@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
-import { Afacad, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
+import { Afacad, Bebas_Neue, Ovo, Source_Sans_3, Work_Sans } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
@@ -28,6 +28,20 @@ const bebasNeue = Bebas_Neue({
 const sourceSans = Source_Sans_3({
   subsets: ['latin'],
   variable: '--font-source-sans',
+  adjustFontFallback: false,
+})
+
+const workSans = Work_Sans({
+  subsets: ['latin'],
+  variable: '--font-work-sans',
+  weight: '400',
+  adjustFontFallback: false,
+})
+
+const ovo = Ovo({
+  subsets: ['latin'],
+  variable: '--font-ovo',
+  weight: '400',
   adjustFontFallback: false,
 })
 
@@ -78,20 +92,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           'min-h-screen overflow-x-hidden bg-ink text-ink',
           afacad.variable,
           bebasNeue.variable,
-          sourceSans.variable
+          sourceSans.variable,
+          workSans.variable,
+          ovo.variable
         )}
       >
         <PostHogProvider>
           <div
-            className='pts-animated-gradient pointer-events-none fixed inset-0 z-0 bg-gradientSite'
-            aria-hidden
-          />
-          <div
-            className='pointer-events-none fixed inset-0 z-0 bg-ink/10'
+            className='pointer-events-none fixed inset-0 z-0 bg-[#c4cae0]'
             aria-hidden
           />
 
-          <PageParticles />
+          {/* <PageParticles /> */}
 
           <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
             <Header />

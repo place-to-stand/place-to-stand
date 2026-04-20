@@ -99,12 +99,12 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
 
 export function FaqSection() {
   return (
-    <AnimatedSection id='faq' className='flex flex-col gap-10'>
+    <AnimatedSection id='faq' className='flex min-h-[100svh] max-w-none flex-col justify-center gap-10 bg-[#94e0e4] px-6'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           FAQ
         </span>
-        <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-4xl text-balance font-headline text-2xl font-semibold uppercase !leading-[.9] text-ink md:text-4xl'>
           The answers you’re looking for
         </h2>
         <p className='max-w-2xl text-balance text-lg !leading-snug text-ink/80'>

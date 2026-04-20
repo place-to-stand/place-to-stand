@@ -5,9 +5,12 @@ export type NavLink = {
 }
 
 export const NAV_LINKS: NavLink[] = [
+  { path: '/services', label: 'Services' },
   { path: '/case-studies', label: 'Case Studies' },
-  { hash: 'how-it-works', label: 'How It Works' },
-  { hash: 'contact', label: 'Contact' },
+  { path: '/how-it-works', label: 'How We Work' },
+  { path: '/team', label: 'Team' },
+  { path: '/blog', label: 'Blog' },
+  { path: '/contact', label: 'Book a Call' },
 ]
 
 export const hashHref = (hash: string) => ({ pathname: '/', hash })
