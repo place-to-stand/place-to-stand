@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/src/lib/utils'
@@ -12,12 +12,37 @@ const ctaLink = NAV_LINKS.find(l => l.label === 'Book a Call')!
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const lastScrollY = useRef(0)
   const pathname = usePathname()
   const router = useRouter()
 
+  const handleScroll = useCallback(() => {
+    const currentY = window.scrollY
+    if (currentY <= 0) {
+      setVisible(true)
+    } else if (currentY < lastScrollY.current) {
+      setVisible(true)
+    } else if (currentY > lastScrollY.current) {
+      setVisible(false)
+      setMobileOpen(false)
+    }
+    lastScrollY.current = currentY
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [handleScroll])
+
   return (
-    <header className='fixed inset-x-0 top-0 z-50 w-full bg-[#111827]'>
-      <div className='mx-auto flex max-w-6xl items-center justify-between px-6 pb-5 pt-7'>
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 w-full bg-white transition-transform duration-500 ease-in-out',
+        visible ? 'translate-y-0' : '-translate-y-full'
+      )}
+    >
+      <div className='mx-auto flex max-w-6xl items-center justify-between px-6 py-7'>
         <button
           type='button'
           onClick={() => {
@@ -29,7 +54,7 @@ export function Header() {
           }}
           className='flex items-center gap-3'
         >
-          <span className='font-logo font-semibold uppercase tracking-[0.025em] text-white md:text-base lg:text-xl'>
+          <span className='font-logo font-semibold uppercase tracking-[0.025em] text-ink text-lg md:text-xl lg:text-2xl'>
             Place To Stand
           </span>
         </button>
@@ -44,8 +69,8 @@ export function Header() {
                 className={cn(
                   'border-b-2 pb-0.5 font-semibold uppercase tracking-[0.1em] transition-all duration-300',
                   isActive
-                    ? 'border-white text-white'
-                    : 'border-transparent text-white/70 hover:border-white hover:text-white'
+                    ? 'border-ink text-ink'
+                    : 'border-transparent text-ink/60 hover:border-ink hover:text-ink'
                 )}
               >
                 {item.label}
@@ -57,13 +82,13 @@ export function Header() {
         <div className='flex items-center gap-3'>
           <Link
             href={navLinkHref(ctaLink)}
-            className='group hidden items-center bg-white text-xs uppercase tracking-[0.1em] text-ink md:inline-flex lg:text-sm'
+            className='group hidden items-center border border-ink/30 text-xs uppercase tracking-[0.1em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white md:inline-flex lg:text-sm'
           >
-            <span className='px-3 py-1.5 font-semibold transition-transform duration-300 group-hover:translate-x-1'>
+            <span className='px-4 py-3 font-semibold transition-transform duration-300 group-hover:translate-x-1'>
               Book a Call
             </span>
-            <span className='flex items-center justify-center self-stretch bg-[#94e0e4] px-3'>
-              <ArrowRight className='size-4 text-ink transition-transform delay-75 duration-200 group-hover:translate-x-1' />
+            <span className='flex items-center justify-center self-stretch border-l border-ink/30 px-3 transition-colors duration-300 group-hover:border-cyan group-hover:bg-cyan'>
+              <ArrowRight className='size-4 transition-transform delay-75 duration-200 group-hover:translate-x-1 group-hover:text-ink' />
             </span>
           </Link>
 
@@ -78,7 +103,7 @@ export function Header() {
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
-              className='h-8 w-8 text-white'
+              className='h-8 w-8 text-ink'
               fill='none'
               stroke='currentColor'
               strokeWidth='1.5'

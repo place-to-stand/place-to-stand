@@ -99,7 +99,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <PostHogProvider>
           <div
-            className='pointer-events-none fixed inset-0 z-0 bg-[#c4cae0]'
+            className='pointer-events-none fixed inset-0 z-0 bg-white'
             aria-hidden
           />
 

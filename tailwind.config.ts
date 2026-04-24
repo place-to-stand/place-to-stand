@@ -7,25 +7,23 @@ const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
-      backgroundImage: {
-        gradientPrimary:
-          // 'linear-gradient(135deg, #444aaa 0%, #d7a5d9 23%, #c4cae0 76%, #94e0e4 100%)',
-          'linear-gradient(35deg, #6a9ea1ff 0%, #5b6483ff 23%, #704571ff 78%, #3a3e79ff 100%)',
-        gradientPrimaryRadial:
-          'radial-gradient(circle, #6a9ea1ff 0%, #5b6483ff 33%, #704571ff 66%, #3a3e79ff 100%)',
-        gradientSite:
-          'linear-gradient(45deg, #444aaa 0%, #d7a5d9 27%, #c4cae0 52%, #94e0e4 100%)',
-      },
       colors: {
         accent: '#A3A6C7',
         ink: {
           DEFAULT: '#111827',
           light: '#F9FAFB',
         },
+        slate: '#1e293b',
+        cyan: '#94e0e4',
+        lavender: '#c4cae0',
+        indigo: '#3d3a7a',
+        gray: {
+          muted: '#7E7B7B',
+        },
       },
       fontFamily: {
         display: ['var(--font-bebas-neue)'],
-        logo: ['var(--font-ovo)'],
+        logo: ['var(--font-afacad)'],
         sans: ['var(--font-work-sans)'],
         headline: ['var(--font-ovo)'],
       },

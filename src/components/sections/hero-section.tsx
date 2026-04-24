@@ -19,24 +19,24 @@ export function HeroSection() {
       {/* Main content — vertically centered */}
       <div className='relative z-10 flex w-full flex-1 flex-col items-center justify-center gap-6 text-center'>
         <h1 className='max-w-4xl font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl lg:text-6xl'>
-          Bespoke enterprise apps priced for SMBs
+          <span className='block'>Find where AI fits.</span>
+          <span className='block'>Build what matters.</span>
         </h1>
-        <p className='max-w-lg text-base text-ink/60 md:text-lg'>
-          We audit your workflows, find where AI creates real leverage, and
-          build the system — in weeks, not quarters.
+        <p className='max-w-lg text-balance text-base text-ink/60 md:text-lg'>
+          AI doesn&apos;t just power what we build — it&apos;s how we build. Bespoke solutions at a pace that wasn&apos;t possible until now.
         </p>
         <div className='mt-4 flex flex-col items-center gap-4 sm:flex-row'>
           <Link
             href='/case-studies'
             data-pts-hero-cta
-            className='group inline-flex items-center bg-ink text-sm uppercase tracking-[0.1em] text-white'
+            className='group inline-flex items-center border border-ink/30 text-sm uppercase tracking-[0.1em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white'
           >
             <span className='px-4 py-3 font-semibold transition-transform duration-300 group-hover:translate-x-1'>
               See our work
             </span>
-            <span className='flex items-center justify-center self-stretch bg-[#94e0e4] px-3'>
+            <span className='flex items-center justify-center self-stretch border-l border-ink/30 px-3 transition-colors duration-300 group-hover:border-cyan group-hover:bg-cyan'>
               <ArrowRight
-                className='size-4 text-ink transition-all delay-75 duration-200 group-hover:translate-x-1'
+                className='size-4 transition-all delay-75 duration-200 group-hover:translate-x-1 group-hover:text-ink'
                 strokeWidth={2}
               />
             </span>

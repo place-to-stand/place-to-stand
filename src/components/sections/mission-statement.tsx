@@ -18,7 +18,7 @@ export function MissionStatement() {
   return (
     <section
       ref={sectionRef}
-      className='relative flex min-h-[100svh] items-center justify-center bg-[#94e0e4] px-6 py-24 md:py-32'
+      className='relative flex min-h-[100svh] items-center justify-center bg-cyan px-6 py-24 md:py-32'
     >
       <h2 className='max-w-4xl text-center font-headline text-2xl font-semibold !leading-tight text-ink/15 md:text-4xl lg:text-5xl'>
         {words.map((word, i) => (

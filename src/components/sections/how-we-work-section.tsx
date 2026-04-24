@@ -59,7 +59,7 @@ export function HowWeWorkSection() {
     <AnimatedSection
       id='how-it-works'
       data-pts-dark
-      className='flex min-h-[100svh] max-w-none flex-col justify-center gap-10 bg-[#111827] px-6 py-24'
+      className='flex min-h-[100svh] max-w-none flex-col justify-center gap-10 bg-ink px-6 py-24'
     >
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-white/60'>
@@ -117,8 +117,8 @@ export function HowWeWorkSection() {
         </p>
 
         <div className='relative w-full max-w-6xl overflow-hidden'>
-          <div className='pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-[#111827] to-transparent md:w-32' />
-          <div className='pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-[#111827] to-transparent md:w-32' />
+          <div className='pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-ink to-transparent md:w-32' />
+          <div className='pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-ink to-transparent md:w-32' />
 
           <div className='relative border-y border-white/10'>
             <div

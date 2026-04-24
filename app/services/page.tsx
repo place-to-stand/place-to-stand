@@ -73,7 +73,7 @@ export default function ServicesPage() {
                 </h2>
               </div>
               <div className='flex flex-1 flex-col gap-2'>
-                <p className='text-sm font-semibold uppercase tracking-[0.05em] text-[#94e0e4]'>
+                <p className='text-sm font-semibold uppercase tracking-[0.05em] text-cyan'>
                   {service.subtitle}
                 </p>
                 <p className='max-w-xl text-base leading-relaxed text-ink/70'>
@@ -98,7 +98,7 @@ export default function ServicesPage() {
           <span className='px-4 py-3 font-semibold transition-transform duration-300 group-hover:translate-x-1'>
             Book a call
           </span>
-          <span className='flex items-center justify-center self-stretch bg-[#94e0e4] px-3'>
+          <span className='flex items-center justify-center self-stretch bg-cyan px-3'>
             <ArrowRight
               className='size-4 text-ink transition-all delay-75 duration-200 group-hover:translate-x-1'
               strokeWidth={2}

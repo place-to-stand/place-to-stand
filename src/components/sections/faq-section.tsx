@@ -99,7 +99,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
 
 export function FaqSection() {
   return (
-    <AnimatedSection id='faq' className='flex min-h-[100svh] max-w-none flex-col justify-center gap-10 bg-[#94e0e4] px-6'>
+    <AnimatedSection id='faq' className='flex min-h-[100svh] max-w-none flex-col justify-center gap-10 bg-cyan px-6'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           FAQ

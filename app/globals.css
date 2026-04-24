@@ -36,22 +36,6 @@ body {
   }
 }
 
-@keyframes pts-gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.pts-animated-gradient {
-  background-size: 200% 200%;
-  animation: pts-gradient-shift 12s ease infinite;
-}
 
 @keyframes pts-header-pop {
   0% {
@@ -70,10 +54,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pts-animated-gradient {
-    animation: none;
-  }
-
   .pts-header-pop {
     animation: none;
   }

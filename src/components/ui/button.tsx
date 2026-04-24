@@ -11,13 +11,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
       primary:
-          'relative isolate bg-ink text-white shadow-md shadow-primary/40 border border-ink/40 transition-all duration-400 ease-in-out hover:border-ink/90 hover:shadow-lg hover:text-white before:absolute before:inset-0 before:-z-10 before:bg-gradientPrimary before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
+          'bg-ink text-white shadow-md border border-ink/40 transition-all duration-300 ease-in-out hover:bg-ink/80 hover:border-ink/90 hover:shadow-lg hover:text-white',
         secondary:
           'bg-ink/80 text-ink-light hover:bg-ink/100 focus-visible:ring-ink hover:text-ink-light',
         ghost:
           'bg-transparent text-ink/70 hover:text-ink/100 focus-visible:ring-ink/40',
         outline:
-          'relative isolate bg-transparent border border-ink/30 text-ink/80 focus-visible:ring-ink/40 transition-all duration-300 hover:border-ink/90 hover:text-white before:absolute before:inset-0 before:-z-10 before:bg-gradientPrimary before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
+          'bg-transparent border border-ink/30 text-ink/80 focus-visible:ring-ink/40 transition-all duration-300 hover:bg-ink hover:border-ink/90 hover:text-white',
       },
       size: {
         sm: 'h-9 px-4',
