@@ -7,7 +7,7 @@ export type NavLink = {
 export const NAV_LINKS: NavLink[] = [
   { path: '/services', label: 'Services' },
   { path: '/case-studies', label: 'Case Studies' },
-  { path: '/how-it-works', label: 'How We Work' },
+  { path: '/how-it-works', label: 'Our Process' },
   { path: '/team', label: 'Team' },
   { path: '/faq', label: 'FAQ' },
   { path: '/blog', label: 'Blog' },

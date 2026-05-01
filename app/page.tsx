@@ -157,7 +157,7 @@ export default function HomePage() {
           <div className='grid gap-12 md:grid-cols-3 md:gap-16'>
             <div className='flex flex-col gap-6 md:col-span-1'>
               <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
-                How we work
+                Our Process
               </span>
               <h2 className='font-headline text-2xl font-semibold uppercase !leading-[.9] text-ink md:text-4xl'>
                 Dead-simple process. Zero surprises.
@@ -171,7 +171,7 @@ export default function HomePage() {
                 className='group mt-2 inline-flex w-fit items-center border border-ink/30 text-sm uppercase tracking-[0.1em] text-ink transition-colors duration-300 hover:bg-ink hover:text-white'
               >
                 <span className='px-4 py-3 font-semibold transition-transform duration-300 group-hover:translate-x-1'>
-                  See how we work
+                  See our process
                 </span>
                 <span className='flex items-center justify-center self-stretch border-l border-ink/30 px-3 transition-colors duration-300 group-hover:border-cyan group-hover:bg-cyan'>
                   <ArrowRight className='size-4 transition-all delay-75 duration-200 group-hover:translate-x-1 group-hover:text-ink' strokeWidth={2} />
