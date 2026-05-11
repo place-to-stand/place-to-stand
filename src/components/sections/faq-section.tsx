@@ -5,39 +5,7 @@ import { ChevronDown } from 'lucide-react'
 
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { cn } from '@/src/lib/utils'
-
-type FAQ = {
-  question: string
-  answer: string
-}
-
-const faqs: FAQ[] = [
-  {
-    question: 'What types of businesses do you partner with?',
-    answer:
-      'Businesses of all sizes. We are focused on solving real-world problems. If you are looking for a growth partner to unlock your business. Let us know.',
-  },
-  {
-    question: 'What is typically included in an engagement?',
-    answer:
-      "It depends on what you need, but we usually cover the full picture—research to understand your customers, brand and design work, building the actual product, and helping you launch. We'll work alongside your team to make sure nothing stalls.",
-  },
-  {
-    question: 'How long does a project usually take?',
-    answer:
-      "Focused sprints like landing pages ship in 2–4 weeks with assets ready. Full-funnel initiatives spanning brand, product, and marketing typically take 8–12 weeks. We set milestones together so you always know what's shipping when.",
-  },
-  {
-    question: 'How do you price your services?',
-    answer:
-      'We scope work by deliverables or capped hourly. After an alignment call, you get a fixed investment range with clear inclusions, add-ons, and payment schedule—no surprise invoices.',
-  },
-  {
-    question: 'Do you stay involved after launch?',
-    answer:
-      'Yes! We can set up dashboards, measure performance, and run optimization cycles to keep momentum post-launch. Many clients retain us for ongoing experiments, features, and marketing rollouts.',
-  },
-]
+import { homepageFaqs, type FAQ } from '@/src/lib/faqs'
 
 type FAQItemProps = FAQ & {
   isOpen: boolean
@@ -120,14 +88,22 @@ export function FaqSection() {
 
 type FaqAccordionProps = {
   className?: string
+  /** Override the question set. Defaults to the homepage 5. */
+  items?: FAQ[]
+  /** Which item index starts expanded. Pass `null` to start fully collapsed. */
+  defaultOpenIndex?: number | null
 }
 
-export function FaqAccordion({ className }: FaqAccordionProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0)
+export function FaqAccordion({
+  className,
+  items = homepageFaqs,
+  defaultOpenIndex = 0,
+}: FaqAccordionProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(defaultOpenIndex)
 
   return (
     <div className={cn('flex flex-col gap-4 pb-12', className)}>
-      {faqs.map((faq, index) => (
+      {items.map((faq, index) => (
         <FAQItem
           key={faq.question}
           {...faq}

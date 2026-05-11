@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import { AnimatedSection } from '@/src/components/layout/animated-section'
 
 const services = [
   {
@@ -42,19 +43,22 @@ const services = [
 export default function ServicesPage() {
   return (
     <main className='flex-1'>
-      {/* Hero */}
-      <section className='flex min-h-[60vh] flex-col items-center justify-center px-6 pt-32 text-center md:pt-40'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
-          Services
-        </span>
-        <h1 className='mt-3 max-w-4xl font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl lg:text-6xl'>
-          What we build
-        </h1>
-        <p className='mx-auto mt-4 max-w-xl text-balance text-base !leading-snug text-ink/60 md:text-lg'>
-          End-to-end solutions for businesses that need to move fast and build
-          right.
-        </p>
-      </section>
+      {/* Hero — Our Process pattern, sized so next section peeks above fold */}
+      <AnimatedSection className='relative isolate flex min-h-[80svh] max-w-none flex-col items-center justify-center gap-6 overflow-hidden bg-white px-6 pb-16 pt-28 text-center text-ink md:px-8'>
+        <div className='relative z-10 flex w-full max-w-4xl flex-col items-center gap-6 text-center'>
+          <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+            Services
+          </span>
+          <h1 className='font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl lg:text-6xl'>
+            <span className='block'>End-to-end builds,</span>
+            <span className='block'>for serious teams.</span>
+          </h1>
+          <p className='max-w-xl text-balance text-base text-ink/60 md:text-lg'>
+            Bespoke software, applied AI, and operating systems for businesses
+            that need to move fast and build right.
+          </p>
+        </div>
+      </AnimatedSection>
 
       {/* Services list */}
       <section className='mx-auto w-full max-w-5xl px-6 py-16 md:py-24'>

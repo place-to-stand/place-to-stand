@@ -52,9 +52,9 @@ export function Header() {
               router.push('/')
             }
           }}
-          className='flex items-center gap-3'
+          className='flex items-center gap-3 border-b-2 border-transparent pb-0.5'
         >
-          <span className='font-logo font-semibold uppercase tracking-[0.025em] text-ink text-lg md:text-xl lg:text-2xl'>
+          <span className='font-logo text-lg font-semibold uppercase leading-none tracking-[0.025em] text-ink md:text-xl lg:text-2xl'>
             Place To Stand
           </span>
         </button>

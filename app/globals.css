@@ -80,3 +80,99 @@ a:hover {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/*
+ * Blog prose styles.
+ *
+ * Hand-rolled (rather than @tailwindcss/typography) so it stays a tiny CSS
+ * footprint and reads in the site's existing ink/cyan/headline language.
+ * Applied to the wrapper around <ReactMarkdown> output.
+ */
+.pts-prose {
+  @apply text-base leading-relaxed text-ink/85 md:text-lg;
+}
+
+.pts-prose > * + * {
+  @apply mt-6;
+}
+
+.pts-prose h2 {
+  @apply mt-12 font-headline text-2xl font-semibold uppercase leading-tight text-ink md:text-3xl;
+}
+
+.pts-prose h3 {
+  @apply mt-10 font-headline text-xl font-semibold uppercase leading-tight text-ink md:text-2xl;
+}
+
+.pts-prose h4 {
+  @apply mt-8 font-headline text-lg font-semibold uppercase leading-tight text-ink;
+}
+
+.pts-prose p {
+  @apply text-ink/80;
+}
+
+.pts-prose a {
+  @apply font-semibold text-ink underline decoration-cyan decoration-2 underline-offset-4 transition-colors hover:text-ink/70;
+}
+
+.pts-prose strong {
+  @apply font-semibold text-ink;
+}
+
+.pts-prose em {
+  @apply italic;
+}
+
+.pts-prose ul {
+  @apply ml-5 list-disc text-ink/80 marker:text-ink/40;
+}
+
+.pts-prose ol {
+  @apply ml-5 list-decimal text-ink/80 marker:text-ink/40;
+}
+
+.pts-prose li + li {
+  @apply mt-2;
+}
+
+.pts-prose li > p {
+  @apply mt-0;
+}
+
+.pts-prose blockquote {
+  @apply border-l-2 border-cyan pl-5 italic text-ink/75;
+}
+
+.pts-prose code {
+  @apply rounded bg-ink/5 px-1.5 py-0.5 font-mono text-[0.9em] text-ink/85;
+}
+
+.pts-prose pre {
+  @apply overflow-x-auto rounded-lg border border-ink/15 bg-ink p-4 text-sm leading-relaxed text-ink-light/90;
+}
+
+.pts-prose pre code {
+  @apply rounded-none bg-transparent p-0 text-inherit;
+}
+
+.pts-prose hr {
+  @apply my-12 border-ink/15;
+}
+
+.pts-prose img {
+  @apply my-8 w-full border border-ink/10;
+}
+
+.pts-prose table {
+  @apply w-full border-collapse text-sm;
+}
+
+.pts-prose th,
+.pts-prose td {
+  @apply border border-ink/15 px-3 py-2 text-left align-top;
+}
+
+.pts-prose th {
+  @apply bg-ink/5 font-semibold uppercase tracking-[0.05em] text-ink;
+}

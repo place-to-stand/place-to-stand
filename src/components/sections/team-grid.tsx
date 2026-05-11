@@ -67,7 +67,15 @@ function SocialLinks({ member }: { member: TeamMember }) {
   )
 }
 
-export function TeamGrid() {
+type TeamGridProps = {
+  /**
+   * When true, each card shows a 01/02/03-style index in the upper left,
+   * mirroring the numbered profiles pattern used on the inspiration site.
+   */
+  numbered?: boolean
+}
+
+export function TeamGrid({ numbered = false }: TeamGridProps = {}) {
   const [activeMember, setActiveMember] = useState<TeamMember | null>(null)
 
   useEffect(() => {
@@ -86,7 +94,7 @@ export function TeamGrid() {
   return (
     <>
       <div className='mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8'>
-        {team.map(member => (
+        {team.map((member, index) => (
           <article
             key={member.name}
             className='group flex flex-col gap-5 border border-ink/15 bg-white p-6 text-ink shadow-sm transition-all duration-300 hover:border-ink/40 hover:shadow-lg md:p-8'
@@ -101,6 +109,11 @@ export function TeamGrid() {
               />
             </div>
             <div className='flex flex-col gap-1'>
+              {numbered && (
+                <span className='text-xs font-semibold uppercase tracking-[0.15em] text-ink/40'>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              )}
               <h3 className='font-headline text-xl uppercase leading-tight md:text-2xl'>
                 {member.name}
               </h3>
