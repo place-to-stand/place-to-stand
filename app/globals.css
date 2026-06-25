@@ -28,13 +28,9 @@ body {
   overflow-x: hidden;
   /* Grid scrolls with the page — attached to content, not viewport */
   background-image:
-    radial-gradient(circle, var(--grid-dot) 1px, transparent 1px),
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
   background-size:
-    24px 24px,
-    96px 96px,
-    96px 96px;
+    24px 24px;
 }
 
 @keyframes fadeIn {
