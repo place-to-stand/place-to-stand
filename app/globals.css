@@ -23,6 +23,14 @@ html {
 body {
   @apply bg-bg font-sans text-text antialiased;
   overflow-x: hidden;
+  background-image:
+    radial-gradient(circle, #3a3b42 1px, transparent 1px),
+    linear-gradient(to right, #22232a 1px, transparent 1px),
+    linear-gradient(to bottom, #22232a 1px, transparent 1px);
+  background-size:
+    24px 24px,
+    96px 96px,
+    96px 96px;
 }
 
 @keyframes fadeIn {

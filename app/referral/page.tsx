@@ -77,7 +77,7 @@ export default function ReferralPage() {
           </p>
         </div>
 
-        <div className='relative mt-10 rounded-xl border border-border bg-bg-card p-6'>
+        <div className='relative mt-10 border border-border bg-bg-card p-6'>
           <form
             noValidate
             onSubmit={onSubmit}
@@ -159,7 +159,7 @@ export default function ReferralPage() {
           </form>
 
           {isSuccess ? (
-            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-bg-card/95 text-center shadow-inner'>
+            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
               <h2 className='text-2xl font-semibold uppercase text-text'>
                 Thank you!
               </h2>

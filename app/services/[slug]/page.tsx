@@ -55,12 +55,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </p>
           </div>
           <div className='md:col-span-2'>
-            <div className='rounded-xl border border-border bg-bg-card p-6'>
+            <div className='border border-border bg-bg-card p-6'>
               <h2 className='mb-4 font-headline text-lg uppercase text-text'>Capabilities</h2>
               <ul className='flex flex-col gap-3'>
                 {service.features.map(feature => (
                   <li key={feature} className='flex items-start gap-3 text-sm text-text-muted'>
-                    <span className='mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent' aria-hidden />
+                    <span className='mt-1.5 h-1.5 w-1.5 shrink-0 bg-accent' aria-hidden />
                     {feature}
                   </li>
                 ))}
@@ -69,7 +69,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </div>
 
-        <div className='flex flex-col items-center gap-6 rounded-xl border border-border bg-bg-card p-10 text-center'>
+        <div className='flex flex-col items-center gap-6 border border-border bg-bg-card p-10 text-center'>
           <h2 className='font-headline text-2xl uppercase text-text md:text-3xl'>
             Ready to get started?
           </h2>

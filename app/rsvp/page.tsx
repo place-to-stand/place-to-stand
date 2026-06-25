@@ -65,7 +65,7 @@ export default function RsvpPage() {
         <div className='container mx-auto w-full max-w-6xl px-6'>
           <header className='grid gap-12 lg:grid-cols-2 lg:items-start'>
             <div className='flex justify-center lg:justify-start'>
-              <div className='relative aspect-[500/647] w-full overflow-hidden rounded-xl border border-ink-light/10 bg-white/10'>
+              <div className='relative aspect-[500/647] w-full overflow-hidden border border-border bg-bg-card'>
                 <Image
                   src='/pts-ai-playbook-flyer.png'
                   alt='Place to Stand AI Playbook flyer'
@@ -91,13 +91,13 @@ export default function RsvpPage() {
                 </p>
               </div>
 
-              <div className='mt-8 overflow-hidden rounded-2xl border border-ink-light/10 bg-white/10 shadow-sm'>
+              <div className='mt-8 overflow-hidden border border-border bg-bg-card'>
                 <FilloutForm filloutId={filloutFormId} />
               </div>
             </div>
           </header>
 
-          <section className='mt-16 rounded-2xl border border-ink-light/10 bg-white/10 p-8 shadow-sm'>
+          <section className='mt-16 border border-border bg-bg-card p-8'>
             <div className='max-w-3xl'>
               <h2 className='text-3xl font-semibold tracking-tight text-ink-light sm:text-4xl'>
                 Event Details
@@ -125,7 +125,7 @@ export default function RsvpPage() {
             </dl>
           </section>
 
-          <section className='mt-36 rounded-2xl md:p-8'>
+          <section className='mt-36 md:p-8'>
             <div className='flex flex-col items-center gap-4 text-center'>
               <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink-light/60'>
                 Book A Consultation
@@ -140,7 +140,7 @@ export default function RsvpPage() {
               </p>
             </div>
 
-            <div className='mt-8 overflow-hidden rounded-xl border border-ink-light/10 bg-white/10'>
+            <div className='mt-8 overflow-hidden border border-border bg-bg-card'>
               <iframe
                 title='Book a consultation'
                 src='https://calendar.google.com/calendar/appointments/schedules/AcZssZ0IvygeLpVOdv1HQkUQLSHv6H-P6Wm6F7KGySphJhsFUNWU8Y6wQhXh4q8iE_YH02hL4ZBUr2-f?gv=true'

@@ -58,7 +58,7 @@ export function HowWeWorkSection() {
             <li
               key={step.number}
               className={cn(
-                'flex flex-col gap-2 rounded-xl px-6 py-6 will-change-transform md:w-1/3 md:gap-3 lg:py-8',
+                'flex flex-col gap-2 px-6 py-6 will-change-transform md:w-1/3 md:gap-3 lg:py-8',
                 isActive
                   ? 'duration-[2500ms] border border-accent bg-bg-card shadow-lg transition-all ease-out md:-translate-y-1'
                   : 'duration-[2500ms] translate-y-0 border border-transparent bg-bg-card/50 shadow-sm transition-all ease-in hover:bg-bg-card'
@@ -89,8 +89,8 @@ export function HowWeWorkSection() {
       </ol>
 
       <div className='mx-auto w-full max-w-3xl'>
-        <div className='rounded-2xl bg-bg-card p-[1px]'>
-          <div className='flex flex-col gap-6 rounded-2xl border border-border p-10 text-center text-text shadow-xl'>
+        <div className='bg-bg-card p-[1px]'>
+          <div className='flex flex-col gap-6 border border-border p-10 text-center text-text'>
             <p className='text-sm font-extrabold uppercase tracking-[0.1em] text-text-muted'>
               One flat rate • Hour blocks • Start anytime
             </p>

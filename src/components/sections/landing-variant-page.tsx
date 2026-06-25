@@ -54,7 +54,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
               <ul className='space-y-3 text-left'>
                 {variant.outcomeBullets.map(item => (
                   <li key={item} className='flex gap-2'>
-                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-accent' aria-hidden />
+                    <span className='mt-2 h-1.5 w-1.5 bg-accent' aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -70,7 +70,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
               <ul className='space-y-3 text-left'>
                 {variant.painPoints.map(item => (
                   <li key={item} className='flex gap-2'>
-                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-accent' aria-hidden />
+                    <span className='mt-2 h-1.5 w-1.5 bg-accent' aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -86,7 +86,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
               <ul className='space-y-3 text-left'>
                 {variant.differentiators.map(item => (
                   <li key={item} className='flex gap-2'>
-                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-accent' aria-hidden />
+                    <span className='mt-2 h-1.5 w-1.5 bg-accent' aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -95,7 +95,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
           </Card>
         </div>
 
-        <div className='mx-auto flex w-full max-w-3xl flex-col items-center gap-4 rounded-2xl border border-border bg-bg-card p-8 text-center'>
+        <div className='mx-auto flex w-full max-w-3xl flex-col items-center gap-4 border border-border bg-bg-card p-8 text-center'>
           <h2 className='font-headline text-3xl font-semibold uppercase text-text md:text-4xl'>
             Ready to book your strategy call?
           </h2>

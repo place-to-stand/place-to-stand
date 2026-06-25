@@ -30,7 +30,7 @@ export default function FieldNotesPage() {
               href={note.url}
               target={note.url.startsWith('http') ? '_blank' : undefined}
               rel={note.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className='group flex flex-col gap-4 rounded-xl border border-border bg-bg-card p-6 transition-all duration-300 hover:border-accent/40'
+              className='group flex flex-col gap-4 border border-border bg-bg-card p-6 transition-colors duration-300 hover:border-accent/40'
             >
               <div className='flex items-center justify-between'>
                 <span className='font-mono text-[11px] text-text-muted'>{note.date}</span>

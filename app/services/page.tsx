@@ -28,7 +28,7 @@ export default function ServicesPage() {
             <Link
               key={service.slug}
               href={`/services/${service.slug}` as any}
-              className='group flex flex-col gap-4 rounded-xl border border-border bg-bg-card p-8 transition-all duration-300 hover:border-accent/40 hover:shadow-[0_0_30px_rgba(181,245,66,0.05)]'
+              className='group flex flex-col gap-4 border border-border bg-bg-card p-8 transition-colors duration-300 hover:border-accent/40'
             >
               <span className='font-mono text-xs text-accent'>{service.icon}</span>
               <h2 className='font-headline text-2xl uppercase text-text transition-colors group-hover:text-accent'>

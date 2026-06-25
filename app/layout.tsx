@@ -8,7 +8,6 @@ import { cn } from '@/src/lib/utils'
 import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
-import { DotGridBackground } from '@/src/components/layout/dot-grid-background'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { FloatingBookCta } from '@/src/components/floating-book-cta'
 
@@ -82,9 +81,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
       >
         <PostHogProvider>
-          <DotGridBackground />
-
-          <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
+          <div className='relative flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
             {children}
             <Footer />

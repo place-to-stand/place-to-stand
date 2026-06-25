@@ -51,7 +51,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
   return (
     <div
       className={cn(
-        'mx-auto max-w-4xl overflow-hidden rounded-xl border border-border bg-bg-card text-text shadow-sm transition-all duration-300 ease-out hover:bg-bg-elevated',
+        'mx-auto max-w-4xl overflow-hidden border border-border bg-bg-card text-text transition-all duration-300 ease-out hover:bg-bg-elevated',
         isOpen ? 'shadow-md' : ''
       )}
     >

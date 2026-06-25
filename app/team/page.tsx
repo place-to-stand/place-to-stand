@@ -27,9 +27,9 @@ export default function TeamPage() {
           {team.map(member => (
             <article
               key={member.name}
-              className='group flex flex-col gap-4 rounded-xl border border-border bg-bg-card p-6 text-center transition-all duration-300 hover:border-accent/30'
+              className='group flex flex-col gap-4 border border-border bg-bg-card p-6 text-center transition-colors duration-300 hover:border-accent/30'
             >
-              <div className='relative mx-auto aspect-square w-3/4 overflow-hidden rounded-full border border-border'>
+              <div className='relative mx-auto aspect-square w-3/4 overflow-hidden border border-border'>
                 <Image
                   src={member.image}
                   alt={`${member.name}, ${member.title}`}

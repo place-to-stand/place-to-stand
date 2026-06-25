@@ -72,7 +72,7 @@ export function UseCasesSection({
                 key={useCase.title}
                 onClick={() => onActiveIndexChange(index)}
                 className={cn(
-                  'relative flex-1 rounded-lg border-2 px-1.5 py-3 text-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink md:rounded-xl md:px-3 md:py-2 md:text-left',
+                  'relative flex-1 border-2 px-1.5 py-3 text-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/30 md:px-3 md:py-2 md:text-left',
                   isActive
                     ? 'border-ink bg-ink text-white shadow-lg ring-1 ring-ink/20 md:scale-105'
                     : 'border-transparent bg-white/50 hover:bg-white hover:shadow-sm'
@@ -154,7 +154,7 @@ export function UseCasesSection({
                     zIndex: useCases.length - Math.abs(activeOffset),
                   }}
                   className={cn(
-                    'flex flex-col overflow-hidden rounded-3xl bg-white shadow-2xl md:flex-row',
+                    'flex flex-col overflow-hidden border border-border bg-bg-card md:flex-row',
                     !isActive && 'pointer-events-none absolute inset-0'
                   )}
                 >
@@ -200,7 +200,7 @@ export function UseCasesSection({
                   {/* Content Side (Overlay or Sidebar) */}
                   <div className='flex flex-col justify-center gap-1 bg-white px-4 py-3 md:w-[35%] md:gap-4 md:p-8 lg:w-[25%]'>
                     <div className='space-y-1 md:space-y-2'>
-                      <div className='inline-flex items-center rounded-full border border-ink px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-ink/70 md:px-3 md:py-1 md:text-sm'>
+                      <div className='inline-flex items-center border border-border px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-text-muted md:px-3 md:py-1 md:text-sm'>
                         {useCase.metric}
                       </div>
                       <h3 className='font-headline text-xl font-bold uppercase text-ink md:text-2xl lg:text-4xl'>

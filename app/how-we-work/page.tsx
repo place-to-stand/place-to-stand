@@ -30,15 +30,15 @@ export default function HowWeWorkPage() {
       <AnimatedSection className='flex flex-col gap-8'>
         <h2 className='text-center font-headline text-3xl uppercase text-text'>Your Private Portal</h2>
         <div className='grid gap-6 md:grid-cols-3'>
-          <div className='rounded-xl border border-border bg-bg-card p-6'>
+          <div className='border border-border bg-bg-card p-6'>
             <h3 className='mb-3 font-headline text-lg uppercase text-accent'>Real-Time Visibility</h3>
             <p className='text-sm text-text-muted'>Track every task, approval, and deliverable in one place. AI-generated summaries keep you informed without meetings.</p>
           </div>
-          <div className='rounded-xl border border-border bg-bg-card p-6'>
+          <div className='border border-border bg-bg-card p-6'>
             <h3 className='mb-3 font-headline text-lg uppercase text-accent'>Direct Communication</h3>
             <p className='text-sm text-text-muted'>Message the engineer building your product directly. No account managers, no telephone game.</p>
           </div>
-          <div className='rounded-xl border border-border bg-bg-card p-6'>
+          <div className='border border-border bg-bg-card p-6'>
             <h3 className='mb-3 font-headline text-lg uppercase text-accent'>One-Click Top-Up</h3>
             <p className='text-sm text-text-muted'>Purchase additional hour blocks directly through your Portal. Unused time never expires.</p>
           </div>
@@ -49,7 +49,7 @@ export default function HowWeWorkPage() {
 
       {/* Pricing */}
       <AnimatedSection className='flex flex-col items-center gap-8'>
-        <div className='w-full max-w-3xl rounded-2xl border border-border bg-bg-card p-10 text-center'>
+        <div className='w-full max-w-3xl border border-border bg-bg-card p-10 text-center'>
           <div className='flex flex-col gap-6'>
             <p className='font-mono text-xs uppercase tracking-[0.15em] text-accent'>
               One flat rate &middot; Hour blocks &middot; Start anytime

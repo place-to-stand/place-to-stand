@@ -28,7 +28,7 @@ export default function CaseStudiesPage() {
           {caseStudies.map(cs => (
             <div
               key={cs.slug}
-              className='group flex flex-col overflow-hidden rounded-xl border border-border bg-bg-card transition-all duration-300 hover:border-accent/30'
+              className='group flex flex-col overflow-hidden border border-border bg-bg-card transition-colors duration-300 hover:border-accent/30'
             >
               <div className='relative aspect-video overflow-hidden'>
                 <Image
@@ -39,7 +39,7 @@ export default function CaseStudiesPage() {
                 />
                 <div className='absolute inset-0 bg-gradient-to-t from-bg-card to-transparent' />
                 <div className='absolute bottom-4 left-4'>
-                  <span className='rounded-full border border-accent/30 bg-bg/80 px-3 py-1 font-mono text-sm font-bold text-accent'>
+                  <span className='border border-accent/30 bg-bg/80 px-3 py-1 font-mono text-sm font-bold text-accent'>
                     {cs.metric}
                   </span>
                 </div>

@@ -13,7 +13,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors',
+        'inline-flex items-center px-2.5 py-0.5 text-xs font-semibold transition-colors',
         variant === 'default' && 'bg-accent-muted text-accent',
         variant === 'outline' && 'border border-border text-text-muted',
         className

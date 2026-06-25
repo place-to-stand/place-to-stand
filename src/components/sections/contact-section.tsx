@@ -125,7 +125,7 @@ export function ContactSection() {
         </p>
       </div>
       <div className='flex flex-col gap-5 md:flex-row md:gap-6 lg:gap-8'>
-        <div className='relative basis-full gap-10 rounded-xl border border-border bg-bg-card p-6 md:basis-1/2'>
+        <div className='relative basis-full gap-10 border border-border bg-bg-card p-6 md:basis-1/2'>
           <form
             noValidate
             onSubmit={onSubmit}
@@ -216,7 +216,7 @@ export function ContactSection() {
           </form>
 
           {isSuccess ? (
-            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-bg-card/95 text-center shadow-inner'>
+            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
               <h3 className='text-2xl font-semibold uppercase text-text'>
                 Thank you!
               </h3>
@@ -238,14 +238,14 @@ export function ContactSection() {
             </div>
           ) : null}
         </div>
-        <div className='flex basis-full flex-col justify-between gap-6 rounded-xl border border-border bg-bg-card p-6 md:basis-1/2'>
+        <div className='flex basis-full flex-col justify-between gap-6 border border-border bg-bg-card p-6 md:basis-1/2'>
           <div className='grid h-full grid-cols-2 gap-3 sm:gap-6 md:gap-6 lg:gap-6'>
             {team.map(member => (
               <article
                 key={member.name}
-                className='group relative flex flex-col justify-start gap-2 rounded-xl border border-border bg-bg-card px-2 pb-10 pt-3 text-center text-text shadow-sm transition-all duration-300 ease-out hover:border-accent/30'
+                className='group relative flex flex-col justify-start gap-2 border border-border bg-bg-card px-2 pb-10 pt-3 text-center text-text transition-colors duration-300 ease-out hover:border-accent/30'
               >
-                <div className='relative mx-auto aspect-square w-2/3 overflow-hidden rounded-full border border-border'>
+                <div className='relative mx-auto aspect-square w-2/3 overflow-hidden border border-border'>
                   <Image
                     src={member.image}
                     alt={`${member.name}, ${member.title}`}

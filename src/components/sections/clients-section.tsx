@@ -93,7 +93,7 @@ export function ClientsSection() {
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group relative overflow-hidden rounded-xl border border-ink no-underline shadow-sm transition-all duration-300 ease-out hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink/30'
+            className='group relative overflow-hidden border border-border no-underline transition-all duration-300 ease-out hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
           >
             {/* Clean image area */}
             <div className='relative aspect-video w-full overflow-hidden'>

@@ -23,7 +23,7 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(
-  'group pointer-events-auto relative flex w-full items-start gap-3 overflow-hidden rounded-xl border border-border bg-bg-card p-5 shadow-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40',
+  'group pointer-events-auto relative flex w-full items-start gap-3 overflow-hidden border border-border bg-bg-card p-5 shadow-lg transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40',
   {
     variants: {
       variant: {
@@ -86,7 +86,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      'absolute right-4 top-4 rounded-full p-2 text-text-muted transition hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40',
+      'absolute right-4 top-4 p-2 text-text-muted transition hover:text-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40',
       className
     )}
     toast-close=''
@@ -102,7 +102,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-border bg-bg-elevated px-4 text-sm font-semibold text-text transition hover:bg-accent hover:text-bg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40',
+      'inline-flex h-10 shrink-0 items-center justify-center border border-border bg-bg-elevated px-4 text-sm font-semibold text-text transition hover:bg-accent hover:text-bg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40',
       className
     )}
     {...props}
