@@ -39,9 +39,9 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-bebas-neue)'],
-        logo: ['var(--font-afacad)'],
+        logo: ['var(--font-space-grotesk)'],
         sans: ['var(--font-source-sans)'],
-        headline: ['var(--font-afacad)'],
+        headline: ['var(--font-space-grotesk)'],
       },
       lineHeight: {
         tighter: '1.2',

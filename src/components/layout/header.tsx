@@ -3,215 +3,136 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { motion, useReducedMotion, type Transition } from 'framer-motion'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
 import { NAV_LINKS } from '@/src/components/layout/nav-links'
 
 export function Header() {
   const pathname = usePathname()
-  const shouldReduceMotion = useReducedMotion()
-  const [pastHero, setPastHero] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const heroCtaElement = document.querySelector(
-      '[data-pts-hero-cta]'
-    ) as HTMLElement | null
-    const heroElement = document.querySelector(
-      '[data-pts-hero]'
-    ) as HTMLElement | null
-
-    let rafId = 0
-    let ticking = false
-
-    const switchOffsetPx = 160
-
-    const update = () => {
-      ticking = false
-
-      if (!heroElement) {
-        setPastHero(window.scrollY > 60)
-        return
-      }
-
-      if (heroCtaElement) {
-        const ctaBottom = heroCtaElement.getBoundingClientRect().bottom
-        setPastHero(ctaBottom <= switchOffsetPx)
-        return
-      }
-
-      const heroBottom = heroElement.getBoundingClientRect().bottom
-      setPastHero(heroBottom <= switchOffsetPx)
-    }
-
-    const onScroll = () => {
-      if (ticking) return
-      ticking = true
-      rafId = window.requestAnimationFrame(update)
-    }
-
-    rafId = window.requestAnimationFrame(update)
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll, { passive: true })
-
-    return () => {
-      window.cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const layoutTransition = (
-    shouldReduceMotion
-      ? { duration: 0 }
-      : { type: 'spring', stiffness: 100, damping: 20, mass: 0.2 }
-  ) satisfies Transition
-
-  const colorTransition = (
-    shouldReduceMotion ? { duration: 0 } : { duration: 0.9, ease: 'easeOut' }
-  ) satisfies Transition
-
   return (
-    <header className='fixed inset-x-0 top-0 z-50'>
-      <motion.div
-        layout
-        transition={layoutTransition}
-        className={cn('relative', pastHero ? 'px-3 pt-3' : 'px-0 pt-0')}
-      >
-        <motion.div
-          layout
-          transition={{
-            layout: layoutTransition,
-            backgroundColor: colorTransition,
-            borderColor: colorTransition,
-          }}
-          className={cn(
-            'border backdrop-blur-xl',
-            pastHero
-              ? 'mx-auto max-w-6xl border border-border bg-bg/80'
-              : 'w-full border-transparent bg-transparent'
-          )}
-          animate={{
-            borderRadius: pastHero ? 9999 : 0,
-            backgroundColor: pastHero
-              ? 'rgba(14, 15, 17, 0.8)'
-              : 'rgba(14, 15, 17, 0)',
-            borderColor: pastHero
-              ? 'rgba(42, 43, 48, 1)'
-              : 'rgba(42, 43, 48, 0)',
-            y: pastHero ? 0 : 0,
-          }}
-        >
-          <motion.div
-            layout
-            transition={layoutTransition}
-            className={cn(
-              'mx-auto flex max-w-6xl items-center justify-between px-6 py-3'
-            )}
-          >
-            <Link href='/' className='flex items-center gap-3'>
-              <span
-                className={cn(
-                  'font-logo font-semibold uppercase tracking-[0.025em] transition-colors duration-700 md:text-xl lg:text-2xl',
-                  'text-text'
-                )}
-              >
-                Place To Stand
-              </span>
-            </Link>
+    <header
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 transition-all duration-500',
+        scrolled
+          ? 'border-b border-border bg-bg/90 backdrop-blur-md'
+          : 'border-b border-transparent bg-transparent'
+      )}
+    >
+      <div className='mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10'>
+        {/* Logo */}
+        <Link href='/' className='group flex items-center gap-2'>
+          <span className='font-headline text-xl font-bold tracking-tight text-text transition-colors group-hover:text-accent'>
+            Place To Stand
+          </span>
+        </Link>
 
-            <nav className='hidden items-center gap-2 md:flex md:text-sm lg:gap-5 lg:text-base'>
-              {NAV_LINKS.map(item => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    'font-semibold uppercase tracking-[0.1em] transition-all duration-500',
-                    pathname === item.href
-                      ? 'text-accent'
-                      : 'text-text-muted hover:text-accent'
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-
-            <div className='flex items-center gap-3'>
-              <div className='hidden md:inline-flex'>
-                <Button
-                  asChild
-                  size='sm'
-                  variant={pastHero ? 'primary' : 'outline'}
-                  className={cn(
-                    'transition-colors duration-300',
-                    pastHero ? 'md:px-9 lg:px-11' : 'px-11'
-                  )}
-                >
-                  <Link href='/contact'>Start a Project</Link>
-                </Button>
-              </div>
-
-              <button
-                type='button'
-                className='md:hidden'
-                onClick={() => setMobileOpen(open => !open)}
-                aria-controls='mobile-nav'
-                aria-expanded={mobileOpen}
-              >
-                <span className='sr-only'>Toggle navigation</span>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 24 24'
-                  className='h-8 w-8 text-text transition-colors duration-700'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='1.5'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M4 7h16M4 12h16M4 17h16'
-                  />
-                </svg>
-              </button>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        <div
-          className={cn(
-            'absolute left-0 right-0 top-full transition duration-300 md:hidden',
-            mobileOpen
-              ? 'pointer-events-auto translate-y-0 opacity-100'
-              : 'pointer-events-none -translate-y-4 opacity-0'
-          )}
-        >
-          <div className='mx-auto max-w-6xl px-4'>
-            <nav
-              id='mobile-nav'
-              className='flex w-full flex-col gap-2 rounded-[28px] border border-border bg-bg-card/95 p-6 text-center shadow-xl backdrop-blur transition md:hidden'
+        {/* Desktop nav */}
+        <nav className='hidden items-center gap-8 md:flex'>
+          {NAV_LINKS.map(item => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={cn(
+                'text-[13px] tracking-[0.08em] transition-colors duration-300',
+                pathname === item.href
+                  ? 'text-accent'
+                  : 'text-text-muted hover:text-text'
+              )}
             >
-              {NAV_LINKS.map(item => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    'rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] transition hover:bg-white/10 hover:text-accent',
-                    pathname === item.href
-                      ? 'text-accent'
-                      : 'text-text-muted'
-                  )}
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* CTA + mobile toggle */}
+        <div className='flex items-center gap-4'>
+          <div className='hidden md:inline-flex'>
+            <Button asChild size='sm'>
+              <Link href='/contact'>Start a Project</Link>
+            </Button>
           </div>
+
+          <button
+            type='button'
+            className='md:hidden'
+            onClick={() => setMobileOpen(open => !open)}
+            aria-controls='mobile-nav'
+            aria-expanded={mobileOpen}
+          >
+            <span className='sr-only'>Toggle navigation</span>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 24 24'
+              className='h-7 w-7 text-text'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='1.5'
+            >
+              {mobileOpen ? (
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M6 18L18 6M6 6l12 12'
+                />
+              ) : (
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M4 7h16M4 12h16M4 17h16'
+                />
+              )}
+            </svg>
+          </button>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Mobile nav */}
+      <div
+        className={cn(
+          'absolute left-0 right-0 top-full transition-all duration-300 md:hidden',
+          mobileOpen
+            ? 'pointer-events-auto translate-y-0 opacity-100'
+            : 'pointer-events-none -translate-y-2 opacity-0'
+        )}
+      >
+        <div className='mx-4 mt-2'>
+          <nav
+            id='mobile-nav'
+            className='flex flex-col border border-border bg-bg-card/95 p-4 backdrop-blur-lg md:hidden'
+          >
+            {NAV_LINKS.map(item => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'border-b border-border/50 px-4 py-3 text-sm tracking-[0.08em] transition-colors last:border-0 hover:text-accent',
+                  pathname === item.href ? 'text-accent' : 'text-text-muted'
+                )}
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className='mt-3 px-4'>
+              <Button asChild size='sm' className='w-full'>
+                <Link href='/contact' onClick={() => setMobileOpen(false)}>
+                  Start a Project
+                </Link>
+              </Button>
+            </div>
+          </nav>
+        </div>
+      </div>
     </header>
   )
 }

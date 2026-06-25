@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
-import { Afacad, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
+import { Space_Grotesk, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
@@ -12,9 +12,9 @@ import { DotGridBackground } from '@/src/components/layout/dot-grid-background'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { FloatingBookCta } from '@/src/components/floating-book-cta'
 
-const afacad = Afacad({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-afacad',
+  variable: '--font-space-grotesk',
   adjustFontFallback: false,
 })
 
@@ -76,7 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={cn(
           'min-h-screen overflow-x-hidden bg-bg text-text',
-          afacad.variable,
+          spaceGrotesk.variable,
           bebasNeue.variable,
           sourceSans.variable
         )}
