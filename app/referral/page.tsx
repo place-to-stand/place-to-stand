@@ -65,19 +65,19 @@ export default function ReferralPage() {
     <main className='flex-1 pb-16 pt-32 sm:pt-40'>
       <div className='container mx-auto w-full max-w-2xl px-6'>
         <div className='flex flex-col items-center gap-4 text-center'>
-          <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+          <span className='text-sm font-semibold uppercase tracking-[0.1em] text-text-muted'>
             Partner With Us
           </span>
-          <h1 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+          <h1 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
             Referral Partners
           </h1>
-          <p className='max-w-xl text-balance text-lg !leading-snug text-ink/80'>
+          <p className='max-w-xl text-balance text-lg !leading-snug text-text-muted'>
             Interested in partnering with us? We&apos;d love to hear from you.
             Fill out the form below and we&apos;ll be in touch.
           </p>
         </div>
 
-        <div className='relative mt-10 rounded-xl border border-ink/10 bg-white/50 p-6'>
+        <div className='relative mt-10 rounded-xl border border-border bg-bg-card p-6'>
           <form
             noValidate
             onSubmit={onSubmit}
@@ -94,7 +94,7 @@ export default function ReferralPage() {
                 aria-invalid={!!form.formState.errors.name}
               />
               {form.formState.errors.name ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.name.message}
                 </p>
               ) : null}
@@ -109,7 +109,7 @@ export default function ReferralPage() {
                 aria-invalid={!!form.formState.errors.email}
               />
               {form.formState.errors.email ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.email.message}
                 </p>
               ) : null}
@@ -124,7 +124,7 @@ export default function ReferralPage() {
                 aria-invalid={!!form.formState.errors.phone}
               />
               {form.formState.errors.phone ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.phone.message}
                 </p>
               ) : null}
@@ -140,7 +140,7 @@ export default function ReferralPage() {
                 aria-invalid={!!form.formState.errors.message}
               />
               {form.formState.errors.message ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.message.message}
                 </p>
               ) : null}
@@ -159,11 +159,11 @@ export default function ReferralPage() {
           </form>
 
           {isSuccess ? (
-            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-white/95 text-center shadow-inner'>
-              <h2 className='text-2xl font-semibold uppercase text-ink'>
+            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-bg-card/95 text-center shadow-inner'>
+              <h2 className='text-2xl font-semibold uppercase text-text'>
                 Thank you!
               </h2>
-              <p className='max-w-md text-balance text-base text-ink/70'>
+              <p className='max-w-md text-balance text-base text-text-muted'>
                 We&apos;ve received your message and will be in touch soon to
                 discuss partnering opportunities.
               </p>

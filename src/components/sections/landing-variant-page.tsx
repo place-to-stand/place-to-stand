@@ -18,16 +18,16 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
       <ScrollDepthTracker />
       <AnimatedSection className='relative isolate flex min-h-[100svh] max-w-none flex-col items-center justify-center gap-8 px-6 pb-24 pt-32 text-center'>
         <div className='mx-auto flex w-full max-w-4xl flex-col items-center gap-6'>
-          <p className='font-headline text-sm font-semibold uppercase tracking-[0.14em] text-ink/60'>
+          <p className='font-headline text-sm font-semibold uppercase tracking-[0.14em] text-text-muted'>
             {variant.eyebrow}
           </p>
-          <p className='text-balance text-base font-semibold text-ink/80 md:text-lg'>
+          <p className='text-balance text-base font-semibold text-text-muted md:text-lg'>
             {variant.audience}
           </p>
-          <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-6xl'>
+          <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             {variant.headline}
           </h1>
-          <p className='max-w-3xl text-balance text-lg !leading-snug text-ink/80 md:text-xl'>
+          <p className='max-w-3xl text-balance text-lg !leading-snug text-text-muted md:text-xl'>
             {variant.subheadline}
           </p>
           <div className='mt-4 flex w-full flex-col items-center justify-center gap-4 sm:flex-row'>
@@ -54,7 +54,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
               <ul className='space-y-3 text-left'>
                 {variant.outcomeBullets.map(item => (
                   <li key={item} className='flex gap-2'>
-                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-ink/70' aria-hidden />
+                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-accent' aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -70,7 +70,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
               <ul className='space-y-3 text-left'>
                 {variant.painPoints.map(item => (
                   <li key={item} className='flex gap-2'>
-                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-ink/70' aria-hidden />
+                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-accent' aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -86,7 +86,7 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
               <ul className='space-y-3 text-left'>
                 {variant.differentiators.map(item => (
                   <li key={item} className='flex gap-2'>
-                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-ink/70' aria-hidden />
+                    <span className='mt-2 h-1.5 w-1.5 rounded-full bg-accent' aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -95,11 +95,11 @@ export function LandingVariantPage({ variant }: LandingVariantPageProps) {
           </Card>
         </div>
 
-        <div className='mx-auto flex w-full max-w-3xl flex-col items-center gap-4 rounded-2xl border border-ink/10 bg-white/50 p-8 text-center'>
-          <h2 className='font-headline text-3xl font-semibold uppercase text-ink md:text-4xl'>
+        <div className='mx-auto flex w-full max-w-3xl flex-col items-center gap-4 rounded-2xl border border-border bg-bg-card p-8 text-center'>
+          <h2 className='font-headline text-3xl font-semibold uppercase text-text md:text-4xl'>
             Ready to book your strategy call?
           </h2>
-          <p className='max-w-2xl text-balance text-base text-ink/80 md:text-lg'>
+          <p className='max-w-2xl text-balance text-base text-text-muted md:text-lg'>
             We&apos;ll review your goals, identify the highest-impact opportunities,
             and outline next steps tailored to your business.
           </p>

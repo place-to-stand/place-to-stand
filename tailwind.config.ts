@@ -1,26 +1,40 @@
 import type { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
 
-// Tailwind configuration for Place to Stand Agency
+// Tailwind configuration for Place to Stand Agency — Dark Blueprint Theme
 const config: Config = {
   darkMode: ['class'],
   content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       backgroundImage: {
-        gradientPrimary:
-          // 'linear-gradient(135deg, #444aaa 0%, #d7a5d9 23%, #c4cae0 76%, #94e0e4 100%)',
-          'linear-gradient(35deg, #6a9ea1ff 0%, #5b6483ff 23%, #704571ff 78%, #3a3e79ff 100%)',
-        gradientPrimaryRadial:
-          'radial-gradient(circle, #6a9ea1ff 0%, #5b6483ff 33%, #704571ff 66%, #3a3e79ff 100%)',
-        gradientSite:
-          'linear-gradient(45deg, #444aaa 0%, #d7a5d9 27%, #c4cae0 52%, #94e0e4 100%)',
+        'dot-grid':
+          'radial-gradient(circle, #2a2b30 1px, transparent 1px)',
+        'grid-lines':
+          'linear-gradient(to right, #1a1b1f 1px, transparent 1px), linear-gradient(to bottom, #1a1b1f 1px, transparent 1px)',
       },
       colors: {
-        accent: '#A3A6C7',
+        bg: {
+          DEFAULT: '#0e0f11',
+          card: '#1a1b1f',
+          elevated: '#242529',
+        },
+        text: {
+          DEFAULT: '#e8e6e3',
+          muted: '#8a8a8d',
+        },
+        accent: {
+          DEFAULT: '#b5f542',
+          muted: 'rgba(181, 245, 66, 0.15)',
+        },
+        border: {
+          DEFAULT: '#2a2b30',
+          light: '#3a3b40',
+        },
+        // Keep old tokens as aliases for backward compatibility during migration
         ink: {
-          DEFAULT: '#111827',
-          light: '#F9FAFB',
+          DEFAULT: '#0e0f11',
+          light: '#e8e6e3',
         },
       },
       fontFamily: {
@@ -42,19 +56,15 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'translateY(-18px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'wave-flow': {
-          '0%': {
-            transform: 'translateX(-10%)',
-          },
-          '100%': {
-            transform: 'translateX(110%)',
-          },
+        'scan-line': {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100vh)' },
         },
       },
       animation: {
         'fade-up': 'fade-up 4.0s ease forwards',
         'fade-down': 'fade-down 4.0s ease forwards',
-        'wave-flow': 'wave-flow 30s linear infinite',
+        'scan-line': 'scan-line 8s linear infinite',
       },
     },
   },

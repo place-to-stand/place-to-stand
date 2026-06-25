@@ -8,7 +8,7 @@ import { cn } from '@/src/lib/utils'
 import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
-import { PageParticles } from '@/src/components/sections/page-particles'
+import { DotGridBackground } from '@/src/components/layout/dot-grid-background'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { FloatingBookCta } from '@/src/components/floating-book-cta'
 
@@ -34,15 +34,15 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
   title: {
-    default: 'Place To Stand | Your Lever in the Digital World',
+    default: 'Place To Stand | Bureaucracy feeds on inefficiency. We starve it.',
     template: '%s | Place To Stand',
   },
   description:
-    'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
+    'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
   openGraph: {
-    title: 'Place To Stand | Your Lever in the Digital World',
+    title: 'Place To Stand | Bureaucracy feeds on inefficiency. We starve it.',
     description:
-      'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
+      'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
     url: 'https://placetostandagency.com/',
     siteName: 'Place To Stand',
     locale: 'en_US',
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Place To Stand | Your Lever in the Digital World',
+    title: 'Place To Stand | Bureaucracy feeds on inefficiency. We starve it.',
     description:
-      'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
+      'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
   },
 }
 
@@ -75,23 +75,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body
         className={cn(
-          'min-h-screen overflow-x-hidden bg-ink text-ink',
+          'min-h-screen overflow-x-hidden bg-bg text-text',
           afacad.variable,
           bebasNeue.variable,
           sourceSans.variable
         )}
       >
         <PostHogProvider>
-          <div
-            className='pts-animated-gradient pointer-events-none fixed inset-0 z-0 bg-gradientSite'
-            aria-hidden
-          />
-          <div
-            className='pointer-events-none fixed inset-0 z-0 bg-ink/10'
-            aria-hidden
-          />
-
-          <PageParticles />
+          <DotGridBackground />
 
           <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
             <Header />

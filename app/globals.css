@@ -3,7 +3,16 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
+  --color-bg: #0e0f11;
+  --color-bg-card: #1a1b1f;
+  --color-bg-elevated: #242529;
+  --color-text: #e8e6e3;
+  --color-text-muted: #8a8a8d;
+  --color-accent: #b5f542;
+  --color-accent-muted: rgba(181, 245, 66, 0.15);
+  --color-border: #2a2b30;
+  --color-border-light: #3a3b40;
 }
 
 html {
@@ -12,7 +21,7 @@ html {
 }
 
 body {
-  @apply bg-ink font-sans text-ink antialiased;
+  @apply bg-bg font-sans text-text antialiased;
   overflow-x: hidden;
 }
 
@@ -25,23 +34,6 @@ body {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-@keyframes pts-gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.pts-animated-gradient {
-  background-size: 200% 200%;
-  animation: pts-gradient-shift 12s ease infinite;
 }
 
 @keyframes pts-header-pop {
@@ -61,25 +53,21 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pts-animated-gradient {
-    animation: none;
-  }
-
   .pts-header-pop {
     animation: none;
   }
 }
 
 a {
-  @apply text-ink underline-offset-4 transition-colors;
+  @apply text-text underline-offset-4 transition-colors;
 }
 
 a:hover {
-  @apply text-ink/80;
+  @apply text-text/80;
 }
 
 ::selection {
-  background: rgba(190, 147, 197, 0.25);
+  background: rgba(181, 245, 66, 0.25);
 }
 
 /* Hide scrollbar for horizontal carousels */

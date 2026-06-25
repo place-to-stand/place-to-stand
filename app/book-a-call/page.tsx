@@ -9,13 +9,13 @@ export default function BookACallLandingIndexPage() {
     <main className='flex-1'>
       <AnimatedSection className='flex min-h-[70svh] flex-col items-center justify-center gap-8 pt-28 text-center'>
         <div className='mx-auto flex w-full max-w-3xl flex-col items-center gap-4'>
-          <p className='font-headline text-sm font-semibold uppercase tracking-[0.14em] text-ink/60'>
+          <p className='font-headline text-sm font-semibold uppercase tracking-[0.14em] text-text-muted'>
             Book-a-call landing pages
           </p>
-          <h1 className='text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-ink md:text-6xl'>
+          <h1 className='text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             Select a messaging variant
           </h1>
-          <p className='text-balance text-base text-ink/80 md:text-lg'>
+          <p className='text-balance text-base text-text-muted md:text-lg'>
             {landingVariants.length} conversion-focused variants for small business owners.
           </p>
         </div>
@@ -27,10 +27,10 @@ export default function BookACallLandingIndexPage() {
                 <CardTitle className='text-2xl'>{variant.eyebrow}</CardTitle>
               </CardHeader>
               <CardContent className='space-y-4'>
-                <p className='font-semibold text-ink'>{variant.headline}</p>
-                <p className='text-sm font-medium text-ink/70'>{variant.audience}</p>
+                <p className='font-semibold text-text'>{variant.headline}</p>
+                <p className='text-sm font-medium text-text-muted'>{variant.audience}</p>
                 <p>{variant.subheadline}</p>
-                <p className='text-sm text-ink/60'>
+                <p className='text-sm text-text-muted'>
                   Route: /book-a-call/{variant.slug}
                 </p>
                 <Button asChild variant='outline'>

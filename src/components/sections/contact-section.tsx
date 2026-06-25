@@ -114,18 +114,18 @@ export function ContactSection() {
   return (
     <AnimatedSection id='contact' className='flex flex-col gap-10 py-24'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-text-muted'>
           Contact
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
-          Let’s talk
+        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
+          Let's talk
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/80'>
+        <p className='max-w-xl text-balance text-lg !leading-snug text-text-muted'>
           Send a message, or book a call directly to our calendars.
         </p>
       </div>
       <div className='flex flex-col gap-5 md:flex-row md:gap-6 lg:gap-8'>
-        <div className='relative basis-full gap-10 rounded-xl border border-ink/10 bg-white/50 p-6 md:basis-1/2'>
+        <div className='relative basis-full gap-10 rounded-xl border border-border bg-bg-card p-6 md:basis-1/2'>
           <form
             noValidate
             onSubmit={onSubmit}
@@ -142,7 +142,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.name}
               />
               {form.formState.errors.name ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.name.message}
                 </p>
               ) : null}
@@ -156,7 +156,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.email}
               />
               {form.formState.errors.email ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.email.message}
                 </p>
               ) : null}
@@ -169,7 +169,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.company}
               />
               {form.formState.errors.company ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.company.message}
                 </p>
               ) : null}
@@ -184,7 +184,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.website}
               />
               {form.formState.errors.website ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.website.message}
                 </p>
               ) : null}
@@ -198,7 +198,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.message}
               />
               {form.formState.errors.message ? (
-                <p className='text-sm text-red-600'>
+                <p className='text-sm text-red-400'>
                   {form.formState.errors.message.message}
                 </p>
               ) : null}
@@ -216,11 +216,11 @@ export function ContactSection() {
           </form>
 
           {isSuccess ? (
-            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-white/95 text-center shadow-inner'>
-              <h3 className='text-2xl font-semibold uppercase text-ink'>
+            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 rounded-xl bg-bg-card/95 text-center shadow-inner'>
+              <h3 className='text-2xl font-semibold uppercase text-text'>
                 Thank you!
               </h3>
-              <p className='max-w-md text-balance text-base text-ink/70'>
+              <p className='max-w-md text-balance text-base text-text-muted'>
                 Your message has been sent. We&apos;ll reach out within one
                 business day.
               </p>
@@ -238,14 +238,14 @@ export function ContactSection() {
             </div>
           ) : null}
         </div>
-        <div className='flex basis-full flex-col justify-between gap-6 rounded-xl border border-ink/10 bg-white/50 p-6 md:basis-1/2'>
+        <div className='flex basis-full flex-col justify-between gap-6 rounded-xl border border-border bg-bg-card p-6 md:basis-1/2'>
           <div className='grid h-full grid-cols-2 gap-3 sm:gap-6 md:gap-6 lg:gap-6'>
             {team.map(member => (
               <article
                 key={member.name}
-                className='group relative flex flex-col justify-start gap-2 rounded-xl border border-ink bg-white/25 px-2 pb-10 pt-3 text-center text-ink shadow-sm backdrop-blur transition-all duration-300 ease-out hover:bg-white/15'
+                className='group relative flex flex-col justify-start gap-2 rounded-xl border border-border bg-bg-card px-2 pb-10 pt-3 text-center text-text shadow-sm transition-all duration-300 ease-out hover:border-accent/30'
               >
-                <div className='relative mx-auto aspect-square w-2/3 overflow-hidden rounded-full border border-ink/20'>
+                <div className='relative mx-auto aspect-square w-2/3 overflow-hidden rounded-full border border-border'>
                   <Image
                     src={member.image}
                     alt={`${member.name}, ${member.title}`}
@@ -257,7 +257,7 @@ export function ContactSection() {
                   <h3 className='font-headline text-sm uppercase leading-none'>
                     {member.name}
                   </h3>
-                  <p className='text-xs text-ink/70'>{member.title}</p>
+                  <p className='text-xs text-text-muted'>{member.title}</p>
                 </div>
                 <div className='absolute inset-x-0 bottom-3 flex justify-center gap-2 md:bottom-4'>
                   {member.socials?.linkedin && (
@@ -265,7 +265,7 @@ export function ContactSection() {
                       href={member.socials.linkedin}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-ink/50 transition-colors hover:text-ink'
+                      className='text-text-muted transition-colors hover:text-accent'
                       aria-label={`${member.name} on LinkedIn`}
                     >
                       <svg
@@ -282,7 +282,7 @@ export function ContactSection() {
                       href={member.socials.x}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-ink/50 transition-colors hover:text-ink'
+                      className='text-text-muted transition-colors hover:text-accent'
                       aria-label={`${member.name} on X`}
                     >
                       <svg
@@ -299,7 +299,7 @@ export function ContactSection() {
                       href={member.socials.instagram}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-ink/50 transition-colors hover:text-ink'
+                      className='text-text-muted transition-colors hover:text-accent'
                       aria-label={`${member.name} on Instagram`}
                     >
                       <svg
@@ -316,7 +316,7 @@ export function ContactSection() {
                       href={member.socials.github}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-ink/50 transition-colors hover:text-ink'
+                      className='text-text-muted transition-colors hover:text-accent'
                       aria-label={`${member.name} on GitHub`}
                     >
                       <svg

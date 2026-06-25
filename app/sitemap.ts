@@ -1,34 +1,81 @@
 import type { MetadataRoute } from 'next'
-
-const sections = [
-  'home',
-  'about',
-  'services',
-  'how-we-work',
-  'team',
-  'work',
-  'contact',
-]
+import { services } from '@/src/lib/services'
+import { landingVariants } from '@/src/lib/landing-pages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.placetostandagency.com'
   const lastModified = new Date()
 
-  const hashLinks: MetadataRoute.Sitemap = sections.map(section => ({
-    url: `${baseUrl}/#${section}`,
-    lastModified,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }))
-
-  const standalonePages: MetadataRoute.Sitemap = [
+  const mainPages: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/rsvp`,
+      url: baseUrl,
       lastModified,
       changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/services`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/case-studies`,
+      lastModified,
+      changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/field-notes`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/team`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/how-we-work`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/privacy`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/terms`,
+      lastModified,
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ]
 
-  return [...hashLinks, ...standalonePages]
+  const servicePages: MetadataRoute.Sitemap = services.map(service => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  const landingPages: MetadataRoute.Sitemap = landingVariants.map(variant => ({
+    url: `${baseUrl}/book-a-call/${variant.slug}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...mainPages, ...servicePages, ...landingPages]
 }

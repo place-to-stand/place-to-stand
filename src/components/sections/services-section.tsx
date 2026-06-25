@@ -74,7 +74,7 @@ const services: Array<{
   {
     title: 'Social Media Strategy',
     description:
-      'Own the conversation with a consistent presence that speaks your audience’s language.',
+      "Own the conversation with a consistent presence that speaks your audience's language.",
     icon: Share2,
   },
 ]

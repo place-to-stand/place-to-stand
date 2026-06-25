@@ -6,7 +6,7 @@ import { FilloutForm } from '../../src/components/fillout-form'
 const filloutFormId = 'dtJoNAa9CEus'
 
 const eventDescription =
-  'Learn how to streamline the everyday admin work so you can focus on the parts you love. We’ll show you how AI can handle the “dishes” while you create the art — all while saving time, cutting costs, and helping you compete against the big brands.'
+  "Learn how to streamline the everyday admin work so you can focus on the parts you love. We'll show you how AI can handle the \"dishes\" while you create the art — all while saving time, cutting costs, and helping you compete against the big brands."
 
 const eventDetails = [
   {

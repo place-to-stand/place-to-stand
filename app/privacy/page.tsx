@@ -8,10 +8,10 @@ export default function PrivacyPage() {
   return (
     <main className='mx-auto mt-28 flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6 py-24'>
       <section className='space-y-4'>
-        <h1 className='font-headline text-5xl uppercase tracking-[0.1em] text-ink-light'>
+        <h1 className='font-headline text-5xl uppercase tracking-[0.1em] text-text'>
           Privacy Policy
         </h1>
-        <p className='text-base text-ink-light/70'>
+        <p className='text-base text-text-muted'>
           We respect your privacy and are committed to safeguarding your data.
           This placeholder page summarises how we collect, use, and protect
           information submitted through our contact form and other interactions
@@ -19,8 +19,8 @@ export default function PrivacyPage() {
           to launch.
         </p>
       </section>
-      <section className='space-y-3 text-sm text-ink-light/70'>
-        <h2 className='font-headline text-2xl uppercase tracking-[0.2em] text-ink-light'>
+      <section className='space-y-3 text-sm text-text-muted'>
+        <h2 className='font-headline text-2xl uppercase tracking-[0.2em] text-text'>
           Key Principles
         </h2>
         <ul className='space-y-2'>

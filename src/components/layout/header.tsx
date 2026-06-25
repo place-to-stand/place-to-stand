@@ -1,13 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion, type Transition } from 'framer-motion'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-import { NAV_LINKS, hashHref } from '@/src/components/layout/nav-links'
+import { NAV_LINKS } from '@/src/components/layout/nav-links'
 
 export function Header() {
+  const pathname = usePathname()
   const shouldReduceMotion = useReducedMotion()
   const [pastHero, setPastHero] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -87,17 +89,17 @@ export function Header() {
           className={cn(
             'border backdrop-blur-xl',
             pastHero
-              ? 'mx-auto max-w-6xl border border-ink bg-white shadow-sm'
+              ? 'mx-auto max-w-6xl border border-border bg-bg/80'
               : 'w-full border-transparent bg-transparent'
           )}
           animate={{
             borderRadius: pastHero ? 9999 : 0,
             backgroundColor: pastHero
-              ? 'rgba(255, 255, 255, 0.75)'
-              : 'rgba(255, 255, 255, 0)',
+              ? 'rgba(14, 15, 17, 0.8)'
+              : 'rgba(14, 15, 17, 0)',
             borderColor: pastHero
-              ? 'rgba(17, 24, 39, 1)'
-              : 'rgba(17, 24, 39, 0)',
+              ? 'rgba(42, 43, 48, 1)'
+              : 'rgba(42, 43, 48, 0)',
             y: pastHero ? 0 : 0,
           }}
         >
@@ -108,11 +110,11 @@ export function Header() {
               'mx-auto flex max-w-6xl items-center justify-between px-6 py-3'
             )}
           >
-            <Link href={hashHref('home')} className='flex items-center gap-3'>
+            <Link href='/' className='flex items-center gap-3'>
               <span
                 className={cn(
                   'font-logo font-semibold uppercase tracking-[0.025em] transition-colors duration-700 md:text-xl lg:text-2xl',
-                  'text-ink'
+                  'text-text'
                 )}
               >
                 Place To Stand
@@ -122,11 +124,13 @@ export function Header() {
             <nav className='hidden items-center gap-2 md:flex md:text-sm lg:gap-5 lg:text-base'>
               {NAV_LINKS.map(item => (
                 <Link
-                  key={item.hash}
-                  href={hashHref(item.hash)}
+                  key={item.href}
+                  href={item.href}
                   className={cn(
                     'font-semibold uppercase tracking-[0.1em] transition-all duration-500',
-                    'border-b-2 border-transparent text-ink/70 hover:border-ink hover:text-ink'
+                    pathname === item.href
+                      ? 'text-accent'
+                      : 'text-text-muted hover:text-accent'
                   )}
                 >
                   {item.label}
@@ -142,10 +146,10 @@ export function Header() {
                   variant={pastHero ? 'primary' : 'outline'}
                   className={cn(
                     'transition-colors duration-300',
-                    pastHero ? 'md:px-9 lg:px-11' : 'border-ink/60 px-11'
+                    pastHero ? 'md:px-9 lg:px-11' : 'px-11'
                   )}
                 >
-                  <Link href={hashHref('contact')}>Start a Project</Link>
+                  <Link href='/contact'>Start a Project</Link>
                 </Button>
               </div>
 
@@ -160,7 +164,7 @@ export function Header() {
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   viewBox='0 0 24 24'
-                  className='h-8 w-8 text-ink transition-colors duration-700'
+                  className='h-8 w-8 text-text transition-colors duration-700'
                   fill='none'
                   stroke='currentColor'
                   strokeWidth='1.5'
@@ -187,13 +191,18 @@ export function Header() {
           <div className='mx-auto max-w-6xl px-4'>
             <nav
               id='mobile-nav'
-              className='flex w-full flex-col gap-2 rounded-[28px] border border-ink-light/10 bg-ink/85 p-6 text-center text-ink-light shadow-xl backdrop-blur transition md:hidden'
+              className='flex w-full flex-col gap-2 rounded-[28px] border border-border bg-bg-card/95 p-6 text-center shadow-xl backdrop-blur transition md:hidden'
             >
               {NAV_LINKS.map(item => (
                 <Link
-                  key={item.hash}
-                  href={hashHref(item.hash)}
-                  className='rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] text-ink-light/80 transition hover:bg-white/10 hover:text-ink-light'
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'rounded-full px-6 py-3 text-base font-semibold uppercase tracking-[0.2em] transition hover:bg-white/10 hover:text-accent',
+                    pathname === item.href
+                      ? 'text-accent'
+                      : 'text-text-muted'
+                  )}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
