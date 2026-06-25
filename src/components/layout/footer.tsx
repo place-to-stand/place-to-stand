@@ -4,7 +4,7 @@ import { NAV_LINKS } from '@/src/components/layout/nav-links'
 export function Footer() {
   const year = new Date().getFullYear()
   return (
-    <footer className='bg-bg-card text-text-muted'>
+    <footer className='border-t border-border bg-bg-card text-text-muted'>
       <div className='mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 py-12 md:flex-row md:items-start md:justify-between'>
         <div className='flex flex-col gap-3'>
           <span className='font-logo text-lg font-semibold uppercase tracking-[0.025em] text-text'>
@@ -13,6 +13,9 @@ export function Footer() {
           <p className='max-w-md text-sm text-text-muted'>
             Bureaucracy feeds on inefficiency. We starve it.
           </p>
+          <span className='mt-2 font-mono text-[9px] tracking-widest text-border-light' aria-hidden>
+            PTS &middot; placetostandagency.com
+          </span>
         </div>
         <nav className='flex flex-col gap-3'>
           <span className='text-left text-sm font-semibold uppercase tracking-[0.1em] text-text'>

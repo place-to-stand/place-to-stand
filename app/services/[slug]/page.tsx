@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
-import { Badge } from '@/src/components/ui/badge'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services, serviceMap } from '@/src/lib/services'
 
 type ServicePageProps = {
@@ -40,7 +40,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <span aria-hidden>&larr;</span> All Services
           </Link>
           <div className='flex flex-col gap-4'>
-            <span className='font-mono text-xs text-accent'>{service.icon}</span>
+            <span className='bp-label font-mono'>{service.icon}</span>
             <h1 className='font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
               {service.title}
             </h1>
@@ -55,7 +55,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </p>
           </div>
           <div className='md:col-span-2'>
-            <div className='border border-border bg-bg-card p-6'>
+            <div className='relative border border-border bg-bg-card p-6'>
+              <BlueprintCorners />
               <h2 className='mb-4 font-headline text-lg uppercase text-text'>Capabilities</h2>
               <ul className='flex flex-col gap-3'>
                 {service.features.map(feature => (
@@ -69,7 +70,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </div>
         </div>
 
-        <div className='flex flex-col items-center gap-6 border border-border bg-bg-card p-10 text-center'>
+        <div className='relative flex flex-col items-center gap-6 border border-border bg-bg-card p-10 text-center'>
+          <BlueprintCorners size={16} all />
           <h2 className='font-headline text-2xl uppercase text-text md:text-3xl'>
             Ready to get started?
           </h2>

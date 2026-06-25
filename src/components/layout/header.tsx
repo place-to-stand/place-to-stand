@@ -30,23 +30,27 @@ export function Header() {
     >
       <div className='mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10'>
         {/* Logo */}
-        <Link href='/' className='group flex items-center gap-2'>
+        <Link href='/' className='group flex items-center gap-3'>
+          {/* Blueprint logo mark */}
+          <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/50' aria-hidden>
+            <span className='h-2 w-2 bg-accent' />
+          </span>
           <span className='font-headline text-xl font-bold tracking-tight text-text transition-colors group-hover:text-accent'>
             Place To Stand
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className='hidden items-center gap-8 md:flex'>
+        <nav className='hidden items-center gap-1 md:flex'>
           {NAV_LINKS.map(item => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'text-[13px] tracking-[0.08em] transition-colors duration-300',
+                'px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-300',
                 pathname === item.href
-                  ? 'text-accent'
-                  : 'text-text-muted hover:text-text'
+                  ? 'border border-accent/30 text-accent'
+                  : 'border border-transparent text-text-muted hover:text-text'
               )}
             >
               {item.label}

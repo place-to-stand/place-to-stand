@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Badge } from '@/src/components/ui/badge'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { caseStudies } from '@/src/lib/case-studies'
 
 export function CaseStudiesPreview() {
@@ -11,9 +12,7 @@ export function CaseStudiesPreview() {
       <div className='flex flex-col gap-12'>
         {/* Header — left-aligned */}
         <div className='flex flex-col gap-4'>
-          <span className='font-mono text-[11px] uppercase tracking-[0.2em] text-accent'>
-            Case Studies
-          </span>
+          <span className='bp-label font-mono'>Case Studies</span>
           <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
             <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
               Real results
@@ -33,10 +32,11 @@ export function CaseStudiesPreview() {
           {featured.map((cs, i) => (
             <div
               key={cs.slug}
-              className={`group grid gap-6 border border-border bg-bg-card transition-all duration-300 hover:border-accent/30 md:grid-cols-2 ${
+              className={`group relative grid gap-0 border border-border bg-bg-card transition-all duration-300 hover:border-accent/30 md:grid-cols-2 ${
                 i % 2 === 1 ? 'md:direction-rtl' : ''
               }`}
             >
+              <BlueprintCorners />
               <div
                 className={`relative aspect-video overflow-hidden ${i % 2 === 1 ? 'md:order-2' : ''}`}
               >
@@ -47,21 +47,19 @@ export function CaseStudiesPreview() {
                   className='object-cover transition-transform duration-500 group-hover:scale-105'
                 />
                 <div className='absolute inset-0 bg-gradient-to-r from-bg-card/60 to-transparent' />
+                {/* Blueprint metric overlay */}
+                <div className='absolute bottom-3 left-3'>
+                  <span className='border border-accent/40 bg-bg/80 px-3 py-1 font-mono text-[11px] font-bold text-accent'>
+                    {cs.metric}
+                  </span>
+                </div>
               </div>
               <div
                 className={`flex flex-col justify-center gap-4 p-8 md:p-10 ${i % 2 === 1 ? 'md:order-1 md:text-right' : ''}`}
               >
-                <div
-                  className={`flex items-center gap-3 ${i % 2 === 1 ? 'md:justify-end' : ''}`}
-                >
-                  <span className='font-mono text-xs font-bold text-accent'>
-                    {cs.metric}
-                  </span>
-                  <span className='text-border'>|</span>
-                  <span className='font-mono text-[11px] uppercase tracking-wider text-text-muted'>
-                    {cs.client}
-                  </span>
-                </div>
+                <span className='font-mono text-[11px] uppercase tracking-wider text-text-muted'>
+                  {cs.client}
+                </span>
                 <h3 className='font-headline text-2xl font-semibold tracking-tight text-text'>
                   {cs.title}
                 </h3>

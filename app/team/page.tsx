@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { team } from '@/src/lib/team'
 
 export const metadata: Metadata = {
@@ -13,9 +14,7 @@ export default function TeamPage() {
     <main className='flex-1 pt-28'>
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col items-center gap-4 text-center'>
-          <span className='font-mono text-xs uppercase tracking-[0.2em] text-accent'>
-            Team
-          </span>
+          <span className='bp-label font-mono'>Team</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             The builders
           </h1>
@@ -27,8 +26,9 @@ export default function TeamPage() {
           {team.map(member => (
             <article
               key={member.name}
-              className='group flex flex-col gap-4 border border-border bg-bg-card p-6 text-center transition-colors duration-300 hover:border-accent/30'
+              className='group relative flex flex-col gap-4 border border-border bg-bg-card p-6 text-center transition-colors duration-300 hover:border-accent/30'
             >
+              <BlueprintCorners />
               <div className='relative mx-auto aspect-square w-3/4 overflow-hidden border border-border'>
                 <Image
                   src={member.image}

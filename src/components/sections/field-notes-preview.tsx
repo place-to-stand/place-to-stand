@@ -10,9 +10,7 @@ export function FieldNotesPreview() {
       <div className='grid gap-16 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
-          <span className='font-mono text-[11px] uppercase tracking-[0.2em] text-accent'>
-            Field Notes
-          </span>
+          <span className='bp-label font-mono'>Field Notes</span>
           <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
             From the
             <br />
@@ -31,7 +29,7 @@ export function FieldNotesPreview() {
         </div>
 
         {/* Right: entries */}
-        <div className='flex flex-col'>
+        <div className='flex flex-col border border-border'>
           {latest.map((note, i) => (
             <a
               key={note.slug}
@@ -40,14 +38,14 @@ export function FieldNotesPreview() {
               rel={
                 note.url.startsWith('http') ? 'noopener noreferrer' : undefined
               }
-              className={`group flex flex-col gap-3 py-8 transition-colors ${i < latest.length - 1 ? 'border-b border-border' : ''}`}
+              className='group flex flex-col gap-3 border-b border-border bg-bg-card px-6 py-8 transition-colors last:border-b-0 hover:bg-bg-elevated'
             >
               <div className='flex items-center gap-4'>
                 <span className='font-mono text-[11px] text-text-muted'>
                   {note.date}
                 </span>
                 {note.repo && (
-                  <span className='font-mono text-[11px] uppercase text-accent'>
+                  <span className='border border-accent/30 px-2 py-0.5 font-mono text-[10px] uppercase text-accent'>
                     Open Source
                   </span>
                 )}

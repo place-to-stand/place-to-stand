@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Badge } from '@/src/components/ui/badge'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { fieldNotes } from '@/src/lib/field-notes'
 
 export const metadata: Metadata = {
@@ -13,9 +14,7 @@ export default function FieldNotesPage() {
     <main className='flex-1 pt-28'>
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col items-center gap-4 text-center'>
-          <span className='font-mono text-xs uppercase tracking-[0.2em] text-accent'>
-            Field Notes
-          </span>
+          <span className='bp-label font-mono'>Field Notes</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             From the lab
           </h1>
@@ -30,8 +29,9 @@ export default function FieldNotesPage() {
               href={note.url}
               target={note.url.startsWith('http') ? '_blank' : undefined}
               rel={note.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className='group flex flex-col gap-4 border border-border bg-bg-card p-6 transition-colors duration-300 hover:border-accent/40'
+              className='group relative flex flex-col gap-4 border border-border bg-bg-card p-6 transition-colors duration-300 hover:border-accent/40'
             >
+              <BlueprintCorners />
               <div className='flex items-center justify-between'>
                 <span className='font-mono text-[11px] text-text-muted'>{note.date}</span>
                 {note.repo && (

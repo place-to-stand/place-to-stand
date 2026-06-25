@@ -7,18 +7,24 @@ export function ServicesPreview() {
     <AnimatedSection className='max-w-7xl lg:px-10'>
       <div className='grid gap-16 md:grid-cols-[1.2fr_1fr]'>
         {/* Left: service list */}
-        <div className='flex flex-col'>
+        <div className='flex flex-col border border-border'>
           {services.map((service, i) => (
             <Link
               key={service.slug}
               href={`/services/${service.slug}` as '/services/ai-automation'}
-              className={`group flex items-start justify-between gap-6 py-6 transition-colors ${i < services.length - 1 ? 'border-b border-border' : ''}`}
+              className='group flex items-start justify-between gap-6 border-b border-border bg-bg-card px-6 py-6 transition-colors last:border-b-0 hover:bg-bg-elevated'
             >
-              <div className='flex flex-col gap-1'>
-                <h3 className='font-headline text-lg font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
-                  {service.title}
-                </h3>
-                <p className='text-sm text-text-muted'>{service.tagline}</p>
+              <div className='flex items-start gap-4'>
+                {/* Grid-attached number marker */}
+                <span className='mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className='flex flex-col gap-1'>
+                  <h3 className='font-headline text-lg font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
+                    {service.title}
+                  </h3>
+                  <p className='text-sm text-text-muted'>{service.tagline}</p>
+                </div>
               </div>
               <span
                 className='mt-1 shrink-0 font-mono text-xs text-text-muted transition-colors group-hover:text-accent'
@@ -32,9 +38,7 @@ export function ServicesPreview() {
 
         {/* Right: heading (sticky) */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start md:text-right'>
-          <span className='font-mono text-[11px] uppercase tracking-[0.2em] text-accent'>
-            Services
-          </span>
+          <span className='bp-label font-mono md:ml-auto'>Services</span>
           <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
             What we
             <br />

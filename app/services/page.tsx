@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services } from '@/src/lib/services'
 
 export const metadata: Metadata = {
@@ -13,9 +14,7 @@ export default function ServicesPage() {
     <main className='flex-1 pt-28'>
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col items-center gap-4 text-center'>
-          <span className='font-mono text-xs uppercase tracking-[0.2em] text-accent'>
-            Services
-          </span>
+          <span className='bp-label font-mono'>Services</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             What we build
           </h1>
@@ -24,13 +23,19 @@ export default function ServicesPage() {
           </p>
         </div>
         <div className='grid gap-6 md:grid-cols-2'>
-          {services.map(service => (
+          {services.map((service, i) => (
             <Link
               key={service.slug}
               href={`/services/${service.slug}` as any}
-              className='group flex flex-col gap-4 border border-border bg-bg-card p-8 transition-colors duration-300 hover:border-accent/40'
+              className='group relative flex flex-col gap-4 border border-border bg-bg-card p-8 transition-colors duration-300 hover:border-accent/40'
             >
-              <span className='font-mono text-xs text-accent'>{service.icon}</span>
+              <BlueprintCorners />
+              <div className='flex items-center gap-3'>
+                <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className='font-mono text-xs text-accent'>{service.icon}</span>
+              </div>
               <h2 className='font-headline text-2xl uppercase text-text transition-colors group-hover:text-accent'>
                 {service.title}
               </h2>

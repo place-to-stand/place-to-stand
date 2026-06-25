@@ -1,18 +1,22 @@
 import * as React from 'react'
 import { cn } from '@/src/lib/utils'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      'group relative overflow-hidden border border-border bg-bg-card p-8 text-text transition-colors duration-300 ease-out hover:border-accent/30',
+      'group relative border border-border bg-bg-card p-8 text-text transition-colors duration-300 ease-out hover:border-accent/30',
       className
     )}
     {...props}
-  />
+  >
+    <BlueprintCorners />
+    {children}
+  </div>
 ))
 Card.displayName = 'Card'
 
