@@ -1,8 +1,16 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { BarChart3, Code2, Compass, GitBranch, type LucideIcon } from 'lucide-react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services } from '@/src/lib/services'
+
+const serviceIcons: Record<string, LucideIcon> = {
+  Code2,
+  GitBranch,
+  BarChart3,
+  Compass,
+}
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -23,7 +31,9 @@ export default function ServicesPage() {
           </p>
         </div>
         <div className='grid gap-6 md:grid-cols-2'>
-          {services.map((service, i) => (
+          {services.map((service, i) => {
+            const Icon = serviceIcons[service.icon]
+            return (
             <Link
               key={service.slug}
               href={`/services/${service.slug}` as any}
@@ -34,7 +44,7 @@ export default function ServicesPage() {
                 <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className='font-mono text-xs text-accent'>{service.icon}</span>
+                {Icon && <Icon className='h-5 w-5 text-accent' aria-hidden />}
               </div>
               <h2 className='font-headline text-2xl uppercase text-text transition-colors group-hover:text-accent'>
                 {service.title}
@@ -45,7 +55,8 @@ export default function ServicesPage() {
                 Learn more <span aria-hidden>&rarr;</span>
               </span>
             </Link>
-          ))}
+            )
+          })}
         </div>
       </AnimatedSection>
     </main>

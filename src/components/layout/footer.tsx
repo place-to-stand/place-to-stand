@@ -11,9 +11,9 @@ export function Footer() {
             Place To Stand
           </span>
           <p className='max-w-md text-sm text-text-muted'>
-            Bureaucracy feeds on inefficiency. We starve it.
+            Austion, TX - Brooklyn, NY
           </p>
-          <span className='mt-2 font-mono text-[9px] tracking-widest text-border-light' aria-hidden>
+          <span className='mt-2 font-mono text-md tracking-widest text-border-light' aria-hidden>
             PTS &middot; placetostandagency.com
           </span>
         </div>
@@ -39,18 +39,6 @@ export function Footer() {
           <span className='order-last md:order-first'>
             &copy; {year} Place To Stand. All rights reserved.
           </span>
-          <Link
-            className='text-text-muted transition hover:text-accent'
-            href='/privacy'
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            className='text-text-muted transition hover:text-accent'
-            href='/terms'
-          >
-            Terms of Service
-          </Link>
         </div>
       </div>
     </footer>

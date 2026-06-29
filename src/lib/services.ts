@@ -9,20 +9,6 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    slug: 'ai-automation',
-    title: 'AI Automation',
-    tagline: 'Replace repetitive work with intelligent systems',
-    description: 'We build custom AI agents and automated workflows that handle the tasks your team shouldn\'t be doing manually. From data processing to customer communications, we deploy AI where it creates the most leverage.',
-    icon: 'Cpu',
-    features: [
-      'Custom AI agent development',
-      'Workflow automation design',
-      'Natural language processing pipelines',
-      'Intelligent document processing',
-      'AI-powered decision support systems',
-    ],
-  },
-  {
     slug: 'software-development',
     title: 'Software Development',
     tagline: 'Full-stack applications built for scale',
@@ -62,20 +48,6 @@ export const services: Service[] = [
       'Business intelligence reporting',
       'Predictive modeling',
       'Data warehouse design',
-    ],
-  },
-  {
-    slug: 'creative-production',
-    title: 'Creative Production',
-    tagline: 'Design and content that converts',
-    description: 'Strategic creative services from brand identity to content production. Photography, video, copywriting, and design — all aligned with your business objectives.',
-    icon: 'Palette',
-    features: [
-      'Brand identity and design systems',
-      'Photography and video production',
-      'Copywriting and content strategy',
-      'UI/UX design',
-      'Email and social media design',
     ],
   },
   {

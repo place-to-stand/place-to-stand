@@ -5,8 +5,28 @@ import { services } from '@/src/lib/services'
 export function ServicesPreview() {
   return (
     <AnimatedSection className='max-w-7xl lg:px-10'>
-      <div className='grid gap-16 md:grid-cols-[1.2fr_1fr]'>
-        {/* Left: service list */}
+      <div className='grid gap-16 md:grid-cols-[1fr_1.2fr]'>
+        {/* Left: heading (sticky) */}
+        <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
+          <span className='bp-label font-mono'>Services</span>
+          <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
+            What we
+            <br />
+            build
+          </h2>
+          <p className='text-md leading-relaxed text-text-muted'>
+            End-to-end capabilities, from strategy to deployment.
+          </p>
+          <Link
+            href='/services'
+            className='mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+          >
+            View all services
+            <span aria-hidden>&rarr;</span>
+          </Link>
+        </div>
+
+        {/* Right: service list */}
         <div className='flex flex-col border border-border'>
           {services.map((service, i) => (
             <Link
@@ -34,26 +54,6 @@ export function ServicesPreview() {
               </span>
             </Link>
           ))}
-        </div>
-
-        {/* Right: heading (sticky) */}
-        <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start md:text-right'>
-          <span className='bp-label font-mono md:ml-auto'>Services</span>
-          <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
-            What we
-            <br />
-            build
-          </h2>
-          <p className='text-sm leading-relaxed text-text-muted'>
-            End-to-end capabilities, from strategy to deployment.
-          </p>
-          <Link
-            href='/services'
-            className='mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80 md:justify-end'
-          >
-            View all services
-            <span aria-hidden>&rarr;</span>
-          </Link>
         </div>
       </div>
     </AnimatedSection>

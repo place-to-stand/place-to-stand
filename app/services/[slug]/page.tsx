@@ -1,10 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { BarChart3, Code2, Compass, GitBranch, type LucideIcon } from 'lucide-react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services, serviceMap } from '@/src/lib/services'
+
+const serviceIcons: Record<string, LucideIcon> = {
+  Code2,
+  GitBranch,
+  BarChart3,
+  Compass,
+}
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>
@@ -29,6 +37,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const service = serviceMap[slug]
   if (!service) notFound()
 
+  const Icon = serviceIcons[service.icon]
+
   return (
     <main className='flex-1 pt-28'>
       <AnimatedSection className='flex flex-col gap-12'>
@@ -40,7 +50,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <span aria-hidden>&larr;</span> All Services
           </Link>
           <div className='flex flex-col gap-4'>
-            <span className='bp-label font-mono'>{service.icon}</span>
+            {Icon && (
+              <span className='inline-flex h-10 w-10 items-center justify-center border border-accent/30 text-accent'>
+                <Icon className='h-5 w-5' aria-hidden />
+              </span>
+            )}
             <h1 className='font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
               {service.title}
             </h1>

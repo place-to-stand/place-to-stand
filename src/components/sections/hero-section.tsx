@@ -39,8 +39,7 @@ export function HeroSection() {
               {/* Vertical leader line */}
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
               <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>
-                Your governance, roles, and processes aren&apos;t a constraint —
-                they&apos;re the spec. We turn them into purpose-built software
+                Your governance, roles, and processes aren&apos;t a constraint, they are the product spec. We turn them into purpose-built software
                 that targets your need directly. No more dealing with bloated SAAS dashboards.
               </p>
             </div>

@@ -22,7 +22,7 @@ export function ManifestoSection() {
           {/* Right: supporting text */}
           <div className='flex flex-col gap-4 md:max-w-sm'>
             <div className='bp-dimension-line w-12' aria-hidden />
-            <p className='text-sm leading-relaxed text-text-muted'>
+            <p className='text-md leading-relaxed text-text-muted'>
               No project managers. No junior handoffs. No surprise invoices. Just
               experienced engineers building exactly what you need — at AI speed.
             </p>
