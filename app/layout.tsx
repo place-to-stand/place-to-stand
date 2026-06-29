@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     template: '%s | Place To Stand',
   },
   description:
-    'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
+    'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
   openGraph: {
     title: 'Place To Stand | Software Agency',
     description:
-      'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
+      'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
     url: 'https://placetostandagency.com/',
     siteName: 'Place To Stand',
     locale: 'en_US',
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Place To Stand | Bureaucracy feeds on inefficiency. We starve it.',
+    title: 'Place To Stand | Software Agency',
     description:
-      'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
+      'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
   },
 }
 
