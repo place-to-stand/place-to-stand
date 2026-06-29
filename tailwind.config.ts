@@ -47,6 +47,9 @@ const config: Config = {
         tighter: '1.2',
         tightest: '1.1',
       },
+      transitionDuration: {
+        '2500': '2500ms',
+      },
       keyframes: {
         'fade-up': {
           '0%': { opacity: '0', transform: 'translateY(10px)' },

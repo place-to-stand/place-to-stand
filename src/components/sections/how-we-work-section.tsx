@@ -58,10 +58,10 @@ export function HowWeWorkSection() {
             <li
               key={step.number}
               className={cn(
-                'flex flex-col gap-2 px-6 py-6 will-change-transform md:w-1/3 md:gap-3 lg:py-8',
+                'flex flex-col gap-2 px-6 py-6 will-change-transform transition-all duration-2500 md:w-1/3 md:gap-3 lg:py-8',
                 isActive
-                  ? 'duration-[2500ms] border border-accent bg-bg-card shadow-lg transition-all ease-out md:-translate-y-1'
-                  : 'duration-[2500ms] translate-y-0 border border-transparent bg-bg-card/50 shadow-sm transition-all ease-in hover:bg-bg-card'
+                  ? 'border border-accent bg-bg-card shadow-lg ease-out md:-translate-y-1'
+                  : 'translate-y-0 border border-transparent bg-bg-card/50 shadow-sm ease-in hover:bg-bg-card'
               )}
             >
               <span

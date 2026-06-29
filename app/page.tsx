@@ -3,7 +3,6 @@ import { PillarsSection } from '@/src/components/sections/pillars-section'
 import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
-import { CaseStudiesPreview } from '@/src/components/sections/case-studies-preview'
 import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
@@ -12,11 +11,10 @@ export default function HomePage() {
   return (
     <main className='flex-1'>
       <HeroSection />
-      <PillarsSection />
-      <ManifestoSection />
       <ServicesPreview />
-      <CaseStudiesPreview />
+      <ManifestoSection />
       <PhasesSection />
+      <PillarsSection />
       <FieldNotesPreview />
 
       {/* CTA Block — blueprint detail callout */}

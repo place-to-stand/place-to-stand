@@ -4,27 +4,27 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 const phases = [
   {
     number: '01',
-    title: 'Validate',
+    title: 'Launch',
     description:
-      'Identify the highest-impact opportunity and ship a focused solution in weeks, not months.',
+      "You're proving the model. We replace spreadsheets and manual steps with lean, purpose-built tools so you can move fast.",
   },
   {
     number: '02',
-    title: 'Scale',
+    title: 'Grow',
     description:
-      'Expand what works. Add integrations, automate handoffs, and connect your systems.',
+      "You're outgrowing your stack. We automate the bottlenecks and connect the systems straining under new demand.",
   },
   {
     number: '03',
-    title: 'Optimize',
+    title: 'Scale',
     description:
-      'Refine performance, reduce costs, and squeeze more value from every workflow.',
+      "You're running at volume. We integrate platforms, streamline operations, and cut the cost of complexity.",
   },
   {
     number: '04',
     title: 'Reinvent',
     description:
-      'Leverage data and AI insights to find the next opportunity. Repeat the cycle.',
+      "You're ready for what's next. We put your data and AI to work to unlock the next opportunity.",
   },
 ]
 
@@ -35,13 +35,14 @@ export function PhasesSection() {
         {/* Header */}
         <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
           <div className='flex flex-col gap-2'>
-            <span className='bp-label font-mono'>Process</span>
+            <span className='bp-label font-mono'>Every Stage</span>
             <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
-              The cycle
+              Wherever your business stands
             </h2>
           </div>
           <p className='max-w-sm text-sm text-text-muted'>
-            A repeatable framework for continuous improvement.
+            From first prototype to full-scale operation, we build software for
+            the phase you&apos;re in.
           </p>
         </div>
 

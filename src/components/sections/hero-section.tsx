@@ -23,11 +23,11 @@ export function HeroSection() {
           <div className='relative inline-block self-start'>
             <BlueprintCorners size={20} />
             <h1 className='max-w-5xl py-4 pl-6 font-headline text-[clamp(2.5rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-tight text-text'>
-              Bureaucracy feeds
+              Off-the-shelf software
               <br />
-              on inefficiency.
+              is built for everyone.
               <br />
-              <span className='text-accent'>We starve it.</span>
+              <span className='text-accent'>We build for you.</span>
             </h1>
           </div>
 
@@ -39,15 +39,15 @@ export function HeroSection() {
               {/* Vertical leader line */}
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
               <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>
-                One builder + AI workflows replaces the traditional agency
-                structure. Custom software, automation, and AI solutions —
-                delivered directly.
+                Your governance, roles, and processes aren&apos;t a constraint —
+                they&apos;re the spec. We turn them into purpose-built software
+                that targets your need directly. No more dealing with bloated SAAS dashboards.
               </p>
             </div>
             <div className='flex shrink-0 gap-3'>
               <Button asChild size='lg'>
-                <Link href='/services' data-pts-hero-cta>
-                  See Our Work
+                <Link href='/audit' data-pts-hero-cta>
+                  Find Your Leverage
                 </Link>
               </Button>
               <Button asChild size='lg' variant='outline'>

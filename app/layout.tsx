@@ -33,13 +33,13 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
   title: {
-    default: 'Place To Stand | Bureaucracy feeds on inefficiency. We starve it.',
+    default: 'Place To Stand | Software Agency',
     template: '%s | Place To Stand',
   },
   description:
     'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
   openGraph: {
-    title: 'Place To Stand | Bureaucracy feeds on inefficiency. We starve it.',
+    title: 'Place To Stand | Software Agency',
     description:
       'One builder + AI workflows replaces the traditional agency structure. Custom software, automation, and AI solutions.',
     url: 'https://placetostandagency.com/',
