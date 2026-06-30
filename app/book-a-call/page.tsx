@@ -7,7 +7,7 @@ import { landingVariants } from '@/src/lib/landing-pages'
 export default function BookACallLandingIndexPage() {
   return (
     <main className='flex-1'>
-      <AnimatedSection className='flex min-h-[70svh] flex-col items-center justify-center gap-8 pt-28 text-center'>
+      <AnimatedSection className='flex min-h-[70svh] flex-col items-center justify-center gap-8 pt-grid-4 text-center'>
         <div className='mx-auto flex w-full max-w-3xl flex-col items-center gap-4'>
           <p className='font-headline text-sm font-semibold uppercase tracking-[0.14em] text-text-muted'>
             Book-a-call landing pages

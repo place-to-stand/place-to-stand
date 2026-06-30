@@ -19,7 +19,7 @@ export default function HomePage() {
 
       {/* CTA Block — blueprint detail callout */}
       <section className='border-t border-border'>
-        <div className='mx-auto max-w-7xl px-6 py-24 lg:px-10'>
+        <div className='mx-auto max-w-content px-6 py-24 lg:px-12'>
           <div className='relative border border-border bg-bg-card p-10 md:p-16'>
             {/* Corner marks */}
             <span className='pointer-events-none absolute -left-px -top-px z-10 h-5 w-5 border-l border-t border-accent' aria-hidden />

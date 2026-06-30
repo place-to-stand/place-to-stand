@@ -28,7 +28,7 @@ export function Header() {
           : 'border-b border-transparent bg-transparent'
       )}
     >
-      <div className='mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10'>
+      <div className='mx-auto flex max-w-content items-center justify-between px-6 py-4 lg:px-12'>
         {/* Logo */}
         <Link href='/' className='group flex items-center gap-3'>
           {/* Blueprint logo mark */}

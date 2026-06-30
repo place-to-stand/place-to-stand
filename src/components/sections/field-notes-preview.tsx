@@ -6,8 +6,8 @@ import { fieldNotes } from '@/src/lib/field-notes'
 export function FieldNotesPreview() {
   const latest = fieldNotes.slice(0, 3)
   return (
-    <AnimatedSection className='max-w-7xl lg:px-10'>
-      <div className='grid gap-16 md:grid-cols-[1fr_1.2fr]'>
+    <AnimatedSection>
+      <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
           <span className='bp-label font-mono'>Field Notes</span>

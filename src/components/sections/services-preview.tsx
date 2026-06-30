@@ -1,11 +1,13 @@
+import type { CSSProperties } from 'react'
 import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { services } from '@/src/lib/services'
+import { serviceIcons } from '@/src/lib/service-icons'
 
 export function ServicesPreview() {
   return (
-    <AnimatedSection className='max-w-7xl lg:px-10'>
-      <div className='grid gap-16 md:grid-cols-[1fr_1.2fr]'>
+    <AnimatedSection>
+      <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading (sticky) */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
           <span className='bp-label font-mono'>Services</span>
@@ -28,17 +30,22 @@ export function ServicesPreview() {
 
         {/* Right: service list */}
         <div className='flex flex-col border border-border'>
-          {services.map((service, i) => (
+          {services.map((service, i) => {
+            const Icon = serviceIcons[service.icon]
+            return (
             <Link
               key={service.slug}
               href={`/services/${service.slug}` as '/services/ai-automation'}
               className='group flex items-start justify-between gap-6 border-b border-border bg-bg-card px-6 py-6 transition-colors last:border-b-0 hover:bg-bg-elevated'
             >
               <div className='flex items-start gap-4'>
-                {/* Grid-attached number marker */}
-                <span className='mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+                {Icon && (
+                  <Icon
+                    className='service-icon mt-0.5 h-5 w-5 shrink-0 text-accent'
+                    style={{ '--icon-delay': `${i * 0.9}s` } as CSSProperties}
+                    aria-hidden
+                  />
+                )}
                 <div className='flex flex-col gap-1'>
                   <h3 className='font-headline text-lg font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
                     {service.title}
@@ -53,7 +60,8 @@ export function ServicesPreview() {
                 &rarr;
               </span>
             </Link>
-          ))}
+            )
+          })}
         </div>
       </div>
     </AnimatedSection>

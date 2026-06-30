@@ -1,16 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BarChart3, Code2, Compass, GitBranch, type LucideIcon } from 'lucide-react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services } from '@/src/lib/services'
-
-const serviceIcons: Record<string, LucideIcon> = {
-  Code2,
-  GitBranch,
-  BarChart3,
-  Compass,
-}
+import { serviceIcons } from '@/src/lib/service-icons'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -19,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main className='flex-1 pt-28'>
+    <main className='flex-1 pt-grid-4'>
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col items-center gap-4 text-center'>
           <span className='bp-label font-mono'>Services</span>

@@ -11,7 +11,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'bg-accent text-bg font-bold shadow-md shadow-accent/20 border border-accent/40 transition-all duration-300 ease-in-out hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30',
+          'relative isolate bg-accent text-bg font-bold border border-accent/40 shadow-md shadow-accent/20 transition-colors duration-300 ease-out hover:text-accent hover:border-accent hover:shadow-lg hover:shadow-accent/30 before:absolute before:inset-0 before:-z-10 before:bg-bg before:-translate-x-full before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0',
+        primaryInvert:
+          'relative isolate bg-bg text-accent font-bold border border-accent shadow-md shadow-accent/10 transition-colors duration-300 ease-out hover:text-bg hover:shadow-lg hover:shadow-accent/30 before:absolute before:inset-0 before:-z-10 before:bg-accent before:-translate-x-full before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0',
         secondary:
           'bg-bg-elevated text-text border border-border hover:bg-bg-card hover:border-border-light focus-visible:ring-accent/40',
         ghost:

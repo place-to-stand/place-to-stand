@@ -30,17 +30,17 @@ const phases = [
 
 export function PhasesSection() {
   return (
-    <AnimatedSection className='max-w-7xl lg:px-10'>
+    <AnimatedSection>
       <div className='flex flex-col gap-12'>
         {/* Header */}
-        <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+        <div className='flex flex-col gap-4'>
           <div className='flex flex-col gap-2'>
             <span className='bp-label font-mono'>Every Stage</span>
             <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
               Wherever your business stands
             </h2>
           </div>
-          <p className='max-w-sm text-sm text-text-muted'>
+          <p className='max-w-xl text-sm text-text-muted'>
             From first prototype to full-scale operation, we build software for
             the phase you&apos;re in.
           </p>

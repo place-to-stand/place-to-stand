@@ -11,11 +11,11 @@ export const services: Service[] = [
   {
     slug: 'software-development',
     title: 'Software Development',
-    tagline: 'Full-stack applications built for scale',
+    tagline: 'Applications built for scale',
     description: 'End-to-end software development from architecture to deployment. We build web applications, APIs, and internal tools using modern frameworks and cloud infrastructure.',
     icon: 'Code2',
     features: [
-      'Full-stack web applications',
+      'Full-stack web, desktop, and mobile applications',
       'API design and development',
       'Database architecture',
       'Cloud infrastructure (AWS, Vercel)',
@@ -62,6 +62,19 @@ export const services: Service[] = [
       'AI readiness assessment',
       'Process optimization consulting',
       'Vendor evaluation and selection',
+    ],
+  },
+    {
+    slug: 'managed-services',
+    title: 'Managed Services',
+    tagline: 'Long-term support for IT infrastucture',
+    description: '',
+    icon: 'ServerCog',
+    features: [
+      'Uptime Gaurantees',
+      'Security Updates & Monitoring',
+      'Contigency Plans',
+      
     ],
   },
 ]

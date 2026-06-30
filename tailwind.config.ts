@@ -7,6 +7,21 @@ const config: Config = {
   content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      // Blueprint grid spacing — multiples of the 24px base grid (--grid).
+      // Use these for structural spacing so elements stay on-grid.
+      spacing: {
+        'grid-half': 'calc(var(--grid) / 2)', // 12
+        'grid-1': 'var(--grid)', // 24
+        'grid-2': 'calc(var(--grid) * 2)', // 48
+        'grid-3': 'calc(var(--grid) * 3)', // 72
+        'grid-4': 'calc(var(--grid) * 4)', // 96
+        'grid-5': 'calc(var(--grid) * 5)', // 120
+        'grid-6': 'calc(var(--grid) * 6)', // 144
+        'grid-8': 'calc(var(--grid) * 8)', // 192
+      },
+      maxWidth: {
+        content: 'calc(var(--grid) * 48)', // 1152 — the one grid-aligned container width
+      },
       backgroundImage: {
         'dot-grid':
           'radial-gradient(circle, #2a2b30 1px, transparent 1px)',
@@ -21,7 +36,7 @@ const config: Config = {
         },
         text: {
           DEFAULT: '#e8e6e3',
-          muted: '#8a8a8d',
+          muted: '#a8a8ac',
         },
         accent: {
           DEFAULT: '#b5f542',

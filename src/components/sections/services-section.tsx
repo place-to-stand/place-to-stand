@@ -81,7 +81,7 @@ const services: Array<{
 
 export function ServicesSection() {
   return (
-    <AnimatedSection id='services' className='flex flex-col gap-20'>
+    <AnimatedSection id='services' className='flex flex-col gap-grid-3'>
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
           Services

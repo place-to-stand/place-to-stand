@@ -62,7 +62,7 @@ export default function RsvpPage() {
   return (
     <>
       <main className='flex-1 pb-16 pt-32 sm:pt-40'>
-        <div className='container mx-auto w-full max-w-6xl px-6'>
+        <div className='container mx-auto w-full max-w-content px-6'>
           <header className='grid gap-12 lg:grid-cols-2 lg:items-start'>
             <div className='flex justify-center lg:justify-start'>
               <div className='relative aspect-[500/647] w-full overflow-hidden border border-border bg-bg-card'>

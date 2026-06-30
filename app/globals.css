@@ -13,6 +13,7 @@
   --color-accent-muted: rgba(181, 245, 66, 0.15);
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
+  --grid: 24px;
   --grid-dot: #2a2b30;
   --grid-line: #2e2f36;
   --grid-line-major: #33343c;
@@ -26,11 +27,19 @@ html {
 body {
   @apply bg-bg font-sans text-text antialiased;
   overflow-x: hidden;
-  /* Grid scrolls with the page — attached to content, not viewport */
+  /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
+     so we phase the pattern to put a dot row/column on the structural lines:
+     - X: 50% anchors a dot at the viewport center; since every container is a
+       centered, even multiple of 24px wide, its edges land on dot columns.
+     - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
+       page-top and 24px-multiple section bands sit on dot rows.
+     Scrolls with content. */
   background-image:
     radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
   background-size:
     24px 24px;
+  background-position:
+    50% 12px;
 }
 
 @keyframes fadeIn {
@@ -63,6 +72,158 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .pts-header-pop {
     animation: none;
+  }
+}
+
+/* ── Hero intro: sharp architectural reveal ──
+   Registration corners snap in → headline wipes in line-by-line
+   (left-to-right clip, like a drafted line) → supporting content rises.
+   Sequencing is via per-element animation-delay set inline. */
+@keyframes hero-corner {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-wipe {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes hero-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animate the BlueprintCorners (direct <span> children) of the framed headline */
+.hero-frame > span {
+  animation: hero-corner 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-line {
+  animation: hero-wipe 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* clip-path clips to the box; pad the bottom so glyph descenders (e.g. "y")
+     aren't cut, then cancel the padding with negative margin to keep leading tight. */
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
+}
+
+.hero-reveal {
+  animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-frame > span,
+  .hero-line,
+  .hero-reveal {
+    animation: none;
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+  }
+}
+
+/* Subtle breathing glow for accent icons (AI / engineering motif) */
+@keyframes icon-glow {
+  0%,
+  100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 0 rgba(181, 245, 66, 0));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(181, 245, 66, 0.4));
+  }
+}
+
+.icon-glow {
+  animation: icon-glow 3.5s ease-in-out infinite;
+}
+
+/* Sequential highlight for the services list. As the wave reaches each icon it
+   pops (scale + glow) AND redraws its SVG strokes. Both layers share the same
+   per-icon timing via the inherited --icon-delay custom property, set inline. */
+@keyframes service-icon-pulse {
+  0%,
+  30%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(181, 245, 66, 0));
+  }
+  14% {
+    transform: scale(1.18);
+    filter: drop-shadow(0 0 8px rgba(181, 245, 66, 0.55));
+  }
+}
+
+@keyframes service-icon-draw {
+  0%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+  4% {
+    stroke-dashoffset: 64;
+  }
+  30% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.service-icon {
+  animation: service-icon-pulse 6s ease-in-out infinite;
+  animation-delay: var(--icon-delay, 0s);
+}
+
+/* Direct SVG manipulation: animate the icon's stroked shapes (paths, lines …) */
+.service-icon > * {
+  stroke-dasharray: 64;
+  animation: service-icon-draw 6s ease-in-out infinite;
+  animation-delay: var(--icon-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-icon,
+  .service-icon > * {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Slow mechanical rotation (cog) */
+@keyframes icon-spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.icon-spin-slow {
+  animation: icon-spin-slow 14s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-glow,
+  .icon-spin-slow {
+    animation: none;
+    opacity: 1;
   }
 }
 

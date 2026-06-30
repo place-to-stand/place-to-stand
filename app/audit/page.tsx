@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function AuditPage() {
   return (
-    <main className='flex-1 pt-28'>
+    <main className='flex-1 pt-grid-4'>
       <AnimatedSection className='flex flex-col items-center gap-8'>
         <div className='flex flex-col items-center gap-4 text-center'>
           <span className='bp-label font-mono'>Business Audit</span>

@@ -1,18 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { BarChart3, Code2, Compass, GitBranch, type LucideIcon } from 'lucide-react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services, serviceMap } from '@/src/lib/services'
-
-const serviceIcons: Record<string, LucideIcon> = {
-  Code2,
-  GitBranch,
-  BarChart3,
-  Compass,
-}
+import { serviceIcons } from '@/src/lib/service-icons'
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>
@@ -40,7 +33,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const Icon = serviceIcons[service.icon]
 
   return (
-    <main className='flex-1 pt-28'>
+    <main className='flex-1 pt-grid-4'>
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col gap-6'>
           <Link
