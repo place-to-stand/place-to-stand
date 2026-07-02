@@ -30,7 +30,7 @@ const phases = [
 
 export function PhasesSection() {
   return (
-    <AnimatedSection>
+    <AnimatedSection className='py-32'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-4'>

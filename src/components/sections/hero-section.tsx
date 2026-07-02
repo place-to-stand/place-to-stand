@@ -7,7 +7,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-[100svh] flex-col overflow-hidden border-b border-border'
+      className='relative flex min-h-[100svh] flex-col overflow-hidden'
     >
       <div className='mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 lg:px-12'>
         {/* Blueprint annotation — top label */}
@@ -18,7 +18,7 @@ export function HeroSection() {
         </div>
 
         {/* Main headline block — bottom-aligned */}
-        <div className='flex flex-col gap-10 pb-16 md:pb-20'>
+        <div className='flex flex-col gap-10 pb-32 md:pb-48'>
           {/* Headline with blueprint corner marks */}
           <div className='hero-frame relative w-full'>
             <BlueprintCorners size={20} />
@@ -48,8 +48,8 @@ export function HeroSection() {
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
               <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>
                 Your governance, roles, and processes aren&apos;t a constraint, they
-                are the product spec. We turn them into purpose-built software that
-                targets your need directly. No more dealing with bloated SAAS
+                are your business ontology. Your ontology guides us to build the right software to 
+                solve your problems directly at the application layer. No more dealing with 10 different bloated SAAS
                 dashboards.
               </p>
             </div>

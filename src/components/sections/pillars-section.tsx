@@ -24,7 +24,7 @@ const pillars = [
 
 export function PillarsSection() {
   return (
-    <AnimatedSection>
+    <AnimatedSection className='py-32'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: sticky heading */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
@@ -34,6 +34,7 @@ export function PillarsSection() {
             <br />
             different
           </h2>
+    <p>We were building software before AI. Adaption is key to our business and yours.</p>
           {/* Blueprint reference annotation */}
           <span className='font-mono text-[10px] tracking-widest text-border-light' aria-hidden>
             PTS-SEC-002

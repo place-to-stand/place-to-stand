@@ -4,7 +4,7 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
 export function ManifestoSection() {
   return (
-    <AnimatedSection>
+    <AnimatedSection className='py-32'>
       <div className='relative border border-border bg-bg-card p-10 md:p-16'>
         <BlueprintCorners size={20} all />
         <div className='flex flex-col gap-10 md:flex-row md:items-center md:gap-grid-3'>
