@@ -17,10 +17,10 @@ export default function HowWeWorkPage() {
         <div className='flex flex-col items-center gap-4 text-center'>
           <span className='bp-label font-mono'>How We Work</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
-            Dead-simple process. Zero surprises.
+            Ontology based design leads to meaningful software. 
           </h1>
           <p className='max-w-2xl text-balance text-base text-text-muted md:text-lg'>
-            We sell bespoke end-to-end solutions, not just automations. Here&apos;s how we deliver.
+            We aim for quick wins initially to establish trust and establish a short-hand. Once the direction is clear, execution is largely automated for us through our custom portal with frontier models integrated directly. We human-verify the output and apply our expert taste to fit your unique business context. 
           </p>
         </div>
       </AnimatedSection>

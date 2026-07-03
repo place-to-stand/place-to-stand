@@ -41,6 +41,7 @@ const config: Config = {
         accent: {
           DEFAULT: '#b5f542',
           muted: 'rgba(181, 245, 66, 0.15)',
+          secondary: '#b4b4b4',
         },
         border: {
           DEFAULT: '#2a2b30',

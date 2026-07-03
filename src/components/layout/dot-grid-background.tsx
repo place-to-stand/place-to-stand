@@ -7,32 +7,34 @@ import * as React from 'react'
 export function BlueprintCorners({
   size = 12,
   all = false,
+  colorClassName = 'border-accent',
 }: {
   size?: number
   all?: boolean
+  colorClassName?: string
 }) {
   const style = { width: size, height: size }
   return (
     <>
       <span
-        className='pointer-events-none absolute -left-px -top-px z-10 border-l border-t border-accent'
+        className={`pointer-events-none absolute -left-px -top-px z-10 border-l border-t ${colorClassName}`}
         style={style}
         aria-hidden
       />
       <span
-        className='pointer-events-none absolute -bottom-px -right-px z-10 border-b border-r border-accent'
+        className={`pointer-events-none absolute -bottom-px -right-px z-10 border-b border-r ${colorClassName}`}
         style={style}
         aria-hidden
       />
       {all && (
         <>
           <span
-            className='pointer-events-none absolute -right-px -top-px z-10 border-r border-t border-accent'
+            className={`pointer-events-none absolute -right-px -top-px z-10 border-r border-t ${colorClassName}`}
             style={style}
             aria-hidden
           />
           <span
-            className='pointer-events-none absolute -bottom-px -left-px z-10 border-b border-l border-accent'
+            className={`pointer-events-none absolute -bottom-px -left-px z-10 border-b border-l ${colorClassName}`}
             style={style}
             aria-hidden
           />

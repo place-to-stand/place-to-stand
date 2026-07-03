@@ -1,17 +1,18 @@
 import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Badge } from '@/src/components/ui/badge'
 import { fieldNotes } from '@/src/lib/field-notes'
 
 export function FieldNotesPreview() {
   const latest = fieldNotes.slice(0, 3)
   return (
-    <AnimatedSection className='py-32'>
-      <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
-        {/* Left: heading */}
-        <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
+    <AnimatedSection className='py-16 md:py-32'>
+      <div className='flex flex-col gap-12'>
+        {/* Header — left aligned */}
+        <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Field Notes</span>
-          <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
+          <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
             From the lab
           </h2>
           <p className='max-w-sm text-sm leading-relaxed text-text-muted'>
@@ -26,9 +27,9 @@ export function FieldNotesPreview() {
           </Link>
         </div>
 
-        {/* Right: entries */}
-        <div className='flex flex-col border border-border'>
-          {latest.map((note, i) => (
+        {/* Entries — 3-column card grid */}
+        <div className='grid gap-6 md:grid-cols-3'>
+          {latest.map(note => (
             <a
               key={note.slug}
               href={note.url}
@@ -36,8 +37,9 @@ export function FieldNotesPreview() {
               rel={
                 note.url.startsWith('http') ? 'noopener noreferrer' : undefined
               }
-              className='group flex flex-col gap-3 border-b border-border bg-bg-card px-6 py-8 transition-colors last:border-b-0 hover:bg-bg-elevated'
+              className='group relative flex flex-col gap-3 border border-border bg-bg-card p-6 transition-colors hover:bg-bg-elevated'
             >
+              <BlueprintCorners size={12} />
               <div className='flex items-center gap-4'>
                 <span className='font-mono text-[11px] text-text-muted'>
                   {note.date}
@@ -54,7 +56,7 @@ export function FieldNotesPreview() {
               <p className='text-sm leading-relaxed text-text-muted'>
                 {note.description}
               </p>
-              <div className='flex flex-wrap gap-2'>
+              <div className='mt-auto flex flex-wrap gap-2 pt-2'>
                 {note.tags.map(tag => (
                   <Badge key={tag} variant='outline'>
                     {tag}

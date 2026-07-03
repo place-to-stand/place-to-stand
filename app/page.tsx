@@ -3,6 +3,7 @@ import { PillarsSection } from '@/src/components/sections/pillars-section'
 import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
+import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
 import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
@@ -11,15 +12,16 @@ export default function HomePage() {
   return (
     <main className='flex-1'>
       <HeroSection />
-      <ServicesPreview />
-      <ManifestoSection />
-      <PhasesSection />
+      <PhasesSection /> 
+      {/*<WhoWeWorkWithSection />*/} 
       <PillarsSection />
+      <ManifestoSection />  
+      <ServicesPreview />
       <FieldNotesPreview />
 
       {/* CTA Block — blueprint detail callout */}
       <section>
-        <div className='mx-auto max-w-content px-6 py-32 lg:px-12'>
+        <div className='mx-auto max-w-content px-6 py-16 lg:px-12 md:py-32'>
           <div className='relative border border-border bg-bg-card p-10 md:p-16'>
             {/* Corner marks */}
             <span className='pointer-events-none absolute -left-px -top-px z-10 h-5 w-5 border-l border-t border-accent' aria-hidden />
@@ -29,7 +31,7 @@ export default function HomePage() {
             <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
               <div className='flex flex-col gap-3'>
                 <span className='bp-label font-mono'>Next Step</span>
-                <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-5xl'>
+                <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                   Ready to build?
                 </h2>
                 <p className='max-w-md text-sm leading-relaxed text-text-muted'>

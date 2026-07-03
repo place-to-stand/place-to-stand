@@ -11,6 +11,7 @@
   --color-text-muted: #a8a8ac;
   --color-accent: #b5f542;
   --color-accent-muted: rgba(181, 245, 66, 0.15);
+  --color-accent-secondary: #b4b4b4;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
   --grid: 24px;
@@ -114,13 +115,14 @@ body {
   }
 }
 
-/* Animate the BlueprintCorners (direct <span> children) of the framed headline */
+/* Animate the BlueprintCorners (direct <span> children) of the framed headline.
+   The frame draws in first (with the pitch label) so the headline wipes into it. */
 .hero-frame > span {
-  animation: hero-corner 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-corner 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
 }
 
 .hero-line {
-  animation: hero-wipe 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-wipe 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
   /* clip-path clips to the box; pad the bottom so glyph descenders (e.g. "y")
      aren't cut, then cancel the padding with negative margin to keep leading tight. */
   padding-bottom: 0.2em;
@@ -131,10 +133,26 @@ body {
   animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes hero-slide-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-slide-in {
+  animation: hero-slide-left 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-frame > span,
   .hero-line,
-  .hero-reveal {
+  .hero-reveal,
+  .hero-slide-in {
     animation: none;
     opacity: 1;
     clip-path: none;
@@ -307,20 +325,34 @@ a:hover {
   gap: 8px;
 }
 
-.bp-label::before {
-  content: '';
-  width: 24px;
-  height: 1px;
-  background: var(--color-accent);
-  opacity: 0.5;
-}
-
 .bp-label::after {
   content: '';
   width: 4px;
   height: 4px;
   border: 1px solid var(--color-accent);
   opacity: 0.5;
+}
+
+/* Hero label icon: after the label reveals (~1.2s), settle into a slow,
+   subtle blink so it reads as a "live" indicator. */
+@keyframes bp-blink {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+[data-pts-hero] .bp-label::after {
+  animation: bp-blink 2.6s ease-in-out 1.2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-pts-hero] .bp-label::after {
+    animation: none;
+  }
 }
 
 /* ─── Blueprint dashed dimension line ─── */

@@ -24,19 +24,7 @@ export const team: TeamMember[] = [
       github: 'https://github.com/jmdesiderio',
     },
   },
-  {
-    name: 'Damon Bodine',
-    title: 'Senior AI Engineer',
-    bio: 'AI engineer specializing in building intelligent automation systems. Expert in LLM integration, agent architectures, and transforming manual workflows into AI-powered pipelines.',
-    image: '/1587649018078.jpeg',
-    socials: {
-      linkedin: 'https://www.linkedin.com/in/damonbodine/',
-      x: 'https://x.com/damonbodine',
-      instagram: 'https://www.instagram.com/damonbodine/',
-      github: 'https://github.com/damonbodine',
-    },
-  },
-  {
+    {
     name: 'Kris Crawford',
     title: 'Software Engineer & AI Technologist',
     bio: 'Software engineer and AI technologist who bridges the gap between cutting-edge technology and practical business applications. Builder of tools that make teams more effective.',
@@ -49,10 +37,23 @@ export const team: TeamMember[] = [
     },
   },
   {
-    name: 'Chris Donahue',
-    title: 'Creative Director',
-    bio: 'Creative director with a passion for visual storytelling and brand strategy. Translates business goals into compelling design systems and content that drives results.',
-    image: '/403081575_325440200226266_2592020462209657049_n.jpg',
-    socials: {},
+    name: 'Damon Bodine',
+    title: 'Senior AI Engineer',
+    bio: 'AI engineer specializing in building intelligent automation systems. Expert in LLM integration, agent architectures, and transforming manual workflows into AI-powered pipelines.',
+    image: '/1587649018078.jpeg',
+    socials: {
+      linkedin: 'https://www.linkedin.com/in/damonbodine/',
+      x: 'https://x.com/damonbodine',
+      instagram: 'https://www.instagram.com/damonbodine/',
+      github: 'https://github.com/damonbodine',
+    },
   },
+  
+  // {
+  //   name: 'Chris Donahue',
+  //   title: 'Creative Director',
+  //   bio: 'Creative director with a passion for visual storytelling and brand strategy. Translates business goals into compelling design systems and content that drives results.',
+  //   image: '/403081575_325440200226266_2592020462209657049_n.jpg',
+  //   socials: {},
+  // },
 ]

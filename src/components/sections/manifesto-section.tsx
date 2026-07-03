@@ -1,54 +1,63 @@
-import { Cog, DraftingCompass, PencilRuler } from 'lucide-react'
+import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
+const facets = [
+  {
+    title: 'Senior Builders',
+    description:
+      'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
+  },
+  {
+    title: 'AI-Native',
+    description:
+      'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
+  },
+  {
+    title: 'Direct Access',
+    description:
+      'You work with the builder directly. No middle management, no handoffs, no telephone game.',
+  },
+]
+
 export function ManifestoSection() {
   return (
-    <AnimatedSection className='py-32'>
-      <div className='relative border border-border bg-bg-card p-10 md:p-16'>
-        <BlueprintCorners size={20} all />
-        <div className='flex flex-col gap-10 md:flex-row md:items-center md:gap-grid-3'>
-          {/* Left: large quote */}
-          <blockquote className='flex-1'>
-            <p className='font-headline text-2xl font-bold leading-[1.15] tracking-tight text-text md:text-4xl'>
-              The traditional agency model is{' '}
-              <span className='text-text-muted line-through decoration-accent/60 decoration-2'>
-                bloated
-              </span>
-              . One senior builder with the right AI tools delivers more than a
-              team of ten.
-            </p>
-          </blockquote>
-
-          {/* Right: supporting text */}
-          <div className='flex flex-col gap-4 md:max-w-sm'>
-            <div className='flex gap-3'>
-              <span className='inline-flex h-12 w-12 items-center justify-center border border-accent/30'>
-                <PencilRuler className='icon-glow h-6 w-6 text-accent' aria-hidden />
-              </span>
-              <span className='inline-flex h-12 w-12 items-center justify-center border border-accent/30'>
-                <DraftingCompass
-                  className='icon-glow h-6 w-6 text-accent'
-                  style={{ animationDelay: '-1.2s' }}
-                  aria-hidden
-                />
-              </span>
-              <span className='inline-flex h-12 w-12 items-center justify-center border border-accent/30'>
-                <Cog className='icon-spin-slow h-6 w-6 text-accent' aria-hidden />
-              </span>
-            </div>
-            <p className='text-md leading-relaxed text-text-muted'>
-              Experienced engineers equipped with fine-tuned AI systems, building exactly what you need. No middle-management. No execution handoff. No bloat.  
-            </p>
-            <p className='text-md leading-relaxed text-text-muted'>
-            You collaborate directly with the builder.
-            </p>
+    <AnimatedSection className='py-16 md:py-32'>
+      <div className='flex flex-col gap-12'>
+        {/* Eyebrow + framed bold claim (corners only, no background) */}
+        <div className='flex flex-col gap-6'>
+          <span className='bp-label font-mono'>Who We Are</span>
+          <div className='relative w-full'>
+            <BlueprintCorners size={20} />
+            <h2 className='max-w-4xl py-4 pl-4 font-headline text-4xl font-bold leading-[0.95] tracking-tight text-balance text-text md:pl-6 md:text-5xl'>
+              Experienced engineers with{' '}
+              <span className='text-accent'>fine-tuned AI</span>, building exactly
+              what you need.
+            </h2>
           </div>
         </div>
-        {/* Blueprint note annotation */}
-        <span className='absolute bottom-3 right-4 font-mono text-[9px] tracking-widest text-border-light' aria-hidden>
-          NOTE-003
-        </span>
+
+        {/* Supporting sub-text */}
+        <div className='grid gap-8 md:grid-cols-3'>
+          {facets.map(facet => (
+            <div key={facet.title} className='flex flex-col gap-2'>
+              <span className='font-mono text-lg text-text'>
+                {facet.title}
+              </span>
+              <p className='text-sm leading-relaxed text-text-muted'>
+                {facet.description}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <Link
+          href='/team'
+          className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+        >
+          Meet the Team
+          <span aria-hidden>&rarr;</span>
+        </Link>
       </div>
     </AnimatedSection>
   )

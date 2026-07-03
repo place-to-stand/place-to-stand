@@ -6,12 +6,12 @@ import { serviceIcons } from '@/src/lib/service-icons'
 
 export function ServicesPreview() {
   return (
-    <AnimatedSection className='py-32'>
+    <AnimatedSection className='py-16 md:py-32'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading (sticky) */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
           <span className='bp-label font-mono'>Services</span>
-          <h2 className='font-headline text-4xl font-bold leading-[0.95] tracking-tight text-text md:text-5xl'>
+          <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
             What we build
           </h2>
           <p className='text-md leading-relaxed text-text-muted'>
