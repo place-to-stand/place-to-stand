@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
@@ -64,11 +65,9 @@ export function ContactSection() {
   })
 
   return (
-    <AnimatedSection id='contact' className='flex flex-col gap-10 py-24'>
+    <AnimatedSection id='contact' className='flex flex-col gap-10 py-24 pb-grid-8'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-text-muted'>
-          Contact
-        </span>
+        <span className='bp-label font-mono'>Contact</span>
         <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
           Let's talk
         </h2>
@@ -76,7 +75,8 @@ export function ContactSection() {
           Send a message and we&apos;ll get back to you within one business day.
         </p>
       </div>
-      <div className='relative mx-auto w-full max-w-2xl gap-10 border border-border bg-bg-card p-6'>
+      <div className='relative mx-auto w-full max-w-2xl gap-10 border border-border p-6'>
+          <BlueprintCorners size={16} />
           <form
             noValidate
             onSubmit={onSubmit}

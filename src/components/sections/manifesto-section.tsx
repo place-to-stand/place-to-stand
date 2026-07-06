@@ -33,8 +33,7 @@ export function ManifestoSection() {
           <Reveal index={0} className='flex flex-col gap-2'>
             <span className='bp-label font-mono'>Who We Are</span>
             <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-balance text-text md:text-4xl'>
-              Experienced engineers with{' '}
-              <span className='text-accent'>fine-tuned AI</span>.
+              Experienced engineers with fine-tuned AI.
             </h2>
           </Reveal>
           <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
