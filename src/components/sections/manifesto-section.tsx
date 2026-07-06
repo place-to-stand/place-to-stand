@@ -1,3 +1,4 @@
+import { Cog, DraftingCompass, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
@@ -5,16 +6,19 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 const facets = [
   {
     title: 'Senior Builders',
+    Icon: DraftingCompass,
     description:
       'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
   },
   {
     title: 'AI-Native',
+    Icon: Cog,
     description:
       'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
   },
   {
     title: 'Direct Access',
+    Icon: MessageSquare,
     description:
       'You work with the builder directly. No middle management, no handoffs, no telephone game.',
   },
@@ -24,31 +28,43 @@ export function ManifestoSection() {
   return (
     <AnimatedSection className='py-16 md:py-32'>
       <div className='flex flex-col gap-12'>
-        {/* Eyebrow + framed bold claim (corners only, no background) */}
-        <div className='flex flex-col gap-6'>
-          <span className='bp-label font-mono'>Who We Are</span>
-          <div className='relative w-full'>
-            <BlueprintCorners size={20} />
-            <h2 className='max-w-4xl py-4 pl-4 font-headline text-4xl font-bold leading-[0.95] tracking-tight text-balance text-text md:pl-6 md:text-5xl'>
+        {/* Header */}
+        <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-2'>
+            <span className='bp-label font-mono'>Who We Are</span>
+            <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-balance text-text md:text-4xl'>
               Experienced engineers with{' '}
-              <span className='text-accent'>fine-tuned AI</span>, building exactly
-              what you need.
+              <span className='text-accent'>fine-tuned AI</span>.
             </h2>
           </div>
+          <p className='max-w-xl text-sm text-text-muted'>
+            Building exactly what you need, directly with the people who build it.
+          </p>
         </div>
 
-        {/* Supporting sub-text */}
-        <div className='grid gap-8 md:grid-cols-3'>
-          {facets.map(facet => (
-            <div key={facet.title} className='flex flex-col gap-2'>
-              <span className='font-mono text-lg text-text'>
-                {facet.title}
-              </span>
-              <p className='text-sm leading-relaxed text-text-muted'>
-                {facet.description}
-              </p>
-            </div>
-          ))}
+        {/* Facet cards — blueprint grid */}
+        <div className='relative'>
+          <BlueprintCorners size={16} />
+          <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
+            {facets.map(facet => (
+              <div
+                key={facet.title}
+                className='relative flex flex-col gap-4 bg-bg-card p-6 md:p-8'
+              >
+                <div className='flex items-center justify-between gap-4'>
+                  <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
+                    {facet.title}
+                  </h3>
+                  <span className='inline-flex h-9 w-9 shrink-0 items-center justify-center border border-accent/30'>
+                    <facet.Icon className='h-4 w-4 text-accent' aria-hidden />
+                  </span>
+                </div>
+                <p className='text-sm leading-relaxed text-text-muted'>
+                  {facet.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <Link

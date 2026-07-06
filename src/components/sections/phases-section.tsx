@@ -66,13 +66,13 @@ export function PhasesSection() {
                 key={phase.number}
                 className='relative flex flex-col gap-4 bg-bg-card p-6 md:p-8'
               >
-                <h3 className='font-headline text-xl font-semibold tracking-tight text-accent'>
+                <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                   {phase.title}
                 </h3>
                 <ul className='flex flex-col gap-2 text-sm leading-relaxed text-text-muted'>
                   {phase.points.map(point => (
                     <li key={point} className='flex gap-2'>
-                      <span className='mt-2 h-1.5 w-1.5 shrink-0 bg-text-muted' aria-hidden />
+                      <span className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent' aria-hidden />
                       <span>{point}</span>
                     </li>
                   ))}
