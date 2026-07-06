@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { services } from '@/src/lib/services'
 import { landingVariants } from '@/src/lib/landing-pages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -19,12 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    {
-      url: `${baseUrl}/field-notes`,
-      lastModified,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
+    // Temporarily unlinked — Field Notes content in progress, restore in a future update
+    // {
+    //   url: `${baseUrl}/field-notes`,
+    //   lastModified,
+    //   changeFrequency: 'weekly',
+    //   priority: 0.7,
+    // },
     {
       url: `${baseUrl}/team`,
       lastModified,
@@ -57,13 +57,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  const servicePages: MetadataRoute.Sitemap = services.map(service => ({
-    url: `${baseUrl}/services/${service.slug}`,
-    lastModified,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
-
   const landingPages: MetadataRoute.Sitemap = landingVariants.map(variant => ({
     url: `${baseUrl}/book-a-call/${variant.slug}`,
     lastModified,
@@ -71,5 +64,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }))
 
-  return [...mainPages, ...servicePages, ...landingPages]
+  return [...mainPages, ...landingPages]
 }

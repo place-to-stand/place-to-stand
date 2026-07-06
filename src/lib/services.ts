@@ -67,18 +67,15 @@ export const services: Service[] = [
     {
     slug: 'managed-services',
     title: 'Managed Services',
-    tagline: 'Long-term support for IT infrastucture',
-    description: '',
+    tagline: 'Long-term support for your IT infrastructure',
+    description:
+      'Ongoing support, monitoring, and maintenance that keeps your software running long after launch. We handle uptime, security, and updates so your team can stay focused on the business instead of babysitting infrastructure.',
     icon: 'ServerCog',
     features: [
-      'Uptime Gaurantees',
-      'Security Updates & Monitoring',
-      'Contigency Plans',
+      'Uptime guarantees',
+      'Security updates & monitoring',
+      'Contingency planning',
       
     ],
   },
 ]
-
-export const serviceMap = Object.fromEntries(
-  services.map(s => [s.slug, s])
-) as Record<string, Service>

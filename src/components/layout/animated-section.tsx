@@ -55,7 +55,10 @@ export function AnimatedSection({
           observer.disconnect()
         }
       },
-      { rootMargin: '0px 0px -30% 0px', threshold: 0.2 }
+      // threshold 0 (fire as soon as any part enters) so tall sections still
+      // reveal: intersectionRatio is a fraction of the *target*, so a section
+      // taller than the viewport can never reach a large ratio on mobile.
+      { rootMargin: '0px 0px -20% 0px', threshold: 0 }
     )
 
     observer.observe(node)

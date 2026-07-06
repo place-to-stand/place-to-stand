@@ -33,6 +33,9 @@ const config: Config = {
           DEFAULT: '#0e0f11',
           card: '#1a1b1f',
           elevated: '#242529',
+          // Translucent panel over the dot grid — mutes the dots for readability
+          // while keeping some background darkness and faint texture.
+          panel: 'rgba(22, 24, 28, 0.88)',
         },
         text: {
           DEFAULT: '#e8e6e3',

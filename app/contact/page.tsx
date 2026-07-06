@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className='flex-1 pt-grid-4'>
+    <main className='flex-1 pt-10 pb-32'>
       <ContactSection />
     </main>
   )

@@ -35,33 +35,24 @@ export function ServicesPreview() {
           {services.map((service, i) => {
             const Icon = serviceIcons[service.icon]
             return (
-            <Link
+            <div
               key={service.slug}
-              href={`/services/${service.slug}` as '/services/ai-automation'}
-              className='group flex items-start justify-between gap-6 border-b border-border bg-bg-card px-6 py-6 transition-colors last:border-b-0 hover:bg-bg-elevated'
+              className='flex items-start gap-4 border-b border-border bg-bg-card px-6 py-6 last:border-b-0'
             >
-              <div className='flex items-start gap-4'>
-                {Icon && (
-                  <Icon
-                    className='service-icon mt-0.5 h-5 w-5 shrink-0 text-accent'
-                    style={{ '--icon-delay': `${i * 0.9}s` } as CSSProperties}
-                    aria-hidden
-                  />
-                )}
-                <div className='flex flex-col gap-1'>
-                  <h3 className='font-headline text-lg font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
-                    {service.title}
-                  </h3>
-                  <p className='text-sm text-text-muted'>{service.tagline}</p>
-                </div>
+              {Icon && (
+                <Icon
+                  className='service-icon mt-0.5 h-5 w-5 shrink-0 text-accent'
+                  style={{ '--icon-delay': `${i * 0.9}s` } as CSSProperties}
+                  aria-hidden
+                />
+              )}
+              <div className='flex flex-col gap-1'>
+                <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
+                  {service.title}
+                </h3>
+                <p className='text-sm text-text-muted'>{service.tagline}</p>
               </div>
-              <span
-                className='mt-1 shrink-0 font-mono text-xs text-text-muted transition-colors group-hover:text-accent'
-                aria-hidden
-              >
-                &rarr;
-              </span>
-            </Link>
+            </div>
             )
           })}
         </Reveal>

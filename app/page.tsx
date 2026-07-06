@@ -4,7 +4,8 @@ import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
-import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
+// Temporarily unlinked — Field Notes content in progress, restore in a future update
+// import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
@@ -18,11 +19,11 @@ export default function HomePage() {
       <PillarsSection />
       <ManifestoSection />  
       <ServicesPreview />
-      <FieldNotesPreview />
+      {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
       {/* CTA Block — blueprint detail callout */}
       <AnimatedSection className='py-16 md:py-32'>
-        <div className='relative border border-border bg-bg-card p-10 md:p-16'>
+        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
             {/* Corner marks */}
             <span className='pointer-events-none absolute -left-px -top-px z-10 h-5 w-5 border-l border-t border-accent' aria-hidden />
             <span className='pointer-events-none absolute -bottom-px -right-px z-10 h-5 w-5 border-b border-r border-accent' aria-hidden />
@@ -38,17 +39,18 @@ export default function HomePage() {
                 </Reveal>
                 <Reveal index={1} className='max-w-md text-sm leading-relaxed text-text-muted'>
                   <p>
-                    Tell us about your project. We&apos;ll identify the highest-impact
-                    opportunity and outline a plan to get there.
+                    Not sure where to start? The Opportunity Audit maps the phase
+                    your business is in and pinpoints where custom software would
+                    pay off first, in about two minutes.
                   </p>
                 </Reveal>
               </div>
-              <Reveal index={2} className='flex shrink-0 gap-3'>
-                <Button asChild size='lg'>
+              <Reveal index={2} className='flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row'>
+                <Button asChild size='lg' className='w-full sm:w-auto'>
                   <Link href='/contact'>Start a Project</Link>
                 </Button>
-                <Button asChild size='lg' variant='outline'>
-                  <Link href='/how-we-work'>How We Work</Link>
+                <Button asChild size='lg' variant='outline' className='w-full sm:w-auto'>
+                  <Link href='/audit'>Opportunity Audit</Link>
                 </Button>
               </Reveal>
             </div>

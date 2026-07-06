@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function TeamPage() {
   return (
-    <main className='flex-1 pt-grid-3'>
+    <main className='flex-1 pt-10 pb-32'>
       <AnimatedSection className='flex flex-col gap-12'>
-        <div className='flex flex-col items-center gap-4 text-center'>
+        <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Team</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             The builders

@@ -7,6 +7,9 @@
   --color-bg: #0e0f11;
   --color-bg-card: #1a1b1f;
   --color-bg-elevated: #242529;
+  /* Translucent panel: sits over the dot grid to mute it for readability while
+     letting some background darkness and faint texture show through. */
+  --color-bg-panel: rgba(22, 24, 28, 0.88);
   --color-text: #e8e6e3;
   --color-text-muted: #a8a8ac;
   --color-accent: #b5f542;

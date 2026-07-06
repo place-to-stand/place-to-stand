@@ -14,7 +14,7 @@ export default function HowWeWorkPage() {
   return (
     <main className='flex-1 pt-grid-4'>
       <AnimatedSection className='flex flex-col gap-12'>
-        <div className='flex flex-col items-center gap-4 text-center'>
+        <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>How We Work</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
             Ontology based design leads to meaningful software. 
@@ -52,24 +52,30 @@ export default function HowWeWorkPage() {
 
       <PhasesSection />
 
-      {/* Pricing */}
-      <AnimatedSection className='flex flex-col items-center gap-8'>
-        <div className='relative w-full max-w-3xl border border-border bg-bg-card p-10 text-center'>
-          <BlueprintCorners size={16} all />
-          <div className='flex flex-col gap-6'>
-            <p className='font-mono text-xs uppercase tracking-[0.15em] text-accent'>
-              One flat rate &middot; Hour blocks &middot; Start anytime
-            </p>
-            <h2 className='text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-4xl'>
-              Pricing that stays under control
-            </h2>
-            <div className='flex flex-col items-center gap-2 text-base text-text-muted'>
-              <p>Unused time never expires.</p>
-              <p>Top up with one click inside your Portal.</p>
+      {/* CTA Block */}
+      <AnimatedSection>
+        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+          <BlueprintCorners size={20} all />
+          <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
+            <div className='flex flex-col gap-3'>
+              <span className='bp-label font-mono'>Next Step</span>
+              <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
+                Ready to build?
+              </h2>
+              <p className='max-w-md text-sm leading-relaxed text-text-muted'>
+                Not sure where to start? The Opportunity Audit maps the phase
+                your business is in and pinpoints where custom software would pay
+                off first, in about two minutes.
+              </p>
             </div>
-            <Button asChild size='lg' className='mx-auto px-10'>
-              <Link href='/contact'>Book a call now</Link>
-            </Button>
+            <div className='flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row'>
+              <Button asChild size='lg' className='w-full sm:w-auto'>
+                <Link href='/contact'>Start a Project</Link>
+              </Button>
+              <Button asChild size='lg' variant='outline' className='w-full sm:w-auto'>
+                <Link href='/audit'>Opportunity Audit</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </AnimatedSection>
