@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Badge } from '@/src/components/ui/badge'
 import { fieldNotes } from '@/src/lib/field-notes'
@@ -11,24 +11,30 @@ export function FieldNotesPreview() {
       <div className='flex flex-col gap-12'>
         {/* Header — left aligned */}
         <div className='flex flex-col gap-4'>
-          <span className='bp-label font-mono'>Field Notes</span>
-          <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
-            From the lab
-          </h2>
-          <p className='max-w-sm text-sm leading-relaxed text-text-muted'>
-            Experiments, open-source projects, and things we&apos;re learning.
-          </p>
-          <Link
-            href='/field-notes'
-            className='mt-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
-          >
-            Explore field notes
-            <span aria-hidden>&rarr;</span>
-          </Link>
+          <Reveal index={0} className='flex flex-col gap-4'>
+            <span className='bp-label font-mono'>Field Notes</span>
+            <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
+              From the lab
+            </h2>
+          </Reveal>
+          <Reveal index={1} className='max-w-sm text-sm leading-relaxed text-text-muted'>
+            <p>
+              Experiments, open-source projects, and things we&apos;re learning.
+            </p>
+          </Reveal>
+          <Reveal index={2}>
+            <Link
+              href='/field-notes'
+              className='mt-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+            >
+              Explore field notes
+              <span aria-hidden>&rarr;</span>
+            </Link>
+          </Reveal>
         </div>
 
         {/* Entries — 3-column card grid */}
-        <div className='grid gap-6 md:grid-cols-3'>
+        <Reveal index={3} className='grid gap-6 md:grid-cols-3'>
           {latest.map(note => (
             <a
               key={note.slug}
@@ -65,7 +71,7 @@ export function FieldNotesPreview() {
               </div>
             </a>
           ))}
-        </div>
+        </Reveal>
       </div>
     </AnimatedSection>
   )

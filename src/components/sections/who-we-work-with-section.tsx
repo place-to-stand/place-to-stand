@@ -4,21 +4,21 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 const profiles = [
   {
     number: '01',
+    title: 'The Lean Mid-Market',
+    description:
+      "You're established with real processes in place, but not big enough to justify a full-time dev team. You need senior engineering to optimize and extend your systems without the cost of hiring one.",
+  },
+  {
+    number: '02',
     title: 'The Technical Founder',
     description:
       "You're technical enough to prototype in AI tools and ship a scrappy v1. But you've hit the ceiling where vibe-coded solutions break, and you need real engineering to make it production-grade.",
   },
   {
-    number: '02',
+    number: '03',
     title: 'The Design-Led Team',
     description:
       'You have the vision, the designers, maybe some technical staff, but no engineering team to execute. You know exactly what you want built. You just need the builders to make it real.',
-  },
-  {
-    number: '03',
-    title: 'The Lean Mid-Market',
-    description:
-      "You're established with real processes in place, but not big enough to justify a full-time dev team. You need senior engineering to optimize and extend your systems without the cost of hiring one.",
   },
 ]
 

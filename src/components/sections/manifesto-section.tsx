@@ -1,6 +1,6 @@
 import { Cog, DraftingCompass, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
 const facets = [
@@ -30,20 +30,22 @@ export function ManifestoSection() {
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-2'>
+          <Reveal index={0} className='flex flex-col gap-2'>
             <span className='bp-label font-mono'>Who We Are</span>
             <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-balance text-text md:text-4xl'>
               Experienced engineers with{' '}
               <span className='text-accent'>fine-tuned AI</span>.
             </h2>
-          </div>
-          <p className='max-w-xl text-sm text-text-muted'>
-            Building exactly what you need, directly with the people who build it.
-          </p>
+          </Reveal>
+          <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
+            <p>
+              Building exactly what you need, directly with the people who build it.
+            </p>
+          </Reveal>
         </div>
 
         {/* Facet cards — blueprint grid */}
-        <div className='relative'>
+        <Reveal index={2} className='relative'>
           <BlueprintCorners size={16} />
           <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
             {facets.map(facet => (
@@ -55,7 +57,7 @@ export function ManifestoSection() {
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                     {facet.title}
                   </h3>
-                  <span className='inline-flex h-9 w-9 shrink-0 items-center justify-center border border-accent/30'>
+                  <span className='inline-flex h-9 w-9 shrink-0 items-center justify-center'>
                     <facet.Icon className='h-4 w-4 text-accent' aria-hidden />
                   </span>
                 </div>
@@ -65,15 +67,17 @@ export function ManifestoSection() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <Link
-          href='/team'
-          className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
-        >
-          Meet the Team
-          <span aria-hidden>&rarr;</span>
-        </Link>
+        <Reveal index={3}>
+          <Link
+            href='/team'
+            className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+          >
+            Meet the Team
+            <span aria-hidden>&rarr;</span>
+          </Link>
+        </Reveal>
       </div>
     </AnimatedSection>
   )

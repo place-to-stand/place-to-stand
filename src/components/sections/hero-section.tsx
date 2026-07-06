@@ -31,7 +31,7 @@ export function HeroSection() {
               </span>
               <span
                 className='hero-line block text-accent'
-                style={{ animationDelay: '1.8s' }}
+                style={{ animationDelay: '2.7s' }}
               >
                 We build for you.
               </span>
@@ -40,7 +40,7 @@ export function HeroSection() {
 
           {/* Supporting subtext + audit CTA */}
           <div className='flex flex-col gap-8 md:flex-row md:items-end md:justify-between'>
-            <div className='hero-reveal flex items-start gap-4' style={{ animationDelay: '2.4s' }}>
+            <div className='hero-reveal flex items-start gap-4' style={{ animationDelay: '3.3s' }}>
               {/* Vertical leader line */}
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
               <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>
@@ -49,7 +49,7 @@ export function HeroSection() {
                 stack of bloated SaaS dashboards.
               </p>
             </div>
-            <div className='hero-reveal flex shrink-0 flex-col items-start gap-3 md:max-w-xs md:items-end md:text-right' style={{ animationDelay: '2.7s' }}>
+            <div className='hero-reveal flex shrink-0 flex-col items-start gap-3 md:max-w-xs md:items-end md:text-right' style={{ animationDelay: '3.6s' }}>
               <Button asChild size='lg' variant='primaryInvert'>
                 <Link href='/audit' data-pts-hero-cta>
                   Find your leverage

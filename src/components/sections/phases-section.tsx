@@ -1,4 +1,4 @@
-import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
 const phases = [
@@ -46,19 +46,21 @@ export function PhasesSection() {
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-2'>
+          <Reveal index={0} className='flex flex-col gap-2'>
             <span className='bp-label font-mono'>Every Stage</span>
             <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
               Wherever your business stands
             </h2>
-          </div>
-          <p className='max-w-xl text-sm text-text-muted'>
-            Ontology based design allows us to build software to meet you at your stage of business.
-          </p>
+          </Reveal>
+          <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
+            <p>
+              Ontology based design allows us to build software to meet you at your stage of business.
+            </p>
+          </Reveal>
         </div>
 
         {/* Phase grid — 4 cols, blueprint-style with corner marks */}
-        <div className='relative'>
+        <Reveal index={2} className='relative'>
           <BlueprintCorners size={16} />
           <div className='grid gap-px border border-border bg-border md:grid-cols-4'>
             {phases.map(phase => (
@@ -80,7 +82,7 @@ export function PhasesSection() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </AnimatedSection>
   )

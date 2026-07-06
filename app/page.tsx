@@ -5,6 +5,7 @@ import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
 import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
+import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
 
@@ -13,16 +14,15 @@ export default function HomePage() {
     <main className='flex-1'>
       <HeroSection />
       <PhasesSection /> 
-      {/*<WhoWeWorkWithSection />*/} 
+      <WhoWeWorkWithSection /> 
       <PillarsSection />
       <ManifestoSection />  
       <ServicesPreview />
       <FieldNotesPreview />
 
       {/* CTA Block — blueprint detail callout */}
-      <section>
-        <div className='mx-auto max-w-content px-6 py-16 lg:px-12 md:py-32'>
-          <div className='relative border border-border bg-bg-card p-10 md:p-16'>
+      <AnimatedSection className='py-16 md:py-32'>
+        <div className='relative border border-border bg-bg-card p-10 md:p-16'>
             {/* Corner marks */}
             <span className='pointer-events-none absolute -left-px -top-px z-10 h-5 w-5 border-l border-t border-accent' aria-hidden />
             <span className='pointer-events-none absolute -bottom-px -right-px z-10 h-5 w-5 border-b border-r border-accent' aria-hidden />
@@ -30,27 +30,30 @@ export default function HomePage() {
             <span className='pointer-events-none absolute -bottom-px -left-px z-10 h-5 w-5 border-b border-l border-accent' aria-hidden />
             <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
               <div className='flex flex-col gap-3'>
-                <span className='bp-label font-mono'>Next Step</span>
-                <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
-                  Ready to build?
-                </h2>
-                <p className='max-w-md text-sm leading-relaxed text-text-muted'>
-                  Tell us about your project. We&apos;ll identify the highest-impact
-                  opportunity and outline a plan to get there.
-                </p>
+                <Reveal index={0} className='flex flex-col gap-3'>
+                  <span className='bp-label font-mono'>Next Step</span>
+                  <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
+                    Ready to build?
+                  </h2>
+                </Reveal>
+                <Reveal index={1} className='max-w-md text-sm leading-relaxed text-text-muted'>
+                  <p>
+                    Tell us about your project. We&apos;ll identify the highest-impact
+                    opportunity and outline a plan to get there.
+                  </p>
+                </Reveal>
               </div>
-              <div className='flex shrink-0 gap-3'>
+              <Reveal index={2} className='flex shrink-0 gap-3'>
                 <Button asChild size='lg'>
                   <Link href='/contact'>Start a Project</Link>
                 </Button>
                 <Button asChild size='lg' variant='outline'>
                   <Link href='/how-we-work'>How We Work</Link>
                 </Button>
-              </div>
+              </Reveal>
             </div>
           </div>
-        </div>
-      </section>
+      </AnimatedSection>
     </main>
   )
 }
