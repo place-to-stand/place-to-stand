@@ -4,6 +4,7 @@ import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
+import { ClientsPreview } from '@/src/components/sections/clients-preview'
 // Temporarily unlinked — Field Notes content in progress, restore in a future update
 // import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
@@ -15,7 +16,8 @@ export default function HomePage() {
     <main className='flex-1'>
       <HeroSection />
       <PhasesSection /> 
-      <WhoWeWorkWithSection /> 
+      <WhoWeWorkWithSection />
+      <ClientsPreview />
       <PillarsSection />
       <ManifestoSection />  
       <ServicesPreview />
