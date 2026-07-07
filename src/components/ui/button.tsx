@@ -6,18 +6,20 @@ import { forwardRef, type ButtonHTMLAttributes } from 'react'
 import { cn } from '@/src/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60 overflow-hidden',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-none text-sm font-semibold uppercase tracking-wider transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:pointer-events-none disabled:opacity-60 overflow-hidden',
   {
     variants: {
       variant: {
-      primary:
-          'relative isolate bg-ink text-white shadow-md shadow-primary/40 border border-ink/40 transition-all duration-400 ease-in-out hover:border-ink/90 hover:shadow-lg hover:text-white before:absolute before:inset-0 before:-z-10 before:bg-gradientPrimary before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
+        primary:
+          'relative isolate bg-accent text-bg font-bold border border-accent/40 shadow-md shadow-accent/20 transition-colors duration-300 ease-out hover:text-accent hover:border-accent hover:shadow-lg hover:shadow-accent/30 before:absolute before:inset-0 before:-z-10 before:bg-bg before:-translate-x-[101%] before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0',
+        primaryInvert:
+          'relative isolate bg-accent text-bg font-bold border border-accent shadow-md shadow-accent/10 transition-colors duration-300 ease-out hover:text-accent hover:shadow-lg hover:shadow-accent/30 before:absolute before:inset-0 before:-z-10 before:bg-bg before:-translate-x-[101%] before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0',
         secondary:
-          'bg-ink/80 text-ink-light hover:bg-ink/100 focus-visible:ring-ink hover:text-ink-light',
+          'bg-bg-elevated text-text border border-border hover:bg-bg-card hover:border-border-light focus-visible:ring-accent/40',
         ghost:
-          'bg-transparent text-ink/70 hover:text-ink/100 focus-visible:ring-ink/40',
+          'bg-transparent text-text-muted hover:text-text focus-visible:ring-accent/40',
         outline:
-          'relative isolate bg-transparent border border-ink/30 text-ink/80 focus-visible:ring-ink/40 transition-all duration-300 hover:border-ink/90 hover:text-white before:absolute before:inset-0 before:-z-10 before:bg-gradientPrimary before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100',
+          'bg-transparent border border-border text-text transition-all duration-300 hover:border-accent hover:text-accent focus-visible:ring-accent/40',
       },
       size: {
         sm: 'h-9 px-4',

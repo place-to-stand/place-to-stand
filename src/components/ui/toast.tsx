@@ -23,13 +23,13 @@ const ToastViewport = React.forwardRef<
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(
-  'group pointer-events-auto relative flex w-full items-start gap-3 overflow-hidden rounded-wxl border border-ink/10 bg-white/80 p-5 shadow-lg backdrop-blur transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink',
+  'group pointer-events-auto relative flex w-full items-start gap-3 overflow-hidden border border-border bg-bg-card p-5 shadow-lg transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40',
   {
     variants: {
       variant: {
-        default: 'text-ink',
+        default: 'text-text',
         destructive:
-          'border-red-500/30 bg-red-50 text-red-700 focus-visible:ring-red-600',
+          'border-red-500/30 bg-red-950 text-red-400 focus-visible:ring-red-600',
       },
     },
     defaultVariants: {
@@ -73,7 +73,7 @@ const ToastDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Description
     ref={ref}
-    className={cn('text-sm text-ink/70', className)}
+    className={cn('text-sm text-text-muted', className)}
     {...props}
   />
 ))
@@ -86,7 +86,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      'absolute right-4 top-4 rounded-full p-2 text-ink/60 transition hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink',
+      'absolute right-4 top-4 p-2 text-text-muted transition hover:text-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40',
       className
     )}
     toast-close=''
@@ -102,7 +102,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      'inline-flex h-10 shrink-0 items-center justify-center rounded-full border border-ink/20 bg-white px-4 text-sm font-semibold text-ink transition hover:bg-ink hover:text-ink-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink',
+      'inline-flex h-10 shrink-0 items-center justify-center border border-border bg-bg-elevated px-4 text-sm font-semibold text-text transition hover:bg-accent hover:text-bg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent/40',
       className
     )}
     {...props}

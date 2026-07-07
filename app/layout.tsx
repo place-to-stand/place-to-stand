@@ -1,20 +1,19 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
-import { Afacad, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
+import { Space_Grotesk, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
 import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
-import { PageParticles } from '@/src/components/sections/page-particles'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { FloatingBookCta } from '@/src/components/floating-book-cta'
 
-const afacad = Afacad({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-afacad',
+  variable: '--font-space-grotesk',
   adjustFontFallback: false,
 })
 
@@ -34,15 +33,15 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
   title: {
-    default: 'Place To Stand | Your Lever in the Digital World',
+    default: 'Place To Stand | Software Agency',
     template: '%s | Place To Stand',
   },
   description:
-    'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
+    'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
   openGraph: {
-    title: 'Place To Stand | Your Lever in the Digital World',
+    title: 'Place To Stand | Software Agency',
     description:
-      'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
+      'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
     url: 'https://placetostandagency.com/',
     siteName: 'Place To Stand',
     locale: 'en_US',
@@ -50,9 +49,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Place To Stand | Your Lever in the Digital World',
+    title: 'Place To Stand | Software Agency',
     description:
-      'We help small businesses make big moves with the right tools and a solid foundation. Digital Strategy, Development, and Marketing.',
+      'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
   },
 }
 
@@ -75,25 +74,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body
         className={cn(
-          'min-h-screen overflow-x-hidden bg-ink text-ink',
-          afacad.variable,
+          'min-h-screen overflow-x-hidden bg-bg text-text',
+          spaceGrotesk.variable,
           bebasNeue.variable,
           sourceSans.variable
         )}
       >
         <PostHogProvider>
-          <div
-            className='pts-animated-gradient pointer-events-none fixed inset-0 z-0 bg-gradientSite'
-            aria-hidden
-          />
-          <div
-            className='pointer-events-none fixed inset-0 z-0 bg-ink/10'
-            aria-hidden
-          />
-
-          <PageParticles />
-
-          <div className='relative z-10 flex min-h-screen flex-col overflow-x-hidden'>
+          <div className='relative flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
             {children}
             <Footer />

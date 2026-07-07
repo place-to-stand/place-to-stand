@@ -1,18 +1,22 @@
 import * as React from 'react'
 import { cn } from '@/src/lib/utils'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
+>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      'group relative overflow-hidden rounded-xl border border-ink bg-white/25 p-8 text-ink shadow-sm backdrop-blur transition-all duration-300 ease-out hover:bg-white/15',
+      'group relative border border-border bg-bg-card p-8 text-text transition-colors duration-300 ease-out hover:border-accent/30',
       className
     )}
     {...props}
-  />
+  >
+    <BlueprintCorners />
+    {children}
+  </div>
 ))
 Card.displayName = 'Card'
 
@@ -35,7 +39,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      'font-headline text-2xl uppercase leading-none text-ink',
+      'font-headline text-2xl uppercase leading-none text-text',
       className
     )}
     {...props}
@@ -49,7 +53,7 @@ const CardContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-base !leading-snug text-ink/70', className)}
+    className={cn('text-base !leading-snug text-text-muted', className)}
     {...props}
   />
 ))

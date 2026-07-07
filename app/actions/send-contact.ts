@@ -84,20 +84,6 @@ export async function sendContact(
     } as const
   }
 
-  if (!audienceId) {
-    return {
-      success: false,
-      message: 'Audience management is not configured. Please try again later.',
-    } as const
-  }
-
-  if (!portalLeadsEndpoint || !portalLeadsToken) {
-    return {
-      success: false,
-      message: 'Lead management is not configured. Please try again later.',
-    } as const
-  }
-
   const { name, email, message, company, website } = parsed.data
 
   const resend = new Resend(apiKey)
@@ -161,95 +147,8 @@ export async function sendContact(
     'The Place To Stand Team'
   )
 
-  // Add contact to Resend audience
-  const contactPayload: {
-    email: string
-    audienceId: string
-    unsubscribed: boolean
-    firstName?: string
-    lastName?: string
-  } = {
-    email,
-    audienceId,
-    unsubscribed: false,
-  }
-
-  if (firstName) {
-    contactPayload.firstName = firstName
-  }
-
-  if (lastName) {
-    contactPayload.lastName = lastName
-  }
-
-  try {
-    const { error: contactError } =
-      await resend.contacts.create(contactPayload)
-
-    if (contactError) {
-      const normalizedMessage = contactError.message?.toLowerCase() ?? ''
-      const contactAlreadyExists =
-        normalizedMessage.includes('already exists')
-
-      if (!contactAlreadyExists) {
-        console.error('Failed to add contact to Resend audience', contactError)
-        return {
-          success: false,
-          message: 'Failed to process your contact. Please try again later.',
-        } as const
-      }
-    }
-  } catch (error) {
-    console.error('Resend contact creation failed', error)
-    return {
-      success: false,
-      message: 'Failed to process your contact. Please try again later.',
-    } as const
-  }
-
-  // Create lead in portal
-  const portalPayload = {
-    name: trimmedName || name,
-    email,
-    company: trimmedCompany,
-    website: validatedWebsite,
-    message: trimmedMessage || null,
-    sourceDetail: WEBSITE_SOURCE_DETAIL,
-  }
-
-  try {
-    const portalResponse = await fetch(portalLeadsEndpoint, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${portalLeadsToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(portalPayload),
-    })
-
-    if (!portalResponse.ok) {
-      const errorText = await portalResponse.text()
-      console.error('Failed to create portal lead', {
-        status: portalResponse.status,
-        statusText: portalResponse.statusText,
-        body: errorText,
-        payload: portalPayload,
-      })
-
-      return {
-        success: false,
-        message: 'Failed to record your inquiry. Please try again later.',
-      } as const
-    }
-  } catch (error) {
-    console.error('Portal lead creation failed', error)
-    return {
-      success: false,
-      message: 'Failed to record your inquiry. Please try again later.',
-    } as const
-  }
-
-  // Send emails
+  // Send emails first — this is the core deliverable. If it fails, surface the
+  // error so the user can retry; everything below is best-effort enrichment.
   try {
     const emailLines = [...detailLines]
 
@@ -274,6 +173,85 @@ export async function sendContact(
       success: false,
       message: 'Failed to send confirmation email. Please try again later.',
     } as const
+  }
+
+  // Best-effort: add contact to Resend audience. Never blocks success.
+  if (audienceId) {
+    const contactPayload: {
+      email: string
+      audienceId: string
+      unsubscribed: boolean
+      firstName?: string
+      lastName?: string
+    } = {
+      email,
+      audienceId,
+      unsubscribed: false,
+    }
+
+    if (firstName) {
+      contactPayload.firstName = firstName
+    }
+
+    if (lastName) {
+      contactPayload.lastName = lastName
+    }
+
+    try {
+      const { error: contactError } =
+        await resend.contacts.create(contactPayload)
+
+      if (contactError) {
+        const normalizedMessage = contactError.message?.toLowerCase() ?? ''
+        const contactAlreadyExists =
+          normalizedMessage.includes('already exists')
+
+        if (!contactAlreadyExists) {
+          console.error('Failed to add contact to Resend audience', contactError)
+        }
+      }
+    } catch (error) {
+      console.error('Resend contact creation failed', error)
+    }
+  } else {
+    console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
+  }
+
+  // Best-effort: create lead in portal. Never blocks success.
+  if (portalLeadsEndpoint && portalLeadsToken) {
+    const portalPayload = {
+      name: trimmedName || name,
+      email,
+      company: trimmedCompany,
+      website: validatedWebsite,
+      message: trimmedMessage || null,
+      sourceDetail: WEBSITE_SOURCE_DETAIL,
+    }
+
+    try {
+      const portalResponse = await fetch(portalLeadsEndpoint, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${portalLeadsToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(portalPayload),
+      })
+
+      if (!portalResponse.ok) {
+        const errorText = await portalResponse.text()
+        console.error('Failed to create portal lead', {
+          status: portalResponse.status,
+          statusText: portalResponse.statusText,
+          body: errorText,
+          payload: portalPayload,
+        })
+      }
+    } catch (error) {
+      console.error('Portal lead creation failed', error)
+    }
+  } else {
+    console.warn('Portal lead endpoint/token not set; skipping portal lead')
   }
 
   return {
