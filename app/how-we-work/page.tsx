@@ -4,6 +4,7 @@ import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { PhasesSection } from '@/src/components/sections/phases-section'
+import { TechStackSection } from '@/src/components/sections/tech-stack-section'
 
 export const metadata: Metadata = {
   title: 'How We Work',
@@ -60,6 +61,8 @@ export default function HowWeWorkPage() {
           ))}
         </div>
       </AnimatedSection>
+
+      <TechStackSection heading='The tools behind our process.' subtitle='Every phase is powered by frontier AI models and modern cloud infrastructure — chosen for reliability, speed, and developer experience.' />
 
       <PhasesSection showHowWeWorkLink={false} />
 

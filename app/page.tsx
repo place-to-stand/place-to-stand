@@ -3,6 +3,7 @@ import { PillarsSection } from '@/src/components/sections/pillars-section'
 import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
+import { TechStackSection } from '@/src/components/sections/tech-stack-section'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
 // Temporarily unlinked — Field Notes content in progress, restore in a future update
 // import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
@@ -17,7 +18,8 @@ export default function HomePage() {
       <PhasesSection /> 
       <WhoWeWorkWithSection /> 
       <PillarsSection />
-      <ManifestoSection />  
+      <ManifestoSection />
+      <TechStackSection />
       <ServicesPreview />
       {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
