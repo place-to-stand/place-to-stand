@@ -11,7 +11,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     description:
-      'The official online sauce shop for the hit interview show "Hot Ones.',
+      'The official online sauce shop for the hit interview show "Hot Ones."',
   },
   {
     title: 'Blake Brown Beauty',

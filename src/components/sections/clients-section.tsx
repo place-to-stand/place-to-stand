@@ -42,40 +42,20 @@ export function ClientsSection() {
                 className='object-cover transition-transform duration-700 group-hover:scale-105'
               />
             </div>
-            {/* Caption bar - fixed height with sliding content */}
-            <div className='relative h-14 overflow-hidden border-t border-border bg-bg-card md:h-16'>
-              {/* Stationary favicon - stays on top */}
-              <div className='absolute left-3 top-1/2 z-10 -translate-y-1/2 md:left-4'>
-                <img
-                  src={`https://www.google.com/s2/favicons?domain=${getClientHostname(project.href)}&sz=64`}
-                  alt=''
-                  className='h-7 w-7 md:h-8 md:w-8'
-                />
-              </div>
-              {/* Description - slides down from above on hover */}
-              <div className='absolute inset-0 flex -translate-y-full items-center gap-5 pl-14 pr-8 transition-transform duration-300 group-hover:translate-y-0 md:gap-6 md:pl-16 md:pr-10'>
-                <p className='line-clamp-2 flex-1 text-balance text-left text-xs font-normal !leading-[1.1] text-text-muted md:text-base'>
-                  {project.description}
-                </p>
-                <svg
-                  className='h-4 w-4 shrink-0 text-accent md:h-5 md:w-5'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M17 8l4 4m0 0l-4 4m4-4H3'
-                  />
-                </svg>
-              </div>
-              {/* Title row - slides down out of view on hover */}
-              <div className='absolute inset-0 flex items-center pl-14 pr-3 transition-transform duration-300 group-hover:translate-y-full md:pl-16 md:pr-4'>
-                <h3 className='flex-1 font-headline text-sm font-semibold uppercase leading-none text-text md:text-base'>
+            {/* Caption - favicon, name, and description, always visible */}
+            <div className='flex items-start gap-3 border-t border-border bg-bg-card p-3 md:gap-4 md:p-4'>
+              <img
+                src={`https://www.google.com/s2/favicons?domain=${getClientHostname(project.href)}&sz=64`}
+                alt=''
+                className='mt-0.5 h-7 w-7 shrink-0 md:h-8 md:w-8'
+              />
+              <div className='flex flex-col gap-1.5'>
+                <h3 className='font-headline text-sm font-semibold uppercase leading-none text-text md:text-base'>
                   {project.title}
                 </h3>
+                <p className='line-clamp-2 min-h-[2.75em] text-xs leading-[1.375] text-text-muted md:text-sm'>
+                  {project.description}
+                </p>
               </div>
             </div>
           </a>

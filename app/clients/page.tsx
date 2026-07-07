@@ -8,7 +8,7 @@ import { ClientsSection } from '@/src/components/sections/clients-section'
 export const metadata: Metadata = {
   title: 'Clients',
   description:
-    'A few of our partners that are using our tools daily to drive business results.',
+    "A selection of the brands we've partnered with to design, build, and ship software that earns its keep.",
 }
 
 export default function ClientsPage() {
@@ -19,11 +19,11 @@ export default function ClientsPage() {
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Clients</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
-            Select Projects
+            Who We Build For
           </h1>
           <p className='max-w-2xl text-balance text-base text-text-muted md:text-lg'>
-            A few of our partners that are using our tools daily to drive
-            business results.
+            A selection of the brands we&apos;ve partnered with to design,
+            build, and ship software that earns its keep.
           </p>
         </div>
 
