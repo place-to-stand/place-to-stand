@@ -8,29 +8,28 @@ import { ClientsSection } from '@/src/components/sections/clients-section'
 export const metadata: Metadata = {
   title: 'Clients',
   description:
-    'Select projects that moved the needle — a look at the product, marketing, and brand experiences we craft with our partners.',
+    'A few of our partners that are using our tools daily to drive business results.',
 }
 
 export default function ClientsPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
-      <AnimatedSection className='flex flex-col gap-12 md:gap-20'>
+      {/* Heading, client cards, and CTA tile, one section separated by gaps */}
+      <AnimatedSection id='clients' className='flex flex-col gap-grid-3 md:gap-grid-4'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Clients</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
-            Select projects that moved the needle
+            Select Projects
           </h1>
           <p className='max-w-2xl text-balance text-base text-text-muted md:text-lg'>
-            A look at the product, marketing, and brand experiences we craft
-            with our partners.
+            A few of our partners that are using our tools daily to drive
+            business results.
           </p>
         </div>
-      </AnimatedSection>
 
-      <ClientsSection />
+        <ClientsSection />
 
-      {/* CTA Block */}
-      <AnimatedSection>
+        {/* CTA Block */}
         <div className='relative border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>

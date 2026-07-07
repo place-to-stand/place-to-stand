@@ -1,13 +1,11 @@
 import Image from 'next/image'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { clients, getClientHostname } from '@/src/lib/clients'
 
 export function ClientsSection() {
   return (
-    <AnimatedSection id='clients' className='flex flex-col gap-8 md:gap-10'>
-      {/* Grid: 1 col on mobile, 2 cols on md+ */}
-      <div className='grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6'>
+    // Grid: 1 col on mobile, 2 cols on md+
+    <div className='grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6'>
         {clients.map(project => (
           <a
             key={project.title}
@@ -15,9 +13,26 @@ export function ClientsSection() {
             target='_blank'
             rel='noreferrer noopener'
             aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group relative overflow-hidden border border-border bg-bg-card no-underline transition-all duration-300 ease-out hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
+            className='group relative border border-border bg-bg-card no-underline transition-all duration-300 ease-out hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
           >
             <BlueprintCorners />
+            {/* External link indicator */}
+            <span className='pointer-events-none absolute right-2 top-2 z-20 flex h-6 w-6 items-center justify-center border border-border bg-bg-card text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5'>
+              <svg
+                className='h-3.5 w-3.5'
+                fill='none'
+                viewBox='0 0 24 24'
+                stroke='currentColor'
+                strokeWidth={2}
+                aria-hidden
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M4.5 19.5 19.5 4.5m0 0H8.25m11.25 0v11.25'
+                />
+              </svg>
+            </span>
             {/* Clean image area */}
             <div className='relative aspect-video w-full overflow-hidden'>
               <Image
@@ -65,7 +80,6 @@ export function ClientsSection() {
             </div>
           </a>
         ))}
-      </div>
-    </AnimatedSection>
+    </div>
   )
 }

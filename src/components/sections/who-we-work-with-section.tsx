@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
@@ -60,6 +61,15 @@ export function WhoWeWorkWithSection() {
             </div>
           ))}
         </div>
+
+        {/* Clients link */}
+        <Link
+          href='/clients'
+          className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+        >
+          See our clients
+          <span aria-hidden>&rarr;</span>
+        </Link>
       </div>
     </AnimatedSection>
   )

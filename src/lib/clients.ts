@@ -21,6 +21,20 @@ export const clients: Client[] = [
       'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
   {
+    title: 'GreenWATT USA',
+    href: 'https://www.gtbsolarexchange.com',
+    image: '/work-greenwatt-usa.png',
+    description:
+      'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
+  },
+  {
+    title: 'Jeremy Turner',
+    href: 'https://jeremyturnerstudio.com',
+    image: '/work-jeremy-turner.png',
+    description:
+      'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
+  },
+  {
     title: 'Heatonist',
     href: 'https://heatonist.com',
     image: '/work-heatonist.png',
@@ -65,7 +79,9 @@ export const clients: Client[] = [
   },
 ]
 
-/** Extract hostname from a client URL for favicon lookups */
+/** Extract hostname from a client URL for favicon lookups.
+ * Strips a leading `www.` since some favicon providers only resolve the
+ * bare domain (e.g. gtbsolarexchange.com works, www. does not). */
 export function getClientHostname(href: string): string {
-  return new URL(href).hostname
+  return new URL(href).hostname.replace(/^www\./, '')
 }
