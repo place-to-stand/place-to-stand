@@ -15,7 +15,7 @@ export const team: TeamMember[] = [
   {
     name: 'Jason Desiderio',
     title: 'Principal Engineer',
-    bio: 'Full-stack engineer and technical leader specializing in building scalable systems and AI-powered applications. Focused on turning complex business problems into elegant software solutions.',
+    bio: 'Spent over a decade as a Senior Engineer at Squarespace, shipping systems that served millions of users. Brings that large-scale platform discipline to every project — architecting apps built to perform under real-world load.',
     image: '/1652631488914.jpeg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/jmdesiderio/',
@@ -27,7 +27,7 @@ export const team: TeamMember[] = [
     {
     name: 'Kris Crawford',
     title: 'Software Engineer & AI Technologist',
-    bio: 'Software engineer and AI technologist who bridges the gap between cutting-edge technology and practical business applications. Builder of tools that make teams more effective.',
+    bio: 'Software engineer with five years of building for the web, grounded in a prior career designing physical systems meant to last decades. That same rigor — measure twice, build once — carries into every line of code.',
     image: '/259858081_219018533698595_237774923102850579_n.jpg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/kristopher-crawford-1177439a/',
@@ -39,7 +39,7 @@ export const team: TeamMember[] = [
   {
     name: 'Damon Bodine',
     title: 'Senior AI Engineer',
-    bio: 'AI engineer specializing in building intelligent automation systems. Expert in LLM integration, agent architectures, and transforming manual workflows into AI-powered pipelines.',
+    bio: 'Graduate of the Gauntlet AI engineering bootcamp with multiple decades of entrepreneurship spanning the music and real-estate industries. Combines hard-won business instinct with hands-on AI engineering to build systems that actually move the needle.',
     image: '/1587649018078.jpeg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/damonbodine/',
