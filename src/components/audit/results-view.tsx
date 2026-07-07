@@ -32,10 +32,11 @@ import {
   type AuditLeadValues,
 } from '@/src/lib/validations/audit'
 import { sendAudit, type AuditActionResult } from '@/app/actions/send-audit'
-import type { AuditResult, PhaseId } from '@/src/lib/audit/types'
+import type { AuditAnswers, AuditResult, PhaseId } from '@/src/lib/audit/types'
 
 interface ResultsViewProps {
   result: AuditResult
+  answers: AuditAnswers
   onRestart: () => void
 }
 
@@ -58,7 +59,7 @@ function shortPhaseName(id: PhaseId): string {
   return PHASES[id].name.split(' & ')[0]
 }
 
-export function ResultsView({ result, onRestart }: ResultsViewProps) {
+export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
   const { phase, phaseScores, recommendations } = result
   const maxScore = Math.max(1, ...Object.values(phaseScores))
   const activeIndex = PHASE_ORDER.indexOf(phase.id)
@@ -123,7 +124,7 @@ export function ResultsView({ result, onRestart }: ResultsViewProps) {
                 </span>
                 <span
                   className={cn(
-                    'px-1 text-[10px] uppercase leading-tight tracking-wide sm:text-xs',
+                    'block w-full hyphens-auto break-words px-0.5 text-[10px] uppercase leading-tight tracking-wide sm:text-xs',
                     isActive
                       ? 'font-semibold text-text'
                       : 'text-text-muted'
@@ -187,7 +188,7 @@ export function ResultsView({ result, onRestart }: ResultsViewProps) {
         <section className='relative border border-border bg-bg-panel p-5'>
           <BlueprintCorners size={12} colorClassName='border-border-light' />
           <h2 className='font-mono text-xs font-semibold uppercase tracking-[0.15em] text-text-muted'>
-            Phase score
+            Audit score
           </h2>
           <div className='mt-4 space-y-2.5'>
             {PHASE_ORDER.map((id: PhaseId) => {
@@ -254,7 +255,7 @@ export function ResultsView({ result, onRestart }: ResultsViewProps) {
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-accent-muted text-accent'>
                       <Icon className='h-5 w-5' />
                     </div>
-                    <span className='ml-auto border border-accent/40 px-2 py-0.5 font-mono text-xs font-semibold text-accent'>
+                    <span className='ml-auto border border-border px-2 py-0.5 font-mono text-xs font-semibold text-text-muted'>
                       #{index + 1}
                     </span>
                   </div>
@@ -264,18 +265,6 @@ export function ResultsView({ result, onRestart }: ResultsViewProps) {
                   <p className='mt-1 text-sm font-medium text-text-muted'>
                     {rec.service.tagline}
                   </p>
-                  {rec.reasons.length > 0 && (
-                    <div className='mt-3 flex flex-wrap gap-1.5'>
-                      {rec.reasons.map((reason) => (
-                        <span
-                          key={reason}
-                          className='bg-bg-elevated px-2 py-0.5 text-xs text-text-muted'
-                        >
-                          {reason}
-                        </span>
-                      ))}
-                    </div>
-                  )}
                 </article>
               )
             })}
@@ -284,17 +273,18 @@ export function ResultsView({ result, onRestart }: ResultsViewProps) {
       )}
 
       {/* Capture / CTA */}
-      <CaptureForm result={result} />
+      <CaptureForm result={result} answers={answers} />
     </div>
   )
 }
 
 interface CaptureFormProps {
   result: AuditResult
+  answers: AuditAnswers
 }
 
 /** Emails the respondent their result and hands us the lead. */
-function CaptureForm({ result }: CaptureFormProps) {
+function CaptureForm({ result, answers }: CaptureFormProps) {
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)
   const form = useForm<AuditLeadValues>({
@@ -304,7 +294,7 @@ function CaptureForm({ result }: CaptureFormProps) {
 
   const onSubmit = form.handleSubmit((values) => {
     startTransition(() => {
-      void sendAudit(values, result).then((res: AuditActionResult) => {
+      void sendAudit(values, result, answers).then((res: AuditActionResult) => {
         if (!res.success) {
           if (res.errors) {
             Object.entries(res.errors).forEach(([key, messages]) => {
@@ -341,11 +331,10 @@ function CaptureForm({ result }: CaptureFormProps) {
             Check your inbox
           </h2>
           <p className='max-w-md text-balance text-sm text-text-muted'>
-            We&apos;ve sent your audit result and we&apos;ll follow up within one
-            business day to map out what to build first.
+            We&apos;ve sent your audit result.
           </p>
           <Button asChild variant='outline' size='lg' className='mt-2 px-8'>
-            <Link href='/book-a-call'>Book a call now</Link>
+            <Link href='/contact'>Book a call now</Link>
           </Button>
         </div>
       ) : (
@@ -355,11 +344,11 @@ function CaptureForm({ result }: CaptureFormProps) {
               Next step
             </p>
             <h2 className='mt-2 font-headline text-xl font-semibold uppercase tracking-tight text-text'>
-              Want this turned into a plan?
+              Get Your Results
             </h2>
             <p className='mx-auto mt-2 max-w-md text-balance text-sm text-text-muted'>
-              Drop your details and we&apos;ll send your result, then follow up
-              to map out what to build first.
+              Drop your details and we&apos;ll send your result. Reply anytime
+              to start a project.
             </p>
           </div>
 
@@ -419,7 +408,7 @@ function CaptureForm({ result }: CaptureFormProps) {
             <p className='mt-3 text-center text-sm text-text-muted'>
               Prefer to talk first?{' '}
               <Link
-                href='/book-a-call'
+                href='/contact'
                 className='text-accent underline-offset-4 hover:underline'
               >
                 Book a call

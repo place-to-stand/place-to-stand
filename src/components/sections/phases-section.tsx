@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
@@ -40,7 +41,11 @@ const phases = [
   },
 ]
 
-export function PhasesSection() {
+export function PhasesSection({
+  showHowWeWorkLink = true,
+}: {
+  showHowWeWorkLink?: boolean
+}) {
   return (
     <AnimatedSection className='py-16 md:py-32'>
       <div className='flex flex-col gap-12'>
@@ -49,14 +54,26 @@ export function PhasesSection() {
           <Reveal index={0} className='flex flex-col gap-2'>
             <span className='bp-label font-mono'>Every Stage</span>
             <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
-              Wherever your business stands
+              We meet you at your stage of business.
             </h2>
           </Reveal>
           <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
             <p>
-              Ontology based design allows us to build software to meet you at your stage of business.
+              Ontology based design allows us to model your business data to interact with humans and agents more effectively.
             </p>
           </Reveal>
+          {/* Mobile-only link: sits with the subtext, above the cards */}
+          {showHowWeWorkLink && (
+            <Reveal index={2} className='pt-2 md:hidden'>
+              <Link
+                href='/how-we-work'
+                className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+              >
+                How we work
+                <span aria-hidden>&rarr;</span>
+              </Link>
+            </Reveal>
+          )}
         </div>
 
         {/* Phase grid — 4 cols, blueprint-style with corner marks */}
@@ -83,6 +100,19 @@ export function PhasesSection() {
             ))}
           </div>
         </Reveal>
+
+        {/* Desktop-only link: stays below the cards */}
+        {showHowWeWorkLink && (
+          <Reveal index={3} className='hidden md:block'>
+            <Link
+              href='/how-we-work'
+              className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+            >
+              How we work
+              <span aria-hidden>&rarr;</span>
+            </Link>
+          </Reveal>
+        )}
       </div>
     </AnimatedSection>
   )

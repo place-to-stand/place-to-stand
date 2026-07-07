@@ -41,6 +41,16 @@ export function ManifestoSection() {
               Building exactly what you need, directly with the people who build it.
             </p>
           </Reveal>
+          {/* Mobile-only link: sits with the subtext, above the cards */}
+          <Reveal index={2} className='pt-2 md:hidden'>
+            <Link
+              href='/team'
+              className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+            >
+              Meet the Team
+              <span aria-hidden>&rarr;</span>
+            </Link>
+          </Reveal>
         </div>
 
         {/* Facet cards — blueprint grid */}
@@ -68,7 +78,8 @@ export function ManifestoSection() {
           </div>
         </Reveal>
 
-        <Reveal index={3}>
+        {/* Desktop-only link: stays below the cards */}
+        <Reveal index={3} className='hidden md:block'>
           <Link
             href='/team'
             className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'

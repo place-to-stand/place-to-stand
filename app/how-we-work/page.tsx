@@ -10,47 +10,58 @@ export const metadata: Metadata = {
   description: 'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
 }
 
+const process = [
+  {
+    title: 'Quick Wins',
+    body: 'We start by shipping something real, fast. Early, tangible wins build trust and give us a shared shorthand for the larger decisions ahead.',
+  },
+  {
+    title: 'Ontology',
+    body: 'Before scaling up, we map how your business actually works. This ontology, the entities, rules, and relationships that define your domain, becomes the backbone the software is built on, so what we ship models reality instead of a template.',
+  },
+  {
+    title: 'Automated Execution & Human Verification',
+    body: 'Once the direction is clear, execution is largely automated. Frontier models are integrated directly into our own custom tools. Every task is human-verified at the input and the output level where we verify code changes with pre-AI programming knowledge.',
+  },
+  {
+    title: 'Taste',
+    body: 'This is where our expertise in building apps shows. We shape the details, iterate tightly with your stakeholders, and apply hard-won judgment to fit the software to your specific business context.',
+  },
+]
+
 export default function HowWeWorkPage() {
   return (
-    <main className='flex-1 pt-grid-4'>
+    <main className='flex-1 pt-10 pb-32'>
+      {/* How We Work — intro + two-column process narrative */}
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>How We Work</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
-            Ontology based design leads to meaningful software. 
+            Our Process
           </h1>
-          <p className='max-w-2xl text-balance text-base text-text-muted md:text-lg'>
-            We aim for quick wins initially to establish trust and establish a short-hand. Once the direction is clear, execution is largely automated for us through our custom portal with frontier models integrated directly. We human-verify the output and apply our expert taste to fit your unique business context. 
+          <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+           We focus on quick wins first to unblock your immediate needs. We design your database structure and then we use our own custom solution to automate the manual task of coding. Lastly, we human-verify all production code with pre-AI programming knowledge.
           </p>
         </div>
-      </AnimatedSection>
-
-      {/* Portal Section */}
-      <AnimatedSection className='flex flex-col gap-8'>
-        <h2 className='text-center font-headline text-3xl uppercase text-text'>Your Private Portal</h2>
-        <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
-          <div className='relative bg-bg-card p-6'>
-            <BlueprintCorners />
-            <span className='mb-2 inline-flex h-5 w-5 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>01</span>
-            <h3 className='mb-3 font-headline text-lg uppercase text-accent'>Real-Time Visibility</h3>
-            <p className='text-sm text-text-muted'>Track every task, approval, and deliverable in one place. AI-generated summaries keep you informed without meetings.</p>
-          </div>
-          <div className='relative bg-bg-card p-6'>
-            <BlueprintCorners />
-            <span className='mb-2 inline-flex h-5 w-5 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>02</span>
-            <h3 className='mb-3 font-headline text-lg uppercase text-accent'>Direct Communication</h3>
-            <p className='text-sm text-text-muted'>Message the engineer building your product directly. No account managers, no telephone game.</p>
-          </div>
-          <div className='relative bg-bg-card p-6'>
-            <BlueprintCorners />
-            <span className='mb-2 inline-flex h-5 w-5 items-center justify-center border border-accent/30 font-mono text-[9px] text-accent'>03</span>
-            <h3 className='mb-3 font-headline text-lg uppercase text-accent'>One-Click Top-Up</h3>
-            <p className='text-sm text-text-muted'>Purchase additional hour blocks directly through your Portal. Unused time never expires.</p>
-          </div>
+        <div className='flex flex-col'>
+          {process.map(step => (
+            <div
+              key={step.title}
+              className='flex gap-6 border-t border-border py-grid-2'
+            >
+              <span className='w-1 shrink-0 self-stretch bg-accent' aria-hidden />
+              <div className='flex flex-col gap-3'>
+                <h3 className='text-balance font-headline text-lg font-bold uppercase tracking-tight text-accent'>
+                  {step.title}
+                </h3>
+                <p className='max-w-2xl text-base leading-relaxed text-text-muted'>{step.body}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </AnimatedSection>
 
-      <PhasesSection />
+      <PhasesSection showHowWeWorkLink={false} />
 
       {/* CTA Block */}
       <AnimatedSection>
@@ -63,18 +74,23 @@ export default function HowWeWorkPage() {
                 Ready to build?
               </h2>
               <p className='max-w-md text-sm leading-relaxed text-text-muted'>
-                Not sure where to start? The Opportunity Audit maps the phase
-                your business is in and pinpoints where custom software would pay
-                off first, in about two minutes.
+                Tell us what you are trying to build. We will scope the work,
+                timeline, and cost, with no obligation.
               </p>
             </div>
-            <div className='flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row'>
-              <Button asChild size='lg' className='w-full sm:w-auto'>
+            <div className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'>
+              <Button asChild size='lg' className='w-full'>
                 <Link href='/contact'>Start a Project</Link>
               </Button>
-              <Button asChild size='lg' variant='outline' className='w-full sm:w-auto'>
-                <Link href='/audit'>Opportunity Audit</Link>
-              </Button>
+              <div className='flex flex-col gap-2'>
+                <Button asChild size='lg' variant='outline' className='w-full border-2'>
+                  <Link href='/audit'>Opportunity Audit</Link>
+                </Button>
+                <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
+                  Not sure where to start? This two-minute audit pinpoints
+                  where custom software pays off first.
+                </p>
+              </div>
             </div>
           </div>
         </div>

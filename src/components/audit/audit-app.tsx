@@ -11,7 +11,7 @@ export function AuditApp() {
     useAudit()
 
   if (stage === 'results' && result) {
-    return <ResultsView result={result} onRestart={reset} />
+    return <ResultsView result={result} answers={answers} onRestart={reset} />
   }
 
   if (stage === 'wizard') {

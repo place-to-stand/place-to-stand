@@ -12,7 +12,7 @@ export default function AuditPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
       <AnimatedSection>
-        <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
+        <div className='mx-auto w-full max-w-content'>
           <AuditApp />
         </div>
       </AnimatedSection>

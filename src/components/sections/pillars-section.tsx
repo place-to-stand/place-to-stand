@@ -1,5 +1,4 @@
 import { Building2, Database, Filter } from 'lucide-react'
-import Link from 'next/link'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
@@ -39,16 +38,7 @@ export function PillarsSection() {
             </h2>
           </Reveal>
           <Reveal index={1} className='max-w-sm text-sm leading-relaxed text-text-muted'>
-            <p>We were building software before AI. Adapting to the new AI environemnt is key to our business and yours.</p>
-          </Reveal>
-          <Reveal index={2}>
-            <Link
-              href='/how-we-work'
-              className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
-            >
-              How we work
-              <span aria-hidden>&rarr;</span>
-            </Link>
+            <p>Own your software instead of renting SaaS, and the economics change. No per-seat fees, your data in one place, none of the bloat you never asked for.</p>
           </Reveal>
         </div>
 

@@ -30,14 +30,13 @@ export function WhoWeWorkWithSection() {
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Who We Work With</span>
           <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
-            Built for teams that have
+            We build for mid-market businesses
             <br />
-            outgrown off-the-shelf.
+            without in-house engineers.
           </h2>
           <p className='max-w-xl text-sm leading-relaxed text-text-muted'>
-            We&apos;re the engineering team for established mid-market businesses.
-            Companies with real processes and a technical mindset, but no in-house
-            engineers to build what&apos;s next.
+            Established companies with real processes and a technical mindset, but
+            no engineering team to build what&apos;s next. That&apos;s where we come in.
           </p>
         </div>
 

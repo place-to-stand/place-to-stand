@@ -39,14 +39,13 @@ export function HeroSection() {
           </div>
 
           {/* Supporting subtext + audit CTA */}
-          <div className='flex flex-col gap-8 md:flex-row md:items-end md:justify-between'>
+          <div className='flex flex-col gap-8 md:flex-row md:justify-between'>
             <div className='hero-reveal flex items-start gap-4' style={{ animationDelay: '3.3s' }}>
               {/* Vertical leader line */}
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
               <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>
-                Your governance, roles, and processes aren&apos;t a constraint. They're the blueprint we use to
-                design software that addresses your business needs directly. No more juggling a
-                stack of bloated SaaS dashboards.
+                We build software shaped to how your business actually runs. No
+                more juggling a stack of bloated SaaS dashboards.
               </p>
             </div>
             <div className='hero-reveal flex shrink-0 flex-col items-start gap-3 md:max-w-xs md:items-end md:text-right' style={{ animationDelay: '3.6s' }}>

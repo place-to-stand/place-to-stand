@@ -6,7 +6,12 @@ import {
   auditLeadSchema,
   type AuditLeadValues,
 } from '@/src/lib/validations/audit'
-import type { AuditResult } from '@/src/lib/audit/types'
+import type { AuditAnswers, AuditResult } from '@/src/lib/audit/types'
+import { summarizeAnswers } from '@/src/lib/audit/summarize-answers'
+import {
+  renderAuditClientEmail,
+  renderAuditTeamEmail,
+} from '@/src/lib/emails/audit-emails'
 
 const WEBSITE_SOURCE_DETAIL = 'https://placetostandagency.com/audit'
 
@@ -40,7 +45,8 @@ function summarizeResult(result: AuditResult): string[] {
 
 export async function sendAudit(
   values: AuditLeadValues,
-  result: AuditResult
+  result: AuditResult,
+  answers: AuditAnswers
 ): Promise<AuditActionResult> {
   const parsed = auditLeadSchema.safeParse(values)
   if (!parsed.success) {
@@ -88,20 +94,6 @@ export async function sendAudit(
     } as const
   }
 
-  if (!audienceId) {
-    return {
-      success: false,
-      message: 'Audience management is not configured. Please try again later.',
-    } as const
-  }
-
-  if (!portalLeadsEndpoint || !portalLeadsToken) {
-    return {
-      success: false,
-      message: 'Lead management is not configured. Please try again later.',
-    } as const
-  }
-
   const { name, email, company } = parsed.data
 
   const resend = new Resend(apiKey)
@@ -122,6 +114,17 @@ export async function sendAudit(
 
   detailLines.push('', 'Opportunity Audit result:', ...resultLines)
 
+  const answerGroups = summarizeAnswers(answers)
+  if (answerGroups.length > 0) {
+    detailLines.push('', 'All responses:')
+    answerGroups.forEach((group) => {
+      detailLines.push('', group.section)
+      group.items.forEach((item) => {
+        detailLines.push(`- ${item.prompt}`, `  ${item.answer}`)
+      })
+    })
+  }
+
   const clientEmailLines = [
     `Hi ${greetingName},`,
     '',
@@ -129,99 +132,14 @@ export async function sendAudit(
     '',
     ...resultLines,
     '',
-    "We'll follow up within one business day to walk through what to build first. If you want to add anything in the meantime, reach out to hello@placetostandagency.com.",
+    'Ready to start? Just reply to this email and we will take it from there.',
     '',
     'Talk soon,',
     'The Place To Stand Team',
   ]
 
-  // Add contact to Resend audience
-  const contactPayload: {
-    email: string
-    audienceId: string
-    unsubscribed: boolean
-    firstName?: string
-    lastName?: string
-  } = {
-    email,
-    audienceId,
-    unsubscribed: false,
-  }
-
-  if (firstName) {
-    contactPayload.firstName = firstName
-  }
-
-  if (lastName) {
-    contactPayload.lastName = lastName
-  }
-
-  try {
-    const { error: contactError } = await resend.contacts.create(contactPayload)
-
-    if (contactError) {
-      const normalizedMessage = contactError.message?.toLowerCase() ?? ''
-      const contactAlreadyExists = normalizedMessage.includes('already exists')
-
-      if (!contactAlreadyExists) {
-        console.error('Failed to add contact to Resend audience', contactError)
-        return {
-          success: false,
-          message: 'Failed to process your contact. Please try again later.',
-        } as const
-      }
-    }
-  } catch (error) {
-    console.error('Resend contact creation failed', error)
-    return {
-      success: false,
-      message: 'Failed to process your contact. Please try again later.',
-    } as const
-  }
-
-  // Create lead in portal
-  const portalPayload = {
-    name: trimmedName || name,
-    email,
-    company: trimmedCompany,
-    website: null,
-    message: ['Opportunity Audit result:', ...resultLines].join('\n'),
-    sourceDetail: WEBSITE_SOURCE_DETAIL,
-  }
-
-  try {
-    const portalResponse = await fetch(portalLeadsEndpoint, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${portalLeadsToken}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(portalPayload),
-    })
-
-    if (!portalResponse.ok) {
-      const errorText = await portalResponse.text()
-      console.error('Failed to create portal lead', {
-        status: portalResponse.status,
-        statusText: portalResponse.statusText,
-        body: errorText,
-        payload: portalPayload,
-      })
-
-      return {
-        success: false,
-        message: 'Failed to record your inquiry. Please try again later.',
-      } as const
-    }
-  } catch (error) {
-    console.error('Portal lead creation failed', error)
-    return {
-      success: false,
-      message: 'Failed to record your inquiry. Please try again later.',
-    } as const
-  }
-
-  // Send emails
+  // Send emails first — this is the core deliverable. If it fails, surface the
+  // error so the user can retry; everything below is best-effort enrichment.
   try {
     await resend.emails.send({
       from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
@@ -229,6 +147,13 @@ export async function sendAudit(
       replyTo: email,
       subject: `New Opportunity Audit from ${name}`,
       text: detailLines.join('\n'),
+      html: renderAuditTeamEmail({
+        name,
+        email,
+        company: trimmedCompany,
+        result,
+        answers,
+      }),
     })
 
     await resend.emails.send({
@@ -237,6 +162,7 @@ export async function sendAudit(
       replyTo: 'hello@placetostandagency.com',
       subject: 'Your Place To Stand Opportunity Audit',
       text: clientEmailLines.join('\n'),
+      html: renderAuditClientEmail({ greetingName, result }),
     })
   } catch (error) {
     console.error('Email sending failed', error)
@@ -244,6 +170,84 @@ export async function sendAudit(
       success: false,
       message: 'Failed to send confirmation email. Please try again later.',
     } as const
+  }
+
+  // Best-effort: add contact to Resend audience. Never blocks success.
+  if (audienceId) {
+    const contactPayload: {
+      email: string
+      audienceId: string
+      unsubscribed: boolean
+      firstName?: string
+      lastName?: string
+    } = {
+      email,
+      audienceId,
+      unsubscribed: false,
+    }
+
+    if (firstName) {
+      contactPayload.firstName = firstName
+    }
+
+    if (lastName) {
+      contactPayload.lastName = lastName
+    }
+
+    try {
+      const { error: contactError } =
+        await resend.contacts.create(contactPayload)
+
+      if (contactError) {
+        const normalizedMessage = contactError.message?.toLowerCase() ?? ''
+        const contactAlreadyExists = normalizedMessage.includes('already exists')
+
+        if (!contactAlreadyExists) {
+          console.error('Failed to add contact to Resend audience', contactError)
+        }
+      }
+    } catch (error) {
+      console.error('Resend contact creation failed', error)
+    }
+  } else {
+    console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
+  }
+
+  // Best-effort: create lead in portal. Never blocks success.
+  if (portalLeadsEndpoint && portalLeadsToken) {
+    const portalPayload = {
+      name: trimmedName || name,
+      email,
+      company: trimmedCompany,
+      website: null,
+      message: ['Opportunity Audit result:', ...resultLines].join('\n'),
+      sourceDetail: WEBSITE_SOURCE_DETAIL,
+    }
+
+    try {
+      const portalResponse = await fetch(portalLeadsEndpoint, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${portalLeadsToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(portalPayload),
+      })
+
+      if (!portalResponse.ok) {
+        const errorText = await portalResponse.text()
+        console.error('Failed to create portal lead', {
+          status: portalResponse.status,
+          statusText: portalResponse.statusText,
+          body: errorText,
+          payload: portalPayload,
+        })
+      }
+    } catch (error) {
+      console.error('Portal lead creation failed', error)
+    }
+  } else {
+    console.warn('Portal lead endpoint/token not set; skipping portal lead')
   }
 
   return {

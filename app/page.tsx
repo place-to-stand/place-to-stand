@@ -39,19 +39,24 @@ export default function HomePage() {
                 </Reveal>
                 <Reveal index={1} className='max-w-md text-sm leading-relaxed text-text-muted'>
                   <p>
-                    Not sure where to start? The Opportunity Audit maps the phase
-                    your business is in and pinpoints where custom software would
-                    pay off first, in about two minutes.
+                    Tell us what you are trying to build. We will scope the work,
+                    timeline, and cost, with no obligation.
                   </p>
                 </Reveal>
               </div>
-              <Reveal index={2} className='flex w-full shrink-0 flex-col gap-3 sm:w-auto sm:flex-row'>
-                <Button asChild size='lg' className='w-full sm:w-auto'>
+              <Reveal index={2} className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'>
+                <Button asChild size='lg' className='w-full'>
                   <Link href='/contact'>Start a Project</Link>
                 </Button>
-                <Button asChild size='lg' variant='outline' className='w-full sm:w-auto'>
-                  <Link href='/audit'>Opportunity Audit</Link>
-                </Button>
+                <div className='flex flex-col gap-2'>
+                  <Button asChild size='lg' variant='outline' className='w-full border-2'>
+                    <Link href='/audit'>Opportunity Audit</Link>
+                  </Button>
+                  <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
+                    Not sure where to start? This two-minute audit pinpoints
+                    where custom software pays off first.
+                  </p>
+                </div>
               </Reveal>
             </div>
           </div>
