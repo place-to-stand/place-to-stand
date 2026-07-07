@@ -40,7 +40,7 @@ export function HeroSection() {
 
           {/* Supporting subtext + audit CTA */}
           <div className='flex flex-col gap-8 md:flex-row md:justify-between'>
-            <div className='hero-reveal flex items-start gap-4' style={{ animationDelay: '3.3s' }}>
+            <div className='hero-reveal flex self-start gap-4' style={{ animationDelay: '3.3s' }}>
               {/* Vertical leader line */}
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
               <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>

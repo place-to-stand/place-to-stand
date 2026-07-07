@@ -1,5 +1,6 @@
 export const NAV_LINKS = [
   { href: '/services' as const, label: 'Services' },
+  { href: '/clients' as const, label: 'Clients' },
   { href: '/how-we-work' as const, label: 'How We Work' },
   { href: '/team' as const, label: 'Team' },
   // Temporarily unlinked — Field Notes content in progress, restore in a future update
