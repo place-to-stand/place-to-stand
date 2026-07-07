@@ -2,6 +2,8 @@ import { Cog, DraftingCompass, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { vendors } from '@/src/lib/vendors'
+import { vendorIcons } from '@/src/components/icons/vendor-icons'
 
 const facets = [
   {
@@ -78,8 +80,37 @@ export function ManifestoSection() {
           </div>
         </Reveal>
 
+        {/* Powered-by strip — the vendors behind our AI-native builds */}
+        <Reveal index={3} className='flex flex-col gap-4 border-t border-border pt-grid-1'>
+          <div className='flex flex-col gap-2'>
+            <span className='bp-label font-mono'>Powered By</span>
+            <p className='max-w-xl text-sm text-text-muted'>
+              The trusted vendors and platforms we build on to ship exactly what you need.
+            </p>
+          </div>
+          <div className='flex flex-wrap items-center gap-x-8 gap-y-4'>
+            {vendors.map(vendor => {
+              const Icon = vendorIcons[vendor.name]
+              return (
+                <div key={vendor.name} className='flex items-center gap-2.5'>
+                  {Icon && (
+                    <Icon
+                      className='h-5 w-5 shrink-0'
+                      style={{ color: vendor.color }}
+                      aria-hidden
+                    />
+                  )}
+                  <span className='font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+                    {vendor.name}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        </Reveal>
+
         {/* Desktop-only link: stays below the cards */}
-        <Reveal index={3} className='hidden md:block'>
+        <Reveal index={4} className='hidden md:block'>
           <Link
             href='/team'
             className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'

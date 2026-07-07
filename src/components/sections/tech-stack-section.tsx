@@ -31,28 +31,25 @@ export function TechStackSection({
         {/* Vendor logo grid */}
         <Reveal index={2} className='relative'>
           <BlueprintCorners size={16} />
-          <div className='grid grid-cols-3 gap-px border border-border bg-border sm:grid-cols-4 md:grid-cols-7'>
+          <div className='grid grid-cols-3 gap-6 sm:grid-cols-4 md:grid-cols-7'>
             {vendors.map(vendor => {
               const Icon = vendorIcons[vendor.name]
               return (
-                <a
+                <div
                   key={vendor.name}
-                  href={vendor.url}
-                  target='_blank'
-                  rel='noreferrer noopener'
-                  aria-label={`${vendor.name} — ${vendor.description}`}
-                  className='group flex flex-col items-center justify-center gap-3 bg-bg-card p-6 transition-colors'
+                  className='flex flex-col items-center justify-center gap-3 border border-border p-6'
                 >
                   {Icon && (
                     <Icon
-                      className='h-8 w-8 text-text-muted transition-colors group-hover:text-accent'
+                      className='h-8 w-8'
+                      style={{ color: vendor.color }}
                       aria-hidden
                     />
                   )}
-                  <span className='font-mono text-[10px] uppercase tracking-wider text-text-muted transition-colors group-hover:text-accent'>
+                  <span className='font-mono text-[10px] uppercase tracking-wider text-text-muted'>
                     {vendor.name}
                   </span>
-                </a>
+                </div>
               )
             })}
           </div>
