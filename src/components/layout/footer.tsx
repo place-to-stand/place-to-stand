@@ -11,7 +11,7 @@ export function Footer() {
             Place To Stand
           </span>
           <p className='max-w-md text-sm text-text-muted'>
-            Austion, TX - Brooklyn, NY
+            Austin, TX - Brooklyn, NY
           </p>
           <span className='mt-2 font-mono text-md tracking-widest text-border-light' aria-hidden>
             PTS &middot; placetostandagency.com
