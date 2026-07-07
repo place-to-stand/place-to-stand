@@ -15,7 +15,7 @@ export default function HomePage() {
     <main className='flex-1'>
       <HeroSection />
       <PhasesSection /> 
-      <WhoWeWorkWithSection /> 
+      <WhoWeWorkWithSection />
       <PillarsSection />
       <ManifestoSection />  
       <ServicesPreview />
