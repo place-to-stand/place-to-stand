@@ -42,7 +42,7 @@ export function WhoWeWorkWithSection() {
         </div>
 
         {/* Profile cards */}
-        <div className='grid gap-6 md:grid-cols-3'>
+        <div className='order-3 grid gap-6 md:order-2 md:grid-cols-3'>
           {profiles.map(profile => (
             <div
               key={profile.number}
@@ -62,10 +62,10 @@ export function WhoWeWorkWithSection() {
           ))}
         </div>
 
-        {/* Clients link */}
+        {/* Clients link — before the cards on mobile, after on desktop */}
         <Link
           href='/clients'
-          className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+          className='order-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80 md:order-3'
         >
           See our clients
           <span aria-hidden>&rarr;</span>
