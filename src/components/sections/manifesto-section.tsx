@@ -1,24 +1,28 @@
-import { Cog, DraftingCompass, MessageSquare } from 'lucide-react'
 import Link from 'next/link'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import {
+  DraftingGraphic,
+  AiNativeGraphic,
+  DirectAccessGraphic,
+} from '@/src/components/graphics/home-graphics'
 
 const facets = [
   {
     title: 'Senior Builders',
-    Icon: DraftingCompass,
+    Graphic: DraftingGraphic,
     description:
       'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
   },
   {
     title: 'AI-Native',
-    Icon: Cog,
+    Graphic: AiNativeGraphic,
     description:
       'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
   },
   {
     title: 'Direct Access',
-    Icon: MessageSquare,
+    Graphic: DirectAccessGraphic,
     description:
       'You work with the builder directly. No middle management, no handoffs, no telephone game.',
   },
@@ -66,9 +70,7 @@ export function ManifestoSection() {
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                     {facet.title}
                   </h3>
-                  <span className='inline-flex h-9 w-9 shrink-0 items-center justify-center'>
-                    <facet.Icon className='h-4 w-4 text-accent' aria-hidden />
-                  </span>
+                  <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
                 <p className='text-sm leading-relaxed text-text-muted'>
                   {facet.description}

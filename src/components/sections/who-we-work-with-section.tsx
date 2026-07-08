@@ -1,23 +1,31 @@
 import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import {
+  LeanMarketGraphic,
+  FounderGraphic,
+  DesignLedGraphic,
+} from '@/src/components/graphics/home-graphics'
 
 const profiles = [
   {
     number: '01',
     title: 'The Lean Mid-Market',
+    Graphic: LeanMarketGraphic,
     description:
       "You're established with real processes in place, but not big enough to justify a full-time dev team. You need senior engineering to optimize and extend your systems without the cost of hiring one.",
   },
   {
     number: '02',
     title: 'The Technical Founder',
+    Graphic: FounderGraphic,
     description:
       "You're technical enough to prototype in AI tools and ship a scrappy v1. But you've hit the ceiling where vibe-coded solutions break, and you need real engineering to make it production-grade.",
   },
   {
     number: '03',
     title: 'The Design-Led Team',
+    Graphic: DesignLedGraphic,
     description:
       'You have the vision, the designers, maybe some technical staff, but no engineering team to execute. You know exactly what you want built. You just need the builders to make it real.',
   },
@@ -49,6 +57,7 @@ export function WhoWeWorkWithSection() {
               className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
             >
               <BlueprintCorners size={12} />
+              <profile.Graphic className='absolute right-4 top-4 h-grid-2 w-grid-2 md:right-6 md:top-6' />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
                 {profile.number}
               </span>

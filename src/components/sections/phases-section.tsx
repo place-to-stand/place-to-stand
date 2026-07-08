@@ -3,11 +3,17 @@ import { AnimatedSection, Reveal } from '@/src/components/layout/animated-sectio
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
+import {
+  PrototypeGraphic,
+  RefineGraphic,
+  ScaleGraphic,
+  RnDGraphic,
+} from '@/src/components/graphics/home-graphics'
 
 const phases = [
   {
-    number: '01',
     title: 'Prototype',
+    Graphic: PrototypeGraphic,
     points: [
       'Test new product ideas',
       'Prove product-market fit',
@@ -15,8 +21,8 @@ const phases = [
     ],
   },
   {
-    number: '02',
     title: 'Refine',
+    Graphic: RefineGraphic,
     points: [
       'Streamline existing systems',
       'Automate the manual work',
@@ -24,8 +30,8 @@ const phases = [
     ],
   },
   {
-    number: '03',
     title: 'Scale',
+    Graphic: ScaleGraphic,
     points: [
       'Re-architect your stack',
       'Rethink operations for demand',
@@ -33,8 +39,8 @@ const phases = [
     ],
   },
   {
-    number: '04',
     title: 'R&D',
+    Graphic: RnDGraphic,
     points: [
       'Analyze your data',
       'Unlock new revenue vectors',
@@ -42,6 +48,30 @@ const phases = [
     ],
   },
 ]
+
+/** One scrolling row of the trust banner. Vendors are duplicated so the loop is
+ *  seamless; `reverse` flips the scroll direction. */
+function TrustTrack({ reverse = false, className }: { reverse?: boolean; className?: string }) {
+  return (
+    <div className={`marquee ${className ?? ''}`}>
+      <div className={`marquee-track ${reverse ? 'marquee-track-rev' : ''}`}>
+        {[...vendors, ...vendors].map((vendor, i) => {
+          const Icon = vendorIcons[vendor.name]
+          return (
+            <div key={`${vendor.name}-${i}`} className='flex shrink-0 items-center gap-2.5 px-6'>
+              {Icon && (
+                <Icon className='h-7 w-7 shrink-0' style={{ color: vendor.color }} aria-hidden />
+              )}
+              <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+                {vendor.name}
+              </span>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
 
 export function PhasesSection({
   showHowWeWorkLink = true,
@@ -83,21 +113,23 @@ export function PhasesSection({
           )}
         </div>
 
-        {/* Phase grid — 4 cols, blueprint-style with corner marks */}
+        {/* Phase grid: 4 cols, blueprint-style with corner marks */}
         <Reveal index={2} className='relative'>
           <BlueprintCorners size={16} />
           <div className='grid gap-px border border-border bg-border md:grid-cols-4'>
-            {phases.map(phase => (
+            {phases.map(phase => {
+              const Graphic = phase.Graphic
+              return (
               <div
-                key={phase.number}
+                key={phase.title}
                 className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
               >
-                <div className='flex flex-col gap-1'>
-                  <span className='font-mono text-xs text-accent'>{phase.number}</span>
-                  <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                    {phase.title}
-                  </h3>
-                </div>
+                {Graphic && (
+                  <Graphic className='absolute right-4 top-4 h-grid-3 w-grid-3 md:right-6 md:top-6 md:h-grid-2 md:w-grid-2' />
+                )}
+                <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
+                  {phase.title}
+                </h3>
                 <ul className='flex flex-col gap-2 text-sm leading-relaxed text-text-muted'>
                   {phase.points.map(point => (
                     <li key={point} className='flex gap-2'>
@@ -107,7 +139,8 @@ export function PhasesSection({
                   ))}
                 </ul>
               </div>
-            ))}
+              )
+            })}
           </div>
         </Reveal>
 
@@ -125,25 +158,11 @@ export function PhasesSection({
                 and human-verified for production-grade quality.
               </p>
             </div>
-            <div className='relative grid grid-cols-2 gap-x-6 gap-y-5 p-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7'>
-                <BlueprintCorners size={16} />
-                {vendors.map(vendor => {
-                  const Icon = vendorIcons[vendor.name]
-                  return (
-                    <div key={vendor.name} className='flex items-center gap-2.5'>
-                      {Icon && (
-                        <Icon
-                          className='h-7 w-7 shrink-0'
-                          style={{ color: vendor.color }}
-                          aria-hidden
-                        />
-                      )}
-                      <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
-                        {vendor.name}
-                      </span>
-                    </div>
-                  )
-                })}
+            {/* Auto-scrolling trust banner: one row on desktop, two rows scrolling
+                opposite directions on mobile. Full-bleed to the section edges. */}
+            <div className='-mx-6 flex flex-col gap-4 lg:-mx-12'>
+              <TrustTrack />
+              <TrustTrack reverse className='md:hidden' />
             </div>
           </Reveal>
         )}

@@ -17,6 +17,7 @@
   --color-accent-secondary: #b4b4b4;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
+  --color-line: #6e7078;
   --grid: 24px;
   --grid-dot: #2a2b30;
   --grid-line: #2e2f36;
@@ -245,6 +246,210 @@ body {
   .icon-spin-slow {
     animation: none;
     opacity: 1;
+  }
+}
+
+/* ─── Blueprint graphic draw-in + ongoing loops ───
+   Powers the homepage schematics (<BlueprintGraphic>). Three element roles,
+   tagged in the SVG body:
+     .bp-line — structural strokes; draw in via stroke-dashoffset, staggered by --draw-i.
+     .bp-node — the single accent highlight; snaps in (opacity + scale) after the lines.
+     .bp-fx   — loop-dedicated elements (flow line, scan bar, gear); fade in, then loop.
+   The wrapper toggles data-visible='true' on first scroll into view. --bp-draw-base
+   offsets the whole sequence (the hero piece uses it to start after its intro). */
+.bp-draw .bp-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms);
+}
+.bp-draw[data-visible='true'] .bp-line {
+  stroke-dashoffset: 0;
+}
+
+.bp-draw .bp-node {
+  opacity: 0;
+  transform: scale(0.4);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 400ms ease-out,
+    transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms);
+}
+.bp-draw[data-visible='true'] .bp-node {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bp-draw .bp-fx {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+  transition-delay: calc(var(--bp-draw-base, 0ms) + 800ms);
+}
+.bp-draw[data-visible='true'] .bp-fx {
+  opacity: 1;
+}
+
+/* Ongoing loops — start only once visible, and after the draw-in has finished. */
+@keyframes bp-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.8);
+  }
+}
+.bp-loop-pulse[data-visible='true'] .bp-node {
+  animation: bp-pulse 4.5s ease-in-out infinite;
+  animation-delay: calc(var(--bp-draw-base, 0ms) + 1000ms);
+}
+
+@keyframes bp-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(181, 245, 66, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(181, 245, 66, 0.5));
+  }
+}
+.bp-loop-breathe[data-visible='true'] .bp-node {
+  animation: bp-breathe 4s ease-in-out infinite;
+  animation-delay: calc(var(--bp-draw-base, 0ms) + 1000ms);
+}
+
+/* Marching dashes along an accent guide line (element sets its own dasharray). */
+@keyframes bp-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+.bp-loop-travel[data-visible='true'] .bp-flow {
+  animation: bp-flow 1.6s linear infinite;
+  animation-delay: calc(var(--bp-draw-base, 0ms) + 1200ms);
+}
+
+@keyframes bp-scan {
+  0% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  20%,
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+}
+.bp-loop-scan[data-visible='true'] .bp-scan {
+  animation: bp-scan 6s ease-in-out infinite;
+  animation-delay: calc(var(--bp-draw-base, 0ms) + 1200ms);
+}
+
+.bp-loop-gear[data-visible='true'] .bp-gear {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: icon-spin-slow 16s linear infinite;
+  animation-delay: calc(var(--bp-draw-base, 0ms) + 1200ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-draw .bp-line,
+  .bp-draw .bp-node,
+  .bp-draw .bp-fx {
+    transition: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: none;
+  }
+  .bp-loop-pulse .bp-node,
+  .bp-loop-breathe .bp-node,
+  .bp-loop-travel .bp-flow,
+  .bp-loop-scan .bp-scan,
+  .bp-loop-gear .bp-gear {
+    animation: none;
+  }
+}
+
+/* ─── Hero story timeline ───
+   The hero's looping five-beat story (<HeroGraphic>). A JS beat sequencer sets
+   per-element opacity/transform inline; these rules tween it. Namespaced under
+   [data-hero-story] so they can't collide with the .bp-* schematic system. */
+[data-hero-story] .hs-anim {
+  transition:
+    opacity 600ms ease,
+    transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes hs-breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0 rgba(181, 245, 66, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px rgba(181, 245, 66, 0.55));
+  }
+}
+[data-hero-story] .hs-core {
+  animation: hs-breathe 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-story] .hs-anim {
+    transition: none;
+  }
+  [data-hero-story] .hs-core {
+    animation: none;
+  }
+}
+
+/* ─── Auto-scrolling trust banner ───
+   A seamless vendor marquee. Items are rendered twice inside .marquee-track and
+   the track slides by -50% (one full copy) on a loop. .marquee-track-rev runs the
+   same keyframe in reverse for the opposite direction. Edges fade via a mask. */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 48s linear infinite;
+}
+.marquee-track-rev {
+  animation-direction: reverse;
+  animation-duration: 40s;
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+/* Slower scroll on mobile, where the two rows are more prominent. */
+@media (max-width: 767px) {
+  .marquee-track {
+    animation-duration: 80s;
+  }
+  .marquee-track-rev {
+    animation-duration: 68s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
   }
 }
 
