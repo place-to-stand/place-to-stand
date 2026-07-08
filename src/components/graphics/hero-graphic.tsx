@@ -1,256 +1,247 @@
-'use client'
-
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { useInView } from './blueprint-graphic'
-import { AsanaLogo, MondayLogo, SlackLogo, TrelloLogo, NotionLogo } from './saas-logos'
+import type { CSSProperties, ReactNode } from 'react'
+import { BlueprintGraphic } from './blueprint-graphic'
 
 /**
- * Hero signature piece — a looping four-beat story that plays after the hero
- * intro and repeats, leaning into the "Place to Stand" metaphor: the PTS Portal
- * is the platform, and the user ends up standing on top of it.
- *   0 TOOL OVERLOAD  — the user, centred, tethered to scattered SaaS tools.
- *   1 MEET PTS       — the tools dim; the lime PTS core appears where the user was,
- *                      and the user rises to stand above it (first accent).
- *   2 YOUR DASHBOARD — the tools collapse into the PTS Portal, now a solid platform
- *                      the user stands on.
- *   3 THINK BIGGER   — strategy ideas rise from the user, up off the top.
+ * Hero signature piece — a plain side-by-side that states the headline outright:
+ * off-the-shelf software is built for everyone; we build for you.
  *
- * Self-contained: a JS beat sequencer toggles `beat`; per-element opacity/transform
- * is set inline and CSS (.hs-anim in globals.css) tweens it. Reuses `useInView`
- * for the in-view gate + reduced-motion detection; under reduced motion it parks on
- * beat 2 (user standing on the Portal) with no timer.
+ *   LEFT   "Built for everyone" — a whole stack of generic dashboards fanned
+ *          like cards (many to juggle), the front one overloaded with
+ *          mismatched modules: hatching, a cramped bar chart, dot rows and data
+ *          lines. One-size-fits-all noise, but rendered in the same thin,
+ *          hollow blueprint language as the rest of the site.
+ *   ARROW  annotated with the transition: consolidate + custom fit.
+ *   RIGHT  "Built for you" — one app, pared to a clean sidebar (one active item)
+ *          and a single insight widget: a rising accent trend with a live node.
+ *
+ * Same schematic vocabulary as home-graphics.tsx (fill-bg-card hollow shapes,
+ * stroke-line, one accent highlight). Entrance is a sequenced fade-and-rise
+ * (see .hero-compare in globals.css): the three generic dashboards come up one
+ * by one, then the arrow, then your app last. The wrapper (<BlueprintGraphic>)
+ * only supplies the in-view gate, reduced-motion handling, and the intro offset.
  */
 
-const CAPTIONS = ['TOOL OVERLOAD', 'MEET PTS', 'YOUR DASHBOARD', 'THINK BIGGER']
-const HOLDS = [3200, 2600, 3000, 3400] // ms held on each beat
+/** Sets a group's entrance delay (ms) within the sequenced reveal. */
+const cmp = (delayMs: number) => ({ ['--cmp-delay']: `${delayMs}ms` }) as CSSProperties
 
-// Opacity of each element group per beat [0..3].
-const OP = {
-  logos: [1, 0.4, 0, 0],
-  tethers: [0.7, 0.35, 0, 0],
-  ring: [1, 1, 0, 0], // the hub ring — only while the user is the centre
-  core: [0, 1, 1, 1],
-  portal: [0, 0, 1, 1],
-  thoughts: [0, 0, 0, 1],
-}
+type Rect = { x: number; y: number; w: number; h: number }
 
-const CENTER = { x: 100, y: 94 } // the hub: the user (beat 0), then the Portal core
-const USER = { x: 100, y: 52, r: 17 } // the user's resting spot — standing on top
-const USER_DROP = CENTER.y - USER.y // translateY that drops the user to CENTER for beat 0
-const LOGO_S = 0.7
-const LOGO_O = 12 * LOGO_S // half of the 24-grid glyph, scaled
-
-// Tools orbit the hub.
-const SCATTER = [
-  { x: 100, y: 40 },
-  { x: 151, y: 77 },
-  { x: 132, y: 138 },
-  { x: 68, y: 138 },
-  { x: 49, y: 77 },
+// ── Generic app: overloaded, misaligned modules in the front dashboard. All
+//    hollow; `deco` adds interior noise. Columns align, rows don't. ──
+type Tile = Rect & { deco?: 'hatch' | 'bars' | 'dots' | 'text' }
+const CLUTTER: Tile[] = [
+  { x: 20, y: 51, w: 19, h: 11, deco: 'text' },
+  { x: 20, y: 64, w: 19, h: 15, deco: 'hatch' },
+  { x: 20, y: 81, w: 19, h: 10 },
+  { x: 20, y: 93, w: 19, h: 20, deco: 'bars' },
+  { x: 41, y: 51, w: 19, h: 8 },
+  { x: 41, y: 61, w: 19, h: 17, deco: 'text' },
+  { x: 41, y: 80, w: 19, h: 7, deco: 'dots' },
+  { x: 41, y: 89, w: 19, h: 24, deco: 'hatch' },
+  { x: 62, y: 51, w: 18, h: 16, deco: 'text' },
+  { x: 62, y: 69, w: 18, h: 10 },
+  { x: 62, y: 81, w: 18, h: 12, deco: 'hatch' },
+  { x: 62, y: 95, w: 18, h: 18, deco: 'bars' },
 ]
-const LOGOS = [AsanaLogo, MondayLogo, SlackLogo, TrelloLogo, NotionLogo]
 
-/** Point on a circle of radius r (centre cx,cy) in the direction of (px,py). */
-function edge(cx: number, cy: number, px: number, py: number, r: number) {
-  const dx = px - cx
-  const dy = py - cy
-  const len = Math.hypot(dx, dy) || 1
-  return { x: cx + (dx / len) * r, y: cy + (dy / len) * r }
+/** Diagonal hatch fill (two parallel sets) inside a tile. */
+function hatch({ x, y, w, h }: Rect): ReactNode {
+  const fs = [0.25, 0.5, 0.75, 1]
+  return (
+    <>
+      {fs.map(f => (
+        <line key={`ha${f}`} x1={x + w * f} y1={y} x2={x} y2={y + h * f} className='stroke-line' strokeWidth='0.5' />
+      ))}
+      {fs.map(f => (
+        <line key={`hb${f}`} x1={x + w} y1={y + h * (1 - f)} x2={x + w * (1 - f)} y2={y + h} className='stroke-line' strokeWidth='0.5' />
+      ))}
+    </>
+  )
 }
 
-/** A person, from lucide's `User` bust glyph, placed + scaled at (cx,cy). */
-function Person({ cx, cy, s }: { cx: number; cy: number; s: number }) {
+/** A cramped bar chart inside a tile. */
+function bars({ x, y, w, h }: Rect): ReactNode {
+  const base = y + h - 3
+  const hs = [0.4, 0.7, 0.5, 0.9, 0.6, 0.8]
+  const bw = (w - 6) / hs.length
   return (
-    <g transform={`translate(${cx - 12 * s} ${cy - 12 * s}) scale(${s})`}>
-      <path
-        d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"
-        className="stroke-border-light"
-        strokeWidth="1.4"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="7" r="4" className="fill-bg stroke-border-light" strokeWidth="1.4" />
+    <>
+      <line x1={x + 3} y1={base} x2={x + w - 3} y2={base} className='stroke-line' strokeWidth='0.55' />
+      {hs.map((f, i) => (
+        <line
+          key={`br${i}`}
+          x1={x + 3 + i * bw + bw / 2}
+          y1={base}
+          x2={x + 3 + i * bw + bw / 2}
+          y2={base - (h - 8) * f}
+          className='stroke-line'
+          strokeWidth={bw - 1.2}
+        />
+      ))}
+    </>
+  )
+}
+
+/** A row of toggle/status dots. */
+function dots({ x, y, w, h }: Rect): ReactNode {
+  const cy = y + h / 2
+  return (
+    <>
+      {[0.2, 0.4, 0.6, 0.8].map(f => (
+        <circle key={`dt${f}`} cx={x + w * f} cy={cy} r='1.3' className='fill-bg stroke-line' strokeWidth='0.55' />
+      ))}
+    </>
+  )
+}
+
+/** Stacked data-row lines, count + widths adapting to the tile height. */
+function textRows({ x, y, w, h }: Rect): ReactNode {
+  const n = Math.max(2, Math.min(6, Math.floor((h - 3) / 4)))
+  const widths = [0.9, 0.6, 0.85, 0.5, 0.78, 0.45]
+  const gap = (h - 7) / n
+  return (
+    <>
+      {Array.from({ length: n }, (_, i) => (
+        <line
+          key={`tx${i}`}
+          x1={x + 3}
+          y1={y + 5 + i * gap}
+          x2={x + 3 + (w - 6) * widths[i % widths.length]}
+          y2={y + 5 + i * gap}
+          className='stroke-line'
+          strokeWidth='0.7'
+          strokeLinecap='round'
+        />
+      ))}
+    </>
+  )
+}
+
+const DECO = { hatch, bars, dots, text: textRows }
+
+// ── The generic stack: front dashboard (with content) sits on the right of the
+//    cluster; the deck recedes up and to the left so their title bars peek out. ──
+const FRONT: Rect = { x: 30, y: 38, w: 74, h: 84 }
+const BEHIND: Rect[] = [
+  { x: 14, y: 24, w: 74, h: 84 },
+  { x: 22, y: 31, w: 74, h: 84 },
+]
+// Clutter is authored for a front at x=14; shift it to match FRONT's position.
+const CLUTTER_DX = FRONT.x - 14
+
+// ── Your app: a clean sidebar + one insight widget. ──
+const RIGHT_WIN: Rect = { x: 184, y: 38, w: 76, h: 84 }
+const RAIL: Rect = { x: 190, y: 53, w: 14, h: 58 }
+const NAV: Rect[] = [
+  { x: 194, y: 57, w: 8, h: 6 }, // active (accent)
+  { x: 194, y: 67, w: 8, h: 6 },
+  { x: 194, y: 77, w: 8, h: 6 },
+  { x: 194, y: 87, w: 8, h: 6 },
+]
+const HEADER: Rect = { x: 210, y: 53, w: 44, h: 7 }
+const WIDGET: Rect = { x: 210, y: 62, w: 44, h: 30 } // clean insight widget
+const FOOTER: Rect = { x: 210, y: 97, w: 44, h: 7 }
+
+/** App window chrome: rounded frame + title bar + three dots. Thin borders. */
+function AppWindow({ x, y, w, h }: Rect) {
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx='3' className='fill-bg-card stroke-line' strokeWidth='1' />
+      <line x1={x} y1={y + 11} x2={x + w} y2={y + 11} className='stroke-line' strokeWidth='0.7' />
+      {[x + 8, x + 13, x + 18].map(dx => (
+        <circle key={`wd${dx}`} cx={dx} cy={y + 5.5} r='1.3' className='fill-bg stroke-line' strokeWidth='0.6' />
+      ))}
     </g>
   )
 }
 
 export function HeroGraphic({ className }: { className?: string }) {
-  const { ref, inView } = useInView<SVGSVGElement>()
-  const [beat, setBeat] = useState(0)
-  const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
-
-  useEffect(() => {
-    if (!inView) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setBeat(2) // park on the resolved frame: user standing on the Portal
-      return
-    }
-    let b = 0
-    setBeat(0)
-    const step = () => {
-      timer.current = setTimeout(() => {
-        b = (b + 1) % CAPTIONS.length
-        setBeat(b)
-        step()
-      }, HOLDS[b])
-    }
-    step()
-    return () => clearTimeout(timer.current)
-  }, [inView])
-
-  const anim = (opacity: number, extra?: CSSProperties): CSSProperties => ({ opacity, ...extra })
-
   return (
-    <svg
-      ref={ref}
-      data-hero-story
-      viewBox="0 0 200 200"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className={className}
+    <BlueprintGraphic
+      viewBox='0 0 274 150'
+      drawDelayMs={3600}
+      className={`hero-compare ${className ?? ''}`}
     >
-      {/* ── Tethers: tools pull on the hub (the user, then the app) ── */}
-      {SCATTER.map((n, i) => {
-        const a = edge(n.x, n.y, CENTER.x, CENTER.y, 10)
-        const b = edge(CENTER.x, CENTER.y, n.x, n.y, USER.r)
-        return (
-          <line
-            key={`t${i}`}
-            className="hs-anim stroke-border-light"
-            x1={a.x}
-            y1={a.y}
-            x2={b.x}
-            y2={b.y}
-            strokeWidth="1"
-            strokeLinecap="round"
-            style={anim(OP.tethers[beat])}
-          />
-        )
-      })}
+      {/* ── Titles ── */}
+      <text x='62' y='18' textAnchor='middle' className='fill-text-muted font-mono' fontSize='6.5' letterSpacing='0.5'>
+        Built for everyone
+      </text>
+      <text x='222' y='18' textAnchor='middle' className='fill-accent font-mono' fontSize='6.5' letterSpacing='0.5'>
+        Built for you
+      </text>
 
-      {/* ── Scattered SaaS logos → collapse into the Portal at beat 2 ── */}
-      {SCATTER.map((n, i) => {
-        const Logo = LOGOS[i]
-        const collapsed = beat >= 2
-        const cx = collapsed ? CENTER.x : n.x
-        const cy = collapsed ? CENTER.y : n.y
-        return (
-          <g
-            key={`l${i}`}
-            className="hs-anim text-text-muted"
-            style={anim(OP.logos[beat], { transform: `translate(${cx - LOGO_O}px, ${cy - LOGO_O}px)` })}
-          >
-            <g transform={`scale(${LOGO_S})`}>
-              <Logo />
-            </g>
-          </g>
-        )
-      })}
-
-      {/* ── The PTS Portal platform (beats 2+) — what the user stands on ── */}
-      <g className="hs-anim" style={anim(OP.portal[beat], { transform: `translateY(${beat >= 2 ? 0 : 6}px)` })}>
-        <rect x="56" y="63" width="88" height="53" rx="2" className="fill-bg stroke-border-light" strokeWidth="1.75" />
-        <g className="stroke-accent" strokeWidth="1.75" fill="none" strokeLinecap="round">
-          <path d="M56 71 V63 H64" />
-          <path d="M136 63 H144 V71" />
-          <path d="M56 108 V116 H64" />
-          <path d="M136 116 H144 V108" />
+      {/* ── Generic stack: dashboards come up one by one ── */}
+      <g className='cmp-in' style={cmp(0)}>
+        <AppWindow {...BEHIND[0]} />
+      </g>
+      <g className='cmp-in' style={cmp(200)}>
+        <AppWindow {...BEHIND[1]} />
+      </g>
+      <g className='cmp-in' style={cmp(400)}>
+        <AppWindow {...FRONT} />
+        <g transform={`translate(${CLUTTER_DX} 0)`}>
+          {CLUTTER.map((t, idx) => {
+            const Deco = t.deco ? DECO[t.deco] : null
+            return (
+              <g key={`c${idx}`}>
+                <rect x={t.x} y={t.y} width={t.w} height={t.h} className='fill-bg-card stroke-line' strokeWidth='0.75' />
+                {Deco && Deco(t)}
+              </g>
+            )
+          })}
         </g>
-        <text x="100" y="110" textAnchor="middle" className="fill-accent font-mono" fontSize="8" letterSpacing="1">
-          PORTAL
-        </text>
       </g>
 
-      {/* ── PTS accent core (beats 1+): the discovery, then the platform's heart ── */}
-      <g className="hs-anim" style={anim(OP.core[beat])}>
-        <rect x="93" y="87" width="14" height="14" className="fill-bg stroke-accent" strokeWidth="1.5" />
-        <rect x="97.5" y="91.5" width="5" height="5" className="hs-core fill-accent" />
-      </g>
+      {/* ── Your app: comes up last ── */}
+      <g className='cmp-in' style={cmp(940)}>
+        <AppWindow {...RIGHT_WIN} />
+        <rect x={RAIL.x} y={RAIL.y} width={RAIL.w} height={RAIL.h} rx='2' className='fill-bg-card stroke-line' strokeWidth='0.8' />
+        {NAV.map((n, i) => (
+          <rect
+            key={`nav${i}`}
+            x={n.x}
+            y={n.y}
+            width={n.w}
+            height={n.h}
+            rx='1'
+            className={i === 0 ? 'fill-accent' : 'fill-bg-card stroke-line'}
+            strokeWidth={i === 0 ? undefined : '0.7'}
+          />
+        ))}
+        <rect x={HEADER.x} y={HEADER.y} width={HEADER.w} height={HEADER.h} rx='1' className='fill-bg-card stroke-line' strokeWidth='0.8' />
+        <rect x={FOOTER.x} y={FOOTER.y} width={FOOTER.w} height={FOOTER.h} rx='1' className='fill-bg-card stroke-line' strokeWidth='0.8' />
 
-      {/* ── The user: centred hub during overload, then rises to stand on the
-             Portal platform (the hub ring fades once they're standing) ── */}
-      <g className="hs-anim" style={{ transform: `translateY(${beat === 0 ? USER_DROP : 0}px)` }}>
+        {/* Insight widget — hollow frame, a couple of bars, a rising accent
+            trend and one live node (mirrors ChartGraphic). */}
+        <rect x={WIDGET.x} y={WIDGET.y} width={WIDGET.w} height={WIDGET.h} rx='1.5' className='fill-bg-card stroke-line' strokeWidth='0.9' />
+        <line x1='214' y1='88' x2='250' y2='88' className='stroke-line' strokeWidth='0.6' strokeLinecap='round' />
+        <rect x='216' y='79' width='6' height='9' className='fill-bg-card stroke-line' strokeWidth='0.7' />
+        <rect x='225' y='73' width='6' height='15' className='fill-bg-card stroke-line' strokeWidth='0.7' />
+        <rect x='234' y='68' width='6' height='20' className='fill-bg-card stroke-line' strokeWidth='0.7' />
+        <polyline points='217,79 228,72 237,67 248,63' className='stroke-accent' strokeWidth='1.4' fill='none' strokeLinejoin='round' strokeLinecap='round' />
         <circle
-          cx={USER.x}
-          cy={USER.y}
-          r={USER.r}
-          className="hs-anim fill-bg stroke-border-light"
-          strokeWidth="1.5"
-          style={anim(OP.ring[beat])}
+          cx='248'
+          cy='63'
+          r='2.4'
+          className='cmp-live fill-accent'
+          style={{ ['--cmp-live-delay']: '1700ms' } as CSSProperties}
         />
-        <Person cx={USER.x} cy={USER.y} s={1.15} />
       </g>
 
-      {/* ── Strategy thought-bubbles (beat 3): ideas rising from the user ── */}
-      <g className="hs-anim" style={anim(OP.thoughts[beat], { transform: `translateY(${beat === 3 ? 0 : 12}px)` })}>
-        {/* thought trail rising from the user's head */}
-        <circle cx="100" cy="36" r="1.4" className="fill-border-light" />
-        <circle cx="100" cy="30" r="2.1" className="fill-bg stroke-border-light" strokeWidth="1.2" />
-        {/* bubbles */}
-        <circle cx="66" cy="24" r="8" className="fill-bg stroke-border-light" strokeWidth="1.3" />
-        <circle cx="100" cy="14" r="8" className="fill-bg stroke-border-light" strokeWidth="1.3" />
-        <circle cx="134" cy="24" r="8" className="fill-bg stroke-border-light" strokeWidth="1.3" />
-        {/* growth trend */}
-        <g className="stroke-accent" strokeWidth="1.5" fill="none" strokeLinejoin="round" strokeLinecap="round">
-          <polyline points="59,28 64,23 68,25 73,18" />
-          <path d="M69.5 18 h3.5 v3.5" />
-        </g>
-        {/* lightbulb */}
-        <g className="stroke-accent" strokeWidth="1.5" fill="none" strokeLinecap="round">
-          <circle cx="100" cy="11" r="4" />
-          <line x1="98" y1="17" x2="102" y2="17" />
-          <line x1="98.7" y1="19" x2="101.3" y2="19" />
-        </g>
-        {/* target */}
-        <g className="stroke-accent" strokeWidth="1.5" fill="none">
-          <circle cx="134" cy="24" r="4.5" />
-          <circle cx="134" cy="24" r="2" className="fill-accent" stroke="none" />
-        </g>
-      </g>
-
-      {/* ── Journey timeline: track + filling progress + step nodes ── */}
-      <line x1="60" y1="180" x2="140" y2="180" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
-      <line
-        x1="60"
-        y1="180"
-        x2="140"
-        y2="180"
-        className="hs-anim stroke-accent"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        style={{ transform: `scaleX(${beat / (CAPTIONS.length - 1)})`, transformBox: 'fill-box', transformOrigin: 'left' }}
-      />
-      {CAPTIONS.map((_, i) => {
-        const on = i <= beat
-        return (
-          <circle
-            key={`step${i}`}
-            className={on ? 'hs-anim fill-accent' : 'hs-anim fill-bg stroke-border-light'}
-            cx={60 + (i * 80) / (CAPTIONS.length - 1)}
-            cy="180"
-            r={i === beat ? 3 : 2.2}
-            strokeWidth={on ? undefined : 1.3}
-          />
-        )
-      })}
-
-      {/* ── Caption ── */}
-      {CAPTIONS.map((c, i) => (
-        <text
-          key={c}
-          className="hs-anim fill-text-muted font-mono"
-          x="100"
-          y="196"
-          textAnchor="middle"
-          fontSize="7.5"
-          letterSpacing="1.5"
-          style={anim(beat === i ? 1 : 0)}
-        >
-          {c}
+      {/* ── Transformation arrow, annotated with the transition. Rendered last
+             so its labels always sit above the windows. ── */}
+      <g className='cmp-in' style={cmp(680)}>
+        <text x='144' y='73' textAnchor='middle' className='fill-text-muted font-mono' fontSize='6' letterSpacing='0.5'>
+          CONSOLIDATE
         </text>
-      ))}
-    </svg>
+        <g className='stroke-line' strokeWidth='1.2' strokeLinecap='round' strokeLinejoin='round' fill='none'>
+          <line x1='132' y1='80' x2='156' y2='80' />
+          <path d='M151 76 L156 80 L151 84' />
+        </g>
+        <text x='144' y='96' textAnchor='middle' className='fill-accent font-mono' fontSize='6' letterSpacing='0.5'>
+          CUSTOM FIT
+        </text>
+      </g>
+    </BlueprintGraphic>
   )
 }

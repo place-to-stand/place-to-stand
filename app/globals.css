@@ -377,6 +377,54 @@ body {
   }
 }
 
+/* ─── Hero comparison set piece ───
+   "Built for everyone" vs "Built for you". Each dashboard/arrow group (.cmp-in)
+   fades and rises in sequence via an inline --cmp-delay: the three generic
+   dashboards one by one, then the arrow, then your app last. The one live widget
+   (.cmp-live) breathes once everything has settled. The whole sequence is offset
+   by --bp-draw-base so it starts after the hero intro. */
+.hero-compare .cmp-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 650ms ease,
+    transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
+}
+.hero-compare[data-visible='true'] .cmp-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes cmp-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.92);
+  }
+}
+.hero-compare[data-visible='true'] .cmp-live {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cmp-pulse 4.5s ease-in-out infinite;
+  animation-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-live-delay, 1600ms));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-compare .cmp-in {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-compare[data-visible='true'] .cmp-live {
+    animation: none;
+  }
+}
+
 /* ─── Hero story timeline ───
    The hero's looping five-beat story (<HeroGraphic>). A JS beat sequencer sets
    per-element opacity/transform inline; these rules tween it. Namespaced under
