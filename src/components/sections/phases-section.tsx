@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { vendors } from '@/src/lib/vendors'
+import { vendorIcons } from '@/src/components/icons/vendor-icons'
 
 const phases = [
   {
@@ -43,23 +45,28 @@ const phases = [
 
 export function PhasesSection({
   showHowWeWorkLink = true,
+  showPoweredBy = false,
+  showLabel = true,
 }: {
   showHowWeWorkLink?: boolean
+  showPoweredBy?: boolean
+  showLabel?: boolean
 }) {
   return (
-    <AnimatedSection className='py-16 md:py-32'>
+    <AnimatedSection className='py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-4'>
           <Reveal index={0} className='flex flex-col gap-2'>
-            <span className='bp-label font-mono'>Every Stage</span>
+            {showLabel && <span className='bp-label font-mono'>How We Work</span>}
             <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
               We meet you at your stage of business.
             </h2>
           </Reveal>
-          <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
+          <Reveal index={1} className='max-w-xl text-base leading-relaxed text-text-muted'>
             <p>
-              Ontology based design allows us to model your business data to interact with humans and agents more effectively.
+              Whether you are testing a first idea or re-architecting for scale, we
+              plug in where you are and build from there.
             </p>
           </Reveal>
           {/* Mobile-only link: sits with the subtext, above the cards */}
@@ -69,7 +76,7 @@ export function PhasesSection({
                 href='/how-we-work'
                 className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
               >
-                How we work
+                See our full process
                 <span aria-hidden>&rarr;</span>
               </Link>
             </Reveal>
@@ -83,11 +90,14 @@ export function PhasesSection({
             {phases.map(phase => (
               <div
                 key={phase.number}
-                className='relative flex flex-col gap-4 bg-bg-card p-6 md:p-8'
+                className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
               >
-                <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                  {phase.title}
-                </h3>
+                <div className='flex flex-col gap-1'>
+                  <span className='font-mono text-xs text-accent'>{phase.number}</span>
+                  <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
+                    {phase.title}
+                  </h3>
+                </div>
                 <ul className='flex flex-col gap-2 text-sm leading-relaxed text-text-muted'>
                   {phase.points.map(point => (
                     <li key={point} className='flex gap-2'>
@@ -101,14 +111,51 @@ export function PhasesSection({
           </div>
         </Reveal>
 
+        {/* Under The Hood — the method behind every stage plus the tools that power
+            it. Folds the how-we-work process into the intro, then the vendor logos. */}
+        {showPoweredBy && (
+          <Reveal index={3} className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-2'>
+              <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
+                Under the hood
+              </h3>
+              <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+                Whatever stage you are at, every build relies on a trusted stack of
+                frontier AI models and cloud infrastructure, wired into our tooling
+                and human-verified for production-grade quality.
+              </p>
+            </div>
+            <div className='relative grid grid-cols-2 gap-x-6 gap-y-5 p-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7'>
+                <BlueprintCorners size={16} />
+                {vendors.map(vendor => {
+                  const Icon = vendorIcons[vendor.name]
+                  return (
+                    <div key={vendor.name} className='flex items-center gap-2.5'>
+                      {Icon && (
+                        <Icon
+                          className='h-7 w-7 shrink-0'
+                          style={{ color: vendor.color }}
+                          aria-hidden
+                        />
+                      )}
+                      <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+                        {vendor.name}
+                      </span>
+                    </div>
+                  )
+                })}
+            </div>
+          </Reveal>
+        )}
+
         {/* Desktop-only link: stays below the cards */}
         {showHowWeWorkLink && (
-          <Reveal index={3} className='hidden md:block'>
+          <Reveal index={4} className='hidden md:block'>
             <Link
               href='/how-we-work'
               className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
             >
-              How we work
+              See our full process
               <span aria-hidden>&rarr;</span>
             </Link>
           </Reveal>

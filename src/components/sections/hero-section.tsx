@@ -7,7 +7,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-[100svh] flex-col justify-end overflow-hidden'
+      className='relative flex flex-col overflow-hidden'
     >
       <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 pb-16 pt-grid-4 md:gap-10 md:pb-24 lg:px-12 lg:pt-grid-6'>
         {/* Blueprint annotation — top label (slides in first) */}
@@ -38,26 +38,33 @@ export function HeroSection() {
             </h1>
           </div>
 
-          {/* Supporting subtext + audit CTA */}
-          <div className='flex flex-col gap-8 md:flex-row md:justify-between'>
+          {/* Supporting subtext + audit CTA — stacked, subtext leads */}
+          <div className='flex flex-col gap-8'>
             <div className='hero-reveal flex self-start gap-4' style={{ animationDelay: '3.3s' }}>
               {/* Vertical leader line */}
               <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
-              <p className='max-w-lg text-base leading-relaxed text-text-muted md:text-lg'>
-                We build software shaped to how your business actually runs. No
-                more juggling a stack of bloated SaaS dashboards.
-              </p>
+              <div className='flex max-w-lg flex-col gap-3'>
+                <p className='text-base leading-relaxed text-text md:text-lg'>
+                  We build software{' '}
+                  <strong className='font-semibold'>
+                    shaped to how your business actually runs.
+                  </strong>{' '}
+                  No more juggling a stack of bloated SaaS dashboards.
+                </p>
+                <p className='text-base leading-relaxed text-text-muted md:text-lg'>
+                  Not sure where to start? Take our free{' '}
+                  <strong className='font-semibold text-accent/70'>
+                    opportunity audit.
+                  </strong>
+                </p>
+              </div>
             </div>
-            <div className='hero-reveal flex shrink-0 flex-col items-start gap-3 md:max-w-xs md:items-end md:text-right' style={{ animationDelay: '3.6s' }}>
+            <div className='hero-reveal flex shrink-0 flex-col items-start gap-3' style={{ animationDelay: '3.6s' }}>
               <Button asChild size='lg' variant='primaryInvert'>
                 <Link href='/audit' data-pts-hero-cta>
-                  Find your leverage
+                  Find your opportunities
                 </Link>
               </Button>
-              <p className='text-sm leading-relaxed text-text-muted'>
-                Take our free business audit to see where you can leverage custom
-                software.
-              </p>
             </div>
           </div>
         </div>

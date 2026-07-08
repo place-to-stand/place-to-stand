@@ -25,7 +25,7 @@ const pillars = [
 
 export function PillarsSection() {
   return (
-    <AnimatedSection className='py-16 md:py-32'>
+    <AnimatedSection className='py-20'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: sticky heading */}
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
@@ -47,10 +47,10 @@ export function PillarsSection() {
           {pillars.map(pillar => (
             <div
               key={pillar.title}
-              className='relative flex flex-col gap-4 bg-bg-card p-8'
+              className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
             >
               <BlueprintCorners size={16} />
-              <span className='absolute right-8 top-8 inline-flex h-9 w-9 items-center justify-center'>
+              <span className='absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center md:right-8 md:top-8'>
                 <pillar.Icon className='h-4 w-4 text-accent' aria-hidden />
               </span>
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>

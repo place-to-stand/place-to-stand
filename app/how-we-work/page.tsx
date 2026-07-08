@@ -4,6 +4,14 @@ import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { PhasesSection } from '@/src/components/sections/phases-section'
+import { vendors } from '@/src/lib/vendors'
+import { vendorIcons } from '@/src/components/icons/vendor-icons'
+import {
+  QuickWinsGraphic,
+  OntologyGraphic,
+  AutomationGraphic,
+  TasteGraphic,
+} from '@/src/components/graphics/process-graphics'
 
 export const metadata: Metadata = {
   title: 'How We Work',
@@ -14,19 +22,29 @@ const process = [
   {
     title: 'Quick Wins',
     body: 'We start by shipping something real, fast. Early, tangible wins build trust and give us a shared shorthand for the larger decisions ahead.',
+    Graphic: QuickWinsGraphic,
   },
   {
     title: 'Ontology',
     body: 'Before scaling up, we map how your business actually works. This ontology, the entities, rules, and relationships that define your domain, becomes the backbone the software is built on, so what we ship models reality instead of a template.',
+    Graphic: OntologyGraphic,
   },
   {
     title: 'Automated Execution & Human Verification',
     body: 'Once the direction is clear, execution is largely automated. Frontier models are integrated directly into our own custom tools. Every task is human-verified at the input and the output level where we verify code changes with pre-AI programming knowledge.',
+    Graphic: AutomationGraphic,
   },
   {
     title: 'Taste',
     body: 'This is where our expertise in building apps shows. We shape the details, iterate tightly with your stakeholders, and apply hard-won judgment to fit the software to your specific business context.',
+    Graphic: TasteGraphic,
   },
+]
+
+// The stack, grouped by role, folded into the process list as a final row.
+const stackGroups = [
+  { label: 'AI Models', items: vendors.filter(v => v.category === 'ai') },
+  { label: 'Infrastructure', items: vendors.filter(v => v.category === 'infra') },
 ]
 
 export default function HowWeWorkPage() {
@@ -50,18 +68,63 @@ export default function HowWeWorkPage() {
               className='flex gap-6 border-t border-border py-grid-2'
             >
               <span className='w-1 shrink-0 self-stretch bg-accent' aria-hidden />
-              <div className='flex flex-col gap-3'>
+              <div className='flex flex-1 flex-col gap-3'>
                 <h3 className='text-balance font-headline text-lg font-bold uppercase tracking-tight text-accent'>
                   {step.title}
                 </h3>
                 <p className='max-w-2xl text-base leading-relaxed text-text-muted'>{step.body}</p>
               </div>
+              <step.Graphic className='hidden h-28 w-28 shrink-0 self-center lg:block' />
             </div>
           ))}
         </div>
+
+        {/* Our Tech Stack — its own framed blueprint panel, visually distinct from
+            the process rows. Logos stay grouped by role. */}
+        <div className='relative border border-border p-6 md:p-10'>
+          <BlueprintCorners size={16} />
+          <div className='flex flex-col gap-8'>
+            <div className='flex flex-col gap-2'>
+              <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
+                Our Tech Stack
+              </h3>
+              <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+                The frontier AI models and modern infrastructure behind every build.
+              </p>
+            </div>
+            <div className='flex flex-col gap-6'>
+              {stackGroups.map(group => (
+                <div key={group.label} className='flex flex-col gap-3'>
+                  <span className='text-xs font-semibold uppercase tracking-[0.1em] text-text-muted'>
+                    {group.label}
+                  </span>
+                  <div className='grid grid-cols-2 gap-x-4 gap-y-5 md:flex md:flex-wrap md:items-center md:gap-x-8 md:gap-y-4'>
+                    {group.items.map(vendor => {
+                      const Icon = vendorIcons[vendor.name]
+                      return (
+                        <div key={vendor.name} className='flex items-center gap-2.5'>
+                          {Icon && (
+                            <Icon
+                              className='h-9 w-9 shrink-0'
+                              style={{ color: vendor.color }}
+                              aria-hidden
+                            />
+                          )}
+                          <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+                            {vendor.name}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </AnimatedSection>
 
-      <PhasesSection showHowWeWorkLink={false} />
+      <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
       {/* CTA Block */}
       <AnimatedSection>

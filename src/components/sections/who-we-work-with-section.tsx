@@ -25,7 +25,7 @@ const profiles = [
 
 export function WhoWeWorkWithSection() {
   return (
-    <AnimatedSection className='py-16 md:py-32'>
+    <AnimatedSection className='py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-4'>
@@ -46,7 +46,7 @@ export function WhoWeWorkWithSection() {
           {profiles.map(profile => (
             <div
               key={profile.number}
-              className='relative flex flex-col gap-4 border border-border bg-bg-card p-8'
+              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
             >
               <BlueprintCorners size={12} />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>

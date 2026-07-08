@@ -26,7 +26,7 @@ const facets = [
 
 export function ManifestoSection() {
   return (
-    <AnimatedSection className='py-16 md:py-32'>
+    <AnimatedSection className='py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-4'>
@@ -60,7 +60,7 @@ export function ManifestoSection() {
             {facets.map(facet => (
               <div
                 key={facet.title}
-                className='relative flex flex-col gap-4 bg-bg-card p-6 md:p-8'
+                className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
               >
                 <div className='flex items-center justify-between gap-4'>
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
