@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <main className='flex-1'>
       <HeroSection />
-      <PhasesSection />
+      <PhasesSection showPoweredBy />
       <WhoWeWorkWithSection />
       <ManifestoSection />
       <ServicesPreview />
@@ -22,8 +22,8 @@ export default function HomePage() {
       {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
       {/* CTA Block — blueprint detail callout */}
-      <AnimatedSection className='py-16 md:py-32'>
-        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+      <AnimatedSection className='py-20'>
+        <div className='relative border border-border bg-bg-card p-5 md:p-16'>
             {/* Corner marks */}
             <span className='pointer-events-none absolute -left-px -top-px z-10 h-5 w-5 border-l border-t border-accent' aria-hidden />
             <span className='pointer-events-none absolute -bottom-px -right-px z-10 h-5 w-5 border-b border-r border-accent' aria-hidden />
