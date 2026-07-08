@@ -16,8 +16,8 @@ export default function HomePage() {
       <HeroSection />
       <PhasesSection showPoweredBy />
       <WhoWeWorkWithSection />
-      <ManifestoSection />
       <ServicesPreview />
+      <ManifestoSection />
       <PillarsSection />
       {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
