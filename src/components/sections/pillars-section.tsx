@@ -1,23 +1,27 @@
-import { Building2, Database, Filter } from 'lucide-react'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import {
+  SeatsGraphic,
+  CentralizedDataGraphic,
+  NoBloatGraphic,
+} from '@/src/components/graphics/home-graphics'
 
 const pillars = [
   {
     title: 'No Per-Seat Pricing',
-    Icon: Building2,
+    Graphic: SeatsGraphic,
     description:
       'You own the tech infrastructure. Add as many users as your business needs without watching the bill climb. No per-seat licensing, no penalty for growing your team.',
   },
   {
     title: 'Centralized Business Data',
-    Icon: Database,
+    Graphic: CentralizedDataGraphic,
     description:
       'All your business data lives in one place, structured and transparent. That single source of truth keeps the system modular, so you can extend it without rebuilding from scratch.',
   },
   {
     title: 'No SaaS Feature Bloat',
-    Icon: Filter,
+    Graphic: NoBloatGraphic,
     description:
       'You get exactly the features your business runs on, nothing more. No paying for bloated dashboards and modules you will never open.',
   },
@@ -50,10 +54,8 @@ export function PillarsSection() {
               className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
             >
               <BlueprintCorners size={16} />
-              <span className='absolute right-5 top-5 inline-flex h-9 w-9 items-center justify-center md:right-8 md:top-8'>
-                <pillar.Icon className='h-4 w-4 text-accent' aria-hidden />
-              </span>
-              <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
+              <pillar.Graphic className='absolute right-4 top-4 h-grid-2 w-grid-2 md:right-6 md:top-6' />
+              <h3 className='max-w-[calc(100%-3.5rem)] font-headline text-xl font-semibold tracking-tight text-text'>
                 {pillar.title}
               </h3>
               <p className='max-w-xl text-sm !leading-snug text-accent-secondary'>

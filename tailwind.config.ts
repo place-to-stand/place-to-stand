@@ -50,6 +50,9 @@ const config: Config = {
           DEFAULT: '#2a2b30',
           light: '#3a3b40',
         },
+        // Mid-grey for schematic line-work — readable on card backgrounds,
+        // where border-light is too dark to see.
+        line: '#6e7078',
         // Keep old tokens as aliases for backward compatibility during migration
         ink: {
           DEFAULT: '#0e0f11',

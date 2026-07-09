@@ -19,6 +19,27 @@ const RevealContext = createContext<{ isVisible: boolean; reduced: boolean }>({
   reduced: false,
 })
 
+/**
+ * The hero plays a scripted intro on page load (see .hero-* in globals.css); its
+ * last element, the CTA, finishes at ~3.6s delay + 0.8s = 4.4s. A section that
+ * happens to be visible on load (tall screens) would otherwise reveal in the
+ * middle of that intro and beat it. This returns how long such a section should
+ * wait so it reveals only once the hero is done — anchored to first paint so a
+ * section scrolled to later isn't delayed. Returns 0 when there's no hero on the
+ * page, under reduced motion, or once the intro has already finished.
+ */
+const HERO_ENTRANCE_MS = 4500
+function heroGateRemainingMs(): number {
+  if (typeof window === 'undefined') return 0
+  if (!document.querySelector('[data-pts-hero]')) return 0
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return 0
+  const paint = performance
+    .getEntriesByType('paint')
+    .find(p => p.name === 'first-contentful-paint')
+  const start = paint?.startTime ?? 0
+  return Math.max(0, start + HERO_ENTRANCE_MS - performance.now())
+}
+
 export function AnimatedSection({
   className,
   children,
@@ -48,11 +69,19 @@ export function AnimatedSection({
       return
     }
 
+    let gateTimer: ReturnType<typeof setTimeout> | undefined
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
           observer.disconnect()
+          // If this section is visible while the hero intro is still playing,
+          // hold it until the intro finishes; otherwise reveal immediately.
+          const delay = heroGateRemainingMs()
+          if (delay > 0) {
+            gateTimer = setTimeout(() => setIsVisible(true), delay)
+          } else {
+            setIsVisible(true)
+          }
         }
       },
       // threshold 0 (fire as soon as any part enters) so tall sections still
@@ -62,7 +91,10 @@ export function AnimatedSection({
     )
 
     observer.observe(node)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      if (gateTimer) clearTimeout(gateTimer)
+    }
   }, [])
 
   return (

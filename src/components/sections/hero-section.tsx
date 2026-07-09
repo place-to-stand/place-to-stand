@@ -38,7 +38,7 @@ export function HeroSection() {
             </h1>
           </div>
 
-          {/* Supporting subtext + audit CTA — stacked, subtext leads */}
+          {/* Supporting subtext + audit CTA */}
           <div className='flex flex-col gap-8'>
             <div className='hero-reveal flex self-start gap-4' style={{ animationDelay: '3.3s' }}>
               {/* Vertical leader line */}
