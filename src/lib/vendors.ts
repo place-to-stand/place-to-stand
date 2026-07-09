@@ -64,6 +64,20 @@ export const vendors: Vendor[] = [
     color: '#FFFFFF',
   },
   {
+    name: 'Git',
+    url: 'https://git-scm.com',
+    description: 'Distributed version control',
+    category: 'infra',
+    color: '#F05032',
+  },
+  {
+    name: 'Next.js',
+    url: 'https://nextjs.org',
+    description: 'React framework for the web',
+    category: 'infra',
+    color: '#FFFFFF',
+  },
+  {
     name: 'Anthropic',
     url: 'https://www.anthropic.com',
     description: 'AI reasoning & code generation',
