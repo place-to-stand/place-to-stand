@@ -269,7 +269,7 @@ export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
       viewBox='0 0 274 150'
-      drawDelayMs={3000}
+      drawDelayMs={2000}
       className={`hero-compare ${className ?? ''}`}
     >
       {/* ── Titles — each rises in with its column (stack first, your app last) ── */}
@@ -278,7 +278,7 @@ export function HeroGraphic({ className }: { className?: string }) {
           Turn these
         </text>
       </g>
-      <g className='cmp-in' style={cmp(2600)}>
+      <g className='cmp-in' style={cmp(1315)}>
         <text x='222' y='12' textAnchor='middle' className='fill-accent font-headline' fontSize='7' fontWeight='500' letterSpacing='0.3'>
           Into this
         </text>
@@ -287,13 +287,13 @@ export function HeroGraphic({ className }: { className?: string }) {
       {/* ── Generic stack: the tossed-behind windows land one by one, then the
              cluttered front dashboard on top ── */}
       {BEHIND.map((w, i) => (
-        <g key={`bh${i}`} className='cmp-in' style={cmp(i * 280)}>
+        <g key={`bh${i}`} className='cmp-in' style={cmp(i * 140)}>
           <g transform={`rotate(${w.rot} ${rcx(w)} ${rcy(w)})`}>
             <ClutterWindow {...w} seed={i} />
           </g>
         </g>
       ))}
-      <g className='cmp-in' style={cmp(1500)}>
+      <g className='cmp-in' style={cmp(760)}>
         <g transform={`rotate(${FRONT_ROT} ${rcx(FRONT)} ${rcy(FRONT)})`}>
           <AppWindow {...FRONT} />
           <g transform={`translate(${CLUTTER_DX} ${CLUTTER_DY})`}>
@@ -314,7 +314,7 @@ export function HeroGraphic({ className }: { className?: string }) {
 
       {/* ── Your app: a clean, squared-off mini of the real product. Slides in
              dramatically from the right, last of all. ── */}
-      <g className='cmp-slide' style={cmp(3050)}>
+      <g className='cmp-slide' style={cmp(1544)}>
         <AppWindow {...RIGHT_WIN} rx='0' fill='fill-bg' />
 
         {/* Sidebar: divider, wordmark, an accent active item, hollow nav rows */}
@@ -348,7 +348,7 @@ export function HeroGraphic({ className }: { className?: string }) {
               width={b.w}
               height={b.h}
               className='cmp-live fill-accent'
-              style={{ ['--cmp-live-delay']: '4200ms' } as CSSProperties}
+              style={{ ['--cmp-live-delay']: '2080ms' } as CSSProperties}
             />
           ) : (
             <rect key={`gb${i}`} x={b.x} y={b.y} width={b.w} height={b.h} className='fill-bg stroke-line' strokeWidth='0.55' />
@@ -369,7 +369,7 @@ export function HeroGraphic({ className }: { className?: string }) {
 
       {/* ── Transformation arrow. Rendered last so it always sits above the
              windows. Slides out to the right after the stack settles. ── */}
-      <g className='cmp-arrow' style={cmp(2050)}>
+      <g className='cmp-arrow' style={cmp(1040)}>
         <g className='stroke-line' strokeWidth='1.2' strokeLinecap='round' strokeLinejoin='round' fill='none'>
           <line x1='132' y1='82' x2='156' y2='82' />
           <path d='M151 78 L156 82 L151 86' />
