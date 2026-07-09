@@ -50,11 +50,11 @@ export const vendors: Vendor[] = [
     color: '#95BF47',
   },
   {
-    name: 'HubSpot',
-    url: 'https://www.hubspot.com',
-    description: 'CRM & marketing automation',
+    name: 'PostHog',
+    url: 'https://posthog.com',
+    description: 'Product analytics & session replay',
     category: 'infra',
-    color: '#FF7A59',
+    color: '#F9BD2B',
   },
   {
     name: 'GitHub',

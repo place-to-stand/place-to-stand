@@ -2,23 +2,26 @@ import type { CSSProperties, ReactNode } from 'react'
 import { BlueprintGraphic } from './blueprint-graphic'
 
 /**
- * Hero signature piece — a plain side-by-side that states the headline outright:
- * off-the-shelf software is built for everyone; we build for you.
+ * Hero signature piece — a side-by-side that states the headline outright:
+ * turn a mess of off-the-shelf apps into one app built for you.
  *
- *   LEFT   "Built for everyone" — a whole stack of generic dashboards fanned
- *          like cards (many to juggle), the front one overloaded with
- *          mismatched modules: hatching, a cramped bar chart, dot rows and data
- *          lines. One-size-fits-all noise, but rendered in the same thin,
- *          hollow blueprint language as the rest of the site.
- *   ARROW  annotated with the transition: consolidate + custom fit.
- *   RIGHT  "Built for you" — one app, pared to a clean sidebar (one active item)
- *          and a single insight widget: a rising accent trend with a live node.
+ *   LEFT   "Turn these" — a cluttered desk of one-size-fits-all dashboards
+ *          tossed at odd angles, the front one overloaded with mismatched
+ *          modules: hatching, a cramped bar chart, dot rows and data lines.
+ *          One-size-fits-all noise, but rendered in the same thin, hollow
+ *          blueprint language as the rest of the site.
+ *   ARROW  the transformation from the clutter to the clean result.
+ *   RIGHT  "Into this" — one clean dashboard (bigger; it's the payoff), modelled
+ *          on the real product: a grouped nav sidebar with the active item in
+ *          accent, a page header, a "My Tasks" list, and two stat-card panels,
+ *          all squared off and aligned to a tight grid. A live dot breathes.
  *
  * Same schematic vocabulary as home-graphics.tsx (fill-bg-card hollow shapes,
  * stroke-line, one accent highlight). Entrance is a sequenced fade-and-rise
- * (see .hero-compare in globals.css): the three generic dashboards come up one
- * by one, then the arrow, then your app last. The wrapper (<BlueprintGraphic>)
- * only supplies the in-view gate, reduced-motion handling, and the intro offset.
+ * (see .hero-compare in globals.css): the tossed generic dashboards come up one
+ * by one, then the front, then the arrow, then your app last. The wrapper
+ * (<BlueprintGraphic>) supplies the in-view gate, reduced-motion handling, and
+ * the intro offset.
  */
 
 /** Sets a group's entrance delay (ms) within the sequenced reveal. */
@@ -119,34 +122,67 @@ function textRows({ x, y, w, h }: Rect): ReactNode {
 
 const DECO = { hatch, bars, dots, text: textRows }
 
-// ── The generic stack: front dashboard (with content) sits on the right of the
-//    cluster; the deck recedes up and to the left so their title bars peek out. ──
-const FRONT: Rect = { x: 30, y: 38, w: 74, h: 84 }
-const BEHIND: Rect[] = [
-  { x: 14, y: 24, w: 74, h: 84 },
-  { x: 22, y: 31, w: 74, h: 84 },
+// ── The generic stack: one cluttered dashboard up front, with a mess of other
+//    one-size-fits-all apps tossed behind it at odd angles — a cluttered desk. ──
+type Win = Rect & { rot: number }
+// A messy fan: each window is tossed at a sporadic angle and scattered wide —
+// alternating hard left/right and stepping down — so a big slice of every
+// dashboard shows, not just its title bar. The top one is the most cock-eyed.
+// The front one (with the dense clutter) sits lowest; the deck spills behind it.
+const FRONT: Rect = { x: 30, y: 60, w: 70, h: 80 }
+const FRONT_ROT = -3
+const BEHIND: Win[] = [
+  { x: 40, y: 30, w: 60, h: 72, rot: 15 },
+  { x: 9, y: 34, w: 60, h: 72, rot: -13 },
+  { x: 46, y: 44, w: 58, h: 70, rot: 8 },
+  { x: 7, y: 50, w: 60, h: 72, rot: -8 },
+  { x: 28, y: 53, w: 64, h: 74, rot: 6 },
 ]
-// Clutter is authored for a front at x=14; shift it to match FRONT's position.
+// Clutter tiles are authored for a front at (14, 38); shift them onto FRONT.
 const CLUTTER_DX = FRONT.x - 14
+const CLUTTER_DY = FRONT.y - 38
 
-// ── Your app: a clean sidebar + one insight widget. ──
-const RIGHT_WIN: Rect = { x: 184, y: 38, w: 76, h: 84 }
-const RAIL: Rect = { x: 190, y: 53, w: 14, h: 58 }
-const NAV: Rect[] = [
-  { x: 194, y: 57, w: 8, h: 6 }, // active (accent)
-  { x: 194, y: 67, w: 8, h: 6 },
-  { x: 194, y: 77, w: 8, h: 6 },
-  { x: 194, y: 87, w: 8, h: 6 },
+// Center of a rect — used as a rotation origin for the tossed windows.
+const rcx = (r: Rect) => r.x + r.w / 2
+const rcy = (r: Rect) => r.y + r.h / 2
+
+// ── Your app: a mini of the real product (the Place To Stand portal) — a
+//    grouped nav sidebar with the active item highlighted, a page header, one
+//    full-width graph widget (the accent trend), and two half-width widgets
+//    below. Squared off and aligned to a tight grid so it reads as precise and
+//    calm next to the clutter. Depth: dark window (fill-bg) → raised cards
+//    (fill-bg-card) → inset marks (stroke-line / accent). ──
+const RIGHT_WIN: Rect = { x: 176, y: 30, w: 92, h: 104 }
+
+// Sidebar: a wordmark, an accent "active" pill, then hollow nav rows (the two
+// wider gaps hint the product's grouped sections).
+const SIDEBAR_DIV = 201
+const NAV_ACTIVE: Rect = { x: 178, y: 55, w: 18, h: 6 }
+const NAV_ROWS = [64, 71, 78, 87, 94]
+
+// Main column: header, one full-width graph widget, two half-width widgets.
+const HOME_ICON: Rect = { x: 205, y: 45, w: 6, h: 6 }
+const GRAPH_CARD: Rect = { x: 205, y: 58, w: 59, h: 40 }
+// Bars in the graph widget; the last one is tallest and accent (baseline y = 93).
+const GRAPH_BARS: Rect[] = [6, 8, 11, 13, 16, 18, 21].map((h, i) => ({
+  x: 211 + i * 7,
+  y: 93 - h,
+  w: 4.5,
+  h,
+}))
+const HALF_CARDS: Rect[] = [
+  { x: 205, y: 102, w: 27, h: 28 },
+  { x: 237, y: 102, w: 27, h: 28 },
 ]
-const HEADER: Rect = { x: 210, y: 53, w: 44, h: 7 }
-const WIDGET: Rect = { x: 210, y: 62, w: 44, h: 30 } // clean insight widget
-const FOOTER: Rect = { x: 210, y: 97, w: 44, h: 7 }
 
-/** App window chrome: rounded frame + title bar + three dots. Thin borders. */
-function AppWindow({ x, y, w, h }: Rect) {
+/** App window chrome: frame + title bar + three dots. Thin borders. `rx` sets
+ *  the corner radius (default rounded; the finished app passes 0 for hard edges).
+ *  `fill` sets the interior (default the card tone; the finished app uses the
+ *  darker page bg so its own cards read as raised). */
+function AppWindow({ x, y, w, h, rx = '3', fill = 'fill-bg-card' }: Rect & { rx?: string; fill?: string }) {
   return (
     <g>
-      <rect x={x} y={y} width={w} height={h} rx='3' className='fill-bg-card stroke-line' strokeWidth='1' />
+      <rect x={x} y={y} width={w} height={h} rx={rx} className={`${fill} stroke-line`} strokeWidth='1' />
       <line x1={x} y1={y + 11} x2={x + w} y2={y + 11} className='stroke-line' strokeWidth='0.7' />
       {[x + 8, x + 13, x + 18].map(dx => (
         <circle key={`wd${dx}`} cx={dx} cy={y + 5.5} r='1.3' className='fill-bg stroke-line' strokeWidth='0.6' />
@@ -155,92 +191,189 @@ function AppWindow({ x, y, w, h }: Rect) {
   )
 }
 
+/** Upsell/ad texts that bloat the generic dashboards — assigned one per window
+ *  (by index) so the clutter isn't uniform. Speaks straight to the SaaS-bloat
+ *  problem the finished app solves. */
+const PROMOS = [
+  'BUY THIS',
+  'UPGRADE NOW',
+  'LIMITED TIME OFFER',
+  'GO PRO TODAY',
+  '50% OFF TODAY',
+  'NEW! CLICK HERE',
+  'ADD-ONS INSIDE',
+  'SUBSCRIBE NOW',
+]
+
+/** A small boxed ad/upsell banner. */
+function PromoBanner({ x, y, w, text }: { x: number; y: number; w: number; text: string }) {
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height='7' className='fill-bg stroke-line' strokeWidth='0.5' />
+      <text
+        x={x + w / 2}
+        y={y + 4.8}
+        textAnchor='middle'
+        className='fill-text-muted font-mono'
+        fontSize='2.8'
+        letterSpacing='0.1'
+      >
+        {text}
+      </text>
+    </g>
+  )
+}
+
+/** A generic dashboard in the clutter pile: window chrome, a nav rail, an upsell
+ *  banner, and a dense grid of mismatched modules — so every window that peeks
+ *  out reads as its own bloated, ad-riddled dashboard. `seed` varies the promo
+ *  text and module decorations so no two windows are identical. */
+function ClutterWindow({ x, y, w, h, seed }: Rect & { seed: number }) {
+  const mainX = x + 16
+  const mainW = w - 20
+  const colW = (mainW - 2) / 2
+  const gridTop = y + 24
+  const rowH = (y + h - 4 - gridTop - 4) / 3
+  const decos: (keyof typeof DECO)[] = ['text', 'bars', 'hatch', 'dots', 'text', 'bars']
+  const cells: Rect[] = []
+  for (let r = 0; r < 3; r++) {
+    for (let c = 0; c < 2; c++) {
+      cells.push({ x: mainX + c * (colW + 2), y: gridTop + r * (rowH + 2), w: colW, h: rowH })
+    }
+  }
+  return (
+    <g>
+      <AppWindow x={x} y={y} w={w} h={h} />
+      {/* nav rail */}
+      <rect x={x + 4} y={y + 14} width='9' height={h - 20} className='fill-bg-card stroke-line' strokeWidth='0.5' />
+      {[0, 1, 2, 3].map(k => (
+        <line key={`nr${k}`} x1={x + 6} y1={y + 18 + k * 6} x2={x + 11} y2={y + 18 + k * 6} className='stroke-line' strokeWidth='0.4' strokeLinecap='round' />
+      ))}
+      {/* upsell banner */}
+      <PromoBanner x={mainX} y={y + 15} w={mainW} text={PROMOS[seed % PROMOS.length]} />
+      {/* dense grid of mismatched modules */}
+      {cells.map((cell, idx) => {
+        const Deco = DECO[decos[(idx + seed) % decos.length]]
+        return (
+          <g key={`cm${idx}`}>
+            <rect x={cell.x} y={cell.y} width={cell.w} height={cell.h} className='fill-bg-card stroke-line' strokeWidth='0.5' />
+            {Deco(cell)}
+          </g>
+        )
+      })}
+    </g>
+  )
+}
+
 export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
       viewBox='0 0 274 150'
-      drawDelayMs={3600}
+      drawDelayMs={2000}
       className={`hero-compare ${className ?? ''}`}
     >
-      {/* ── Titles ── */}
-      <text x='62' y='18' textAnchor='middle' className='fill-text-muted font-mono' fontSize='6.5' letterSpacing='0.5'>
-        Built for everyone
-      </text>
-      <text x='222' y='18' textAnchor='middle' className='fill-accent font-mono' fontSize='6.5' letterSpacing='0.5'>
-        Built for you
-      </text>
-
-      {/* ── Generic stack: dashboards come up one by one ── */}
+      {/* ── Titles — each rises in with its column (stack first, your app last) ── */}
       <g className='cmp-in' style={cmp(0)}>
-        <AppWindow {...BEHIND[0]} />
+        <text x='62' y='12' textAnchor='middle' className='fill-text-muted font-headline' fontSize='7' fontWeight='500' letterSpacing='0.3'>
+          Turn these
+        </text>
       </g>
-      <g className='cmp-in' style={cmp(200)}>
-        <AppWindow {...BEHIND[1]} />
+      <g className='cmp-in' style={cmp(1315)}>
+        <text x='222' y='12' textAnchor='middle' className='fill-accent font-headline' fontSize='7' fontWeight='500' letterSpacing='0.3'>
+          Into this
+        </text>
       </g>
-      <g className='cmp-in' style={cmp(400)}>
-        <AppWindow {...FRONT} />
-        <g transform={`translate(${CLUTTER_DX} 0)`}>
-          {CLUTTER.map((t, idx) => {
-            const Deco = t.deco ? DECO[t.deco] : null
-            return (
-              <g key={`c${idx}`}>
-                <rect x={t.x} y={t.y} width={t.w} height={t.h} className='fill-bg-card stroke-line' strokeWidth='0.75' />
-                {Deco && Deco(t)}
-              </g>
-            )
-          })}
+
+      {/* ── Generic stack: the tossed-behind windows land one by one, then the
+             cluttered front dashboard on top ── */}
+      {BEHIND.map((w, i) => (
+        <g key={`bh${i}`} className='cmp-in' style={cmp(i * 140)}>
+          <g transform={`rotate(${w.rot} ${rcx(w)} ${rcy(w)})`}>
+            <ClutterWindow {...w} seed={i} />
+          </g>
+        </g>
+      ))}
+      <g className='cmp-in' style={cmp(760)}>
+        <g transform={`rotate(${FRONT_ROT} ${rcx(FRONT)} ${rcy(FRONT)})`}>
+          <AppWindow {...FRONT} />
+          <g transform={`translate(${CLUTTER_DX} ${CLUTTER_DY})`}>
+            {CLUTTER.map((t, idx) => {
+              const Deco = t.deco ? DECO[t.deco] : null
+              return (
+                <g key={`c${idx}`}>
+                  <rect x={t.x} y={t.y} width={t.w} height={t.h} className='fill-bg-card stroke-line' strokeWidth='0.75' />
+                  {Deco && Deco(t)}
+                </g>
+              )
+            })}
+          </g>
+          {/* Intrusive top-of-page ad banner across the front dashboard */}
+          <PromoBanner x={FRONT.x + 8} y={FRONT.y + 14} w={FRONT.w - 16} text='TRY OUR NEW PRODUCT' />
         </g>
       </g>
 
-      {/* ── Your app: comes up last ── */}
-      <g className='cmp-in' style={cmp(940)}>
-        <AppWindow {...RIGHT_WIN} />
-        <rect x={RAIL.x} y={RAIL.y} width={RAIL.w} height={RAIL.h} rx='2' className='fill-bg-card stroke-line' strokeWidth='0.8' />
-        {NAV.map((n, i) => (
-          <rect
-            key={`nav${i}`}
-            x={n.x}
-            y={n.y}
-            width={n.w}
-            height={n.h}
-            rx='1'
-            className={i === 0 ? 'fill-accent' : 'fill-bg-card stroke-line'}
-            strokeWidth={i === 0 ? undefined : '0.7'}
-          />
+      {/* ── Your app: a clean, squared-off mini of the real product. Slides in
+             dramatically from the right, last of all. ── */}
+      <g className='cmp-slide' style={cmp(1544)}>
+        <AppWindow {...RIGHT_WIN} rx='0' fill='fill-bg' />
+
+        {/* Sidebar: divider, wordmark, an accent active item, hollow nav rows */}
+        <line x1={SIDEBAR_DIV} y1='45' x2={SIDEBAR_DIV} y2='130' className='stroke-line' strokeWidth='0.6' />
+        <line x1='180' y1='49' x2='193' y2='49' className='stroke-line' strokeWidth='1.3' strokeLinecap='round' />
+        <rect x={NAV_ACTIVE.x} y={NAV_ACTIVE.y} width={NAV_ACTIVE.w} height={NAV_ACTIVE.h} className='fill-accent' />
+        <rect x='180' y='56.5' width='3' height='3' className='fill-bg' />
+        <rect x='185' y='57.4' width='8' height='1.6' className='fill-bg' />
+        {NAV_ROWS.map((y, i) => (
+          <g key={`nav${i}`}>
+            <rect x='180' y={y} width='3' height='3' className='fill-bg stroke-line' strokeWidth='0.55' />
+            <line x1='185' y1={y + 1.6} x2='196' y2={y + 1.6} className='stroke-line' strokeWidth='0.75' strokeLinecap='round' />
+          </g>
         ))}
-        <rect x={HEADER.x} y={HEADER.y} width={HEADER.w} height={HEADER.h} rx='1' className='fill-bg-card stroke-line' strokeWidth='0.8' />
-        <rect x={FOOTER.x} y={FOOTER.y} width={FOOTER.w} height={FOOTER.h} rx='1' className='fill-bg-card stroke-line' strokeWidth='0.8' />
 
-        {/* Insight widget — hollow frame, a couple of bars, a rising accent
-            trend and one live node (mirrors ChartGraphic). */}
-        <rect x={WIDGET.x} y={WIDGET.y} width={WIDGET.w} height={WIDGET.h} rx='1.5' className='fill-bg-card stroke-line' strokeWidth='0.9' />
-        <line x1='214' y1='88' x2='250' y2='88' className='stroke-line' strokeWidth='0.6' strokeLinecap='round' />
-        <rect x='216' y='79' width='6' height='9' className='fill-bg-card stroke-line' strokeWidth='0.7' />
-        <rect x='225' y='73' width='6' height='15' className='fill-bg-card stroke-line' strokeWidth='0.7' />
-        <rect x='234' y='68' width='6' height='20' className='fill-bg-card stroke-line' strokeWidth='0.7' />
-        <polyline points='217,79 228,72 237,67 248,63' className='stroke-accent' strokeWidth='1.4' fill='none' strokeLinejoin='round' strokeLinecap='round' />
-        <circle
-          cx='248'
-          cy='63'
-          r='2.4'
-          className='cmp-live fill-accent'
-          style={{ ['--cmp-live-delay']: '1700ms' } as CSSProperties}
-        />
+        {/* Page header: icon, title, subtitle */}
+        <rect x={HOME_ICON.x} y={HOME_ICON.y} width={HOME_ICON.w} height={HOME_ICON.h} className='fill-bg stroke-line' strokeWidth='0.7' />
+        <line x1='214' y1='48' x2='236' y2='48' className='stroke-line' strokeWidth='1.5' strokeLinecap='round' />
+        <line x1='214' y1='52.5' x2='255' y2='52.5' className='stroke-line' strokeWidth='0.8' strokeLinecap='round' />
+
+        {/* Full-width graph widget — a bar chart whose tallest, final column is
+            the accent and slowly blinks */}
+        <rect x={GRAPH_CARD.x} y={GRAPH_CARD.y} width={GRAPH_CARD.w} height={GRAPH_CARD.h} className='fill-bg-card stroke-line' strokeWidth='0.9' />
+        <line x1='209' y1='64' x2='224' y2='64' className='stroke-line' strokeWidth='1.1' strokeLinecap='round' />
+        {GRAPH_BARS.map((b, i) =>
+          i === GRAPH_BARS.length - 1 ? (
+            <rect
+              key={`gb${i}`}
+              x={b.x}
+              y={b.y}
+              width={b.w}
+              height={b.h}
+              className='cmp-live fill-accent'
+              style={{ ['--cmp-live-delay']: '2080ms' } as CSSProperties}
+            />
+          ) : (
+            <rect key={`gb${i}`} x={b.x} y={b.y} width={b.w} height={b.h} className='fill-bg stroke-line' strokeWidth='0.55' />
+          )
+        )}
+        <line x1='209' y1='93' x2='259' y2='93' className='stroke-line' strokeWidth='0.5' strokeLinecap='round' />
+
+        {/* Two half-width widgets below — clean KPI cards */}
+        {HALF_CARDS.map((c, i) => (
+          <g key={`half${i}`}>
+            <rect x={c.x} y={c.y} width={c.w} height={c.h} className='fill-bg-card stroke-line' strokeWidth='0.9' />
+            <line x1={c.x + 4} y1={c.y + 7} x2={c.x + 15} y2={c.y + 7} className='stroke-line' strokeWidth='0.8' strokeLinecap='round' />
+            <line x1={c.x + 4} y1={c.y + 15} x2={c.x + 12} y2={c.y + 15} className='stroke-line' strokeWidth='1.8' strokeLinecap='round' />
+            <line x1={c.x + 4} y1={c.y + 21} x2={c.x + 19} y2={c.y + 21} className='stroke-line' strokeWidth='0.5' strokeLinecap='round' />
+          </g>
+        ))}
       </g>
 
-      {/* ── Transformation arrow, annotated with the transition. Rendered last
-             so its labels always sit above the windows. ── */}
-      <g className='cmp-in' style={cmp(680)}>
-        <text x='144' y='73' textAnchor='middle' className='fill-text-muted font-mono' fontSize='6' letterSpacing='0.5'>
-          CONSOLIDATE
-        </text>
+      {/* ── Transformation arrow. Rendered last so it always sits above the
+             windows. Slides out to the right after the stack settles. ── */}
+      <g className='cmp-arrow' style={cmp(1040)}>
         <g className='stroke-line' strokeWidth='1.2' strokeLinecap='round' strokeLinejoin='round' fill='none'>
-          <line x1='132' y1='80' x2='156' y2='80' />
-          <path d='M151 76 L156 80 L151 84' />
+          <line x1='132' y1='82' x2='156' y2='82' />
+          <path d='M151 78 L156 82 L151 86' />
         </g>
-        <text x='144' y='96' textAnchor='middle' className='fill-accent font-mono' fontSize='6' letterSpacing='0.5'>
-          CUSTOM FIT
-        </text>
       </g>
     </BlueprintGraphic>
   )
