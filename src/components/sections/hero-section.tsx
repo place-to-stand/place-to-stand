@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { HeroGraphic } from '@/src/components/graphics/hero-graphic'
 
 export function HeroSection() {
   return (
@@ -38,34 +39,39 @@ export function HeroSection() {
             </h1>
           </div>
 
-          {/* Supporting subtext + audit CTA */}
-          <div className='flex flex-col gap-8'>
-            <div className='hero-reveal flex self-start gap-4' style={{ animationDelay: '3.3s' }}>
-              {/* Vertical leader line */}
-              <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
-              <div className='flex max-w-lg flex-col gap-3'>
-                <p className='text-base leading-relaxed text-text md:text-lg'>
-                  We build software{' '}
-                  <strong className='font-semibold'>
-                    shaped to how your business actually runs.
-                  </strong>{' '}
-                  No more juggling a stack of bloated SaaS dashboards.
-                </p>
-                <p className='text-base leading-relaxed text-text-muted md:text-lg'>
-                  Not sure where to start? Take our free{' '}
-                  <strong className='font-semibold text-accent/70'>
-                    opportunity audit.
-                  </strong>
-                </p>
+          {/* Supporting subtext + CTA (left) beside the comparison graphic (right) */}
+          <div className='flex flex-col gap-grid-2 lg:flex-row lg:items-center lg:gap-grid-3'>
+            <div className='flex flex-col gap-8 lg:flex-1'>
+              <div className='hero-reveal flex self-start gap-4' style={{ animationDelay: '7.2s' }}>
+                {/* Vertical leader line */}
+                <div className='mt-2 hidden w-px self-stretch bg-border-light md:block' aria-hidden />
+                <div className='flex max-w-lg flex-col gap-3'>
+                  <p className='text-base leading-relaxed text-text md:text-lg'>
+                    We build software{' '}
+                    <strong className='font-semibold'>
+                      shaped to how your business actually runs.
+                    </strong>{' '}
+                    No more juggling a stack of bloated SaaS dashboards.
+                  </p>
+                  <p className='text-base leading-relaxed text-text-muted md:text-lg'>
+                    Not sure where to start? Take our free{' '}
+                    <strong className='font-semibold text-accent/70'>
+                      opportunity audit.
+                    </strong>
+                  </p>
+                </div>
+              </div>
+              <div className='hero-reveal flex shrink-0 flex-col items-start gap-3' style={{ animationDelay: '7.5s' }}>
+                <Button asChild size='lg' variant='primaryInvert'>
+                  <Link href='/audit' data-pts-hero-cta>
+                    Find your opportunities
+                  </Link>
+                </Button>
               </div>
             </div>
-            <div className='hero-reveal flex shrink-0 flex-col items-start gap-3' style={{ animationDelay: '3.6s' }}>
-              <Button asChild size='lg' variant='primaryInvert'>
-                <Link href='/audit' data-pts-hero-cta>
-                  Find your opportunities
-                </Link>
-              </Button>
-            </div>
+
+            {/* Hero comparison set piece — turn this (clutter) into this (one app) */}
+            <HeroGraphic className='w-full lg:flex-1' />
           </div>
         </div>
       </div>

@@ -20,15 +20,18 @@ const RevealContext = createContext<{ isVisible: boolean; reduced: boolean }>({
 })
 
 /**
- * The hero plays a scripted intro on page load (see .hero-* in globals.css); its
- * last element, the CTA, finishes at ~3.6s delay + 0.8s = 4.4s. A section that
+ * The hero plays a scripted intro on page load (see .hero-* in globals.css): the
+ * headline lands, the comparison graphic plays out slowly (~3.0s–7.0s: the stack
+ * builds, the arrow slides out, "Into this" fades, the finished app slides in),
+ * then the subtext and CTA reveal, the CTA finishing at ~7.5s delay + 0.8s = 8.3s.
+ * A section that
  * happens to be visible on load (tall screens) would otherwise reveal in the
  * middle of that intro and beat it. This returns how long such a section should
  * wait so it reveals only once the hero is done — anchored to first paint so a
  * section scrolled to later isn't delayed. Returns 0 when there's no hero on the
  * page, under reduced motion, or once the intro has already finished.
  */
-const HERO_ENTRANCE_MS = 4500
+const HERO_ENTRANCE_MS = 8300
 function heroGateRemainingMs(): number {
   if (typeof window === 'undefined') return 0
   if (!document.querySelector('[data-pts-hero]')) return 0
