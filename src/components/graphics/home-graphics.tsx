@@ -21,25 +21,16 @@ const di = (i: number) => ({ ['--draw-i']: i }) as CSSProperties
 
 // ─── Pillars — the customer-value story ───
 
-/** No Per-Seat Pricing — a flat cost line while user seats multiply beneath it. */
+/** No Per-Seat Pricing — a fixed price tag carrying an unlimited (infinity) count. */
 export function SeatsGraphic({ className }: GraphicProps) {
   return (
     <BlueprintGraphic loop='bp-loop-pulse' className={className}>
-      {/* Flat cost line — stays level no matter how many seats are added */}
-      <line x1="16" y1="30" x2="84" y2="30" className="bp-line stroke-line" strokeWidth="2" strokeLinecap="round" style={di(0)} />
-      <line x1="16" y1="26" x2="16" y2="34" className="bp-line stroke-line" strokeWidth="1.5" strokeLinecap="round" style={di(1)} />
-      <line x1="84" y1="26" x2="84" y2="34" className="bp-line stroke-line" strokeWidth="1.5" strokeLinecap="round" style={di(1)} />
-      {/* Seat baseline */}
-      <line x1="16" y1="80" x2="84" y2="80" className="bp-line stroke-line" strokeWidth="1.5" strokeDasharray="3 4" strokeLinecap="round" style={di(2)} />
-      {/* User seats sitting on the baseline */}
-      {[26, 42, 58].map((x, i) => (
-        <g key={x}>
-          <circle cx={x} cy="60" r="4" className="bp-line fill-bg-card stroke-line" strokeWidth="1.5" style={di(3 + i)} />
-          <path d={`M${x - 5} 80 q0 -8 5 -8 q5 0 5 8`} className="bp-line stroke-line" strokeWidth="1.5" strokeLinecap="round" style={di(3 + i)} />
-        </g>
-      ))}
-      {/* The "+1, free" seat — accent, and it pulses */}
-      <circle cx="74" cy="60" r="4.5" className="bp-node fill-accent" />
+      {/* Price tag — pointed left, one flat rate */}
+      <path d="M36 26 L82 26 L82 74 L36 74 L18 50 Z" className="bp-line stroke-line" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" style={di(0)} />
+      {/* Grommet hole near the point */}
+      <circle cx="33" cy="50" r="3" className="bp-line fill-bg-card stroke-line" strokeWidth="1.5" style={di(1)} />
+      {/* Unlimited — the seat count that never raises the price */}
+      <path d="M48 50 C48 44 54 44 57 50 C60 56 66 56 66 50 C66 44 60 44 57 50 C54 56 48 56 48 50 Z" className="bp-node stroke-accent" strokeWidth="2" fill="none" strokeLinejoin="round" strokeLinecap="round" />
     </BlueprintGraphic>
   )
 }
@@ -72,20 +63,20 @@ export function CentralizedDataGraphic({ className }: GraphicProps) {
   )
 }
 
-/** No SaaS Feature Bloat — many modules funnel down to one you actually use. */
+/** No SaaS Feature Bloat — a toggle panel with the extras off, only what you need on. */
 export function NoBloatGraphic({ className }: GraphicProps) {
   return (
     <BlueprintGraphic loop='bp-loop-pulse' className={className}>
-      {/* Incoming modules */}
-      {[22, 39, 56, 73].map((x, i) => (
-        <rect key={x} x={x - 5} y="16" width="10" height="10" className="bp-line fill-bg-card stroke-line" strokeWidth="1.5" style={di(i)} />
+      {/* Off toggles — the bloat you never switch on (knob parked left) */}
+      {[28, 72].map((y, i) => (
+        <g key={y}>
+          <rect x="26" y={y - 7} width="34" height="14" rx="7" className="bp-line fill-bg-card stroke-line" strokeWidth="1.5" style={di(i)} />
+          <circle cx="33" cy={y} r="4" className="bp-line stroke-line" strokeWidth="1.5" style={di(i)} />
+        </g>
       ))}
-      {/* Funnel */}
-      <path d="M18 34 L45 56 L45 66" className="bp-line stroke-line" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" style={di(4)} />
-      <path d="M82 34 L55 56 L55 66" className="bp-line stroke-line" strokeWidth="1.5" strokeLinejoin="round" strokeLinecap="round" style={di(4)} />
-      <line x1="45" y1="70" x2="55" y2="70" className="bp-line stroke-line" strokeWidth="1.5" strokeLinecap="round" style={di(5)} />
-      {/* The one module you keep — accent */}
-      <rect x="44" y="76" width="12" height="12" rx="1" className="bp-node fill-accent" />
+      {/* On toggle — the one feature you actually run (knob right, accent) */}
+      <rect x="26" y="43" width="34" height="14" rx="7" className="bp-line stroke-accent" strokeWidth="1.5" style={di(2)} />
+      <circle cx="53" cy="50" r="4.5" className="bp-node fill-accent" />
     </BlueprintGraphic>
   )
 }

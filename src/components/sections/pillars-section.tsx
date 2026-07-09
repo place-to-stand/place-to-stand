@@ -54,11 +54,11 @@ export function PillarsSection() {
               className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
             >
               <BlueprintCorners size={16} />
-              <pillar.Graphic className='absolute right-4 top-4 h-grid-2 w-grid-2 md:right-6 md:top-6' />
+              <pillar.Graphic className='absolute right-4 top-4 h-9 w-9 md:right-6 md:top-6' />
               <h3 className='max-w-[calc(100%-3.5rem)] font-headline text-xl font-semibold tracking-tight text-text'>
                 {pillar.title}
               </h3>
-              <p className='max-w-xl text-sm !leading-snug text-accent-secondary'>
+              <p className='max-w-xl text-sm leading-relaxed text-accent-secondary'>
                 {pillar.description}
               </p>
             </div>
