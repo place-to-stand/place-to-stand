@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import animate from 'tailwindcss-animate'
+import typography from '@tailwindcss/typography'
 
 // Tailwind configuration for Place to Stand Agency — Dark Blueprint Theme
 const config: Config = {
@@ -91,9 +92,34 @@ const config: Config = {
         'fade-down': 'fade-down 4.0s ease forwards',
         'scan-line': 'scan-line 8s linear infinite',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            '--tw-prose-body': '#a8a8ac',
+            '--tw-prose-headings': '#e8e6e3',
+            '--tw-prose-lead': '#a8a8ac',
+            '--tw-prose-links': '#b5f542',
+            '--tw-prose-bold': '#e8e6e3',
+            '--tw-prose-counters': '#a8a8ac',
+            '--tw-prose-bullets': '#6e7078',
+            '--tw-prose-hr': '#2a2b30',
+            '--tw-prose-quotes': '#e8e6e3',
+            '--tw-prose-quote-borders': '#b5f542',
+            '--tw-prose-captions': '#a8a8ac',
+            '--tw-prose-code': '#e8e6e3',
+            '--tw-prose-pre-code': '#e8e6e3',
+            '--tw-prose-pre-bg': '#242529',
+            '--tw-prose-th-borders': '#3a3b40',
+            '--tw-prose-td-borders': '#2a2b30',
+          },
+        },
+      },
     },
   },
-  plugins: [animate],
+  plugins: [
+    animate,
+    typography,
+  ],
 }
 
 export default config

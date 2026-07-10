@@ -1,37 +1,64 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
+import { remark } from 'remark'
+import html from 'remark-html'
+
+const fieldNotesDirectory = path.join(process.cwd(), 'content/field-notes')
+
 export type FieldNote = {
   slug: string
   title: string
   description: string
   tags: string[]
-  url: string
-  repo?: string
   date: string
+  repo?: string
+  externalUrl?: string
+  contentHtml: string
 }
 
-export const fieldNotes: FieldNote[] = [
-  {
-    slug: 'ai-playbook-smbs',
-    title: 'The Emerging AI Playbook for SMBs',
-    description: 'A practical guide for small and medium businesses to identify, implement, and measure AI initiatives that create real business value.',
-    tags: ['AI', 'Strategy', 'SMB'],
-    url: '/rsvp',
-    date: '2025-11-05',
-  },
-  {
-    slug: 'portal-open-source',
-    title: 'Portal: Open-Source Client Dashboard',
-    description: 'Our internal client management portal — built with Next.js, AI-powered activity tracking, and real-time project visibility.',
-    tags: ['Open Source', 'Next.js', 'AI'],
-    url: 'https://github.com/placetostand',
-    repo: 'https://github.com/placetostand',
-    date: '2025-06-01',
-  },
-  {
-    slug: 'automation-roi-calculator',
-    title: 'Automation ROI Calculator',
-    description: 'A framework for calculating the true return on investment of workflow automation, including hidden costs and compounding efficiency gains.',
-    tags: ['Automation', 'ROI', 'Framework'],
-    url: '#',
-    date: '2025-08-15',
-  },
-]
+function parseFieldNote(slug: string, fileContents: string, renderBody: boolean): FieldNote {
+  const { data, content } = matter(fileContents)
+
+  let contentHtml = ''
+  if (renderBody) {
+    const result = remark().use(html).processSync(content)
+    contentHtml = result.toString()
+  }
+
+  return {
+    slug,
+    title: data.title,
+    description: data.description,
+    tags: data.tags ?? [],
+    date: data.date,
+    repo: data.repo ?? undefined,
+    externalUrl: data.externalUrl ?? undefined,
+    contentHtml,
+  }
+}
+
+export function getAllFieldNotes(): FieldNote[] {
+  const fileNames = fs.readdirSync(fieldNotesDirectory).filter(f => f.endsWith('.md'))
+
+  const notes = fileNames.map(fileName => {
+    const slug = fileName.replace(/\.md$/, '')
+    const fullPath = path.join(fieldNotesDirectory, fileName)
+    const fileContents = fs.readFileSync(fullPath, 'utf8')
+    return parseFieldNote(slug, fileContents, false)
+  })
+
+  // Sort by date, newest first
+  return notes.sort((a, b) => (a.date > b.date ? -1 : 1))
+}
+
+export function getFieldNoteBySlug(slug: string): FieldNote | null {
+  const fullPath = path.join(fieldNotesDirectory, `${slug}.md`)
+
+  if (!fs.existsSync(fullPath)) {
+    return null
+  }
+
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  return parseFieldNote(slug, fileContents, true)
+}

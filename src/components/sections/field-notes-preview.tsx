@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Badge } from '@/src/components/ui/badge'
-import { fieldNotes } from '@/src/lib/field-notes'
+import { getAllFieldNotes } from '@/src/lib/field-notes'
 
 export function FieldNotesPreview() {
-  const latest = fieldNotes.slice(0, 3)
+  const latest = getAllFieldNotes().slice(0, 3)
   return (
     <AnimatedSection className='py-16 md:py-32'>
       <div className='flex flex-col gap-12'>
@@ -35,42 +35,59 @@ export function FieldNotesPreview() {
 
         {/* Entries — 3-column card grid */}
         <Reveal index={3} className='grid gap-6 md:grid-cols-3'>
-          {latest.map(note => (
-            <a
-              key={note.slug}
-              href={note.url}
-              target={note.url.startsWith('http') ? '_blank' : undefined}
-              rel={
-                note.url.startsWith('http') ? 'noopener noreferrer' : undefined
-              }
-              className='group relative flex flex-col gap-3 border border-border bg-bg-card p-6 transition-colors hover:bg-bg-elevated'
-            >
-              <BlueprintCorners size={12} />
-              <div className='flex items-center gap-4'>
-                <span className='font-mono text-[11px] text-text-muted'>
-                  {note.date}
-                </span>
-                {note.repo && (
-                  <span className='border border-accent/30 px-2 py-0.5 font-mono text-[10px] uppercase text-accent'>
-                    Open Source
+          {latest.map(note => {
+            const isExternal = !!note.externalUrl
+            const cardContent = (
+              <>
+                <BlueprintCorners size={12} />
+                <div className='flex items-center gap-4'>
+                  <span className='font-mono text-[11px] text-text-muted'>
+                    {note.date}
                   </span>
-                )}
-              </div>
-              <h3 className='font-headline text-xl font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
-                {note.title}
-              </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>
-                {note.description}
-              </p>
-              <div className='mt-auto flex flex-wrap gap-2 pt-2'>
-                {note.tags.map(tag => (
-                  <Badge key={tag} variant='outline'>
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </a>
-          ))}
+                  {note.repo && (
+                    <span className='border border-accent/30 px-2 py-0.5 font-mono text-[10px] uppercase text-accent'>
+                      Open Source
+                    </span>
+                  )}
+                </div>
+                <h3 className='font-headline text-xl font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
+                  {note.title}
+                </h3>
+                <p className='text-sm leading-relaxed text-text-muted'>
+                  {note.description}
+                </p>
+                <div className='mt-auto flex flex-wrap gap-2 pt-2'>
+                  {note.tags.map(tag => (
+                    <Badge key={tag} variant='outline'>
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </>
+            )
+
+            const className = 'group relative flex flex-col gap-3 border border-border bg-bg-card p-6 transition-colors hover:bg-bg-elevated'
+
+            return isExternal ? (
+              <a
+                key={note.slug}
+                href={note.externalUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={className}
+              >
+                {cardContent}
+              </a>
+            ) : (
+              <Link
+                key={note.slug}
+                href={`/field-notes/${note.slug}` as '/field-notes/[slug]'}
+                className={className}
+              >
+                {cardContent}
+              </Link>
+            )
+          })}
         </Reveal>
       </div>
     </AnimatedSection>
