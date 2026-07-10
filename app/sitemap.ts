@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { landingVariants } from '@/src/lib/landing-pages'
+import { getAllFieldNotes } from '@/src/lib/field-notes'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.placetostandagency.com'
@@ -18,13 +19,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.9,
     },
-    // Temporarily unlinked — Field Notes content in progress, restore in a future update
-    // {
-    //   url: `${baseUrl}/field-notes`,
-    //   lastModified,
-    //   changeFrequency: 'weekly',
-    //   priority: 0.7,
-    // },
+    {
+      url: `${baseUrl}/field-notes`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
     {
       url: `${baseUrl}/team`,
       lastModified,
@@ -70,5 +70,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }))
 
-  return [...mainPages, ...landingPages]
+  const fieldNotePages: MetadataRoute.Sitemap = getAllFieldNotes().map(note => ({
+    url: `${baseUrl}/field-notes/${note.slug}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...mainPages, ...landingPages, ...fieldNotePages]
 }

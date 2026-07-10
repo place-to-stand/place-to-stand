@@ -4,8 +4,7 @@ import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
-// Temporarily unlinked — Field Notes content in progress, restore in a future update
-// import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
+import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
@@ -19,7 +18,7 @@ export default function HomePage() {
       <ServicesPreview />
       <ManifestoSection />
       <PillarsSection />
-      {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
+      <FieldNotesPreview />
 
       {/* CTA Block — blueprint detail callout */}
       <AnimatedSection className='py-20'>
