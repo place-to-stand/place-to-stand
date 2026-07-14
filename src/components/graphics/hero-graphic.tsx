@@ -16,12 +16,21 @@ import { BlueprintGraphic } from './blueprint-graphic'
  *          accent, a page header, a "My Tasks" list, and two stat-card panels,
  *          all squared off and aligned to a tight grid. A live dot breathes.
  *
+ * DATA LAYER — a second band beneath the app layer that tells the same story for
+ * the data itself: many SaaS tools also mean many separate databases, so a
+ * business's data ends up fragmented across silos. Under the clutter sits one
+ * small, tilted database cylinder per dashboard, each fed by a straight line from
+ * the window above it; under the clean app sits one unified accent cylinder. The
+ * headings carry the copy ("Turn your scattered data" → "Into one source of truth"), so
+ * the graphic reads: we don't just consolidate the interface, we consolidate the
+ * data into a single source of truth.
+ *
  * Same schematic vocabulary as home-graphics.tsx (fill-bg-card hollow shapes,
  * stroke-line, one accent highlight). Entrance is a sequenced fade-and-rise
  * (see .hero-compare in globals.css): the tossed generic dashboards come up one
- * by one, then the front, then the arrow, then your app last. The wrapper
- * (<BlueprintGraphic>) supplies the in-view gate, reduced-motion handling, and
- * the intro offset.
+ * by one, then the front, then the arrow, then your app, then the data layer
+ * settles in beneath. The wrapper (<BlueprintGraphic>) supplies the in-view gate,
+ * reduced-motion handling, and the intro offset.
  */
 
 /** Sets a group's entrance delay (ms) within the sequenced reveal. */
@@ -265,22 +274,72 @@ function ClutterWindow({ x, y, w, h, seed }: Rect & { seed: number }) {
   )
 }
 
+// ── Data layer: database cylinders in the same hollow blueprint vocabulary.
+//    A classic cylinder — a filled body (fill-bg-card so the grid doesn't show
+//    through), two side lines, a front-facing bottom arc, one interior "disk"
+//    band, and the top ellipse drawn last. `accent` swaps the stroke for the
+//    unified store; `rot` tilts a scattered silo. ──
+type Db = { cx: number; top: number; w: number; h: number; accent?: boolean; rot?: number }
+function DbCylinder({ cx, top, w, h, accent = false, rot = 0 }: Db) {
+  const rx = w / 2
+  const ry = rx * 0.42
+  const cyTop = top + ry
+  const cyBot = cyTop + h
+  const midY = cyTop + h * 0.45
+  const stroke = accent ? 'stroke-accent' : 'stroke-line'
+  const sw = accent ? 1.1 : 0.8
+  const arc = (y: number) => `M${cx - rx} ${y} A ${rx} ${ry} 0 0 0 ${cx + rx} ${y}`
+  return (
+    <g transform={rot ? `rotate(${rot} ${cx} ${cyTop + h / 2})` : undefined}>
+      {/* filled body so the background grid doesn't read through */}
+      <path d={`M${cx - rx} ${cyTop} V${cyBot} A ${rx} ${ry} 0 0 0 ${cx + rx} ${cyBot} V${cyTop}`} className='fill-bg-card' stroke='none' />
+      {/* body sides */}
+      <line x1={cx - rx} y1={cyTop} x2={cx - rx} y2={cyBot} className={stroke} strokeWidth={sw} />
+      <line x1={cx + rx} y1={cyTop} x2={cx + rx} y2={cyBot} className={stroke} strokeWidth={sw} />
+      {/* front-facing bottom + interior disk band */}
+      <path d={arc(cyBot)} className={`fill-none ${stroke}`} strokeWidth={sw} />
+      <path d={arc(midY)} className={`fill-none ${stroke}`} strokeWidth={sw * 0.7} />
+      {/* top ellipse, drawn last so it sits above the body */}
+      <ellipse cx={cx} cy={cyTop} rx={rx} ry={ry} className={`fill-bg-card ${stroke}`} strokeWidth={sw} />
+    </g>
+  )
+}
+
+// One data silo per dashboard in the clutter pile — each sits directly below the
+// window that owns it (cx = that window's centre) and is fed by a straight line
+// dropping from the stack above. Different sizes/tilts and depth-staggered tops
+// so the cluster reads as scattered, disconnected islands and occludes like the
+// pile. Ordered back-to-front (behind windows first, the front one last) so the
+// layering matches the dashboards.
+const SILOS: Db[] = [
+  { cx: 70, top: 155, w: 13, h: 10, rot: 5 }, // behind 0
+  { cx: 39, top: 151, w: 14, h: 12, rot: -6 }, // behind 1
+  { cx: 76, top: 150, w: 12, h: 10, rot: 4 }, // behind 2
+  { cx: 37, top: 158, w: 13, h: 11, rot: -4 }, // behind 3
+  { cx: 59, top: 153, w: 14, h: 11, rot: 3 }, // behind 4
+  { cx: 64, top: 161, w: 16, h: 13, rot: -2 }, // front (biggest, on top)
+]
+// The unified store under the clean app — one bigger cylinder in accent.
+const UNIFIED_DB: Db = { cx: 222, top: 152, w: 26, h: 20, accent: true }
+
 export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
-      viewBox='0 0 274 150'
+      viewBox='0 0 274 190'
       drawDelayMs={2000}
       className={`hero-compare ${className ?? ''}`}
     >
       {/* ── Titles — each rises in with its column (stack first, your app last) ── */}
       <g className='cmp-in' style={cmp(0)}>
-        <text x='62' y='12' textAnchor='middle' className='fill-text-muted font-headline' fontSize='7' fontWeight='500' letterSpacing='0.3'>
-          Turn these
+        <text x='62' y='8' textAnchor='middle' className='cmp-title fill-text-muted font-headline' fontSize='8.5' fontWeight='500' letterSpacing='0.3'>
+          <tspan x='62'>Turn your</tspan>
+          <tspan x='62' dy='10'>scattered data</tspan>
         </text>
       </g>
       <g className='cmp-in' style={cmp(1315)}>
-        <text x='222' y='12' textAnchor='middle' className='fill-accent font-headline' fontSize='7' fontWeight='500' letterSpacing='0.3'>
-          Into this
+        <text x='222' y='8' textAnchor='middle' className='cmp-title fill-accent font-headline' fontSize='8.5' fontWeight='500' letterSpacing='0.2'>
+          <tspan x='222'>Into one</tspan>
+          <tspan x='222' dy='10'>source of truth</tspan>
         </text>
       </g>
 
@@ -374,6 +433,23 @@ export function HeroGraphic({ className }: { className?: string }) {
           <line x1='132' y1='82' x2='156' y2='82' />
           <path d='M151 78 L156 82 L151 86' />
         </g>
+      </g>
+
+      {/* ── Data layer: the same story for the data itself. Under the clutter,
+             scattered silos with tangled connectors drop in one by one; under the
+             clean app, one unified accent store. Both settle after the app. ── */}
+      {SILOS.map((s, i) => (
+        <g key={`silo${i}`} className='cmp-in' style={cmp(1000 + i * 120)}>
+          {/* straight connector dropping from the dashboard directly above */}
+          <line x1={s.cx} y1='141' x2={s.cx} y2={s.top} className='stroke-line' strokeWidth='0.6' strokeLinecap='round' />
+          <DbCylinder {...s} />
+        </g>
+      ))}
+
+      <g className='cmp-in' style={cmp(1750)}>
+        {/* one clean connector from the app down to the unified store */}
+        <line x1={UNIFIED_DB.cx} y1='135' x2={UNIFIED_DB.cx} y2={UNIFIED_DB.top} className='stroke-accent' strokeWidth='1' strokeLinecap='round' />
+        <DbCylinder {...UNIFIED_DB} />
       </g>
     </BlueprintGraphic>
   )

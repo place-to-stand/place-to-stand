@@ -457,6 +457,15 @@ body {
   }
 }
 
+/* On mobile the graphic renders narrower, so its titles shrink with it — bump
+   the "Turn all of this" / "Into one source of truth" headings up a touch
+   (font-size is in SVG user units, so this scales relative to the viewBox). */
+@media (max-width: 767px) {
+  .hero-compare .cmp-title {
+    font-size: 10.5px;
+  }
+}
+
 /* ─── Hero story timeline ───
    The hero's looping five-beat story (<HeroGraphic>). A JS beat sequencer sets
    per-element opacity/transform inline; these rules tween it. Namespaced under
