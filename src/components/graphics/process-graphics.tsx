@@ -70,6 +70,39 @@ export function AutomationGraphic(props: GraphicProps) {
   )
 }
 
+/** Portal — a dashboard wireframe with sidebar nav, task row, and accent AI gear node. */
+export function PortalGraphic(props: GraphicProps) {
+  return (
+    <svg {...base} {...props}>
+      {/* Dashboard frame */}
+      <rect x="10" y="14" width="80" height="72" rx="3" className="stroke-border-light" strokeWidth="1.5" />
+      {/* Sidebar */}
+      <line x1="30" y1="14" x2="30" y2="86" className="stroke-border-light" strokeWidth="1.5" />
+      {/* Sidebar nav lines */}
+      <line x1="15" y1="28" x2="25" y2="28" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="15" y1="38" x2="25" y2="38" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="15" y1="48" x2="25" y2="48" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Content area — task rows */}
+      <line x1="36" y1="30" x2="72" y2="30" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="36" y1="42" x2="72" y2="42" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
+      <line x1="36" y1="54" x2="72" y2="54" className="stroke-border-light" strokeWidth="1.5" strokeLinecap="round" />
+      {/* Task status dots */}
+      <circle cx="80" cy="30" r="2.5" className="fill-border-light" />
+      <circle cx="80" cy="42" r="2.5" className="fill-accent" />
+      <circle cx="80" cy="54" r="2.5" className="fill-border-light" />
+      {/* AI gear node — accent highlight */}
+      <circle cx="54" cy="70" r="8" className="fill-bg stroke-accent" strokeWidth="1.5" />
+      <g className="stroke-accent" strokeWidth="1.5" strokeLinecap="round">
+        <line x1="54" y1="58" x2="54" y2="62" />
+        <line x1="54" y1="78" x2="54" y2="82" />
+        <line x1="42" y1="70" x2="46" y2="70" />
+        <line x1="62" y1="70" x2="66" y2="70" />
+      </g>
+      <circle cx="54" cy="70" r="2.5" className="fill-accent" />
+    </svg>
+  )
+}
+
 /** Taste — a refined bezier curve with accent control points. */
 export function TasteGraphic(props: GraphicProps) {
   return (
