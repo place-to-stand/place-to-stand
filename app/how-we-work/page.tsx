@@ -4,6 +4,7 @@ import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { PhasesSection } from '@/src/components/sections/phases-section'
+import { PortalSection } from '@/src/components/sections/portal-section'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import {
@@ -31,7 +32,7 @@ const process = [
   },
   {
     title: 'Automated Execution & Human Verification',
-    body: 'Once the direction is clear, execution is largely automated. Frontier models are integrated directly into our own custom tools. Every task is human-verified at the input and the output level where we verify code changes with pre-AI programming knowledge.',
+    body: 'Once the direction is clear, execution runs through our portal, and every task is human-verified before it ships. More on that below.',
     Graphic: AutomationGraphic,
   },
   {
@@ -58,7 +59,7 @@ export default function HowWeWorkPage() {
             Our Process
           </h1>
           <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
-           We focus on quick wins first to unblock your immediate needs. We design your database structure and then we use our own custom solution to automate the manual task of coding. Lastly, we human-verify all production code with pre-AI programming knowledge.
+           We start with quick wins to unblock you, then map how your business actually works before we scale up. From there, execution runs through our portal, and we bring hard-won judgment to the details.
           </p>
         </div>
         <div className='flex flex-col'>
@@ -123,6 +124,8 @@ export default function HowWeWorkPage() {
           </div>
         </div>
       </AnimatedSection>
+
+      <PortalSection />
 
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
