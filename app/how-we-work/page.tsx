@@ -4,6 +4,7 @@ import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { PhasesSection } from '@/src/components/sections/phases-section'
+import { PortalSection } from '@/src/components/sections/portal-section'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import {
@@ -15,7 +16,7 @@ import {
 
 export const metadata: Metadata = {
   title: 'How We Work',
-  description: 'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
+  description: 'Our production cycle, delivery model, and open-source portal. Flat-rate blocks, direct access, AI-powered delivery, and frontier model integration via our custom tooling.',
 }
 
 const process = [
@@ -31,7 +32,7 @@ const process = [
   },
   {
     title: 'Automated Execution & Human Verification',
-    body: 'Once the direction is clear, execution is largely automated. Frontier models are integrated directly into our own custom tools. Every task is human-verified at the input and the output level where we verify code changes with pre-AI programming knowledge.',
+    body: 'Once the direction is clear, execution is largely automated. Frontier models are integrated directly into our own custom portal and tooling. Every task is human-verified at the input and the output level where we verify code changes with pre-AI programming knowledge. See our custom portal below.',
     Graphic: AutomationGraphic,
   },
   {
@@ -123,6 +124,8 @@ export default function HowWeWorkPage() {
           </div>
         </div>
       </AnimatedSection>
+
+      <PortalSection />
 
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
