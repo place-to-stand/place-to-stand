@@ -1,142 +1,122 @@
-import { Fragment } from 'react'
 import Image from 'next/image'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
-  TaskIcon,
-  ModelIcon,
-  AgentIcon,
-  SandboxIcon,
-  VerifyIcon,
-  ShipIcon,
-  ThroughputIcon,
+  CommsTaskIcon,
+  HandoffIcon,
+  VerifyTasteIterateIcon,
+  BuildDeployIcon,
 } from '@/src/components/graphics/portal-graphics'
 
-/** The task flow, left to right: what happens to a unit of work inside the portal. */
-const pipeline = [
-  { title: 'Task', Icon: TaskIcon, body: 'A scoped unit of work enters the portal.' },
-  { title: 'Frontier model', Icon: ModelIcon, body: 'Frontier models plan the change and draft the code.' },
-  { title: 'Deployed agent', Icon: AgentIcon, body: 'A deployed agent picks up the task and runs it.' },
-  { title: 'Cloud sandbox', Icon: SandboxIcon, body: 'Each task executes in its own isolated sandbox. Code runs, tests run.' },
-  { title: 'Human verification', Icon: VerifyIcon, body: 'A human verifies the diff with pre-AI programming knowledge.' },
-  { title: 'Shipped', Icon: ShipIcon, body: 'Verified code ships to production.' },
+/**
+ * The pipeline, top to bottom. Each stage is a node on the left rail paired with
+ * the screenshot of that stage in the real portal on the right. The two internal
+ * steps (deployed agent, cloud sandbox) are folded into the frontier-model stage.
+ */
+const stages = [
+  {
+    Icon: CommsTaskIcon,
+    title: 'Comms → Task',
+    body: 'We populate the board from meeting transcripts, emails, and any other communication, turning them into executable chunks. It is a refined, traditional kanban board, and once a task lands on it, that task becomes the prompt for an agent.',
+    src: '/portal-board.png',
+    alt: 'The Place To Stand portal task board with On Deck, In Progress, Blocked, and Done columns.',
+  },
+  {
+    Icon: HandoffIcon,
+    title: 'Human + Agent Handoff',
+    body: 'Each task can talk to a frontier model to draft a technical plan against that project\'s repository. A task can hold many versions of a plan, and once one is approved, it is dispatched for execution.',
+    src: '/portal-planning.png',
+    alt: 'The portal task planning view, with a frontier model generating an implementation plan for a task.',
+  },
+  {
+    Icon: VerifyTasteIterateIcon,
+    title: 'Human Verification, Taste & Iterate',
+    body: 'Once a dispatched task finishes building in its cloud sandbox, it opens a pull request with every change and commit it made. We pull those changes to our local machines, confirm they run, and apply our taste and judgment before anything ships.',
+    src: '/portal-pr.png',
+    alt: 'A pull request marked ready to merge, with a summary of the changes made.',
+  },
+  {
+    Icon: BuildDeployIcon,
+    title: 'Build, Validate & Deploy',
+    body: 'This stage is built into the flow. Vercel and Supabase connect to our repository and spin up a preview deployment on every pull request, so we see changes live without a local environment. Each PR has to pass our pipeline and infra checks before it can go live. Once we are happy, we merge to main.',
+    src: '/portal-build.png',
+    alt: 'A pull request with all checks passed, no merge conflicts, and live Vercel preview deployments, ready to merge.',
+  },
 ]
 
-/** The claims the architecture earns. Architecture first, payoff last. */
-const claims = [
-  {
-    title: 'Integrated frontier models',
-    Icon: ModelIcon,
-    body: 'Reasoning and code generation wired into our own tooling, not a bolted-on chatbot.',
-  },
-  {
-    title: 'Isolated execution',
-    Icon: SandboxIcon,
-    body: 'Every task runs in a fresh cloud sandbox, so execution stays contained and reproducible.',
-  },
-  {
-    title: 'Human verification gate',
-    Icon: VerifyIcon,
-    body: 'No automated change ships unverified. Pre-AI programming judgment on every diff.',
-  },
-  {
-    title: 'Throughput, not headcount',
-    Icon: ThroughputIcon,
-    body: 'The automation is what lets a small team deliver like a large one. Days, not months.',
-  },
-]
+type Stage = (typeof stages)[number]
+
+/** One pipeline stage: a node + label + body header sitting above the full-width
+ *  screenshot of that stage, with a solid line running down into it. */
+function PipelineStage({ stage }: { stage: Stage }) {
+  const { Icon } = stage
+  return (
+    <div className='relative flex flex-col'>
+      {/* Header: node + a solid line running down to the screenshot below, beside the copy. */}
+      <div className='flex gap-4'>
+        <div className='flex shrink-0 flex-col items-center'>
+          <div className='flex h-12 w-12 items-center justify-center border border-border-light bg-bg'>
+            <Icon className='h-7 w-7' />
+          </div>
+          <div className='mt-2 w-px flex-1 bg-border-light' aria-hidden />
+        </div>
+        <div className='flex flex-col gap-1.5 pb-12 pt-1 md:pb-16'>
+          <span className='font-headline text-lg font-bold uppercase tracking-tight text-accent'>
+            {stage.title}
+          </span>
+          <span className='max-w-2xl text-sm leading-relaxed text-text-muted md:text-base'>{stage.body}</span>
+        </div>
+      </div>
+
+      {/* Full-width screenshot of the stage in the real portal */}
+      <div className='relative border border-border bg-bg-card'>
+        <BlueprintCorners size={16} />
+        <Image
+          src={stage.src}
+          alt={stage.alt}
+          width={0}
+          height={0}
+          sizes='100vw'
+          quality={100}
+          className='h-auto w-full'
+        />
+      </div>
+    </div>
+  )
+}
 
 export function PortalSection() {
   return (
     <AnimatedSection className='flex flex-col gap-12'>
       {/* Heading — architecture first */}
       <Reveal index={0} className='flex flex-col gap-4'>
-        <span className='bp-label font-mono'>The Portal</span>
+        <span className='bp-label font-mono'>Our Portal</span>
         <h2 className='max-w-3xl text-balance font-headline text-3xl font-bold uppercase !leading-[.95] tracking-tight text-text md:text-4xl'>
-          Frontier models, wired to a live execution engine.
+          Our secret weapon
         </h2>
         <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
-          Our delivery runs on a portal we built ourselves. Frontier models are wired directly
-          into it for planning and code generation, paired with a deployed agent that executes
-          every task inside its own isolated cloud sandbox. You watch it happen, approve each
-          build, and nothing reaches production until a human with pre-AI programming knowledge
-          has verified it.
+          Delivery runs on a portal we built ourselves. Frontier models plan and write the code,
+          a deployed agent executes each task in its own isolated cloud sandbox, and nothing
+          ships until a human has verified it.
         </p>
       </Reveal>
 
-      {/* Execution pipeline */}
-      <Reveal index={1} className='relative border border-border p-6 md:p-10'>
-        <BlueprintCorners size={16} />
-        <div className='flex flex-col gap-8'>
-          <span className='font-mono text-xs uppercase tracking-[0.1em] text-text-muted'>
-            Execution pipeline
-          </span>
-          <div className='flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-2'>
-            {pipeline.map((step, i) => (
-              <Fragment key={step.title}>
-                <div className='flex items-start gap-4 lg:flex-1 lg:flex-col lg:items-center lg:gap-4 lg:text-center'>
-                  <div className='flex h-14 w-14 shrink-0 items-center justify-center border border-border-light lg:h-16 lg:w-16'>
-                    <step.Icon className='h-8 w-8 lg:h-9 lg:w-9' />
-                  </div>
-                  <div className='flex flex-col gap-1 lg:items-center'>
-                    <span className='font-headline text-sm font-bold uppercase tracking-tight text-accent'>
-                      {step.title}
-                    </span>
-                    <span className='text-xs leading-relaxed text-text-muted lg:max-w-[18ch]'>
-                      {step.body}
-                    </span>
-                  </div>
-                </div>
-                {i < pipeline.length - 1 && (
-                  <span
-                    className='ml-7 h-6 w-px shrink-0 bg-border-light lg:ml-0 lg:mt-8 lg:h-px lg:w-6'
-                    aria-hidden
-                  />
-                )}
-              </Fragment>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-
-      {/* Inside the portal — the real task board clients work from */}
-      <Reveal index={2} className='flex flex-col gap-4'>
-        <div className='flex flex-col gap-2'>
-          <span className='font-mono text-xs uppercase tracking-[0.1em] text-text-muted'>
-            Inside the portal
-          </span>
-          <p className='max-w-2xl text-sm leading-relaxed text-text-muted'>
-            The same board our team works from. Clients watch every task move from planning to
-            shipped, and approve builds in one place.
-          </p>
-        </div>
-        <div className='relative border border-border bg-bg-card p-2 md:p-3'>
-          <BlueprintCorners size={16} />
-          <Image
-            src='/portal-board.png'
-            alt='The Place To Stand portal task board, showing tasks across On Deck, In Progress, Blocked, and Done columns.'
-            width={0}
-            height={0}
-            sizes='100vw'
-            quality={100}
-            className='h-auto w-full'
-          />
-        </div>
-      </Reveal>
-
-      {/* Claims row */}
-      <Reveal index={3} className='relative'>
-        <BlueprintCorners size={16} />
-        <div className='grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4'>
-          {claims.map(claim => (
-            <div key={claim.title} className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'>
-              <claim.Icon className='h-10 w-10' />
-              <h3 className='font-headline text-base font-bold uppercase tracking-tight text-text'>
-                {claim.title}
-              </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>{claim.body}</p>
-            </div>
+      {/* Pipeline — each stage paired with its screenshot in the real portal */}
+      <Reveal index={1} className='flex flex-col gap-8'>
+        <span className='font-mono text-xs uppercase tracking-[0.1em] text-text-muted'>
+          From task to production
+        </span>
+        <div className='flex flex-col gap-14 md:gap-20'>
+          {stages.map(stage => (
+            <PipelineStage key={stage.title} stage={stage} />
           ))}
+        </div>
+        <div className='border-l-2 border-accent pl-5 md:pl-6'>
+          <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+            For simple changes, this is an almost fully automated process. For more involved
+            work that calls for taste and nuance, we usually run a few rounds back and forth.
+            The core process stays the same.
+          </p>
         </div>
       </Reveal>
     </AnimatedSection>

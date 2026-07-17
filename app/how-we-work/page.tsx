@@ -22,22 +22,22 @@ export const metadata: Metadata = {
 const process = [
   {
     title: 'Quick Wins',
-    body: 'We start by shipping something real, fast. Early, tangible wins build trust and give us a shared shorthand for the larger decisions ahead.',
+    body: 'We ship something real, fast. Early wins build trust and a shared shorthand for the bigger decisions ahead.',
     Graphic: QuickWinsGraphic,
   },
   {
     title: 'Ontology',
-    body: 'Before scaling up, we map how your business actually works. This ontology, the entities, rules, and relationships that define your domain, becomes the backbone the software is built on, so what we ship models reality instead of a template.',
+    body: 'We map how your business actually works, the entities and rules that define your domain, so the software models reality, not a template.',
     Graphic: OntologyGraphic,
   },
   {
-    title: 'Automated Execution & Human Verification',
-    body: 'Once the direction is clear, execution runs through our portal, and every task is human-verified before it ships. More on that below.',
+    title: 'Execution & Verification',
+    body: 'Execution runs through our portal, and every task is human-verified before it ships.',
     Graphic: AutomationGraphic,
   },
   {
     title: 'Taste',
-    body: 'This is where our expertise in building apps shows. We shape the details, iterate tightly with your stakeholders, and apply hard-won judgment to fit the software to your specific business context.',
+    body: 'We shape the details and apply hard-won judgment to fit the software to your business context.',
     Graphic: TasteGraphic,
   },
 ]
@@ -59,29 +59,32 @@ export default function HowWeWorkPage() {
             Our Process
           </h1>
           <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
-           We start with quick wins to unblock you, then map how your business actually works before we scale up. From there, execution runs through our portal, and we bring hard-won judgment to the details.
+           Quick wins to unblock you, a model of how your business actually works, execution through our portal, and hard-won judgment on the details.
           </p>
         </div>
-        <div className='flex flex-col'>
-          {process.map(step => (
-            <div
-              key={step.title}
-              className='flex gap-6 border-t border-border py-grid-2'
-            >
-              <span className='w-1 shrink-0 self-stretch bg-accent' aria-hidden />
-              <div className='flex flex-1 flex-col gap-3'>
-                <h3 className='text-balance font-headline text-lg font-bold uppercase tracking-tight text-accent'>
+        <div className='relative'>
+          <BlueprintCorners size={16} />
+          <div className='grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4'>
+            {process.map(step => (
+              <div
+                key={step.title}
+                className='relative flex flex-col gap-6 bg-bg-card p-5 md:p-8'
+              >
+                <step.Graphic className='absolute right-4 top-4 h-10 w-10 md:right-6 md:top-6' aria-hidden />
+                <h3 className='max-w-[80%] text-balance font-headline text-sm font-bold uppercase leading-tight tracking-tight text-accent'>
                   {step.title}
                 </h3>
-                <p className='max-w-2xl text-base leading-relaxed text-text-muted'>{step.body}</p>
+                <p className='text-sm leading-relaxed text-text-muted'>{step.body}</p>
               </div>
-              <step.Graphic className='hidden h-28 w-28 shrink-0 self-center lg:block' />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+      </AnimatedSection>
 
-        {/* Our Tech Stack — its own framed blueprint panel, visually distinct from
-            the process rows. Logos stay grouped by role. */}
+      <PortalSection />
+
+      {/* Our Tech Stack — the models and infrastructure powering the portal */}
+      <AnimatedSection>
         <div className='relative border border-border p-6 md:p-10'>
           <BlueprintCorners size={16} />
           <div className='flex flex-col gap-8'>
@@ -124,8 +127,6 @@ export default function HowWeWorkPage() {
           </div>
         </div>
       </AnimatedSection>
-
-      <PortalSection />
 
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 

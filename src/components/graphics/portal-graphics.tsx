@@ -1,11 +1,10 @@
 import type { SVGProps } from 'react'
 
 /**
- * Blueprint schematic icons for the "The Portal" section on how-we-work. Same
- * language as process-graphics: thin border-light strokes on a 100x100 viewBox
- * with accent highlights, hollow nodes filled with the page background so
- * connecting lines don't show through. Used for the execution-pipeline nodes and
- * the claim cards below it.
+ * Blueprint schematic icons for the "Our Portal" pipeline steps. Same language as
+ * process-graphics: thin border-light strokes on a 100x100 viewBox with accent
+ * highlights, hollow nodes filled with the page background so connecting lines
+ * don't show through. One icon per pipeline stage.
  */
 
 type GraphicProps = SVGProps<SVGSVGElement>
@@ -16,112 +15,89 @@ const base = {
   xmlns: 'http://www.w3.org/2000/svg',
 } as const
 
-/** Task — a scoped work card entering the portal. */
-export function TaskIcon(props: GraphicProps) {
+/** Comms -> Task — communications converging through an accent arrow into a task card. */
+export function CommsTaskIcon(props: GraphicProps) {
   return (
     <svg {...base} {...props}>
-      <rect x="22" y="16" width="56" height="68" className="fill-bg stroke-border-light" strokeWidth="2" />
-      <line x1="32" y1="36" x2="68" y2="36" className="stroke-border-light" strokeWidth="2" />
-      <line x1="32" y1="48" x2="68" y2="48" className="stroke-border-light" strokeWidth="2" />
-      <line x1="32" y1="60" x2="54" y2="60" className="stroke-border-light" strokeWidth="2" />
-      <rect x="22" y="16" width="14" height="8" className="fill-accent" />
+      {/* comm sources: three stacked message lines with terminal dots */}
+      <g className="stroke-border-light" strokeWidth="2" strokeLinecap="round">
+        <line x1="16" y1="34" x2="34" y2="34" />
+        <line x1="16" y1="50" x2="34" y2="50" />
+        <line x1="16" y1="66" x2="34" y2="66" />
+      </g>
+      <g className="fill-border-light">
+        <circle cx="16" cy="34" r="2.5" />
+        <circle cx="16" cy="50" r="2.5" />
+        <circle cx="16" cy="66" r="2.5" />
+      </g>
+      {/* accent arrow into the task */}
+      <line x1="40" y1="50" x2="54" y2="50" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M49 44 l6 6 l-6 6" className="stroke-accent" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+      {/* task card */}
+      <rect x="62" y="28" width="26" height="44" className="fill-bg stroke-border-light" strokeWidth="2" />
+      <line x1="68" y1="44" x2="82" y2="44" className="stroke-border-light" strokeWidth="2" />
+      <line x1="68" y1="54" x2="82" y2="54" className="stroke-border-light" strokeWidth="2" />
+      <rect x="62" y="28" width="8" height="6" className="fill-accent" />
     </svg>
   )
 }
 
-/** Frontier model — a central accent node with radiating satellites. */
-export function ModelIcon(props: GraphicProps) {
+/** Human + Agent Handoff — a person and an agent chip joined by an accent plus. */
+export function HandoffIcon(props: GraphicProps) {
   return (
     <svg {...base} {...props}>
-      <g className="stroke-border-light" strokeWidth="2">
-        <line x1="50" y1="50" x2="24" y2="28" />
-        <line x1="50" y1="50" x2="76" y2="28" />
-        <line x1="50" y1="50" x2="24" y2="74" />
-        <line x1="50" y1="50" x2="76" y2="74" />
+      {/* human */}
+      <circle cx="24" cy="36" r="9" className="fill-bg stroke-border-light" strokeWidth="2" />
+      <path d="M10 70 C10 54, 38 54, 38 70" className="stroke-border-light" strokeWidth="2" strokeLinecap="round" />
+      {/* accent plus, joining human and agent */}
+      <g className="stroke-accent" strokeWidth="2.5" strokeLinecap="round">
+        <line x1="50" y1="44" x2="50" y2="58" />
+        <line x1="43" y1="51" x2="57" y2="51" />
       </g>
+      {/* agent chip */}
+      <rect x="62" y="38" width="26" height="26" className="fill-bg stroke-border-light" strokeWidth="2" />
+      <g className="stroke-border-light" strokeWidth="2" strokeLinecap="round">
+        <line x1="70" y1="38" x2="70" y2="32" />
+        <line x1="80" y1="38" x2="80" y2="32" />
+        <line x1="70" y1="64" x2="70" y2="70" />
+        <line x1="80" y1="64" x2="80" y2="70" />
+      </g>
+      <circle cx="75" cy="51" r="4" className="fill-accent" />
+    </svg>
+  )
+}
+
+/** Human Verification, Taste & Iterate — a refinement curve with iteration nodes,
+ *  rising into an accent verification check. */
+export function VerifyTasteIterateIcon(props: GraphicProps) {
+  return (
+    <svg {...base} {...props}>
+      {/* refinement / iteration curve */}
+      <path d="M16 80 C 30 68, 40 58, 52 48" className="stroke-border-light" strokeWidth="2" strokeLinecap="round" />
+      {/* iteration nodes along the curve */}
+      <g className="fill-bg stroke-border-light" strokeWidth="1.5">
+        <circle cx="16" cy="80" r="3.5" />
+        <circle cx="34" cy="63" r="3.5" />
+      </g>
+      {/* accent verification check at the end */}
+      <path d="M54 54 l6 6 l14 -18" className="stroke-accent" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/** Build, Validate & Deploy — build blocks launched by an accent deploy arrow. */
+export function BuildDeployIcon(props: GraphicProps) {
+  return (
+    <svg {...base} {...props}>
+      {/* build blocks */}
       <g className="fill-bg stroke-border-light" strokeWidth="2">
-        <circle cx="24" cy="28" r="6" />
-        <circle cx="76" cy="28" r="6" />
-        <circle cx="24" cy="74" r="6" />
-        <circle cx="76" cy="74" r="6" />
+        <rect x="16" y="58" width="16" height="16" />
+        <rect x="34" y="58" width="16" height="16" />
+        <rect x="25" y="42" width="16" height="16" />
       </g>
-      <circle cx="50" cy="50" r="9" className="fill-accent" />
-    </svg>
-  )
-}
-
-/** Deployed agent — a processor chip with pins and an accent run triangle. */
-export function AgentIcon(props: GraphicProps) {
-  return (
-    <svg {...base} {...props}>
-      <rect x="30" y="30" width="40" height="40" className="fill-bg stroke-border-light" strokeWidth="2" />
-      <g className="stroke-border-light" strokeWidth="2" strokeLinecap="round">
-        <line x1="40" y1="30" x2="40" y2="20" />
-        <line x1="50" y1="30" x2="50" y2="20" />
-        <line x1="60" y1="30" x2="60" y2="20" />
-        <line x1="40" y1="70" x2="40" y2="80" />
-        <line x1="50" y1="70" x2="50" y2="80" />
-        <line x1="60" y1="70" x2="60" y2="80" />
-        <line x1="30" y1="40" x2="20" y2="40" />
-        <line x1="30" y1="60" x2="20" y2="60" />
-        <line x1="70" y1="40" x2="80" y2="40" />
-        <line x1="70" y1="60" x2="80" y2="60" />
-      </g>
-      <path d="M45 42 L45 58 L59 50 Z" className="fill-accent" />
-    </svg>
-  )
-}
-
-/** Cloud sandbox — an isolated terminal container with a prompt + input line. */
-export function SandboxIcon(props: GraphicProps) {
-  return (
-    <svg {...base} {...props}>
-      <rect x="18" y="24" width="64" height="52" className="fill-bg stroke-border-light" strokeWidth="2" />
-      <line x1="18" y1="36" x2="82" y2="36" className="stroke-border-light" strokeWidth="2" />
-      <path d="M28 50 l8 6 l-8 6" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <line x1="44" y1="62" x2="60" y2="62" className="stroke-border-light" strokeWidth="2.5" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-/** Human verification — a shield with an accent check. */
-export function VerifyIcon(props: GraphicProps) {
-  return (
-    <svg {...base} {...props}>
-      <path
-        d="M50 16 L78 26 V52 C78 68 66 80 50 86 C34 80 22 68 22 52 V26 Z"
-        className="fill-bg stroke-border-light"
-        strokeWidth="2"
-        strokeLinejoin="round"
-      />
-      <path d="M38 50 l8 9 l16 -20" className="stroke-accent" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-/** Shipped — an accent deploy arrow rising through the production line. */
-export function ShipIcon(props: GraphicProps) {
-  return (
-    <svg {...base} {...props}>
-      <line x1="20" y1="76" x2="80" y2="76" className="stroke-border-light" strokeWidth="2" strokeDasharray="3 4" strokeLinecap="round" />
-      <line x1="50" y1="70" x2="50" y2="26" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M38 38 l12 -14 l12 14" className="stroke-accent" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
-  )
-}
-
-/** Throughput — many tasks funneling through one accent output. */
-export function ThroughputIcon(props: GraphicProps) {
-  return (
-    <svg {...base} {...props}>
-      <g className="stroke-border-light" strokeWidth="2" strokeLinecap="round">
-        <line x1="18" y1="30" x2="50" y2="50" />
-        <line x1="18" y1="50" x2="46" y2="50" />
-        <line x1="18" y1="70" x2="50" y2="50" />
-      </g>
-      <line x1="50" y1="50" x2="80" y2="50" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M70 42 l10 8 l-10 8" className="stroke-accent" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx="50" cy="50" r="4" className="fill-accent" />
+      {/* accent deploy arrow */}
+      <line x1="72" y1="74" x2="72" y2="34" className="stroke-accent" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M64 42 l8 -9 l8 9" className="stroke-accent" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   )
 }
