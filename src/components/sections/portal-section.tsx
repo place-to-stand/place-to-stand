@@ -1,12 +1,17 @@
 import Image from 'next/image'
 import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { Button } from '@/src/components/ui/button'
+import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import {
   CommsTaskIcon,
   HandoffIcon,
   VerifyTasteIterateIcon,
   BuildDeployIcon,
 } from '@/src/components/graphics/portal-graphics'
+
+const GitHubIcon = vendorIcons.GitHub
+const REPO_URL = 'https://github.com/place-to-stand/place-to-stand-portal'
 
 /**
  * The pipeline, top to bottom. Each stage is a node on the left rail paired with
@@ -88,17 +93,30 @@ function PipelineStage({ stage }: { stage: Stage }) {
 export function PortalSection() {
   return (
     <AnimatedSection className='flex flex-col gap-12'>
-      {/* Heading — architecture first */}
-      <Reveal index={0} className='flex flex-col gap-4'>
-        <span className='bp-label font-mono'>Our Portal</span>
-        <h2 className='max-w-3xl text-balance font-headline text-3xl font-bold uppercase !leading-[.95] tracking-tight text-text md:text-4xl'>
-          Our secret weapon
-        </h2>
-        <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
-          Delivery runs on a portal we built ourselves. Frontier models plan and write the code,
-          a deployed agent executes each task in its own isolated cloud sandbox, and nothing
-          ships until a human has verified it.
-        </p>
+      {/* Heading — architecture first, with the open-source link top-right */}
+      <Reveal index={0} className='flex flex-col-reverse gap-6 md:flex-row md:items-start md:justify-between'>
+        <div className='flex flex-col gap-4'>
+          <span className='bp-label font-mono'>Our Portal</span>
+          <h2 className='max-w-3xl text-balance font-headline text-3xl font-bold uppercase !leading-[.95] tracking-tight text-text md:text-4xl'>
+            Our secret weapon
+          </h2>
+          <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+            Delivery runs on a portal we built ourselves. Frontier models plan and write the code,
+            a deployed agent executes each task in its own isolated cloud sandbox, and nothing
+            ships until a human has verified it.
+          </p>
+        </div>
+        <Button
+          asChild
+          variant='outline'
+          size='sm'
+          className='shrink-0 gap-2 self-start'
+        >
+          <a href={REPO_URL} target='_blank' rel='noopener noreferrer'>
+            <GitHubIcon className='h-4 w-4' aria-hidden />
+            Open Source
+          </a>
+        </Button>
       </Reveal>
 
       {/* Pipeline — each stage paired with its screenshot in the real portal */}
