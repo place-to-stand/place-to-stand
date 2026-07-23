@@ -57,7 +57,7 @@ export function WhoWeWorkWithSection() {
               key={profile.number}
               className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
             >
-              <BlueprintCorners size={12} colorClassName='border-accent/40' />
+              <BlueprintCorners size={12} />
               <profile.Graphic className='absolute top-4 right-4 h-grid-2 w-grid-2 md:top-6 md:right-6' />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
                 {profile.number}

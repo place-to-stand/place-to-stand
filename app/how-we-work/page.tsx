@@ -145,7 +145,7 @@ export default function HowWeWorkPage() {
       {/* CTA Block */}
       <AnimatedSection>
         <div className='relative border border-border bg-bg-card p-6 md:p-16'>
-          <BlueprintCorners size={20} all colorClassName='border-accent/40' />
+          <BlueprintCorners size={20} all />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3'>
               <span className='bp-label font-mono'>Next Step</span>

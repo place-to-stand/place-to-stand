@@ -15,7 +15,7 @@ export function ClientsSection() {
           aria-label={`View ${project.title} project (opens in a new tab)`}
           className='group relative border border-border bg-bg-card no-underline transition-all duration-300 ease-out hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
         >
-          <BlueprintCorners colorClassName='border-accent/40' />
+          <BlueprintCorners />
           {/* External link indicator */}
           <span className='pointer-events-none absolute top-2 right-2 z-20 flex h-6 w-6 items-center justify-center border border-border bg-bg-card text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'>
             <svg

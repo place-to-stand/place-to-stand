@@ -4,6 +4,7 @@ import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
+import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 // Temporarily unlinked — Field Notes content in progress, restore in a future update
 // import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
 import {
@@ -27,23 +28,7 @@ export default function HomePage() {
       {/* CTA Block — blueprint detail callout */}
       <AnimatedSection className='py-20'>
         <div className='relative border border-border bg-bg-card p-5 md:p-16'>
-          {/* Corner marks */}
-          <span
-            className='pointer-events-none absolute -top-px -left-px z-10 h-5 w-5 border-t border-l border-accent'
-            aria-hidden
-          />
-          <span
-            className='pointer-events-none absolute -right-px -bottom-px z-10 h-5 w-5 border-r border-b border-accent'
-            aria-hidden
-          />
-          <span
-            className='pointer-events-none absolute -top-px -right-px z-10 h-5 w-5 border-t border-r border-accent'
-            aria-hidden
-          />
-          <span
-            className='pointer-events-none absolute -bottom-px -left-px z-10 h-5 w-5 border-b border-l border-accent'
-            aria-hidden
-          />
+          <BlueprintCorners size={20} all />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3'>
               <Reveal index={0} className='flex flex-col gap-3'>

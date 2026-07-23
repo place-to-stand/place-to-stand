@@ -23,7 +23,9 @@ export function HeroSection() {
         <div className='flex flex-col gap-8 md:gap-10'>
           {/* Headline with blueprint corner marks */}
           <div className='hero-frame relative w-full'>
-            <BlueprintCorners size={20} />
+            {/* Hero keeps the full-strength accent corners — the muted default
+                is for content cards further down the page. */}
+            <BlueprintCorners size={20} colorClassName='border-accent' />
             <h1 className='max-w-5xl py-4 pl-3 font-headline text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
               <span
                 className='hero-line block'
