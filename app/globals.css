@@ -62,22 +62,25 @@ html {
   overflow-x: hidden;
 }
 
-body {
-  @apply bg-bg font-sans text-text antialiased;
-  overflow-x: hidden;
-  /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
-     so we phase the pattern to put a dot row/column on the structural lines:
-     - X: 50% anchors a dot at the viewport center; since every container is a
-       centered, even multiple of 24px wide, its edges land on dot columns.
-     - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
-       page-top and 24px-multiple section bands sit on dot rows.
-     Scrolls with content. */
-  background-image:
-    radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
-  background-size:
-    24px 24px;
-  background-position:
-    50% 12px;
+@layer base {
+  body {
+    @apply bg-bg font-sans text-text antialiased;
+    overflow-x: hidden;
+    /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
+       so we phase the pattern to put a dot row/column on the structural lines:
+       - X: 50% anchors a dot at the viewport center; since every container is a
+         centered, even multiple of 24px wide, its edges land on dot columns.
+       - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
+         page-top and 24px-multiple section bands sit on dot rows.
+       Scrolls with content. */
+    background-image: radial-gradient(
+      circle,
+      var(--grid-dot) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+    background-position: 50% 12px;
+  }
 }
 
 @keyframes fadeIn {
@@ -575,12 +578,17 @@ body {
   }
 }
 
-a {
-  @apply text-text underline-offset-4 transition-colors;
-}
+/* Base link styles live in @layer base so utility classes (e.g. a button's
+   text-bg) can override them — unlayered rules would beat v4's layered
+   utilities regardless of specificity. */
+@layer base {
+  a {
+    @apply text-text underline-offset-4 transition-colors;
+  }
 
-a:hover {
-  @apply text-text/80;
+  a:hover {
+    @apply text-text/80;
+  }
 }
 
 ::selection {
