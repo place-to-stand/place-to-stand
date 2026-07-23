@@ -35,12 +35,4 @@ export const team: TeamMember[] = [
       instagram: 'https://www.instagram.com/kristopher.____/',
       github: 'https://github.com/krismakesstuff',
     },
-  },
-  // {
-  //   name: 'Chris Donahue',
-  //   title: 'Creative Director',
-  //   bio: 'Creative director with a passion for visual storytelling and brand strategy. Translates business goals into compelling design systems and content that drives results.',
-  //   image: '/403081575_325440200226266_2592020462209657049_n.jpg',
-  //   socials: {},
-  // },
-]
+  },]

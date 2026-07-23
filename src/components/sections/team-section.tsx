@@ -12,11 +12,6 @@ const team = [
     title: 'Software Engineer & AI Technologist',
     image: '/259858081_219018533698595_237774923102850579_n.jpg',
   },
-  {
-    name: 'Chris Donahue',
-    title: 'Creative Director',
-    image: '/403081575_325440200226266_2592020462209657049_n.jpg',
-  },
 ]
 
 export function TeamSection() {
