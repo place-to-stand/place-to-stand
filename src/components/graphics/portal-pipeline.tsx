@@ -36,6 +36,11 @@ const ACTIVE = 1.16
  *  (which grows ~w/2·(ACTIVE−BASE) past its resting edge) never swallows the
  *  arrowhead — it keeps a little breathing room around every stage. */
 const CONNECT_GAP = 8
+/** Mobile can't read the wide strip, so it crops to a single stage — a square
+ *  window on the mid-line — and pans horizontally between stages. The window is
+ *  sized well past the widest stage (cloud, w≈118) so each stage sits with padding
+ *  and its neighbours bleed in at the edges for context. */
+const CROP_W = 186
 
 type StageMeta = { key: string; xo: number; w: number; cy: number }
 
@@ -172,10 +177,17 @@ export function PortalPipeline({
   active,
   paused = false,
   className,
+  mobile = false,
+  focus,
 }: {
   active: number | null
   paused?: boolean
   className?: string
+  /** Crop to a single stage and pan between them (see CROP_W); for phone widths. */
+  mobile?: boolean
+  /** Which stage the mobile crop frames. Defaults to the spotlight (`active`);
+   *  set explicitly for the static reduced-motion cards, which have no spotlight. */
+  focus?: number
 }) {
   const stageStyle = (i: number): CSSProperties => ({
     transformBox: 'fill-box',
@@ -192,11 +204,22 @@ export function PortalPipeline({
   const titleTone = (i: number): 'muted' | 'accent' =>
     active === i ? 'accent' : 'muted'
 
+  // Mobile: every stage's box centre sits on MID_Y (see place), so framing one
+  // stage in the square window is a pure horizontal pan — translateX in user
+  // units, CSS-transitioned so it glides as the autoplay advances.
+  const idx = focus ?? active ?? 0
+  const mobileViewBox = `${centerX(STAGES[0]) - CROP_W / 2} ${MID_Y - CROP_W / 2} ${CROP_W} ${CROP_W}`
+  const panStyle: CSSProperties = {
+    transform: `translateX(${centerX(STAGES[0]) - centerX(STAGES[idx])}px)`,
+    transition: 'transform 500ms ease-out',
+  }
+
   return (
     <BlueprintGraphic
-      viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`}
+      viewBox={mobile ? mobileViewBox : `${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`}
       className={`bp-loop-travel bp-loop-gear bp-loop-slow ${paused ? 'bp-paused' : ''} ${className ?? ''}`}
     >
+      <g style={mobile ? panStyle : undefined}>
       {/* ── Connectors (resting edges → never gap when a stage zooms) ── */}
       {STAGES.slice(0, -1).map((s, i) => (
         <Flow
@@ -210,9 +233,6 @@ export function PortalPipeline({
       {/* ── 0 · Board: comms → task, with the information flowing in ── */}
       <g transform={place(0)}>
         <g style={stageStyle(0)}>
-          <Txt x={0} y={15} size={7.5} tone={titleTone(0)}>
-            COMMS
-          </Txt>
           {/* email */}
           <rect
             x={0}
@@ -273,8 +293,8 @@ export function PortalPipeline({
             <path d='M24 47.5 H58' />
           </g>
           {/* task board: kanban columns of little cards, one in progress */}
-          <Txt x={60} y={15} size={7.5} tone={titleTone(0)}>
-            TASK
+          <Txt x={0} y={15} size={6.5} tone={titleTone(0)}>
+            GENERATE TASKS
           </Txt>
           {[
             { x: 58, header: 12, cards: [40, 52, 64], accent: -1 },
@@ -337,10 +357,7 @@ export function PortalPipeline({
       <g transform={place(1)}>
         <g style={stageStyle(1)}>
           <Txt x={0} y={13} tone={titleTone(1)} size={6.5}>
-            HUMAN + AGENT
-          </Txt>
-          <Txt x={0} y={22} tone={titleTone(1)} size={6.5}>
-            PLANNING
+            PLAN.MD
           </Txt>
           <rect
             x={0}
@@ -415,7 +432,7 @@ export function PortalPipeline({
             strokeDasharray='4 4'
           />
           <Txt x={6} y={33} size={7.5} tone={titleTone(2)}>
-            DISPATCH CLOUD AGENT
+            ISOLATED SANDBOX
           </Txt>
           {/* small terminal — code being written */}
           <rect
@@ -532,10 +549,7 @@ export function PortalPipeline({
       <g transform={place(3)}>
         <g style={stageStyle(3)}>
           <Txt x={0} y={13} size={6.5} tone={titleTone(3)}>
-            HUMAN QA +
-          </Txt>
-          <Txt x={0} y={22} size={6.5} tone={titleTone(3)}>
-            TASTEMAKING
+            ITERATE ON PR
           </Txt>
           {/* monitor: the work under review */}
           <rect
@@ -594,10 +608,7 @@ export function PortalPipeline({
       <g transform={place(4)}>
         <g style={stageStyle(4)}>
           <Txt x={0} y={13} size={6.5} tone={titleTone(4)}>
-            VERIFY &
-          </Txt>
-          <Txt x={0} y={22} size={6.5} tone={titleTone(4)}>
-            DEPLOY
+            GO LIVE
           </Txt>
           {/* browser window */}
           <rect
@@ -699,6 +710,7 @@ export function PortalPipeline({
           {/* content below the fold */}
           {rows(5, 78, [42, 34, 38], 5, 6, 0.7)}
         </g>
+      </g>
       </g>
     </BlueprintGraphic>
   )

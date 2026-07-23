@@ -1,6 +1,12 @@
 'use client'
 
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type TouchEvent,
+} from 'react'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { cn } from '@/src/lib/utils'
 import { PortalPipeline } from '@/src/components/graphics/portal-pipeline'
@@ -70,19 +76,31 @@ const N = SCENES.length
 /** How long each stage holds the spotlight before advancing (ms). */
 const SCENE_MS = 4200
 
-const REDUCED_QUERY = '(prefers-reduced-motion: reduce)'
+/** Minimum horizontal travel (px) to register a stage swipe on mobile. Below this,
+ *  or when the gesture is more vertical than horizontal, the page scrolls normally. */
+const SWIPE_THRESHOLD = 40
 
-/** Subscribe to prefers-reduced-motion without setState-in-effect; SSR-safe. */
-function usePrefersReducedMotion() {
+const REDUCED_QUERY = '(prefers-reduced-motion: reduce)'
+/** Below Tailwind `md`, matching the heading's md:flex-row breakpoint. The wide
+ *  pipeline strip is illegible here, so the graphic crops to one stage at a time. */
+const MOBILE_QUERY = '(max-width: 767px)'
+
+/** Subscribe to a media query without setState-in-effect; SSR-safe (server
+ *  snapshot is false, so SSR renders the desktop layout and hydration matches). */
+function useMediaQuery(query: string) {
   return useSyncExternalStore(
     cb => {
-      const mq = window.matchMedia(REDUCED_QUERY)
+      const mq = window.matchMedia(query)
       mq.addEventListener('change', cb)
       return () => mq.removeEventListener('change', cb)
     },
-    () => window.matchMedia(REDUCED_QUERY).matches,
+    () => window.matchMedia(query).matches,
     () => false
   )
+}
+
+function usePrefersReducedMotion() {
+  return useMediaQuery(REDUCED_QUERY)
 }
 
 /** Horizontal progress rail: a clickable station per stage. A single accent line
@@ -112,7 +130,7 @@ function FlowRail({
       />
       {/* completed segments, locked in instantly as each step lands */}
       <div
-        className='absolute top-[6px] h-px bg-white'
+        className='absolute top-[6px] h-px bg-line'
         style={{ left: `${50 / N}%`, width: `${active * (100 / N)}%` }}
         aria-hidden
       />
@@ -121,7 +139,7 @@ function FlowRail({
       <div
         key={`fill-${active}`}
         onAnimationEnd={onAdvance}
-        className='absolute top-[6px] h-px origin-left bg-white'
+        className='absolute top-[6px] h-px origin-left bg-line'
         style={{
           left: hasNext ? `${(0.5 + active) * (100 / N)}%` : '0%',
           width: hasNext ? `${100 / N}%` : '0%',
@@ -143,8 +161,8 @@ function FlowRail({
           >
             <span
               className={cn(
-                'h-3 w-3 rounded-full border transition-colors duration-300 group-hover:border-white group-focus-visible:ring-2 group-focus-visible:ring-white/40',
-                done ? 'border-white bg-white' : 'border-border-light bg-bg'
+                'h-3 w-3 rounded-full border transition-colors duration-300 group-hover:border-text-muted group-focus-visible:ring-2 group-focus-visible:ring-text-muted/40',
+                done ? 'border-line bg-line' : 'border-border-light bg-bg'
               )}
             />
           </button>
@@ -159,9 +177,13 @@ function FlowRail({
 function PipelineStage({
   active,
   paused = false,
+  mobile = false,
+  focus,
 }: {
   active: number | null
   paused?: boolean
+  mobile?: boolean
+  focus?: number
 }) {
   return (
     <div className='group relative w-full'>
@@ -169,10 +191,13 @@ function PipelineStage({
       <span className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
         <BlueprintCorners size={20} />
       </span>
-      <div className='aspect-[159/40] w-full'>
+      {/* Mobile crops to one stage in a square window; desktop keeps the wide strip. */}
+      <div className={mobile ? 'aspect-square w-full' : 'aspect-[159/40] w-full'}>
         <PortalPipeline
           active={active}
           paused={paused}
+          mobile={mobile}
+          focus={focus}
           className='h-full w-full'
         />
       </div>
@@ -199,6 +224,7 @@ export function PortalFlow() {
   const rootRef = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const reduced = usePrefersReducedMotion()
+  const mobile = useMediaQuery(MOBILE_QUERY)
   const [inView, setInView] = useState(false)
   const [hovered, setHovered] = useState(false)
 
@@ -224,24 +250,65 @@ export function PortalFlow() {
     setActive(index)
   }
 
+  // Mobile has no hover, so the crop-and-pan graphic doubles as a swipeable
+  // carousel: a horizontal drag steps prev/next (clamped at the ends). We hold the
+  // start point and only act on release, so vertical page-scroll is never hijacked.
+  const swipeStart = useRef<{ x: number; y: number } | null>(null)
+
+  const onTouchStart = (e: TouchEvent) => {
+    if (!mobile) return
+    const t = e.touches[0]
+    swipeStart.current = { x: t.clientX, y: t.clientY }
+    setHovered(true) // pause autoplay while the finger is down, mirroring hover
+  }
+
+  const onTouchEnd = (e: TouchEvent) => {
+    setHovered(false)
+    const start = swipeStart.current
+    swipeStart.current = null
+    const t = e.changedTouches[0]
+    if (!mobile || !start || !t) return
+    const dx = t.clientX - start.x
+    const dy = t.clientY - start.y
+    // Only a clearly horizontal swipe navigates; otherwise it was a tap or scroll.
+    if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) <= Math.abs(dy)) return
+    setActive(a => (dx < 0 ? Math.min(a + 1, N - 1) : Math.max(a - 1, 0)))
+  }
+
   return (
     <section className='mx-auto w-full max-w-content px-6 pb-20 lg:px-12'>
       {reduced ? (
-        // Reduced motion: the fully-lit pipeline with every stage written out.
-        <div className='flex flex-col gap-10'>
-          <PipelineStage active={null} />
-          <div className='flex flex-col gap-8'>
-            {SCENES.map(scene => (
-              <StageNarration key={scene.key} scene={scene} />
+        mobile ? (
+          // Reduced motion on mobile: a legible static card per stage — the crop
+          // framed on that stage (fully lit, no pan) above its write-up.
+          <div className='flex flex-col gap-10'>
+            {SCENES.map((scene, i) => (
+              <div key={scene.key} className='flex flex-col gap-6'>
+                <PipelineStage active={null} mobile focus={i} />
+                <StageNarration scene={scene} />
+              </div>
             ))}
           </div>
-        </div>
+        ) : (
+          // Reduced motion: the fully-lit pipeline with every stage written out.
+          <div className='flex flex-col gap-10'>
+            <PipelineStage active={null} />
+            <div className='flex flex-col gap-8'>
+              {SCENES.map(scene => (
+                <StageNarration key={scene.key} scene={scene} />
+              ))}
+            </div>
+          </div>
+        )
       ) : (
         // Auto-play: narration above the set piece and its timeline.
         <div
           ref={rootRef}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          onTouchCancel={onTouchEnd}
           className='flex flex-col gap-8'
         >
           <div
@@ -256,7 +323,7 @@ export function PortalFlow() {
             onAdvance={advance}
             onSelect={selectScene}
           />
-          <PipelineStage active={active} paused={paused} />
+          <PipelineStage active={active} paused={paused} mobile={mobile} />
         </div>
       )}
     </section>
