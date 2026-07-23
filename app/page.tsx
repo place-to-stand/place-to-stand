@@ -12,7 +12,7 @@ import { Button } from '@/src/components/ui/button'
 
 export default function HomePage() {
   return (
-    <main className='flex-1'>
+    <main className='flex-1 pb-32'>
       <HeroSection />
       <PhasesSection showPoweredBy />
       <WhoWeWorkWithSection />
