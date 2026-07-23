@@ -9,8 +9,12 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+        // First-party managed reverse proxy — keeps events off ad-block lists
         api_host:
-          process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+          process.env.NEXT_PUBLIC_POSTHOG_HOST ||
+          'https://t.placetostandagency.com',
+        // Required when api_host is a proxy so the toolbar/app links resolve
+        ui_host: 'https://us.posthog.com',
         person_profiles: 'identified_only',
         capture_pageview: false, // We capture manually for route changes
         capture_pageleave: true,
