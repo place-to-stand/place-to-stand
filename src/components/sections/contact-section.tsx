@@ -72,7 +72,7 @@ export function ContactSection() {
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='bp-label font-mono'>Contact</span>
         <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
-          Let's talk
+          Let&apos;s talk
         </h2>
         <p className='max-w-xl text-lg leading-snug! text-balance text-text-muted'>
           Send a message and we&apos;ll get back to you within one business day.

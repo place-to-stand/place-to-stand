@@ -1,26 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { usePathname } from 'next/navigation'
 import { BookCallLink } from '@/src/components/book-call-link'
 
+// sessionStorage never notifies same-document writes, but the flag is only set
+// on landing pages (where this CTA is hidden), so the re-render caused by the
+// pathname change on navigation is enough to pick up a fresh snapshot.
+const subscribe = () => () => {}
+const getSnapshot = () => !!sessionStorage.getItem('pts-landing-session')
+const getServerSnapshot = () => false
+
 export function FloatingBookCta() {
   const pathname = usePathname()
-  const [visible, setVisible] = useState(false)
+  const hasLandingSession = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  )
 
   const isLandingPage = pathname.startsWith('/book-a-call/')
 
-  useEffect(() => {
-    if (isLandingPage) {
-      setVisible(false)
-      return
-    }
-
-    const hasLandingSession = sessionStorage.getItem('pts-landing-session')
-    setVisible(!!hasLandingSession)
-  }, [isLandingPage])
-
-  if (!visible) return null
+  if (isLandingPage || !hasLandingSession) return null
 
   return (
     <div className='fixed right-6 bottom-6 z-50 duration-500 animate-in fade-in slide-in-from-bottom-4'>
