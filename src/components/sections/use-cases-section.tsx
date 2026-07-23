@@ -58,7 +58,7 @@ export function UseCasesSection({
           Real products helping businesses
         </h2>
         <p className='max-w-xl text-base leading-snug! text-balance text-ink/80 md:text-lg'>
-          Custom solutions we've built for real-world business needs.
+          Custom solutions we&apos;ve built for real-world business needs.
         </p>
       </div>
 

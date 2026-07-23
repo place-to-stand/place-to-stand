@@ -4,11 +4,22 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
   type CSSProperties,
   type ReactNode,
   type SVGProps,
 } from 'react'
 import { cn } from '@/src/lib/utils'
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
+const subscribeReducedMotion = (onChange: () => void) => {
+  const mql = window.matchMedia(REDUCED_MOTION_QUERY)
+  mql.addEventListener('change', onChange)
+  return () => mql.removeEventListener('change', onChange)
+}
+const getReducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY).matches
+const getServerReducedMotion = () => false
 
 /**
  * Fires once when the element first scrolls into view. Under prefers-reduced-motion
@@ -17,21 +28,21 @@ import { cn } from '@/src/lib/utils'
  */
 export function useInView<T extends Element = HTMLElement>() {
   const ref = useRef<T>(null)
-  const [inView, setInView] = useState(false)
+  const [intersected, setIntersected] = useState(false)
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getServerReducedMotion
+  )
 
   useEffect(() => {
     const node = ref.current
-    if (!node) return
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setInView(true)
-      return
-    }
+    if (!node || reducedMotion) return
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setInView(true)
+          setIntersected(true)
           observer.disconnect()
         }
       },
@@ -40,9 +51,9 @@ export function useInView<T extends Element = HTMLElement>() {
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [])
+  }, [reducedMotion])
 
-  return { ref, inView }
+  return { ref, inView: reducedMotion || intersected }
 }
 
 interface BlueprintGraphicProps extends SVGProps<SVGSVGElement> {

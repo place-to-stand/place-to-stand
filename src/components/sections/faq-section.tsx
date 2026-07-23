@@ -105,12 +105,12 @@ export function FaqSection() {
           FAQ
         </span>
         <h2 className='max-w-4xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
-          The answers you're looking for
+          The answers you&apos;re looking for
         </h2>
         <p className='max-w-2xl text-lg leading-snug! text-balance text-text-muted'>
           The essentials that most clients ask us before we kick off a new
-          engagement. Please reach out if you have other questions. We're happy
-          to answer them!
+          engagement. Please reach out if you have other questions. We&apos;re
+          happy to answer them!
         </p>
       </div>
       <FaqAccordion />
