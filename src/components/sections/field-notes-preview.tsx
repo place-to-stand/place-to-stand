@@ -51,7 +51,7 @@ export function FieldNotesPreview() {
               }
               className='group relative flex flex-col gap-3 border border-border bg-bg-card p-6 transition-colors hover:bg-bg-elevated'
             >
-              <BlueprintCorners size={12} />
+              <BlueprintCorners size={12} colorClassName='border-accent/40' />
               <div className='flex items-center gap-4'>
                 <span className='font-mono text-[11px] text-text-muted'>
                   {note.date}

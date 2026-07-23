@@ -28,7 +28,7 @@ export default function TeamPage() {
               key={member.name}
               className='group relative flex flex-col gap-4 border border-border bg-bg-card p-6 text-center transition-colors duration-300 hover:border-accent/30'
             >
-              <BlueprintCorners />
+              <BlueprintCorners colorClassName='border-accent/40' />
               <div className='relative mx-auto aspect-square w-3/4 overflow-hidden border border-border'>
                 <Image
                   src={member.image}

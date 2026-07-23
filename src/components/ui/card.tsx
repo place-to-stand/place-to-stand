@@ -14,7 +14,7 @@ const Card = React.forwardRef<
     )}
     {...props}
   >
-    <BlueprintCorners />
+    <BlueprintCorners colorClassName='border-accent/40' />
     {children}
   </div>
 ))

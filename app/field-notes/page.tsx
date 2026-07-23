@@ -35,7 +35,7 @@ export default function FieldNotesPage() {
               }
               className='group relative flex flex-col gap-4 border border-border bg-bg-card p-6 transition-colors duration-300 hover:border-accent/40'
             >
-              <BlueprintCorners />
+              <BlueprintCorners colorClassName='border-accent/40' />
               <div className='flex items-center justify-between'>
                 <span className='font-mono text-[11px] text-text-muted'>
                   {note.date}
