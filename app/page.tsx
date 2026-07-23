@@ -11,8 +11,8 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
+import { TrackedLink } from '@/src/components/tracked-link'
 
 export default function HomePage() {
   return (
@@ -52,7 +52,9 @@ export default function HomePage() {
               className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'
             >
               <Button asChild size='lg' className='w-full'>
-                <Link href='/contact'>Start a Project</Link>
+                <TrackedLink href='/contact' location='home-cta-block'>
+                  Start a Project
+                </TrackedLink>
               </Button>
               <div className='flex flex-col gap-2'>
                 <Button
@@ -61,7 +63,9 @@ export default function HomePage() {
                   variant='outline'
                   className='w-full border-2'
                 >
-                  <Link href='/audit'>Opportunity Audit</Link>
+                  <TrackedLink href='/audit' location='home-cta-block'>
+                    Opportunity Audit
+                  </TrackedLink>
                 </Button>
                 <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
                   Not sure where to start? This two-minute audit pinpoints where

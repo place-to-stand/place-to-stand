@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { TrackedLink } from '@/src/components/tracked-link'
 import {
   AnimatedSection,
   Reveal,
@@ -61,7 +61,9 @@ export default function ClientsPage() {
               className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'
             >
               <Button asChild size='lg' className='w-full'>
-                <Link href='/contact'>Start a Project</Link>
+                <TrackedLink href='/contact' location='clients-cta-block'>
+                  Start a Project
+                </TrackedLink>
               </Button>
               <div className='flex flex-col gap-2'>
                 <Button
@@ -70,7 +72,9 @@ export default function ClientsPage() {
                   variant='outline'
                   className='w-full border-2'
                 >
-                  <Link href='/audit'>Opportunity Audit</Link>
+                  <TrackedLink href='/audit' location='clients-cta-block'>
+                    Opportunity Audit
+                  </TrackedLink>
                 </Button>
                 <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
                   Not sure where to start? This two-minute audit pinpoints where

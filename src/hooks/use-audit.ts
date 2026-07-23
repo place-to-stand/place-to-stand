@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { runAudit } from '@/src/lib/audit/engine'
 import type {
   AnswerValue,
@@ -27,6 +28,7 @@ export interface UseAudit {
  * only so a future Claude-backed engine drops in without touching this hook.
  */
 export function useAudit(): UseAudit {
+  const posthog = usePostHog()
   const [stage, setStage] = useState<AuditStage>('intro')
   const [answers, setAnswers] = useState<AuditAnswers>({})
   const [result, setResult] = useState<AuditResult | null>(null)
@@ -40,7 +42,8 @@ export function useAudit(): UseAudit {
     setAnswers({})
     setResult(null)
     setStage('wizard')
-  }, [])
+    posthog?.capture('audit_started')
+  }, [posthog])
 
   const submit = useCallback(async () => {
     setIsScoring(true)
@@ -48,10 +51,14 @@ export function useAudit(): UseAudit {
       const scored = await runAudit(answers)
       setResult(scored)
       setStage('results')
+      posthog?.capture('audit_completed', {
+        phase: scored.phase.id,
+        top_service: scored.recommendations[0]?.service.id,
+      })
     } finally {
       setIsScoring(false)
     }
-  }, [answers])
+  }, [answers, posthog])
 
   const reset = useCallback(() => {
     setAnswers({})

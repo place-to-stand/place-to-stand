@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Button } from '@/src/components/ui/button'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { cn } from '@/src/lib/utils'
 import { NAV_LINKS } from '@/src/components/layout/nav-links'
 
@@ -65,7 +66,9 @@ export function Header() {
         <div className='flex items-center gap-4'>
           <div className='hidden md:inline-flex'>
             <Button asChild size='sm'>
-              <Link href='/contact'>Start a Project</Link>
+              <TrackedLink href='/contact' location='header'>
+                Start a Project
+              </TrackedLink>
             </Button>
           </div>
 
@@ -132,9 +135,13 @@ export function Header() {
             ))}
             <div className='mt-3 px-4'>
               <Button asChild size='sm' className='w-full'>
-                <Link href='/contact' onClick={() => setMobileOpen(false)}>
+                <TrackedLink
+                  href='/contact'
+                  location='header-mobile'
+                  onClick={() => setMobileOpen(false)}
+                >
                   Start a Project
-                </Link>
+                </TrackedLink>
               </Button>
             </div>
           </nav>

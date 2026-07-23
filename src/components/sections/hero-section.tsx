@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { Button } from '@/src/components/ui/button'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { HeroGraphic } from '@/src/components/graphics/hero-graphic'
 
@@ -68,9 +68,9 @@ export function HeroSection() {
                 style={{ animationDelay: '4.2s' }}
               >
                 <Button asChild size='lg' variant='primaryInvert'>
-                  <Link href='/audit' data-pts-hero-cta>
+                  <TrackedLink href='/audit' location='hero' data-pts-hero-cta>
                     Find your opportunities
-                  </Link>
+                  </TrackedLink>
                 </Button>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-import Link from 'next/link'
+import { TrackedLink } from '@/src/components/tracked-link'
 
 const steps = [
   {
@@ -103,7 +103,9 @@ export function HowWeWorkSection() {
             </div>
 
             <Button asChild size='lg' className='mx-auto px-10'>
-              <Link href='/contact'>Book a call now</Link>
+              <TrackedLink href='/contact' location='how-we-work-pricing'>
+                Book a call now
+              </TrackedLink>
             </Button>
           </div>
         </div>

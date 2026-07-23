@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { usePostHog } from 'posthog-js/react'
 
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
@@ -21,6 +22,7 @@ import {
 } from '@/src/lib/validations/contact'
 
 export function ContactSection() {
+  const posthog = usePostHog()
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)
   const form = useForm<ContactFormValues>({
@@ -60,6 +62,7 @@ export function ContactSection() {
 
         form.reset()
         setIsSuccess(true)
+        posthog?.capture('contact_form_submitted')
       })
     })
   })

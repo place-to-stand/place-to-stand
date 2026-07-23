@@ -3,7 +3,7 @@
 import { useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Link from 'next/link'
+import { usePostHog } from 'posthog-js/react'
 import {
   ArrowRight,
   BarChart3,
@@ -21,6 +21,7 @@ import {
   Workflow,
 } from 'lucide-react'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
@@ -279,6 +280,7 @@ interface CaptureFormProps {
 
 /** Emails the respondent their result and hands us the lead. */
 function CaptureForm({ result, answers }: CaptureFormProps) {
+  const posthog = usePostHog()
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)
   const form = useForm<AuditLeadValues>({
@@ -312,6 +314,7 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
 
         form.reset()
         setIsSuccess(true)
+        posthog?.capture('audit_capture_submitted', { phase: result.phase.id })
       })
     })
   })
@@ -327,7 +330,9 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
             We&apos;ve sent your audit result.
           </p>
           <Button asChild variant='outline' size='lg' className='mt-2 px-8'>
-            <Link href='/contact'>Book a call now</Link>
+            <TrackedLink href='/contact' location='audit-capture-success'>
+              Book a call now
+            </TrackedLink>
           </Button>
         </div>
       ) : (
@@ -400,12 +405,13 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
             </Button>
             <p className='mt-3 text-center text-sm text-text-muted'>
               Prefer to talk first?{' '}
-              <Link
+              <TrackedLink
                 href='/contact'
+                location='audit-capture-form'
                 className='text-accent underline-offset-4 hover:underline'
               >
                 Book a call
-              </Link>
+              </TrackedLink>
               .
             </p>
           </form>

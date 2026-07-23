@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import { QuestionField } from '@/src/components/audit/question-field'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
@@ -26,6 +27,7 @@ export function AuditWizard({
   onSubmit,
   onExit,
 }: AuditWizardProps) {
+  const posthog = usePostHog()
   const [stepIndex, setStepIndex] = useState(0)
   const [showErrors, setShowErrors] = useState(false)
 
@@ -40,6 +42,10 @@ export function AuditWizard({
       return
     }
     setShowErrors(false)
+    posthog?.capture('audit_step_completed', {
+      step: stepIndex + 1,
+      section: section.id,
+    })
     if (isLastStep) {
       onSubmit()
     } else {

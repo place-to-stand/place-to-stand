@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
@@ -83,7 +83,9 @@ export default function ServicesPage() {
             </div>
             <div className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'>
               <Button asChild size='lg' className='w-full'>
-                <Link href='/contact'>Start a Project</Link>
+                <TrackedLink href='/contact' location='services-cta-block'>
+                  Start a Project
+                </TrackedLink>
               </Button>
               <div className='flex flex-col gap-2'>
                 <Button
@@ -92,7 +94,9 @@ export default function ServicesPage() {
                   variant='outline'
                   className='w-full border-2'
                 >
-                  <Link href='/audit'>Opportunity Audit</Link>
+                  <TrackedLink href='/audit' location='services-cta-block'>
+                    Opportunity Audit
+                  </TrackedLink>
                 </Button>
                 <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
                   Not sure where to start? This two-minute audit pinpoints where
