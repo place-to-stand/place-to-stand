@@ -15,7 +15,7 @@ export const fieldNotes: FieldNote[] = [
     description:
       'A practical guide for small and medium businesses to identify, implement, and measure AI initiatives that create real business value.',
     tags: ['AI', 'Strategy', 'SMB'],
-    url: '/rsvp',
+    url: '#',
     date: '2025-11-05',
   },
   {

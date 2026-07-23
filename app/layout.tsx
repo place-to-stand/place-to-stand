@@ -9,7 +9,6 @@ import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
-import { FloatingBookCta } from '@/src/components/floating-book-cta'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -86,7 +85,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
             <Footer />
           </div>
-          <FloatingBookCta />
           <Toaster />
           <Analytics />
         </PostHogProvider>

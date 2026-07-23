@@ -37,12 +37,26 @@ export function Footer() {
           </div>
         </nav>
       </div>
-      <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 pb-8 md:flex-row md:items-start md:justify-between'>
+      <div className='mx-auto flex w-full max-w-content flex-col gap-3 px-6 pb-8 md:flex-row md:items-center md:justify-between'>
         <div className='flex flex-col gap-2 text-xs tracking-[0.1em] text-text-muted uppercase md:flex-row md:items-center md:gap-3'>
           <span className='order-last md:order-first'>
             &copy; {year} Place To Stand. All rights reserved.
           </span>
         </div>
+        <nav className='flex items-center gap-6 text-xs font-semibold tracking-[0.1em] uppercase'>
+          <Link
+            href='/privacy'
+            className='text-text-muted transition hover:text-accent'
+          >
+            Privacy
+          </Link>
+          <Link
+            href='/terms'
+            className='text-text-muted transition hover:text-accent'
+          >
+            Terms
+          </Link>
+        </nav>
       </div>
     </footer>
   )
