@@ -16,7 +16,7 @@ import { TrackedLink } from '@/src/components/tracked-link'
 
 export default function HomePage() {
   return (
-    <main className='flex-1'>
+    <main className='flex-1 pb-32'>
       <HeroSection />
       <PhasesSection showPoweredBy />
       <WhoWeWorkWithSection />

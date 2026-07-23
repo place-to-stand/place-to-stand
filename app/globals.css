@@ -94,6 +94,18 @@ html {
   }
 }
 
+/* Progress fill that grows from the active rail dot toward the next. Its
+   completion drives the autoplay advance, so the fill and the step change stay
+   in sync (one timer, no drift). */
+@keyframes railProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes pts-header-pop {
   0% {
     transform: scale(0.995);
@@ -311,7 +323,9 @@ html {
   transition:
     opacity 400ms ease-out,
     transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms);
+  transition-delay: calc(
+    var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms
+  );
 }
 .bp-draw[data-visible='true'] .bp-node {
   opacity: 1;
@@ -367,6 +381,19 @@ html {
 .bp-loop-travel[data-visible='true'] .bp-flow {
   animation: bp-flow 1.6s linear infinite;
   animation-delay: calc(var(--bp-draw-base, 0ms) + 1200ms);
+}
+/* Portal pipeline: a calmer, slower march than the homepage schematics. */
+.bp-loop-travel.bp-loop-slow[data-visible='true'] .bp-flow {
+  animation-duration: 3.4s;
+}
+/* Hover / lightbox pause: freeze the ongoing motion (marching lines, spinning
+   gear) so it reads clearly that the autoplay has stopped. The selectors are
+   scoped tightly (loop class + [data-visible]) so they outrank the base
+   animation rules, whose `animation` shorthand would otherwise reset
+   play-state back to running. */
+.bp-loop-travel.bp-paused[data-visible='true'] .bp-flow,
+.bp-loop-gear.bp-paused[data-visible='true'] .bp-gear {
+  animation-play-state: paused;
 }
 
 @keyframes bp-scan {
@@ -477,7 +504,9 @@ html {
   transform-box: fill-box;
   transform-origin: center;
   animation: cmp-pulse 4.5s ease-in-out infinite;
-  animation-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-live-delay, 1600ms));
+  animation-delay: calc(
+    var(--bp-draw-base, 0ms) + var(--cmp-live-delay, 1600ms)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -540,8 +569,20 @@ html {
    same keyframe in reverse for the opposite direction. Edges fade via a mask. */
 .marquee {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
 }
 .marquee-track {
   display: flex;
