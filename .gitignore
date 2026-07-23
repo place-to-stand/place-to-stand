@@ -45,3 +45,9 @@ coverage/
 .claude/settings.local.json
 .vercel
 .env*.local
+.env*
+!.env.example
+
+# Generated files (Next.js / TypeScript rewrite these constantly)
+next-env.d.ts
+*.tsbuildinfo
