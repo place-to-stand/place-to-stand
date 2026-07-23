@@ -36,19 +36,6 @@ export const team: TeamMember[] = [
       github: 'https://github.com/krismakesstuff',
     },
   },
-  {
-    name: 'Damon Bodine',
-    title: 'Senior AI Engineer',
-    bio: 'Graduate of the Gauntlet AI engineering bootcamp with multiple decades of entrepreneurship spanning the music and real-estate industries. Combines hard-won business instinct with hands-on AI engineering to build systems that actually move the needle.',
-    image: '/1587649018078.jpeg',
-    socials: {
-      linkedin: 'https://www.linkedin.com/in/damonbodine/',
-      x: 'https://x.com/damonbodine',
-      instagram: 'https://www.instagram.com/damonbodine/',
-      github: 'https://github.com/damonbodine',
-    },
-  },
-  
   // {
   //   name: 'Chris Donahue',
   //   title: 'Creative Director',

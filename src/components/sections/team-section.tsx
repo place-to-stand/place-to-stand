@@ -8,11 +8,6 @@ const team = [
     image: '/1652631488914.jpeg',
   },
   {
-    name: 'Damon Bodine',
-    title: 'Senior AI Engineer',
-    image: '/1587649018078.jpeg',
-  },
-  {
     name: 'Kris Crawford',
     title: 'Software Engineer & AI Technologist',
     image: '/259858081_219018533698595_237774923102850579_n.jpg',
