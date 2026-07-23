@@ -23,11 +23,16 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
   const Graphic = serviceGraphics[service.icon]
 
   return (
-    <div className='border-b border-border bg-bg-card transition-colors last:border-b-0 hover:bg-bg-elevated'>
+    // The row div is the click target so the expanded content can be clicked
+    // to close; the header button (whose clicks bubble here) remains the
+    // keyboard/AT control, so no onClick of its own.
+    <div
+      onClick={onToggle}
+      className='cursor-pointer border-b border-border bg-bg-card transition-colors last:border-b-0 hover:bg-bg-elevated'
+    >
       <button
         type='button'
         id={id}
-        onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
         className='flex w-full items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:px-6 md:py-6'
