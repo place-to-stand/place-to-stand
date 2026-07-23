@@ -7,7 +7,7 @@ import * as React from 'react'
 export function BlueprintCorners({
   size = 12,
   all = false,
-  colorClassName = 'border-accent/40',
+  colorClassName = 'border-accent/50',
 }: {
   size?: number
   all?: boolean

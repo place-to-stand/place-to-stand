@@ -28,7 +28,7 @@ export default function HomePage() {
       {/* CTA Block — blueprint detail callout */}
       <AnimatedSection className='py-20'>
         <div className='relative border border-border bg-bg-card p-5 md:p-16'>
-          <BlueprintCorners size={20} all />
+          <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3'>
               <Reveal index={0} className='flex flex-col gap-3'>

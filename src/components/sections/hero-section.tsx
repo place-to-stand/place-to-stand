@@ -11,14 +11,6 @@ export function HeroSection() {
       className='relative flex flex-col overflow-hidden'
     >
       <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 pt-grid-4 pb-16 md:gap-10 md:pb-24 lg:px-12 lg:pt-grid-6'>
-        {/* Blueprint annotation — top label (slides in first) */}
-        <div
-          className='hero-slide-in flex items-center gap-4'
-          style={{ animationDelay: '0.3s' }}
-        >
-          <span className='bp-label font-mono'>The Pitch</span>
-        </div>
-
         {/* Main headline block — bottom-aligned */}
         <div className='flex flex-col gap-8 md:gap-10'>
           {/* Headline with blueprint corner marks */}
@@ -55,11 +47,6 @@ export function HeroSection() {
                 className='hero-reveal flex gap-4 self-start'
                 style={{ animationDelay: '4s' }}
               >
-                {/* Vertical leader line */}
-                <div
-                  className='mt-2 hidden w-px self-stretch bg-border-light md:block'
-                  aria-hidden
-                />
                 <div className='flex max-w-lg flex-col gap-3'>
                   <p className='text-base leading-relaxed text-text md:text-lg'>
                     We build software{' '}
