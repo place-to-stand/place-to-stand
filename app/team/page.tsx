@@ -22,7 +22,7 @@ export default function TeamPage() {
             Senior engineers who own your project end-to-end.
           </p>
         </div>
-        <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+        <div className='mx-auto grid w-full max-w-3xl gap-8 sm:grid-cols-2'>
           {team.map(member => (
             <article
               key={member.name}
