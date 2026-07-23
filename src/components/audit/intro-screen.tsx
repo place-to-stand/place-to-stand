@@ -18,10 +18,10 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
     <div className='mx-auto max-w-2xl py-grid-4 sm:py-grid-5'>
       <div className='flex flex-col items-center gap-6 text-center'>
         <span className='bp-label font-mono'>Opportunity Audit</span>
-        <h1 className='max-w-2xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text sm:text-5xl'>
+        <h1 className='max-w-2xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase sm:text-5xl'>
           Find your biggest software opportunity
         </h1>
-        <p className='mx-auto max-w-md text-balance text-base text-text-muted md:text-lg'>
+        <p className='mx-auto max-w-md text-base text-balance text-text-muted md:text-lg'>
           A few quick questions to pinpoint your phase and where custom software
           pays off. Built AI-fast, so it stays affordable.
         </p>

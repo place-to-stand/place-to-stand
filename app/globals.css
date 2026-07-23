@@ -1,9 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin 'tailwindcss-animate';
 
-:root {
-  color-scheme: dark;
+/* Theme tokens — Dark Blueprint Theme. Single source of truth for design
+   tokens: Tailwind v4 generates both the utility classes (bg-bg, text-text,
+   p-grid-2, max-w-content, …) and the :root CSS variables from this block. */
+@theme {
   --color-bg: #0e0f11;
   --color-bg-card: #1a1b1f;
   --color-bg-elevated: #242529;
@@ -17,7 +18,39 @@
   --color-accent-secondary: #b4b4b4;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
+  /* Mid-grey for schematic line-work — readable on card backgrounds,
+     where border-light is too dark to see. */
   --color-line: #6e7078;
+  /* Old tokens kept as aliases for backward compatibility */
+  --color-ink: #0e0f11;
+  --color-ink-light: #e8e6e3;
+
+  /* Blueprint grid spacing — multiples of the 24px base grid (--grid).
+     Use these for structural spacing so elements stay on-grid. */
+  --spacing-grid-half: calc(var(--grid) / 2); /* 12 */
+  --spacing-grid-1: var(--grid); /* 24 */
+  --spacing-grid-2: calc(var(--grid) * 2); /* 48 */
+  --spacing-grid-3: calc(var(--grid) * 3); /* 72 */
+  --spacing-grid-4: calc(var(--grid) * 4); /* 96 */
+  --spacing-grid-5: calc(var(--grid) * 5); /* 120 */
+  --spacing-grid-6: calc(var(--grid) * 6); /* 144 */
+  --spacing-grid-8: calc(var(--grid) * 8); /* 192 */
+
+  /* 1152 — the one grid-aligned container width (max-w-content) */
+  --container-content: calc(var(--grid) * 48);
+}
+
+/* Fonts reference next/font variables set on <html>, so they must be inlined
+   at the point of use rather than resolved against :root. */
+@theme inline {
+  --font-display: var(--font-bebas-neue);
+  --font-logo: var(--font-space-grotesk);
+  --font-sans: var(--font-source-sans);
+  --font-headline: var(--font-space-grotesk);
+}
+
+:root {
+  color-scheme: dark;
   --grid: 24px;
   --grid-dot: #2a2b30;
   --grid-line: #2e2f36;
@@ -29,23 +62,25 @@ html {
   overflow-x: hidden;
 }
 
-body {
-  @apply bg-bg font-sans text-text antialiased;
-  overflow-x: hidden;
-  /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
-     so we phase the pattern to put a dot row/column on the structural lines:
-     - X: 50% anchors a dot at the viewport center; since every container is a
-       centered, even multiple of 24px wide, its edges land on dot columns.
-     - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
-       page-top and 24px-multiple section bands sit on dot rows.
-     Scrolls with content. */
-  background-image: radial-gradient(
-    circle,
-    var(--grid-dot) 1px,
-    transparent 1px
-  );
-  background-size: 24px 24px;
-  background-position: 50% 12px;
+@layer base {
+  body {
+    @apply bg-bg font-sans text-text antialiased;
+    overflow-x: hidden;
+    /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
+       so we phase the pattern to put a dot row/column on the structural lines:
+       - X: 50% anchors a dot at the viewport center; since every container is a
+         centered, even multiple of 24px wide, its edges land on dot columns.
+       - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
+         page-top and 24px-multiple section bands sit on dot rows.
+       Scrolls with content. */
+    background-image: radial-gradient(
+      circle,
+      var(--grid-dot) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+    background-position: 50% 12px;
+  }
 }
 
 @keyframes fadeIn {
@@ -584,12 +619,17 @@ body {
   }
 }
 
-a {
-  @apply text-text underline-offset-4 transition-colors;
-}
+/* Base link styles live in @layer base so utility classes (e.g. a button's
+   text-bg) can override them — unlayered rules would beat v4's layered
+   utilities regardless of specificity. */
+@layer base {
+  a {
+    @apply text-text underline-offset-4 transition-colors;
+  }
 
-a:hover {
-  @apply text-text/80;
+  a:hover {
+    @apply text-text/80;
+  }
 }
 
 ::selection {

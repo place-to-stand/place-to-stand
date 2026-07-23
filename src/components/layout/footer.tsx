@@ -7,18 +7,21 @@ export function Footer() {
     <footer className='border-t border-border bg-bg-card text-text-muted'>
       <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 py-8 md:flex-row md:items-start md:justify-between'>
         <div className='flex flex-col gap-3'>
-          <span className='font-logo text-lg font-semibold uppercase tracking-[0.025em] text-text'>
+          <span className='font-logo text-lg font-semibold tracking-[0.025em] text-text uppercase'>
             Place To Stand
           </span>
           <p className='max-w-md text-sm text-text-muted'>
             Austin, TX - Brooklyn, NY
           </p>
-          <span className='mt-2 font-mono text-md tracking-widest text-border-light' aria-hidden>
+          <span
+            className='text-md mt-2 font-mono tracking-widest text-border-light'
+            aria-hidden
+          >
             PTS &middot; placetostandagency.com
           </span>
         </div>
         <nav className='flex flex-col gap-3'>
-          <span className='text-left text-sm font-semibold uppercase tracking-[0.1em] text-text'>
+          <span className='text-left text-sm font-semibold tracking-[0.1em] text-text uppercase'>
             Explore
           </span>
           <div className='flex flex-col gap-2 text-left'>
@@ -34,12 +37,26 @@ export function Footer() {
           </div>
         </nav>
       </div>
-      <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 pb-8 md:flex-row md:items-start md:justify-between'>
-        <div className='flex flex-col gap-2 text-xs uppercase tracking-[0.1em] text-text-muted md:flex-row md:items-center md:gap-3'>
+      <div className='mx-auto flex w-full max-w-content flex-col gap-3 px-6 pb-8 md:flex-row md:items-center md:justify-between'>
+        <div className='flex flex-col gap-2 text-xs tracking-[0.1em] text-text-muted uppercase md:flex-row md:items-center md:gap-3'>
           <span className='order-last md:order-first'>
             &copy; {year} Place To Stand. All rights reserved.
           </span>
         </div>
+        <nav className='flex items-center gap-6 text-xs font-semibold tracking-[0.1em] uppercase'>
+          <Link
+            href='/privacy'
+            className='text-text-muted transition hover:text-accent'
+          >
+            Privacy
+          </Link>
+          <Link
+            href='/terms'
+            className='text-text-muted transition hover:text-accent'
+          >
+            Terms
+          </Link>
+        </nav>
       </div>
     </footer>
   )

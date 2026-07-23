@@ -79,7 +79,8 @@ export function AnimatedSection({
     // hero intro. Anything below the fold reveals on scroll immediately, so
     // scrolling down during the intro (e.g. a returning visitor) still loads
     // the sections in.
-    const inInitialViewport = node.getBoundingClientRect().top < window.innerHeight
+    const inInitialViewport =
+      node.getBoundingClientRect().top < window.innerHeight
 
     let gateTimer: ReturnType<typeof setTimeout> | undefined
     let onScroll: (() => void) | undefined
@@ -156,7 +157,13 @@ interface RevealProps extends ComponentProps<'div'> {
  * AnimatedSection scrolls into view. Small vertical rise + fade, sequenced
  * by `index`. Used to cascade heading → subheading → content.
  */
-export function Reveal({ index = 0, className, style, children, ...props }: RevealProps) {
+export function Reveal({
+  index = 0,
+  className,
+  style,
+  children,
+  ...props
+}: RevealProps) {
   const { isVisible, reduced } = useContext(RevealContext)
 
   return (

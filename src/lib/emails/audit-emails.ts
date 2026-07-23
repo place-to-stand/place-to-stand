@@ -117,9 +117,7 @@ function renderRecommendations(
         includeReasons && rec.reasons.length > 0
           ? `<p style="margin:8px 0 0 0;font-family:${FONT_MONO};font-size:11px;line-height:1.5;color:${C.muted};">Signals: ${escapeHtml(rec.reasons.join(', '))}</p>`
           : ''
-      const border = isLast
-        ? ''
-        : `border-bottom:1px solid ${C.hair};`
+      const border = isLast ? '' : `border-bottom:1px solid ${C.hair};`
       return `<tr>
         <td style="padding:16px 0;${border}">
           <p style="margin:0;font-family:${FONT_HEAD};font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.02em;color:${C.heading};">${index + 1}. ${escapeHtml(rec.service.name)}</p>
@@ -140,10 +138,10 @@ function renderResponses(answers: AuditAnswers): string {
   if (groups.length === 0) return ''
 
   const sections = groups
-    .map((group) => {
+    .map(group => {
       const rows = group.items
         .map(
-          (item) => `<tr>
+          item => `<tr>
             <td style="padding:10px 0 0 0;font-family:${FONT_BODY};font-size:13px;line-height:1.5;color:${C.muted};">${escapeHtml(item.prompt)}</td>
           </tr>
           <tr>

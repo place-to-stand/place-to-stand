@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-import Link from 'next/link'
+import { TrackedLink } from '@/src/components/tracked-link'
 
 const steps = [
   {
@@ -40,13 +40,13 @@ export function HowWeWorkSection() {
   return (
     <AnimatedSection id='how-it-works' className='flex flex-col gap-10'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-text-muted'>
+        <span className='text-sm font-semibold tracking-[0.1em] text-text-muted uppercase'>
           How it works
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
+        <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
           Dead-simple process. Zero surprises.
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-text-muted'>
+        <p className='max-w-xl text-lg leading-snug! text-balance text-text-muted'>
           We are selling bespoke end-to-end solutions, not just automations.
         </p>
       </div>
@@ -58,26 +58,26 @@ export function HowWeWorkSection() {
             <li
               key={step.number}
               className={cn(
-                'flex flex-col gap-2 px-6 py-6 will-change-transform transition-all duration-2500 md:w-1/3 md:gap-3 lg:py-8',
+                'flex flex-col gap-2 px-6 py-6 transition-all duration-2500 will-change-transform md:w-1/3 md:gap-3 lg:py-8',
                 isActive
                   ? 'border border-accent bg-bg-card shadow-lg ease-out md:-translate-y-1'
-                  : 'translate-y-0 border border-transparent bg-bg-card/50 shadow-sm ease-in hover:bg-bg-card'
+                  : 'translate-y-0 border border-transparent bg-bg-card/50 shadow-xs ease-in hover:bg-bg-card'
               )}
             >
               <span
                 className={cn(
-                  'text-xs font-semibold uppercase tracking-[0.1em] transition-colors md:text-sm',
+                  'text-xs font-semibold tracking-[0.1em] uppercase transition-colors md:text-sm',
                   isActive ? 'text-accent' : 'text-text-muted'
                 )}
               >
                 {step.number}
               </span>
-              <h3 className='text-balance font-headline text-lg uppercase leading-none md:text-2xl'>
+              <h3 className='font-headline text-lg leading-none text-balance uppercase md:text-2xl'>
                 {step.title}
               </h3>
               <p
                 className={cn(
-                  'text-xs !leading-snug transition-colors md:text-base',
+                  'text-xs leading-snug! transition-colors md:text-base',
                   isActive ? 'text-text' : 'text-text-muted'
                 )}
               >
@@ -91,10 +91,10 @@ export function HowWeWorkSection() {
       <div className='mx-auto w-full max-w-3xl'>
         <div className='bg-bg-card p-[1px]'>
           <div className='flex flex-col gap-6 border border-border p-10 text-center text-text'>
-            <p className='text-sm font-extrabold uppercase tracking-[0.1em] text-text-muted'>
+            <p className='text-sm font-extrabold tracking-[0.1em] text-text-muted uppercase'>
               One flat rate • Hour blocks • Start anytime
             </p>
-            <h3 className='text-balance font-headline text-3xl font-semibold uppercase !leading-[.9]'>
+            <h3 className='font-headline text-3xl leading-[.9]! font-semibold text-balance uppercase'>
               Pricing that stays under control
             </h3>
             <div className='flex flex-col items-center gap-2 text-base text-text-muted'>
@@ -103,7 +103,9 @@ export function HowWeWorkSection() {
             </div>
 
             <Button asChild size='lg' className='mx-auto px-10'>
-              <Link href='/contact'>Book a call now</Link>
+              <TrackedLink href='/contact' location='how-we-work-pricing'>
+                Book a call now
+              </TrackedLink>
             </Button>
           </div>
         </div>

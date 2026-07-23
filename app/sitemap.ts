@@ -1,11 +1,10 @@
 import type { MetadataRoute } from 'next'
-import { landingVariants } from '@/src/lib/landing-pages'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.placetostandagency.com'
   const lastModified = new Date()
 
-  const mainPages: MetadataRoute.Sitemap = [
+  return [
     {
       url: baseUrl,
       lastModified,
@@ -17,6 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: 'monthly',
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/audit`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
     },
     // Temporarily unlinked — Field Notes content in progress, restore in a future update
     // {
@@ -62,13 +67,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ]
-
-  const landingPages: MetadataRoute.Sitemap = landingVariants.map(variant => ({
-    url: `${baseUrl}/book-a-call/${variant.slug}`,
-    lastModified,
-    changeFrequency: 'monthly' as const,
-    priority: 0.5,
-  }))
-
-  return [...mainPages, ...landingPages]
 }

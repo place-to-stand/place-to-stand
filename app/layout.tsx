@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
-import Script from 'next/script'
 import { Space_Grotesk, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -9,7 +8,7 @@ import { Toaster } from '@/src/components/ui/use-toast'
 import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
-import { FloatingBookCta } from '@/src/components/floating-book-cta'
+import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -58,20 +57,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='en' className='scroll-smooth' suppressHydrationWarning>
-      <head>
-        <Script
-          src='https://www.googletagmanager.com/gtag/js?id=AW-18004452791'
-          strategy='afterInteractive'
-        />
-        <Script id='google-ads' strategy='afterInteractive'>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-18004452791');
-          `}
-        </Script>
-      </head>
       <body
         className={cn(
           'min-h-screen overflow-x-hidden bg-bg text-text',
@@ -86,8 +71,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
             <Footer />
           </div>
-          <FloatingBookCta />
           <Toaster />
+          <ScrollDepthTracker />
           <Analytics />
         </PostHogProvider>
       </body>

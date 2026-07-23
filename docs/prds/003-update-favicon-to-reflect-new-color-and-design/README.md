@@ -4,23 +4,23 @@
 
 The site uses Next.js App Router's [file-based metadata convention](https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons) for favicons. Three icon files currently live in the `app/` directory:
 
-| File | Size | Purpose |
-|---|---|---|
-| `app/favicon.ico` | 15 KB | Classic `.ico` favicon (shown in browser tabs, bookmarks) |
-| `app/icon.png` | 37 KB | Modern PNG icon (used by browsers that prefer `<link rel="icon" type="image/png">`) |
-| `app/apple-icon.png` | 37 KB | Apple touch icon (iOS home screen, Safari) |
+| File                 | Size  | Purpose                                                                             |
+| -------------------- | ----- | ----------------------------------------------------------------------------------- |
+| `app/favicon.ico`    | 15 KB | Classic `.ico` favicon (shown in browser tabs, bookmarks)                           |
+| `app/icon.png`       | 37 KB | Modern PNG icon (used by browsers that prefer `<link rel="icon" type="image/png">`) |
+| `app/apple-icon.png` | 37 KB | Apple touch icon (iOS home screen, Safari)                                          |
 
 Next.js automatically generates the appropriate `<link>` tags from these files — **no code references them explicitly**. The site's brand colors are a dark background (`#0e0f11`) with a lime-green accent (`#b5f542`), and the in-page logo mark in `src/components/layout/header.tsx` is a small accent-bordered square with an accent dot (blueprint motif). The OG images (`app/opengraph-image.png`, `app/twitter-image.png`) may also need consideration for consistency, though those are separate assets.
 
 ## 2. Design Decisions
 
-| Decision | Choice | Rationale |
-|---|---|---|
-| **File format** | Keep `.ico` + `.png` + Apple touch icon (same structure) | Next.js convention; no code changes needed, maximum browser compatibility |
-| **Design motif** | Blueprint logo mark — accent-bordered square with accent dot on dark bg | Matches the header logo mark (`<span className='inline-flex h-6 w-6 items-center justify-center border border-accent/50'><span className='h-2 w-2 bg-accent' /></span>`) and the site's architectural theme |
-| **Color palette** | Dark bg `#0e0f11`, accent green `#b5f542`, border `#2a2b30` | Pulled from `globals.css` / `tailwind.config.ts` design tokens |
-| **Sizes** | `favicon.ico`: 16×16 + 32×32 multi-res; `icon.png`: 192×192; `apple-icon.png`: 180×180 | Standard sizes for each platform; Next.js docs recommend these |
-| **No code changes** | Replace files in-place, same filenames | Next.js auto-discovers by convention; layout.tsx has no explicit icon metadata |
+| Decision            | Choice                                                                                 | Rationale                                                                                                                                                                                                   |
+| ------------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **File format**     | Keep `.ico` + `.png` + Apple touch icon (same structure)                               | Next.js convention; no code changes needed, maximum browser compatibility                                                                                                                                   |
+| **Design motif**    | Blueprint logo mark — accent-bordered square with accent dot on dark bg                | Matches the header logo mark (`<span className='inline-flex h-6 w-6 items-center justify-center border border-accent/50'><span className='h-2 w-2 bg-accent' /></span>`) and the site's architectural theme |
+| **Color palette**   | Dark bg `#0e0f11`, accent green `#b5f542`, border `#2a2b30`                            | Pulled from `globals.css` / `tailwind.config.ts` design tokens                                                                                                                                              |
+| **Sizes**           | `favicon.ico`: 16×16 + 32×32 multi-res; `icon.png`: 192×192; `apple-icon.png`: 180×180 | Standard sizes for each platform; Next.js docs recommend these                                                                                                                                              |
+| **No code changes** | Replace files in-place, same filenames                                                 | Next.js auto-discovers by convention; layout.tsx has no explicit icon metadata                                                                                                                              |
 
 ## 3. Architecture Overview
 
@@ -47,11 +47,13 @@ The only work is designing the new icon assets and replacing the three files.
   - **180×180 px** — for `apple-icon.png`
 
 **Files to create:**
+
 - `app/favicon.ico` (replace) — multi-resolution `.ico` containing 16×16 and 32×32
 - `app/icon.png` (replace) — 192×192 PNG
 - `app/apple-icon.png` (replace) — 180×180 PNG
 
 **Design tips for small sizes:**
+
 - At 16×16, simplify: solid dark bg, a 1px accent border, and a 4×4 or 3×3 centered accent square. Avoid anti-aliasing artifacts.
 - At 32×32, the border + centered dot can be slightly more refined.
 - At 180–192px, the full blueprint mark renders cleanly.
@@ -79,6 +81,7 @@ The only work is designing the new icon assets and replacing the three files.
 ### Phase 4 (Optional): Update OG / Twitter Images for Consistency
 
 If the brand refresh extends beyond the favicon, the same design language should be reflected in:
+
 - `app/opengraph-image.png` (1.5 MB, 1200×630 recommended)
 - `app/twitter-image.png` (1.5 MB, 1200×630 recommended)
 
@@ -86,15 +89,15 @@ These are separate assets and a separate scope, but flagged here for completenes
 
 ## 5. Critical Files Reference
 
-| File | Action | Notes |
-|---|---|---|
-| `app/favicon.ico` | **Replace** | Multi-res .ico (16×16 + 32×32); dark bg + accent border + accent dot |
-| `app/icon.png` | **Replace** | 192×192 PNG; same design |
-| `app/apple-icon.png` | **Replace** | 180×180 PNG; same design (no transparency — iOS clips to rounded rect) |
-| `app/layout.tsx` | No change | No explicit icon metadata; Next.js auto-discovers from file convention |
-| `app/globals.css` | Reference only | Source of truth for brand colors (`--color-accent: #b5f542`, `--color-bg: #0e0f11`) |
-| `tailwind.config.ts` | Reference only | Hex values for accent (`#b5f542`) and bg (`#0e0f11`) |
-| `src/components/layout/header.tsx` | Reference only | Contains the in-page logo mark to visually match |
+| File                               | Action         | Notes                                                                               |
+| ---------------------------------- | -------------- | ----------------------------------------------------------------------------------- |
+| `app/favicon.ico`                  | **Replace**    | Multi-res .ico (16×16 + 32×32); dark bg + accent border + accent dot                |
+| `app/icon.png`                     | **Replace**    | 192×192 PNG; same design                                                            |
+| `app/apple-icon.png`               | **Replace**    | 180×180 PNG; same design (no transparency — iOS clips to rounded rect)              |
+| `app/layout.tsx`                   | No change      | No explicit icon metadata; Next.js auto-discovers from file convention              |
+| `app/globals.css`                  | Reference only | Source of truth for brand colors (`--color-accent: #b5f542`, `--color-bg: #0e0f11`) |
+| `tailwind.config.ts`               | Reference only | Hex values for accent (`#b5f542`) and bg (`#0e0f11`)                                |
+| `src/components/layout/header.tsx` | Reference only | Contains the in-page logo mark to visually match                                    |
 
 ## 6. Notes & Caveats
 

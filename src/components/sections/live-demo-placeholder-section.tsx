@@ -4,7 +4,7 @@ export function LiveDemoPlaceholderSection() {
   return (
     <AnimatedSection id='live-demo' className='flex flex-col gap-12'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-4xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-ink uppercase md:text-5xl'>
           Pick your business type and play with a real Portal
         </h2>
       </div>

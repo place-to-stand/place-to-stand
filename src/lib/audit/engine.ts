@@ -52,7 +52,7 @@ export function runRuleBasedAudit(answers: AuditAnswers): AuditResult {
     const selected = selectedOptionIds(answers[question.id])
 
     for (const optionId of selected) {
-      const option = question.options.find((o) => o.id === optionId)
+      const option = question.options.find(o => o.id === optionId)
       if (!option) continue
 
       for (const [phase, weight] of Object.entries(option.phaseWeights ?? {})) {
@@ -129,7 +129,7 @@ function buildSummary(
     return `You're in the ${phaseName} phase. Let's talk about where software could help.`
   }
 
-  const names = recommendations.slice(0, 2).map((r) => r.service.name)
+  const names = recommendations.slice(0, 2).map(r => r.service.name)
   const list = names.length === 1 ? names[0] : `${names[0]} and ${names[1]}`
 
   return `You're in the ${phaseName} phase. Best place to start: ${list}.`
@@ -140,5 +140,4 @@ function buildSummary(
  * engine will be async, and keeping the signature stable now means the UI never
  * needs to change when we swap the implementation.
  */
-export const runAudit: AuditEngine = async (answers) =>
-  runRuleBasedAudit(answers)
+export const runAudit: AuditEngine = async answers => runRuleBasedAudit(answers)

@@ -3,7 +3,8 @@ import { ContactSection } from '@/src/components/sections/contact-section'
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Get in touch with Place To Stand. Send a message or book a call directly.',
+  description:
+    'Get in touch with Place To Stand. Send a message or book a call directly.',
 }
 
 export default function ContactPage() {

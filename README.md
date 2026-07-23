@@ -141,4 +141,3 @@ Each section component should expose a simple contract:
 - [`DEVELOPMENT_PLAN.md`](./DEVELOPMENT_PLAN.md) — phased roadmap & KPIs
 
 For questions or clarifications, document assumptions directly in PR descriptions and update this README as architecture evolves.
-

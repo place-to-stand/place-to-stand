@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
+import {
+  AnimatedSection,
+  Reveal,
+} from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Badge } from '@/src/components/ui/badge'
 import { fieldNotes } from '@/src/lib/field-notes'
@@ -13,11 +16,14 @@ export function FieldNotesPreview() {
         <div className='flex flex-col gap-4'>
           <Reveal index={0} className='flex flex-col gap-4'>
             <span className='bp-label font-mono'>Field Notes</span>
-            <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               From the lab
             </h2>
           </Reveal>
-          <Reveal index={1} className='max-w-sm text-sm leading-relaxed text-text-muted'>
+          <Reveal
+            index={1}
+            className='max-w-sm text-sm leading-relaxed text-text-muted'
+          >
             <p>
               Experiments, open-source projects, and things we&apos;re learning.
             </p>
@@ -25,7 +31,7 @@ export function FieldNotesPreview() {
           <Reveal index={2}>
             <Link
               href='/field-notes'
-              className='mt-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+              className='mt-2 inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
             >
               Explore field notes
               <span aria-hidden>&rarr;</span>
@@ -51,7 +57,7 @@ export function FieldNotesPreview() {
                   {note.date}
                 </span>
                 {note.repo && (
-                  <span className='border border-accent/30 px-2 py-0.5 font-mono text-[10px] uppercase text-accent'>
+                  <span className='border border-accent/30 px-2 py-0.5 font-mono text-[10px] text-accent uppercase'>
                     Open Source
                   </span>
                 )}

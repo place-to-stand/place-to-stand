@@ -7,7 +7,7 @@ import * as React from 'react'
 export function BlueprintCorners({
   size = 12,
   all = false,
-  colorClassName = 'border-accent',
+  colorClassName = 'border-accent/50',
 }: {
   size?: number
   all?: boolean
@@ -17,19 +17,19 @@ export function BlueprintCorners({
   return (
     <>
       <span
-        className={`pointer-events-none absolute -left-px -top-px z-10 border-l border-t ${colorClassName}`}
+        className={`pointer-events-none absolute -top-px -left-px z-10 border-t border-l ${colorClassName}`}
         style={style}
         aria-hidden
       />
       <span
-        className={`pointer-events-none absolute -bottom-px -right-px z-10 border-b border-r ${colorClassName}`}
+        className={`pointer-events-none absolute -right-px -bottom-px z-10 border-r border-b ${colorClassName}`}
         style={style}
         aria-hidden
       />
       {all && (
         <>
           <span
-            className={`pointer-events-none absolute -right-px -top-px z-10 border-r border-t ${colorClassName}`}
+            className={`pointer-events-none absolute -top-px -right-px z-10 border-t border-r ${colorClassName}`}
             style={style}
             aria-hidden
           />
@@ -54,9 +54,7 @@ export function BlueprintLabel({
   children: React.ReactNode
   className?: string
 }) {
-  return (
-    <span className={`bp-label font-mono ${className}`}>{children}</span>
-  )
+  return <span className={`bp-label font-mono ${className}`}>{children}</span>
 }
 
 /**
@@ -68,8 +66,8 @@ export function BlueprintCrosshair({ className = '' }: { className?: string }) {
       className={`pointer-events-none relative inline-block h-3 w-3 ${className}`}
       aria-hidden
     >
-      <span className='absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-accent/40' />
-      <span className='absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-accent/40' />
+      <span className='absolute top-0 left-1/2 h-full w-px -translate-x-1/2 bg-accent/40' />
+      <span className='absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-accent/40' />
     </span>
   )
 }

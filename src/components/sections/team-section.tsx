@@ -8,33 +8,23 @@ const team = [
     image: '/1652631488914.jpeg',
   },
   {
-    name: 'Damon Bodine',
-    title: 'Senior AI Engineer',
-    image: '/1587649018078.jpeg',
-  },
-  {
     name: 'Kris Crawford',
     title: 'Software Engineer & AI Technologist',
     image: '/259858081_219018533698595_237774923102850579_n.jpg',
-  },
-  {
-    name: 'Chris Donahue',
-    title: 'Creative Director',
-    image: '/403081575_325440200226266_2592020462209657049_n.jpg',
   },
 ]
 
 export function TeamSection() {
   return (
-    <AnimatedSection id='team' className='flex flex-col gap-grid-3 !pt-grid-1'>
+    <AnimatedSection id='team' className='flex flex-col gap-grid-3 pt-grid-1!'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+        <span className='text-sm font-semibold tracking-[0.1em] text-ink/60 uppercase'>
           Team
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-ink uppercase md:text-5xl'>
           The people behind the lever
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
+        <p className='max-w-xl text-lg leading-snug! text-balance text-ink/60'>
           Strategists, storytellers, and engineers working in concert to deliver
           measurable impact.
         </p>
@@ -54,7 +44,7 @@ export function TeamSection() {
               />
             </div>
             <div className='space-y-0.5 md:space-y-1'>
-              <h3 className='font-headline text-base uppercase leading-none md:text-2xl'>
+              <h3 className='font-headline text-base leading-none uppercase md:text-2xl'>
                 {member.name}
               </h3>
               <p className='text-xs text-ink/70 md:text-sm'>{member.title}</p>

@@ -34,7 +34,8 @@ import { BlueprintGraphic } from './blueprint-graphic'
  */
 
 /** Sets a group's entrance delay (ms) within the sequenced reveal. */
-const cmp = (delayMs: number) => ({ ['--cmp-delay']: `${delayMs}ms` }) as CSSProperties
+const cmp = (delayMs: number) =>
+  ({ ['--cmp-delay']: `${delayMs}ms` }) as CSSProperties
 
 type Rect = { x: number; y: number; w: number; h: number }
 
@@ -62,10 +63,26 @@ function hatch({ x, y, w, h }: Rect): ReactNode {
   return (
     <>
       {fs.map(f => (
-        <line key={`ha${f}`} x1={x + w * f} y1={y} x2={x} y2={y + h * f} className='stroke-line' strokeWidth='0.5' />
+        <line
+          key={`ha${f}`}
+          x1={x + w * f}
+          y1={y}
+          x2={x}
+          y2={y + h * f}
+          className='stroke-line'
+          strokeWidth='0.5'
+        />
       ))}
       {fs.map(f => (
-        <line key={`hb${f}`} x1={x + w} y1={y + h * (1 - f)} x2={x + w * (1 - f)} y2={y + h} className='stroke-line' strokeWidth='0.5' />
+        <line
+          key={`hb${f}`}
+          x1={x + w}
+          y1={y + h * (1 - f)}
+          x2={x + w * (1 - f)}
+          y2={y + h}
+          className='stroke-line'
+          strokeWidth='0.5'
+        />
       ))}
     </>
   )
@@ -78,7 +95,14 @@ function bars({ x, y, w, h }: Rect): ReactNode {
   const bw = (w - 6) / hs.length
   return (
     <>
-      <line x1={x + 3} y1={base} x2={x + w - 3} y2={base} className='stroke-line' strokeWidth='0.55' />
+      <line
+        x1={x + 3}
+        y1={base}
+        x2={x + w - 3}
+        y2={base}
+        className='stroke-line'
+        strokeWidth='0.55'
+      />
       {hs.map((f, i) => (
         <line
           key={`br${i}`}
@@ -100,7 +124,14 @@ function dots({ x, y, w, h }: Rect): ReactNode {
   return (
     <>
       {[0.2, 0.4, 0.6, 0.8].map(f => (
-        <circle key={`dt${f}`} cx={x + w * f} cy={cy} r='1.3' className='fill-bg stroke-line' strokeWidth='0.55' />
+        <circle
+          key={`dt${f}`}
+          cx={x + w * f}
+          cy={cy}
+          r='1.3'
+          className='fill-bg stroke-line'
+          strokeWidth='0.55'
+        />
       ))}
     </>
   )
@@ -188,13 +219,42 @@ const HALF_CARDS: Rect[] = [
  *  the corner radius (default rounded; the finished app passes 0 for hard edges).
  *  `fill` sets the interior (default the card tone; the finished app uses the
  *  darker page bg so its own cards read as raised). */
-function AppWindow({ x, y, w, h, rx = '3', fill = 'fill-bg-card' }: Rect & { rx?: string; fill?: string }) {
+function AppWindow({
+  x,
+  y,
+  w,
+  h,
+  rx = '3',
+  fill = 'fill-bg-card',
+}: Rect & { rx?: string; fill?: string }) {
   return (
     <g>
-      <rect x={x} y={y} width={w} height={h} rx={rx} className={`${fill} stroke-line`} strokeWidth='1' />
-      <line x1={x} y1={y + 11} x2={x + w} y2={y + 11} className='stroke-line' strokeWidth='0.7' />
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={rx}
+        className={`${fill} stroke-line`}
+        strokeWidth='1'
+      />
+      <line
+        x1={x}
+        y1={y + 11}
+        x2={x + w}
+        y2={y + 11}
+        className='stroke-line'
+        strokeWidth='0.7'
+      />
       {[x + 8, x + 13, x + 18].map(dx => (
-        <circle key={`wd${dx}`} cx={dx} cy={y + 5.5} r='1.3' className='fill-bg stroke-line' strokeWidth='0.6' />
+        <circle
+          key={`wd${dx}`}
+          cx={dx}
+          cy={y + 5.5}
+          r='1.3'
+          className='fill-bg stroke-line'
+          strokeWidth='0.6'
+        />
       ))}
     </g>
   )
@@ -215,10 +275,27 @@ const PROMOS = [
 ]
 
 /** A small boxed ad/upsell banner. */
-function PromoBanner({ x, y, w, text }: { x: number; y: number; w: number; text: string }) {
+function PromoBanner({
+  x,
+  y,
+  w,
+  text,
+}: {
+  x: number
+  y: number
+  w: number
+  text: string
+}) {
   return (
     <g>
-      <rect x={x} y={y} width={w} height='7' className='fill-bg stroke-line' strokeWidth='0.5' />
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height='7'
+        className='fill-bg stroke-line'
+        strokeWidth='0.5'
+      />
       <text
         x={x + w / 2}
         y={y + 4.8}
@@ -243,29 +320,69 @@ function ClutterWindow({ x, y, w, h, seed }: Rect & { seed: number }) {
   const colW = (mainW - 2) / 2
   const gridTop = y + 24
   const rowH = (y + h - 4 - gridTop - 4) / 3
-  const decos: (keyof typeof DECO)[] = ['text', 'bars', 'hatch', 'dots', 'text', 'bars']
+  const decos: (keyof typeof DECO)[] = [
+    'text',
+    'bars',
+    'hatch',
+    'dots',
+    'text',
+    'bars',
+  ]
   const cells: Rect[] = []
   for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 2; c++) {
-      cells.push({ x: mainX + c * (colW + 2), y: gridTop + r * (rowH + 2), w: colW, h: rowH })
+      cells.push({
+        x: mainX + c * (colW + 2),
+        y: gridTop + r * (rowH + 2),
+        w: colW,
+        h: rowH,
+      })
     }
   }
   return (
     <g>
       <AppWindow x={x} y={y} w={w} h={h} />
       {/* nav rail */}
-      <rect x={x + 4} y={y + 14} width='9' height={h - 20} className='fill-bg-card stroke-line' strokeWidth='0.5' />
+      <rect
+        x={x + 4}
+        y={y + 14}
+        width='9'
+        height={h - 20}
+        className='fill-bg-card stroke-line'
+        strokeWidth='0.5'
+      />
       {[0, 1, 2, 3].map(k => (
-        <line key={`nr${k}`} x1={x + 6} y1={y + 18 + k * 6} x2={x + 11} y2={y + 18 + k * 6} className='stroke-line' strokeWidth='0.4' strokeLinecap='round' />
+        <line
+          key={`nr${k}`}
+          x1={x + 6}
+          y1={y + 18 + k * 6}
+          x2={x + 11}
+          y2={y + 18 + k * 6}
+          className='stroke-line'
+          strokeWidth='0.4'
+          strokeLinecap='round'
+        />
       ))}
       {/* upsell banner */}
-      <PromoBanner x={mainX} y={y + 15} w={mainW} text={PROMOS[seed % PROMOS.length]} />
+      <PromoBanner
+        x={mainX}
+        y={y + 15}
+        w={mainW}
+        text={PROMOS[seed % PROMOS.length]}
+      />
       {/* dense grid of mismatched modules */}
       {cells.map((cell, idx) => {
         const Deco = DECO[decos[(idx + seed) % decos.length]]
         return (
           <g key={`cm${idx}`}>
-            <rect x={cell.x} y={cell.y} width={cell.w} height={cell.h} className='fill-bg-card stroke-line' strokeWidth='0.5' />
+            <rect
+              x={cell.x}
+              y={cell.y}
+              width={cell.w}
+              height={cell.h}
+              className='fill-bg-card stroke-line'
+              strokeWidth='0.5'
+            />
             {Deco(cell)}
           </g>
         )
@@ -279,7 +396,14 @@ function ClutterWindow({ x, y, w, h, seed }: Rect & { seed: number }) {
 //    through), two side lines, a front-facing bottom arc, one interior "disk"
 //    band, and the top ellipse drawn last. `accent` swaps the stroke for the
 //    unified store; `rot` tilts a scattered silo. ──
-type Db = { cx: number; top: number; w: number; h: number; accent?: boolean; rot?: number }
+type Db = {
+  cx: number
+  top: number
+  w: number
+  h: number
+  accent?: boolean
+  rot?: number
+}
 function DbCylinder({ cx, top, w, h, accent = false, rot = 0 }: Db) {
   const rx = w / 2
   const ry = rx * 0.42
@@ -288,19 +412,49 @@ function DbCylinder({ cx, top, w, h, accent = false, rot = 0 }: Db) {
   const midY = cyTop + h * 0.45
   const stroke = accent ? 'stroke-accent' : 'stroke-line'
   const sw = accent ? 1.1 : 0.8
-  const arc = (y: number) => `M${cx - rx} ${y} A ${rx} ${ry} 0 0 0 ${cx + rx} ${y}`
+  const arc = (y: number) =>
+    `M${cx - rx} ${y} A ${rx} ${ry} 0 0 0 ${cx + rx} ${y}`
   return (
     <g transform={rot ? `rotate(${rot} ${cx} ${cyTop + h / 2})` : undefined}>
       {/* filled body so the background grid doesn't read through */}
-      <path d={`M${cx - rx} ${cyTop} V${cyBot} A ${rx} ${ry} 0 0 0 ${cx + rx} ${cyBot} V${cyTop}`} className='fill-bg-card' stroke='none' />
+      <path
+        d={`M${cx - rx} ${cyTop} V${cyBot} A ${rx} ${ry} 0 0 0 ${cx + rx} ${cyBot} V${cyTop}`}
+        className='fill-bg-card'
+        stroke='none'
+      />
       {/* body sides */}
-      <line x1={cx - rx} y1={cyTop} x2={cx - rx} y2={cyBot} className={stroke} strokeWidth={sw} />
-      <line x1={cx + rx} y1={cyTop} x2={cx + rx} y2={cyBot} className={stroke} strokeWidth={sw} />
+      <line
+        x1={cx - rx}
+        y1={cyTop}
+        x2={cx - rx}
+        y2={cyBot}
+        className={stroke}
+        strokeWidth={sw}
+      />
+      <line
+        x1={cx + rx}
+        y1={cyTop}
+        x2={cx + rx}
+        y2={cyBot}
+        className={stroke}
+        strokeWidth={sw}
+      />
       {/* front-facing bottom + interior disk band */}
       <path d={arc(cyBot)} className={`fill-none ${stroke}`} strokeWidth={sw} />
-      <path d={arc(midY)} className={`fill-none ${stroke}`} strokeWidth={sw * 0.7} />
+      <path
+        d={arc(midY)}
+        className={`fill-none ${stroke}`}
+        strokeWidth={sw * 0.7}
+      />
       {/* top ellipse, drawn last so it sits above the body */}
-      <ellipse cx={cx} cy={cyTop} rx={rx} ry={ry} className={`fill-bg-card ${stroke}`} strokeWidth={sw} />
+      <ellipse
+        cx={cx}
+        cy={cyTop}
+        rx={rx}
+        ry={ry}
+        className={`fill-bg-card ${stroke}`}
+        strokeWidth={sw}
+      />
     </g>
   )
 }
@@ -331,15 +485,35 @@ export function HeroGraphic({ className }: { className?: string }) {
     >
       {/* ── Titles — each rises in with its column (stack first, your app last) ── */}
       <g className='cmp-in' style={cmp(0)}>
-        <text x='62' y='8' textAnchor='middle' className='cmp-title fill-text-muted font-headline' fontSize='8.5' fontWeight='500' letterSpacing='0.3'>
+        <text
+          x='62'
+          y='8'
+          textAnchor='middle'
+          className='cmp-title fill-text-muted font-headline'
+          fontSize='8.5'
+          fontWeight='500'
+          letterSpacing='0.3'
+        >
           <tspan x='62'>Turn your</tspan>
-          <tspan x='62' dy='10'>scattered data</tspan>
+          <tspan x='62' dy='10'>
+            scattered data
+          </tspan>
         </text>
       </g>
       <g className='cmp-in' style={cmp(1315)}>
-        <text x='222' y='8' textAnchor='middle' className='cmp-title fill-accent font-headline' fontSize='8.5' fontWeight='500' letterSpacing='0.2'>
+        <text
+          x='222'
+          y='8'
+          textAnchor='middle'
+          className='cmp-title fill-accent font-headline'
+          fontSize='8.5'
+          fontWeight='500'
+          letterSpacing='0.2'
+        >
           <tspan x='222'>Into one</tspan>
-          <tspan x='222' dy='10'>source of truth</tspan>
+          <tspan x='222' dy='10'>
+            source of truth
+          </tspan>
         </text>
       </g>
 
@@ -360,14 +534,26 @@ export function HeroGraphic({ className }: { className?: string }) {
               const Deco = t.deco ? DECO[t.deco] : null
               return (
                 <g key={`c${idx}`}>
-                  <rect x={t.x} y={t.y} width={t.w} height={t.h} className='fill-bg-card stroke-line' strokeWidth='0.75' />
+                  <rect
+                    x={t.x}
+                    y={t.y}
+                    width={t.w}
+                    height={t.h}
+                    className='fill-bg-card stroke-line'
+                    strokeWidth='0.75'
+                  />
                   {Deco && Deco(t)}
                 </g>
               )
             })}
           </g>
           {/* Intrusive top-of-page ad banner across the front dashboard */}
-          <PromoBanner x={FRONT.x + 8} y={FRONT.y + 14} w={FRONT.w - 16} text='TRY OUR NEW PRODUCT' />
+          <PromoBanner
+            x={FRONT.x + 8}
+            y={FRONT.y + 14}
+            w={FRONT.w - 16}
+            text='TRY OUR NEW PRODUCT'
+          />
         </g>
       </g>
 
@@ -377,27 +563,101 @@ export function HeroGraphic({ className }: { className?: string }) {
         <AppWindow {...RIGHT_WIN} rx='0' fill='fill-bg' />
 
         {/* Sidebar: divider, wordmark, an accent active item, hollow nav rows */}
-        <line x1={SIDEBAR_DIV} y1='45' x2={SIDEBAR_DIV} y2='130' className='stroke-line' strokeWidth='0.6' />
-        <line x1='180' y1='49' x2='193' y2='49' className='stroke-line' strokeWidth='1.3' strokeLinecap='round' />
-        <rect x={NAV_ACTIVE.x} y={NAV_ACTIVE.y} width={NAV_ACTIVE.w} height={NAV_ACTIVE.h} className='fill-accent' />
+        <line
+          x1={SIDEBAR_DIV}
+          y1='45'
+          x2={SIDEBAR_DIV}
+          y2='130'
+          className='stroke-line'
+          strokeWidth='0.6'
+        />
+        <line
+          x1='180'
+          y1='49'
+          x2='193'
+          y2='49'
+          className='stroke-line'
+          strokeWidth='1.3'
+          strokeLinecap='round'
+        />
+        <rect
+          x={NAV_ACTIVE.x}
+          y={NAV_ACTIVE.y}
+          width={NAV_ACTIVE.w}
+          height={NAV_ACTIVE.h}
+          className='fill-accent'
+        />
         <rect x='180' y='56.5' width='3' height='3' className='fill-bg' />
         <rect x='185' y='57.4' width='8' height='1.6' className='fill-bg' />
         {NAV_ROWS.map((y, i) => (
           <g key={`nav${i}`}>
-            <rect x='180' y={y} width='3' height='3' className='fill-bg stroke-line' strokeWidth='0.55' />
-            <line x1='185' y1={y + 1.6} x2='196' y2={y + 1.6} className='stroke-line' strokeWidth='0.75' strokeLinecap='round' />
+            <rect
+              x='180'
+              y={y}
+              width='3'
+              height='3'
+              className='fill-bg stroke-line'
+              strokeWidth='0.55'
+            />
+            <line
+              x1='185'
+              y1={y + 1.6}
+              x2='196'
+              y2={y + 1.6}
+              className='stroke-line'
+              strokeWidth='0.75'
+              strokeLinecap='round'
+            />
           </g>
         ))}
 
         {/* Page header: icon, title, subtitle */}
-        <rect x={HOME_ICON.x} y={HOME_ICON.y} width={HOME_ICON.w} height={HOME_ICON.h} className='fill-bg stroke-line' strokeWidth='0.7' />
-        <line x1='214' y1='48' x2='236' y2='48' className='stroke-line' strokeWidth='1.5' strokeLinecap='round' />
-        <line x1='214' y1='52.5' x2='255' y2='52.5' className='stroke-line' strokeWidth='0.8' strokeLinecap='round' />
+        <rect
+          x={HOME_ICON.x}
+          y={HOME_ICON.y}
+          width={HOME_ICON.w}
+          height={HOME_ICON.h}
+          className='fill-bg stroke-line'
+          strokeWidth='0.7'
+        />
+        <line
+          x1='214'
+          y1='48'
+          x2='236'
+          y2='48'
+          className='stroke-line'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+        />
+        <line
+          x1='214'
+          y1='52.5'
+          x2='255'
+          y2='52.5'
+          className='stroke-line'
+          strokeWidth='0.8'
+          strokeLinecap='round'
+        />
 
         {/* Full-width graph widget — a bar chart whose tallest, final column is
             the accent and slowly blinks */}
-        <rect x={GRAPH_CARD.x} y={GRAPH_CARD.y} width={GRAPH_CARD.w} height={GRAPH_CARD.h} className='fill-bg-card stroke-line' strokeWidth='0.9' />
-        <line x1='209' y1='64' x2='224' y2='64' className='stroke-line' strokeWidth='1.1' strokeLinecap='round' />
+        <rect
+          x={GRAPH_CARD.x}
+          y={GRAPH_CARD.y}
+          width={GRAPH_CARD.w}
+          height={GRAPH_CARD.h}
+          className='fill-bg-card stroke-line'
+          strokeWidth='0.9'
+        />
+        <line
+          x1='209'
+          y1='64'
+          x2='224'
+          y2='64'
+          className='stroke-line'
+          strokeWidth='1.1'
+          strokeLinecap='round'
+        />
         {GRAPH_BARS.map((b, i) =>
           i === GRAPH_BARS.length - 1 ? (
             <rect
@@ -410,18 +670,65 @@ export function HeroGraphic({ className }: { className?: string }) {
               style={{ ['--cmp-live-delay']: '2080ms' } as CSSProperties}
             />
           ) : (
-            <rect key={`gb${i}`} x={b.x} y={b.y} width={b.w} height={b.h} className='fill-bg stroke-line' strokeWidth='0.55' />
+            <rect
+              key={`gb${i}`}
+              x={b.x}
+              y={b.y}
+              width={b.w}
+              height={b.h}
+              className='fill-bg stroke-line'
+              strokeWidth='0.55'
+            />
           )
         )}
-        <line x1='209' y1='93' x2='259' y2='93' className='stroke-line' strokeWidth='0.5' strokeLinecap='round' />
+        <line
+          x1='209'
+          y1='93'
+          x2='259'
+          y2='93'
+          className='stroke-line'
+          strokeWidth='0.5'
+          strokeLinecap='round'
+        />
 
         {/* Two half-width widgets below — clean KPI cards */}
         {HALF_CARDS.map((c, i) => (
           <g key={`half${i}`}>
-            <rect x={c.x} y={c.y} width={c.w} height={c.h} className='fill-bg-card stroke-line' strokeWidth='0.9' />
-            <line x1={c.x + 4} y1={c.y + 7} x2={c.x + 15} y2={c.y + 7} className='stroke-line' strokeWidth='0.8' strokeLinecap='round' />
-            <line x1={c.x + 4} y1={c.y + 15} x2={c.x + 12} y2={c.y + 15} className='stroke-line' strokeWidth='1.8' strokeLinecap='round' />
-            <line x1={c.x + 4} y1={c.y + 21} x2={c.x + 19} y2={c.y + 21} className='stroke-line' strokeWidth='0.5' strokeLinecap='round' />
+            <rect
+              x={c.x}
+              y={c.y}
+              width={c.w}
+              height={c.h}
+              className='fill-bg-card stroke-line'
+              strokeWidth='0.9'
+            />
+            <line
+              x1={c.x + 4}
+              y1={c.y + 7}
+              x2={c.x + 15}
+              y2={c.y + 7}
+              className='stroke-line'
+              strokeWidth='0.8'
+              strokeLinecap='round'
+            />
+            <line
+              x1={c.x + 4}
+              y1={c.y + 15}
+              x2={c.x + 12}
+              y2={c.y + 15}
+              className='stroke-line'
+              strokeWidth='1.8'
+              strokeLinecap='round'
+            />
+            <line
+              x1={c.x + 4}
+              y1={c.y + 21}
+              x2={c.x + 19}
+              y2={c.y + 21}
+              className='stroke-line'
+              strokeWidth='0.5'
+              strokeLinecap='round'
+            />
           </g>
         ))}
       </g>
@@ -429,7 +736,13 @@ export function HeroGraphic({ className }: { className?: string }) {
       {/* ── Transformation arrow. Rendered last so it always sits above the
              windows. Slides out to the right after the stack settles. ── */}
       <g className='cmp-arrow' style={cmp(1040)}>
-        <g className='stroke-line' strokeWidth='1.2' strokeLinecap='round' strokeLinejoin='round' fill='none'>
+        <g
+          className='stroke-line'
+          strokeWidth='1.2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          fill='none'
+        >
           <line x1='132' y1='82' x2='156' y2='82' />
           <path d='M151 78 L156 82 L151 86' />
         </g>
@@ -441,14 +754,30 @@ export function HeroGraphic({ className }: { className?: string }) {
       {SILOS.map((s, i) => (
         <g key={`silo${i}`} className='cmp-in' style={cmp(1000 + i * 120)}>
           {/* straight connector dropping from the dashboard directly above */}
-          <line x1={s.cx} y1='141' x2={s.cx} y2={s.top} className='stroke-line' strokeWidth='0.6' strokeLinecap='round' />
+          <line
+            x1={s.cx}
+            y1='141'
+            x2={s.cx}
+            y2={s.top}
+            className='stroke-line'
+            strokeWidth='0.6'
+            strokeLinecap='round'
+          />
           <DbCylinder {...s} />
         </g>
       ))}
 
       <g className='cmp-in' style={cmp(1750)}>
         {/* one clean connector from the app down to the unified store */}
-        <line x1={UNIFIED_DB.cx} y1='135' x2={UNIFIED_DB.cx} y2={UNIFIED_DB.top} className='stroke-accent' strokeWidth='1' strokeLinecap='round' />
+        <line
+          x1={UNIFIED_DB.cx}
+          y1='135'
+          x2={UNIFIED_DB.cx}
+          y2={UNIFIED_DB.top}
+          className='stroke-accent'
+          strokeWidth='1'
+          strokeLinecap='round'
+        />
         <DbCylinder {...UNIFIED_DB} />
       </g>
     </BlueprintGraphic>

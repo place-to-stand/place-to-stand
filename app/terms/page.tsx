@@ -8,7 +8,7 @@ export default function TermsPage() {
   return (
     <main className='mx-auto mt-28 flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6 py-24'>
       <section className='space-y-4'>
-        <h1 className='font-headline text-5xl uppercase tracking-[0.1em] text-text'>
+        <h1 className='font-headline text-5xl tracking-[0.1em] text-text uppercase'>
           Terms of Service
         </h1>
         <p className='text-base text-text-muted'>
@@ -18,7 +18,7 @@ export default function TermsPage() {
         </p>
       </section>
       <section className='space-y-3 text-sm text-text-muted'>
-        <h2 className='font-headline text-2xl uppercase tracking-[0.2em] text-text'>
+        <h2 className='font-headline text-2xl tracking-[0.2em] text-text uppercase'>
           Highlights
         </h2>
         <ul className='space-y-2'>

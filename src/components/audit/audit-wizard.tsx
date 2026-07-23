@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
 import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import { QuestionField } from '@/src/components/audit/question-field'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
@@ -26,14 +27,12 @@ export function AuditWizard({
   onSubmit,
   onExit,
 }: AuditWizardProps) {
+  const posthog = usePostHog()
   const [stepIndex, setStepIndex] = useState(0)
   const [showErrors, setShowErrors] = useState(false)
 
   const section = SECTIONS[stepIndex]
-  const questions = useMemo(
-    () => questionsForSection(section.id),
-    [section.id]
-  )
+  const questions = useMemo(() => questionsForSection(section.id), [section.id])
   const isLastStep = stepIndex === SECTIONS.length - 1
   const sectionComplete = isSectionComplete(section.id, answers)
 
@@ -43,10 +42,14 @@ export function AuditWizard({
       return
     }
     setShowErrors(false)
+    posthog?.capture('audit_step_completed', {
+      step: stepIndex + 1,
+      section: section.id,
+    })
     if (isLastStep) {
       onSubmit()
     } else {
-      setStepIndex((i) => i + 1)
+      setStepIndex(i => i + 1)
     }
   }
 
@@ -55,7 +58,7 @@ export function AuditWizard({
     if (stepIndex === 0) {
       onExit()
     } else {
-      setStepIndex((i) => i - 1)
+      setStepIndex(i => i - 1)
     }
   }
 
@@ -63,7 +66,7 @@ export function AuditWizard({
     <div className='mx-auto max-w-2xl py-grid-2'>
       {/* Progress */}
       <div className='mb-8'>
-        <div className='flex items-center justify-between font-mono text-xs uppercase tracking-[0.15em] text-text-muted'>
+        <div className='flex items-center justify-between font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
           <span>
             Step {stepIndex + 1} of {SECTIONS.length}
           </span>
@@ -84,18 +87,18 @@ export function AuditWizard({
 
       <div className='relative border border-border p-6 sm:p-8'>
         <BlueprintCorners size={16} />
-        <h2 className='font-headline text-2xl font-semibold uppercase tracking-tight text-text'>
+        <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
           {section.title}
         </h2>
         <p className='mt-1 text-sm text-text-muted'>{section.subtitle}</p>
 
         <div className='mt-8 space-y-8'>
-          {questions.map((question) => (
+          {questions.map(question => (
             <QuestionField
               key={question.id}
               question={question}
               value={answers[question.id]}
-              onChange={(value) => onAnswer(question.id, value)}
+              onChange={value => onAnswer(question.id, value)}
             />
           ))}
         </div>

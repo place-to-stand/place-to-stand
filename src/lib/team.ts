@@ -24,7 +24,7 @@ export const team: TeamMember[] = [
       github: 'https://github.com/jmdesiderio',
     },
   },
-    {
+  {
     name: 'Kris Crawford',
     title: 'Software Engineer & AI Technologist',
     bio: 'Software engineer with five years of building applications, grounded in a prior career designing physical systems meant to last decades. That same rigor, measure twice and build once, carries into every line of code. He also has a decade of entrepreneurship under his belt.',
@@ -36,24 +36,4 @@ export const team: TeamMember[] = [
       github: 'https://github.com/krismakesstuff',
     },
   },
-  {
-    name: 'Damon Bodine',
-    title: 'Senior AI Engineer',
-    bio: 'Graduate of the Gauntlet AI engineering bootcamp with multiple decades of entrepreneurship spanning the music and real-estate industries. Combines hard-won business instinct with hands-on AI engineering to build systems that actually move the needle.',
-    image: '/1587649018078.jpeg',
-    socials: {
-      linkedin: 'https://www.linkedin.com/in/damonbodine/',
-      x: 'https://x.com/damonbodine',
-      instagram: 'https://www.instagram.com/damonbodine/',
-      github: 'https://github.com/damonbodine',
-    },
-  },
-  
-  // {
-  //   name: 'Chris Donahue',
-  //   title: 'Creative Director',
-  //   bio: 'Creative director with a passion for visual storytelling and brand strategy. Translates business goals into compelling design systems and content that drives results.',
-  //   image: '/403081575_325440200226266_2592020462209657049_n.jpg',
-  //   socials: {},
-  // },
 ]
