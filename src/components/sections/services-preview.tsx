@@ -23,7 +23,7 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
   const Graphic = serviceGraphics[service.icon]
 
   return (
-    <div className='border-b border-border bg-bg-card transition-colors hover:bg-bg-elevated last:border-b-0'>
+    <div className='border-b border-border bg-bg-card transition-colors last:border-b-0 hover:bg-bg-elevated'>
       <button
         type='button'
         id={id}
