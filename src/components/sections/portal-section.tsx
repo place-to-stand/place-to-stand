@@ -22,7 +22,7 @@ export function PortalSection() {
       <AnimatedSection className='flex flex-col gap-6'>
         <Reveal
           index={0}
-          className='flex flex-col-reverse gap-6 md:flex-row md:items-start md:justify-between'
+          className='flex flex-col gap-6 md:flex-row md:items-start md:justify-between'
         >
           <div className='flex flex-col gap-4'>
             <h2 className='max-w-3xl text-balance font-headline text-3xl font-bold uppercase !leading-[.95] tracking-tight text-text md:text-4xl'>
@@ -39,10 +39,10 @@ export function PortalSection() {
             asChild
             variant='outline'
             size='sm'
-            className='shrink-0 gap-2 self-start'
+            className='h-8 shrink-0 gap-1.5 self-start px-3 text-xs md:h-9 md:gap-2 md:px-4 md:text-sm'
           >
             <a href={REPO_URL} target='_blank' rel='noopener noreferrer'>
-              <GitHubIcon className='h-4 w-4' aria-hidden />
+              <GitHubIcon className='h-3.5 w-3.5 md:h-4 md:w-4' aria-hidden />
               Open Source
             </a>
           </Button>
