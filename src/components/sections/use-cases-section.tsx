@@ -51,13 +51,13 @@ export function UseCasesSection({
   return (
     <AnimatedSection id='use-cases' className='flex flex-col gap-8 md:gap-8'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+        <span className='text-sm font-semibold tracking-[0.1em] text-ink/60 uppercase'>
           Use-cases
         </span>
-        <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-4xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-ink uppercase md:text-5xl'>
           Real products helping businesses
         </h2>
-        <p className='max-w-xl text-balance text-base !leading-snug text-ink/80 md:text-lg'>
+        <p className='max-w-xl text-base leading-snug! text-balance text-ink/80 md:text-lg'>
           Custom solutions we've built for real-world business needs.
         </p>
       </div>
@@ -75,19 +75,19 @@ export function UseCasesSection({
                   'relative flex-1 border-2 px-1.5 py-3 text-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/30 md:px-3 md:py-2 md:text-left',
                   isActive
                     ? 'border-ink bg-ink text-white shadow-lg ring-1 ring-ink/20 md:scale-105'
-                    : 'border-transparent bg-white/50 hover:bg-white hover:shadow-sm'
+                    : 'border-transparent bg-white/50 hover:bg-white hover:shadow-xs'
                 )}
               >
                 <div className='flex flex-col items-center justify-center gap-0.5 md:items-start md:justify-start'>
                   <span
                     className={cn(
-                      'hidden text-xs font-bold uppercase tracking-wider md:block',
+                      'hidden text-xs font-bold tracking-wider uppercase md:block',
                       isActive ? 'text-white/70' : 'text-ink/60'
                     )}
                   >
                     0{index + 1}
                   </span>
-                  <h3 className='text-balance font-headline text-[13px] font-bold leading-none md:text-base md:leading-tight'>
+                  <h3 className='font-headline text-[13px] leading-none font-bold text-balance md:text-base md:leading-tight'>
                     {useCase.title}
                   </h3>
                   <p
@@ -103,7 +103,7 @@ export function UseCasesSection({
                 {isActive && (
                   <motion.div
                     layoutId='active-connector'
-                    className='absolute -bottom-3 left-0 right-0 flex justify-center md:-bottom-4'
+                    className='absolute right-0 -bottom-3 left-0 flex justify-center md:-bottom-4'
                     initial={false}
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                   >
@@ -189,7 +189,7 @@ export function UseCasesSection({
                       <div className='flex aspect-video items-center justify-center bg-ink'>
                         <div className='text-center opacity-40'>
                           <Play className='mx-auto mb-4 h-20 w-20 fill-white' />
-                          <p className='text-sm font-bold uppercase tracking-widest text-white/50'>
+                          <p className='text-sm font-bold tracking-widest text-white/50 uppercase'>
                             Demo Preview
                           </p>
                         </div>
@@ -200,10 +200,10 @@ export function UseCasesSection({
                   {/* Content Side (Overlay or Sidebar) */}
                   <div className='flex flex-col justify-center gap-1 bg-white px-4 py-3 md:w-[35%] md:gap-4 md:p-8 lg:w-[25%]'>
                     <div className='space-y-1 md:space-y-2'>
-                      <div className='inline-flex items-center border border-border px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-text-muted md:px-3 md:py-1 md:text-sm'>
+                      <div className='inline-flex items-center border border-border px-2 py-0.5 text-xs font-bold tracking-wider text-text-muted uppercase md:px-3 md:py-1 md:text-sm'>
                         {useCase.metric}
                       </div>
-                      <h3 className='font-headline text-xl font-bold uppercase text-ink md:text-2xl lg:text-4xl'>
+                      <h3 className='font-headline text-xl font-bold text-ink uppercase md:text-2xl lg:text-4xl'>
                         {useCase.title}
                       </h3>
                     </div>

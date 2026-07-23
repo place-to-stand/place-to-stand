@@ -3,7 +3,10 @@
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
-import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
+import {
+  AnimatedSection,
+  Reveal,
+} from '@/src/components/layout/animated-section'
 import { services, type Service } from '@/src/lib/services'
 import { serviceGraphics } from '@/src/components/graphics/home-graphics'
 import { cn } from '@/src/lib/utils'
@@ -39,7 +42,7 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
         <ChevronDown
           aria-hidden
           className={cn(
-            'ml-auto mt-0.5 h-5 w-5 shrink-0 text-text-muted transition-transform duration-300 ease-out',
+            'mt-0.5 ml-auto h-5 w-5 shrink-0 text-text-muted transition-transform duration-300 ease-out',
             isOpen && 'rotate-180 text-accent'
           )}
         />
@@ -90,7 +93,7 @@ export function ServicesPreview() {
         <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
           <Reveal index={0} className='flex flex-col gap-4'>
             <span className='bp-label font-mono'>Services</span>
-            <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               What we build
             </h2>
           </Reveal>
@@ -100,7 +103,7 @@ export function ServicesPreview() {
           <Reveal index={2}>
             <Link
               href='/services'
-              className='mt-4 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+              className='mt-4 inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
             >
               View all services
               <span aria-hidden>&rarr;</span>
@@ -115,9 +118,7 @@ export function ServicesPreview() {
               key={service.slug}
               service={service}
               isOpen={activeIndex === i}
-              onToggle={() =>
-                setActiveIndex(prev => (prev === i ? null : i))
-              }
+              onToggle={() => setActiveIndex(prev => (prev === i ? null : i))}
             />
           ))}
         </Reveal>

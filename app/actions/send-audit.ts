@@ -117,9 +117,9 @@ export async function sendAudit(
   const answerGroups = summarizeAnswers(answers)
   if (answerGroups.length > 0) {
     detailLines.push('', 'All responses:')
-    answerGroups.forEach((group) => {
+    answerGroups.forEach(group => {
       detailLines.push('', group.section)
-      group.items.forEach((item) => {
+      group.items.forEach(item => {
         detailLines.push(`- ${item.prompt}`, `  ${item.answer}`)
       })
     })
@@ -200,10 +200,14 @@ export async function sendAudit(
 
       if (contactError) {
         const normalizedMessage = contactError.message?.toLowerCase() ?? ''
-        const contactAlreadyExists = normalizedMessage.includes('already exists')
+        const contactAlreadyExists =
+          normalizedMessage.includes('already exists')
 
         if (!contactAlreadyExists) {
-          console.error('Failed to add contact to Resend audience', contactError)
+          console.error(
+            'Failed to add contact to Resend audience',
+            contactError
+          )
         }
       }
     } catch (error) {

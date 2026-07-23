@@ -61,7 +61,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold uppercase tracking-[0.05em] text-text transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/30'
+        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold tracking-[0.05em] text-text uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/30'
       >
         <span className='text-balance'>{question}</span>
         <ChevronDown
@@ -101,13 +101,13 @@ export function FaqSection() {
   return (
     <AnimatedSection id='faq' className='flex flex-col gap-10'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-text-muted'>
+        <span className='text-sm font-semibold tracking-[0.1em] text-text-muted uppercase'>
           FAQ
         </span>
-        <h2 className='max-w-4xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
+        <h2 className='max-w-4xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
           The answers you're looking for
         </h2>
-        <p className='max-w-2xl text-balance text-lg !leading-snug text-text-muted'>
+        <p className='max-w-2xl text-lg leading-snug! text-balance text-text-muted'>
           The essentials that most clients ask us before we kick off a new
           engagement. Please reach out if you have other questions. We're happy
           to answer them!

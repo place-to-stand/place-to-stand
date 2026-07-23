@@ -19,7 +19,7 @@ export function QuestionField({
 }: QuestionFieldProps) {
   return (
     <fieldset className='space-y-3'>
-      <legend className='font-headline text-base font-semibold uppercase tracking-tight text-text'>
+      <legend className='font-headline text-base font-semibold tracking-tight text-text uppercase'>
         {question.prompt}
         {question.required && <span className='ml-1 text-accent'>*</span>}
       </legend>
@@ -30,13 +30,13 @@ export function QuestionField({
       {question.type === 'text' ? (
         <Textarea
           value={typeof value === 'string' ? value : ''}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={e => onChange(e.target.value)}
           placeholder={question.placeholder}
           rows={4}
         />
       ) : (
         <div className='grid gap-2 sm:grid-cols-2'>
-          {question.options?.map((option) => {
+          {question.options?.map(option => {
             const selected = isSelected(question, value, option.id)
             return (
               <button
@@ -102,6 +102,6 @@ function nextValue(
 
   const current = Array.isArray(value) ? value : []
   return current.includes(optionId)
-    ? current.filter((id) => id !== optionId)
+    ? current.filter(id => id !== optionId)
     : [...current, optionId]
 }

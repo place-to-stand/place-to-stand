@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
+import {
+  AnimatedSection,
+  Reveal,
+} from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { ClientsSection } from '@/src/components/sections/clients-section'
@@ -15,13 +18,16 @@ export default function ClientsPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
       {/* Heading, client cards, and CTA tile, one section separated by gaps */}
-      <AnimatedSection id='clients' className='flex flex-col gap-grid-3 md:gap-grid-4'>
+      <AnimatedSection
+        id='clients'
+        className='flex flex-col gap-grid-3 md:gap-grid-4'
+      >
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Clients</span>
-          <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
+          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             Who We Build For
           </h1>
-          <p className='max-w-2xl text-balance text-base text-text-muted md:text-lg'>
+          <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
             A selection of the brands we&apos;ve partnered with to design,
             build, and ship software that earns its keep.
           </p>
@@ -40,24 +46,35 @@ export default function ClientsPage() {
                   Ready to build?
                 </h2>
               </Reveal>
-              <Reveal index={1} className='max-w-md text-sm leading-relaxed text-text-muted'>
+              <Reveal
+                index={1}
+                className='max-w-md text-sm leading-relaxed text-text-muted'
+              >
                 <p>
                   Tell us what you are trying to build. We will scope the work,
                   timeline, and cost, with no obligation.
                 </p>
               </Reveal>
             </div>
-            <Reveal index={2} className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'>
+            <Reveal
+              index={2}
+              className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'
+            >
               <Button asChild size='lg' className='w-full'>
                 <Link href='/contact'>Start a Project</Link>
               </Button>
               <div className='flex flex-col gap-2'>
-                <Button asChild size='lg' variant='outline' className='w-full border-2'>
+                <Button
+                  asChild
+                  size='lg'
+                  variant='outline'
+                  className='w-full border-2'
+                >
                   <Link href='/audit'>Opportunity Audit</Link>
                 </Button>
                 <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
-                  Not sure where to start? This two-minute audit pinpoints
-                  where custom software pays off first.
+                  Not sure where to start? This two-minute audit pinpoints where
+                  custom software pays off first.
                 </p>
               </div>
             </Reveal>

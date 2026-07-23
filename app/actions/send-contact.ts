@@ -99,7 +99,9 @@ export async function sendContact(
   // Normalize website (add https:// if missing) then validate
   const normalizedWebsite = rawWebsite ? normalizeUrl(rawWebsite) : null
   const validatedWebsite =
-    normalizedWebsite && isValidUrl(normalizedWebsite) ? normalizedWebsite : null
+    normalizedWebsite && isValidUrl(normalizedWebsite)
+      ? normalizedWebsite
+      : null
   // Keep original for display in emails
   const trimmedWebsite = rawWebsite
 
@@ -207,7 +209,10 @@ export async function sendContact(
           normalizedMessage.includes('already exists')
 
         if (!contactAlreadyExists) {
-          console.error('Failed to add contact to Resend audience', contactError)
+          console.error(
+            'Failed to add contact to Resend audience',
+            contactError
+          )
         }
       }
     } catch (error) {

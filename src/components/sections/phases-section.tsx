@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
+import {
+  AnimatedSection,
+  Reveal,
+} from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
@@ -51,18 +54,31 @@ const phases = [
 
 /** One scrolling row of the trust banner. Vendors are duplicated so the loop is
  *  seamless; `reverse` flips the scroll direction. */
-function TrustTrack({ reverse = false, className }: { reverse?: boolean; className?: string }) {
+function TrustTrack({
+  reverse = false,
+  className,
+}: {
+  reverse?: boolean
+  className?: string
+}) {
   return (
     <div className={`marquee ${className ?? ''}`}>
       <div className={`marquee-track ${reverse ? 'marquee-track-rev' : ''}`}>
         {[...vendors, ...vendors].map((vendor, i) => {
           const Icon = vendorIcons[vendor.name]
           return (
-            <div key={`${vendor.name}-${i}`} className='flex shrink-0 items-center gap-2.5 px-6'>
+            <div
+              key={`${vendor.name}-${i}`}
+              className='flex shrink-0 items-center gap-2.5 px-6'
+            >
               {Icon && (
-                <Icon className='h-7 w-7 shrink-0' style={{ color: vendor.color }} aria-hidden />
+                <Icon
+                  className='h-7 w-7 shrink-0'
+                  style={{ color: vendor.color }}
+                  aria-hidden
+                />
               )}
-              <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+              <span className='font-mono text-[10px] tracking-wider whitespace-nowrap text-text-muted uppercase'>
                 {vendor.name}
               </span>
             </div>
@@ -88,15 +104,20 @@ export function PhasesSection({
         {/* Header */}
         <div className='flex flex-col gap-4'>
           <Reveal index={0} className='flex flex-col gap-2'>
-            {showLabel && <span className='bp-label font-mono'>How We Work</span>}
-            <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
+            {showLabel && (
+              <span className='bp-label font-mono'>How We Work</span>
+            )}
+            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               We meet you at your stage of business.
             </h2>
           </Reveal>
-          <Reveal index={1} className='max-w-xl text-base leading-relaxed text-text-muted'>
+          <Reveal
+            index={1}
+            className='max-w-xl text-base leading-relaxed text-text-muted'
+          >
             <p>
-              Whether you are testing a first idea or re-architecting for scale, we
-              plug in where you are and build from there.
+              Whether you are testing a first idea or re-architecting for scale,
+              we plug in where you are and build from there.
             </p>
           </Reveal>
           {/* Mobile-only link: sits with the subtext, above the cards */}
@@ -104,7 +125,7 @@ export function PhasesSection({
             <Reveal index={2} className='pt-2 md:hidden'>
               <Link
                 href='/how-we-work'
-                className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+                className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
               >
                 See our full process
                 <span aria-hidden>&rarr;</span>
@@ -120,25 +141,28 @@ export function PhasesSection({
             {phases.map(phase => {
               const Graphic = phase.Graphic
               return (
-              <div
-                key={phase.title}
-                className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
-              >
-                {Graphic && (
-                  <Graphic className='absolute right-4 top-4 h-grid-3 w-grid-3 md:right-6 md:top-6 md:h-grid-2 md:w-grid-2' />
-                )}
-                <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                  {phase.title}
-                </h3>
-                <ul className='flex flex-col gap-2 text-sm leading-relaxed text-text-muted'>
-                  {phase.points.map(point => (
-                    <li key={point} className='flex gap-2'>
-                      <span className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent' aria-hidden />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div
+                  key={phase.title}
+                  className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
+                >
+                  {Graphic && (
+                    <Graphic className='absolute top-4 right-4 h-grid-3 w-grid-3 md:top-6 md:right-6 md:h-grid-2 md:w-grid-2' />
+                  )}
+                  <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
+                    {phase.title}
+                  </h3>
+                  <ul className='flex flex-col gap-2 text-sm leading-relaxed text-text-muted'>
+                    {phase.points.map(point => (
+                      <li key={point} className='flex gap-2'>
+                        <span
+                          className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent'
+                          aria-hidden
+                        />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )
             })}
           </div>
@@ -153,9 +177,9 @@ export function PhasesSection({
                 Under the hood
               </h3>
               <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
-                Whatever stage you are at, every build relies on a trusted stack of
-                frontier AI models and cloud infrastructure, wired into our tooling
-                and human-verified for production-grade quality.
+                Whatever stage you are at, every build relies on a trusted stack
+                of frontier AI models and cloud infrastructure, wired into our
+                tooling and human-verified for production-grade quality.
               </p>
             </div>
             {/* Auto-scrolling trust banner: one row on desktop, two rows scrolling
@@ -172,7 +196,7 @@ export function PhasesSection({
           <Reveal index={4} className='hidden md:block'>
             <Link
               href='/how-we-work'
-              className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+              className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
             >
               See our full process
               <span aria-hidden>&rarr;</span>

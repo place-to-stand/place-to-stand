@@ -3,6 +3,7 @@
 ## 1. Context
 
 The task has two parts:
+
 1. **Build a dedicated `/clients` page** showcasing client projects with the site's dark blueprint design system (the existing `ClientsSection` component uses the old light theme and center-aligned styling).
 2. **Add a clients preview/reference to the homepage** (within or near the `WhoWeWorkWithSection`) — as an icon cloud or carousel of client logos.
 
@@ -10,14 +11,14 @@ The existing `ClientsSection` in `src/components/sections/clients-section.tsx` c
 
 ## 2. Design Decisions
 
-| Decision | Choice | Rationale |
-|---|---|---|
-| **Data layer** | Extract project data into `src/lib/clients.ts` | Follows the pattern of `src/lib/services.ts` and `src/lib/team.ts` — separates data from presentation so both the full page and homepage preview can import the same source. |
-| **Full page layout** | Two-column header (sticky left heading + scrollable grid right) then full-width project grid | Matches `services/page.tsx` and `team/page.tsx` patterns: `bp-label` -> `h1` -> `p` header, card grid with `BlueprintCorners`, CTA block at bottom. |
-| **Project cards** | Blueprint-styled cards with `Image`, `BlueprintCorners`, hover effects | Adapts the existing `ClientsSection` card structure (image + caption) into the dark theme. Replace `bg-white` with `bg-bg-card`, `text-ink` with `text-text`, etc. |
+| Decision             | Choice                                                                                                                                              | Rationale                                                                                                                                                                                                                               |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Data layer**       | Extract project data into `src/lib/clients.ts`                                                                                                      | Follows the pattern of `src/lib/services.ts` and `src/lib/team.ts` — separates data from presentation so both the full page and homepage preview can import the same source.                                                            |
+| **Full page layout** | Two-column header (sticky left heading + scrollable grid right) then full-width project grid                                                        | Matches `services/page.tsx` and `team/page.tsx` patterns: `bp-label` -> `h1` -> `p` header, card grid with `BlueprintCorners`, CTA block at bottom.                                                                                     |
+| **Project cards**    | Blueprint-styled cards with `Image`, `BlueprintCorners`, hover effects                                                                              | Adapts the existing `ClientsSection` card structure (image + caption) into the dark theme. Replace `bg-white` with `bg-bg-card`, `text-ink` with `text-text`, etc.                                                                      |
 | **Homepage preview** | Client logo bar/cloud using Google Favicon API (already used in existing code) in the `WhoWeWorkWithSection` or as a standalone lightweight section | Simple, low-weight. The existing `ClientsSection` already fetches favicons via `https://www.google.com/s2/favicons?domain=...&sz=64`. A row of logos with a "View all clients" link matches how `ServicesPreview` links to `/services`. |
-| **Navigation** | Add "Clients" to `NAV_LINKS` | Ensures header/footer nav includes the new page. Placed after "Team" and before "Contact". |
-| **Sitemap** | Add `/clients` entry | Follows existing pattern in `app/sitemap.ts`. |
+| **Navigation**       | Add "Clients" to `NAV_LINKS`                                                                                                                        | Ensures header/footer nav includes the new page. Placed after "Team" and before "Contact".                                                                                                                                              |
+| **Sitemap**          | Add `/clients` entry                                                                                                                                | Follows existing pattern in `app/sitemap.ts`.                                                                                                                                                                                           |
 
 ## 3. Architecture Overview
 
@@ -113,6 +114,7 @@ app/sitemap.ts                   <- MODIFY: Add /clients entry
 - Add entry: `{ url: '${baseUrl}/clients', lastModified, changeFrequency: 'monthly', priority: 0.7 }`
 
 **Verification:**
+
 - Header and footer nav show "Clients" link
 - `npm run build` succeeds
 - Sitemap includes `/clients`
@@ -133,12 +135,12 @@ app/sitemap.ts                   <- MODIFY: Add /clients entry
 
 ## 5. Critical Files Reference
 
-| File | Action | Purpose |
-|---|---|---|
-| `src/lib/clients.ts` | Create | Typed client data array |
-| `app/clients/page.tsx` | Create | Dedicated clients page route |
+| File                                          | Action | Purpose                                    |
+| --------------------------------------------- | ------ | ------------------------------------------ |
+| `src/lib/clients.ts`                          | Create | Typed client data array                    |
+| `app/clients/page.tsx`                        | Create | Dedicated clients page route               |
 | `src/components/sections/clients-section.tsx` | Modify | Restyle from light to dark blueprint theme |
-| `src/components/sections/clients-preview.tsx` | Create | Homepage logo bar preview section |
-| `app/page.tsx` | Modify | Add `ClientsPreview` to homepage |
-| `src/components/layout/nav-links.ts` | Modify | Add "Clients" nav entry |
-| `app/sitemap.ts` | Modify | Add `/clients` to sitemap |
+| `src/components/sections/clients-preview.tsx` | Create | Homepage logo bar preview section          |
+| `app/page.tsx`                                | Modify | Add `ClientsPreview` to homepage           |
+| `src/components/layout/nav-links.ts`          | Modify | Add "Clients" nav entry                    |
+| `app/sitemap.ts`                              | Modify | Add `/clients` to sitemap                  |

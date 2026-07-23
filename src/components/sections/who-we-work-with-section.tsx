@@ -38,14 +38,15 @@ export function WhoWeWorkWithSection() {
         {/* Header */}
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Who We Work With</span>
-          <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-text md:text-4xl'>
+          <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
             We build for mid-market businesses
             <br />
             without in-house engineers.
           </h2>
           <p className='max-w-xl text-sm leading-relaxed text-text-muted'>
-            Established companies with real processes and a technical mindset, but
-            no engineering team to build what&apos;s next. That&apos;s where we come in.
+            Established companies with real processes and a technical mindset,
+            but no engineering team to build what&apos;s next. That&apos;s where
+            we come in.
           </p>
         </div>
 
@@ -57,7 +58,7 @@ export function WhoWeWorkWithSection() {
               className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
             >
               <BlueprintCorners size={12} />
-              <profile.Graphic className='absolute right-4 top-4 h-grid-2 w-grid-2 md:right-6 md:top-6' />
+              <profile.Graphic className='absolute top-4 right-4 h-grid-2 w-grid-2 md:top-6 md:right-6' />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
                 {profile.number}
               </span>
@@ -74,7 +75,7 @@ export function WhoWeWorkWithSection() {
         {/* Clients link — before the cards on mobile, after on desktop */}
         <Link
           href='/clients'
-          className='order-2 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80 md:order-3'
+          className='order-2 inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80 md:order-3'
         >
           See our clients
           <span aria-hidden>&rarr;</span>

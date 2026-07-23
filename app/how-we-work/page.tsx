@@ -15,7 +15,8 @@ import {
 
 export const metadata: Metadata = {
   title: 'How We Work',
-  description: 'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
+  description:
+    'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
 }
 
 const process = [
@@ -44,7 +45,10 @@ const process = [
 // The stack, grouped by role, folded into the process list as a final row.
 const stackGroups = [
   { label: 'AI Models', items: vendors.filter(v => v.category === 'ai') },
-  { label: 'Infrastructure', items: vendors.filter(v => v.category === 'infra') },
+  {
+    label: 'Infrastructure',
+    items: vendors.filter(v => v.category === 'infra'),
+  },
 ]
 
 export default function HowWeWorkPage() {
@@ -54,11 +58,14 @@ export default function HowWeWorkPage() {
       <AnimatedSection className='flex flex-col gap-12'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>How We Work</span>
-          <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
+          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             Our Process
           </h1>
           <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
-           We focus on quick wins first to unblock your immediate needs. We design your database structure and then we use our own custom solution to automate the manual task of coding. Lastly, we human-verify all production code with pre-AI programming knowledge.
+            We focus on quick wins first to unblock your immediate needs. We
+            design your database structure and then we use our own custom
+            solution to automate the manual task of coding. Lastly, we
+            human-verify all production code with pre-AI programming knowledge.
           </p>
         </div>
         <div className='flex flex-col'>
@@ -67,12 +74,17 @@ export default function HowWeWorkPage() {
               key={step.title}
               className='flex gap-6 border-t border-border py-grid-2'
             >
-              <span className='w-1 shrink-0 self-stretch bg-accent' aria-hidden />
+              <span
+                className='w-1 shrink-0 self-stretch bg-accent'
+                aria-hidden
+              />
               <div className='flex flex-1 flex-col gap-3'>
-                <h3 className='text-balance font-headline text-lg font-bold uppercase tracking-tight text-accent'>
+                <h3 className='font-headline text-lg font-bold tracking-tight text-balance text-accent uppercase'>
                   {step.title}
                 </h3>
-                <p className='max-w-2xl text-base leading-relaxed text-text-muted'>{step.body}</p>
+                <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+                  {step.body}
+                </p>
               </div>
               <step.Graphic className='hidden h-28 w-28 shrink-0 self-center lg:block' />
             </div>
@@ -89,20 +101,24 @@ export default function HowWeWorkPage() {
                 Our Tech Stack
               </h3>
               <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
-                The frontier AI models and modern infrastructure behind every build.
+                The frontier AI models and modern infrastructure behind every
+                build.
               </p>
             </div>
             <div className='flex flex-col gap-6'>
               {stackGroups.map(group => (
                 <div key={group.label} className='flex flex-col gap-3'>
-                  <span className='text-xs font-semibold uppercase tracking-[0.1em] text-text-muted'>
+                  <span className='text-xs font-semibold tracking-[0.1em] text-text-muted uppercase'>
                     {group.label}
                   </span>
                   <div className='grid grid-cols-2 gap-x-4 gap-y-5 md:flex md:flex-wrap md:items-center md:gap-x-8 md:gap-y-4'>
                     {group.items.map(vendor => {
                       const Icon = vendorIcons[vendor.name]
                       return (
-                        <div key={vendor.name} className='flex items-center gap-2.5'>
+                        <div
+                          key={vendor.name}
+                          className='flex items-center gap-2.5'
+                        >
                           {Icon && (
                             <Icon
                               className='h-9 w-9 shrink-0'
@@ -110,7 +126,7 @@ export default function HowWeWorkPage() {
                               aria-hidden
                             />
                           )}
-                          <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+                          <span className='font-mono text-[10px] tracking-wider whitespace-nowrap text-text-muted uppercase'>
                             {vendor.name}
                           </span>
                         </div>
@@ -146,12 +162,17 @@ export default function HowWeWorkPage() {
                 <Link href='/contact'>Start a Project</Link>
               </Button>
               <div className='flex flex-col gap-2'>
-                <Button asChild size='lg' variant='outline' className='w-full border-2'>
+                <Button
+                  asChild
+                  size='lg'
+                  variant='outline'
+                  className='w-full border-2'
+                >
                   <Link href='/audit'>Opportunity Audit</Link>
                 </Button>
                 <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
-                  Not sure where to start? This two-minute audit pinpoints
-                  where custom software pays off first.
+                  Not sure where to start? This two-minute audit pinpoints where
+                  custom software pays off first.
                 </p>
               </div>
             </div>

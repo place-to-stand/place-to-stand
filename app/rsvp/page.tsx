@@ -6,7 +6,7 @@ import { FilloutForm } from '../../src/components/fillout-form'
 const filloutFormId = 'dtJoNAa9CEus'
 
 const eventDescription =
-  "Learn how to streamline the everyday admin work so you can focus on the parts you love. We'll show you how AI can handle the \"dishes\" while you create the art — all while saving time, cutting costs, and helping you compete against the big brands."
+  'Learn how to streamline the everyday admin work so you can focus on the parts you love. We\'ll show you how AI can handle the "dishes" while you create the art — all while saving time, cutting costs, and helping you compete against the big brands.'
 
 const eventDetails = [
   {
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
 export default function RsvpPage() {
   return (
     <>
-      <main className='flex-1 pb-16 pt-32 sm:pt-40'>
+      <main className='flex-1 pt-32 pb-16 sm:pt-40'>
         <div className='container mx-auto w-full max-w-content px-6'>
           <header className='grid gap-12 lg:grid-cols-2 lg:items-start'>
             <div className='flex justify-center lg:justify-start'>
@@ -79,13 +79,13 @@ export default function RsvpPage() {
 
             <div>
               <div className='flex flex-col gap-2'>
-                <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink-light/60'>
+                <span className='text-sm font-semibold tracking-[0.1em] text-ink-light/60 uppercase'>
                   RSVP to
                 </span>
-                <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink-light md:text-5xl'>
+                <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-ink-light uppercase md:text-5xl'>
                   The Emerging AI Playbook for SMBs
                 </h2>
-                <p className='max-w-xl text-balance text-lg !leading-snug text-ink-light/60'>
+                <p className='max-w-xl text-lg leading-snug! text-balance text-ink-light/60'>
                   Complete the short form below to lock in your spot for the
                   presentation + Q&A. We look forward to seeing you there!
                 </p>
@@ -110,7 +110,7 @@ export default function RsvpPage() {
             <dl className='mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
               {eventDetails.map(detail => (
                 <div key={detail.term}>
-                  <dt className='text-xs font-semibold uppercase tracking-[0.1em] text-ink-light/60'>
+                  <dt className='text-xs font-semibold tracking-[0.1em] text-ink-light/60 uppercase'>
                     {detail.term}
                   </dt>
                   <dd className='mt-3 text-lg font-medium text-ink-light sm:text-xl'>
@@ -127,13 +127,13 @@ export default function RsvpPage() {
 
           <section className='mt-36 md:p-8'>
             <div className='flex flex-col items-center gap-4 text-center'>
-              <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink-light/60'>
+              <span className='text-sm font-semibold tracking-[0.1em] text-ink-light/60 uppercase'>
                 Book A Consultation
               </span>
-              <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink-light md:text-5xl'>
+              <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-ink-light uppercase md:text-5xl'>
                 Want to talk sooner?
               </h2>
-              <p className='max-w-xl text-balance text-lg !leading-snug text-ink-light/60'>
+              <p className='max-w-xl text-lg leading-snug! text-balance text-ink-light/60'>
                 Grab some time with our team right now to learn more about the
                 emerging AI playbook for SMBs and how it can benefit your
                 business.

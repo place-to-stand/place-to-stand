@@ -2,7 +2,11 @@
 
 import { useCallback, useState } from 'react'
 import { runAudit } from '@/src/lib/audit/engine'
-import type { AnswerValue, AuditAnswers, AuditResult } from '@/src/lib/audit/types'
+import type {
+  AnswerValue,
+  AuditAnswers,
+  AuditResult,
+} from '@/src/lib/audit/types'
 
 export type AuditStage = 'intro' | 'wizard' | 'results'
 
@@ -29,7 +33,7 @@ export function useAudit(): UseAudit {
   const [isScoring, setIsScoring] = useState(false)
 
   const setAnswer = useCallback((questionId: string, value: AnswerValue) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }))
+    setAnswers(prev => ({ ...prev, [questionId]: value }))
   }, [])
 
   const start = useCallback(() => {

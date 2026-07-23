@@ -33,19 +33,17 @@ function displayAnswer(
   if (ids.length === 0) return NO_ANSWER
 
   return ids
-    .map(
-      (id) => question.options?.find((option) => option.id === id)?.label ?? id
-    )
+    .map(id => question.options?.find(option => option.id === id)?.label ?? id)
     .join(', ')
 }
 
 /** Every question with its answer, grouped by section, in definition order. */
 export function summarizeAnswers(answers: AuditAnswers): AnswerGroup[] {
-  return SECTIONS.map((section) => ({
+  return SECTIONS.map(section => ({
     section: section.title,
-    items: QUESTIONS.filter((q) => q.sectionId === section.id).map((q) => ({
+    items: QUESTIONS.filter(q => q.sectionId === section.id).map(q => ({
       prompt: q.prompt,
       answer: displayAnswer(q, answers[q.id]),
     })),
-  })).filter((group) => group.items.length > 0)
+  })).filter(group => group.items.length > 0)
 }

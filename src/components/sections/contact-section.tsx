@@ -65,130 +65,133 @@ export function ContactSection() {
   })
 
   return (
-    <AnimatedSection id='contact' className='flex flex-col gap-10 py-24 pb-grid-8'>
+    <AnimatedSection
+      id='contact'
+      className='flex flex-col gap-10 py-24 pb-grid-8'
+    >
       <div className='flex flex-col items-center gap-4 text-center'>
         <span className='bp-label font-mono'>Contact</span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
+        <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
           Let's talk
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-text-muted'>
+        <p className='max-w-xl text-lg leading-snug! text-balance text-text-muted'>
           Send a message and we&apos;ll get back to you within one business day.
         </p>
       </div>
       <div className='relative mx-auto w-full max-w-2xl gap-10 border border-border p-6'>
-          <BlueprintCorners size={16} />
-          <form
-            noValidate
-            onSubmit={onSubmit}
-            className={`flex h-full flex-col gap-3 transition-opacity ${
-              isSuccess ? 'pointer-events-none opacity-0' : 'opacity-100'
-            }`}
-            aria-hidden={isSuccess}
-          >
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='name'>Name</Label>
-              <Input
-                id='name'
-                {...form.register('name')}
-                aria-invalid={!!form.formState.errors.name}
-              />
-              {form.formState.errors.name ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.name.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='email'>Email</Label>
-              <Input
-                id='email'
-                type='email'
-                {...form.register('email')}
-                aria-invalid={!!form.formState.errors.email}
-              />
-              {form.formState.errors.email ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.email.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='company'>Company Name (optional)</Label>
-              <Input
-                id='company'
-                {...form.register('company')}
-                aria-invalid={!!form.formState.errors.company}
-              />
-              {form.formState.errors.company ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.company.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='website'>Website (optional)</Label>
-              <Input
-                id='website'
-                type='url'
-                placeholder='https://example.com'
-                {...form.register('website')}
-                aria-invalid={!!form.formState.errors.website}
-              />
-              {form.formState.errors.website ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.website.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='message'>Message</Label>
-              <Textarea
-                id='message'
-                rows={5}
-                {...form.register('message')}
-                aria-invalid={!!form.formState.errors.message}
-              />
-              {form.formState.errors.message ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.message.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='mt-auto pt-3'>
-              <Button
-                type='submit'
-                disabled={isPending}
-                className='block w-full px-8'
-                size='lg'
-              >
-                {isPending ? 'Sending...' : 'Send Message'}
-              </Button>
-            </div>
-          </form>
-
-          {isSuccess ? (
-            <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
-              <h3 className='text-2xl font-semibold uppercase text-text'>
-                Thank you!
-              </h3>
-              <p className='max-w-md text-balance text-base text-text-muted'>
-                Your message has been sent. We&apos;ll reach out within one
-                business day.
+        <BlueprintCorners size={16} />
+        <form
+          noValidate
+          onSubmit={onSubmit}
+          className={`flex h-full flex-col gap-3 transition-opacity ${
+            isSuccess ? 'pointer-events-none opacity-0' : 'opacity-100'
+          }`}
+          aria-hidden={isSuccess}
+        >
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='name'>Name</Label>
+            <Input
+              id='name'
+              {...form.register('name')}
+              aria-invalid={!!form.formState.errors.name}
+            />
+            {form.formState.errors.name ? (
+              <p className='text-sm text-red-400'>
+                {form.formState.errors.name.message}
               </p>
-              <Button
-                type='button'
-                size='lg'
-                className='px-8'
-                onClick={() => {
-                  form.reset()
-                  setIsSuccess(false)
-                }}
-              >
-                Send another message
-              </Button>
-            </div>
-          ) : null}
-        </div>
+            ) : null}
+          </div>
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='email'>Email</Label>
+            <Input
+              id='email'
+              type='email'
+              {...form.register('email')}
+              aria-invalid={!!form.formState.errors.email}
+            />
+            {form.formState.errors.email ? (
+              <p className='text-sm text-red-400'>
+                {form.formState.errors.email.message}
+              </p>
+            ) : null}
+          </div>
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='company'>Company Name (optional)</Label>
+            <Input
+              id='company'
+              {...form.register('company')}
+              aria-invalid={!!form.formState.errors.company}
+            />
+            {form.formState.errors.company ? (
+              <p className='text-sm text-red-400'>
+                {form.formState.errors.company.message}
+              </p>
+            ) : null}
+          </div>
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='website'>Website (optional)</Label>
+            <Input
+              id='website'
+              type='url'
+              placeholder='https://example.com'
+              {...form.register('website')}
+              aria-invalid={!!form.formState.errors.website}
+            />
+            {form.formState.errors.website ? (
+              <p className='text-sm text-red-400'>
+                {form.formState.errors.website.message}
+              </p>
+            ) : null}
+          </div>
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='message'>Message</Label>
+            <Textarea
+              id='message'
+              rows={5}
+              {...form.register('message')}
+              aria-invalid={!!form.formState.errors.message}
+            />
+            {form.formState.errors.message ? (
+              <p className='text-sm text-red-400'>
+                {form.formState.errors.message.message}
+              </p>
+            ) : null}
+          </div>
+          <div className='mt-auto pt-3'>
+            <Button
+              type='submit'
+              disabled={isPending}
+              className='block w-full px-8'
+              size='lg'
+            >
+              {isPending ? 'Sending...' : 'Send Message'}
+            </Button>
+          </div>
+        </form>
+
+        {isSuccess ? (
+          <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
+            <h3 className='text-2xl font-semibold text-text uppercase'>
+              Thank you!
+            </h3>
+            <p className='max-w-md text-base text-balance text-text-muted'>
+              Your message has been sent. We&apos;ll reach out within one
+              business day.
+            </p>
+            <Button
+              type='button'
+              size='lg'
+              className='px-8'
+              onClick={() => {
+                form.reset()
+                setIsSuccess(false)
+              }}
+            >
+              Send another message
+            </Button>
+          </div>
+        ) : null}
+      </div>
     </AnimatedSection>
   )
 }

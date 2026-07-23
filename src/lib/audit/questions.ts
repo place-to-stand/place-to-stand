@@ -422,5 +422,5 @@ export const QUESTIONS: AuditQuestion[] = [
 
 /** Questions belonging to a given section, in worksheet order. */
 export function questionsForSection(sectionId: string): AuditQuestion[] {
-  return QUESTIONS.filter((q) => q.sectionId === sectionId)
+  return QUESTIONS.filter(q => q.sectionId === sectionId)
 }

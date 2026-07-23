@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { AnimatedSection, Reveal } from '@/src/components/layout/animated-section'
+import {
+  AnimatedSection,
+  Reveal,
+} from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
   DraftingGraphic,
@@ -36,20 +39,21 @@ export function ManifestoSection() {
         <div className='flex flex-col gap-4'>
           <Reveal index={0} className='flex flex-col gap-2'>
             <span className='bp-label font-mono'>Who We Are</span>
-            <h2 className='font-headline text-3xl font-bold leading-[0.95] tracking-tight text-balance text-text md:text-4xl'>
+            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-4xl'>
               Experienced engineers with fine-tuned AI.
             </h2>
           </Reveal>
           <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
             <p>
-              Building exactly what you need, directly with the people who build it.
+              Building exactly what you need, directly with the people who build
+              it.
             </p>
           </Reveal>
           {/* Mobile-only link: sits with the subtext, above the cards */}
           <Reveal index={2} className='pt-2 md:hidden'>
             <Link
               href='/team'
-              className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+              className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
             >
               Meet the Team
               <span aria-hidden>&rarr;</span>
@@ -84,7 +88,7 @@ export function ManifestoSection() {
         <Reveal index={3} className='hidden md:block'>
           <Link
             href='/team'
-            className='inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent transition-colors hover:text-accent/80'
+            className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
           >
             Meet the Team
             <span aria-hidden>&rarr;</span>

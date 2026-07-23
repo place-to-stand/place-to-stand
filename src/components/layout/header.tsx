@@ -32,7 +32,10 @@ export function Header() {
         {/* Logo */}
         <Link href='/' className='group flex items-center gap-3'>
           {/* Blueprint logo mark */}
-          <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/50' aria-hidden>
+          <span
+            className='inline-flex h-6 w-6 items-center justify-center border border-accent/50'
+            aria-hidden
+          >
             <span className='h-2 w-2 bg-accent' />
           </span>
           <span className='font-headline text-xl font-bold tracking-tight text-text transition-colors group-hover:text-accent'>
@@ -47,7 +50,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors duration-300',
+                'px-3 py-1.5 font-mono text-[11px] tracking-[0.1em] uppercase transition-colors duration-300',
                 pathname === item.href
                   ? 'border border-accent/30 text-accent'
                   : 'border border-transparent text-text-muted hover:text-text'
@@ -103,7 +106,7 @@ export function Header() {
       {/* Mobile nav */}
       <div
         className={cn(
-          'absolute left-0 right-0 top-full transition-all duration-300 md:hidden',
+          'absolute top-full right-0 left-0 transition-all duration-300 md:hidden',
           mobileOpen
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-2 opacity-0'

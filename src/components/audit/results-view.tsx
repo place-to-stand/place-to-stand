@@ -64,9 +64,7 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
   const maxScore = Math.max(1, ...Object.values(phaseScores))
   const activeIndex = PHASE_ORDER.indexOf(phase.id)
   const progressPct =
-    PHASE_ORDER.length > 1
-      ? (activeIndex / (PHASE_ORDER.length - 1)) * 100
-      : 0
+    PHASE_ORDER.length > 1 ? (activeIndex / (PHASE_ORDER.length - 1)) * 100 : 0
 
   return (
     <div className='w-full py-grid-2'>
@@ -83,10 +81,10 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
       <section className='relative border border-border bg-bg-panel p-6 sm:px-8'>
         <BlueprintCorners size={12} colorClassName='border-border-light' />
         <div className='flex items-baseline justify-between'>
-          <h2 className='font-mono text-xs font-semibold uppercase tracking-[0.15em] text-text-muted'>
+          <h2 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Business phase
           </h2>
-          <span className='font-mono text-xs uppercase tracking-[0.15em] text-text-muted'>
+          <span className='font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
             {activeIndex + 1} / {PHASE_ORDER.length}
           </span>
         </div>
@@ -94,11 +92,11 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
         <ol className='relative mt-6 flex items-start justify-between'>
           {/* connector track + progress fill */}
           <div
-            className='absolute left-0 right-0 top-[11px] h-px bg-border'
+            className='absolute top-[11px] right-0 left-0 h-px bg-border'
             aria-hidden
           />
           <div
-            className='absolute left-0 top-[11px] h-px bg-border-light'
+            className='absolute top-[11px] left-0 h-px bg-border-light'
             style={{ width: `${progressPct}%` }}
             aria-hidden
           />
@@ -124,10 +122,8 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
                 </span>
                 <span
                   className={cn(
-                    'block w-full hyphens-auto break-words px-0.5 text-[10px] uppercase leading-tight tracking-wide sm:text-xs',
-                    isActive
-                      ? 'font-semibold text-text'
-                      : 'text-text-muted'
+                    'block w-full px-0.5 text-[10px] leading-tight tracking-wide break-words hyphens-auto uppercase sm:text-xs',
+                    isActive ? 'font-semibold text-text' : 'text-text-muted'
                   )}
                 >
                   {shortPhaseName(id)}
@@ -143,24 +139,24 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
         {/* Phase detail */}
         <section className='relative border border-border bg-bg-panel p-6 sm:p-8 lg:col-span-2'>
           <BlueprintCorners size={12} colorClassName='border-border-light' />
-          <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-xs font-semibold uppercase tracking-[0.15em] text-text-muted'>
+          <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Your phase
           </span>
-          <h1 className='mt-4 font-headline text-3xl font-semibold uppercase !leading-[.9] text-text'>
+          <h1 className='mt-4 font-headline text-3xl leading-[.9]! font-semibold text-text uppercase'>
             {phase.name}
           </h1>
-          <p className='mt-2 font-mono text-xs uppercase tracking-[0.15em] text-text-muted'>
+          <p className='mt-2 font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
             {phase.tagline}
           </p>
           <p className='mt-4 text-sm text-text-muted'>{phase.description}</p>
 
           <div className='mt-6 grid gap-6 sm:grid-cols-2'>
             <div>
-              <h3 className='font-mono text-xs font-semibold uppercase tracking-[0.15em] text-text-muted'>
+              <h3 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Signals
               </h3>
               <ul className='mt-3 space-y-1.5'>
-                {phase.signals.map((signal) => (
+                {phase.signals.map(signal => (
                   <li key={signal} className='flex gap-2 text-sm text-text'>
                     <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
                     {signal}
@@ -169,11 +165,11 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
               </ul>
             </div>
             <div>
-              <h3 className='font-mono text-xs font-semibold uppercase tracking-[0.15em] text-text-muted'>
+              <h3 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Next steps
               </h3>
               <ul className='mt-3 space-y-1.5'>
-                {phase.nextSteps.map((step) => (
+                {phase.nextSteps.map(step => (
                   <li key={step} className='flex gap-2 text-sm text-text'>
                     <ArrowRight className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
                     {step}
@@ -187,7 +183,7 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
         {/* Phase score chart */}
         <section className='relative border border-border bg-bg-panel p-5'>
           <BlueprintCorners size={12} colorClassName='border-border-light' />
-          <h2 className='font-mono text-xs font-semibold uppercase tracking-[0.15em] text-text-muted'>
+          <h2 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Audit score
           </h2>
           <div className='mt-4 space-y-2.5'>
@@ -201,14 +197,12 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
                     <span
                       className={cn(
                         'text-xs',
-                        isWinner
-                          ? 'font-semibold text-text'
-                          : 'text-text-muted'
+                        isWinner ? 'font-semibold text-text' : 'text-text-muted'
                       )}
                     >
                       {shortPhaseName(id)}
                     </span>
-                    <span className='font-mono text-[11px] tabular-nums text-text-muted'>
+                    <span className='font-mono text-[11px] text-text-muted tabular-nums'>
                       {score}
                     </span>
                   </div>
@@ -234,11 +228,11 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
           <div className='mb-grid-1 flex items-end justify-between'>
             <div className='flex flex-col gap-2'>
               <span className='bp-label font-mono'>The Blueprint</span>
-              <h2 className='font-headline text-2xl font-semibold uppercase tracking-tight text-text sm:text-3xl'>
+              <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
                 Where we&apos;d start
               </h2>
             </div>
-            <span className='hidden font-mono text-xs uppercase tracking-[0.15em] text-text-muted sm:inline'>
+            <span className='hidden font-mono text-xs tracking-[0.15em] text-text-muted uppercase sm:inline'>
               {recommendations.length} opportunities
             </span>
           </div>
@@ -259,7 +253,7 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
                       #{index + 1}
                     </span>
                   </div>
-                  <h3 className='mt-3 font-headline text-base font-semibold uppercase tracking-tight text-text'>
+                  <h3 className='mt-3 font-headline text-base font-semibold tracking-tight text-text uppercase'>
                     {rec.service.name}
                   </h3>
                   <p className='mt-1 text-sm font-medium text-text-muted'>
@@ -292,7 +286,7 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
     defaultValues: { name: '', email: '', company: '' },
   })
 
-  const onSubmit = form.handleSubmit((values) => {
+  const onSubmit = form.handleSubmit(values => {
     startTransition(() => {
       void sendAudit(values, result, answers).then((res: AuditActionResult) => {
         if (!res.success) {
@@ -324,13 +318,12 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
 
   return (
     <section className='relative mt-grid-1 border border-border bg-bg-panel p-6 sm:p-8'>
-
       {isSuccess ? (
         <div className='flex flex-col items-center gap-4 text-center'>
-          <h2 className='font-headline text-xl font-semibold uppercase tracking-tight text-text'>
+          <h2 className='font-headline text-xl font-semibold tracking-tight text-text uppercase'>
             Check your inbox
           </h2>
-          <p className='max-w-md text-balance text-sm text-text-muted'>
+          <p className='max-w-md text-sm text-balance text-text-muted'>
             We&apos;ve sent your audit result.
           </p>
           <Button asChild variant='outline' size='lg' className='mt-2 px-8'>
@@ -340,13 +333,13 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
       ) : (
         <>
           <div className='text-center'>
-            <p className='font-mono text-xs uppercase tracking-[0.15em] text-accent'>
+            <p className='font-mono text-xs tracking-[0.15em] text-accent uppercase'>
               Next step
             </p>
-            <h2 className='mt-2 font-headline text-xl font-semibold uppercase tracking-tight text-text'>
+            <h2 className='mt-2 font-headline text-xl font-semibold tracking-tight text-text uppercase'>
               Get Your Results
             </h2>
-            <p className='mx-auto mt-2 max-w-md text-balance text-sm text-text-muted'>
+            <p className='mx-auto mt-2 max-w-md text-sm text-balance text-text-muted'>
               Drop your details and we&apos;ll send your result. Reply anytime
               to start a project.
             </p>

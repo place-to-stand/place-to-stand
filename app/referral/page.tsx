@@ -62,16 +62,16 @@ export default function ReferralPage() {
   })
 
   return (
-    <main className='flex-1 pb-16 pt-32 sm:pt-40'>
+    <main className='flex-1 pt-32 pb-16 sm:pt-40'>
       <div className='container mx-auto w-full max-w-2xl px-6'>
         <div className='flex flex-col items-center gap-4 text-center'>
-          <span className='text-sm font-semibold uppercase tracking-[0.1em] text-text-muted'>
+          <span className='text-sm font-semibold tracking-[0.1em] text-text-muted uppercase'>
             Partner With Us
           </span>
-          <h1 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-text md:text-5xl'>
+          <h1 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
             Referral Partners
           </h1>
-          <p className='max-w-xl text-balance text-lg !leading-snug text-text-muted'>
+          <p className='max-w-xl text-lg leading-snug! text-balance text-text-muted'>
             Interested in partnering with us? We&apos;d love to hear from you.
             Fill out the form below and we&apos;ll be in touch.
           </p>
@@ -160,10 +160,10 @@ export default function ReferralPage() {
 
           {isSuccess ? (
             <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
-              <h2 className='text-2xl font-semibold uppercase text-text'>
+              <h2 className='text-2xl font-semibold text-text uppercase'>
                 Thank you!
               </h2>
-              <p className='max-w-md text-balance text-base text-text-muted'>
+              <p className='max-w-md text-base text-balance text-text-muted'>
                 We&apos;ve received your message and will be in touch soon to
                 discuss partnering opportunities.
               </p>

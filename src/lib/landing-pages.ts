@@ -233,7 +233,8 @@ export const landingVariants: LandingVariant[] = [
     slug: 'ai-coo',
     audience: 'For small teams drowning in Slack, email, and scattered docs',
     eyebrow: 'Variant J · AI COO message',
-    headline: 'Give your business an AI operations lead that never drops context.',
+    headline:
+      'Give your business an AI operations lead that never drops context.',
     subheadline:
       'We implement an AI COO layer that tracks priorities, summarizes blockers, and keeps your team aligned so projects move forward without constant owner intervention.',
     outcomeBullets: [
@@ -281,7 +282,8 @@ export const landingVariants: LandingVariant[] = [
     slug: 'approval-first-automation',
     audience: 'For owners who want automation but need control and guardrails',
     eyebrow: 'Variant L · Approval-first automation message',
-    headline: 'Automate routine work while keeping sensitive actions under approval.',
+    headline:
+      'Automate routine work while keeping sensitive actions under approval.',
     subheadline:
       'We design approval-first workflows so repetitive tasks run automatically, while high-risk actions require a quick human yes before execution.',
     outcomeBullets: [
@@ -303,7 +305,8 @@ export const landingVariants: LandingVariant[] = [
   },
   {
     slug: 'always-on',
-    audience: 'For owners who need their business producing even when they step away',
+    audience:
+      'For owners who need their business producing even when they step away',
     eyebrow: 'Variant M · Always-on business message',
     headline: 'Keep making money while you are asleep.',
     subheadline:

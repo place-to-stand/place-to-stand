@@ -24,7 +24,7 @@ export const team: TeamMember[] = [
       github: 'https://github.com/jmdesiderio',
     },
   },
-    {
+  {
     name: 'Kris Crawford',
     title: 'Software Engineer & AI Technologist',
     bio: 'Software engineer with five years of building applications, grounded in a prior career designing physical systems meant to last decades. That same rigor, measure twice and build once, carries into every line of code. He also has a decade of entrepreneurship under his belt.',
@@ -35,4 +35,5 @@ export const team: TeamMember[] = [
       instagram: 'https://www.instagram.com/kristopher.____/',
       github: 'https://github.com/krismakesstuff',
     },
-  },]
+  },
+]

@@ -19,7 +19,7 @@ export function missingRequired(
   answers: AuditAnswers
 ): AuditQuestion[] {
   return questionsForSection(sectionId).filter(
-    (q) => q.required && !isAnswered(q, answers)
+    q => q.required && !isAnswered(q, answers)
   )
 }
 

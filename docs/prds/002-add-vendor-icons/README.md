@@ -5,6 +5,7 @@
 ### 1. Context
 
 The agency wants to showcase the independent vendor technologies it uses (Anthropic, OpenAI, Vercel, Supabase, Cloudflare, Resend, Shopify) to establish technical credibility. This will appear as:
+
 - A new section on the **homepage** (`app/page.tsx`)
 - A new section on the **How We Work** page (`app/how-we-work/page.tsx`)
 
@@ -12,15 +13,15 @@ Both pages will use a shared, reusable component. The design must follow the exi
 
 ### 2. Design Decisions
 
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| **Icon format** | Inline SVG React components in a single file | No external deps needed; keeps icons crisp at any size; follows the same pattern as `lucide-react` icons used elsewhere; allows easy `currentColor` theming |
-| **Icon color treatment** | Monochrome (`text-text-muted` / `text-accent-secondary`) with optional subtle `hover:text-accent` | Consistent with the dark blueprint aesthetic; avoids colorful logos clashing with the muted palette; shows vendors as tools, not sponsors |
-| **Data structure** | Array of vendor objects in a dedicated `src/lib/vendors.ts` file | Mirrors the pattern of `src/lib/services.ts`, `src/lib/team.ts` — data lives in `src/lib/`, components in `src/components/sections/` |
-| **Section layout** | Horizontal logo bar with bp-label, single row on desktop, wrapping grid on mobile | Similar to "trust bar" patterns; lightweight, doesn't compete with other sections. Uses `AnimatedSection` + `Reveal` like all other sections |
-| **Section component** | Single `<TechStackSection />` with an optional `variant` prop for homepage vs how-we-work styling | Reusable component; both pages can render it with minor contextual differences (e.g., heading text) |
-| **Placement on homepage** | After `ManifestoSection` (the "Who We Are" section), before `ServicesPreview` | The "Who We Are" section introduces the team's AI-native approach — the tech stack logically follows as proof of the tools they wield |
-| **Placement on How We Work** | After the process steps and before `PhasesSection` | The process narrative describes automated execution with frontier models — the vendor strip backs that claim with concrete tooling |
+| Decision                     | Choice                                                                                            | Rationale                                                                                                                                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Icon format**              | Inline SVG React components in a single file                                                      | No external deps needed; keeps icons crisp at any size; follows the same pattern as `lucide-react` icons used elsewhere; allows easy `currentColor` theming |
+| **Icon color treatment**     | Monochrome (`text-text-muted` / `text-accent-secondary`) with optional subtle `hover:text-accent` | Consistent with the dark blueprint aesthetic; avoids colorful logos clashing with the muted palette; shows vendors as tools, not sponsors                   |
+| **Data structure**           | Array of vendor objects in a dedicated `src/lib/vendors.ts` file                                  | Mirrors the pattern of `src/lib/services.ts`, `src/lib/team.ts` — data lives in `src/lib/`, components in `src/components/sections/`                        |
+| **Section layout**           | Horizontal logo bar with bp-label, single row on desktop, wrapping grid on mobile                 | Similar to "trust bar" patterns; lightweight, doesn't compete with other sections. Uses `AnimatedSection` + `Reveal` like all other sections                |
+| **Section component**        | Single `<TechStackSection />` with an optional `variant` prop for homepage vs how-we-work styling | Reusable component; both pages can render it with minor contextual differences (e.g., heading text)                                                         |
+| **Placement on homepage**    | After `ManifestoSection` (the "Who We Are" section), before `ServicesPreview`                     | The "Who We Are" section introduces the team's AI-native approach — the tech stack logically follows as proof of the tools they wield                       |
+| **Placement on How We Work** | After the process steps and before `PhasesSection`                                                | The process narrative describes automated execution with frontier models — the vendor strip backs that claim with concrete tooling                          |
 
 ### 3. Architecture Overview
 
@@ -39,11 +40,12 @@ app/how-we-work/page.tsx         — Add <TechStackSection /> to How We Work
 **File:** `src/lib/vendors.ts`
 
 Create a typed array of vendor objects:
+
 ```ts
 export type Vendor = {
   name: string
   url: string
-  description: string  // short tooltip/aria text
+  description: string // short tooltip/aria text
 }
 ```
 
@@ -56,6 +58,7 @@ Seven entries: Anthropic, OpenAI, Vercel, Supabase, Cloudflare, Resend, Shopify.
 **File:** `src/components/icons/vendor-icons.tsx`
 
 Create a set of lightweight SVG React components, one per vendor. Each component:
+
 - Accepts standard `SVGProps<SVGSVGElement>` (so consumers can pass `className`, `aria-hidden`, etc.)
 - Uses `currentColor` as `fill` for monochrome theming
 - Renders the recognizable logomark (not wordmark) of each vendor
@@ -104,11 +107,13 @@ Server component that renders:
 ```
 
 Props:
+
 - `heading?: string` — defaults to something like `"Our Tech Stack"`
 - `subtitle?: string` — defaults to a description of the tooling philosophy
 - `className?: string` — passed to `AnimatedSection`
 
 Layout details:
+
 - Grid: `grid grid-cols-3 gap-px border border-border bg-border sm:grid-cols-4 md:grid-cols-7` — mimics the `gap-px bg-border` pattern used in `PhasesSection` and `ManifestoSection` for the inner-grid look
 - Each cell: `bg-bg-card p-6 flex items-center justify-center` — icon centered, with vendor name below in `font-mono text-[10px] uppercase tracking-wider text-text-muted`
 - Icons sized at `h-8 w-8` in `text-text-muted`, with `transition-colors hover:text-accent`
@@ -123,7 +128,7 @@ Layout details:
 - Import `TechStackSection` from `@/src/components/sections/tech-stack-section`
 - Place `<TechStackSection />` after `<ManifestoSection />` and before `<ServicesPreview />`
 
-This positions the vendor trust bar right after the "Who We Are" narrative about AI-native engineering, creating a natural flow: *who we are → what tools we use → what we build*.
+This positions the vendor trust bar right after the "Who We Are" narrative about AI-native engineering, creating a natural flow: _who we are → what tools we use → what we build_.
 
 **Verification:** `npm run dev` — homepage renders correctly, section animates on scroll, grid alignment checked against dot grid.
 
@@ -149,13 +154,13 @@ This positions the vendor trust bar right after the "Who We Are" narrative about
 
 ### 5. Critical Files Reference
 
-| File | Action | Purpose |
-|------|--------|---------|
-| `src/lib/vendors.ts` | **Create** | Vendor data (name, url, description) |
-| `src/components/icons/vendor-icons.tsx` | **Create** | SVG icon components for 7 vendors |
-| `src/components/sections/tech-stack-section.tsx` | **Create** | Reusable tech stack section component |
-| `app/page.tsx` | **Modify** | Add `<TechStackSection />` after ManifestoSection |
-| `app/how-we-work/page.tsx` | **Modify** | Add `<TechStackSection />` after process steps |
+| File                                             | Action     | Purpose                                           |
+| ------------------------------------------------ | ---------- | ------------------------------------------------- |
+| `src/lib/vendors.ts`                             | **Create** | Vendor data (name, url, description)              |
+| `src/components/icons/vendor-icons.tsx`          | **Create** | SVG icon components for 7 vendors                 |
+| `src/components/sections/tech-stack-section.tsx` | **Create** | Reusable tech stack section component             |
+| `app/page.tsx`                                   | **Modify** | Add `<TechStackSection />` after ManifestoSection |
+| `app/how-we-work/page.tsx`                       | **Modify** | Add `<TechStackSection />` after process steps    |
 
 ### Notes
 

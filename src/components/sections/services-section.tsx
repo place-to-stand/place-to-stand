@@ -83,13 +83,13 @@ export function ServicesSection() {
   return (
     <AnimatedSection id='services' className='flex flex-col gap-grid-3'>
       <div className='flex flex-col items-center gap-4 text-center'>
-        <span className='text-sm font-semibold uppercase tracking-[0.1em] text-ink/60'>
+        <span className='text-sm font-semibold tracking-[0.1em] text-ink/60 uppercase'>
           Services
         </span>
-        <h2 className='max-w-5xl text-balance font-headline text-3xl font-semibold uppercase !leading-[.9] text-ink md:text-5xl'>
+        <h2 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-ink uppercase md:text-5xl'>
           Leverage we bring to every engagement
         </h2>
-        <p className='max-w-xl text-balance text-lg !leading-snug text-ink/60'>
+        <p className='max-w-xl text-lg leading-snug! text-balance text-ink/60'>
           From first idea to lasting growth, every service is designed to put
           you on firmer ground and amplify your next move.
         </p>

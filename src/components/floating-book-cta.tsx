@@ -23,7 +23,7 @@ export function FloatingBookCta() {
   if (!visible) return null
 
   return (
-    <div className='fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4 duration-500'>
+    <div className='fixed right-6 bottom-6 z-50 duration-500 animate-in fade-in slide-in-from-bottom-4'>
       <BookCallLink
         label='Book a Call'
         placement='floating'
