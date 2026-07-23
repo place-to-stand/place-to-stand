@@ -39,12 +39,13 @@ body {
      - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
        page-top and 24px-multiple section bands sit on dot rows.
      Scrolls with content. */
-  background-image:
-    radial-gradient(circle, var(--grid-dot) 1px, transparent 1px);
-  background-size:
-    24px 24px;
-  background-position:
-    50% 12px;
+  background-image: radial-gradient(
+    circle,
+    var(--grid-dot) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  background-position: 50% 12px;
 }
 
 @keyframes fadeIn {
@@ -55,6 +56,18 @@ body {
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Progress fill that grows from the active rail dot toward the next. Its
+   completion drives the autoplay advance, so the fill and the step change stay
+   in sync (one timer, no drift). */
+@keyframes railProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
@@ -275,7 +288,9 @@ body {
   transition:
     opacity 400ms ease-out,
     transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms);
+  transition-delay: calc(
+    var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms
+  );
 }
 .bp-draw[data-visible='true'] .bp-node {
   opacity: 1;
@@ -331,6 +346,19 @@ body {
 .bp-loop-travel[data-visible='true'] .bp-flow {
   animation: bp-flow 1.6s linear infinite;
   animation-delay: calc(var(--bp-draw-base, 0ms) + 1200ms);
+}
+/* Portal pipeline: a calmer, slower march than the homepage schematics. */
+.bp-loop-travel.bp-loop-slow[data-visible='true'] .bp-flow {
+  animation-duration: 3.4s;
+}
+/* Hover / lightbox pause: freeze the ongoing motion (marching lines, spinning
+   gear) so it reads clearly that the autoplay has stopped. The selectors are
+   scoped tightly (loop class + [data-visible]) so they outrank the base
+   animation rules, whose `animation` shorthand would otherwise reset
+   play-state back to running. */
+.bp-loop-travel.bp-paused[data-visible='true'] .bp-flow,
+.bp-loop-gear.bp-paused[data-visible='true'] .bp-gear {
+  animation-play-state: paused;
 }
 
 @keyframes bp-scan {
@@ -441,7 +469,9 @@ body {
   transform-box: fill-box;
   transform-origin: center;
   animation: cmp-pulse 4.5s ease-in-out infinite;
-  animation-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-live-delay, 1600ms));
+  animation-delay: calc(
+    var(--bp-draw-base, 0ms) + var(--cmp-live-delay, 1600ms)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -504,8 +534,20 @@ body {
    same keyframe in reverse for the opposite direction. Edges fade via a mask. */
 .marquee {
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 6%,
+    #000 94%,
+    transparent
+  );
 }
 .marquee-track {
   display: flex;
