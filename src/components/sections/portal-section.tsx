@@ -4,6 +4,7 @@ import {
 } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { PortalFlow } from './portal-flow'
 
 const GitHubIcon = vendorIcons.GitHub
@@ -41,10 +42,15 @@ export function PortalSection() {
             size='sm'
             className='h-8 shrink-0 gap-1.5 self-start px-3 text-xs md:h-9 md:gap-2 md:px-4 md:text-sm'
           >
-            <a href={REPO_URL} target='_blank' rel='noopener noreferrer'>
+            <TrackedLink
+              href={REPO_URL}
+              target='_blank'
+              rel='noopener noreferrer'
+              location='portal-open-source'
+            >
               <GitHubIcon className='h-3.5 w-3.5 md:h-4 md:w-4' aria-hidden />
               Open Source
-            </a>
+            </TrackedLink>
           </Button>
         </Reveal>
       </AnimatedSection>
