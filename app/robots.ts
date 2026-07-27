@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://www.placetostandagency.com/sitemap.xml',
+    sitemap: 'https://placetostandagency.com/sitemap.xml',
   }
 }
