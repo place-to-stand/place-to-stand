@@ -12,6 +12,21 @@ import { cn } from '@/src/lib/utils'
 
 interface AnimatedSectionProps extends ComponentProps<'section'> {
   id?: string
+  /**
+   * Set this on the first section of any page whose content sits in the initial
+   * viewport. The section then renders in its final visible state on the server
+   * and skips the observer, the hero gate, and the transition entirely.
+   *
+   * This is not just a speed tweak. Chrome decides whether an element can ever
+   * be the Largest Contentful Paint element the first time it paints, and an
+   * element that first paints at opacity 0 is disqualified permanently — it does
+   * not become eligible again when it fades in. A heading revealed this way is
+   * invisible to LCP for the whole page lifetime, so the browser falls back to
+   * whatever small element happened to paint at load (here, the header logo).
+   * The reported number looks fine while the headline a visitor actually waits
+   * for is not being measured at all.
+   */
+  priority?: boolean
 }
 
 const RevealContext = createContext<{ isVisible: boolean; reduced: boolean }>({
@@ -21,20 +36,19 @@ const RevealContext = createContext<{ isVisible: boolean; reduced: boolean }>({
 
 /**
  * The hero plays a scripted intro on page load (see .hero-* in globals.css): the
- * headline lands, the comparison graphic plays out (~2.0s–4.0s: the stack
- * builds, the arrow slides out, "Into this" fades, the finished app slides in),
- * then the subtext and CTA reveal, the CTA finishing at ~4.2s delay + 0.8s = 5.0s.
- * A section that
- * happens to be visible on load (tall screens) would otherwise reveal in the
- * middle of that intro and beat it. This returns how long such a section should
- * wait so it reveals only once the hero is done. Only sections already in the
- * viewport at first paint are gated (see the caller), and even those reveal
- * early the instant the user scrolls — so anyone who scrolls, or a returning
- * visitor past the replaying hero, gets the content loading in without waiting.
- * Returns 0 when there's no hero on the page, under reduced motion, or once the
- * intro has finished.
+ * headline wipes in line by line (done by ~0.74s), the subtext and CTA rise
+ * (CTA finishing at ~1.0s delay + 0.6s = 1.6s), and the comparison graphic plays
+ * out alongside them (~0.8s–3.0s: the stack builds, the arrow slides out, "Into
+ * this" fades, the finished app slides in). A section that happens to be visible
+ * on load (tall screens) would otherwise reveal in the middle of that intro and
+ * beat it. This returns how long such a section should wait so it reveals only
+ * once the hero is done. Only sections already in the viewport at first paint
+ * are gated (see the caller), and even those reveal early the instant the user
+ * scrolls — so anyone who scrolls, or a returning visitor past the replaying
+ * hero, gets the content loading in without waiting. Returns 0 when there's no
+ * hero on the page, under reduced motion, or once the intro has finished.
  */
-const HERO_ENTRANCE_MS = 5000
+const HERO_ENTRANCE_MS = 3000
 function heroGateRemainingMs(): number {
   if (typeof window === 'undefined') return 0
   if (!document.querySelector('[data-pts-hero]')) return 0
@@ -50,16 +64,17 @@ export function AnimatedSection({
   className,
   children,
   id,
+  priority = false,
   ...props
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(priority)
   const [fromLeft, setFromLeft] = useState(true)
   const [reduced, setReduced] = useState(false)
 
   useEffect(() => {
     const node = ref.current
-    if (!node) return
+    if (!node || priority) return
 
     // Alternate slide direction based on this section's order among all
     // animated sections on the page (even = from left, odd = from right).
@@ -119,7 +134,7 @@ export function AnimatedSection({
       if (gateTimer) clearTimeout(gateTimer)
       if (onScroll) window.removeEventListener('scroll', onScroll)
     }
-  }, [])
+  }, [priority])
 
   return (
     <section
@@ -129,7 +144,7 @@ export function AnimatedSection({
       style={{
         transitionProperty: 'opacity, transform',
         transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        transitionDuration: reduced ? '0ms' : '2200ms',
+        transitionDuration: reduced || priority ? '0ms' : '2200ms',
       }}
       className={cn(
         'mx-auto w-full max-w-content scroll-mt-24 px-6 py-20 lg:px-12',

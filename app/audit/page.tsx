@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function AuditPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
-      <AnimatedSection>
+      <AnimatedSection priority>
         <div className='mx-auto w-full max-w-content'>
           <AuditApp />
         </div>

@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
@@ -21,19 +22,19 @@ export function HeroSection() {
             <h1 className='max-w-5xl py-4 pl-3 font-headline text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
               <span
                 className='hero-line block'
-                style={{ animationDelay: '0.9s' }}
+                style={{ '--hero-delay': '0s' } as CSSProperties}
               >
                 Off-the-shelf software
               </span>
               <span
                 className='hero-line block'
-                style={{ animationDelay: '1.2s' }}
+                style={{ '--hero-delay': '0.12s' } as CSSProperties}
               >
                 is built for everyone.
               </span>
               <span
                 className='hero-line block text-accent'
-                style={{ animationDelay: '2s' }}
+                style={{ '--hero-delay': '0.24s' } as CSSProperties}
               >
                 We build for you.
               </span>
@@ -45,7 +46,7 @@ export function HeroSection() {
             <div className='flex flex-col gap-8 lg:flex-1'>
               <div
                 className='hero-reveal flex gap-4 self-start'
-                style={{ animationDelay: '4s' }}
+                style={{ animationDelay: '0.85s' }}
               >
                 <div className='flex max-w-lg flex-col gap-3'>
                   <p className='text-base leading-relaxed text-text md:text-lg'>
@@ -66,7 +67,7 @@ export function HeroSection() {
               </div>
               <div
                 className='hero-reveal flex shrink-0 flex-col items-start gap-3'
-                style={{ animationDelay: '4.2s' }}
+                style={{ animationDelay: '1s' }}
               >
                 <Button asChild size='lg' variant='primaryInvert'>
                   <TrackedLink href='/audit' location='hero' data-pts-hero-cta>
