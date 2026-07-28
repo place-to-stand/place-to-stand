@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePostHog } from 'posthog-js/react'
@@ -61,8 +61,18 @@ function shortPhaseName(id: PhaseId): string {
 }
 
 export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
+  const posthog = usePostHog()
   const { phase, phaseScores, recommendations } = result
   const maxScore = Math.max(1, ...Object.values(phaseScores))
+
+  useEffect(() => {
+    posthog?.capture('audit_results_viewed', {
+      phase: phase.id,
+      recommendations_count: recommendations.length,
+      top_service: recommendations[0]?.service.id,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const activeIndex = PHASE_ORDER.indexOf(phase.id)
   const progressPct =
     PHASE_ORDER.length > 1 ? (activeIndex / (PHASE_ORDER.length - 1)) * 100 : 0

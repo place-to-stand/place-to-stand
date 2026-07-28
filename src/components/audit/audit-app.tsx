@@ -1,7 +1,7 @@
 'use client'
 
+import { AuditLandingContent } from '@/src/components/audit/audit-landing'
 import { AuditWizard } from '@/src/components/audit/audit-wizard'
-import { IntroScreen } from '@/src/components/audit/intro-screen'
 import { ResultsView } from '@/src/components/audit/results-view'
 import { useAudit } from '@/src/hooks/use-audit'
 
@@ -26,5 +26,5 @@ export function AuditApp() {
     )
   }
 
-  return <IntroScreen onStart={start} />
+  return <AuditLandingContent onStart={start} />
 }

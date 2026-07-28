@@ -34,9 +34,16 @@ export function useAudit(): UseAudit {
   const [result, setResult] = useState<AuditResult | null>(null)
   const [isScoring, setIsScoring] = useState(false)
 
-  const setAnswer = useCallback((questionId: string, value: AnswerValue) => {
-    setAnswers(prev => ({ ...prev, [questionId]: value }))
-  }, [])
+  const setAnswer = useCallback(
+    (questionId: string, value: AnswerValue) => {
+      setAnswers(prev => ({ ...prev, [questionId]: value }))
+      posthog?.capture('audit_answer_selected', {
+        question_id: questionId,
+        value,
+      })
+    },
+    [posthog]
+  )
 
   const start = useCallback(() => {
     setAnswers({})
@@ -61,10 +68,15 @@ export function useAudit(): UseAudit {
   }, [answers, posthog])
 
   const reset = useCallback(() => {
+    if (stage === 'wizard') {
+      posthog?.capture('audit_abandoned', {
+        answers_count: Object.keys(answers).length,
+      })
+    }
     setAnswers({})
     setResult(null)
     setStage('intro')
-  }, [])
+  }, [stage, answers, posthog])
 
   return {
     stage,
