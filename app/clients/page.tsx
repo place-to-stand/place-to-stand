@@ -43,7 +43,7 @@ export default function ClientsPage() {
               <Reveal index={0} className='flex flex-col gap-3'>
                 <span className='bp-label font-mono'>Next Step</span>
                 <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
-                  Ready to build?
+                  Find where to start.
                 </h2>
               </Reveal>
               <Reveal
@@ -51,8 +51,9 @@ export default function ClientsPage() {
                 className='max-w-md text-sm leading-relaxed text-text-muted'
               >
                 <p>
-                  Tell us what you are trying to build. We will scope the work,
-                  timeline, and cost, with no obligation.
+                  The free audit pinpoints the phase your business is in and
+                  where custom software pays off first. Two minutes, results on
+                  screen, no obligation.
                 </p>
               </Reveal>
             </div>
@@ -61,8 +62,8 @@ export default function ClientsPage() {
               className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'
             >
               <Button asChild size='lg' className='w-full'>
-                <TrackedLink href='/contact' location='clients-cta-block'>
-                  Start a Project
+                <TrackedLink href='/audit' location='clients-cta-block'>
+                  Start the free audit
                 </TrackedLink>
               </Button>
               <div className='flex flex-col gap-2'>
@@ -72,13 +73,13 @@ export default function ClientsPage() {
                   variant='outline'
                   className='w-full border-2'
                 >
-                  <TrackedLink href='/audit' location='clients-cta-block'>
-                    Opportunity Audit
+                  <TrackedLink href='/contact' location='clients-cta-block'>
+                    Contact Us
                   </TrackedLink>
                 </Button>
                 <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
-                  Not sure where to start? This two-minute audit pinpoints where
-                  custom software pays off first.
+                  Already know what you want built, or want a bespoke mapping of
+                  your systems? Talk to us directly.
                 </p>
               </div>
             </Reveal>

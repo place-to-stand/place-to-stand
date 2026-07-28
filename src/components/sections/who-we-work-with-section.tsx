@@ -1,5 +1,6 @@
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { TrackedLink } from '@/src/components/tracked-link'
 import {
   LeanMarketGraphic,
   FounderGraphic,
@@ -70,6 +71,24 @@ export function WhoWeWorkWithSection() {
             </div>
           ))}
         </div>
+
+        {/* Each clause is an inline-block so a narrow viewport breaks the line
+            between them instead of orphaning a word or two. */}
+        <p className='text-base leading-relaxed text-balance text-text-muted'>
+          <span className='inline-block'>
+            Recognize yourself in one of these?
+          </span>{' '}
+          <span className='inline-block'>
+            <TrackedLink
+              href='/audit'
+              location='home-who-we-work-with'
+              className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+            >
+              The free audit shows where to start
+            </TrackedLink>
+            .
+          </span>
+        </p>
       </div>
     </AnimatedSection>
   )

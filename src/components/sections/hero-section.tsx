@@ -56,10 +56,11 @@ export function HeroSection() {
                     No more juggling a stack of bloated SaaS dashboards.
                   </p>
                   <p className='text-base leading-relaxed text-text-muted md:text-lg'>
-                    Not sure where to start? Take our free{' '}
+                    Take the{' '}
                     <strong className='font-semibold text-accent/70'>
-                      opportunity audit.
-                    </strong>
+                      free audit
+                    </strong>{' '}
+                    to see where custom software fits for your business.
                   </p>
                 </div>
               </div>
@@ -69,9 +70,12 @@ export function HeroSection() {
               >
                 <Button asChild size='lg' variant='primaryInvert'>
                   <TrackedLink href='/audit' location='hero' data-pts-hero-cta>
-                    Find your opportunities
+                    Start the free audit
                   </TrackedLink>
                 </Button>
+                <p className='font-mono text-[11px] tracking-[0.08em] text-text-muted'>
+                  2 minutes, free results, no email required.
+                </p>
               </div>
             </div>
 

@@ -4,6 +4,7 @@ import {
   Reveal,
 } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import {
@@ -93,10 +94,14 @@ export function PhasesSection({
   showHowWeWorkLink = true,
   showPoweredBy = false,
   showLabel = true,
+  showAuditLink = false,
 }: {
   showHowWeWorkLink?: boolean
   showPoweredBy?: boolean
   showLabel?: boolean
+  /** Prompts the reader into the audit right under the phase cards. The audit's
+   *  first output is the phase you are in, so this is where that question lands. */
+  showAuditLink?: boolean
 }) {
   return (
     <AnimatedSection className='py-20'>
@@ -167,6 +172,28 @@ export function PhasesSection({
             })}
           </div>
         </Reveal>
+
+        {showAuditLink && (
+          <Reveal index={3}>
+            {/* Each clause is an inline-block so a narrow viewport breaks the
+                line between them instead of orphaning a word or two. */}
+            <p className='text-base leading-relaxed text-balance text-text-muted'>
+              <span className='inline-block'>
+                Not sure which phase you are in?
+              </span>{' '}
+              <span className='inline-block'>
+                <TrackedLink
+                  href='/audit'
+                  location='home-phases'
+                  className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+                >
+                  Find out in 2 minutes
+                </TrackedLink>
+                , free.
+              </span>
+            </p>
+          </Reveal>
+        )}
 
         {/* Under The Hood — the method behind every stage plus the tools that power
             it. Folds the how-we-work process into the intro, then the vendor logos. */}
