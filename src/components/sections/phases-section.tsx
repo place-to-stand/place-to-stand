@@ -175,16 +175,22 @@ export function PhasesSection({
 
         {showAuditLink && (
           <Reveal index={3}>
-            <p className='text-base leading-relaxed text-text-muted'>
-              Not sure which phase you are in?{' '}
-              <TrackedLink
-                href='/audit'
-                location='home-phases'
-                className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
-              >
-                Find out in 2 minutes
-              </TrackedLink>
-              , free.
+            {/* Each clause is an inline-block so a narrow viewport breaks the
+                line between them instead of orphaning a word or two. */}
+            <p className='text-base leading-relaxed text-balance text-text-muted'>
+              <span className='inline-block'>
+                Not sure which phase you are in?
+              </span>{' '}
+              <span className='inline-block'>
+                <TrackedLink
+                  href='/audit'
+                  location='home-phases'
+                  className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+                >
+                  Find out in 2 minutes
+                </TrackedLink>
+                , free.
+              </span>
             </p>
           </Reveal>
         )}

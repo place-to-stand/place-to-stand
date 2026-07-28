@@ -89,6 +89,34 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
   )
 }
 
+/** Audit prompt that closes out the service list. Rendered in two places so it
+ *  can sit in the sticky left column on desktop but fall below the cards on
+ *  mobile, matching where the other homepage sections put their audit CTA.
+ *  Each clause is an inline-block so the line breaks between them rather than
+ *  orphaning a word or two onto the second line. */
+function AuditPrompt({ className }: { className?: string }) {
+  return (
+    <p
+      className={cn(
+        'text-base leading-relaxed text-balance text-text-muted',
+        className
+      )}
+    >
+      <span className='inline-block'>Not sure which of these you need?</span>{' '}
+      <span className='inline-block'>
+        <TrackedLink
+          href='/audit'
+          location='home-services-preview'
+          className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+        >
+          This free audit picks for you
+        </TrackedLink>
+        .
+      </span>
+    </p>
+  )
+}
+
 export function ServicesPreview() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -115,18 +143,9 @@ export function ServicesPreview() {
               <span aria-hidden>&rarr;</span>
             </Link>
           </Reveal>
-          <Reveal index={3}>
-            <p className='border-t border-border pt-4 text-base leading-relaxed text-text-muted'>
-              Not sure which of these you need?{' '}
-              <TrackedLink
-                href='/audit'
-                location='home-services-preview'
-                className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
-              >
-                The free audit picks them for you
-              </TrackedLink>
-              .
-            </p>
+          {/* Desktop: rides along in the sticky column */}
+          <Reveal index={3} className='hidden md:block'>
+            <AuditPrompt className='border-t border-border pt-4' />
           </Reveal>
         </div>
 
@@ -140,6 +159,12 @@ export function ServicesPreview() {
               onToggle={() => setActiveIndex(prev => (prev === i ? null : i))}
             />
           ))}
+        </Reveal>
+
+        {/* Mobile: falls below the cards. `md:hidden` keeps it out of the grid
+            entirely on desktop, so the two-column layout is unaffected. */}
+        <Reveal index={3} className='md:hidden'>
+          <AuditPrompt />
         </Reveal>
       </div>
     </AnimatedSection>
