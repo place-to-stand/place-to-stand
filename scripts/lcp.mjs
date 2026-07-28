@@ -96,7 +96,12 @@ const rows = []
 
 try {
   for (const route of targets) {
-    const page = await browser.newPage()
+    // A fresh browser context per route, so each one is measured cold. Sharing
+    // one context lets route 2 onward reuse the CSS, fonts and JS that route 1
+    // pulled down, which on a throttled connection is most of the critical path
+    // — it made later routes look ~5x faster than a first-time visitor sees.
+    const context = await browser.createBrowserContext()
+    const page = await context.newPage()
     await page.setViewport(MOBILE)
     const cdp = await page.createCDPSession()
 
@@ -123,6 +128,7 @@ try {
 
     rows.push({ route, ...result })
     await page.close()
+    await context.close()
   }
 } finally {
   await browser.disconnect()
