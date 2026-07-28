@@ -66,8 +66,8 @@ export function Header() {
         <div className='flex items-center gap-4'>
           <div className='hidden md:inline-flex'>
             <Button asChild size='sm'>
-              <TrackedLink href='/contact' location='header'>
-                Start a Project
+              <TrackedLink href='/audit' location='header'>
+                Free Audit
               </TrackedLink>
             </Button>
           </div>
@@ -136,11 +136,11 @@ export function Header() {
             <div className='mt-3 px-4'>
               <Button asChild size='sm' className='w-full'>
                 <TrackedLink
-                  href='/contact'
+                  href='/audit'
                   location='header-mobile'
                   onClick={() => setMobileOpen(false)}
                 >
-                  Start a Project
+                  Free Audit
                 </TrackedLink>
               </Button>
             </div>

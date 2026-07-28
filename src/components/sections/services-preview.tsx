@@ -7,6 +7,7 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
+import { TrackedLink } from '@/src/components/tracked-link'
 import { services, type Service } from '@/src/lib/services'
 import { serviceGraphics } from '@/src/components/graphics/home-graphics'
 import { cn } from '@/src/lib/utils'
@@ -113,6 +114,19 @@ export function ServicesPreview() {
               View all services
               <span aria-hidden>&rarr;</span>
             </Link>
+          </Reveal>
+          <Reveal index={3}>
+            <p className='border-t border-border pt-4 text-base leading-relaxed text-text-muted'>
+              Not sure which of these you need?{' '}
+              <TrackedLink
+                href='/audit'
+                location='home-services-preview'
+                className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+              >
+                The free audit picks them for you
+              </TrackedLink>
+              .
+            </p>
           </Reveal>
         </div>
 
