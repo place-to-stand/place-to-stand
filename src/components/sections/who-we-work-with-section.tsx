@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
@@ -51,7 +50,7 @@ export function WhoWeWorkWithSection() {
         </div>
 
         {/* Profile cards */}
-        <div className='order-3 grid gap-6 md:order-2 md:grid-cols-3'>
+        <div className='grid gap-6 md:grid-cols-3'>
           {profiles.map(profile => (
             <div
               key={profile.number}
@@ -71,15 +70,6 @@ export function WhoWeWorkWithSection() {
             </div>
           ))}
         </div>
-
-        {/* Clients link — before the cards on mobile, after on desktop */}
-        <Link
-          href='/clients'
-          className='order-2 inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80 md:order-3'
-        >
-          See our clients
-          <span aria-hidden>&rarr;</span>
-        </Link>
       </div>
     </AnimatedSection>
   )

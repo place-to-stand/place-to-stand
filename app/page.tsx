@@ -1,4 +1,5 @@
 import { HeroSection } from '@/src/components/sections/hero-section'
+import { ClientLogosSection } from '@/src/components/sections/client-logos-section'
 import { PillarsSection } from '@/src/components/sections/pillars-section'
 import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
@@ -18,8 +19,9 @@ export default function HomePage() {
   return (
     <main className='flex-1 pb-32'>
       <HeroSection />
-      <PhasesSection showPoweredBy />
+      <ClientLogosSection />
       <WhoWeWorkWithSection />
+      <PhasesSection showPoweredBy />
       <ServicesPreview />
       <ManifestoSection />
       <PillarsSection />

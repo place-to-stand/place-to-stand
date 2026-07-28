@@ -23,7 +23,7 @@ export default function ClientsPage() {
         className='flex flex-col gap-grid-3 md:gap-grid-4'
       >
         <div className='flex flex-col gap-4'>
-          <span className='bp-label font-mono'>Clients</span>
+          <span className='bp-label font-mono'>Selected Clients</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             Who We Build For
           </h1>
