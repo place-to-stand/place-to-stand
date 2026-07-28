@@ -1,9 +1,29 @@
 'use client'
 
-import posthog from 'posthog-js'
+import posthog, { type CaptureResult } from 'posthog-js'
 import { PostHogProvider as PHProvider, usePostHog } from 'posthog-js/react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, Suspense } from 'react'
+
+// Errors thrown by third-party scripts injected into the page (not by our
+// code), e.g. Outlook SafeLinks scanners — never seen by real users
+const IGNORED_EXCEPTION_PATTERNS = [/Object Not Found Matching Id:\d+/]
+
+function dropInjectedScriptExceptions(
+  event: CaptureResult | null
+): CaptureResult | null {
+  if (event?.event !== '$exception') return event
+
+  const exceptions: { type?: string; value?: string }[] =
+    event.properties?.$exception_list ?? []
+  const isIgnored = exceptions.some(({ type, value }) =>
+    IGNORED_EXCEPTION_PATTERNS.some(
+      pattern => pattern.test(value ?? '') || pattern.test(type ?? '')
+    )
+  )
+
+  return isIgnored ? null : event
+}
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -20,6 +40,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         capture_pageleave: true,
         autocapture: true,
         capture_dead_clicks: true,
+        before_send: dropInjectedScriptExceptions,
       })
     }
   }, [])
