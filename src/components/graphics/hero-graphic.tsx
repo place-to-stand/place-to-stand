@@ -480,7 +480,7 @@ export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
       viewBox='0 0 274 190'
-      drawDelayMs={2000}
+      drawDelayMs={800}
       className={`hero-compare ${className ?? ''}`}
     >
       {/* ── Titles — each rises in with its column (stack first, your app last) ── */}

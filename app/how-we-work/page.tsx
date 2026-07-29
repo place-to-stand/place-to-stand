@@ -52,7 +52,7 @@ export default function HowWeWorkPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
       {/* How We Work — intro + two-column process narrative */}
-      <AnimatedSection className='flex flex-col gap-12'>
+      <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>How We Work</span>
           <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>

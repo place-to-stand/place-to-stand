@@ -143,16 +143,32 @@ html {
   }
 }
 
-@keyframes hero-wipe {
+/* The headline reveal is a curtain, not a clip or a fade, and that is
+   deliberate. Chrome decides once — at an element's very first paint — whether
+   it can ever be the Largest Contentful Paint element, and both `opacity: 0` and
+   `clip-path` disqualify it permanently; it does not become eligible again when
+   it animates in. Revealing the headline by hiding it meant the headline was
+   never the measured element on this page: the browser fell back to a 3.6k px²
+   label inside the hero SVG while the real 20k px² headline went unmeasured.
+   So the text now paints opaque and unclipped from frame 0, and the wipe is done
+   by a bar sliding off it instead.
+   The bar scales to zero from its right edge rather than translating, so it
+   collapses inside the headline box and never overhangs it. */
+@keyframes hero-line-settle {
   0% {
-    opacity: 0;
-    clip-path: inset(0 100% 0 0);
     transform: translateX(-10px);
   }
   100% {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: translateX(0);
+  }
+}
+
+@keyframes hero-curtain {
+  0% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
   }
 }
 
@@ -170,19 +186,35 @@ html {
 /* Animate the BlueprintCorners (direct <span> children) of the framed headline.
    The frame draws in first (with the pitch label) so the headline wipes into it. */
 .hero-frame > span {
-  animation: hero-corner 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  animation: hero-corner 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
 }
 
+/* --hero-delay is set inline per line (see hero-section.tsx) and drives both the
+   text and its curtain. A custom property rather than animation-delay directly,
+   because the curtain is a pseudo-element and needs to inherit the same value. */
 .hero-line {
-  animation: hero-wipe 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
-  /* clip-path clips to the box; pad the bottom so glyph descenders (e.g. "y")
-     aren't cut, then cancel the padding with negative margin to keep leading tight. */
+  position: relative;
+  animation: hero-line-settle 0.5s cubic-bezier(0.16, 1, 0.3, 1)
+    var(--hero-delay, 0s) both;
+  /* The curtain covers the box; pad the bottom so glyph descenders (e.g. "y")
+     stay covered, then cancel the padding with negative margin to keep leading tight. */
   padding-bottom: 0.2em;
   margin-bottom: -0.2em;
 }
 
+.hero-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-bg);
+  transform-origin: right center;
+  animation: hero-curtain 0.5s cubic-bezier(0.16, 1, 0.3, 1)
+    var(--hero-delay, 0s) both;
+  pointer-events: none;
+}
+
 .hero-reveal {
-  animation: hero-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes hero-slide-left {
@@ -201,6 +233,12 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* The curtain is the reveal, so under reduced motion it must not exist at all —
+     leaving it parked over the headline would hide it permanently. */
+  .hero-line::after {
+    display: none;
+  }
+
   .hero-frame > span,
   .hero-line,
   .hero-reveal,

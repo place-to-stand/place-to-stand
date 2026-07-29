@@ -36,6 +36,9 @@ Thumbs.db
 # Test coverage
 coverage/
 
+# Lighthouse reports (npm run perf)
+.lighthouse/
+
 # Misc
 *.tgz
 *.zip

@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "perf": "node scripts/lighthouse.mjs",
+    "perf:lcp": "node scripts/lcp.mjs",
     "format": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
     "type-check": "tsc --noEmit"
@@ -40,11 +42,14 @@
     "@types/node": "26.1.1",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
+    "chrome-launcher": "1.2.1",
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.10",
+    "lighthouse": "13.4.1",
     "postcss": "8.5.19",
     "prettier": "3.9.5",
     "prettier-plugin-tailwindcss": "0.8.1",
+    "puppeteer-core": "25.4.0",
     "tailwindcss": "4.3.2",
     "tailwindcss-animate": "1.0.7",
     "typescript": "6.0.3"
