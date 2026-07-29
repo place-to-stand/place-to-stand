@@ -1,10 +1,12 @@
 'use client'
 
 import Image from 'next/image'
+import { useId, useState } from 'react'
 import { usePostHog } from 'posthog-js/react'
 import {
   ArrowRight,
   BarChart3,
+  ChevronDown,
   Clock,
   Code2,
   Compass,
@@ -19,11 +21,11 @@ import {
 import { Reveal } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
-import { FaqAccordion } from '@/src/components/sections/faq-section'
 import { Button } from '@/src/components/ui/button'
+import { cn } from '@/src/lib/utils'
 import { clients } from '@/src/lib/clients'
 import { team } from '@/src/lib/team'
-import { services } from '@/src/lib/services'
+import { type Service, services } from '@/src/lib/services'
 
 interface AuditLandingProps {
   onStart: (location: string) => void
@@ -89,8 +91,116 @@ const SERVICE_ICONS: Record<string, LucideIcon> = {
   ServerCog,
 }
 
+type ServiceRowProps = {
+  service: Service
+  index: number
+  isOpen: boolean
+  onToggle: () => void
+}
+
+/** One capability: a schematic table row that expands to its detail panel. */
+function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
+  const id = useId()
+  const panelId = `${id}-panel`
+  const Icon = SERVICE_ICONS[service.icon] ?? Code2
+
+  return (
+    <li className='border-b border-border last:border-b-0'>
+      <button
+        type='button'
+        id={id}
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        className={cn(
+          'group grid w-full grid-cols-[3rem_1fr_3rem] items-stretch text-left transition-colors hover:bg-bg-elevated focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:grid-cols-[3rem_18rem_1fr_3rem]',
+          isOpen && 'bg-bg-elevated'
+        )}
+      >
+        {/* Row-number gutter */}
+        <span
+          className={cn(
+            'flex items-center justify-center font-mono text-xs tabular-nums transition-colors',
+            isOpen ? 'text-accent' : 'text-text-muted group-hover:text-accent'
+          )}
+        >
+          {String(index + 1).padStart(2, '0')}
+        </span>
+
+        {/* Icon + title */}
+        <span className='flex items-center gap-3 px-grid-1 py-5'>
+          <span
+            className={cn(
+              'flex h-8 w-8 shrink-0 items-center justify-center border bg-bg text-accent transition-colors',
+              isOpen
+                ? 'border-accent'
+                : 'border-border group-hover:border-accent'
+            )}
+          >
+            <Icon aria-hidden className='h-4 w-4' />
+          </span>
+          <span className='font-headline text-base font-semibold tracking-tight text-text'>
+            {service.title}
+          </span>
+        </span>
+
+        {/* Tagline */}
+        <span className='hidden items-center px-grid-1 text-sm text-text-muted md:flex'>
+          {service.tagline}
+        </span>
+
+        {/* Expand indicator */}
+        <span className='flex items-center justify-center'>
+          <ChevronDown
+            aria-hidden
+            className={cn(
+              'h-4 w-4 transition-transform duration-300 ease-out',
+              isOpen ? 'rotate-180 text-accent' : 'text-text-muted'
+            )}
+          />
+        </span>
+      </button>
+
+      {/* Detail panel */}
+      <div
+        id={panelId}
+        role='region'
+        aria-labelledby={id}
+        aria-hidden={!isOpen}
+        className={cn(
+          'grid overflow-hidden transition-all duration-500 ease-in-out',
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr] opacity-0'
+        )}
+      >
+        <div className='overflow-hidden'>
+          <div className='grid gap-grid-2 bg-bg px-grid-1 pt-9 pb-grid-1 md:grid-cols-2 md:pl-grid-3'>
+            <p className='text-sm leading-relaxed text-text-muted'>
+              {service.description}
+            </p>
+            <ul className='flex flex-col gap-1.5'>
+              {service.features.map(feature => (
+                <li
+                  key={feature}
+                  className='flex items-start gap-2 text-sm text-text-muted'
+                >
+                  <span
+                    aria-hidden
+                    className='mt-1.5 h-px w-3 shrink-0 bg-accent'
+                  />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+  )
+}
+
 export function AuditLandingContent({ onStart }: AuditLandingProps) {
   const posthog = usePostHog()
+  const [openService, setOpenService] = useState<number | null>(0)
 
   const handleStart = (location: string) => {
     posthog?.capture('audit_landing_cta_click', { location })
@@ -170,8 +280,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               Experienced engineers with fine-tuned AI.
             </h2>
             <p className='mt-1 max-w-xl text-sm text-text-muted'>
-              Ex-Squarespace engineers building exactly what you need, directly
-              with the people who build it. No layers, no hand-offs.
+              Senior engineers building exactly what you need, directly with the
+              people who build it. No layers, no hand-offs.
             </p>
           </div>
 
@@ -257,38 +367,22 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               What we can build for you
             </h2>
           </div>
-          <div className='grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3'>
-            {services.map(service => {
-              const Icon = SERVICE_ICONS[service.icon] ?? Code2
-              return (
-                <div
+          <div className='relative border border-border bg-bg-card'>
+            <BlueprintCorners size={16} />
+            <ul className='flex flex-col'>
+              {services.map((service, index) => (
+                <ServiceRow
                   key={service.slug}
-                  className='flex flex-col gap-2 bg-bg-card p-5'
-                >
-                  <div className='flex h-8 w-8 shrink-0 items-center justify-center border border-border bg-bg text-accent'>
-                    <Icon className='h-4 w-4' />
-                  </div>
-                  <h3 className='font-headline text-base font-semibold tracking-tight text-text'>
-                    {service.title}
-                  </h3>
-                  <p className='text-sm text-text-muted'>{service.tagline}</p>
-                </div>
-              )
-            })}
+                  service={service}
+                  index={index}
+                  isOpen={openService === index}
+                  onToggle={() =>
+                    setOpenService(prev => (prev === index ? null : index))
+                  }
+                />
+              ))}
+            </ul>
           </div>
-        </div>
-      </Reveal>
-
-      {/* FAQ Block */}
-      <Reveal index={3} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-2'>
-            <span className='bp-label font-mono'>FAQ</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
-              Common questions
-            </h2>
-          </div>
-          <FaqAccordion />
         </div>
       </Reveal>
 
@@ -300,8 +394,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             Ready to find your leverage?
           </h2>
           <p className='max-w-md text-sm text-balance text-text-muted'>
-            Two minutes. Zero obligation. Personalized recommendations for
-            where custom software would move the needle most.
+            Two minutes. Zero obligation. Personalized recommendations for where
+            custom software would move the needle most.
           </p>
           <Button
             type='button'
