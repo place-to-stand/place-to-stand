@@ -8,6 +8,7 @@ import { usePostHog } from 'posthog-js/react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
+import { Checkbox } from '@/src/components/ui/checkbox'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
 import { Textarea } from '@/src/components/ui/textarea'
@@ -33,6 +34,7 @@ export function ContactSection() {
       company: '',
       website: '',
       message: '',
+      marketingConsent: false,
     },
   })
 
@@ -159,6 +161,20 @@ export function ContactSection() {
                 {form.formState.errors.message.message}
               </p>
             ) : null}
+          </div>
+          <div className='flex items-start gap-3 pt-1'>
+            <Checkbox
+              id='marketingConsent'
+              {...form.register('marketingConsent')}
+            />
+            <Label
+              htmlFor='marketingConsent'
+              className='text-sm leading-snug font-normal text-text-muted'
+            >
+              Send me occasional updates about Place To Stand&apos;s work. We
+              will reply to your message either way, and you can unsubscribe at
+              any time.
+            </Label>
           </div>
           <div className='mt-auto pt-3'>
             <Button

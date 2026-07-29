@@ -94,7 +94,7 @@ export async function sendAudit(
     } as const
   }
 
-  const { name, email, company } = parsed.data
+  const { name, email, company, marketingConsent } = parsed.data
 
   const resend = new Resend(apiKey)
 
@@ -173,7 +173,9 @@ export async function sendAudit(
   }
 
   // Best-effort: add contact to Resend audience. Never blocks success.
-  if (audienceId) {
+  // Requires explicit opt-in — asking for audit results is not consent to
+  // marketing, so an unticked box means we skip the audience entirely.
+  if (audienceId && marketingConsent) {
     const contactPayload: {
       email: string
       audienceId: string
@@ -213,7 +215,7 @@ export async function sendAudit(
     } catch (error) {
       console.error('Resend contact creation failed', error)
     }
-  } else {
+  } else if (!audienceId) {
     console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
   }
 

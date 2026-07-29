@@ -179,15 +179,17 @@ export default function PrivacyPage() {
 
             <LegalSection index={7} title='Email and marketing'>
               <p>
-                When you submit the contact form or complete the audit, we add
-                your name and email address to our mailing list so we can follow
-                up and share occasional updates. Every marketing email includes
-                an unsubscribe link, and unsubscribing takes effect immediately.
+                We add your name and email address to our mailing list only if
+                you tick the opt-in box on the contact form or the audit. The
+                box is unticked by default, and leaving it that way has no
+                effect on your enquiry or your audit results.
               </p>
               <p>
-                Unsubscribing does not stop transactional messages such as
-                replies to your enquiry or your audit results. You can ask us to
-                remove you entirely by emailing {CONTACT_EMAIL}.
+                Every marketing email includes an unsubscribe link, and
+                unsubscribing takes effect immediately. Unsubscribing does not
+                stop transactional messages such as replies to your enquiry or
+                your audit results. You can ask us to remove you entirely by
+                emailing {CONTACT_EMAIL}.
               </p>
             </LegalSection>
 

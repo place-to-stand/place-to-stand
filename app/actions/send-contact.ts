@@ -84,7 +84,8 @@ export async function sendContact(
     } as const
   }
 
-  const { name, email, message, company, website } = parsed.data
+  const { name, email, message, company, website, marketingConsent } =
+    parsed.data
 
   const resend = new Resend(apiKey)
 
@@ -178,7 +179,9 @@ export async function sendContact(
   }
 
   // Best-effort: add contact to Resend audience. Never blocks success.
-  if (audienceId) {
+  // Requires explicit opt-in — replying to an enquiry is not consent to
+  // marketing, so an unticked box means we skip the audience entirely.
+  if (audienceId && marketingConsent) {
     const contactPayload: {
       email: string
       audienceId: string
@@ -218,7 +221,7 @@ export async function sendContact(
     } catch (error) {
       console.error('Resend contact creation failed', error)
     }
-  } else {
+  } else if (!audienceId) {
     console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
   }
 
