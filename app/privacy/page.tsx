@@ -6,13 +6,13 @@ import {
   LegalSection,
 } from '@/src/components/legal/legal-prose'
 
-const UPDATED = 'July 29, 2026'
+const UPDATED = 'July 30, 2026'
 const CONTACT_EMAIL = 'hello@placetostandagency.com'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
-    'How Place To Stand collects, uses, shares, and protects personal information submitted through our website, contact form, and opportunity audit.',
+    'How Place To Stand collects, uses, shares, and protects personal information from our website, contact form, and opportunity audit, including audits that are never finished.',
 }
 
 export default function PrivacyPage() {
@@ -42,7 +42,11 @@ export default function PrivacyPage() {
             </LegalSection>
 
             <LegalSection index={2} title='Information you give us'>
-              <p>We collect information only when you choose to send it.</p>
+              <p>
+                Most of what we hold is information you deliberately send us.
+                The Opportunity Audit is the exception, and we spell that out
+                below.
+              </p>
               <LegalList
                 items={[
                   <>
@@ -52,9 +56,13 @@ export default function PrivacyPage() {
                   </>,
                   <>
                     <strong className='text-text'>Opportunity Audit:</strong>{' '}
-                    your name, email address, optional company name, the answers
-                    you select during the audit, and the recommendations we
-                    generate from them.
+                    your answers are recorded as you move through the audit, not
+                    only when you finish it. If you stop partway or close the
+                    tab, the answers you had given by that point stay with us,
+                    along with how far you got. If you finish and ask for your
+                    results, we also collect your name, email address, and
+                    optional company name, and we store the recommendations we
+                    generated for you.
                   </>,
                   <>
                     <strong className='text-text'>
@@ -64,6 +72,12 @@ export default function PrivacyPage() {
                   </>,
                 ]}
               />
+              <p>
+                We keep unfinished audit responses so we can see where the audit
+                loses people and make it better. They are not used to contact
+                you, and an unfinished audit on its own tells us nothing about
+                who you are.
+              </p>
               <p>
                 We do not ask for payment card details, government identifiers,
                 or any special category data through this website. Please do not
@@ -80,9 +94,20 @@ export default function PrivacyPage() {
               </p>
               <p>
                 Our product analytics run through a first-party subdomain
-                (t.placetostandagency.com). We create a persistent analytics
-                profile only for visitors who identify themselves by submitting
-                a form. Everyone else is measured anonymously.
+                (t.placetostandagency.com). We do not build persistent analytics
+                profiles of visitors. Browsing is measured anonymously.
+              </p>
+              <p>
+                When you send us a form or work through the Opportunity Audit,
+                some of this automatically collected data is stored alongside
+                your submission rather than kept separate. That includes the
+                campaign or link that brought you to the site, such as UTM
+                parameters, a Google Ads click identifier, and the referring
+                page; your browser&apos;s user agent, screen size, time zone,
+                and language; and the identifiers our analytics tool uses for
+                that visit. Those identifiers include a link to a session
+                recording of the visit. If you later give us your email address,
+                it is held on the same record as all of the above.
               </p>
               <p>
                 We also run automated bot detection on form submissions to block
@@ -93,12 +118,19 @@ export default function PrivacyPage() {
 
             <LegalSection index={4} title='Cookies and similar technologies'>
               <p>
-                We use cookies and browser storage for three purposes: to make
-                the site work, to measure how it is used, and to measure the
-                performance of our advertising.
+                We use cookies and browser storage to make the site work, to
+                hold your place in the Opportunity Audit, to measure how the
+                site is used, and to measure the performance of our advertising.
               </p>
               <LegalList
                 items={[
+                  <>
+                    <strong className='text-text'>Audit progress:</strong> if
+                    you start the Opportunity Audit, your answers are saved in
+                    your own browser for up to seven days so you can pick up
+                    where you left off. Clearing your browser storage removes
+                    that copy from your device.
+                  </>,
                   <>
                     <strong className='text-text'>Analytics:</strong> PostHog
                     and Vercel Analytics, used to understand which pages and
@@ -113,8 +145,9 @@ export default function PrivacyPage() {
               />
               <p>
                 You can block or delete cookies through your browser settings.
-                Doing so will not prevent you from using the site. We honour
-                Global Privacy Control signals where your browser sends them.
+                Doing so will not prevent you from using the site, though
+                clearing your browser storage will discard any saved audit
+                progress.
               </p>
             </LegalSection>
 
@@ -126,6 +159,7 @@ export default function PrivacyPage() {
                   'To evaluate whether we are a good fit for your project and to prepare a proposal.',
                   'To send occasional updates about our work, if you have opted in.',
                   'To understand how the site is used and improve it.',
+                  'To see where the Opportunity Audit loses people, including from responses that were never finished, so we can make it clearer.',
                   'To detect and block spam and abuse.',
                   'To meet our legal and accounting obligations.',
                 ]}
@@ -164,8 +198,9 @@ export default function PrivacyPage() {
                     <strong className='text-text'>
                       Our own client portal:
                     </strong>{' '}
-                    infrastructure we operate to track enquiries through to
-                    proposal.
+                    infrastructure we operate to record enquiries and audit
+                    responses, including unfinished ones, and to track them
+                    through to proposal.
                   </>,
                 ]}
               />
@@ -195,10 +230,13 @@ export default function PrivacyPage() {
 
             <LegalSection index={8} title='How long we keep it'>
               <p>
-                Enquiry and audit records are kept for three years from your
-                last contact with us, so we have context if you return. Mailing
-                list entries are kept until you unsubscribe. Analytics data is
-                kept according to our providers&apos; standard retention
+                Enquiry and completed audit records are kept for three years
+                from your last contact with us, so we have context if you
+                return. An unfinished audit response has no contact to measure
+                from, so we keep it for three years from the date you took it.
+                The copy saved in your own browser expires after seven days.
+                Mailing list entries are kept until you unsubscribe. Analytics
+                data is kept according to our providers&apos; standard retention
                 periods. Records we need for tax and accounting are kept as long
                 as the law requires.
               </p>
@@ -208,7 +246,10 @@ export default function PrivacyPage() {
               <p>
                 Wherever you live, you can ask us to give you a copy of the
                 personal information we hold about you, correct it, or delete
-                it. Email {CONTACT_EMAIL} and we will respond within 30 days.
+                it. Email {CONTACT_EMAIL} and we will respond within 30 days. If
+                you took the Opportunity Audit without giving us your email
+                address, that response is not linked to your name, so we may
+                need more detail from you before we can find it.
               </p>
               <p>
                 If you are in the European Economic Area or the United Kingdom,
@@ -217,7 +258,8 @@ export default function PrivacyPage() {
                 protection authority. We process your information on the basis
                 of your consent (for marketing and non-essential cookies), our
                 legitimate interest in operating and improving our business (for
-                analytics and responding to enquiries), and our legal
+                analytics, for recording audit responses including unfinished
+                ones, and for responding to enquiries), and our legal
                 obligations.
               </p>
               <p>
