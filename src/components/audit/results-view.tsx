@@ -23,6 +23,7 @@ import {
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
+import { Checkbox } from '@/src/components/ui/checkbox'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
 import { toast } from '@/src/components/ui/use-toast'
@@ -295,7 +296,12 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
   const [isSuccess, setIsSuccess] = useState(false)
   const form = useForm<AuditLeadValues>({
     resolver: zodResolver(auditLeadSchema),
-    defaultValues: { name: '', email: '', company: '' },
+    defaultValues: {
+      name: '',
+      email: '',
+      company: '',
+      marketingConsent: false,
+    },
   })
 
   const onSubmit = form.handleSubmit(values => {
@@ -404,6 +410,20 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
                   {form.formState.errors.company.message}
                 </p>
               ) : null}
+            </div>
+            <div className='flex items-start gap-3 pt-1'>
+              <Checkbox
+                id='audit-marketing-consent'
+                {...form.register('marketingConsent')}
+              />
+              <Label
+                htmlFor='audit-marketing-consent'
+                className='text-sm leading-snug font-normal text-text-muted'
+              >
+                Send me occasional updates about Place To Stand&apos;s work. You
+                will get your result either way, and you can unsubscribe at any
+                time.
+              </Label>
             </div>
             <Button
               type='submit'
