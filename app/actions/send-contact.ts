@@ -1,13 +1,21 @@
 'use server'
 
+import { headers } from 'next/headers'
 import { Resend } from 'resend'
 import { checkBotId } from 'botid/server'
 import {
   contactSchema,
   type ContactFormValues,
 } from '@/src/lib/validations/contact'
-
-const WEBSITE_SOURCE_DETAIL = 'https://placetostandagency.com/'
+import {
+  buildContactSubmissionPayload,
+  type ContactSubmissionContext,
+} from '@/src/lib/forms/contact-payload'
+import {
+  PORTAL_PATHS,
+  postToPortal,
+  resolvePortalTarget,
+} from '@/src/lib/forms/portal'
 
 export type ContactActionResult =
   | { success: true }
@@ -36,7 +44,12 @@ function isValidUrl(value: string): boolean {
 }
 
 export async function sendContact(
-  values: ContactFormValues
+  values: ContactFormValues,
+  /**
+   * Analytics, campaign, and device context gathered in the browser. Absent when
+   * the client could not collect it; the submission still goes to the portal.
+   */
+  submissionContext?: ContactSubmissionContext
 ): Promise<ContactActionResult> {
   const parsed = contactSchema.safeParse(values)
   if (!parsed.success) {
@@ -74,8 +87,6 @@ export async function sendContact(
 
   const apiKey = process.env.RESEND_API_KEY
   const audienceId = process.env.RESEND_AUDIENCE_ID
-  const portalLeadsEndpoint = process.env.PORTAL_LEADS_ENDPOINT
-  const portalLeadsToken = process.env.PORTAL_LEADS_TOKEN
 
   if (!apiKey) {
     return {
@@ -225,41 +236,43 @@ export async function sendContact(
     console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
   }
 
-  // Best-effort: create lead in portal. Never blocks success.
-  if (portalLeadsEndpoint && portalLeadsToken) {
-    const portalPayload = {
-      name: trimmedName || name,
-      email,
-      company: trimmedCompany,
-      website: validatedWebsite,
-      message: trimmedMessage || null,
-      sourceDetail: WEBSITE_SOURCE_DETAIL,
-    }
+  // Best-effort: record the submission in the portal. Never blocks success.
+  // Leads are promoted from Submissions by hand, so nothing is created directly.
+  if (submissionContext) {
+    const userAgent = (await headers()).get('user-agent')?.slice(0, 1024) ?? null
 
-    try {
-      const portalResponse = await fetch(portalLeadsEndpoint, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${portalLeadsToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(portalPayload),
+    const payload = buildContactSubmissionPayload({
+      context: submissionContext,
+      contact: {
+        name: trimmedName || name,
+        email,
+        company: trimmedCompany,
+        website: validatedWebsite,
+        message: trimmedMessage,
+        marketingConsent: marketingConsent ?? false,
+      },
+      userAgent,
+    })
+
+    const target = resolvePortalTarget(
+      PORTAL_PATHS.contactSubmissions,
+      process.env.CONTACT_INTAKE_TOKEN
+    )
+
+    if (target) {
+      await postToPortal(target, payload, {
+        submissionId: payload.submissionId,
       })
-
-      if (!portalResponse.ok) {
-        const errorText = await portalResponse.text()
-        console.error('Failed to create portal lead', {
-          status: portalResponse.status,
-          statusText: portalResponse.statusText,
-          body: errorText,
-          payload: portalPayload,
-        })
-      }
-    } catch (error) {
-      console.error('Portal lead creation failed', error)
+    } else {
+      // Dev affordance: log rather than silently drop, so the flow is
+      // verifiable locally with no portal running.
+      console.info(
+        'PORTAL_API_BASE_URL/CONTACT_INTAKE_TOKEN not set; contact submission not forwarded',
+        JSON.stringify(payload, null, 2)
+      )
     }
   } else {
-    console.warn('Portal lead endpoint/token not set; skipping portal lead')
+    console.warn('No submission context supplied; skipping portal submission')
   }
 
   return {

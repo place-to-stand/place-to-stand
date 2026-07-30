@@ -21,11 +21,20 @@ import {
   contactSchema,
   type ContactFormValues,
 } from '@/src/lib/validations/contact'
+import {
+  collectSubmissionContext,
+  createSubmissionId,
+  readSubmissionAnalytics,
+} from '@/src/lib/forms/context'
+import type { ContactSubmissionContext } from '@/src/lib/forms/contact-payload'
 
 export function ContactSection() {
   const posthog = usePostHog()
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)
+  // Minted on first submit and kept, so retrying a failed submit upserts the
+  // same portal row instead of creating a duplicate.
+  const [submissionId, setSubmissionId] = useState<string | null>(null)
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -39,33 +48,46 @@ export function ContactSection() {
   })
 
   const onSubmit = form.handleSubmit(values => {
+    const id = submissionId ?? createSubmissionId()
+    if (!submissionId) setSubmissionId(id)
+
+    const { attribution, client } = collectSubmissionContext()
+    const submissionContext: ContactSubmissionContext = {
+      submissionId: id,
+      analytics: readSubmissionAnalytics(),
+      attribution,
+      client,
+    }
+
     startTransition(() => {
-      void sendContact(values).then((result: ContactActionResult) => {
-        if (!result.success) {
-          if (result.errors) {
-            Object.entries(result.errors).forEach(([key, messages]) => {
-              const typedMessages = messages as string[] | undefined
-              const firstMessage = typedMessages?.[0]
-              if (firstMessage) {
-                form.setError(key as keyof ContactFormValues, {
-                  message: firstMessage,
-                })
-              }
+      void sendContact(values, submissionContext).then(
+        (result: ContactActionResult) => {
+          if (!result.success) {
+            if (result.errors) {
+              Object.entries(result.errors).forEach(([key, messages]) => {
+                const typedMessages = messages as string[] | undefined
+                const firstMessage = typedMessages?.[0]
+                if (firstMessage) {
+                  form.setError(key as keyof ContactFormValues, {
+                    message: firstMessage,
+                  })
+                }
+              })
+            }
+
+            toast({
+              variant: 'destructive',
+              title: 'Something went wrong',
+              description: result.message ?? 'Please try again.',
             })
+            return
           }
 
-          toast({
-            variant: 'destructive',
-            title: 'Something went wrong',
-            description: result.message ?? 'Please try again.',
-          })
-          return
+          form.reset()
+          setIsSuccess(true)
+          posthog?.capture('contact_form_submitted')
         }
-
-        form.reset()
-        setIsSuccess(true)
-        posthog?.capture('contact_form_submitted')
-      })
+      )
     })
   })
 

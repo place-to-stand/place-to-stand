@@ -78,16 +78,32 @@ Environment variables:
 
 - `RESEND_API_KEY` — required for contact form submission
 - `RESEND_AUDIENCE_ID` — required; Resend audience that stores new leads
-- `PORTAL_LEADS_ENDPOINT` — required; `https://portal.<domain>/api/integrations/leads-intake`
-- `PORTAL_LEADS_TOKEN` — required; bearer token shared with the portal’s `LEADS_INTAKE_TOKEN`
+- `PORTAL_API_BASE_URL` — required; portal host, e.g. `https://portal.placetostandagency.com`
+- `AUDIT_INTAKE_TOKEN` — required; bearer token for the portal’s audit-responses endpoint
+- `CONTACT_INTAKE_TOKEN` — required; bearer token for the portal’s contact-submissions endpoint
 - `NEXT_PUBLIC_VERCEL_ANALYTICS_ID` — optional if using Vercel Analytics locally
 
-### Lead intake configuration
+### Form submission intake
 
-1. Generate a shared secret with `openssl rand -hex 32` (or another secure random string generator).
-2. Set the generated value as `LEADS_INTAKE_TOKEN` in the portal environment and `PORTAL_LEADS_TOKEN` in this marketing site.
-3. Point `PORTAL_LEADS_ENDPOINT` to the portal instance (e.g. `https://portal.placetostandagency.com/api/integrations/leads-intake`).
-4. Deploy both apps so the marketing site can post newly submitted leads directly into the portal board.
+Both marketing forms land in the portal’s `form_submissions` table, surfaced at **Sales → Submissions**.
+Leads are promoted from there by hand; the marketing site no longer creates portal leads directly.
+
+Every Opportunity Audit attempt is pushed, whether or not the visitor ever hands over an email. Progress
+is sent at each section boundary, again when results are scored, again on lead capture, and via
+`navigator.sendBeacon` when the tab closes mid-wizard. The portal upserts on the audit’s `sessionId`, so
+an attempt occupies one row no matter how many times it is pushed.
+
+1. Set `PORTAL_API_BASE_URL` to the portal instance. The integration paths are appended automatically.
+2. Obtain the two intake tokens out of band and set them as `AUDIT_INTAKE_TOKEN` and
+   `CONTACT_INTAKE_TOKEN`. They are separate so either can be rotated independently. Never commit them.
+
+Leave all three unset in local development. The audit route and the contact action then log each payload
+to the server console instead of forwarding it, so the whole flow is verifiable with no portal running.
+The payload contract lives in `docs/prds/005-form-submissions/README.md`.
+
+The audit beacons through the same-origin `app/api/audit-progress/route.ts` rather than posting to the
+portal from the browser: `navigator.sendBeacon` cannot set an `Authorization` header, and putting an
+intake token in the client bundle would publish a portal secret.
 
 ## Development Workflow
 

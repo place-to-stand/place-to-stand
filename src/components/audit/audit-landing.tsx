@@ -314,6 +314,9 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                     src={member.image}
                     alt={member.name}
                     fill
+                    // The avatar is a fixed 48px at every breakpoint, so this is
+                    // exact rather than a viewport estimate.
+                    sizes='48px'
                     className='object-cover'
                   />
                 </div>
