@@ -34,11 +34,15 @@ import {
   type AuditLeadValues,
 } from '@/src/lib/validations/audit'
 import { sendAudit, type AuditActionResult } from '@/app/actions/send-audit'
+import type { AuditLeadPayload } from '@/src/lib/audit/progress-payload'
 import type { AuditAnswers, AuditResult, PhaseId } from '@/src/lib/audit/types'
 
 interface ResultsViewProps {
   result: AuditResult
   answers: AuditAnswers
+  /** Ties the lead back to the stored audit response row in the portal. */
+  auditSessionId: string | null
+  onCaptured: (lead: AuditLeadPayload) => void
   onRestart: () => void
 }
 
@@ -61,7 +65,13 @@ function shortPhaseName(id: PhaseId): string {
   return PHASES[id].name.split(' & ')[0]
 }
 
-export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
+export function ResultsView({
+  result,
+  answers,
+  auditSessionId,
+  onCaptured,
+  onRestart,
+}: ResultsViewProps) {
   const posthog = usePostHog()
   const { phase, phaseScores, recommendations } = result
   const maxScore = Math.max(1, ...Object.values(phaseScores))
@@ -279,7 +289,12 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
       )}
 
       {/* Capture / CTA */}
-      <CaptureForm result={result} answers={answers} />
+      <CaptureForm
+        result={result}
+        answers={answers}
+        auditSessionId={auditSessionId}
+        onCaptured={onCaptured}
+      />
     </div>
   )
 }
@@ -287,10 +302,17 @@ export function ResultsView({ result, answers, onRestart }: ResultsViewProps) {
 interface CaptureFormProps {
   result: AuditResult
   answers: AuditAnswers
+  auditSessionId: string | null
+  onCaptured: (lead: AuditLeadPayload) => void
 }
 
 /** Emails the respondent their result and hands us the lead. */
-function CaptureForm({ result, answers }: CaptureFormProps) {
+function CaptureForm({
+  result,
+  answers,
+  auditSessionId,
+  onCaptured,
+}: CaptureFormProps) {
   const posthog = usePostHog()
   const [isPending, startTransition] = useTransition()
   const [isSuccess, setIsSuccess] = useState(false)
@@ -306,32 +328,40 @@ function CaptureForm({ result, answers }: CaptureFormProps) {
 
   const onSubmit = form.handleSubmit(values => {
     startTransition(() => {
-      void sendAudit(values, result, answers).then((res: AuditActionResult) => {
-        if (!res.success) {
-          if (res.errors) {
-            Object.entries(res.errors).forEach(([key, messages]) => {
-              const typedMessages = messages as string[] | undefined
-              const firstMessage = typedMessages?.[0]
-              if (firstMessage) {
-                form.setError(key as keyof AuditLeadValues, {
-                  message: firstMessage,
-                })
-              }
+      void sendAudit(values, result, answers, auditSessionId).then(
+        (res: AuditActionResult) => {
+          if (!res.success) {
+            if (res.errors) {
+              Object.entries(res.errors).forEach(([key, messages]) => {
+                const typedMessages = messages as string[] | undefined
+                const firstMessage = typedMessages?.[0]
+                if (firstMessage) {
+                  form.setError(key as keyof AuditLeadValues, {
+                    message: firstMessage,
+                  })
+                }
+              })
+            }
+
+            toast({
+              variant: 'destructive',
+              title: 'Something went wrong',
+              description: res.message ?? 'Please try again.',
             })
+            return
           }
 
-          toast({
-            variant: 'destructive',
-            title: 'Something went wrong',
-            description: res.message ?? 'Please try again.',
+          form.reset()
+          setIsSuccess(true)
+          posthog?.capture('audit_capture_submitted', { phase: result.phase.id })
+          onCaptured({
+            name: values.name.trim(),
+            email: values.email.trim(),
+            company: values.company?.trim() || null,
+            marketingConsent: values.marketingConsent ?? false,
           })
-          return
         }
-
-        form.reset()
-        setIsSuccess(true)
-        posthog?.capture('audit_capture_submitted', { phase: result.phase.id })
-      })
+      )
     })
   })
 

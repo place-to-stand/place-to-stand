@@ -7,11 +7,31 @@ import { useAudit } from '@/src/hooks/use-audit'
 
 /** Top-level state machine for the audit: intro to wizard to results. */
 export function AuditApp() {
-  const { stage, answers, result, isScoring, setAnswer, start, submit, reset } =
-    useAudit()
+  const {
+    stage,
+    answers,
+    result,
+    isScoring,
+    initialStepIndex,
+    sessionId,
+    setAnswer,
+    start,
+    completeStep,
+    submit,
+    markCaptured,
+    reset,
+  } = useAudit()
 
   if (stage === 'results' && result) {
-    return <ResultsView result={result} answers={answers} onRestart={reset} />
+    return (
+      <ResultsView
+        result={result}
+        answers={answers}
+        auditSessionId={sessionId}
+        onCaptured={markCaptured}
+        onRestart={reset}
+      />
+    )
   }
 
   if (stage === 'wizard') {
@@ -19,7 +39,9 @@ export function AuditApp() {
       <AuditWizard
         answers={answers}
         isScoring={isScoring}
+        initialStepIndex={initialStepIndex}
         onAnswer={setAnswer}
+        onStepComplete={completeStep}
         onSubmit={submit}
         onExit={reset}
       />

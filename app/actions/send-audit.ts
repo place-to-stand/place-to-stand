@@ -13,8 +13,6 @@ import {
   renderAuditTeamEmail,
 } from '@/src/lib/emails/audit-emails'
 
-const WEBSITE_SOURCE_DETAIL = 'https://placetostandagency.com/audit'
-
 export type AuditActionResult =
   | { success: true }
   | {
@@ -46,7 +44,9 @@ function summarizeResult(result: AuditResult): string[] {
 export async function sendAudit(
   values: AuditLeadValues,
   result: AuditResult,
-  answers: AuditAnswers
+  answers: AuditAnswers,
+  /** Links this lead to its stored audit response row in the portal. */
+  auditSessionId?: string | null
 ): Promise<AuditActionResult> {
   const parsed = auditLeadSchema.safeParse(values)
   if (!parsed.success) {
@@ -84,8 +84,6 @@ export async function sendAudit(
 
   const apiKey = process.env.RESEND_API_KEY
   const audienceId = process.env.RESEND_AUDIENCE_ID
-  const portalLeadsEndpoint = process.env.PORTAL_LEADS_ENDPOINT
-  const portalLeadsToken = process.env.PORTAL_LEADS_TOKEN
 
   if (!apiKey) {
     return {
@@ -113,6 +111,10 @@ export async function sendAudit(
   }
 
   detailLines.push('', 'Opportunity Audit result:', ...resultLines)
+
+  if (auditSessionId) {
+    detailLines.push('', `Audit session: ${auditSessionId}`)
+  }
 
   const answerGroups = summarizeAnswers(answers)
   if (answerGroups.length > 0) {
@@ -219,42 +221,10 @@ export async function sendAudit(
     console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
   }
 
-  // Best-effort: create lead in portal. Never blocks success.
-  if (portalLeadsEndpoint && portalLeadsToken) {
-    const portalPayload = {
-      name: trimmedName || name,
-      email,
-      company: trimmedCompany,
-      website: null,
-      message: ['Opportunity Audit result:', ...resultLines].join('\n'),
-      sourceDetail: WEBSITE_SOURCE_DETAIL,
-    }
-
-    try {
-      const portalResponse = await fetch(portalLeadsEndpoint, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${portalLeadsToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(portalPayload),
-      })
-
-      if (!portalResponse.ok) {
-        const errorText = await portalResponse.text()
-        console.error('Failed to create portal lead', {
-          status: portalResponse.status,
-          statusText: portalResponse.statusText,
-          body: errorText,
-          payload: portalPayload,
-        })
-      }
-    } catch (error) {
-      console.error('Portal lead creation failed', error)
-    }
-  } else {
-    console.warn('Portal lead endpoint/token not set; skipping portal lead')
-  }
+  // The portal record for this audit is created by the progress pushes in
+  // `useAudit`, not here. A successful capture fires a `captured` push carrying
+  // the lead details, which upserts onto the same `sessionId` row. Nothing in
+  // this action talks to the portal.
 
   return {
     success: true,

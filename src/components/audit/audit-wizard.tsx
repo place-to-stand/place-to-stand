@@ -14,7 +14,10 @@ import type { AnswerValue, AuditAnswers } from '@/src/lib/audit/types'
 interface AuditWizardProps {
   answers: AuditAnswers
   isScoring: boolean
+  /** Where to open, non-zero when resuming a stored session. */
+  initialStepIndex?: number
   onAnswer: (questionId: string, value: AnswerValue) => void
+  onStepComplete: (stepIndex: number) => void
   onSubmit: () => void
   onExit: () => void
 }
@@ -23,12 +26,16 @@ interface AuditWizardProps {
 export function AuditWizard({
   answers,
   isScoring,
+  initialStepIndex = 0,
   onAnswer,
+  onStepComplete,
   onSubmit,
   onExit,
 }: AuditWizardProps) {
   const posthog = usePostHog()
-  const [stepIndex, setStepIndex] = useState(0)
+  const [stepIndex, setStepIndex] = useState(() =>
+    Math.min(Math.max(initialStepIndex, 0), SECTIONS.length - 1)
+  )
   const [showErrors, setShowErrors] = useState(false)
 
   const section = SECTIONS[stepIndex]
@@ -53,6 +60,7 @@ export function AuditWizard({
       step: stepIndex + 1,
       section: section.id,
     })
+    onStepComplete(stepIndex)
     if (isLastStep) {
       onSubmit()
     } else {
