@@ -161,12 +161,16 @@ export async function sendContact(
     'The Place To Stand Team'
   )
 
-  // Send emails first — this is the core deliverable. If it fails, surface the
+  // Send emails first: this is the core deliverable. If it fails, surface the
   // error so the user can retry; everything below is best-effort enrichment.
+  //
+  // Resend does NOT throw on API errors. It resolves with `{ data: null, error }`
+  // for anything non-2xx and only rejects on a network-level failure, so an
+  // unchecked `await` here would report success while sending nothing.
   try {
     const emailLines = [...detailLines]
 
-    await resend.emails.send({
+    const teamEmail = await resend.emails.send({
       from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
       to: ['hello@placetostandagency.com'],
       replyTo: email,
@@ -174,13 +178,29 @@ export async function sendContact(
       text: emailLines.join('\n'),
     })
 
-    await resend.emails.send({
+    if (teamEmail.error) {
+      console.error('Resend rejected the team notification', teamEmail.error)
+      return {
+        success: false,
+        message: 'Failed to send your message. Please try again in a moment.',
+      } as const
+    }
+
+    const clientEmail = await resend.emails.send({
       from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
       to: [email],
       replyTo: 'hello@placetostandagency.com',
       subject: 'Thanks for contacting Place To Stand',
       text: clientEmailLines.join('\n'),
     })
+
+    if (clientEmail.error) {
+      console.error('Resend rejected the client email', clientEmail.error)
+      return {
+        success: false,
+        message: 'Failed to send your message. Please try again in a moment.',
+      } as const
+    }
   } catch (error) {
     console.error('Email sending failed', error)
     return {

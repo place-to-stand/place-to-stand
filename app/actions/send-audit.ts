@@ -13,10 +13,25 @@ import {
   renderAuditTeamEmail,
 } from '@/src/lib/emails/audit-emails'
 
+/**
+ * Why a submission failed. Returned to the client so it can report the cause to
+ * PostHog: without this every failure looks identical to an ordinary drop-off.
+ */
+export type AuditFailureReason =
+  | 'validation'
+  | 'botid_blocked'
+  | 'botid_error'
+  | 'not_configured'
+  /** Resend accepted the request and answered with an error object. */
+  | 'email_rejected'
+  /** The request never reached Resend, or it threw for another reason. */
+  | 'email_threw'
+
 export type AuditActionResult =
   | { success: true }
   | {
       success: false
+      reason: AuditFailureReason
       message?: string
       errors?: Partial<Record<keyof AuditLeadValues, string[]>>
     }
@@ -52,6 +67,7 @@ export async function sendAudit(
   if (!parsed.success) {
     return {
       success: false,
+      reason: 'validation',
       errors: parsed.error.flatten().fieldErrors,
     } as const
   }
@@ -68,6 +84,7 @@ export async function sendAudit(
 
       return {
         success: false,
+        reason: 'botid_blocked',
         message:
           "We couldn't verify your request. Please refresh and try again.",
       } as const
@@ -77,6 +94,7 @@ export async function sendAudit(
 
     return {
       success: false,
+      reason: 'botid_error',
       message:
         'Unable to verify your request at this time. Please try again later.',
     } as const
@@ -88,6 +106,7 @@ export async function sendAudit(
   if (!apiKey) {
     return {
       success: false,
+      reason: 'not_configured',
       message: 'Email service is not configured. Please try again later.',
     } as const
   }
@@ -140,10 +159,16 @@ export async function sendAudit(
     'The Place To Stand Team',
   ]
 
-  // Send emails first — this is the core deliverable. If it fails, surface the
+  // Send emails first: this is the core deliverable. If it fails, surface the
   // error so the user can retry; everything below is best-effort enrichment.
+  //
+  // Resend does NOT throw on API errors. It resolves with `{ data: null, error }`
+  // for anything non-2xx (rate limit, suppressed recipient, domain problem), and
+  // only rejects on a network-level failure. An unchecked `await` here reports
+  // success while sending nothing, which is exactly the bug this replaced. Check
+  // `.error` on every send.
   try {
-    await resend.emails.send({
+    const teamEmail = await resend.emails.send({
       from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
       to: ['hello@placetostandagency.com'],
       replyTo: email,
@@ -158,7 +183,16 @@ export async function sendAudit(
       }),
     })
 
-    await resend.emails.send({
+    if (teamEmail.error) {
+      console.error('Resend rejected the team notification', teamEmail.error)
+      return {
+        success: false,
+        reason: 'email_rejected',
+        message: 'Failed to send your audit. Please try again in a moment.',
+      } as const
+    }
+
+    const clientEmail = await resend.emails.send({
       from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
       to: [email],
       replyTo: 'hello@placetostandagency.com',
@@ -166,10 +200,23 @@ export async function sendAudit(
       text: clientEmailLines.join('\n'),
       html: renderAuditClientEmail({ greetingName, result }),
     })
+
+    // The team mail already landed, so a retry sends them a duplicate. A
+    // duplicate lead notification is strictly better than the visitor believing
+    // a result is on its way when none is.
+    if (clientEmail.error) {
+      console.error('Resend rejected the client email', clientEmail.error)
+      return {
+        success: false,
+        reason: 'email_rejected',
+        message: 'Failed to send your audit. Please try again in a moment.',
+      } as const
+    }
   } catch (error) {
     console.error('Email sending failed', error)
     return {
       success: false,
+      reason: 'email_threw',
       message: 'Failed to send confirmation email. Please try again later.',
     } as const
   }
