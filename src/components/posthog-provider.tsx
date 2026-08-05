@@ -40,6 +40,10 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
         capture_pageleave: true,
         autocapture: true,
         capture_dead_clicks: true,
+        // Pinned here rather than left to the PostHog project setting: error
+        // tracking is load-bearing for the audit funnel, and a UI toggle would
+        // otherwise switch it off with nothing in the repo to explain it.
+        capture_exceptions: true,
         before_send: dropInjectedScriptExceptions,
       })
     }

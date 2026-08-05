@@ -1,4 +1,12 @@
 import { initBotId } from 'botid/client/core'
+import { installTranslationSafeDom } from '@/src/lib/translation-safe-dom'
+
+/**
+ * Runs before the app hydrates, so React never gets the chance to hit a
+ * translator-rewritten node with an unguarded `removeChild`. See the module for
+ * why this is needed and what it costs.
+ */
+installTranslationSafeDom()
 
 /**
  * Protect only the routes whose server actions actually call `checkBotId()`.

@@ -327,10 +327,22 @@ function CaptureForm({
   })
 
   const onSubmit = form.handleSubmit(values => {
+    const lead: AuditLeadPayload = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+      company: values.company?.trim() || null,
+      marketingConsent: values.marketingConsent ?? false,
+    }
+
     startTransition(() => {
-      void sendAudit(values, result, answers, auditSessionId).then(
-        (res: AuditActionResult) => {
+      void sendAudit(values, result, answers, auditSessionId)
+        .then((res: AuditActionResult) => {
           if (!res.success) {
+            posthog?.capture('audit_capture_failed', {
+              reason: res.reason,
+              phase: result.phase.id,
+            })
+
             if (res.errors) {
               Object.entries(res.errors).forEach(([key, messages]) => {
                 const typedMessages = messages as string[] | undefined
@@ -341,6 +353,17 @@ function CaptureForm({
                   })
                 }
               })
+            }
+
+            // The email failed but the details are real and already typed. Push
+            // the lead to the portal anyway so it is recoverable by hand, rather
+            // than losing a finished audit to a Resend outage. Validation and
+            // bot blocks are excluded: those details are not trustworthy.
+            if (
+              res.reason === 'email_rejected' ||
+              res.reason === 'email_threw'
+            ) {
+              onCaptured(lead)
             }
 
             toast({
@@ -354,14 +377,22 @@ function CaptureForm({
           form.reset()
           setIsSuccess(true)
           posthog?.capture('audit_capture_submitted', { phase: result.phase.id })
-          onCaptured({
-            name: values.name.trim(),
-            email: values.email.trim(),
-            company: values.company?.trim() || null,
-            marketingConsent: values.marketingConsent ?? false,
+          onCaptured(lead)
+        })
+        .catch((error: unknown) => {
+          // The action itself rejected (deploy skew, cold-start failure). Without
+          // this the button stays stuck on "Sending..." with no explanation.
+          posthog?.capture('audit_capture_failed', {
+            reason: 'action_threw',
+            phase: result.phase.id,
           })
-        }
-      )
+          posthog?.captureException(error)
+          toast({
+            variant: 'destructive',
+            title: 'Something went wrong',
+            description: 'Please try again.',
+          })
+        })
     })
   })
 

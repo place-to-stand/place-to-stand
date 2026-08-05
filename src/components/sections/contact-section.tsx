@@ -60,9 +60,11 @@ export function ContactSection() {
     }
 
     startTransition(() => {
-      void sendContact(values, submissionContext).then(
-        (result: ContactActionResult) => {
+      void sendContact(values, submissionContext)
+        .then((result: ContactActionResult) => {
           if (!result.success) {
+            posthog?.capture('contact_form_failed')
+
             if (result.errors) {
               Object.entries(result.errors).forEach(([key, messages]) => {
                 const typedMessages = messages as string[] | undefined
@@ -86,8 +88,18 @@ export function ContactSection() {
           form.reset()
           setIsSuccess(true)
           posthog?.capture('contact_form_submitted')
-        }
-      )
+        })
+        .catch((error: unknown) => {
+          // The action itself rejected. Without this the button stays stuck on
+          // its pending state with no explanation.
+          posthog?.capture('contact_form_failed', { reason: 'action_threw' })
+          posthog?.captureException(error)
+          toast({
+            variant: 'destructive',
+            title: 'Something went wrong',
+            description: 'Please try again.',
+          })
+        })
     })
   })
 

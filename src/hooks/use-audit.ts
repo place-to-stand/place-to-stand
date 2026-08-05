@@ -19,12 +19,14 @@ import {
   createAuditSession,
   getAuditSessionServerSnapshot,
   getAuditSessionSnapshot,
+  isResultRecoverable,
   isResumable,
   setAuditSession,
   subscribeToAuditSession,
   type AuditSession,
   type AuditStatus,
 } from '@/src/lib/audit/session'
+import { toast } from '@/src/components/ui/use-toast'
 import { sendAuditProgress } from '@/src/lib/audit/track-progress'
 import type {
   AnswerValue,
@@ -78,8 +80,16 @@ export function useAudit(): UseAudit {
   const [result, setResult] = useState<AuditResult | null>(null)
   const [isScoring, setIsScoring] = useState(false)
 
+  // A completed session outranks a resumable one: someone who finished and then
+  // lost the page (a crash, a closed tab) should land back on their results,
+  // not be asked to take the audit again.
   const stage: AuditStage =
-    chosenStage ?? (isResumable(session) ? 'wizard' : 'intro')
+    chosenStage ??
+    (isResultRecoverable(session)
+      ? 'results'
+      : isResumable(session)
+        ? 'wizard'
+        : 'intro')
 
   const completedAtRef = useRef<string | null>(null)
   /** True when answers changed since the last push, so pagehide can skip. */
@@ -141,6 +151,40 @@ export function useAudit(): UseAudit {
     })
   }, [posthog])
 
+  // Rebuild the result for a session that was already scored but whose result is
+  // no longer in memory. `runAudit` is pure over the stored answers, so this is
+  // exact, not an approximation. Deliberately has no cleanup flag: under
+  // `reactStrictMode` the effect runs twice, and a `cancelled` flag combined
+  // with the ref guard would permanently swallow the only in-flight restore.
+  const restoreAttemptedRef = useRef(false)
+  useEffect(() => {
+    if (restoreAttemptedRef.current || result) return
+
+    const stored = getAuditSessionSnapshot()
+    if (!isResultRecoverable(stored) || !stored) return
+
+    restoreAttemptedRef.current = true
+    void runAudit(stored.answers)
+      .then(scored => {
+        setResult(scored)
+        completedAtRef.current = stored.updatedAt
+        posthog?.capture('audit_results_restored', {
+          phase: scored.phase.id,
+          answers_count: Object.keys(stored.answers).length,
+        })
+      })
+      .catch(() => {
+        // Scored once but unscoreable now. Send them somewhere usable rather
+        // than leaving the results stage empty forever.
+        setChosenStage('intro')
+        toast({
+          variant: 'destructive',
+          title: 'We could not rebuild your results',
+          description: 'Your answers are saved. Start the audit to see them.',
+        })
+      })
+  }, [result, posthog])
+
   const setAnswer = useCallback(
     (questionId: string, value: AnswerValue) => {
       commit(prev => ({
@@ -157,6 +201,28 @@ export function useAudit(): UseAudit {
   )
 
   const start = useCallback(() => {
+    const stored = getAuditSessionSnapshot()
+
+    // Never mint a second session on top of answers we could still use. This is
+    // reachable when a scored session failed to rebuild: without the reopen the
+    // visitor's answers would be overwritten and the portal would gain a
+    // duplicate row for the same attempt. `reset()` still nulls the session, so
+    // a deliberate "Start over" continues to yield a genuinely fresh id.
+    if (stored && Object.keys(stored.answers).length > 0) {
+      const reopened = commit(prev => ({ ...prev, status: 'in_progress' }))
+
+      setResult(null)
+      completedAtRef.current = null
+      dirtyRef.current = false
+      setChosenStage('wizard')
+
+      posthog?.capture('audit_started', { reopened: true })
+      if (reopened) {
+        push({ session: reopened, status: 'in_progress', trigger: 'started' })
+      }
+      return
+    }
+
     const fresh = createAuditSession()
     setAuditSession(fresh)
 
@@ -168,7 +234,7 @@ export function useAudit(): UseAudit {
 
     posthog?.capture('audit_started')
     push({ session: fresh, status: 'in_progress', trigger: 'started' })
-  }, [posthog, push])
+  }, [posthog, push, commit])
 
   const completeStep = useCallback(
     (stepIndex: number) => {

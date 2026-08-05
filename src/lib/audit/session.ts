@@ -23,8 +23,9 @@ export const AUDIT_SESSION_KEY = 'pts_audit_session_v1'
 export const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000
 
 /**
- * How far the attempt got. Also the resume gate: only `in_progress` sessions are
- * restored, so finishing the audit and coming back later starts a fresh one.
+ * How far the attempt got. Also the resume gate, in two parts: `in_progress`
+ * reopens the wizard (`isResumable`), `completed` rebuilds the results
+ * (`isResultRecoverable`). A `captured` attempt is finished and starts fresh.
  * The portal only ever advances a row along this order, never backwards.
  */
 export type AuditStatus = 'in_progress' | 'completed' | 'captured' | 'abandoned'
@@ -174,6 +175,28 @@ export function isResumable(session: AuditSession | null): boolean {
   return (
     session !== null &&
     session.status === 'in_progress' &&
+    Object.keys(session.answers).length > 0
+  )
+}
+
+/**
+ * Whether a stored session carries enough to rebuild the result the visitor
+ * already earned. `runAudit` is pure over `answers`, so a scored result is
+ * always re-derivable and never needs storing: persisting it would freeze the
+ * phase and service copy into localStorage for the session's whole lifetime.
+ *
+ * This is what makes a crash at the wizard-to-results swap survivable. Without
+ * it, a `completed` session fails `isResumable` and the visitor lands back on
+ * the intro with their answers stranded.
+ *
+ * `completed` only, never `captured`: that visitor already has the result in
+ * their inbox, and reopening them onto a blank capture form invites a duplicate
+ * submission and a second pair of emails.
+ */
+export function isResultRecoverable(session: AuditSession | null): boolean {
+  return (
+    session !== null &&
+    session.status === 'completed' &&
     Object.keys(session.answers).length > 0
   )
 }
