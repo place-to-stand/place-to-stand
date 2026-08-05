@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import type { ReactNode } from 'react'
+import { Suspense, type ReactNode } from 'react'
 import Script from 'next/script'
 import { Space_Grotesk, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
@@ -10,6 +10,7 @@ import { Header } from '@/src/components/layout/header'
 import { Footer } from '@/src/components/layout/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
+import { AttributionCapture } from '@/src/components/attribution-capture'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -78,6 +79,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           sourceSans.variable
         )}
       >
+        {/*
+          A sibling of PostHogProvider, not a child: that provider returns its
+          children untouched when NEXT_PUBLIC_POSTHOG_KEY is unset, so nesting
+          this inside it would stop attribution capture running in local dev.
+        */}
+        <Suspense fallback={null}>
+          <AttributionCapture />
+        </Suspense>
         <PostHogProvider>
           <div className='relative flex min-h-screen flex-col overflow-x-hidden'>
             <Header />
