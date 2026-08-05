@@ -8,6 +8,13 @@
  * Client-only: reads `window`, `document`, and the PostHog browser client.
  */
 import posthog from 'posthog-js'
+import {
+  hasCampaign,
+  nullable,
+  parseCampaignParams,
+  readStoredAttribution,
+  type CampaignParams,
+} from './attribution-store'
 
 export type ViewportClass = 'mobile' | 'tablet' | 'desktop'
 
@@ -75,26 +82,30 @@ function classifyViewport(width: number): ViewportClass {
   return 'desktop'
 }
 
-/** Empty string and whitespace both mean "not present" for our purposes. */
-function nullable(value: string | null | undefined): string | null {
-  const trimmed = value?.trim()
-  return trimmed ? trimmed : null
-}
-
 /**
  * Snapshot campaign, referrer, and device context from the current page.
  *
- * Honest limitation: UTM params are read from the URL as it stands right now.
- * Someone who lands on `/?utm_source=x` and then navigates before submitting
- * arrives with a bare URL, so their attribution is lost. Site-wide first-touch
- * capture is a separate change.
+ * Attribution resolves as **current URL → stored first touch → null**, the
+ * stored record coming from `<AttributionCapture />`. That fallback is the whole
+ * point: the ads land on `/` but conversions happen on `/audit` and `/contact`,
+ * so by the time this runs the URL is usually bare.
+ *
+ * The campaign block resolves as a unit rather than field by field. Pairing a
+ * `utm_source` read off this URL with a `gclid` left over from an older visit
+ * would describe a campaign that never ran.
  */
 export function collectSubmissionContext(): SubmissionContext {
   if (!isBrowser()) {
     return { attribution: EMPTY_ATTRIBUTION, client: EMPTY_CLIENT }
   }
 
-  const params = new URLSearchParams(window.location.search)
+  const urlCampaign = parseCampaignParams(window.location.search)
+
+  // A URL carrying campaign params describes this visit directly and wins;
+  // otherwise the stored record supplies the whole first-touch block.
+  const firstTouch = hasCampaign(urlCampaign) ? null : readStoredAttribution()
+  const campaign: CampaignParams = firstTouch ?? urlCampaign
+
   const width = window.innerWidth || window.screen?.width || 0
 
   let timezone: string | null = null
@@ -106,14 +117,17 @@ export function collectSubmissionContext(): SubmissionContext {
 
   return {
     attribution: {
-      utmSource: nullable(params.get('utm_source')),
-      utmMedium: nullable(params.get('utm_medium')),
-      utmCampaign: nullable(params.get('utm_campaign')),
-      utmTerm: nullable(params.get('utm_term')),
-      utmContent: nullable(params.get('utm_content')),
-      gclid: nullable(params.get('gclid')),
-      referrer: nullable(document.referrer),
-      landingPath: window.location.pathname,
+      utmSource: campaign.utmSource,
+      utmMedium: campaign.utmMedium,
+      utmCampaign: campaign.utmCampaign,
+      utmTerm: campaign.utmTerm,
+      utmContent: campaign.utmContent,
+      gclid: campaign.gclid,
+      // Both follow the campaign block's source, so all eight fields describe
+      // the same visit. `landingPath` now means the page the visitor arrived
+      // on, not the page they happened to submit from.
+      referrer: firstTouch?.referrer ?? nullable(document.referrer),
+      landingPath: firstTouch?.landingPath ?? window.location.pathname,
     },
     client: {
       viewport: width ? classifyViewport(width) : null,
