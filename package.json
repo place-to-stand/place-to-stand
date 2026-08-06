@@ -46,7 +46,7 @@
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.10",
     "lighthouse": "13.4.1",
-    "postcss": "8.5.19",
+    "postcss": "8.5.23",
     "prettier": "3.9.5",
     "prettier-plugin-tailwindcss": "0.8.1",
     "puppeteer-core": "25.4.0",
