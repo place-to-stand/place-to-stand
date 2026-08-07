@@ -171,7 +171,7 @@ export async function sendContact(
     const emailLines = [...detailLines]
 
     const teamEmail = await resend.emails.send({
-      from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+      from: 'Place To Stand <hello@send.placetostandagency.com>',
       to: ['hello@placetostandagency.com'],
       replyTo: email,
       subject: `New inquiry from ${name}`,
@@ -187,7 +187,7 @@ export async function sendContact(
     }
 
     const clientEmail = await resend.emails.send({
-      from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+      from: 'Place To Stand <hello@send.placetostandagency.com>',
       to: [email],
       replyTo: 'hello@placetostandagency.com',
       subject: 'Thanks for contacting Place To Stand',
