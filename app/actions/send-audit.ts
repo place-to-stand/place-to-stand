@@ -169,7 +169,7 @@ export async function sendAudit(
   // `.error` on every send.
   try {
     const teamEmail = await resend.emails.send({
-      from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+      from: 'Place To Stand <hello@send.placetostandagency.com>',
       to: ['hello@placetostandagency.com'],
       replyTo: email,
       subject: `New Opportunity Audit from ${name}`,
@@ -193,7 +193,7 @@ export async function sendAudit(
     }
 
     const clientEmail = await resend.emails.send({
-      from: 'Place To Stand <noreply@notifications.placetostandagency.com>',
+      from: 'Place To Stand <hello@send.placetostandagency.com>',
       to: [email],
       replyTo: 'hello@placetostandagency.com',
       subject: 'Your Place To Stand Opportunity Audit',
