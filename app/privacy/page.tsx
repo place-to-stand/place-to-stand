@@ -6,7 +6,7 @@ import {
   LegalSection,
 } from '@/src/components/legal/legal-prose'
 
-const UPDATED = 'July 30, 2026'
+const UPDATED = 'August 25, 2026'
 const CONTACT_EMAIL = 'hello@placetostandagency.com'
 
 export const metadata: Metadata = {
@@ -137,9 +137,15 @@ export default function PrivacyPage() {
                     features people actually use.
                   </>,
                   <>
-                    <strong className='text-text'>Advertising:</strong> a Google
-                    Ads conversion tag, used to attribute enquiries to the ads
-                    that produced them.
+                    <strong className='text-text'>Advertising:</strong> Google
+                    Tag Manager loads a Google Ads conversion tag, used to
+                    attribute enquiries to the ads that produced them. When you
+                    successfully submit the contact form or the audit, the email
+                    address you entered is hashed in your browser and the hash
+                    is sent to Google to improve that matching (Google calls
+                    this enhanced conversions). Google receives the hash, not
+                    the address itself, and can only match it against an
+                    account it already knows.
                   </>,
                 ]}
               />
@@ -192,7 +198,8 @@ export default function PrivacyPage() {
                   </>,
                   <>
                     <strong className='text-text'>Google:</strong> advertising
-                    conversion measurement.
+                    conversion measurement, including a hashed copy of your
+                    email address when you submit a form.
                   </>,
                   <>
                     <strong className='text-text'>
