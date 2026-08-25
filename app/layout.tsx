@@ -68,18 +68,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           })(window,document,'script','dataLayer','GTM-MS2BB27R');
         `}
       </Script>
-      <Script
-        src='https://www.googletagmanager.com/gtag/js?id=AW-18356348929'
-        strategy='afterInteractive'
-      />
-      <Script id='google-tag' strategy='afterInteractive'>
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'AW-18356348929');
-        `}
-      </Script>
       <body
         className={cn(
           'min-h-screen overflow-x-hidden bg-bg text-text',
