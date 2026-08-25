@@ -26,6 +26,7 @@ import {
   createSubmissionId,
   readSubmissionAnalytics,
 } from '@/src/lib/forms/context'
+import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
 import type { ContactSubmissionContext } from '@/src/lib/forms/contact-payload'
 
 export function ContactSection() {
@@ -88,6 +89,7 @@ export function ContactSection() {
           form.reset()
           setIsSuccess(true)
           posthog?.capture('contact_form_submitted')
+          pushLeadConversion('contact_form_submitted', values.email)
         })
         .catch((error: unknown) => {
           // The action itself rejected. Without this the button stays stuck on
