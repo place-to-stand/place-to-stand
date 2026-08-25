@@ -28,6 +28,7 @@ import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
 import { toast } from '@/src/components/ui/use-toast'
 import { cn } from '@/src/lib/utils'
+import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
 import { PHASE_ORDER, PHASES } from '@/src/lib/audit/phases'
 import {
   auditLeadSchema,
@@ -377,6 +378,7 @@ function CaptureForm({
           form.reset()
           setIsSuccess(true)
           posthog?.capture('audit_capture_submitted', { phase: result.phase.id })
+          pushLeadConversion('audit_lead_submitted', lead.email)
           onCaptured(lead)
         })
         .catch((error: unknown) => {
