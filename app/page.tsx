@@ -15,9 +15,24 @@ import {
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Place To Stand',
+  url: 'https://placetostandagency.com/',
+  logo: 'https://placetostandagency.com/icon.png',
+  email: 'hello@placetostandagency.com',
+  description:
+    'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
+}
+
 export default function HomePage() {
   return (
     <main className='flex-1 pb-32'>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
       <HeroSection />
       <ClientLogosSection />
       <WhoWeWorkWithSection />

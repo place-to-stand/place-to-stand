@@ -34,15 +34,15 @@ const sourceSans = Source_Sans_3({
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
   title: {
-    default: 'Place To Stand | Software Agency',
+    default: 'Place To Stand | Custom Software & AI Development Agency',
     template: '%s | Place To Stand',
   },
   description:
-    'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
+    'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
   openGraph: {
-    title: 'Place To Stand | Software Agency',
+    title: 'Place To Stand | Custom Software & AI Development Agency',
     description:
-      'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
+      'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
     url: 'https://placetostandagency.com/',
     siteName: 'Place To Stand',
     locale: 'en_US',
@@ -50,9 +50,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Place To Stand | Software Agency',
+    title: 'Place To Stand | Custom Software & AI Development Agency',
     description:
-      'Off-the-shelf software is built for everyone. We build purpose-built software, automation, and AI around how your business actually works.',
+      'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
   },
 }
 
