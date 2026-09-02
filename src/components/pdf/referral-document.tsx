@@ -323,7 +323,7 @@ export function ReferralDocument({ date }: { date: string }) {
                     <Text style={styles.body}>
                       <Text style={styles.strong}>{service.name}</Text>
                       {' — '}
-                      {service.detail}
+                      {service.items.join(' · ')}
                     </Text>
                   </View>
                 ))}

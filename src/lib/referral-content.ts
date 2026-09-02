@@ -24,24 +24,29 @@ export const referralContent = {
     services: [
       {
         name: 'Software development',
-        detail: 'web, mobile, and desktop apps, APIs, internal tools',
+        items: ['Web, mobile, and desktop apps', 'APIs', 'Internal tools'],
       },
       {
         name: 'Workflow systems',
-        detail:
-          'portals, task tracking, approvals, integrations, live dashboards',
+        items: [
+          'Portals',
+          'Task tracking',
+          'Approvals',
+          'Integrations',
+          'Live dashboards',
+        ],
       },
       {
         name: 'Data intelligence',
-        detail: 'pipelines, analytics, AI-powered reporting',
+        items: ['Pipelines', 'Analytics', 'AI-powered reporting'],
       },
       {
         name: 'Strategic advisory',
-        detail: 'fractional CTO, roadmaps, AI readiness',
+        items: ['Fractional CTO', 'Roadmaps', 'AI readiness'],
       },
       {
         name: 'Managed services',
-        detail: 'uptime, security, updates after launch',
+        items: ['Uptime', 'Security', 'Updates after launch'],
       },
     ],
   },

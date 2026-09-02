@@ -60,18 +60,29 @@ export default function ReferralPage() {
         </div>
         <div className='relative'>
           <BlueprintCorners size={16} />
-          <ul className='grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-5'>
+          <ul className='flex flex-col gap-px border border-border bg-border'>
             {c.whoWeAre.services.map(service => (
               <li
                 key={service.name}
-                className='flex flex-col gap-2 bg-bg-card p-5 md:p-6'
+                className='grid gap-3 bg-bg-card p-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-baseline md:gap-grid-1 md:px-8 md:py-6'
               >
-                <span className='font-headline text-sm font-bold tracking-tight text-accent uppercase'>
+                <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
                   {service.name}
-                </span>
-                <p className='text-sm leading-relaxed text-text-muted'>
-                  {service.detail}
-                </p>
+                </h3>
+                <ul className='flex flex-wrap gap-x-6 gap-y-2'>
+                  {service.items.map(item => (
+                    <li
+                      key={item}
+                      className='flex items-center gap-2 text-sm text-text-muted'
+                    >
+                      <span
+                        className='h-1.5 w-1.5 shrink-0 bg-accent'
+                        aria-hidden
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>
@@ -127,27 +138,25 @@ export default function ReferralPage() {
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.howItWorks.label}
         </h2>
-        <div className='relative'>
-          <BlueprintCorners size={16} />
-          <ol className='grid gap-px border border-border bg-border md:grid-cols-3'>
-            {c.howItWorks.steps.map(step => (
-              <li
-                key={step.number}
-                className='flex flex-col gap-4 bg-bg-card p-5 md:p-8'
-              >
-                <span className='font-mono text-[10px] tracking-[0.2em] text-accent'>
-                  {step.number}
-                </span>
-                <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                  {step.title}
-                </h3>
-                <p className='text-sm leading-relaxed text-text-muted'>
-                  {step.body}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <ol className='grid gap-6 md:grid-cols-3'>
+          {c.howItWorks.steps.map(step => (
+            <li
+              key={step.number}
+              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+            >
+              <BlueprintCorners size={12} />
+              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
+                {step.number}
+              </span>
+              <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
+                {step.title}
+              </h3>
+              <p className='text-sm leading-relaxed text-text-muted'>
+                {step.body}
+              </p>
+            </li>
+          ))}
+        </ol>
       </AnimatedSection>
 
       {/* How we work */}
@@ -157,8 +166,12 @@ export default function ReferralPage() {
         </h2>
         <ul className='grid gap-6 md:grid-cols-3'>
           {c.howWeWork.points.map(point => (
-            <li key={point.title} className='flex flex-col gap-2'>
-              <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
+            <li
+              key={point.title}
+              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+            >
+              <BlueprintCorners size={12} />
+              <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {point.title}
               </h3>
               <p className='text-sm leading-relaxed text-text-muted'>
