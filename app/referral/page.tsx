@@ -191,41 +191,6 @@ export default function ReferralPage() {
           </div>
         </div>
       </AnimatedSection>
-
-      {/* Contacts */}
-      <AnimatedSection className='py-0'>
-        <div className='flex flex-col gap-grid-1 border-t border-border pt-grid-2 md:flex-row md:items-start md:justify-between'>
-          <div className='flex flex-col gap-1'>
-            <span className='font-headline text-xl font-bold tracking-tight text-text'>
-              {c.footer.company}
-            </span>
-            <span className='text-sm text-text-muted'>
-              {c.footer.locations}
-            </span>
-            <a
-              href={c.footer.siteUrl}
-              className='font-mono text-[11px] tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-accent'
-            >
-              {c.footer.site}
-            </a>
-          </div>
-          <ul className='flex flex-col gap-3'>
-            {c.footer.contacts.map(contact => (
-              <li key={contact.email} className='flex flex-col'>
-                <span className='text-sm font-semibold text-text'>
-                  {contact.name}
-                </span>
-                <a
-                  href={`mailto:${contact.email}`}
-                  className='font-mono text-[11px] tracking-[0.1em] text-text-muted transition-colors hover:text-accent'
-                >
-                  {contact.email}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </AnimatedSection>
     </main>
   )
 }

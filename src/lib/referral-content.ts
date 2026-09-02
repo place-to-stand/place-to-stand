@@ -84,7 +84,7 @@ export const referralContent = {
       {
         number: '01',
         title: 'Intro us by email.',
-        body: 'One line is enough: "You two should talk." Copy jason@placetostandagency.com.',
+        body: 'One line is enough: "You two should talk." Copy hello@placetostandagency.com.',
       },
       {
         number: '02',
