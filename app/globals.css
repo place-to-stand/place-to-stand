@@ -728,7 +728,8 @@ html {
   height: 20px;
 }
 
-/* ─── Blueprint section annotation label ─── */
+/* ─── Blueprint section annotation label ───
+   Callout label with a double-chevron terminal mark. */
 .bp-label {
   font-size: 10px;
   letter-spacing: 0.2em;
@@ -736,6 +737,15 @@ html {
   color: var(--color-accent);
   display: inline-flex;
   align-items: center;
+  gap: 6px;
+}
+
+.bp-label::after {
+  content: '\00BB';
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: 0;
+  opacity: 0.7;
 }
 
 /* ─── Blueprint dashed dimension line ─── */
