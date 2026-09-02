@@ -175,7 +175,6 @@ export default function ReferralPage() {
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3'>
-              <span className='bp-label font-mono'>{c.audit.label}</span>
               <p className='max-w-md text-base leading-relaxed text-text md:text-lg'>
                 {c.audit.body}
               </p>
