@@ -728,48 +728,14 @@ html {
   height: 20px;
 }
 
-/* ─── Blueprint section annotation label ───
-   Architectural callout label with a leader line + terminal mark.
-*/
+/* ─── Blueprint section annotation label ─── */
 .bp-label {
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);
-  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-
-.bp-label::after {
-  content: '';
-  width: 4px;
-  height: 4px;
-  border: 1px solid var(--color-accent);
-  opacity: 0.5;
-}
-
-/* Hero label icon: after the label reveals (~1.2s), settle into a slow,
-   subtle blink so it reads as a "live" indicator. */
-@keyframes bp-blink {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 0.12;
-  }
-}
-
-[data-pts-hero] .bp-label::after {
-  animation: bp-blink 2.6s ease-in-out 1.2s infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-pts-hero] .bp-label::after {
-    animation: none;
-  }
 }
 
 /* ─── Blueprint dashed dimension line ─── */
