@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function ReferralPage() {
   return (
-    <main className='flex-1 pt-grid-4 pb-grid-4'>
+    <main className='flex-1 pt-grid-4 pb-grid-3'>
       {/* Hero */}
       <AnimatedSection
         priority
@@ -198,7 +198,7 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Audit callout */}
-      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
+      <AnimatedSection className='flex flex-col gap-grid-2 pt-grid-3 pb-0'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.audit.heading}
         </h2>
@@ -218,7 +218,7 @@ export default function ReferralPage() {
             </Button>
           </div>
         </div>
-        <p className='pt-grid-1 text-center text-sm leading-relaxed text-text-muted'>
+        <p className='pt-grid-2 text-center text-sm leading-relaxed text-text-muted'>
           {c.join.note}{' '}
           <TrackedLink
             href={c.join.href}
