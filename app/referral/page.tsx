@@ -152,9 +152,9 @@ export default function ReferralPage() {
 
       {/* How we work */}
       <AnimatedSection className='flex flex-col gap-12'>
-        <div className='flex flex-col gap-4'>
-          <span className='bp-label font-mono'>{c.howWeWork.label}</span>
-        </div>
+        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+          {c.howWeWork.label}
+        </h2>
         <ul className='grid gap-6 md:grid-cols-3'>
           {c.howWeWork.points.map(point => (
             <li key={point.title} className='flex flex-col gap-2'>
