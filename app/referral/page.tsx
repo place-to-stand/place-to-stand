@@ -129,12 +129,9 @@ export default function ReferralPage() {
             {c.whoToSend.quotes.map(quote => (
               <li
                 key={quote}
-                className='flex items-start gap-3 border-l border-accent/40 pl-4 text-sm leading-relaxed text-text-muted'
+                className='border-l border-accent/40 pl-4 text-sm leading-relaxed text-text-muted'
               >
-                <span className='font-headline text-accent' aria-hidden>
-                  &ldquo;
-                </span>
-                <span>{quote}&rdquo;</span>
+                &ldquo;{quote}&rdquo;
               </li>
             ))}
           </ul>
