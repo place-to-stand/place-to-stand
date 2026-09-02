@@ -362,7 +362,9 @@ export function ReferralDocument({ date }: { date: string }) {
                   </View>
                 ))}
               </View>
-              <Text style={styles.note}>{c.join.pdfNote}</Text>
+              <Text style={styles.note}>
+                {c.join.note} {c.join.noteCta}
+              </Text>
             </View>
           </View>
 

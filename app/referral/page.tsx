@@ -172,24 +172,6 @@ export default function ReferralPage() {
         </ol>
       </AnimatedSection>
 
-      {/* Join the program */}
-      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
-        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
-          {c.join.heading}
-        </h2>
-        <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
-          <BlueprintCorners size={20} all colorClassName='border-accent' />
-          <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
-            <p className='max-w-xl text-base leading-relaxed text-text md:text-lg'>
-              {c.join.body}
-            </p>
-            <Button asChild size='lg' className='w-full shrink-0 sm:w-auto'>
-              <a href={c.join.mailto}>{c.join.buttonLabel}</a>
-            </Button>
-          </div>
-        </div>
-      </AnimatedSection>
-
       {/* How we work */}
       <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
@@ -234,6 +216,15 @@ export default function ReferralPage() {
             </Button>
           </div>
         </div>
+        <p className='max-w-2xl text-sm leading-relaxed text-text-muted'>
+          {c.join.note}{' '}
+          <a
+            href={c.join.mailto}
+            className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+          >
+            {c.join.noteCta}
+          </a>
+        </p>
       </AnimatedSection>
     </main>
   )

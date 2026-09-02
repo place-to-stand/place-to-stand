@@ -160,14 +160,11 @@ export const referralContent = {
   },
 
   join: {
-    heading: 'Join the program before you refer.',
-    body: 'We only pay referrers who have been accepted into the program and set up in our system as 1099 contractors. Email us to join. We will send a W-9, confirm you are in, and you can start sending clients our way.',
-    buttonLabel: 'Join the referral program',
+    note: 'Payouts go only to referrers who have been accepted into the program and set up as 1099 contractors.',
+    noteCta: 'Email hello@placetostandagency.com to join.',
     email: 'hello@placetostandagency.com',
     mailto:
       'mailto:hello@placetostandagency.com?subject=Join%20the%20referral%20program',
-    pdfNote:
-      'Payouts go only to referrers who have been accepted into the program and set up as 1099 contractors. Email hello@placetostandagency.com to join.',
   },
 
   audit: {
