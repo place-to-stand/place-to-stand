@@ -40,14 +40,22 @@ export default function ReferralPage() {
             {c.hero.body}
           </p>
         </div>
-        <div>
+        <div className='flex flex-col gap-grid-half sm:flex-row sm:items-center sm:gap-grid-1'>
+          <Button asChild size='lg' className='w-full sm:w-auto'>
+            <a href={c.join.mailto}>{c.hero.joinLabel}</a>
+          </Button>
           {/*
             A plain anchor rather than next/link: the target is a route handler
             that streams a file, so client-side navigation (and prefetching)
             would generate the PDF once for the router and again for the
             browser's fallback hard navigation.
           */}
-          <Button asChild size='lg' className='w-full sm:w-auto'>
+          <Button
+            asChild
+            size='lg'
+            variant='outline'
+            className='w-full border-2 sm:w-auto'
+          >
             <a href='/referral/pdf' download>
               {c.hero.downloadLabel}
             </a>
@@ -162,6 +170,24 @@ export default function ReferralPage() {
             </li>
           ))}
         </ol>
+      </AnimatedSection>
+
+      {/* Join the program */}
+      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
+        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+          {c.join.heading}
+        </h2>
+        <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
+          <BlueprintCorners size={20} all colorClassName='border-accent' />
+          <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
+            <p className='max-w-xl text-base leading-relaxed text-text md:text-lg'>
+              {c.join.body}
+            </p>
+            <Button asChild size='lg' className='w-full shrink-0 sm:w-auto'>
+              <a href={c.join.mailto}>{c.join.buttonLabel}</a>
+            </Button>
+          </div>
+        </div>
       </AnimatedSection>
 
       {/* How we work */}

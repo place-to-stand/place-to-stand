@@ -218,6 +218,15 @@ const styles = StyleSheet.create({
     width: 16,
     marginTop: 1.5,
   },
+  note: {
+    borderLeftWidth: 1,
+    borderLeftColor: color.accent,
+    paddingLeft: 6,
+    marginTop: 2,
+    fontSize: 8,
+    lineHeight: 1.35,
+    color: color.text,
+  },
   callout: {
     backgroundColor: color.panel,
     borderWidth: 1,
@@ -353,6 +362,7 @@ export function ReferralDocument({ date }: { date: string }) {
                   </View>
                 ))}
               </View>
+              <Text style={styles.note}>{c.join.pdfNote}</Text>
             </View>
           </View>
 
