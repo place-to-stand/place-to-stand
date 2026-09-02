@@ -7,7 +7,7 @@ export const referralContent = {
   meta: {
     title: 'Referral Program',
     description:
-      'Not 10% of the first project. Ten percent of their lifetime billing, for as long as they stay a client. A $20k build that turns into $60k of work over time pays you $6,000.',
+      'Refer a client to Place To Stand and earn 10% of their lifetime billing, for as long as they stay a client. No cap, no expiration.',
   },
 
   hero: {
@@ -26,9 +26,10 @@ export const referralContent = {
         name: 'Software development',
         items: [
           'Web, mobile, and desktop apps',
-          'E-commerce',
+          'E-commerce and Shopify',
           'APIs',
           'Internal tools',
+          'Legacy system rebuilds',
         ],
       },
       {
@@ -37,6 +38,9 @@ export const referralContent = {
           'Portals',
           'CRM',
           'ERP',
+          'Inventory',
+          'Scheduling and booking',
+          'Quoting and invoicing',
           'Task tracking',
           'Approvals',
           'Integrations',
@@ -44,16 +48,41 @@ export const referralContent = {
         ],
       },
       {
+        name: 'Automation and AI',
+        items: [
+          'Workflow automation',
+          'AI agents',
+          'Chatbots',
+          'Document processing',
+        ],
+      },
+      {
         name: 'Data intelligence',
-        items: ['Pipelines', 'Analytics', 'AI-powered reporting'],
+        items: [
+          'Pipelines',
+          'Analytics',
+          'Forecasting',
+          'AI-powered reporting',
+        ],
       },
       {
         name: 'Strategic advisory',
-        items: ['Fractional CTO', 'Roadmaps', 'AI readiness'],
+        items: [
+          'Fractional CTO',
+          'Roadmaps',
+          'AI readiness',
+          'Tool and vendor selection',
+        ],
       },
       {
         name: 'Managed services',
-        items: ['Uptime', 'Security', 'Updates after launch'],
+        items: [
+          'Hosting',
+          'Uptime',
+          'Security',
+          'Updates after launch',
+          'Ongoing support',
+        ],
       },
     ],
   },
@@ -124,13 +153,14 @@ export const referralContent = {
       },
       {
         title: 'They own the software.',
-        body: 'No per-seat fees, no feature bloat, all their data in one place.',
+        body: 'No per-seat fees, no subscription fees to us, no feature bloat, all their data in one place.',
       },
     ],
   },
 
   audit: {
-    body: "Not sure if someone's a fit? Send them the free two-minute audit. No email required, results on screen.",
+    heading: "Not sure if someone's a fit?",
+    body: 'Send them the free two-minute audit. No email required, results on screen.',
     buttonLabel: 'Start the free audit',
     href: '/audit',
     url: 'https://placetostandagency.com/audit',

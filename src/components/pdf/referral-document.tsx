@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
     color: color.text,
     fontFamily: 'Source Sans 3',
     fontSize: 8.5,
-    paddingTop: 36,
-    paddingBottom: 32,
+    paddingTop: 28,
+    paddingBottom: 26,
     paddingHorizontal: 36,
     lineHeight: 1.4,
   },
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 18,
+    marginBottom: 10,
   },
   label: {
     fontFamily: 'Courier',
@@ -79,11 +79,11 @@ const styles = StyleSheet.create({
   heroHeadline: {
     fontFamily: 'Space Grotesk',
     fontWeight: 700,
-    fontSize: 24,
+    fontSize: 22,
     lineHeight: 1.02,
-    letterSpacing: -0.5,
-    maxWidth: 470,
-    marginBottom: 10,
+    letterSpacing: -0.4,
+    maxWidth: 440,
+    marginBottom: 8,
   },
   heroBody: {
     fontSize: 10,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   rule: {
     borderTopWidth: 1,
     borderTopColor: color.border,
-    marginVertical: 16,
+    marginVertical: 10,
   },
   columns: {
     flexDirection: 'row',
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   column: {
     flex: 1,
     flexDirection: 'column',
-    gap: 16,
+    gap: 12,
   },
   section: {
     flexDirection: 'column',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: 8.5,
-    lineHeight: 1.45,
+    lineHeight: 1.4,
     color: color.muted,
   },
   strong: {
@@ -144,14 +144,14 @@ const styles = StyleSheet.create({
   },
   cards: {
     flexDirection: 'column',
-    gap: 5,
+    gap: 4,
     marginTop: 2,
   },
   card: {
     backgroundColor: color.panel,
     borderWidth: 1,
     borderColor: color.border,
-    paddingVertical: 7,
+    paddingVertical: 6,
     paddingHorizontal: 9,
     flexDirection: 'row',
     gap: 8,
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   },
   quotes: {
     flexDirection: 'column',
-    gap: 3,
+    gap: 2,
     marginTop: 3,
   },
   quote: {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     borderLeftColor: 'rgba(181, 245, 66, 0.4)',
     paddingLeft: 6,
     fontSize: 8,
-    lineHeight: 1.35,
+    lineHeight: 1.3,
     color: color.muted,
   },
   steps: {
@@ -222,9 +222,9 @@ const styles = StyleSheet.create({
     backgroundColor: color.panel,
     borderWidth: 1,
     borderColor: color.accent,
-    padding: 10,
+    padding: 9,
     flexDirection: 'column',
-    gap: 6,
+    gap: 5,
   },
   button: {
     backgroundColor: color.accent,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     borderTopWidth: 1,
     borderTopColor: color.border,
-    paddingTop: 10,
+    paddingTop: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
@@ -268,10 +268,13 @@ const styles = StyleSheet.create({
     color: color.muted,
     textDecoration: 'none',
   },
+  contacts: {
+    flexDirection: 'row',
+    gap: 18,
+  },
   contact: {
     flexDirection: 'column',
     alignItems: 'flex-end',
-    marginBottom: 3,
   },
   contactName: {
     fontSize: 8,
@@ -351,18 +354,6 @@ export function ReferralDocument({ date }: { date: string }) {
                 ))}
               </View>
             </View>
-
-            <View style={styles.section}>
-              <Label>{c.howWeWork.label}</Label>
-              <View style={styles.list}>
-                {c.howWeWork.points.map(point => (
-                  <Text key={point.title} style={styles.body}>
-                    <Text style={styles.strong}>{point.title}</Text>{' '}
-                    {point.body}
-                  </Text>
-                ))}
-              </View>
-            </View>
           </View>
 
           {/* Right column */}
@@ -397,10 +388,22 @@ export function ReferralDocument({ date }: { date: string }) {
               </View>
             </View>
 
+            <View style={styles.section}>
+              <Label>{c.howWeWork.label}</Label>
+              <View style={styles.list}>
+                {c.howWeWork.points.map(point => (
+                  <Text key={point.title} style={styles.body}>
+                    <Text style={styles.strong}>{point.title}</Text>{' '}
+                    {point.body}
+                  </Text>
+                ))}
+              </View>
+            </View>
             <View style={styles.callout}>
-              <Text style={[styles.body, { color: color.text }]}>
-                {c.audit.body}
-              </Text>
+              <View>
+                <Text style={styles.cardTitle}>{c.audit.heading}</Text>
+                <Text style={styles.body}>{c.audit.body}</Text>
+              </View>
               <Link src={c.audit.url} style={styles.button}>
                 <Text style={styles.buttonText}>{c.audit.buttonLabel}</Text>
               </Link>
@@ -418,7 +421,7 @@ export function ReferralDocument({ date }: { date: string }) {
               {c.footer.site}
             </Link>
           </View>
-          <View>
+          <View style={styles.contacts}>
             {c.footer.contacts.map(contact => (
               <View key={contact.email} style={styles.contact}>
                 <Text style={styles.contactName}>{contact.name}</Text>

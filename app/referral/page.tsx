@@ -8,9 +8,14 @@ import { referralContent as c } from '@/src/lib/referral-content'
 export const metadata: Metadata = {
   title: c.meta.title,
   description: c.meta.description,
+  alternates: { canonical: '/referral' },
   openGraph: {
     title: `${c.meta.title} | Place To Stand`,
     description: c.meta.description,
+    url: '/referral',
+    siteName: 'Place To Stand',
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
     title: `${c.meta.title} | Place To Stand`,
@@ -186,15 +191,16 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Audit callout */}
-      <AnimatedSection className='py-grid-3'>
+      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
+        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+          {c.audit.heading}
+        </h2>
         <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
-            <div className='flex flex-col gap-grid-half'>
-              <p className='max-w-md text-base leading-relaxed text-text md:text-lg'>
-                {c.audit.body}
-              </p>
-            </div>
+            <p className='max-w-md text-base leading-relaxed text-text md:text-lg'>
+              {c.audit.body}
+            </p>
             <Button asChild size='lg' className='w-full shrink-0 sm:w-auto'>
               <TrackedLink
                 href={c.audit.href}
