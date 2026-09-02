@@ -76,6 +76,8 @@ export interface AuditLeadPayload {
   name: string
   email: string
   company: string | null
+  /** Optional free-text note from the capture form; the portal stores it as `message`. */
+  message: string | null
   marketingConsent: boolean
 }
 

@@ -26,6 +26,7 @@ import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
+import { Textarea } from '@/src/components/ui/textarea'
 import { toast } from '@/src/components/ui/use-toast'
 import { cn } from '@/src/lib/utils'
 import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
@@ -323,6 +324,7 @@ function CaptureForm({
       name: '',
       email: '',
       company: '',
+      message: '',
       marketingConsent: false,
     },
   })
@@ -332,6 +334,7 @@ function CaptureForm({
       name: values.name.trim(),
       email: values.email.trim(),
       company: values.company?.trim() || null,
+      message: values.message?.trim() || null,
       marketingConsent: values.marketingConsent ?? false,
     }
 
@@ -377,7 +380,9 @@ function CaptureForm({
 
           form.reset()
           setIsSuccess(true)
-          posthog?.capture('audit_capture_submitted', { phase: result.phase.id })
+          posthog?.capture('audit_capture_submitted', {
+            phase: result.phase.id,
+          })
           pushLeadConversion('audit_lead_submitted', lead.email)
           onCaptured(lead)
         })
@@ -474,6 +479,24 @@ function CaptureForm({
                 </p>
               ) : null}
             </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='audit-message'>
+                Anything else we should know? (optional)
+              </Label>
+              <Textarea
+                id='audit-message'
+                rows={3}
+                className='min-h-24 p-3'
+                placeholder="What you're looking for, or what's not working today."
+                {...form.register('message')}
+                aria-invalid={!!form.formState.errors.message}
+              />
+              {form.formState.errors.message ? (
+                <p className='text-sm text-red-400'>
+                  {form.formState.errors.message.message}
+                </p>
+              ) : null}
+            </div>
             <div className='flex items-start gap-3 pt-1'>
               <Checkbox
                 id='audit-marketing-consent'
@@ -481,7 +504,7 @@ function CaptureForm({
               />
               <Label
                 htmlFor='audit-marketing-consent'
-                className='text-sm leading-snug font-normal text-text-muted'
+                className='text-sm leading-snug font-normal tracking-normal text-text-muted normal-case'
               >
                 Send me occasional updates about Place To Stand&apos;s work. You
                 will get your result either way, and you can unsubscribe at any

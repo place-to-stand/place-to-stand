@@ -89,7 +89,7 @@ export const referralContent = {
   },
 
   whoToSend: {
-    label: 'Who to send us',
+    label: 'Who to refer',
     cards: [
       {
         title: 'The lean mid-market company',
@@ -161,8 +161,8 @@ export const referralContent = {
     note: 'Payouts require referrers to be accepted into the program and set up as 1099 contractors.',
     noteCta: 'Contact us to join.',
     pdfCta: 'Join at placetostandagency.com/contact.',
-    href: '/contact',
-    url: 'https://placetostandagency.com/contact',
+    href: '/contact?subject=Referral%20Program',
+    url: 'https://placetostandagency.com/contact?subject=Referral%20Program',
   },
 
   audit: {

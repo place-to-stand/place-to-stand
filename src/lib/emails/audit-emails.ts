@@ -183,10 +183,11 @@ export function renderAuditTeamEmail(opts: {
   name: string
   email: string
   company: string | null
+  message: string | null
   result: AuditResult
   answers: AuditAnswers
 }): string {
-  const { name, email, company, result, answers } = opts
+  const { name, email, company, message, result, answers } = opts
   const detailRow = (k: string, v: string) =>
     `<tr>
       <td style="padding:3px 0;font-family:${FONT_MONO};font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:${C.muted};width:90px;vertical-align:top;">${escapeHtml(k)}</td>
@@ -197,6 +198,7 @@ export function renderAuditTeamEmail(opts: {
     ${detailRow('Name', escapeHtml(name))}
     ${detailRow('Email', `<a href="mailto:${escapeHtml(email)}" style="color:${C.heading};text-decoration:underline;">${escapeHtml(email)}</a>`)}
     ${company ? detailRow('Company', escapeHtml(company)) : ''}
+    ${message ? detailRow('Context', escapeHtml(message).replace(/\r?\n/g, '<br>')) : ''}
   </table>`
 
   const body = `${details}

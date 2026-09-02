@@ -107,7 +107,7 @@ export default function ReferralPage() {
         </div>
       </AnimatedSection>
 
-      {/* Who to send us */}
+      {/* Who to refer */}
       <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.whoToSend.label}

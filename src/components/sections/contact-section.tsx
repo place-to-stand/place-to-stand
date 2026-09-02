@@ -1,7 +1,14 @@
 'use client'
 
-import { useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePostHog } from 'posthog-js/react'
 
@@ -28,6 +35,31 @@ import {
 } from '@/src/lib/forms/context'
 import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
 import type { ContactSubmissionContext } from '@/src/lib/forms/contact-payload'
+import {
+  CONTACT_SUBJECT_OTHER,
+  CONTACT_SUBJECTS,
+  subjectFromQuery,
+} from '@/src/lib/forms/contact-subjects'
+
+/**
+ * Applies `?subject=` from the URL to the form. Lives in its own component so
+ * `useSearchParams` sits behind a `<Suspense>` boundary and the contact page
+ * stays statically rendered (same pattern as `AttributionCapture`).
+ */
+function SubjectPrefill({
+  onSubject,
+}: {
+  onSubject: (subject: string) => void
+}) {
+  const searchParams = useSearchParams()
+  const subject = searchParams.get('subject')
+
+  useEffect(() => {
+    if (subject) onSubject(subject)
+  }, [subject, onSubject])
+
+  return null
+}
 
 export function ContactSection() {
   const posthog = usePostHog()
@@ -43,10 +75,24 @@ export function ContactSection() {
       email: '',
       company: '',
       website: '',
+      // Empty until the visitor picks one; the placeholder option carries it.
+      subject: '' as ContactFormValues['subject'],
+      subjectOther: '',
       message: '',
       marketingConsent: false,
     },
   })
+  const selectedSubject = useWatch({ control: form.control, name: 'subject' })
+
+  const applySubjectFromQuery = useCallback(
+    (raw: string) => {
+      const prefill = subjectFromQuery(raw)
+      if (!prefill) return
+      form.setValue('subject', prefill.subject)
+      form.setValue('subjectOther', prefill.subjectOther)
+    },
+    [form]
+  )
 
   const onSubmit = form.handleSubmit(values => {
     const id = submissionId ?? createSubmissionId()
@@ -119,6 +165,9 @@ export function ContactSection() {
           Send a message and we&apos;ll get back to you within one business day.
         </p>
       </div>
+      <Suspense fallback={null}>
+        <SubjectPrefill onSubject={applySubjectFromQuery} />
+      </Suspense>
       <div className='relative mx-auto w-full max-w-2xl gap-10 border border-border p-6'>
         <BlueprintCorners size={16} />
         <form
@@ -156,34 +205,75 @@ export function ContactSection() {
               </p>
             ) : null}
           </div>
+          <div className='grid gap-3 md:grid-cols-2'>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='company'>Company Name (optional)</Label>
+              <Input
+                id='company'
+                {...form.register('company')}
+                aria-invalid={!!form.formState.errors.company}
+              />
+              {form.formState.errors.company ? (
+                <p className='text-sm text-red-400'>
+                  {form.formState.errors.company.message}
+                </p>
+              ) : null}
+            </div>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='website'>Website (optional)</Label>
+              <Input
+                id='website'
+                type='url'
+                placeholder='https://example.com'
+                {...form.register('website')}
+                aria-invalid={!!form.formState.errors.website}
+              />
+              {form.formState.errors.website ? (
+                <p className='text-sm text-red-400'>
+                  {form.formState.errors.website.message}
+                </p>
+              ) : null}
+            </div>
+          </div>
           <div className='flex flex-col gap-2'>
-            <Label htmlFor='company'>Company Name (optional)</Label>
-            <Input
-              id='company'
-              {...form.register('company')}
-              aria-invalid={!!form.formState.errors.company}
-            />
-            {form.formState.errors.company ? (
+            <Label htmlFor='subject'>Subject</Label>
+            <select
+              id='subject'
+              {...form.register('subject')}
+              aria-invalid={!!form.formState.errors.subject}
+              className='flex h-12 w-full border border-border bg-bg-card px-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+            >
+              <option value='' disabled>
+                Choose a subject
+              </option>
+              {CONTACT_SUBJECTS.map(subject => (
+                <option key={subject} value={subject}>
+                  {subject}
+                </option>
+              ))}
+            </select>
+            {form.formState.errors.subject ? (
               <p className='text-sm text-red-400'>
-                {form.formState.errors.company.message}
+                {form.formState.errors.subject.message}
               </p>
             ) : null}
           </div>
-          <div className='flex flex-col gap-2'>
-            <Label htmlFor='website'>Website (optional)</Label>
-            <Input
-              id='website'
-              type='url'
-              placeholder='https://example.com'
-              {...form.register('website')}
-              aria-invalid={!!form.formState.errors.website}
-            />
-            {form.formState.errors.website ? (
-              <p className='text-sm text-red-400'>
-                {form.formState.errors.website.message}
-              </p>
-            ) : null}
-          </div>
+          {selectedSubject === CONTACT_SUBJECT_OTHER ? (
+            <div className='flex flex-col gap-2'>
+              <Input
+                id='subjectOther'
+                aria-label='Subject'
+                placeholder="Tell us what it's about"
+                {...form.register('subjectOther')}
+                aria-invalid={!!form.formState.errors.subjectOther}
+              />
+              {form.formState.errors.subjectOther ? (
+                <p className='text-sm text-red-400'>
+                  {form.formState.errors.subjectOther.message}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
           <div className='flex flex-col gap-2'>
             <Label htmlFor='message'>Message</Label>
             <Textarea
@@ -205,7 +295,7 @@ export function ContactSection() {
             />
             <Label
               htmlFor='marketingConsent'
-              className='text-sm leading-snug font-normal text-text-muted'
+              className='text-sm leading-snug font-normal tracking-normal text-text-muted normal-case'
             >
               Send me occasional updates about Place To Stand&apos;s work. We
               will reply to your message either way, and you can unsubscribe at

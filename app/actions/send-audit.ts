@@ -111,7 +111,7 @@ export async function sendAudit(
     } as const
   }
 
-  const { name, email, company, marketingConsent } = parsed.data
+  const { name, email, company, message, marketingConsent } = parsed.data
 
   const resend = new Resend(apiKey)
 
@@ -119,6 +119,7 @@ export async function sendAudit(
   const [firstName, ...restOfName] = trimmedName.split(/\s+/)
   const lastName = restOfName.join(' ').trim()
   const trimmedCompany = company?.trim() || null
+  const trimmedMessage = message?.trim() || null
   const greetingName = firstName || trimmedName || 'there'
 
   const resultLines = summarizeResult(result)
@@ -127,6 +128,14 @@ export async function sendAudit(
 
   if (trimmedCompany) {
     detailLines.push(`Company: ${trimmedCompany}`)
+  }
+
+  if (trimmedMessage) {
+    detailLines.push(
+      '',
+      'Additional context:',
+      ...trimmedMessage.split(/\r?\n/)
+    )
   }
 
   detailLines.push('', 'Opportunity Audit result:', ...resultLines)
@@ -178,6 +187,7 @@ export async function sendAudit(
         name,
         email,
         company: trimmedCompany,
+        message: trimmedMessage,
         result,
         answers,
       }),

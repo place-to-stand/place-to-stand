@@ -16,6 +16,7 @@ import {
   postToPortal,
   resolvePortalTarget,
 } from '@/src/lib/forms/portal'
+import { resolveContactSubject } from '@/src/lib/forms/contact-subjects'
 
 export type ContactActionResult =
   | { success: true }
@@ -106,6 +107,7 @@ export async function sendContact(
   const trimmedCompany = company?.trim() || null
   const rawWebsite = website?.trim() || null
   const trimmedMessage = message.trim()
+  const subject = resolveContactSubject(parsed.data)
   const greetingName = firstName || trimmedName || 'there'
 
   // Normalize website (add https:// if missing) then validate
@@ -117,7 +119,11 @@ export async function sendContact(
   // Keep original for display in emails
   const trimmedWebsite = rawWebsite
 
-  const detailLines = [`Name: ${name}`, `Email: ${email}`]
+  const detailLines = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Subject: ${subject}`,
+  ]
 
   if (trimmedCompany) {
     detailLines.push(`Company: ${trimmedCompany}`)
@@ -138,6 +144,7 @@ export async function sendContact(
     '',
     `Name: ${name}`,
     `Email: ${email}`,
+    `Subject: ${subject}`,
   ]
 
   if (trimmedCompany) {
@@ -174,7 +181,7 @@ export async function sendContact(
       from: 'Place To Stand <hello@send.placetostandagency.com>',
       to: ['hello@placetostandagency.com'],
       replyTo: email,
-      subject: `New inquiry from ${name}`,
+      subject: `New inquiry from ${name}: ${subject}`,
       text: emailLines.join('\n'),
     })
 
@@ -259,7 +266,8 @@ export async function sendContact(
   // Best-effort: record the submission in the portal. Never blocks success.
   // Leads are promoted from Submissions by hand, so nothing is created directly.
   if (submissionContext) {
-    const userAgent = (await headers()).get('user-agent')?.slice(0, 1024) ?? null
+    const userAgent =
+      (await headers()).get('user-agent')?.slice(0, 1024) ?? null
 
     const payload = buildContactSubmissionPayload({
       context: submissionContext,
@@ -268,6 +276,7 @@ export async function sendContact(
         email,
         company: trimmedCompany,
         website: validatedWebsite,
+        subject,
         message: trimmedMessage,
         marketingConsent: marketingConsent ?? false,
       },
