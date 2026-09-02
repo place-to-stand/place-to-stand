@@ -30,15 +30,14 @@ export function Footer() {
           </p>
         </div>
 
-        {/* Site nav — inset from the container edge so it doesn't hug the right */}
+        {/* Site nav — flush with the container edge, right-aligned so it lines
+            up with the legal links below and the header CTA above */}
         <nav
-          className='flex flex-col gap-grid-half md:pr-grid-2 lg:pr-grid-6'
+          className='flex flex-col gap-grid-half md:items-end md:text-right'
           aria-label='Footer'
         >
-          <span className='font-mono text-[11px] font-semibold tracking-[0.2em] text-text uppercase'>
-            Explore
-          </span>
-          <ul className='flex flex-col gap-2'>
+          <span className='bp-label font-mono'>Explore</span>
+          <ul className='flex flex-col gap-2 md:items-end'>
             {NAV_LINKS.map(link => (
               <li key={link.href}>
                 <Link
@@ -63,6 +62,12 @@ export function Footer() {
             className='flex items-center gap-6 text-xs font-semibold tracking-[0.1em] uppercase'
             aria-label='Legal'
           >
+            <Link
+              href='/referral'
+              className='text-text-muted transition-colors hover:text-accent'
+            >
+              Referral Program
+            </Link>
             <Link
               href='/privacy'
               className='text-text-muted transition-colors hover:text-accent'
