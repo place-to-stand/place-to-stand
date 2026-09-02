@@ -15,6 +15,7 @@ export const referralContent = {
     headline: 'Send us a client. Earn 10% of everything they ever pay us.',
     body: 'Not 10% of the first project. Ten percent of their lifetime billing, for as long as they stay a client. A $20k build that turns into $60k of work over time pays you $6,000.',
     downloadLabel: 'Download PDF One-pager',
+    joinLabel: 'Join the referral program',
   },
 
   whoWeAre: {
@@ -156,6 +157,14 @@ export const referralContent = {
         body: 'No per-seat fees, no subscription fees to us, no feature bloat, all their data in one place.',
       },
     ],
+  },
+
+  join: {
+    note: 'Payouts require referrers to be accepted into the program and set up as 1099 contractors.',
+    noteCta: 'Contact us to join.',
+    pdfCta: 'Join at placetostandagency.com/contact.',
+    href: '/contact',
+    url: 'https://placetostandagency.com/contact',
   },
 
   audit: {

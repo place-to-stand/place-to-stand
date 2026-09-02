@@ -40,14 +40,24 @@ export default function ReferralPage() {
             {c.hero.body}
           </p>
         </div>
-        <div>
+        <div className='flex flex-col gap-grid-half sm:flex-row sm:items-center sm:gap-grid-1'>
+          <Button asChild size='lg' className='w-full sm:w-auto'>
+            <TrackedLink href={c.join.href} location='referral-hero'>
+              {c.hero.joinLabel}
+            </TrackedLink>
+          </Button>
           {/*
             A plain anchor rather than next/link: the target is a route handler
             that streams a file, so client-side navigation (and prefetching)
             would generate the PDF once for the router and again for the
             browser's fallback hard navigation.
           */}
-          <Button asChild size='lg' className='w-full sm:w-auto'>
+          <Button
+            asChild
+            size='lg'
+            variant='outline'
+            className='w-full border-2 sm:w-auto'
+          >
             <a href='/referral/pdf' download>
               {c.hero.downloadLabel}
             </a>
@@ -188,7 +198,7 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Audit callout */}
-      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
+      <AnimatedSection className='flex flex-col gap-grid-2 pt-grid-3 pb-0'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.audit.heading}
         </h2>
@@ -208,6 +218,16 @@ export default function ReferralPage() {
             </Button>
           </div>
         </div>
+        <p className='pt-grid-2 text-center text-sm leading-relaxed text-text-muted'>
+          {c.join.note}{' '}
+          <TrackedLink
+            href={c.join.href}
+            location='referral-join-footnote'
+            className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+          >
+            {c.join.noteCta}
+          </TrackedLink>
+        </p>
       </AnimatedSection>
     </main>
   )
