@@ -107,6 +107,7 @@ export const referralContent = {
         body: 'Has the vision and the designers, needs builders.',
       },
     ],
+    quotesLabel: 'Signals',
     leadIn: "You'll know one when you hear them say:",
     quotes: [
       "We run this on spreadsheets and it's breaking.",

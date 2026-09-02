@@ -131,27 +131,30 @@ export default function ReferralPage() {
             </div>
           ))}
         </div>
-        <div className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='flex flex-col gap-px border border-border bg-border'>
-            <h3 className='bg-bg-card p-grid-1 font-headline text-xl font-semibold tracking-tight text-text md:text-2xl'>
+        <div className='grid gap-grid-1 pt-grid-1 md:grid-cols-12 md:gap-grid-2'>
+          <div className='flex flex-col gap-grid-half md:col-span-4'>
+            <span className='bp-label font-mono'>
+              {c.whoToSend.quotesLabel}
+            </span>
+            <h3 className='font-headline text-2xl leading-tight font-semibold tracking-tight text-balance text-text'>
               {c.whoToSend.leadIn}
             </h3>
-            <ul className='grid gap-px md:grid-cols-2'>
-              {c.whoToSend.quotes.map(quote => (
-                <li
-                  key={quote}
-                  className='flex gap-3 bg-bg-card p-grid-1 text-base leading-relaxed text-text-muted'
-                >
-                  <span
-                    className='mt-2.5 h-1.5 w-1.5 shrink-0 bg-accent'
-                    aria-hidden
-                  />
-                  <span>&ldquo;{quote}&rdquo;</span>
-                </li>
-              ))}
-            </ul>
           </div>
+          <ol className='flex flex-col border-b border-border md:col-span-8'>
+            {c.whoToSend.quotes.map((quote, index) => (
+              <li
+                key={quote}
+                className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-3 border-t border-border py-3.5'
+              >
+                <span className='font-mono text-[11px] tracking-[0.2em] text-accent'>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p className='text-[17px] leading-normal text-text'>
+                  &ldquo;{quote}&rdquo;
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
       </AnimatedSection>
 
