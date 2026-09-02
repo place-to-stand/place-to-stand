@@ -131,20 +131,27 @@ export default function ReferralPage() {
             </div>
           ))}
         </div>
-        <div className='flex flex-col gap-grid-1'>
-          <p className='text-base leading-relaxed text-text'>
-            {c.whoToSend.leadIn}
-          </p>
-          <ul className='grid gap-x-grid-2 gap-y-grid-half md:grid-cols-2'>
-            {c.whoToSend.quotes.map(quote => (
-              <li
-                key={quote}
-                className='border-l border-accent/40 pl-4 text-base leading-relaxed text-text-muted md:text-lg'
-              >
-                &ldquo;{quote}&rdquo;
-              </li>
-            ))}
-          </ul>
+        <div className='relative'>
+          <BlueprintCorners size={16} />
+          <div className='flex flex-col gap-px border border-border bg-border'>
+            <h3 className='bg-bg-card p-grid-1 font-headline text-xl font-semibold tracking-tight text-text md:text-2xl'>
+              {c.whoToSend.leadIn}
+            </h3>
+            <ul className='grid gap-px md:grid-cols-2'>
+              {c.whoToSend.quotes.map(quote => (
+                <li
+                  key={quote}
+                  className='flex gap-3 bg-bg-card p-grid-1 text-base leading-relaxed text-text-muted'
+                >
+                  <span
+                    className='mt-2.5 h-1.5 w-1.5 shrink-0 bg-accent'
+                    aria-hidden
+                  />
+                  <span>&ldquo;{quote}&rdquo;</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </AnimatedSection>
 
