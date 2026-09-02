@@ -24,12 +24,19 @@ export const referralContent = {
     services: [
       {
         name: 'Software development',
-        items: ['Web, mobile, and desktop apps', 'APIs', 'Internal tools'],
+        items: [
+          'Web, mobile, and desktop apps',
+          'E-commerce',
+          'APIs',
+          'Internal tools',
+        ],
       },
       {
         name: 'Workflow systems',
         items: [
           'Portals',
+          'CRM',
+          'ERP',
           'Task tracking',
           'Approvals',
           'Integrations',

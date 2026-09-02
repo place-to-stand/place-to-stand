@@ -20,9 +20,12 @@ export const metadata: Metadata = {
 
 export default function ReferralPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-grid-4 pb-grid-4'>
       {/* Hero */}
-      <AnimatedSection priority className='flex flex-col gap-8'>
+      <AnimatedSection
+        priority
+        className='flex flex-col gap-grid-1 pt-grid-1 pb-grid-3'
+      >
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>{c.hero.label}</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[0.92] font-bold tracking-tight text-balance text-text md:text-6xl'>
@@ -48,7 +51,7 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Who we are */}
-      <AnimatedSection className='flex flex-col gap-12'>
+      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>{c.whoWeAre.label}</span>
           <h2 className='max-w-3xl font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-4xl'>
@@ -64,7 +67,7 @@ export default function ReferralPage() {
             {c.whoWeAre.services.map(service => (
               <li
                 key={service.name}
-                className='grid gap-3 bg-bg-card p-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-baseline md:gap-grid-1 md:px-8 md:py-6'
+                className='grid gap-grid-half bg-bg-card p-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-baseline md:gap-grid-1'
               >
                 <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
                   {service.name}
@@ -90,15 +93,15 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Who to send us */}
-      <AnimatedSection className='flex flex-col gap-12'>
+      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.whoToSend.label}
         </h2>
-        <div className='grid gap-6 md:grid-cols-3'>
+        <div className='grid gap-grid-1 md:grid-cols-3'>
           {c.whoToSend.cards.map(card => (
             <div
               key={card.number}
-              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+              className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
             >
               <BlueprintCorners size={12} />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
@@ -113,11 +116,11 @@ export default function ReferralPage() {
             </div>
           ))}
         </div>
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-col gap-grid-1'>
           <p className='text-base leading-relaxed text-text'>
             {c.whoToSend.leadIn}
           </p>
-          <ul className='grid gap-x-10 gap-y-4 md:grid-cols-2'>
+          <ul className='grid gap-x-grid-2 gap-y-grid-half md:grid-cols-2'>
             {c.whoToSend.quotes.map(quote => (
               <li
                 key={quote}
@@ -134,15 +137,15 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* How it works */}
-      <AnimatedSection className='flex flex-col gap-12'>
+      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.howItWorks.label}
         </h2>
-        <ol className='grid gap-6 md:grid-cols-3'>
+        <ol className='grid gap-grid-1 md:grid-cols-3'>
           {c.howItWorks.steps.map(step => (
             <li
               key={step.number}
-              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+              className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
             >
               <BlueprintCorners size={12} />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
@@ -160,15 +163,15 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* How we work */}
-      <AnimatedSection className='flex flex-col gap-12'>
+      <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.howWeWork.label}
         </h2>
-        <ul className='grid gap-6 md:grid-cols-3'>
+        <ul className='grid gap-grid-1 md:grid-cols-3'>
           {c.howWeWork.points.map(point => (
             <li
               key={point.title}
-              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+              className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
             >
               <BlueprintCorners size={12} />
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
@@ -183,11 +186,11 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Audit callout */}
-      <AnimatedSection>
-        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+      <AnimatedSection className='py-grid-3'>
+        <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
-          <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
+            <div className='flex flex-col gap-grid-half'>
               <p className='max-w-md text-base leading-relaxed text-text md:text-lg'>
                 {c.audit.body}
               </p>
