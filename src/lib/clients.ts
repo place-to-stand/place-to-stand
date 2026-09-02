@@ -19,7 +19,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
-    logoScale: 0.6,
+    logoScale: 0.7,
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
   },
@@ -45,7 +45,7 @@ export const clients: Client[] = [
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner.png',
     logo: '/logos/jeremy-turner.png',
-    logoScale: 0.42,
+    logoScale: 0.5,
     description:
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
@@ -99,6 +99,7 @@ export const clients: Client[] = [
     image:
       'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=1200&q=80',
     logo: '/logos/lifepacks.png',
+    logoScale: 0.4,
     description:
       'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
   },
