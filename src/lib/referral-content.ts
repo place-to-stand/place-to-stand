@@ -119,7 +119,7 @@ export const referralContent = {
 
   audit: {
     body: "Not sure if someone's a fit? Send them the free two-minute audit. No email required, results on screen.",
-    buttonLabel: 'placetostandagency.com/audit',
+    buttonLabel: 'Start the free audit',
     href: '/audit',
     url: 'https://placetostandagency.com/audit',
   },

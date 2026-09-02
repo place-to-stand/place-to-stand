@@ -80,9 +80,9 @@ export default function ReferralPage() {
 
       {/* Who to send us */}
       <AnimatedSection className='flex flex-col gap-12'>
-        <div className='flex flex-col gap-4'>
-          <span className='bp-label font-mono'>{c.whoToSend.label}</span>
-        </div>
+        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+          {c.whoToSend.label}
+        </h2>
         <div className='grid gap-6 md:grid-cols-3'>
           {c.whoToSend.cards.map(card => (
             <div
@@ -124,9 +124,9 @@ export default function ReferralPage() {
 
       {/* How it works */}
       <AnimatedSection className='flex flex-col gap-12'>
-        <div className='flex flex-col gap-4'>
-          <span className='bp-label font-mono'>{c.howItWorks.label}</span>
-        </div>
+        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+          {c.howItWorks.label}
+        </h2>
         <div className='relative'>
           <BlueprintCorners size={16} />
           <ol className='grid gap-px border border-border bg-border md:grid-cols-3'>

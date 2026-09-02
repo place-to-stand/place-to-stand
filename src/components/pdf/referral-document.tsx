@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     borderColor: color.accent,
     padding: 10,
     flexDirection: 'column',
-    gap: 8,
+    gap: 6,
   },
   button: {
     backgroundColor: color.accent,
@@ -404,6 +404,7 @@ export function ReferralDocument({ date }: { date: string }) {
               <Link src={c.audit.url} style={styles.button}>
                 <Text style={styles.buttonText}>{c.audit.buttonLabel}</Text>
               </Link>
+              <Text style={styles.meta}>{c.audit.url}</Text>
             </View>
           </View>
         </View>
