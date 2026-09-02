@@ -115,13 +115,10 @@ export default function ReferralPage() {
         <div className='grid gap-grid-1 md:grid-cols-3'>
           {c.whoToSend.cards.map(card => (
             <div
-              key={card.number}
+              key={card.title}
               className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
             >
               <BlueprintCorners size={12} />
-              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
-                {card.number}
-              </span>
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {card.title}
               </h3>

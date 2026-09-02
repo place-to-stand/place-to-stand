@@ -157,20 +157,6 @@ const styles = StyleSheet.create({
     gap: 8,
     alignItems: 'flex-start',
   },
-  numberBox: {
-    width: 15,
-    height: 15,
-    borderWidth: 1,
-    borderColor: 'rgba(181, 245, 66, 0.4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 1,
-  },
-  number: {
-    fontFamily: 'Courier',
-    fontSize: 6,
-    color: color.accent,
-  },
   cardTitle: {
     fontFamily: 'Space Grotesk',
     fontWeight: 700,
@@ -381,10 +367,7 @@ export function ReferralDocument({ date }: { date: string }) {
               <Label>{c.whoToSend.label}</Label>
               <View style={styles.cards}>
                 {c.whoToSend.cards.map(card => (
-                  <View key={card.number} style={styles.card}>
-                    <View style={styles.numberBox}>
-                      <Text style={styles.number}>{card.number}</Text>
-                    </View>
+                  <View key={card.title} style={styles.card}>
                     <View style={{ flex: 1 }}>
                       <Text style={styles.cardTitle}>{card.title}</Text>
                       <Text style={styles.body}>{card.body}</Text>

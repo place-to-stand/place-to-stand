@@ -92,17 +92,14 @@ export const referralContent = {
     label: 'Who to send us',
     cards: [
       {
-        number: '01',
         title: 'The lean mid-market company',
         body: 'Established, real processes, too small to hire a dev team.',
       },
       {
-        number: '02',
         title: 'The technical founder',
         body: 'Prototyped in AI tools, shipped a scrappy v1, hit the ceiling where it breaks.',
       },
       {
-        number: '03',
         title: 'The design-led team',
         body: 'Has the vision and the designers, needs builders.',
       },
