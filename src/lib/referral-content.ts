@@ -160,7 +160,7 @@ export const referralContent = {
   },
 
   join: {
-    note: 'Payouts go only to referrers who have been accepted into the program and set up as 1099 contractors.',
+    note: 'Payouts require referrers to be accepted into the program and set up as 1099 contractors.',
     noteCta: 'Contact us to join.',
     pdfCta: 'Join at placetostandagency.com/contact.',
     href: '/contact',
