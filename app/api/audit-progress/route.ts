@@ -81,6 +81,7 @@ const payloadSchema = z.object({
       name: z.string().max(160),
       email: z.string().email().max(320),
       company: z.string().max(160).nullable(),
+      message: z.string().max(2000).nullable(),
       marketingConsent: z.boolean(),
     })
     .nullable(),

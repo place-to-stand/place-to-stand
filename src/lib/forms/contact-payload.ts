@@ -18,6 +18,8 @@ export interface ContactSubmissionFields {
   email: string
   company: string | null
   website: string | null
+  /** A preset label or the visitor's own "Other" text. */
+  subject: string | null
   message: string
   marketingConsent: boolean
 }
