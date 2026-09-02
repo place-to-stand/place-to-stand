@@ -218,7 +218,7 @@ export default function ReferralPage() {
             </Button>
           </div>
         </div>
-        <p className='max-w-2xl text-sm leading-relaxed text-text-muted'>
+        <p className='pt-grid-1 text-center text-sm leading-relaxed text-text-muted'>
           {c.join.note}{' '}
           <TrackedLink
             href={c.join.href}
