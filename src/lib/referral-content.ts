@@ -161,10 +161,10 @@ export const referralContent = {
 
   join: {
     note: 'Payouts go only to referrers who have been accepted into the program and set up as 1099 contractors.',
-    noteCta: 'Email hello@placetostandagency.com to join.',
-    email: 'hello@placetostandagency.com',
-    mailto:
-      'mailto:hello@placetostandagency.com?subject=Join%20the%20referral%20program',
+    noteCta: 'Contact us to join.',
+    pdfCta: 'Join at placetostandagency.com/contact.',
+    href: '/contact',
+    url: 'https://placetostandagency.com/contact',
   },
 
   audit: {

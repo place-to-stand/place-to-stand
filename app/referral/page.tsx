@@ -42,7 +42,9 @@ export default function ReferralPage() {
         </div>
         <div className='flex flex-col gap-grid-half sm:flex-row sm:items-center sm:gap-grid-1'>
           <Button asChild size='lg' className='w-full sm:w-auto'>
-            <a href={c.join.mailto}>{c.hero.joinLabel}</a>
+            <TrackedLink href={c.join.href} location='referral-hero'>
+              {c.hero.joinLabel}
+            </TrackedLink>
           </Button>
           {/*
             A plain anchor rather than next/link: the target is a route handler
@@ -218,12 +220,13 @@ export default function ReferralPage() {
         </div>
         <p className='max-w-2xl text-sm leading-relaxed text-text-muted'>
           {c.join.note}{' '}
-          <a
-            href={c.join.mailto}
+          <TrackedLink
+            href={c.join.href}
+            location='referral-join-footnote'
             className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
           >
             {c.join.noteCta}
-          </a>
+          </TrackedLink>
         </p>
       </AnimatedSection>
     </main>

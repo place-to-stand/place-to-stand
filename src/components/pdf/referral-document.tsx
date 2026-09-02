@@ -227,6 +227,10 @@ const styles = StyleSheet.create({
     lineHeight: 1.35,
     color: color.text,
   },
+  noteLink: {
+    color: color.accent,
+    textDecoration: 'none',
+  },
   callout: {
     backgroundColor: color.panel,
     borderWidth: 1,
@@ -363,7 +367,10 @@ export function ReferralDocument({ date }: { date: string }) {
                 ))}
               </View>
               <Text style={styles.note}>
-                {c.join.note} {c.join.noteCta}
+                {c.join.note}{' '}
+                <Link src={c.join.url} style={styles.noteLink}>
+                  {c.join.pdfCta}
+                </Link>
               </Text>
             </View>
           </View>
