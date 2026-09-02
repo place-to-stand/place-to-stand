@@ -19,6 +19,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
+    logoScale: 0.6,
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
   },
@@ -35,7 +36,7 @@ export const clients: Client[] = [
     href: 'https://www.gtbsolarexchange.com',
     image: '/work-greenwatt-usa.png',
     logo: '/logos/greenwatt-usa.png',
-    logoScale: 0.9,
+    logoScale: 0.7,
     description:
       'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
@@ -44,7 +45,7 @@ export const clients: Client[] = [
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner.png',
     logo: '/logos/jeremy-turner.png',
-    logoScale: 0.7,
+    logoScale: 0.42,
     description:
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
@@ -61,7 +62,7 @@ export const clients: Client[] = [
     href: 'https://florencebymillsbeauty.com',
     image: '/work-florence-by-mills-beauty.png',
     logo: '/logos/florence-by-mills-beauty.png',
-    logoScale: 0.85,
+    logoScale: 0.64,
     description:
       'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
@@ -79,7 +80,7 @@ export const clients: Client[] = [
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397.png',
     logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.95,
+    logoScale: 0.85,
     description:
       'A specialty shop offering elegant, functional wine and bar accessories.',
   },
@@ -88,7 +89,7 @@ export const clients: Client[] = [
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club.png',
     logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.8,
+    logoScale: 0.6,
     description:
       'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
   },
