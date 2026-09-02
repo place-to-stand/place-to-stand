@@ -115,13 +115,10 @@ export default function ReferralPage() {
         <div className='grid gap-grid-1 md:grid-cols-3'>
           {c.whoToSend.cards.map(card => (
             <div
-              key={card.number}
+              key={card.title}
               className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
             >
               <BlueprintCorners size={12} />
-              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
-                {card.number}
-              </span>
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {card.title}
               </h3>
@@ -131,20 +128,30 @@ export default function ReferralPage() {
             </div>
           ))}
         </div>
-        <div className='flex flex-col gap-grid-1'>
-          <p className='text-base leading-relaxed text-text'>
-            {c.whoToSend.leadIn}
-          </p>
-          <ul className='grid gap-x-grid-2 gap-y-grid-half md:grid-cols-2'>
-            {c.whoToSend.quotes.map(quote => (
+        <div className='grid gap-grid-1 pt-grid-1 md:grid-cols-12 md:gap-grid-2'>
+          <div className='flex flex-col gap-grid-half md:col-span-4'>
+            <span className='bp-label font-mono'>
+              {c.whoToSend.quotesLabel}
+            </span>
+            <h3 className='font-headline text-2xl leading-tight font-semibold tracking-tight text-balance text-text'>
+              {c.whoToSend.leadIn}
+            </h3>
+          </div>
+          <ol className='flex flex-col border-b border-border md:col-span-8'>
+            {c.whoToSend.quotes.map((quote, index) => (
               <li
                 key={quote}
-                className='border-l border-accent/40 pl-4 text-base leading-relaxed text-text-muted md:text-lg'
+                className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-3 border-t border-border py-3.5'
               >
-                &ldquo;{quote}&rdquo;
+                <span className='font-mono text-[11px] tracking-[0.2em] text-accent'>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <p className='text-[17px] leading-normal text-text'>
+                  &ldquo;{quote}&rdquo;
+                </p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </AnimatedSection>
 
