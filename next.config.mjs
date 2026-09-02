@@ -11,6 +11,11 @@ const nextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  // react-pdf reads the referral PDF's fonts from disk at request time; make
+  // sure the files ship inside that function's bundle on Vercel.
+  outputFileTracingIncludes: {
+    '/referral/pdf': ['./public/fonts/**/*'],
+  },
   images: {
     remotePatterns: [
       {

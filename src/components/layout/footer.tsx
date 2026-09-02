@@ -64,6 +64,12 @@ export function Footer() {
             aria-label='Legal'
           >
             <Link
+              href='/referral'
+              className='text-text-muted transition-colors hover:text-accent'
+            >
+              Referral Program
+            </Link>
+            <Link
               href='/privacy'
               className='text-text-muted transition-colors hover:text-accent'
             >
