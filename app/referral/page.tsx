@@ -32,7 +32,7 @@ export default function ReferralPage() {
             {c.hero.body}
           </p>
         </div>
-        <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6'>
+        <div>
           {/*
             A plain anchor rather than next/link: the target is a route handler
             that streams a file, so client-side navigation (and prefetching)
@@ -44,9 +44,6 @@ export default function ReferralPage() {
               {c.hero.downloadLabel}
             </a>
           </Button>
-          <p className='font-mono text-[11px] tracking-[0.08em] text-text-muted'>
-            One page. Dated so you know which version you have.
-          </p>
         </div>
       </AnimatedSection>
 

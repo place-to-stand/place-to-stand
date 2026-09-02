@@ -14,7 +14,7 @@ export const referralContent = {
     label: 'Referral Program',
     headline: 'Send us a client. Earn 10% of everything they ever pay us.',
     body: 'Not 10% of the first project. Ten percent of their lifetime billing, for as long as they stay a client. A $20k build that turns into $60k of work over time pays you $6,000.',
-    downloadLabel: 'Download PDF',
+    downloadLabel: 'Download PDF One-sheet',
   },
 
   whoWeAre: {
