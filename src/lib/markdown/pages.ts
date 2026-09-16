@@ -4,6 +4,15 @@ import { services } from '@/src/lib/services'
 import { team } from '@/src/lib/team'
 import { vendors } from '@/src/lib/vendors'
 import {
+  audiences,
+  auditCovers,
+  beliefs,
+  businessPhases,
+  facets,
+  principles,
+  processSteps,
+} from '@/src/lib/site-copy'
+import {
   CONTACT_EMAIL,
   LOCATIONS,
   SITE_DESCRIPTION,
@@ -39,124 +48,6 @@ const locationLine = LOCATIONS.map(l => `${l.locality}, ${l.region}`).join(
   ' and '
 )
 
-const phases = [
-  {
-    title: 'Prototype',
-    points: [
-      'Test new product ideas',
-      'Prove product-market fit',
-      'Iterate fast',
-    ],
-  },
-  {
-    title: 'Refine',
-    points: [
-      'Streamline existing systems',
-      'Automate the manual work',
-      'Save time, cut friction',
-    ],
-  },
-  {
-    title: 'Scale',
-    points: [
-      'Re-architect your stack',
-      'Rethink operations for demand',
-      'Engineer for peak load',
-    ],
-  },
-  {
-    title: 'R&D',
-    points: [
-      'Analyze your data',
-      'Unlock new revenue vectors',
-      'Surface your next prototype',
-    ],
-  },
-]
-
-const audiences = [
-  {
-    title: 'The Lean Mid-Market',
-    body: "You're established with real processes in place, but not big enough to justify a full-time dev team. You need senior engineering to optimize and extend your systems without the cost of hiring one.",
-  },
-  {
-    title: 'The Technical Founder',
-    body: "You're technical enough to prototype in AI tools and ship a scrappy v1. But you've hit the ceiling where vibe-coded solutions break, and you need real engineering to make it production-grade.",
-  },
-  {
-    title: 'The Design-Led Team',
-    body: 'You have the vision, the designers, maybe some technical staff, but no engineering team to execute. You know exactly what you want built. You just need the builders to make it real.',
-  },
-]
-
-const pillars = [
-  {
-    title: 'Senior Builders',
-    body: 'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
-  },
-  {
-    title: 'AI-Native',
-    body: 'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
-  },
-  {
-    title: 'Direct Access',
-    body: 'You work with the builder directly. No middle management, no handoffs, no telephone game.',
-  },
-]
-
-const principles = [
-  {
-    title: 'No Per-Seat Pricing',
-    body: 'You own the tech infrastructure. Add as many users as your business needs without watching the bill climb. No per-seat licensing, no penalty for growing your team.',
-  },
-  {
-    title: 'Centralized Business Data',
-    body: 'All your business data lives in one place, structured and transparent. That single source of truth keeps the system modular, so you can extend it without rebuilding from scratch.',
-  },
-  {
-    title: 'No SaaS Feature Bloat',
-    body: 'You get exactly the features your business runs on, nothing more. No paying for bloated dashboards and modules you will never open.',
-  },
-]
-
-const process = [
-  {
-    title: 'Quick Wins',
-    body: 'We ship something real, fast. Early wins build trust and a shared shorthand for the bigger decisions ahead.',
-  },
-  {
-    title: 'Ontology',
-    body: 'We map how your business actually works, the entities and rules that define your domain, so the software models reality, not a template.',
-  },
-  {
-    title: 'Execution & Verification',
-    body: 'Execution runs through our portal, and every task is human-verified before it ships.',
-  },
-  {
-    title: 'Taste',
-    body: 'We shape the details and apply hard-won judgment to fit the software to your business context.',
-  },
-]
-
-const auditCovers = [
-  {
-    title: 'Your business phase',
-    body: 'Where you are on the journey from idea to scaled operation.',
-  },
-  {
-    title: 'Top software opportunities',
-    body: 'The highest-leverage places custom software could help.',
-  },
-  {
-    title: 'Where to start first',
-    body: 'A prioritized shortlist so you know what to build next.',
-  },
-  {
-    title: 'Tailored recommendations',
-    body: 'Specific services matched to your answers, not a generic pitch.',
-  },
-]
-
 function servicesMarkdown(level: '##' | '###'): string {
   return services
     .map(service =>
@@ -172,15 +63,17 @@ function servicesMarkdown(level: '##' | '###'): string {
 }
 
 function phasesMarkdown(): string {
-  return phases
+  return businessPhases
     .map(phase =>
       [`### ${phase.title}`, '', ...phase.points.map(p => `- ${p}`)].join('\n')
     )
     .join('\n\n')
 }
 
-function titledList(items: { title: string; body: string }[]): string {
-  return items.map(item => `- **${item.title}.** ${item.body}`).join('\n')
+function titledList(items: { title: string; description: string }[]): string {
+  return items
+    .map(item => `- **${item.title}.** ${item.description}`)
+    .join('\n')
 }
 
 const ctaMarkdown = [
@@ -221,7 +114,7 @@ export const markdownPages: MarkdownPage[] = [
         '',
         '## Experienced engineers with fine-tuned AI',
         '',
-        titledList(pillars),
+        titledList(facets),
         '',
         '## Our development principles',
         '',
@@ -246,7 +139,7 @@ export const markdownPages: MarkdownPage[] = [
         '',
         '## What we believe',
         '',
-        'Off-the-shelf software is built for everyone, which means it fits no one exactly. When you own software built around how your business runs, the economics change: no per-seat fees, your data in one place, and none of the features you never asked for.',
+        titledList(beliefs),
         '',
         '## Who builds your software',
         '',
@@ -298,7 +191,7 @@ export const markdownPages: MarkdownPage[] = [
         '',
         '## The four steps',
         '',
-        titledList(process),
+        titledList(processSteps),
         '',
         '## Our portal',
         '',
@@ -321,7 +214,10 @@ export const markdownPages: MarkdownPage[] = [
         '## Pricing',
         '',
         titledList(
-          referral.howWeWork.points.map(p => ({ title: p.title, body: p.body }))
+          referral.howWeWork.points.map(p => ({
+            title: p.title,
+            description: p.body,
+          }))
         ),
         '',
         '## We meet you at your stage of business',
@@ -428,7 +324,10 @@ export const markdownPages: MarkdownPage[] = [
         `## ${referral.whoToSend.label}`,
         '',
         titledList(
-          referral.whoToSend.cards.map(c => ({ title: c.title, body: c.body }))
+          referral.whoToSend.cards.map(c => ({
+            title: c.title,
+            description: c.body,
+          }))
         ),
         '',
         referral.whoToSend.leadIn,
@@ -444,7 +343,10 @@ export const markdownPages: MarkdownPage[] = [
         `## ${referral.howWeWork.label}`,
         '',
         titledList(
-          referral.howWeWork.points.map(p => ({ title: p.title, body: p.body }))
+          referral.howWeWork.points.map(p => ({
+            title: p.title,
+            description: p.body,
+          }))
         ),
         '',
         `${referral.join.note} ${referral.join.noteCta} ${referral.join.url}`,

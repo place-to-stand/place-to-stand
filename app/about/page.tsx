@@ -5,6 +5,7 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { CONTACT_EMAIL, LOCATIONS, SITE_URL } from '@/src/lib/site'
+import { beliefs } from '@/src/lib/site-copy'
 import { team } from '@/src/lib/team'
 
 export const metadata: Metadata = {
@@ -12,21 +13,6 @@ export const metadata: Metadata = {
   description:
     'Who Place To Stand is, where we work from, who builds the software, and how to reach us.',
 }
-
-const beliefs = [
-  {
-    title: 'Own it, do not rent it',
-    body: 'Off-the-shelf software is built for everyone, which means it fits no one exactly. When you own software built around how your business runs, the economics change: no per-seat fees, your data in one place, and none of the features you never asked for.',
-  },
-  {
-    title: 'The builder is the contact',
-    body: 'The engineer who scopes your project is the one who builds it. No account managers, no handoffs, no telephone game.',
-  },
-  {
-    title: 'Clear pricing',
-    body: 'Work starts with a $1k minimum that buys a five-hour block. Hours belong to you, never expire, and can be spent across any project. You see hours, tasks, and invoices live in your portal.',
-  },
-]
 
 const facts = [
   {
@@ -75,7 +61,7 @@ export default function AboutPage() {
                     {belief.title}
                   </h3>
                   <p className='text-sm leading-relaxed text-text-muted'>
-                    {belief.body}
+                    {belief.description}
                   </p>
                 </li>
               ))}

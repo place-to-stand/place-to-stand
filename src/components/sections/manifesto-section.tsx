@@ -9,27 +9,14 @@ import {
   AiNativeGraphic,
   DirectAccessGraphic,
 } from '@/src/components/graphics/home-graphics'
+import { facets as facetCopy } from '@/src/lib/site-copy'
 
-const facets = [
-  {
-    title: 'Senior Builders',
-    Graphic: DraftingGraphic,
-    description:
-      'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
-  },
-  {
-    title: 'AI-Native',
-    Graphic: AiNativeGraphic,
-    description:
-      'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
-  },
-  {
-    title: 'Direct Access',
-    Graphic: DirectAccessGraphic,
-    description:
-      'You work with the builder directly. No middle management, no handoffs, no telephone game.',
-  },
-]
+// One graphic per facet, in the order of `facetCopy`.
+const facetGraphics = [DraftingGraphic, AiNativeGraphic, DirectAccessGraphic]
+const facets = facetCopy.map((facet, i) => ({
+  ...facet,
+  Graphic: facetGraphics[i],
+}))
 
 export function ManifestoSection() {
   return (

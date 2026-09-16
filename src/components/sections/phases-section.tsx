@@ -13,45 +13,19 @@ import {
   ScaleGraphic,
   RnDGraphic,
 } from '@/src/components/graphics/home-graphics'
+import { businessPhases } from '@/src/lib/site-copy'
 
-const phases = [
-  {
-    title: 'Prototype',
-    Graphic: PrototypeGraphic,
-    points: [
-      'Test new product ideas',
-      'Prove product-market fit',
-      'Iterate fast',
-    ],
-  },
-  {
-    title: 'Refine',
-    Graphic: RefineGraphic,
-    points: [
-      'Streamline existing systems',
-      'Automate the manual work',
-      'Save time, cut friction',
-    ],
-  },
-  {
-    title: 'Scale',
-    Graphic: ScaleGraphic,
-    points: [
-      'Re-architect your stack',
-      'Rethink operations for demand',
-      'Engineer for peak load',
-    ],
-  },
-  {
-    title: 'R&D',
-    Graphic: RnDGraphic,
-    points: [
-      'Analyze your data',
-      'Unlock new revenue vectors',
-      'Surface your next prototype',
-    ],
-  },
+// One graphic per phase, in the order of `businessPhases`.
+const phaseGraphics = [
+  PrototypeGraphic,
+  RefineGraphic,
+  ScaleGraphic,
+  RnDGraphic,
 ]
+const phases = businessPhases.map((phase, i) => ({
+  ...phase,
+  Graphic: phaseGraphics[i],
+}))
 
 /** DOM id of one vendor's icon inside the sprite. */
 const vendorIconId = (name: string) =>
