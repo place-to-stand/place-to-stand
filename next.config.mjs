@@ -19,6 +19,17 @@ const nextConfig = {
     '/opengraph-image': ['./public/fonts/**/*'],
     '/twitter-image': ['./public/fonts/**/*'],
   },
+  // Pages are served as HTML or, on `Accept: text/markdown`, as markdown
+  // (see proxy.ts). `Vary: Accept` keeps a CDN from handing one variant to a
+  // client that asked for the other. Next merges this with its own Vary list.
+  async headers() {
+    return [
+      {
+        source: '/((?!_next/|api/|.*\\.[a-z0-9]+$).*)',
+        headers: [{ key: 'Vary', value: 'Accept' }],
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {

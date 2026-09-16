@@ -111,7 +111,7 @@ intake token in the client bundle would publish a portal secret.
 2. Implement changes alongside unit/visual coverage when applicable.
 3. Run quality gates:
    - `npm run lint`
-   - `npm run test` (if tests exist)
+   - `npm run test` (Vitest; unit tests live next to the code as `*.test.ts`)
    - `npm run type-check`
 4. Submit a PR referencing relevant spec sections.
 
@@ -143,6 +143,32 @@ Each section component should expose a simple contract:
 - Prefetch navigation targets with smooth scrolling.
 - Respect `prefers-reduced-motion` for animations.
 - Provide visual focus states compliant with contrast guidelines.
+
+## Agent readiness
+
+The site serves the same content to people and to AI agents, through a few machine-readable surfaces:
+
+- **Markdown negotiation** (`proxy.ts`): any page returns markdown when requested with
+  `Accept: text/markdown`, with `Content-Type: text/markdown` and `Vary: Accept`. The markdown for each
+  page lives in `src/lib/markdown/pages.ts` and reads from the same data modules as the HTML (services,
+  team, clients, referral copy). Legal pages are mirrored by hand in `src/lib/markdown/legal.ts`; a test
+  checks that every clause heading in the HTML appears there.
+- **404s**: unknown paths return a real HTTP 404. Browsers get `app/not-found.tsx` (a site map);
+  markdown clients get a markdown site map from the proxy.
+- **`/llms.txt` and `/llms-full.txt`** (`src/lib/markdown/llms.ts`): the llmstxt.org index with
+  when-to-use guidance, and every page's markdown in one file.
+- **JSON-LD**: `Organization` (contact point, addresses, founders) on every page from the root layout and
+  `WebSite` on the homepage, both from `src/lib/structured-data.ts`.
+- **Canonical URLs**: set for every route through `alternates.canonical: './'` in the root layout.
+- Shared business facts (name, email, locations, profiles) live in `src/lib/site.ts`.
+
+Verify after a deploy:
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" https://placetostandagency.com/some-path-that-does-not-exist   # 404
+curl -s -D - -o /dev/null -H "Accept: text/markdown" https://placetostandagency.com/services | grep -i "content-type\|vary"
+curl -s https://placetostandagency.com/llms.txt | head
+```
 
 ## Deployment
 

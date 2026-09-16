@@ -9,3 +9,14 @@ export const NAV_LINKS = [
 ] as const
 
 export type NavLink = (typeof NAV_LINKS)[number]
+
+/** The footer lists everything in the header plus pages that do not earn a
+ *  header slot. About sits with the other company pages, ahead of Contact. */
+export const FOOTER_LINKS = [
+  { href: '/services' as const, label: 'Services' },
+  { href: '/clients' as const, label: 'Clients' },
+  { href: '/how-we-work' as const, label: 'How We Work' },
+  { href: '/team' as const, label: 'Team' },
+  { href: '/about' as const, label: 'About' },
+  { href: '/contact' as const, label: 'Contact' },
+] as const

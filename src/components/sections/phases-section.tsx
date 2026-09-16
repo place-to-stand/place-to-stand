@@ -53,6 +53,35 @@ const phases = [
   },
 ]
 
+/** DOM id of one vendor's icon inside the sprite. */
+const vendorIconId = (name: string) =>
+  `vendor-icon-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
+
+/**
+ * Every vendor icon once, hidden, so the marquee rows can reference them with
+ * `<use>` instead of inlining each path four times (two rows, each doubled for
+ * the seamless loop). Cuts the homepage HTML by about a quarter with no change
+ * to what is drawn.
+ */
+function VendorIconSprite() {
+  return (
+    <svg
+      width='0'
+      height='0'
+      className='absolute'
+      aria-hidden
+      focusable='false'
+    >
+      <defs>
+        {vendors.map(vendor => {
+          const Icon = vendorIcons[vendor.name]
+          return <Icon key={vendor.name} id={vendorIconId(vendor.name)} />
+        })}
+      </defs>
+    </svg>
+  )
+}
+
 /** One scrolling row of the trust banner. Vendors are duplicated so the loop is
  *  seamless; `reverse` flips the scroll direction. */
 function TrustTrack({
@@ -66,18 +95,21 @@ function TrustTrack({
     <div className={`marquee ${className ?? ''}`}>
       <div className={`marquee-track ${reverse ? 'marquee-track-rev' : ''}`}>
         {[...vendors, ...vendors].map((vendor, i) => {
-          const Icon = vendorIcons[vendor.name]
           return (
             <div
               key={`${vendor.name}-${i}`}
               className='flex shrink-0 items-center gap-2.5 px-6'
             >
-              {Icon && (
-                <Icon
+              {vendor.name in vendorIcons && (
+                <svg
+                  viewBox='0 0 24 24'
+                  fill='currentColor'
                   className='h-7 w-7 shrink-0'
                   style={{ color: vendor.color }}
                   aria-hidden
-                />
+                >
+                  <use href={`#${vendorIconId(vendor.name)}`} />
+                </svg>
               )}
               <span className='font-mono text-[10px] tracking-wider whitespace-nowrap text-text-muted uppercase'>
                 {vendor.name}
@@ -212,6 +244,7 @@ export function PhasesSection({
             {/* Auto-scrolling trust banner: one row on desktop, two rows scrolling
                 opposite directions on mobile. Full-bleed to the section edges. */}
             <div className='-mx-6 flex flex-col gap-4 lg:-mx-12'>
+              <VendorIconSprite />
               <TrustTrack />
               <TrustTrack reverse className='md:hidden' />
             </div>
