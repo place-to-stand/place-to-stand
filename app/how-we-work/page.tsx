@@ -13,34 +13,25 @@ import {
   AutomationGraphic,
   TasteGraphic,
 } from '@/src/components/graphics/process-graphics'
+import { processSteps } from '@/src/lib/site-copy'
+
+// One graphic per step, in the order of `processSteps`.
+const stepGraphics = [
+  QuickWinsGraphic,
+  OntologyGraphic,
+  AutomationGraphic,
+  TasteGraphic,
+]
+const process = processSteps.map((step, i) => ({
+  ...step,
+  Graphic: stepGraphics[i],
+}))
 
 export const metadata: Metadata = {
   title: 'How We Work',
   description: 'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
 }
 
-const process = [
-  {
-    title: 'Quick Wins',
-    body: 'We ship something real, fast. Early wins build trust and a shared shorthand for the bigger decisions ahead.',
-    Graphic: QuickWinsGraphic,
-  },
-  {
-    title: 'Ontology',
-    body: 'We map how your business actually works, the entities and rules that define your domain, so the software models reality, not a template.',
-    Graphic: OntologyGraphic,
-  },
-  {
-    title: 'Execution & Verification',
-    body: 'Execution runs through our portal, and every task is human-verified before it ships.',
-    Graphic: AutomationGraphic,
-  },
-  {
-    title: 'Taste',
-    body: 'We shape the details and apply hard-won judgment to fit the software to your business context.',
-    Graphic: TasteGraphic,
-  },
-]
 
 // The stack, grouped by role, folded into the process list as a final row.
 const stackGroups = [
@@ -74,7 +65,7 @@ export default function HowWeWorkPage() {
                 <h3 className='max-w-[80%] text-balance font-headline text-sm font-bold uppercase leading-tight tracking-tight text-accent'>
                   {step.title}
                 </h3>
-                <p className='text-sm leading-relaxed text-text-muted'>{step.body}</p>
+                <p className='text-sm leading-relaxed text-text-muted'>{step.description}</p>
               </div>
             ))}
           </div>

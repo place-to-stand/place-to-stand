@@ -11,6 +11,7 @@ import { Footer } from '@/src/components/layout/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
 import { AttributionCapture } from '@/src/components/attribution-capture'
+import { jsonLdString, organizationJsonLd } from '@/src/lib/structured-data'
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -33,6 +34,8 @@ const sourceSans = Source_Sans_3({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
+  // './' resolves to the current route, so every page gets its own canonical.
+  alternates: { canonical: './' },
   title: {
     default: 'Place To Stand | Custom Software & AI Development Agency',
     template: '%s | Place To Stand',
@@ -92,6 +95,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Suspense fallback={null}>
           <AttributionCapture />
         </Suspense>
+        {/* Site-wide identity for agents and search engines. */}
+        <script
+          type='application/ld+json'
+          dangerouslySetInnerHTML={{ __html: jsonLdString(organizationJsonLd) }}
+        />
         <PostHogProvider>
           <div className='relative flex min-h-screen flex-col overflow-x-hidden'>
             <Header />

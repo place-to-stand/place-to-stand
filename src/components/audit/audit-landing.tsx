@@ -25,58 +25,24 @@ import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
 import { clients } from '@/src/lib/clients'
 import { team } from '@/src/lib/team'
+import { auditCovers, facets } from '@/src/lib/site-copy'
 import { type Service, services } from '@/src/lib/services'
 
 interface AuditLandingProps {
   onStart: (location: string) => void
 }
 
+// One icon per audit outcome, in the order of `auditCovers`.
+const AUDIT_COVER_ICONS = [Compass, Target, Zap, Sparkles]
+const AUDIT_COVERS = auditCovers.map((cover, i) => ({
+  ...cover,
+  icon: AUDIT_COVER_ICONS[i],
+}))
+
 const HIGHLIGHTS = [
   { icon: Clock, label: 'Under 2 minutes' },
   { icon: Shield, label: 'Free, no obligation' },
   { icon: Target, label: 'Personalized recommendations' },
-]
-
-const FACETS = [
-  {
-    title: 'Senior Builders',
-    description:
-      'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
-  },
-  {
-    title: 'AI-Native',
-    description:
-      'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
-  },
-  {
-    title: 'Direct Access',
-    description:
-      'You work with the builder directly. No middle management, no handoffs, no telephone game.',
-  },
-]
-
-const AUDIT_COVERS = [
-  {
-    icon: Compass,
-    title: 'Your business phase',
-    description: 'Where you are on the journey from idea to scaled operation.',
-  },
-  {
-    icon: Target,
-    title: 'Top software opportunities',
-    description: 'The highest-leverage places custom software could help.',
-  },
-  {
-    icon: Zap,
-    title: 'Where to start first',
-    description: 'A prioritized shortlist so you know what to build next.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Tailored recommendations',
-    description:
-      'Specific services matched to your answers, not a generic pitch.',
-  },
 ]
 
 /** Trusted-by strip uses top 6 clients for a compact row. */
@@ -289,7 +255,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
           <div className='relative'>
             <BlueprintCorners size={16} />
             <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
-              {FACETS.map(facet => (
+              {facets.map(facet => (
                 <div
                   key={facet.title}
                   className='flex flex-col gap-3 bg-bg-card p-5 md:p-8'

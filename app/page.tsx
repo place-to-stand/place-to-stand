@@ -14,24 +14,15 @@ import {
 } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
-
-const organizationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'Place To Stand',
-  url: 'https://placetostandagency.com/',
-  logo: 'https://placetostandagency.com/icon.png',
-  email: 'hello@placetostandagency.com',
-  description:
-    'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
-}
+import { jsonLdString, webSiteJsonLd } from '@/src/lib/structured-data'
 
 export default function HomePage() {
   return (
     <main className='flex-1 pb-32'>
+      {/* The Organization block lives in the root layout; this names the site. */}
       <script
         type='application/ld+json'
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(webSiteJsonLd) }}
       />
       <HeroSection />
       <ClientLogosSection />

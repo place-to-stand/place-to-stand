@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { NAV_LINKS } from '@/src/components/layout/nav-links'
+import { FOOTER_LINKS } from '@/src/components/layout/nav-links'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -38,7 +38,7 @@ export function Footer() {
         >
           <span className='bp-label font-mono'>Explore</span>
           <ul className='flex flex-col gap-2 md:items-end'>
-            {NAV_LINKS.map(link => (
+            {FOOTER_LINKS.map(link => (
               <li key={link.href}>
                 <Link
                   href={link.href}

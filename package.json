@@ -9,6 +9,8 @@
     "lint": "eslint .",
     "perf": "node scripts/lighthouse.mjs",
     "perf:lcp": "node scripts/lcp.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "format": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
     "type-check": "tsc --noEmit"
@@ -52,7 +54,8 @@
     "puppeteer-core": "25.10.0",
     "tailwindcss": "4.3.3",
     "tailwindcss-animate": "1.0.7",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "5.0.1"
   },
   "packageManager": "npm@10.8.2"
 }

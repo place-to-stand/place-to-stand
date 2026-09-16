@@ -8,27 +8,14 @@ import {
   CentralizedDataGraphic,
   NoBloatGraphic,
 } from '@/src/components/graphics/home-graphics'
+import { principles } from '@/src/lib/site-copy'
 
-const pillars = [
-  {
-    title: 'No Per-Seat Pricing',
-    Graphic: SeatsGraphic,
-    description:
-      'You own the tech infrastructure. Add as many users as your business needs without watching the bill climb. No per-seat licensing, no penalty for growing your team.',
-  },
-  {
-    title: 'Centralized Business Data',
-    Graphic: CentralizedDataGraphic,
-    description:
-      'All your business data lives in one place, structured and transparent. That single source of truth keeps the system modular, so you can extend it without rebuilding from scratch.',
-  },
-  {
-    title: 'No SaaS Feature Bloat',
-    Graphic: NoBloatGraphic,
-    description:
-      'You get exactly the features your business runs on, nothing more. No paying for bloated dashboards and modules you will never open.',
-  },
-]
+// One graphic per principle, in the order of `principles`.
+const principleGraphics = [SeatsGraphic, CentralizedDataGraphic, NoBloatGraphic]
+const pillars = principles.map((principle, i) => ({
+  ...principle,
+  Graphic: principleGraphics[i],
+}))
 
 export function PillarsSection() {
   return (
