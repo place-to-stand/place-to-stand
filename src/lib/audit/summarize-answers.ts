@@ -3,29 +3,16 @@
  *
  * `describeAnswers` is the low-level view: every question in definition order,
  * carrying both the raw option ids and their resolved human labels. The portal
- * payload uses it so the receiving side needs no copy of the question set.
- *
- * `summarizeAnswers` groups the same data by section for the internal team email
- * (HTML template + plain-text fallback), so the team can review every response,
- * not just the scored result.
+ * payload uses it so the receiving side needs no copy of the question set,
+ * which is also what lets the portal render the team email's transcript.
  */
-import { QUESTIONS, SECTIONS } from '@/src/lib/audit/questions'
+import { QUESTIONS } from '@/src/lib/audit/questions'
 import type {
   AnswerValue,
   AuditAnswers,
   AuditQuestion,
   QuestionType,
 } from '@/src/lib/audit/types'
-
-export interface AnswerItem {
-  prompt: string
-  answer: string
-}
-
-export interface AnswerGroup {
-  section: string
-  items: AnswerItem[]
-}
 
 /** One question and its answer, in both machine and human form. */
 export interface DescribedAnswer {
@@ -38,8 +25,6 @@ export interface DescribedAnswer {
   /** Human-readable labels for the selected options. Empty when unanswered. */
   labels: string[]
 }
-
-const NO_ANSWER = 'No answer'
 
 /** Selected option ids as an array, regardless of single vs multi. */
 function selectedIds(value: AnswerValue | undefined): string[] {
@@ -61,14 +46,6 @@ function resolveLabels(
   )
 }
 
-function displayAnswer(
-  question: AuditQuestion,
-  value: AnswerValue | undefined
-): string {
-  const labels = resolveLabels(question, value)
-  return labels.length > 0 ? labels.join(', ') : NO_ANSWER
-}
-
 /**
  * Every question with its raw value and resolved labels, in definition order.
  * Unanswered questions are included with `value: null` so a partial audit has
@@ -88,15 +65,4 @@ export function describeAnswers(answers: AuditAnswers): DescribedAnswer[] {
       labels,
     }
   })
-}
-
-/** Every question with its answer, grouped by section, in definition order. */
-export function summarizeAnswers(answers: AuditAnswers): AnswerGroup[] {
-  return SECTIONS.map(section => ({
-    section: section.title,
-    items: QUESTIONS.filter(q => q.sectionId === section.id).map(q => ({
-      prompt: q.prompt,
-      answer: displayAnswer(q, answers[q.id]),
-    })),
-  })).filter(group => group.items.length > 0)
 }

@@ -1,17 +1,17 @@
 'use server'
 
-import { Resend } from 'resend'
+import { headers } from 'next/headers'
 import { checkBotId } from 'botid/server'
 import {
   auditLeadSchema,
   type AuditLeadValues,
 } from '@/src/lib/validations/audit'
-import type { AuditAnswers, AuditResult } from '@/src/lib/audit/types'
-import { summarizeAnswers } from '@/src/lib/audit/summarize-answers'
+import { auditProgressSchema } from '@/src/lib/audit/progress-schema'
 import {
-  renderAuditClientEmail,
-  renderAuditTeamEmail,
-} from '@/src/lib/emails/audit-emails'
+  PORTAL_PATHS,
+  resolvePortalTarget,
+  submitToPortal,
+} from '@/src/lib/forms/portal'
 
 /**
  * Why a submission failed. Returned to the client so it can report the cause to
@@ -22,10 +22,10 @@ export type AuditFailureReason =
   | 'botid_blocked'
   | 'botid_error'
   | 'not_configured'
-  /** Resend accepted the request and answered with an error object. */
-  | 'email_rejected'
-  /** The request never reached Resend, or it threw for another reason. */
-  | 'email_threw'
+  /** The portal answered, and the answer was an error. */
+  | 'portal_rejected'
+  /** The portal never answered: network failure or timeout. */
+  | 'portal_unreachable'
 
 export type AuditActionResult =
   | { success: true }
@@ -36,32 +36,31 @@ export type AuditActionResult =
       errors?: Partial<Record<keyof AuditLeadValues, string[]>>
     }
 
-/** Render the scored audit into plain-text lines for emails and the lead note. */
-function summarizeResult(result: AuditResult): string[] {
-  const lines = [
-    `Phase: ${result.phase.name} (${result.phase.tagline})`,
-    result.summary,
-  ]
+/** Shown whenever the portal did not take the submission. */
+const DELIVERY_FAILED_MESSAGE =
+  "We couldn't send your audit. Please email hello@placetostandagency.com and we'll get right back to you."
 
-  if (result.recommendations.length > 0) {
-    lines.push('', 'Recommended opportunities:')
-    result.recommendations.forEach((rec, index) => {
-      lines.push(`${index + 1}. ${rec.service.name}`)
-      if (rec.reasons.length > 0) {
-        lines.push(`   Because they said: ${rec.reasons.join(', ')}`)
-      }
-    })
-  }
-
-  return lines
-}
-
+/**
+ * Captures the lead at the end of the Opportunity Audit.
+ *
+ * This action sends no email. It forwards the audit's `captured` push to the
+ * portal with `deliver: true`, and the portal records the lead and sends both
+ * the team notification and the visitor's results.
+ *
+ * The captured push lives here, not in the progress beacon, on purpose. That
+ * beacon route is unauthenticated and skips BotID, which was fine while it
+ * could only create an anonymous row. A push that makes the portal email an
+ * address the caller chose is a different thing, so it goes through the one
+ * path that verifies a human first. See `src/lib/audit/progress-schema.ts`.
+ */
 export async function sendAudit(
   values: AuditLeadValues,
-  result: AuditResult,
-  answers: AuditAnswers,
-  /** Links this lead to its stored audit response row in the portal. */
-  auditSessionId?: string | null
+  /**
+   * The full progress payload for this attempt, built in the browser by
+   * `buildAuditProgressPayload` because the session, PostHog ids and campaign
+   * context only exist there. Validated below like any other client input.
+   */
+  progressPayload: unknown
 ): Promise<AuditActionResult> {
   const parsed = auditLeadSchema.safeParse(values)
   if (!parsed.success) {
@@ -69,6 +68,16 @@ export async function sendAudit(
       success: false,
       reason: 'validation',
       errors: parsed.error.flatten().fieldErrors,
+    } as const
+  }
+
+  const progress = auditProgressSchema.safeParse(progressPayload)
+  if (!progress.success) {
+    console.warn('Invalid audit capture payload', progress.error.flatten())
+    return {
+      success: false,
+      reason: 'validation',
+      message: 'Something went wrong with your audit. Please try again.',
     } as const
   }
 
@@ -100,190 +109,61 @@ export async function sendAudit(
     } as const
   }
 
-  const apiKey = process.env.RESEND_API_KEY
-  const audienceId = process.env.RESEND_AUDIENCE_ID
+  const { name, email, company, message, marketingConsent } = parsed.data
+  const userAgent = (await headers()).get('user-agent')?.slice(0, 1024) ?? null
 
-  if (!apiKey) {
+  const payload = {
+    ...progress.data,
+    status: 'captured' as const,
+    trigger: 'captured' as const,
+    // The lead comes from the validated form values, never from the payload:
+    // the payload is only trusted for the audit itself.
+    lead: {
+      name: name.trim(),
+      email: email.trim(),
+      company: company?.trim() || null,
+      message: message?.trim() || null,
+      marketingConsent: marketingConsent ?? false,
+    },
+    // Trust the request header over anything the client claims about itself.
+    client: { ...progress.data.client, userAgent },
+    deliver: true,
+  }
+
+  const target = resolvePortalTarget(
+    PORTAL_PATHS.auditResponses,
+    process.env.AUDIT_INTAKE_TOKEN
+  )
+
+  if (!target) {
+    // Dev affordance: see the matching note in send-contact.ts.
+    if (process.env.NODE_ENV !== 'production') {
+      console.info(
+        'PORTAL_API_BASE_URL/AUDIT_INTAKE_TOKEN not set; audit capture not forwarded',
+        JSON.stringify(payload, null, 2)
+      )
+      return { success: true } as const
+    }
+
+    console.error('Audit capture is not configured to reach the portal')
     return {
       success: false,
       reason: 'not_configured',
-      message: 'Email service is not configured. Please try again later.',
+      message: DELIVERY_FAILED_MESSAGE,
     } as const
   }
 
-  const { name, email, company, message, marketingConsent } = parsed.data
+  const result = await submitToPortal(target, payload, {
+    sessionId: payload.sessionId,
+  })
 
-  const resend = new Resend(apiKey)
-
-  const trimmedName = name.trim()
-  const [firstName, ...restOfName] = trimmedName.split(/\s+/)
-  const lastName = restOfName.join(' ').trim()
-  const trimmedCompany = company?.trim() || null
-  const trimmedMessage = message?.trim() || null
-  const greetingName = firstName || trimmedName || 'there'
-
-  const resultLines = summarizeResult(result)
-
-  const detailLines = [`Name: ${name}`, `Email: ${email}`]
-
-  if (trimmedCompany) {
-    detailLines.push(`Company: ${trimmedCompany}`)
-  }
-
-  if (trimmedMessage) {
-    detailLines.push(
-      '',
-      'Additional context:',
-      ...trimmedMessage.split(/\r?\n/)
-    )
-  }
-
-  detailLines.push('', 'Opportunity Audit result:', ...resultLines)
-
-  if (auditSessionId) {
-    detailLines.push('', `Audit session: ${auditSessionId}`)
-  }
-
-  const answerGroups = summarizeAnswers(answers)
-  if (answerGroups.length > 0) {
-    detailLines.push('', 'All responses:')
-    answerGroups.forEach(group => {
-      detailLines.push('', group.section)
-      group.items.forEach(item => {
-        detailLines.push(`- ${item.prompt}`, `  ${item.answer}`)
-      })
-    })
-  }
-
-  const clientEmailLines = [
-    `Hi ${greetingName},`,
-    '',
-    "Thanks for taking the Place To Stand Opportunity Audit. Here's what your answers pointed to:",
-    '',
-    ...resultLines,
-    '',
-    'Ready to start? Just reply to this email and we will take it from there.',
-    '',
-    'Talk soon,',
-    'The Place To Stand Team',
-  ]
-
-  // Send emails first: this is the core deliverable. If it fails, surface the
-  // error so the user can retry; everything below is best-effort enrichment.
-  //
-  // Resend does NOT throw on API errors. It resolves with `{ data: null, error }`
-  // for anything non-2xx (rate limit, suppressed recipient, domain problem), and
-  // only rejects on a network-level failure. An unchecked `await` here reports
-  // success while sending nothing, which is exactly the bug this replaced. Check
-  // `.error` on every send.
-  try {
-    const teamEmail = await resend.emails.send({
-      from: 'Place To Stand <hello@send.placetostandagency.com>',
-      to: ['hello@placetostandagency.com'],
-      replyTo: email,
-      subject: `New Opportunity Audit from ${name}`,
-      text: detailLines.join('\n'),
-      html: renderAuditTeamEmail({
-        name,
-        email,
-        company: trimmedCompany,
-        message: trimmedMessage,
-        result,
-        answers,
-      }),
-    })
-
-    if (teamEmail.error) {
-      console.error('Resend rejected the team notification', teamEmail.error)
-      return {
-        success: false,
-        reason: 'email_rejected',
-        message: 'Failed to send your audit. Please try again in a moment.',
-      } as const
-    }
-
-    const clientEmail = await resend.emails.send({
-      from: 'Place To Stand <hello@send.placetostandagency.com>',
-      to: [email],
-      replyTo: 'hello@placetostandagency.com',
-      subject: 'Your Place To Stand Opportunity Audit',
-      text: clientEmailLines.join('\n'),
-      html: renderAuditClientEmail({ greetingName, result }),
-    })
-
-    // The team mail already landed, so a retry sends them a duplicate. A
-    // duplicate lead notification is strictly better than the visitor believing
-    // a result is on its way when none is.
-    if (clientEmail.error) {
-      console.error('Resend rejected the client email', clientEmail.error)
-      return {
-        success: false,
-        reason: 'email_rejected',
-        message: 'Failed to send your audit. Please try again in a moment.',
-      } as const
-    }
-  } catch (error) {
-    console.error('Email sending failed', error)
+  if (!result.ok) {
     return {
       success: false,
-      reason: 'email_threw',
-      message: 'Failed to send confirmation email. Please try again later.',
+      reason: result.reason,
+      message: DELIVERY_FAILED_MESSAGE,
     } as const
   }
 
-  // Best-effort: add contact to Resend audience. Never blocks success.
-  // Requires explicit opt-in — asking for audit results is not consent to
-  // marketing, so an unticked box means we skip the audience entirely.
-  if (audienceId && marketingConsent) {
-    const contactPayload: {
-      email: string
-      audienceId: string
-      unsubscribed: boolean
-      firstName?: string
-      lastName?: string
-    } = {
-      email,
-      audienceId,
-      unsubscribed: false,
-    }
-
-    if (firstName) {
-      contactPayload.firstName = firstName
-    }
-
-    if (lastName) {
-      contactPayload.lastName = lastName
-    }
-
-    try {
-      const { error: contactError } =
-        await resend.contacts.create(contactPayload)
-
-      if (contactError) {
-        const normalizedMessage = contactError.message?.toLowerCase() ?? ''
-        const contactAlreadyExists =
-          normalizedMessage.includes('already exists')
-
-        if (!contactAlreadyExists) {
-          console.error(
-            'Failed to add contact to Resend audience',
-            contactError
-          )
-        }
-      }
-    } catch (error) {
-      console.error('Resend contact creation failed', error)
-    }
-  } else if (!audienceId) {
-    console.warn('RESEND_AUDIENCE_ID not set; skipping audience add')
-  }
-
-  // The portal record for this audit is created by the progress pushes in
-  // `useAudit`, not here. A successful capture fires a `captured` push carrying
-  // the lead details, which upserts onto the same `sessionId` row. Nothing in
-  // this action talks to the portal.
-
-  return {
-    success: true,
-  } as const
+  return { success: true } as const
 }

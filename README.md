@@ -25,7 +25,7 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 | Framework            | Next.js (App Router, TypeScript)                                                             |
 | Styling              | Tailwind CSS + shadcn/ui                                                                     |
 | Forms & Validation   | React Hook Form + Zod                                                                        |
-| Email Delivery       | Resend                                                                                       |
+| Email Delivery       | Sent by the portal (Resend); this site sends no email                                        |
 | Analytics            | Vercel Analytics                                                                             |
 | Linting & Formatting | ESLint (`eslint-config-next`, `eslint-plugin-react`, `eslint-plugin-react-hooks`) + Prettier |
 
@@ -48,7 +48,7 @@ Single-page layout with sticky header navigation that smooth-scrolls to each sec
 | `#how-we-work` | Numbered 4-step process                                                 |
 | `#team`        | Team card grid (photo, name, title)                                     |
 | `#work`        | Portfolio thumbnails + titles                                           |
-| `#contact`     | Contact form (name, email, message) with validation + Resend submission |
+| `#contact`     | Contact form (name, email, message) with validation, delivered via the portal |
 | Footer         | Copyright, legal links, socials                                         |
 
 ## Repo Structure
@@ -76,8 +76,6 @@ pnpm dev
 
 Environment variables:
 
-- `RESEND_API_KEY` — required for contact form submission
-- `RESEND_AUDIENCE_ID` — required; Resend audience that stores new leads
 - `PORTAL_API_BASE_URL` — required; portal host, e.g. `https://portal.placetostandagency.com`
 - `AUDIT_INTAKE_TOKEN` — required; bearer token for the portal’s audit-responses endpoint
 - `CONTACT_INTAKE_TOKEN` — required; bearer token for the portal’s contact-submissions endpoint
@@ -135,7 +133,7 @@ Each section component should expose a simple contract:
 - Inline error text in red under each field.
 - Loading state on submission.
 - Toast notifications: success (“Thank you! Your message has been sent.”) and failure (“Something went wrong. Please try again.”)
-- Server action posts to Resend for email delivery.
+- Server action posts to the portal, which records the submission and sends both emails. If the portal does not accept it, the visitor is asked to email hello@placetostandagency.com.
 
 ## Performance & Accessibility Checklist
 

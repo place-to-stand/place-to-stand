@@ -8,9 +8,15 @@
  * token and would fail the check, and the worst an abusive caller achieves is a
  * junk anonymous row: no email is sent, no PII is required, and the portal
  * upserts on `sessionId` so repeats collapse into one record.
+ *
+ * "No email is sent" is now load-bearing. The portal mails the visitor when a
+ * `captured` lead arrives with `deliver: true`, so this route must never be
+ * able to forward either. `auditBeaconSchema` refuses `captured`, nulls any
+ * lead, and (being a plain Zod object) strips `deliver` as an unknown key. The
+ * captured push goes through the BotID-gated `sendAudit` action instead.
  */
 import { NextResponse } from 'next/server'
-import { z } from 'zod'
+import { auditBeaconSchema } from '@/src/lib/audit/progress-schema'
 import {
   PORTAL_PATHS,
   postToPortal,
@@ -19,95 +25,6 @@ import {
 
 /** Generous next to a real payload (~4KB), tight enough to stop abuse. */
 const MAX_BODY_BYTES = 32 * 1024
-
-const isoDate = z.string().datetime()
-
-const responseItemSchema = z.object({
-  questionId: z.string().max(128),
-  sectionId: z.string().max(128),
-  prompt: z.string().max(1024),
-  type: z.enum(['single', 'multi', 'text']),
-  value: z
-    .union([z.string().max(5000), z.array(z.string().max(256)).max(64)])
-    .nullable(),
-  labels: z.array(z.string().max(5000)).max(64),
-})
-
-const payloadSchema = z.object({
-  sessionId: z.string().uuid(),
-  status: z.enum(['in_progress', 'completed', 'captured', 'abandoned']),
-  trigger: z.enum([
-    'started',
-    'step_completed',
-    'scored',
-    'captured',
-    'abandoned',
-    'pagehide',
-  ]),
-  sourceDetail: z.string().max(255),
-  startedAt: isoDate,
-  updatedAt: isoDate,
-  completedAt: isoDate.nullable(),
-  progress: z.object({
-    furthestStepIndex: z.number().int().min(0).max(64),
-    stepsTotal: z.number().int().min(0).max(64),
-    answeredCount: z.number().int().min(0).max(512),
-    questionsTotal: z.number().int().min(0).max(512),
-    percentComplete: z.number().int().min(0).max(100),
-    durationMs: z.number().int().min(0),
-  }),
-  responses: z.array(responseItemSchema).max(128),
-  result: z
-    .object({
-      phaseId: z.string().max(64),
-      phaseName: z.string().max(128),
-      summary: z.string().max(5000),
-      generatedBy: z.enum(['rules', 'ai']),
-      phaseScores: z.record(z.string(), z.number()),
-      recommendations: z
-        .array(
-          z.object({
-            serviceId: z.string().max(64),
-            serviceName: z.string().max(128),
-            score: z.number(),
-            reasons: z.array(z.string().max(512)).max(16),
-          })
-        )
-        .max(16),
-    })
-    .nullable(),
-  lead: z
-    .object({
-      name: z.string().max(160),
-      email: z.string().email().max(320),
-      company: z.string().max(160).nullable(),
-      message: z.string().max(2000).nullable(),
-      marketingConsent: z.boolean(),
-    })
-    .nullable(),
-  analytics: z.object({
-    posthogDistinctId: z.string().max(256).nullable(),
-    posthogSessionId: z.string().max(256).nullable(),
-    posthogReplayUrl: z.string().max(2048).nullable(),
-  }),
-  attribution: z.object({
-    utmSource: z.string().max(256).nullable(),
-    utmMedium: z.string().max(256).nullable(),
-    utmCampaign: z.string().max(256).nullable(),
-    utmTerm: z.string().max(256).nullable(),
-    utmContent: z.string().max(256).nullable(),
-    gclid: z.string().max(512).nullable(),
-    referrer: z.string().max(2048).nullable(),
-    landingPath: z.string().max(512).nullable(),
-  }),
-  client: z.object({
-    viewport: z.enum(['mobile', 'tablet', 'desktop']).nullable(),
-    screenWidth: z.number().int().min(0).max(20000).nullable(),
-    timezone: z.string().max(128).nullable(),
-    language: z.string().max(64).nullable(),
-    userAgent: z.string().max(1024).nullable(),
-  }),
-})
 
 export async function POST(request: Request): Promise<NextResponse> {
   let raw: string
@@ -131,15 +48,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     return new NextResponse(null, { status: 204 })
   }
 
-  const parsed = payloadSchema.safeParse(parsedJson)
+  const parsed = auditBeaconSchema.safeParse(parsedJson)
   if (!parsed.success) {
     console.warn('Invalid audit progress payload', parsed.error.flatten())
     return new NextResponse(null, { status: 204 })
   }
 
   // Trust the request header over anything the client claims about itself.
-  // Shape mirrors `AuditProgressPayload` in src/lib/audit/progress-payload.ts;
-  // the schema above is the enforcement point, so keep the two in step.
   const payload = {
     ...parsed.data,
     client: {
