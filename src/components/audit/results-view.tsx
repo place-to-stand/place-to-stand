@@ -21,6 +21,7 @@ import {
   Workflow,
 } from 'lucide-react'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { FeedbackCard } from '@/src/components/audit/feedback-card'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
@@ -297,6 +298,9 @@ export function ResultsView({
         auditSessionId={auditSessionId}
         onCaptured={onCaptured}
       />
+
+      {/* Optional feedback on the result itself. UI only for now. */}
+      <FeedbackCard />
     </div>
   )
 }
