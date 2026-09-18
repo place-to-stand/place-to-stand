@@ -97,11 +97,15 @@ export function useAudit(): UseAudit {
   /** True when answers changed since the last push, so pagehide can skip. */
   const dirtyRef = useRef(false)
 
+  // `captured` is deliberately not accepted here. That push carries the lead
+  // and makes the portal send email, so it goes through the BotID-gated server
+  // action (`buildCapturedPayload` → `sendAudit`), never the beacon route,
+  // which refuses it anyway. The type keeps a future edit from re-adding it.
   const push = useCallback(
     (args: {
       session: AuditSession
-      status: AuditStatus
-      trigger: AuditTrigger
+      status: Exclude<AuditStatus, 'captured'>
+      trigger: Exclude<AuditTrigger, 'captured'>
       result?: AuditResult | null
       lead?: AuditLeadPayload | null
       beacon?: boolean

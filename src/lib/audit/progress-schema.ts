@@ -61,6 +61,8 @@ export const auditProgressSchema = z.object({
     .object({
       phaseId: z.string().max(64),
       phaseName: z.string().max(128),
+      // Optional so a cached client bundle from before the field still lands.
+      phaseTagline: z.string().max(256).optional(),
       summary: z.string().max(5000),
       generatedBy: z.enum(['rules', 'ai']),
       phaseScores: z.record(z.string(), z.number()),
@@ -69,6 +71,7 @@ export const auditProgressSchema = z.object({
           z.object({
             serviceId: z.string().max(64),
             serviceName: z.string().max(128),
+            tagline: z.string().max(256).optional(),
             score: z.number(),
             reasons: z.array(z.string().max(512)).max(16),
           })
