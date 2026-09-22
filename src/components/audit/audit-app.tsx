@@ -14,12 +14,12 @@ export function AuditApp() {
     result,
     isScoring,
     initialStepIndex,
-    sessionId,
     feedback,
     setAnswer,
     start,
     completeStep,
     submit,
+    buildCapturedPayload,
     markCaptured,
     submitFeedback,
     reset,
@@ -46,8 +46,7 @@ export function AuditApp() {
     return (
       <ResultsView
         result={result}
-        answers={answers}
-        auditSessionId={sessionId}
+        buildCapturedPayload={buildCapturedPayload}
         feedback={feedback}
         onCaptured={markCaptured}
         onFeedback={submitFeedback}
