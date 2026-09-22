@@ -15,11 +15,13 @@ export function AuditApp() {
     isScoring,
     initialStepIndex,
     sessionId,
+    feedback,
     setAnswer,
     start,
     completeStep,
     submit,
     markCaptured,
+    submitFeedback,
     reset,
   } = useAudit()
 
@@ -46,7 +48,9 @@ export function AuditApp() {
         result={result}
         answers={answers}
         auditSessionId={sessionId}
+        feedback={feedback}
         onCaptured={markCaptured}
+        onFeedback={submitFeedback}
         onRestart={reset}
       />
     )

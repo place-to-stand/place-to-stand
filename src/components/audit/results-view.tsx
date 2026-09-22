@@ -21,7 +21,10 @@ import {
   Workflow,
 } from 'lucide-react'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
-import { FeedbackCard } from '@/src/components/audit/feedback-card'
+import {
+  FeedbackCard,
+  type FeedbackCardProps,
+} from '@/src/components/audit/feedback-card'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
@@ -45,7 +48,9 @@ interface ResultsViewProps {
   answers: AuditAnswers
   /** Ties the lead back to the stored audit response row in the portal. */
   auditSessionId: string | null
+  feedback: FeedbackCardProps['initial']
   onCaptured: (lead: AuditLeadPayload) => void
+  onFeedback: FeedbackCardProps['onSubmit']
   onRestart: () => void
 }
 
@@ -72,7 +77,9 @@ export function ResultsView({
   result,
   answers,
   auditSessionId,
+  feedback,
   onCaptured,
+  onFeedback,
   onRestart,
 }: ResultsViewProps) {
   const posthog = usePostHog()
@@ -299,8 +306,8 @@ export function ResultsView({
         onCaptured={onCaptured}
       />
 
-      {/* Optional feedback on the result itself. UI only for now. */}
-      <FeedbackCard />
+      {/* Optional feedback on the result itself. */}
+      <FeedbackCard initial={feedback} onSubmit={onFeedback} />
     </div>
   )
 }

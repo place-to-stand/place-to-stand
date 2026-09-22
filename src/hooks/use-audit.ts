@@ -16,6 +16,7 @@ import {
   type AuditTrigger,
 } from '@/src/lib/audit/progress-payload'
 import {
+  type AuditSessionFeedback,
   createAuditSession,
   getAuditSessionServerSnapshot,
   getAuditSessionSnapshot,
@@ -47,11 +48,19 @@ export interface UseAudit {
   /** Wizard step to open on, non-zero when resuming a stored session. */
   initialStepIndex: number
   sessionId: string | null
+  /** Stored results-page feedback, so the card restores after a refresh. */
+  feedback: AuditSessionFeedback | null
   setAnswer: (questionId: string, value: AnswerValue) => void
   start: () => void
   completeStep: (stepIndex: number) => void
   submit: () => Promise<void>
   markCaptured: (lead: AuditLeadPayload) => void
+  /** Record a vote and/or comment on the result and push it to the portal. */
+  submitFeedback: (input: {
+    helpful: boolean | null
+    comment: string | null
+    sent: boolean
+  }) => void
   reset: () => void
 }
 
@@ -298,6 +307,39 @@ export function useAudit(): UseAudit {
     [commit, push, result]
   )
 
+  const submitFeedback = useCallback(
+    (input: {
+      helpful: boolean | null
+      comment: string | null
+      sent: boolean
+    }) => {
+      const submittedAt = new Date().toISOString()
+      const next = commit(prev => ({
+        ...prev,
+        feedback: { ...input, submittedAt },
+      }))
+      if (!next) return
+
+      // Status is whatever the session already reached; feedback never
+      // advances it. The portal re-flags the row on a newer submittedAt.
+      push({
+        session: next,
+        status: next.status,
+        trigger: 'feedback',
+        result,
+      })
+
+      if (input.sent) {
+        posthog?.capture('audit_feedback_submitted', {
+          phase: result?.phase.id,
+          helpful: input.helpful,
+          has_comment: Boolean(input.comment),
+        })
+      }
+    },
+    [commit, push, result, posthog]
+  )
+
   const reset = useCallback(() => {
     const current = getAuditSessionSnapshot()
 
@@ -352,11 +394,13 @@ export function useAudit(): UseAudit {
     isScoring,
     initialStepIndex: Math.min(session?.stepIndex ?? 0, SECTIONS.length - 1),
     sessionId: session?.sessionId ?? null,
+    feedback: session?.feedback ?? null,
     setAnswer,
     start,
     completeStep,
     submit,
     markCaptured,
+    submitFeedback,
     reset,
   }
 }

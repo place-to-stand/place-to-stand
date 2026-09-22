@@ -13,31 +13,38 @@ const COMMENT_MAX_LENGTH = 2000
 export interface AuditFeedback {
   helpful: boolean | null
   comment: string | null
+  /** True when the visitor pressed Send, false for a bare vote. */
+  sent: boolean
 }
 
-interface FeedbackCardProps {
-  /** Called when the visitor votes or sends a comment. UI-only for now. */
+export interface FeedbackCardProps {
+  /** Previously stored feedback, so a refresh restores the card's state. */
+  initial?: AuditFeedback | null
+  /** Called on every vote (sent: false) and on Send (sent: true). */
   onSubmit?: (feedback: AuditFeedback) => void
 }
 
 /**
  * Two optional questions at the foot of the results page: a yes/no on whether
- * the result was useful, and a free-text comment. Voting is one tap; the
- * comment has its own send button so a vote is never held hostage to typing.
+ * the result was useful, and a free-text comment. Voting is one tap and is
+ * recorded immediately; the comment has its own send button so a vote is
+ * never held hostage to typing.
  */
-export function FeedbackCard({ onSubmit }: FeedbackCardProps) {
-  const [helpful, setHelpful] = useState<boolean | null>(null)
-  const [comment, setComment] = useState('')
-  const [isSent, setIsSent] = useState(false)
+export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
+  const [helpful, setHelpful] = useState<boolean | null>(
+    initial?.helpful ?? null
+  )
+  const [comment, setComment] = useState(initial?.comment ?? '')
+  const [isSent, setIsSent] = useState(initial?.sent ?? false)
 
   const vote = (value: boolean) => {
     const next = helpful === value ? null : value
     setHelpful(next)
-    onSubmit?.({ helpful: next, comment: comment.trim() || null })
+    onSubmit?.({ helpful: next, comment: comment.trim() || null, sent: false })
   }
 
   const send = () => {
-    onSubmit?.({ helpful, comment: comment.trim() || null })
+    onSubmit?.({ helpful, comment: comment.trim() || null, sent: true })
     setIsSent(true)
   }
 

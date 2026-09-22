@@ -43,6 +43,7 @@ const payloadSchema = z.object({
     'captured',
     'abandoned',
     'pagehide',
+    'feedback',
   ]),
   sourceDetail: z.string().max(255),
   startedAt: isoDate,
@@ -83,6 +84,13 @@ const payloadSchema = z.object({
       company: z.string().max(160).nullable(),
       message: z.string().max(2000).nullable(),
       marketingConsent: z.boolean(),
+    })
+    .nullable(),
+  feedback: z
+    .object({
+      helpful: z.boolean().nullable(),
+      comment: z.string().max(2000).nullable(),
+      submittedAt: isoDate,
     })
     .nullable(),
   analytics: z.object({
