@@ -30,6 +30,19 @@ export const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000
  */
 export type AuditStatus = 'in_progress' | 'completed' | 'captured' | 'abandoned'
 
+/**
+ * Results-page feedback as stored on the session. `sent` is client-only: it
+ * records that the visitor pressed Send (vs. only voted) so a refresh lands on
+ * the thank-you state rather than an editable card. The wire shape the portal
+ * receives is `AuditFeedbackPayload` in progress-payload.ts.
+ */
+export interface AuditSessionFeedback {
+  helpful: boolean | null
+  comment: string | null
+  submittedAt: string
+  sent: boolean
+}
+
 export interface AuditSession {
   sessionId: string
   status: AuditStatus
@@ -40,6 +53,8 @@ export interface AuditSession {
   updatedAt: string
   /** Captured once when the session is created, then frozen for its lifetime. */
   context: SubmissionContext
+  /** Absent until the visitor votes or sends a comment on the results page. */
+  feedback?: AuditSessionFeedback
 }
 
 function isBrowser(): boolean {

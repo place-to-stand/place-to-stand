@@ -43,6 +43,7 @@ export const auditProgressSchema = z.object({
     'captured',
     'abandoned',
     'pagehide',
+    'feedback',
   ]),
   sourceDetail: z.string().max(255),
   startedAt: isoDate,
@@ -88,6 +89,16 @@ export const auditProgressSchema = z.object({
       marketingConsent: z.boolean(),
     })
     .nullable(),
+  // Results-page feedback. Optional so a cached client bundle from before the
+  // card still lands; nullable because a vote and a comment are independent.
+  feedback: z
+    .object({
+      helpful: z.boolean().nullable(),
+      comment: z.string().max(2000).nullable(),
+      submittedAt: isoDate,
+    })
+    .nullable()
+    .optional(),
   analytics: z.object({
     posthogDistinctId: z.string().max(256).nullable(),
     posthogSessionId: z.string().max(256).nullable(),
@@ -122,6 +133,7 @@ export const auditBeaconSchema = auditProgressSchema.extend({
     'scored',
     'abandoned',
     'pagehide',
+    'feedback',
   ]),
   // Dropped rather than rejected: a beacon that somehow carries lead details
   // still records its progress, it just never delivers a contact.

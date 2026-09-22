@@ -39,6 +39,7 @@ export type AuditTrigger =
   | 'captured'
   | 'abandoned'
   | 'pagehide'
+  | 'feedback'
 
 export interface AuditResponseItem {
   questionId: string
@@ -85,6 +86,13 @@ export interface AuditLeadPayload {
   marketingConsent: boolean
 }
 
+/** Results-page feedback. Either field may be null on its own. */
+export interface AuditFeedbackPayload {
+  helpful: boolean | null
+  comment: string | null
+  submittedAt: string
+}
+
 export interface AuditProgressPayload {
   sessionId: string
   status: AuditStatus
@@ -97,6 +105,7 @@ export interface AuditProgressPayload {
   responses: AuditResponseItem[]
   result: AuditResultPayload | null
   lead: AuditLeadPayload | null
+  feedback: AuditFeedbackPayload | null
   analytics: SubmissionAnalytics
   attribution: SubmissionAttribution
   client: SubmissionClientInfo & { userAgent: string | null }
@@ -171,6 +180,15 @@ export function buildAuditProgressPayload({
     responses,
     result: result ? toResultPayload(result) : null,
     lead,
+    // Always carried when present: the portal COALESCEs it, so re-sending on
+    // later beacons is harmless and protects against a dropped feedback push.
+    feedback: session.feedback
+      ? {
+          helpful: session.feedback.helpful,
+          comment: session.feedback.comment,
+          submittedAt: session.feedback.submittedAt,
+        }
+      : null,
     analytics: readSubmissionAnalytics(),
     attribution: session.context.attribution,
     // `userAgent` is filled in server-side by the API route, which reads the

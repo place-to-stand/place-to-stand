@@ -21,6 +21,10 @@ import {
   Workflow,
 } from 'lucide-react'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import {
+  FeedbackCard,
+  type FeedbackCardProps,
+} from '@/src/components/audit/feedback-card'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
@@ -46,7 +50,9 @@ interface ResultsViewProps {
   result: AuditResult
   /** Builds the `captured` payload the server action forwards to the portal. */
   buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  feedback: FeedbackCardProps['initial']
   onCaptured: () => void
+  onFeedback: FeedbackCardProps['onSubmit']
   onRestart: () => void
 }
 
@@ -72,7 +78,9 @@ function shortPhaseName(id: PhaseId): string {
 export function ResultsView({
   result,
   buildCapturedPayload,
+  feedback,
   onCaptured,
+  onFeedback,
   onRestart,
 }: ResultsViewProps) {
   const posthog = usePostHog()
@@ -297,6 +305,9 @@ export function ResultsView({
         buildCapturedPayload={buildCapturedPayload}
         onCaptured={onCaptured}
       />
+
+      {/* Optional feedback on the result itself. */}
+      <FeedbackCard initial={feedback} onSubmit={onFeedback} />
     </div>
   )
 }
