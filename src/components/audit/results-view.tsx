@@ -36,15 +36,17 @@ import {
   type AuditLeadValues,
 } from '@/src/lib/validations/audit'
 import { sendAudit, type AuditActionResult } from '@/app/actions/send-audit'
-import type { AuditLeadPayload } from '@/src/lib/audit/progress-payload'
-import type { AuditAnswers, AuditResult, PhaseId } from '@/src/lib/audit/types'
+import type {
+  AuditLeadPayload,
+  AuditProgressPayload,
+} from '@/src/lib/audit/progress-payload'
+import type { AuditResult, PhaseId } from '@/src/lib/audit/types'
 
 interface ResultsViewProps {
   result: AuditResult
-  answers: AuditAnswers
-  /** Ties the lead back to the stored audit response row in the portal. */
-  auditSessionId: string | null
-  onCaptured: (lead: AuditLeadPayload) => void
+  /** Builds the `captured` payload the server action forwards to the portal. */
+  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  onCaptured: () => void
   onRestart: () => void
 }
 
@@ -69,8 +71,7 @@ function shortPhaseName(id: PhaseId): string {
 
 export function ResultsView({
   result,
-  answers,
-  auditSessionId,
+  buildCapturedPayload,
   onCaptured,
   onRestart,
 }: ResultsViewProps) {
@@ -293,8 +294,7 @@ export function ResultsView({
       {/* Capture / CTA */}
       <CaptureForm
         result={result}
-        answers={answers}
-        auditSessionId={auditSessionId}
+        buildCapturedPayload={buildCapturedPayload}
         onCaptured={onCaptured}
       />
     </div>
@@ -303,16 +303,14 @@ export function ResultsView({
 
 interface CaptureFormProps {
   result: AuditResult
-  answers: AuditAnswers
-  auditSessionId: string | null
-  onCaptured: (lead: AuditLeadPayload) => void
+  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  onCaptured: () => void
 }
 
 /** Emails the respondent their result and hands us the lead. */
 function CaptureForm({
   result,
-  answers,
-  auditSessionId,
+  buildCapturedPayload,
   onCaptured,
 }: CaptureFormProps) {
   const posthog = usePostHog()
@@ -338,8 +336,13 @@ function CaptureForm({
       marketingConsent: values.marketingConsent ?? false,
     }
 
+    // The portal records the lead and sends both emails, so the captured
+    // payload rides along with the form values instead of going out as a
+    // separate beacon afterwards.
+    const capturedPayload = buildCapturedPayload(lead)
+
     startTransition(() => {
-      void sendAudit(values, result, answers, auditSessionId)
+      void sendAudit(values, capturedPayload)
         .then((res: AuditActionResult) => {
           if (!res.success) {
             posthog?.capture('audit_capture_failed', {
@@ -359,17 +362,6 @@ function CaptureForm({
               })
             }
 
-            // The email failed but the details are real and already typed. Push
-            // the lead to the portal anyway so it is recoverable by hand, rather
-            // than losing a finished audit to a Resend outage. Validation and
-            // bot blocks are excluded: those details are not trustworthy.
-            if (
-              res.reason === 'email_rejected' ||
-              res.reason === 'email_threw'
-            ) {
-              onCaptured(lead)
-            }
-
             toast({
               variant: 'destructive',
               title: 'Something went wrong',
@@ -384,7 +376,7 @@ function CaptureForm({
             phase: result.phase.id,
           })
           pushLeadConversion('audit_lead_submitted', lead.email)
-          onCaptured(lead)
+          onCaptured()
         })
         .catch((error: unknown) => {
           // The action itself rejected (deploy skew, cold-start failure). Without

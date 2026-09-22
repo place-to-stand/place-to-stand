@@ -87,13 +87,28 @@ server-rendered tree without a hydration mismatch.
 from Vercel after the cutover.
 
 Leave all three unset in local development. Both paths then log the payload to the server console
-instead of forwarding it, so the whole flow is verifiable with no portal running.
+instead of forwarding it and report success, so the whole flow is verifiable with no portal running.
+In production an unset value is an error the visitor sees, because nothing else delivers the message.
 
 ## Failure handling
 
-Delivery is best-effort throughout. A portal outage logs and continues, and the visitor still sees
-success. The Resend emails and the audience opt-in are untouched by this integration and still gate
-success as they did before.
+**Superseded in September 2026 by portal PRD 008 (form email consolidation).** This site no longer
+sends email. Both form submissions now go to the portal with `deliver: true`, and the portal records
+the row and then sends the team notification and the visitor's confirmation, and handles the
+marketing-audience opt-in.
+
+- **Form submissions are awaited and gate success.** `submitToPortal` reports `portal_rejected` or
+  `portal_unreachable`, and the visitor sees an error pointing at hello@placetostandagency.com. The
+  portal records before it sends, so a mail-provider outage delays an email rather than losing the
+  enquiry; a visitor only sees a failure when the portal itself did not accept the request.
+- **Audit progress beacons stay best-effort.** `postToPortal` still logs and continues.
+- **The audit's `captured` push moved out of the beacon** and into the BotID-gated `sendAudit`
+  action. The beacon route is unauthenticated, and `captured` + `deliver` is what makes the portal
+  email a visitor-supplied address, so `auditBeaconSchema` refuses `captured`, nulls any lead, and
+  strips `deliver`. See `src/lib/audit/progress-schema.ts`.
+
+`RESEND_API_KEY` and `RESEND_AUDIENCE_ID` are no longer read and should be removed from Vercel after
+the cutover has been quiet for a week.
 
 ## Known limitations
 

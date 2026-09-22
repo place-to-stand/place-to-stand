@@ -14,11 +14,11 @@ export function AuditApp() {
     result,
     isScoring,
     initialStepIndex,
-    sessionId,
     setAnswer,
     start,
     completeStep,
     submit,
+    buildCapturedPayload,
     markCaptured,
     reset,
   } = useAudit()
@@ -44,8 +44,7 @@ export function AuditApp() {
     return (
       <ResultsView
         result={result}
-        answers={answers}
-        auditSessionId={sessionId}
+        buildCapturedPayload={buildCapturedPayload}
         onCaptured={markCaptured}
         onRestart={reset}
       />

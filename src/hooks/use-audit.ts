@@ -13,6 +13,7 @@ import { SECTIONS } from '@/src/lib/audit/questions'
 import {
   buildAuditProgressPayload,
   type AuditLeadPayload,
+  type AuditProgressPayload,
   type AuditTrigger,
 } from '@/src/lib/audit/progress-payload'
 import {
@@ -51,7 +52,8 @@ export interface UseAudit {
   start: () => void
   completeStep: (stepIndex: number) => void
   submit: () => Promise<void>
-  markCaptured: (lead: AuditLeadPayload) => void
+  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  markCaptured: () => void
   reset: () => void
 }
 
@@ -95,11 +97,15 @@ export function useAudit(): UseAudit {
   /** True when answers changed since the last push, so pagehide can skip. */
   const dirtyRef = useRef(false)
 
+  // `captured` is deliberately not accepted here. That push carries the lead
+  // and makes the portal send email, so it goes through the BotID-gated server
+  // action (`buildCapturedPayload` → `sendAudit`), never the beacon route,
+  // which refuses it anyway. The type keeps a future edit from re-adding it.
   const push = useCallback(
     (args: {
       session: AuditSession
-      status: AuditStatus
-      trigger: AuditTrigger
+      status: Exclude<AuditStatus, 'captured'>
+      trigger: Exclude<AuditTrigger, 'captured'>
       result?: AuditResult | null
       lead?: AuditLeadPayload | null
       beacon?: boolean
@@ -282,21 +288,39 @@ export function useAudit(): UseAudit {
     }
   }, [posthog, commit, push])
 
-  const markCaptured = useCallback(
-    (lead: AuditLeadPayload) => {
-      const next = commit(prev => ({ ...prev, status: 'captured' }))
-      if (!next) return
+  /**
+   * The `captured` payload for `sendAudit` to forward. Built here because the
+   * session, PostHog ids and campaign context only exist in the browser, but
+   * NOT pushed from here: the captured push is the one that makes the portal
+   * send email, so it travels through the BotID-gated server action instead
+   * of the unauthenticated progress beacon.
+   *
+   * Does not commit `captured` to the session. That happens in `markCaptured`,
+   * once the action has actually succeeded.
+   */
+  const buildCapturedPayload = useCallback(
+    (lead: AuditLeadPayload): AuditProgressPayload | null => {
+      const current = getAuditSessionSnapshot()
+      if (!current) return null
 
-      push({
-        session: next,
+      return buildAuditProgressPayload({
+        // Stamped at send time: `updatedAt` is the portal's ordering key, and
+        // reusing the last commit's value risks being discarded as stale.
+        session: { ...current, updatedAt: new Date().toISOString() },
         status: 'captured',
         trigger: 'captured',
         result,
         lead,
+        completedAt: completedAtRef.current,
       })
     },
-    [commit, push, result]
+    [result]
   )
+
+  /** Records locally that the lead was captured. The portal already knows. */
+  const markCaptured = useCallback(() => {
+    commit(prev => ({ ...prev, status: 'captured' }))
+  }, [commit])
 
   const reset = useCallback(() => {
     const current = getAuditSessionSnapshot()
@@ -356,6 +380,7 @@ export function useAudit(): UseAudit {
     start,
     completeStep,
     submit,
+    buildCapturedPayload,
     markCaptured,
     reset,
   }

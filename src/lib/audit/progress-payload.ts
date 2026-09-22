@@ -61,12 +61,16 @@ export interface AuditProgressSummary {
 export interface AuditResultPayload {
   phaseId: PhaseId
   phaseName: string
+  /** One-line description of the phase; the portal's results email shows it. */
+  phaseTagline: string
   summary: string
   generatedBy: 'rules' | 'ai'
   phaseScores: Record<PhaseId, number>
   recommendations: Array<{
     serviceId: ServiceId
     serviceName: string
+    /** One-line description of the service, for the same reason. */
+    tagline: string
     score: number
     reasons: string[]
   }>
@@ -112,12 +116,14 @@ function toResultPayload(result: AuditResult): AuditResultPayload {
   return {
     phaseId: result.phase.id,
     phaseName: result.phase.name,
+    phaseTagline: result.phase.tagline,
     summary: result.summary,
     generatedBy: result.generatedBy,
     phaseScores: result.phaseScores,
     recommendations: result.recommendations.map(rec => ({
       serviceId: rec.service.id,
       serviceName: rec.service.name,
+      tagline: rec.service.tagline,
       score: rec.score,
       reasons: rec.reasons,
     })),

@@ -6,8 +6,15 @@
  * `app/api/audit-progress/route.ts`; the contact form calls it directly from its
  * server action.
  *
- * Delivery is best-effort by design: a portal outage logs and continues, and the
- * visitor still sees success. See `docs/prds/005-form-submissions/README.md`.
+ * Two delivery modes, because the two callers need opposite guarantees:
+ *
+ * - `postToPortal` is log-and-continue, for audit progress beacons. A dropped
+ *   beacon costs one data point and must never disturb the visitor.
+ * - `submitToPortal` reports the outcome, for the two form submissions. The
+ *   portal records the lead and sends both emails, so if it did not accept the
+ *   request the visitor has to be told — nothing else will reach us.
+ *
+ * See `docs/prds/005-form-submissions/README.md`.
  */
 
 /** Paths on the portal, per the integration contract. */
@@ -75,5 +82,54 @@ export async function postToPortal(
       error,
       ...context,
     })
+  }
+}
+
+/** Long enough for the portal to write a row and send two emails. */
+const SUBMIT_TIMEOUT_MS = 15_000
+
+export type PortalSubmitResult =
+  { ok: true } | { ok: false; reason: 'portal_rejected' | 'portal_unreachable' }
+
+/**
+ * POST a form submission and report whether the portal accepted it. Never
+ * throws. `portal_rejected` is an answer we did not want (4xx/5xx);
+ * `portal_unreachable` is no answer at all (network error or timeout).
+ */
+export async function submitToPortal(
+  target: PortalTarget,
+  payload: unknown,
+  context: Record<string, unknown>
+): Promise<PortalSubmitResult> {
+  try {
+    const response = await fetch(target.url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${target.token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(SUBMIT_TIMEOUT_MS),
+    })
+
+    if (!response.ok) {
+      console.error('Portal submission rejected', {
+        url: target.url,
+        status: response.status,
+        statusText: response.statusText,
+        body: await response.text().catch(() => null),
+        ...context,
+      })
+      return { ok: false, reason: 'portal_rejected' }
+    }
+
+    return { ok: true }
+  } catch (error) {
+    console.error('Portal submission request failed', {
+      url: target.url,
+      error,
+      ...context,
+    })
+    return { ok: false, reason: 'portal_unreachable' }
   }
 }

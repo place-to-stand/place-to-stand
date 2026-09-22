@@ -47,16 +47,58 @@ export interface ContactSubmissionPayload {
   analytics: SubmissionAnalytics
   attribution: SubmissionAttribution
   client: SubmissionClientInfo & { userAgent: string | null }
+  /**
+   * Asks the portal to send the team notification and the visitor's
+   * confirmation. The site sends no email of its own.
+   */
+  deliver: boolean
+}
+
+/**
+ * Envelope for a submission whose browser context never arrived. The portal is
+ * the only delivery path, so a missing context must not stop the message; it
+ * just lands with no attribution. Built here rather than imported from
+ * `context.ts`, which is client-only (it pulls in the PostHog browser client).
+ */
+export function emptyContactSubmissionContext(
+  submissionId: string
+): ContactSubmissionContext {
+  return {
+    submissionId,
+    analytics: {
+      posthogDistinctId: null,
+      posthogSessionId: null,
+      posthogReplayUrl: null,
+    },
+    attribution: {
+      utmSource: null,
+      utmMedium: null,
+      utmCampaign: null,
+      utmTerm: null,
+      utmContent: null,
+      gclid: null,
+      referrer: null,
+      landingPath: null,
+    },
+    client: {
+      viewport: null,
+      screenWidth: null,
+      timezone: null,
+      language: null,
+    },
+  }
 }
 
 export function buildContactSubmissionPayload({
   context,
   contact,
   userAgent,
+  deliver,
 }: {
   context: ContactSubmissionContext
   contact: ContactSubmissionFields
   userAgent: string | null
+  deliver: boolean
 }): ContactSubmissionPayload {
   return {
     submissionId: context.submissionId,
@@ -66,5 +108,6 @@ export function buildContactSubmissionPayload({
     analytics: context.analytics,
     attribution: context.attribution,
     client: { ...context.client, userAgent },
+    deliver,
   }
 }
