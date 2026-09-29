@@ -9,3 +9,7 @@ export const NAV_LINKS = [
 ] as const
 
 export type NavLink = (typeof NAV_LINKS)[number]
+
+/** Where existing clients log in to see invoices, hours, and tasks. Kept out
+ *  of NAV_LINKS: it's a utility link, not a marketing page. */
+export const CLIENT_PORTAL_URL = 'https://clients.placetostandagency.com/'

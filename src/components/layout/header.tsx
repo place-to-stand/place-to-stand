@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { cn } from '@/src/lib/utils'
-import { NAV_LINKS } from '@/src/components/layout/nav-links'
+import { CLIENT_PORTAL_URL, NAV_LINKS } from '@/src/components/layout/nav-links'
 
 export function Header() {
   const pathname = usePathname()
@@ -45,13 +45,13 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className='hidden items-center gap-1 md:flex'>
+        <nav className='hidden items-center gap-1 lg:flex'>
           {NAV_LINKS.map(item => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'px-3 py-1.5 font-mono text-[11px] tracking-[0.1em] uppercase transition-colors duration-300',
+                'px-3 py-1.5 font-mono text-[11px] tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-300',
                 pathname === item.href
                   ? 'border border-accent/30 text-accent'
                   : 'border border-transparent text-text-muted hover:text-text'
@@ -64,8 +64,21 @@ export function Header() {
 
         {/* CTA + mobile toggle */}
         <div className='flex items-center gap-4'>
-          <div className='hidden md:inline-flex'>
-            <Button asChild size='sm'>
+          <TrackedLink
+            href={CLIENT_PORTAL_URL}
+            location='header-portal'
+            className='hidden font-mono text-[11px] tracking-[0.1em] text-text-muted uppercase transition-colors duration-300 hover:text-text lg:inline'
+          >
+            Client Login
+          </TrackedLink>
+          {/* Shown beside the menu toggle from ~416px up: logo + CTA + toggle
+              need ~360px, so it fits large phones but not a 375px screen. */}
+          <div className='hidden min-[26rem]:inline-flex'>
+            <Button
+              asChild
+              size='sm'
+              className='h-8 px-3 text-xs lg:h-9 lg:px-4 lg:text-sm'
+            >
               <TrackedLink href='/audit' location='header'>
                 Free Audit
               </TrackedLink>
@@ -74,7 +87,7 @@ export function Header() {
 
           <button
             type='button'
-            className='md:hidden'
+            className='lg:hidden'
             onClick={() => setMobileOpen(open => !open)}
             aria-controls='mobile-nav'
             aria-expanded={mobileOpen}
@@ -109,7 +122,7 @@ export function Header() {
       {/* Mobile nav */}
       <div
         className={cn(
-          'absolute top-full right-0 left-0 transition-all duration-300 md:hidden',
+          'absolute top-full right-0 left-0 transition-all duration-300 lg:hidden',
           mobileOpen
             ? 'pointer-events-auto translate-y-0 opacity-100'
             : 'pointer-events-none -translate-y-2 opacity-0'
@@ -118,7 +131,7 @@ export function Header() {
         <div className='mx-4 mt-2'>
           <nav
             id='mobile-nav'
-            className='flex flex-col border border-border bg-bg-card/95 p-4 backdrop-blur-lg md:hidden'
+            className='flex flex-col border border-border bg-bg-card/95 p-4 backdrop-blur-lg lg:hidden'
           >
             {NAV_LINKS.map(item => (
               <Link
@@ -133,7 +146,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <div className='mt-3 px-4'>
+            <TrackedLink
+              href={CLIENT_PORTAL_URL}
+              location='header-mobile-portal'
+              className='px-4 py-3 text-sm tracking-[0.08em] text-text-muted transition-colors hover:text-accent'
+              onClick={() => setMobileOpen(false)}
+            >
+              Client Login
+            </TrackedLink>
+            <div className='mt-3 px-4 min-[26rem]:hidden'>
               <Button asChild size='sm' className='w-full'>
                 <TrackedLink
                   href='/audit'
