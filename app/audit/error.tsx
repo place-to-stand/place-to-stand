@@ -38,6 +38,16 @@ export default function AuditError({
   useEffect(() => {
     const session = getAuditSessionSnapshot()
 
+    // An error.tsx is an explicit React error boundary, so Next treats what it
+    // catches as handled: the error never reaches window.onerror and PostHog's
+    // `capture_exceptions` autocapture never sees it. Report it by hand or the
+    // crash is invisible in Error Tracking (the event below is analytics only).
+    posthog?.captureException(error, {
+      digest: error.digest,
+      boundary: 'app/audit/error',
+      auto_retried: autoRetried,
+    })
+
     posthog?.capture('audit_render_failed', {
       error_name: error.name,
       error_message: error.message,
