@@ -1,4 +1,5 @@
 import { initBotId } from 'botid/client/core'
+import { initPostHog } from '@/src/lib/posthog-init'
 import { installTranslationSafeDom } from '@/src/lib/translation-safe-dom'
 
 /**
@@ -7,6 +8,12 @@ import { installTranslationSafeDom } from '@/src/lib/translation-safe-dom'
  * why this is needed and what it costs.
  */
 installTranslationSafeDom()
+
+/**
+ * Before hydration so that crashes during the first render, whether caught by
+ * an error boundary or not, are reported rather than dropped.
+ */
+initPostHog()
 
 /**
  * Protect only the routes whose server actions actually call `checkBotId()`.
