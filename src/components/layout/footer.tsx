@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { NAV_LINKS } from '@/src/components/layout/nav-links'
+import { TrackedLink } from '@/src/components/tracked-link'
+import { CLIENT_PORTAL_URL, NAV_LINKS } from '@/src/components/layout/nav-links'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -59,9 +60,16 @@ export function Footer() {
             &copy; {year} Place To Stand. All rights reserved.
           </span>
           <nav
-            className='flex items-center gap-6 text-xs font-semibold tracking-[0.1em] uppercase'
+            className='flex flex-wrap items-center gap-x-6 gap-y-grid-half text-xs font-semibold tracking-[0.1em] whitespace-nowrap uppercase'
             aria-label='Legal'
           >
+            <TrackedLink
+              href={CLIENT_PORTAL_URL}
+              location='footer-portal'
+              className='text-text-muted transition-colors hover:text-accent'
+            >
+              Client Login
+            </TrackedLink>
             <Link
               href='/referral'
               className='text-text-muted transition-colors hover:text-accent'
