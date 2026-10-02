@@ -3,9 +3,9 @@ import type { AuditQuestion, AuditSection } from './types'
 /**
  * The audit worksheet.
  *
- * Kept intentionally short (two questions per step) to respect busy people's
- * time. Questions are grouped into sections, and the wizard renders one per
- * step. Each selectable option carries scoring weights that nudge the result
+ * Kept intentionally short (two questions per section) to respect busy
+ * people's time. Questions are grouped into sections for progress and portal
+ * tracking, but the wizard shows one question per screen. Each selectable option carries scoring weights that nudge the result
  * toward a business phase and/or a set of opportunity recommendations. The
  * weights are deliberately simple (roughly 1 to 3) and live next to the answer
  * they describe so the scoring stays transparent and easy to tune.
@@ -36,6 +36,42 @@ export const SECTIONS: AuditSection[] = [
 
 export const QUESTIONS: AuditQuestion[] = [
   // Section 1: Your Business
+  // Revenue leads: five short options are the easiest possible first tap.
+  {
+    id: 'revenue',
+    sectionId: 'business',
+    type: 'single',
+    prompt: 'What stage is your business at?',
+    helper: 'Annual revenue, ballpark is fine.',
+    required: true,
+    options: [
+      {
+        id: 'pre-revenue',
+        label: 'Pre-revenue',
+        phaseWeights: { foundation: 3 },
+      },
+      {
+        id: 'under-100k',
+        label: 'Under $100K',
+        phaseWeights: { foundation: 1, launch: 2 },
+      },
+      {
+        id: '100k-1m',
+        label: '$100K to $1M',
+        phaseWeights: { launch: 1, growth: 2 },
+      },
+      {
+        id: '1m-10m',
+        label: '$1M to $10M',
+        phaseWeights: { growth: 1, optimization: 2 },
+      },
+      {
+        id: '10m-plus',
+        label: '$10M+',
+        phaseWeights: { optimization: 1, transformation: 2 },
+      },
+    ],
+  },
   {
     id: 'industry',
     sectionId: 'business',
@@ -102,41 +138,6 @@ export const QUESTIONS: AuditQuestion[] = [
       {
         id: 'other',
         label: 'Something else',
-      },
-    ],
-  },
-  {
-    id: 'revenue',
-    sectionId: 'business',
-    type: 'single',
-    prompt: 'What stage is your business at?',
-    helper: 'Annual revenue, ballpark is fine.',
-    required: true,
-    options: [
-      {
-        id: 'pre-revenue',
-        label: 'Pre-revenue',
-        phaseWeights: { foundation: 3 },
-      },
-      {
-        id: 'under-100k',
-        label: 'Under $100K',
-        phaseWeights: { foundation: 1, launch: 2 },
-      },
-      {
-        id: '100k-1m',
-        label: '$100K to $1M',
-        phaseWeights: { launch: 1, growth: 2 },
-      },
-      {
-        id: '1m-10m',
-        label: '$1M to $10M',
-        phaseWeights: { growth: 1, optimization: 2 },
-      },
-      {
-        id: '10m-plus',
-        label: '$10M+',
-        phaseWeights: { optimization: 1, transformation: 2 },
       },
     ],
   },

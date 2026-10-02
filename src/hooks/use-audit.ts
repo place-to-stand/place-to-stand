@@ -36,7 +36,11 @@ import type {
   AuditResult,
 } from '@/src/lib/audit/types'
 
-export type AuditStage = 'intro' | 'wizard' | 'results'
+/**
+ * `capture` sits between scoring and the reveal: the visitor is asked for an
+ * email (or skips) before seeing results, the point where curiosity peaks.
+ */
+export type AuditStage = 'intro' | 'wizard' | 'capture' | 'results'
 
 /** Stable identity so consumers do not see a new object every render. */
 const EMPTY_ANSWERS: AuditAnswers = {}
@@ -51,12 +55,20 @@ export interface UseAudit {
   sessionId: string | null
   /** Stored results-page feedback, so the card restores after a refresh. */
   feedback: AuditSessionFeedback | null
+  /**
+   * The lead from a successful capture in this page load, or null. Held in
+   * memory only: a captured session starts fresh on refresh anyway.
+   */
+  capturedLead: AuditLeadPayload | null
   setAnswer: (questionId: string, value: AnswerValue) => void
   start: () => void
   completeStep: (stepIndex: number) => void
   submit: () => Promise<void>
   buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
-  markCaptured: () => void
+  /** Record a successful capture and move on to the results. */
+  markCaptured: (lead: AuditLeadPayload) => void
+  /** Leave the email screen without giving an email. */
+  skipCapture: () => void
   /** Record a vote and/or comment on the result and push it to the portal. */
   submitFeedback: (input: {
     helpful: boolean | null
@@ -90,6 +102,9 @@ export function useAudit(): UseAudit {
   const [chosenStage, setChosenStage] = useState<AuditStage | null>(null)
   const [result, setResult] = useState<AuditResult | null>(null)
   const [isScoring, setIsScoring] = useState(false)
+  const [capturedLead, setCapturedLead] = useState<AuditLeadPayload | null>(
+    null
+  )
 
   // A completed session outranks a resumable one: someone who finished and then
   // lost the page (a crash, a closed tab) should land back on their results,
@@ -227,6 +242,7 @@ export function useAudit(): UseAudit {
       const reopened = commit(prev => ({ ...prev, status: 'in_progress' }))
 
       setResult(null)
+      setCapturedLead(null)
       completedAtRef.current = null
       dirtyRef.current = false
       setChosenStage('wizard')
@@ -242,6 +258,7 @@ export function useAudit(): UseAudit {
     setAuditSession(fresh)
 
     setResult(null)
+    setCapturedLead(null)
     completedAtRef.current = null
     dirtyRef.current = false
     // A fresh session is never resumable, so pin the stage explicitly.
@@ -275,7 +292,7 @@ export function useAudit(): UseAudit {
     try {
       const scored = await runAudit(getAuditSessionSnapshot()?.answers ?? {})
       setResult(scored)
-      setChosenStage('results')
+      setChosenStage('capture')
       posthog?.capture('audit_completed', {
         phase: scored.phase.id,
         top_service: scored.recommendations[0]?.service.id,
@@ -327,9 +344,19 @@ export function useAudit(): UseAudit {
   )
 
   /** Records locally that the lead was captured. The portal already knows. */
-  const markCaptured = useCallback(() => {
-    commit(prev => ({ ...prev, status: 'captured' }))
-  }, [commit])
+  const markCaptured = useCallback(
+    (lead: AuditLeadPayload) => {
+      commit(prev => ({ ...prev, status: 'captured' }))
+      setCapturedLead(lead)
+      setChosenStage('results')
+    },
+    [commit]
+  )
+
+  const skipCapture = useCallback(() => {
+    posthog?.capture('audit_capture_skipped', { phase: result?.phase.id })
+    setChosenStage('results')
+  }, [posthog, result])
 
   const submitFeedback = useCallback(
     (input: {
@@ -385,6 +412,7 @@ export function useAudit(): UseAudit {
 
     setAuditSession(null)
     setResult(null)
+    setCapturedLead(null)
     completedAtRef.current = null
     dirtyRef.current = false
     setChosenStage('intro')
@@ -421,12 +449,14 @@ export function useAudit(): UseAudit {
     initialStepIndex: Math.min(session?.stepIndex ?? 0, SECTIONS.length - 1),
     sessionId: session?.sessionId ?? null,
     feedback: session?.feedback ?? null,
+    capturedLead,
     setAnswer,
     start,
     completeStep,
     submit,
     buildCapturedPayload,
     markCaptured,
+    skipCapture,
     submitFeedback,
     reset,
   }

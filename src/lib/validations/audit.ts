@@ -8,7 +8,10 @@ const optionalString = z
   .or(z.literal(''))
 
 export const auditLeadSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters.'),
+  // Optional: the capture asks for an email alone, and name, company and
+  // message arrive later (if at all) from the follow-up details form. The
+  // portal greets a nameless lead by email address.
+  name: optionalString,
   email: z.string().email('Please enter a valid email address.'),
   company: optionalString,
   // "Anything else we should know?" — free text, never required.
@@ -24,3 +27,22 @@ export const auditLeadSchema = z.object({
 })
 
 export type AuditLeadValues = z.infer<typeof auditLeadSchema>
+
+/** The capture itself: an email and the opt-in, nothing else. */
+export const auditEmailSchema = auditLeadSchema.pick({
+  email: true,
+  marketingConsent: true,
+})
+
+export type AuditEmailValues = z.infer<typeof auditEmailSchema>
+
+/** The optional follow-up once the email is in. Empty is not worth sending. */
+export const auditDetailsSchema = auditLeadSchema
+  .pick({ name: true, company: true, message: true })
+  .refine(
+    values =>
+      [values.name, values.company, values.message].some(v => v?.trim()),
+    { message: 'Add at least one detail.', path: ['message'] }
+  )
+
+export type AuditDetailsValues = z.infer<typeof auditDetailsSchema>

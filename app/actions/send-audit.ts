@@ -43,6 +43,11 @@ const DELIVERY_FAILED_MESSAGE =
 /**
  * Captures the lead at the end of the Opportunity Audit.
  *
+ * Called twice for a visitor who also fills in the optional details form: once
+ * with just an email, then again with name, company and message. The portal
+ * upserts on `sessionId` and delivers each submission's emails only once, so
+ * the second call enriches the row without re-sending anything.
+ *
  * This action sends no email. It forwards the audit's `captured` push to the
  * portal with `deliver: true`, and the portal records the lead and sends both
  * the team notification and the visitor's results.
@@ -94,8 +99,10 @@ export async function sendAudit(
       return {
         success: false,
         reason: 'botid_blocked',
+        // Has rejected at least one real visitor (a paid click who retried
+        // three times), so always give them a way through that works.
         message:
-          "We couldn't verify your request. Please refresh and try again.",
+          "We couldn't verify your request. Please refresh and try again, or email hello@placetostandagency.com and we'll send your blueprint.",
       } as const
     }
   } catch (error) {
@@ -119,7 +126,8 @@ export async function sendAudit(
     // The lead comes from the validated form values, never from the payload:
     // the payload is only trusted for the audit itself.
     lead: {
-      name: name.trim(),
+      // The contract wants a string; blank means "only gave an email".
+      name: name?.trim() ?? '',
       email: email.trim(),
       company: company?.trim() || null,
       message: message?.trim() || null,
