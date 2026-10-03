@@ -9,6 +9,8 @@ interface QuestionFieldProps {
   question: AuditQuestion
   value: AnswerValue | undefined
   onChange: (value: AnswerValue) => void
+  /** `lg` when the question is alone on screen and acts as the heading. */
+  size?: 'md' | 'lg'
 }
 
 /** Renders one worksheet question as single-select, multi-select, or free text. */
@@ -16,10 +18,18 @@ export function QuestionField({
   question,
   value,
   onChange,
+  size = 'md',
 }: QuestionFieldProps) {
   return (
     <fieldset className='space-y-3'>
-      <legend className='font-headline text-base font-semibold tracking-tight text-text uppercase'>
+      <legend
+        className={cn(
+          'font-headline font-semibold tracking-tight text-text uppercase',
+          size === 'lg'
+            ? 'mb-3 text-2xl leading-[1.05] text-balance sm:text-3xl'
+            : 'text-base'
+        )}
+      >
         {question.prompt}
         {question.required && <span className='ml-1 text-accent'>*</span>}
       </legend>
