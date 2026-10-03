@@ -47,24 +47,23 @@ export function AuditWizard({
   onExit,
 }: AuditWizardProps) {
   const posthog = usePostHog()
-  const [stepIndex, setStepIndex] = useState(() =>
-    Math.min(Math.max(initialStepIndex, 0), SECTIONS.length - 1)
+  const initialStep = Math.min(
+    Math.max(initialStepIndex, 0),
+    SECTIONS.length - 1
   )
+  const [stepIndex, setStepIndex] = useState(initialStep)
   // Resuming lands on the first unanswered question of the stored section.
-  const [questionIndex, setQuestionIndex] = useState(() => {
-    const resumed = questionsForSection(
-      SECTIONS[Math.min(Math.max(initialStepIndex, 0), SECTIONS.length - 1)].id
-    )
-    return Math.max(
-      resumed.findIndex(q => !isAnswered(q, answers)),
+  const [questionIndex, setQuestionIndex] = useState(() =>
+    Math.max(
+      questionsForSection(SECTIONS[initialStep].id).findIndex(
+        q => !isAnswered(q, answers)
+      ),
       0
     )
-  })
+  )
   const [showError, setShowError] = useState(false)
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  // Set once the last answer submits. A second tap on the final question
-  // during scoring would otherwise schedule a second submit.
-  const submittedRef = useRef(false)
+  const questionRef = useRef<HTMLDivElement>(null)
 
   const section = SECTIONS[stepIndex]
   const questions = useMemo(() => questionsForSection(section.id), [section.id])
@@ -80,11 +79,17 @@ export function AuditWizard({
 
   useEffect(() => cancelAutoAdvance, [])
 
-  // A successful submit unmounts the wizard. Still being here once scoring
-  // stops means it failed, so let the visitor try again.
+  // Each question remounts (see the keyed wrapper), which destroys whatever
+  // had focus. Hand focus to the new question so keyboard and screen-reader
+  // users continue from it instead of the top of the page. Compared against
+  // the last focused id rather than skipped on mount, which Strict Mode's
+  // double effect would defeat.
+  const focusedQuestionRef = useRef(question.id)
   useEffect(() => {
-    if (!isScoring) submittedRef.current = false
-  }, [isScoring])
+    if (focusedQuestionRef.current === question.id) return
+    focusedQuestionRef.current = question.id
+    questionRef.current?.focus()
+  }, [question.id])
 
   useEffect(() => {
     posthog?.capture('audit_step_viewed', {
@@ -108,7 +113,6 @@ export function AuditWizard({
    */
   const advance = (answered: boolean) => {
     cancelAutoAdvance()
-    if (submittedRef.current) return
     if (question.required && !answered) {
       setShowError(true)
       return
@@ -126,7 +130,7 @@ export function AuditWizard({
     })
     onStepComplete(stepIndex)
     if (isLastStep) {
-      submittedRef.current = true
+      // `submit` ignores re-entry itself, so a stray second advance is safe.
       onSubmit()
     } else {
       setStepIndex(i => i + 1)
@@ -135,6 +139,8 @@ export function AuditWizard({
   }
 
   const handleAnswer = (value: AnswerValue) => {
+    // Answers are frozen while the blueprint is being built.
+    if (isScoring) return
     onAnswer(question.id, value)
     setShowError(false)
     if (question.type === 'single') {
@@ -179,7 +185,9 @@ export function AuditWizard({
         {/* Keyed so each question mounts fresh and fades in. */}
         <div
           key={question.id}
-          className='duration-300 animate-in fade-in slide-in-from-right-2 motion-reduce:animate-none'
+          ref={questionRef}
+          tabIndex={-1}
+          className='duration-300 animate-in outline-none fade-in slide-in-from-right-2 motion-reduce:animate-none'
         >
           <QuestionField
             question={question}

@@ -100,9 +100,11 @@ export async function sendAudit(
         success: false,
         reason: 'botid_blocked',
         // Has rejected at least one real visitor (a paid click who retried
-        // three times), so always give them a way through that works.
+        // three times), so always give them a way through that works. Kept
+        // generic: this action also serves the post-capture details form,
+        // where the blueprint has already been sent.
         message:
-          "We couldn't verify your request. Please refresh and try again, or email hello@placetostandagency.com and we'll send your blueprint.",
+          "We couldn't verify your request. Please refresh and try again, or email hello@placetostandagency.com and we'll take it from there.",
       } as const
     }
   } catch (error) {

@@ -29,7 +29,7 @@ export function AuditProgress({
   const segments = SECTIONS.length + 1
 
   return (
-    <div className='mb-8'>
+    <div className='mb-grid-1'>
       <div className='flex items-center justify-between gap-4 font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
         <span>{label}</span>
         <span className='text-right text-accent'>{title}</span>

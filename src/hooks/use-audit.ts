@@ -287,7 +287,17 @@ export function useAudit(): UseAudit {
     [commit, push]
   )
 
+  /**
+   * Guards `submit` against re-entry. A ref rather than `isScoring` state: a
+   * second call can arrive before the state update renders (an auto-advance
+   * and a tap in the same frame), and a ref is cleared deterministically in
+   * `finally` whatever React batches.
+   */
+  const scoringRef = useRef(false)
+
   const submit = useCallback(async () => {
+    if (scoringRef.current) return
+    scoringRef.current = true
     setIsScoring(true)
     try {
       const scored = await runAudit(getAuditSessionSnapshot()?.answers ?? {})
@@ -309,7 +319,16 @@ export function useAudit(): UseAudit {
           result: scored,
         })
       }
+    } catch (error: unknown) {
+      // The wizard stays put with the answers intact, so trying again works.
+      posthog?.captureException(error)
+      toast({
+        variant: 'destructive',
+        title: 'We could not build your blueprint',
+        description: 'Your answers are saved. Please try again.',
+      })
     } finally {
+      scoringRef.current = false
       setIsScoring(false)
     }
   }, [posthog, commit, push])

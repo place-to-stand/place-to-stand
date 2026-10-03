@@ -397,9 +397,17 @@ export function ResultsView({
  * form screens away.
  */
 function LockedRecommendation({ rank }: { rank: number }) {
+  const posthog = usePostHog()
+
   return (
     <a
       href={`#${CAPTURE_ANCHOR}`}
+      onClick={() =>
+        posthog?.capture('audit_capture_anchor_click', {
+          location: 'locked-card',
+          rank,
+        })
+      }
       className='group relative flex items-center gap-4 border border-dashed border-border bg-bg-panel p-4 transition-colors hover:border-accent/60'
     >
       <span className='sr-only'>
@@ -476,20 +484,24 @@ function CapturedPanel({
           {detailsSent ? (
             <div className='flex h-full flex-col justify-center gap-2'>
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
-                Thanks, that&apos;s with the team
+                Saved with your audit
               </h3>
               <p className='text-sm text-text-muted'>
-                We&apos;ll have it in front of us when we talk.
+                Want a faster answer? Reply to your blueprint email and it lands
+                straight in our inbox.
               </p>
             </div>
           ) : (
             <>
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
-                Want us to take a look?
+                Add some context?
               </h3>
+              {/* Deliberately no promise that the team is notified: the portal
+                  emails once per capture, so this only enriches the stored
+                  submission. */}
               <p className='mt-1 mb-4 text-sm text-text-muted'>
-                Optional. A little context helps us come to the first
-                conversation with ideas, not questions.
+                Optional. It&apos;s saved with your audit, so we can come to the
+                first conversation with ideas, not questions.
               </p>
               <LeadDetailsForm
                 result={result}

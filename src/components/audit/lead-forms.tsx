@@ -224,7 +224,8 @@ interface LeadDetailsFormProps {
 /**
  * Optional follow-up after the capture. Sends the same `captured` push again,
  * now with name, company and a note. The portal fills in its row and does not
- * re-send the emails (see `sendAudit`).
+ * re-send the emails (see `sendAudit`), which also means nobody is notified:
+ * the details reach the team only through the stored submission.
  */
 export function LeadDetailsForm({
   result,
@@ -324,7 +325,7 @@ export function LeadDetailsForm({
         disabled={isPending}
         className='mt-1 w-full px-8 sm:w-auto sm:self-start'
       >
-        {isPending ? 'Sending...' : 'Send to the team'}
+        {isPending ? 'Saving...' : 'Save to my audit'}
       </Button>
     </form>
   )

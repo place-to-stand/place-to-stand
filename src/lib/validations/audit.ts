@@ -1,9 +1,12 @@
 import { z } from 'zod'
 
+// 160 matches the lead caps in `auditProgressSchema` (the portal allows 255).
+// The server builds the lead after that schema runs, so this is the only
+// check a name or company gets before it is forwarded.
 const optionalString = z
   .string()
   .trim()
-  .max(256, 'Must be 256 characters or fewer.')
+  .max(160, 'Must be 160 characters or fewer.')
   .optional()
   .or(z.literal(''))
 
