@@ -48,6 +48,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  // iOS WebViews (e.g. the TikTok in-app browser) auto-link phone numbers,
+  // dates and addresses by rewriting the DOM before React hydrates, which
+  // surfaces as React error #418. Opt out so the server HTML stays untouched.
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+  },
   twitter: {
     card: 'summary_large_image',
     title: 'Place To Stand | Custom Software & AI Development Agency',
