@@ -66,6 +66,7 @@ export function Header() {
         <div className='flex items-center gap-4'>
           <TrackedLink
             href={CLIENT_PORTAL_URL}
+            rel='nofollow'
             location='header-portal'
             className='hidden font-mono text-[11px] tracking-[0.1em] text-text-muted uppercase transition-colors duration-300 hover:text-text lg:inline'
           >
@@ -148,6 +149,7 @@ export function Header() {
             ))}
             <TrackedLink
               href={CLIENT_PORTAL_URL}
+              rel='nofollow'
               location='header-mobile-portal'
               className='px-4 py-3 text-sm tracking-[0.08em] text-text-muted transition-colors hover:text-accent'
               onClick={() => setMobileOpen(false)}
