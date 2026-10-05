@@ -65,6 +65,7 @@ export function Footer() {
           >
             <TrackedLink
               href={CLIENT_PORTAL_URL}
+              rel='nofollow'
               location='footer-portal'
               className='text-text-muted transition-colors hover:text-accent'
             >
