@@ -14,7 +14,7 @@ import { captureAttribution } from '@/src/lib/forms/attribution-store'
  * anything nested inside it silently never runs there.
  *
  * `useSearchParams` needs a `<Suspense>` boundary around this component or the
- * whole route opts out of static rendering. `PostHogPageView` does the same.
+ * whole route opts out of static rendering.
  */
 export function AttributionCapture() {
   const pathname = usePathname()

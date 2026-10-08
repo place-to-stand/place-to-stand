@@ -24,7 +24,10 @@ export function initPostHog() {
     // Required when api_host is a proxy so the toolbar/app links resolve
     ui_host: 'https://us.posthog.com',
     person_profiles: 'identified_only',
-    capture_pageview: false, // We capture manually for route changes
+    // Fires the first pageview at init and one per client-side route change
+    // (pushState/replaceState/popstate), replacing a hand-rolled tracker that
+    // needed a useSearchParams component in the root layout.
+    capture_pageview: 'history_change',
     capture_pageleave: true,
     autocapture: true,
     capture_dead_clicks: true,

@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og'
+import { cacheLife } from 'next/cache'
 import type { CSSProperties } from 'react'
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
@@ -99,11 +100,24 @@ function CornerMark({ top, left }: { top?: boolean; left?: boolean }) {
   return <div style={style} />
 }
 
+// Cached so the disk reads don't count as request-time work: with Cache
+// Components, uncached I/O would turn this image into a per-request render.
+// Returned as base64 because binary buffers don't survive the cache intact.
+async function loadFonts() {
+  'use cache'
+  cacheLife('max')
+  const files = ['SpaceGrotesk-Bold.ttf', 'SourceSans3-Regular.ttf']
+  return Promise.all(
+    files.map(async file =>
+      (await readFile(path.join(fontDir, file))).toString('base64')
+    )
+  )
+}
+
 export default async function OpenGraphImage() {
-  const [spaceGrotesk, sourceSans] = await Promise.all([
-    readFile(path.join(fontDir, 'SpaceGrotesk-Bold.ttf')),
-    readFile(path.join(fontDir, 'SourceSans3-Regular.ttf')),
-  ])
+  const [spaceGrotesk, sourceSans] = (await loadFonts()).map(font =>
+    Buffer.from(font, 'base64')
+  )
 
   return new ImageResponse(
     <div

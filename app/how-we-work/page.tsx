@@ -17,6 +17,7 @@ import {
 export const metadata: Metadata = {
   title: 'How We Work',
   description: 'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
+  alternates: { canonical: '/how-we-work' },
 }
 
 const process = [

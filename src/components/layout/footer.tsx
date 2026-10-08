@@ -1,9 +1,18 @@
 import Link from 'next/link'
+import { cacheLife } from 'next/cache'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { CLIENT_PORTAL_URL, NAV_LINKS } from '@/src/components/layout/nav-links'
 
-export function Footer() {
-  const year = new Date().getFullYear()
+// Cached rather than read per render so every page can stay static; a daily
+// refresh rolls the copyright year over without needing a redeploy.
+async function currentYear() {
+  'use cache'
+  cacheLife('days')
+  return new Date().getFullYear()
+}
+
+export async function Footer() {
+  const year = await currentYear()
   return (
     <footer className='border-t border-border bg-bg-card text-text-muted'>
       <div className='mx-auto flex w-full max-w-content flex-col gap-grid-2 px-6 py-grid-2 md:flex-row md:items-start md:justify-between lg:px-12'>

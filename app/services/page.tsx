@@ -10,12 +10,13 @@ export const metadata: Metadata = {
   title: 'Services',
   description:
     'AI automation, software development, workflow systems, and strategic advisory services from Place To Stand.',
+  alternates: { canonical: '/services' },
 }
 
 export default function ServicesPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
-      <AnimatedSection className='flex flex-col gap-12 md:gap-20'>
+      <AnimatedSection priority className='flex flex-col gap-12 md:gap-20'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Services</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>

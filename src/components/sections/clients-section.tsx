@@ -39,6 +39,7 @@ export function ClientsSection() {
               src={project.image}
               alt={`${project.title} project thumbnail`}
               fill
+              sizes='(min-width: 1248px) 540px, (min-width: 768px) 50vw, 100vw'
               className='object-cover transition-transform duration-700 group-hover:scale-105'
             />
           </div>

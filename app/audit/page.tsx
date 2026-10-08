@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Free Opportunity Audit',
   description:
     'Take our 2-minute audit to discover where custom software would give your business the most leverage. Built by ex-Squarespace engineers using AI-accelerated development.',
+  alternates: { canonical: '/audit' },
   openGraph: {
     title: 'Free Opportunity Audit | Place To Stand',
     description:

@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: 'Clients',
   description:
     "A selection of the brands we've partnered with to design, build, and ship software that earns its keep.",
+  alternates: { canonical: '/clients' },
 }
 
 export default function ClientsPage() {
@@ -19,6 +20,7 @@ export default function ClientsPage() {
     <main className='flex-1 pt-10 pb-32'>
       {/* Heading, client cards, and CTA tile, one section separated by gaps */}
       <AnimatedSection
+        priority
         id='clients'
         className='flex flex-col gap-grid-3 md:gap-grid-4'
       >
