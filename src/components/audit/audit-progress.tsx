@@ -1,4 +1,4 @@
-import { questionsForSection, SECTIONS } from '@/src/lib/audit/questions'
+import { QUESTIONS } from '@/src/lib/audit/questions'
 import { cn } from '@/src/lib/utils'
 
 interface AuditProgressProps {
@@ -14,26 +14,10 @@ interface AuditProgressProps {
   currentIndex: number
 }
 
-/** Each section's worksheet-order question indices, for grouping segments. */
-const SECTION_GROUPS = SECTIONS.reduce<{ id: string; indices: number[] }[]>(
-  (groups, section) => {
-    const start = groups.reduce((n, g) => n + g.indices.length, 0)
-    const size = questionsForSection(section.id).length
-    return [
-      ...groups,
-      {
-        id: section.id,
-        indices: Array.from({ length: size }, (_, i) => start + i),
-      },
-    ]
-  },
-  []
-)
-
 /**
- * One segment per question, so the bar matches the "Question N of M" label
- * exactly: done, current, or still to come. Sections show as groups separated
- * by a wider gap, never as partially filled segments of their own.
+ * One evenly spaced segment per question, so the bar matches the "Question N
+ * of M" label exactly: done, current, or still to come. The section is named
+ * in the label, so the bar does not group by it.
  */
 export function AuditProgress({
   label,
@@ -46,23 +30,19 @@ export function AuditProgress({
         <span>{label}</span>
         <span className='text-right text-accent'>{title}</span>
       </div>
-      <div className='mt-2 flex gap-2.5'>
-        {SECTION_GROUPS.map(group => (
-          <div key={group.id} className='flex flex-1 gap-1'>
-            {group.indices.map(i => (
-              <div
-                key={i}
-                className={cn(
-                  'h-1.5 flex-1 transition-colors duration-300',
-                  i < currentIndex
-                    ? 'bg-accent'
-                    : i === currentIndex
-                      ? 'bg-accent/40'
-                      : 'bg-border'
-                )}
-              />
-            ))}
-          </div>
+      <div className='mt-2 flex gap-1.5'>
+        {QUESTIONS.map((question, i) => (
+          <div
+            key={question.id}
+            className={cn(
+              'h-1.5 flex-1 transition-colors duration-300',
+              i < currentIndex
+                ? 'bg-accent'
+                : i === currentIndex
+                  ? 'bg-accent/40'
+                  : 'bg-border'
+            )}
+          />
         ))}
       </div>
     </div>
