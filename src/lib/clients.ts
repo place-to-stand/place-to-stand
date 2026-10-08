@@ -96,8 +96,7 @@ export const clients: Client[] = [
   {
     title: 'Lifepacks',
     href: 'https://www.lifepacks.co',
-    image:
-      'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=1200&q=80',
+    image: '/work-lifepacks.jpg',
     logo: '/logos/lifepacks.png',
     logoScale: 0.4,
     description:

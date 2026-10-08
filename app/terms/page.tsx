@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service',
   description:
     'The terms that govern use of the Place To Stand website and the Opportunity Audit, and the general conditions under which we deliver client work.',
+  alternates: { canonical: '/terms' },
 }
 
 export default function TermsPage() {

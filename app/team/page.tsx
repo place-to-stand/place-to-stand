@@ -7,12 +7,13 @@ import { team } from '@/src/lib/team'
 export const metadata: Metadata = {
   title: 'Team',
   description: 'Meet the engineers and builders behind Place To Stand.',
+  alternates: { canonical: '/team' },
 }
 
 export default function TeamPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
-      <AnimatedSection className='flex flex-col gap-12'>
+      <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Team</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
@@ -34,6 +35,7 @@ export default function TeamPage() {
                   src={member.image}
                   alt={`${member.name}, ${member.title}`}
                   fill
+                  sizes='(min-width: 640px) 288px, 75vw'
                   className='object-cover transition duration-700 group-hover:scale-105'
                 />
               </div>

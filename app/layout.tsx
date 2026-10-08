@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Suspense, type ReactNode } from 'react'
-import Script from 'next/script'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { Space_Grotesk, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
@@ -12,23 +12,22 @@ import { PostHogProvider } from '@/src/components/posthog-provider'
 import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
 import { AttributionCapture } from '@/src/components/attribution-capture'
 
+const GTM_ID = 'GTM-MS2BB27R'
+
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space-grotesk',
-  adjustFontFallback: false,
 })
 
 const bebasNeue = Bebas_Neue({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bebas-neue',
-  adjustFontFallback: false,
 })
 
 const sourceSans = Source_Sans_3({
   subsets: ['latin'],
   variable: '--font-source-sans',
-  adjustFontFallback: false,
 })
 
 export const metadata: Metadata = {
@@ -65,18 +64,25 @@ export const metadata: Metadata = {
   },
 }
 
+// Every page on the site is static. Fail the build if a change would make
+// any of them render per request.
+export const ensureStatic = 'navigation'
+
+// Matches --color-bg so mobile browser chrome blends into the page.
+export const viewport: Viewport = {
+  themeColor: '#0e0f11',
+  colorScheme: 'dark',
+}
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en' className='scroll-smooth' suppressHydrationWarning>
-      <Script id='google-tag-manager' strategy='afterInteractive'>
-        {`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-MS2BB27R');
-        `}
-      </Script>
+    <html
+      lang='en'
+      className='scroll-smooth'
+      data-scroll-behavior='smooth'
+      suppressHydrationWarning
+    >
+      <GoogleTagManager gtmId={GTM_ID} />
       <body
         className={cn(
           'min-h-screen overflow-x-hidden bg-bg text-text',
@@ -87,7 +93,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       >
         <noscript>
           <iframe
-            src='https://www.googletagmanager.com/ns.html?id=GTM-MS2BB27R'
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
             height='0'
             width='0'
             style={{ display: 'none', visibility: 'hidden' }}

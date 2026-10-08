@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy',
   description:
     'How Place To Stand collects, uses, shares, and protects personal information from our website, contact form, and opportunity audit, including audits that are never finished.',
+  alternates: { canonical: '/privacy' },
 }
 
 export default function PrivacyPage() {

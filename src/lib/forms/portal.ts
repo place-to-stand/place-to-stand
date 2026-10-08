@@ -16,6 +16,7 @@
  *
  * See `docs/prds/005-form-submissions/README.md`.
  */
+import 'server-only'
 
 /** Paths on the portal, per the integration contract. */
 export const PORTAL_PATHS = {

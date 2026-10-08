@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Contact',
   description:
     'Get in touch with Place To Stand. Send a message or book a call directly.',
+  alternates: { canonical: '/contact' },
 }
 
 export default function ContactPage() {

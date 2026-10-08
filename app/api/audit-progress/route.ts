@@ -15,7 +15,7 @@
  * lead, and (being a plain Zod object) strips `deliver` as an unknown key. The
  * captured push goes through the BotID-gated `sendAudit` action instead.
  */
-import { NextResponse } from 'next/server'
+import { after, NextResponse } from 'next/server'
 import { auditBeaconSchema } from '@/src/lib/audit/progress-schema'
 import {
   PORTAL_PATHS,
@@ -78,12 +78,16 @@ export async function POST(request: Request): Promise<NextResponse> {
     return new NextResponse(null, { status: 204 })
   }
 
-  await postToPortal(target, payload, {
-    sessionId: payload.sessionId,
-    auditStatus: payload.status,
-    trigger: payload.trigger,
-  })
+  // The visitor's experience never depends on the portal being reachable, so
+  // answer the beacon now and forward after the response (`waitUntil` on
+  // Vercel). `postToPortal` never throws.
+  after(() =>
+    postToPortal(target, payload, {
+      sessionId: payload.sessionId,
+      auditStatus: payload.status,
+      trigger: payload.trigger,
+    })
+  )
 
-  // The visitor's experience never depends on the portal being reachable.
   return new NextResponse(null, { status: 204 })
 }

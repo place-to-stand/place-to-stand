@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { HeroSection } from '@/src/components/sections/hero-section'
 import { ClientLogosSection } from '@/src/components/sections/client-logos-section'
 import { PillarsSection } from '@/src/components/sections/pillars-section'
@@ -14,6 +15,10 @@ import {
 } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+}
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',

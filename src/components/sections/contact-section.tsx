@@ -153,6 +153,7 @@ export function ContactSection() {
 
   return (
     <AnimatedSection
+      priority
       id='contact'
       className='flex flex-col gap-10 py-24 pb-grid-8'
     >
