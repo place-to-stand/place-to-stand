@@ -6,7 +6,7 @@ import { CheckCircle2 } from 'lucide-react'
 import { AuditProgress } from '@/src/components/audit/audit-progress'
 import { EmailCaptureForm } from '@/src/components/audit/lead-forms'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
-import { SECTIONS } from '@/src/lib/audit/questions'
+import { QUESTIONS } from '@/src/lib/audit/questions'
 import type {
   AuditLeadPayload,
   AuditProgressPayload,
@@ -45,10 +45,9 @@ export function CaptureGate({
   return (
     <div className='mx-auto max-w-2xl py-grid-2'>
       <AuditProgress
-        label='Last step'
+        label='All questions answered'
         title='Your blueprint'
-        segmentIndex={SECTIONS.length}
-        segmentFill={1}
+        currentIndex={QUESTIONS.length}
       />
 
       <div className='relative border border-border p-6 sm:p-8'>

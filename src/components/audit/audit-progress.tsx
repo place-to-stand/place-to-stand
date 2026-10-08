@@ -1,4 +1,4 @@
-import { SECTIONS } from '@/src/lib/audit/questions'
+import { questionsForSection, SECTIONS } from '@/src/lib/audit/questions'
 import { cn } from '@/src/lib/utils'
 
 interface AuditProgressProps {
@@ -7,57 +7,63 @@ interface AuditProgressProps {
   /** Right-hand label, usually the current section's title. */
   title: string
   /**
-   * Segment currently in progress: a section index, or `SECTIONS.length` for
-   * the closing "Your blueprint" segment.
+   * Zero-based index of the question on screen, in worksheet order. Every
+   * earlier question shows as done. Past the last question (the email step)
+   * every segment is done.
    */
-  segmentIndex: number
-  /** How far through the current segment, 0 to 1. */
-  segmentFill: number
+  currentIndex: number
 }
 
+/** Each section's worksheet-order question indices, for grouping segments. */
+const SECTION_GROUPS = SECTIONS.reduce<{ id: string; indices: number[] }[]>(
+  (groups, section) => {
+    const start = groups.reduce((n, g) => n + g.indices.length, 0)
+    const size = questionsForSection(section.id).length
+    return [
+      ...groups,
+      {
+        id: section.id,
+        indices: Array.from({ length: size }, (_, i) => start + i),
+      },
+    ]
+  },
+  []
+)
+
 /**
- * One segment per section plus a final one for the emailed blueprint, so the
- * email step reads as part of the audit from the first screen rather than a
- * surprise at the end.
+ * One segment per question, so the bar matches the "Question N of M" label
+ * exactly: done, current, or still to come. Sections show as groups separated
+ * by a wider gap, never as partially filled segments of their own.
  */
 export function AuditProgress({
   label,
   title,
-  segmentIndex,
-  segmentFill,
+  currentIndex,
 }: AuditProgressProps) {
-  const segments = SECTIONS.length + 1
-
   return (
     <div className='mb-grid-1'>
       <div className='flex items-center justify-between gap-4 font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
         <span>{label}</span>
         <span className='text-right text-accent'>{title}</span>
       </div>
-      <div className='mt-2 flex gap-1.5'>
-        {Array.from({ length: segments }, (_, i) => {
-          const fill =
-            i < segmentIndex
-              ? 1
-              : i === segmentIndex
-                ? Math.min(Math.max(segmentFill, 0), 1)
-                : 0
-          return (
-            <div
-              key={i}
-              className={cn(
-                'h-1.5 flex-1 overflow-hidden bg-border',
-                // The blueprint segment is visibly different: it is the payoff.
-                i === segments - 1 && 'outline outline-1 outline-accent/40'
-              )}
-            >
+      <div className='mt-2 flex gap-2.5'>
+        {SECTION_GROUPS.map(group => (
+          <div key={group.id} className='flex flex-1 gap-1'>
+            {group.indices.map(i => (
               <div
-                className='h-full bg-accent transition-[width] duration-300 ease-out'
-                style={{ width: `${fill * 100}%` }}
+                key={i}
+                className={cn(
+                  'h-1.5 flex-1 transition-colors duration-300',
+                  i < currentIndex
+                    ? 'bg-accent'
+                    : i === currentIndex
+                      ? 'bg-accent/40'
+                      : 'bg-border'
+                )}
               />
-            </div>
-          )
-        })}
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   )

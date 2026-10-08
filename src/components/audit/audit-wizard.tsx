@@ -176,8 +176,7 @@ export function AuditWizard({
       <AuditProgress
         label={`Question ${questionNumber} of ${ALL_QUESTIONS.length}`}
         title={section.title}
-        segmentIndex={stepIndex}
-        segmentFill={questionIndex / questions.length}
+        currentIndex={questionNumber - 1}
       />
 
       <div className='relative border border-border p-6 sm:p-8'>
