@@ -46,7 +46,8 @@ const DELIVERY_FAILED_MESSAGE =
  * Called twice for a visitor who also fills in the optional details form: once
  * with just an email, then again with name, company and message. The portal
  * upserts on `sessionId` and delivers each submission's emails only once, so
- * the second call enriches the row without re-sending anything.
+ * the second call enriches the row without re-sending them; the portal sends
+ * the team a separate follow-up with what was added.
  *
  * This action sends no email. It forwards the audit's `captured` push to the
  * portal with `deliver: true`, and the portal records the lead and sends both

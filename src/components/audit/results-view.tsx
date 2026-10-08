@@ -484,24 +484,23 @@ function CapturedPanel({
           {detailsSent ? (
             <div className='flex h-full flex-col justify-center gap-2'>
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
-                Saved with your audit
+                Thanks, the team has it
               </h3>
               <p className='text-sm text-text-muted'>
-                Want a faster answer? Reply to your blueprint email and it lands
+                Want to keep talking? Reply to your blueprint email and it lands
                 straight in our inbox.
               </p>
             </div>
           ) : (
             <>
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
-                Add some context?
+                Want us to take a look?
               </h3>
-              {/* Deliberately no promise that the team is notified: the portal
-                  emails once per capture, so this only enriches the stored
-                  submission. */}
+              {/* The portal emails the team a follow-up when a captured audit
+                  gains these details (place-to-stand-portal#259). */}
               <p className='mt-1 mb-4 text-sm text-text-muted'>
-                Optional. It&apos;s saved with your audit, so we can come to the
-                first conversation with ideas, not questions.
+                Optional. We&apos;ll send it to the team with your audit, so we
+                can come to the first conversation with ideas, not questions.
               </p>
               <LeadDetailsForm
                 result={result}
