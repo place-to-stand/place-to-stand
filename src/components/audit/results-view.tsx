@@ -1,8 +1,6 @@
 'use client'
 
-import { useEffect, useState, useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect, useState } from 'react'
 import { usePostHog } from 'posthog-js/react'
 import {
   ArrowRight,
@@ -10,7 +8,9 @@ import {
   CheckCircle2,
   Contact,
   LayoutDashboard,
+  Lock,
   type LucideIcon,
+  Mail,
   Network,
   RefreshCw,
   RotateCcw,
@@ -25,21 +25,14 @@ import {
   FeedbackCard,
   type FeedbackCardProps,
 } from '@/src/components/audit/feedback-card'
+import {
+  EmailCaptureForm,
+  LeadDetailsForm,
+} from '@/src/components/audit/lead-forms'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
-import { Checkbox } from '@/src/components/ui/checkbox'
-import { Input } from '@/src/components/ui/input'
-import { Label } from '@/src/components/ui/label'
-import { Textarea } from '@/src/components/ui/textarea'
-import { toast } from '@/src/components/ui/use-toast'
 import { cn } from '@/src/lib/utils'
-import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
 import { PHASE_ORDER, PHASES } from '@/src/lib/audit/phases'
-import {
-  auditLeadSchema,
-  type AuditLeadValues,
-} from '@/src/lib/validations/audit'
-import { sendAudit, type AuditActionResult } from '@/app/actions/send-audit'
 import type {
   AuditLeadPayload,
   AuditProgressPayload,
@@ -50,8 +43,10 @@ interface ResultsViewProps {
   result: AuditResult
   /** Builds the `captured` payload the server action forwards to the portal. */
   buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  /** Set once this visitor has given an email; unlocks the full blueprint. */
+  capturedLead: AuditLeadPayload | null
   feedback: FeedbackCardProps['initial']
-  onCaptured: () => void
+  onCaptured: (lead: AuditLeadPayload) => void
   onFeedback: FeedbackCardProps['onSubmit']
   onRestart: () => void
 }
@@ -70,6 +65,9 @@ const SERVICE_ICONS: Record<string, LucideIcon> = {
   RefreshCw,
 }
 
+/** Anchor for the "get the full blueprint" links that point at the form. */
+const CAPTURE_ANCHOR = 'audit-blueprint'
+
 /** First word of a phase name, for compact stepper / chart labels. */
 function shortPhaseName(id: PhaseId): string {
   return PHASES[id].name.split(' & ')[0]
@@ -78,6 +76,7 @@ function shortPhaseName(id: PhaseId): string {
 export function ResultsView({
   result,
   buildCapturedPayload,
+  capturedLead,
   feedback,
   onCaptured,
   onFeedback,
@@ -86,13 +85,26 @@ export function ResultsView({
   const posthog = usePostHog()
   const { phase, phaseScores, recommendations } = result
   const maxScore = Math.max(1, ...Object.values(phaseScores))
+  const isCaptured = capturedLead !== null
+  // The top pick is always shown; the rest come with the emailed blueprint.
+  const visibleRecommendations = isCaptured
+    ? recommendations
+    : recommendations.slice(0, 1)
+  const lockedCount = recommendations.length - visibleRecommendations.length
 
   useEffect(() => {
     posthog?.capture('audit_results_viewed', {
       phase: phase.id,
       recommendations_count: recommendations.length,
       top_service: recommendations[0]?.service.id,
+      captured: isCaptured,
     })
+    if (!isCaptured) {
+      posthog?.capture('audit_capture_viewed', {
+        placement: 'results',
+        phase: phase.id,
+      })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const activeIndex = PHASE_ORDER.indexOf(phase.id)
@@ -109,6 +121,26 @@ export function ResultsView({
           Start over
         </Button>
       </div>
+
+      {!isCaptured && (
+        <a
+          href={`#${CAPTURE_ANCHOR}`}
+          onClick={() =>
+            posthog?.capture('audit_capture_anchor_click', {
+              location: 'results-strip',
+            })
+          }
+          className='mb-grid-half flex items-center justify-between gap-4 border border-accent/40 bg-accent-muted px-4 py-3 text-sm text-text transition-colors hover:border-accent'
+        >
+          <span className='inline-flex items-center gap-2'>
+            <Mail aria-hidden className='h-4 w-4 shrink-0 text-accent' />
+            {lockedCount > 0
+              ? `Showing your top opportunity. Get all ${recommendations.length} in your inbox.`
+              : 'Get a copy of your blueprint in your inbox.'}
+          </span>
+          <ArrowRight aria-hidden className='h-4 w-4 shrink-0 text-accent' />
+        </a>
+      )}
 
       {/* Phase progression timeline */}
       <section className='relative border border-border bg-bg-panel p-6 sm:px-8'>
@@ -270,7 +302,7 @@ export function ResultsView({
             </span>
           </div>
           <div className='grid gap-grid-1 sm:grid-cols-2'>
-            {recommendations.map((rec, index) => {
+            {visibleRecommendations.map((rec, index) => {
               const Icon = SERVICE_ICONS[rec.service.icon] ?? Sparkles
               return (
                 <article
@@ -295,16 +327,63 @@ export function ResultsView({
                 </article>
               )
             })}
+            {Array.from({ length: lockedCount }, (_, i) => (
+              <LockedRecommendation
+                key={`locked-${i}`}
+                rank={visibleRecommendations.length + i + 1}
+              />
+            ))}
           </div>
         </section>
       )}
 
-      {/* Capture / CTA */}
-      <CaptureForm
-        result={result}
-        buildCapturedPayload={buildCapturedPayload}
-        onCaptured={onCaptured}
-      />
+      {capturedLead ? (
+        <CapturedPanel
+          result={result}
+          lead={capturedLead}
+          buildCapturedPayload={buildCapturedPayload}
+          onSaved={onCaptured}
+        />
+      ) : (
+        <section
+          id={CAPTURE_ANCHOR}
+          className='relative mt-grid-1 scroll-mt-grid-4 border border-accent/40 bg-bg-panel p-6 sm:p-8'
+        >
+          <BlueprintCorners size={12} />
+          {/* min-w-0 on both columns: a grid item's min width is its
+              content's, so an unwrappable button would push the card past
+              the viewport on a phone. */}
+          <div className='grid gap-grid-2 md:grid-cols-2 md:items-center'>
+            <div className='min-w-0'>
+              <p className='font-mono text-xs tracking-[0.15em] text-accent uppercase'>
+                Your full blueprint
+              </p>
+              <h2 className='mt-2 font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
+                {lockedCount > 0
+                  ? `Unlock all ${recommendations.length} opportunities`
+                  : 'Keep a copy of your blueprint'}
+              </h2>
+              <p className='mt-2 text-sm text-text-muted'>
+                {lockedCount > 0
+                  ? "Get every opportunity, ranked by where we'd start, sent to your inbox. They unlock here too."
+                  : "Get your result sent to your inbox so it's there when you need it."}{' '}
+                Reply to the email any time to talk to the engineers who&apos;d
+                build it.
+              </p>
+            </div>
+            <EmailCaptureForm
+              result={result}
+              placement='results'
+              buildCapturedPayload={buildCapturedPayload}
+              onCaptured={onCaptured}
+              submitLabel={
+                lockedCount > 0 ? 'Email it to me' : 'Send me a copy'
+              }
+              className='min-w-0'
+            />
+          </div>
+        </section>
+      )}
 
       {/* Optional feedback on the result itself. */}
       <FeedbackCard initial={feedback} onSubmit={onFeedback} />
@@ -312,109 +391,87 @@ export function ResultsView({
   )
 }
 
-interface CaptureFormProps {
-  result: AuditResult
-  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
-  onCaptured: () => void
+/**
+ * A ranked slot whose recommendation arrives with the emailed blueprint. A
+ * single compact row, so a stack of them on a phone does not push the unlock
+ * form screens away.
+ */
+function LockedRecommendation({ rank }: { rank: number }) {
+  const posthog = usePostHog()
+
+  return (
+    <a
+      href={`#${CAPTURE_ANCHOR}`}
+      onClick={() =>
+        posthog?.capture('audit_capture_anchor_click', {
+          location: 'locked-card',
+          rank,
+        })
+      }
+      className='group relative flex items-center gap-4 border border-dashed border-border bg-bg-panel p-4 transition-colors hover:border-accent/60'
+    >
+      <span className='sr-only'>
+        Opportunity {rank} is included in your emailed blueprint.
+      </span>
+      <div
+        aria-hidden
+        className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text-muted transition-colors group-hover:text-accent'
+      >
+        <Lock className='h-5 w-5' />
+      </div>
+      <div aria-hidden className='min-w-0 flex-1'>
+        <div className='h-3 w-2/3 bg-bg-elevated' />
+        <p className='mt-2 font-mono text-[11px] tracking-[0.15em] text-text-muted uppercase transition-colors group-hover:text-accent'>
+          Unlocks by email
+        </p>
+      </div>
+      <span
+        aria-hidden
+        className='shrink-0 border border-border px-2 py-0.5 font-mono text-xs font-semibold text-text-muted'
+      >
+        #{rank}
+      </span>
+    </a>
+  )
 }
 
-/** Emails the respondent their result and hands us the lead. */
-function CaptureForm({
+interface CapturedPanelProps {
+  result: AuditResult
+  lead: AuditLeadPayload
+  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  onSaved: (lead: AuditLeadPayload) => void
+}
+
+/**
+ * After the capture: confirms where the blueprint went, offers the call, and
+ * asks (optionally) for the context the capture form no longer collects.
+ */
+function CapturedPanel({
   result,
+  lead,
   buildCapturedPayload,
-  onCaptured,
-}: CaptureFormProps) {
-  const posthog = usePostHog()
-  const [isPending, startTransition] = useTransition()
-  const [isSuccess, setIsSuccess] = useState(false)
-  const form = useForm<AuditLeadValues>({
-    resolver: zodResolver(auditLeadSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      company: '',
-      message: '',
-      marketingConsent: false,
-    },
-  })
-
-  const onSubmit = form.handleSubmit(values => {
-    const lead: AuditLeadPayload = {
-      name: values.name.trim(),
-      email: values.email.trim(),
-      company: values.company?.trim() || null,
-      message: values.message?.trim() || null,
-      marketingConsent: values.marketingConsent ?? false,
-    }
-
-    // The portal records the lead and sends both emails, so the captured
-    // payload rides along with the form values instead of going out as a
-    // separate beacon afterwards.
-    const capturedPayload = buildCapturedPayload(lead)
-
-    startTransition(() => {
-      void sendAudit(values, capturedPayload)
-        .then((res: AuditActionResult) => {
-          if (!res.success) {
-            posthog?.capture('audit_capture_failed', {
-              reason: res.reason,
-              phase: result.phase.id,
-            })
-
-            if (res.errors) {
-              Object.entries(res.errors).forEach(([key, messages]) => {
-                const typedMessages = messages as string[] | undefined
-                const firstMessage = typedMessages?.[0]
-                if (firstMessage) {
-                  form.setError(key as keyof AuditLeadValues, {
-                    message: firstMessage,
-                  })
-                }
-              })
-            }
-
-            toast({
-              variant: 'destructive',
-              title: 'Something went wrong',
-              description: res.message ?? 'Please try again.',
-            })
-            return
-          }
-
-          form.reset()
-          setIsSuccess(true)
-          posthog?.capture('audit_capture_submitted', {
-            phase: result.phase.id,
-          })
-          pushLeadConversion('audit_lead_submitted', lead.email)
-          onCaptured()
-        })
-        .catch((error: unknown) => {
-          // The action itself rejected (deploy skew, cold-start failure). Without
-          // this the button stays stuck on "Sending..." with no explanation.
-          posthog?.capture('audit_capture_failed', {
-            reason: 'action_threw',
-            phase: result.phase.id,
-          })
-          posthog?.captureException(error)
-          toast({
-            variant: 'destructive',
-            title: 'Something went wrong',
-            description: 'Please try again.',
-          })
-        })
-    })
-  })
+  onSaved,
+}: CapturedPanelProps) {
+  const [detailsSent, setDetailsSent] = useState(false)
 
   return (
     <section className='relative mt-grid-1 border border-border bg-bg-panel p-6 sm:p-8'>
-      {isSuccess ? (
-        <div className='flex flex-col items-center gap-4 text-center'>
-          <h2 className='font-headline text-xl font-semibold tracking-tight text-text uppercase'>
+      <BlueprintCorners size={12} />
+      <div className='grid gap-grid-2 md:grid-cols-2'>
+        <div className='flex min-w-0 flex-col items-start gap-3'>
+          <p className='inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-accent uppercase'>
+            <CheckCircle2 aria-hidden className='h-4 w-4' />
+            Blueprint sent
+          </p>
+          <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
             Check your inbox
           </h2>
-          <p className='max-w-md text-sm text-balance text-text-muted'>
-            We&apos;ve sent your audit result.
+          <p className='text-sm text-text-muted'>
+            Your blueprint is on its way to{' '}
+            <span className='font-medium break-all text-text'>
+              {lead.email}
+            </span>
+            . Reply to it any time to start a conversation.
           </p>
           <Button asChild variant='outline' size='lg' className='mt-2 px-8'>
             <TrackedLink href='/contact' location='audit-capture-success'>
@@ -422,120 +479,42 @@ function CaptureForm({
             </TrackedLink>
           </Button>
         </div>
-      ) : (
-        <>
-          <div className='text-center'>
-            <p className='font-mono text-xs tracking-[0.15em] text-accent uppercase'>
-              Next step
-            </p>
-            <h2 className='mt-2 font-headline text-xl font-semibold tracking-tight text-text uppercase'>
-              Get Your Results
-            </h2>
-            <p className='mx-auto mt-2 max-w-md text-sm text-balance text-text-muted'>
-              Drop your details and we&apos;ll send your result. Reply anytime
-              to start a project.
-            </p>
-          </div>
 
-          <form
-            noValidate
-            onSubmit={onSubmit}
-            className='mx-auto mt-6 flex max-w-md flex-col gap-3'
-          >
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='audit-name'>Name</Label>
-              <Input
-                id='audit-name'
-                {...form.register('name')}
-                aria-invalid={!!form.formState.errors.name}
-              />
-              {form.formState.errors.name ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.name.message}
-                </p>
-              ) : null}
+        <div className='min-w-0 border-t border-border pt-grid-1 md:border-t-0 md:border-l md:pt-0 md:pl-grid-2'>
+          {detailsSent ? (
+            <div className='flex h-full flex-col justify-center gap-2'>
+              <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
+                Thanks, the team has it
+              </h3>
+              <p className='text-sm text-text-muted'>
+                Want to keep talking? Reply to your blueprint email and it lands
+                straight in our inbox.
+              </p>
             </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='audit-email'>Email</Label>
-              <Input
-                id='audit-email'
-                type='email'
-                {...form.register('email')}
-                aria-invalid={!!form.formState.errors.email}
+          ) : (
+            <>
+              <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
+                Want us to take a look?
+              </h3>
+              {/* The portal emails the team a follow-up when a captured audit
+                  gains these details (place-to-stand-portal#259). */}
+              <p className='mt-1 mb-4 text-sm text-text-muted'>
+                Optional. We&apos;ll send it to the team with your audit, so we
+                can come to the first conversation with ideas, not questions.
+              </p>
+              <LeadDetailsForm
+                result={result}
+                lead={lead}
+                buildCapturedPayload={buildCapturedPayload}
+                onSaved={saved => {
+                  setDetailsSent(true)
+                  onSaved(saved)
+                }}
               />
-              {form.formState.errors.email ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.email.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='audit-company'>Company Name (optional)</Label>
-              <Input
-                id='audit-company'
-                {...form.register('company')}
-                aria-invalid={!!form.formState.errors.company}
-              />
-              {form.formState.errors.company ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.company.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='audit-message'>
-                Anything else we should know? (optional)
-              </Label>
-              <Textarea
-                id='audit-message'
-                rows={3}
-                className='min-h-24 p-3'
-                placeholder="What you're looking for, or what's not working today."
-                {...form.register('message')}
-                aria-invalid={!!form.formState.errors.message}
-              />
-              {form.formState.errors.message ? (
-                <p className='text-sm text-red-400'>
-                  {form.formState.errors.message.message}
-                </p>
-              ) : null}
-            </div>
-            <div className='flex items-start gap-3 pt-1'>
-              <Checkbox
-                id='audit-marketing-consent'
-                {...form.register('marketingConsent')}
-              />
-              <Label
-                htmlFor='audit-marketing-consent'
-                className='text-sm leading-snug font-normal tracking-normal text-text-muted normal-case'
-              >
-                Send me occasional updates about Place To Stand&apos;s work. You
-                will get your result either way, and you can unsubscribe at any
-                time.
-              </Label>
-            </div>
-            <Button
-              type='submit'
-              size='lg'
-              disabled={isPending}
-              className='mt-1 w-full px-8'
-            >
-              {isPending ? 'Sending...' : 'Send me my result'}
-            </Button>
-            <p className='mt-3 text-center text-sm text-text-muted'>
-              Prefer to talk first?{' '}
-              <TrackedLink
-                href='/contact'
-                location='audit-capture-form'
-                className='text-accent underline-offset-4 hover:underline'
-              >
-                Book a call
-              </TrackedLink>
-              .
-            </p>
-          </form>
-        </>
-      )}
+            </>
+          )}
+        </div>
+      </div>
     </section>
   )
 }

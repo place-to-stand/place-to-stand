@@ -37,6 +37,23 @@ export function initPostHog() {
     capture_exceptions: true,
     before_send: dropInjectedScriptExceptions,
   })
+
+  tagInternalTraffic()
+}
+
+/**
+ * Visit any page with `?internal=1` to mark this browser as the team's, and
+ * `?internal=0` to undo it. The flag rides on every event as `is_internal`, so
+ * the project's test-account filter can drop it.
+ *
+ * Needed because persons are `identified_only` and the team rarely identifies,
+ * so the existing email filter never matches and test runs of the audit were
+ * being counted as real captures.
+ */
+function tagInternalTraffic() {
+  const flag = new URLSearchParams(window.location.search).get('internal')
+  if (flag === '1') posthog.register({ is_internal: true })
+  if (flag === '0') posthog.unregister('is_internal')
 }
 
 // Errors thrown by third-party scripts injected into the page (not by our

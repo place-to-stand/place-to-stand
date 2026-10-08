@@ -12,6 +12,7 @@ import {
   Compass,
   GitBranch,
   type LucideIcon,
+  Mail,
   ServerCog,
   Shield,
   Sparkles,
@@ -34,7 +35,7 @@ interface AuditLandingProps {
 const HIGHLIGHTS = [
   { icon: Clock, label: 'Under 2 minutes' },
   { icon: Shield, label: 'Free, no obligation' },
-  { icon: Target, label: 'Personalized recommendations' },
+  { icon: Mail, label: 'Your blueprint, emailed to you' },
 ]
 
 const FACETS = [
@@ -218,8 +219,9 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
           </h1>
           <p className='mx-auto max-w-xl text-base text-balance text-text-muted md:text-lg'>
             Place To Stand builds custom software for businesses ready to stop
-            duct-taping tools together. Take our free, 2-minute audit to see
-            where purpose-built software would give you the most leverage.
+            duct-taping tools together. Take our free, 2-minute audit and
+            we&apos;ll send you a personalized blueprint of where purpose-built
+            software would give you the most leverage.
           </p>
           <Button
             type='button'
@@ -397,8 +399,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             Ready to find your leverage?
           </h2>
           <p className='max-w-md text-sm text-balance text-text-muted'>
-            Two minutes. Zero obligation. Personalized recommendations for where
-            custom software would move the needle most.
+            Two minutes. Zero obligation. A personalized blueprint in your inbox
+            showing where custom software would move the needle most.
           </p>
           <Button
             type='button'
