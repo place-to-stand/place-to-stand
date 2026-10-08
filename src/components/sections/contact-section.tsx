@@ -10,6 +10,7 @@ import {
 import { useSearchParams } from 'next/navigation'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ChevronDown } from 'lucide-react'
 import { usePostHog } from 'posthog-js/react'
 
 import { AnimatedSection } from '@/src/components/layout/animated-section'
@@ -238,21 +239,27 @@ export function ContactSection() {
           </div>
           <div className='flex flex-col gap-2'>
             <Label htmlFor='subject'>Subject</Label>
-            <select
-              id='subject'
-              {...form.register('subject')}
-              aria-invalid={!!form.formState.errors.subject}
-              className='flex h-12 w-full border border-border bg-bg-card px-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
-            >
-              <option value='' disabled>
-                Choose a subject
-              </option>
-              {CONTACT_SUBJECTS.map(subject => (
-                <option key={subject} value={subject}>
-                  {subject}
+            <div className='relative'>
+              <select
+                id='subject'
+                {...form.register('subject')}
+                aria-invalid={!!form.formState.errors.subject}
+                className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+              >
+                <option value='' disabled>
+                  Choose a subject
                 </option>
-              ))}
-            </select>
+                {CONTACT_SUBJECTS.map(subject => (
+                  <option key={subject} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                aria-hidden='true'
+                className='pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-text-muted'
+              />
+            </div>
             {form.formState.errors.subject ? (
               <p className='text-sm text-red-400'>
                 {form.formState.errors.subject.message}
