@@ -205,11 +205,14 @@ export function AuditWizard({
           : 'mt-6'
       )}
     >
+      {/* No side padding, so the arrow lines up with the content edge
+          instead of floating 24px in. */}
       <Button
         type='button'
         variant='ghost'
         onClick={goBack}
         disabled={isScoring}
+        className='px-0'
       >
         <ArrowLeft className='mr-2 h-4 w-4' />
         {isFirstQuestion ? 'Back to start' : 'Back'}
