@@ -1,6 +1,13 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react'
+import { createPortal } from 'react-dom'
 import { usePostHog } from 'posthog-js/react'
 import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import { AuditProgress } from '@/src/components/audit/audit-progress'
@@ -9,6 +16,7 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { questionsForSection, SECTIONS } from '@/src/lib/audit/questions'
 import { isAnswered } from '@/src/lib/audit/validation'
+import { cn } from '@/src/lib/utils'
 import type { AnswerValue, AuditAnswers } from '@/src/lib/audit/types'
 
 interface AuditWizardProps {
@@ -27,6 +35,22 @@ const AUTO_ADVANCE_MS = 280
 
 /** Every question in worksheet order, for the "Question N of M" counter. */
 const ALL_QUESTIONS = SECTIONS.flatMap(s => questionsForSection(s.id))
+
+/** Below Tailwind's `sm`, where the actions pin to the bottom of the screen. */
+const PHONE_QUERY = '(width < 40rem)'
+
+/** SSR-safe: the server renders the inline layout, so hydration matches. */
+function useIsPhone() {
+  return useSyncExternalStore(
+    cb => {
+      const mq = window.matchMedia(PHONE_QUERY)
+      mq.addEventListener('change', cb)
+      return () => mq.removeEventListener('change', cb)
+    },
+    () => window.matchMedia(PHONE_QUERY).matches,
+    () => false
+  )
+}
 
 /**
  * The guided worksheet, one question per screen.
@@ -47,6 +71,7 @@ export function AuditWizard({
   onExit,
 }: AuditWizardProps) {
   const posthog = usePostHog()
+  const isPhone = useIsPhone()
   const initialStep = Math.min(
     Math.max(initialStepIndex, 0),
     SECTIONS.length - 1
@@ -171,15 +196,67 @@ export function AuditWizard({
   const selectedCount =
     question.type === 'multi' && Array.isArray(current) ? current.length : 0
 
+  const actions = (
+    <div
+      className={cn(
+        'flex items-center justify-between',
+        isPhone
+          ? 'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 px-6 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
+          : 'mt-6'
+      )}
+    >
+      {/* No side padding, so the arrow lines up with the content edge
+          instead of floating 24px in. */}
+      <Button
+        type='button'
+        variant='ghost'
+        onClick={goBack}
+        disabled={isScoring}
+        className='px-0'
+      >
+        <ArrowLeft className='mr-2 h-4 w-4' />
+        {isFirstQuestion ? 'Back to start' : 'Back'}
+      </Button>
+
+      <Button
+        type='button'
+        onClick={() => advance(isAnswered(question, answers))}
+        disabled={isScoring}
+      >
+        {isScoring ? (
+          <>
+            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            Analyzing...
+          </>
+        ) : isFinalQuestion ? (
+          <>
+            Build my blueprint
+            <ArrowRight className='ml-2 h-4 w-4' />
+          </>
+        ) : (
+          <>
+            Continue
+            {selectedCount > 0 && (
+              <span className='ml-1.5 font-normal'>
+                &middot; {selectedCount} selected
+              </span>
+            )}
+            <ArrowRight className='ml-2 h-4 w-4' />
+          </>
+        )}
+      </Button>
+    </div>
+  )
+
   return (
-    <div className='mx-auto max-w-2xl py-grid-2'>
+    <div className='mx-auto max-w-2xl sm:py-grid-2'>
       <AuditProgress
         label={`Question ${questionNumber} of ${ALL_QUESTIONS.length}`}
         title={section.title}
         currentIndex={questionNumber - 1}
       />
 
-      <div className='relative border border-border p-6 sm:p-8'>
+      <div className='relative border border-border p-4 sm:p-8'>
         <BlueprintCorners size={16} />
         {/* Keyed so each question mounts fresh and fades in. */}
         <div
@@ -203,45 +280,11 @@ export function AuditWizard({
         )}
       </div>
 
-      <div className='mt-6 flex items-center justify-between'>
-        <Button
-          type='button'
-          variant='ghost'
-          onClick={goBack}
-          disabled={isScoring}
-        >
-          <ArrowLeft className='mr-2 h-4 w-4' />
-          {isFirstQuestion ? 'Back to start' : 'Back'}
-        </Button>
-
-        <Button
-          type='button'
-          onClick={() => advance(isAnswered(question, answers))}
-          disabled={isScoring}
-        >
-          {isScoring ? (
-            <>
-              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-              Analyzing...
-            </>
-          ) : isFinalQuestion ? (
-            <>
-              Build my blueprint
-              <ArrowRight className='ml-2 h-4 w-4' />
-            </>
-          ) : (
-            <>
-              Continue
-              {selectedCount > 0 && (
-                <span className='ml-1.5 font-normal'>
-                  &middot; {selectedCount} selected
-                </span>
-              )}
-              <ArrowRight className='ml-2 h-4 w-4' />
-            </>
-          )}
-        </Button>
-      </div>
+      {/* On phones the actions pin to the bottom of the screen, so Continue is
+          always in reach on long multi-selects instead of below the fold. They
+          go through a portal because the section's slide-in transform would
+          otherwise trap a fixed element inside it. */}
+      {isPhone ? createPortal(actions, document.body) : actions}
     </div>
   )
 }

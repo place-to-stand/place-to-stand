@@ -22,7 +22,9 @@ export const metadata: Metadata = {
 export default function AuditPage() {
   return (
     <main className='flex-1 pt-grid-4 pb-32'>
-      <AnimatedSection priority>
+      {/* Phones drop the section's own padding: the page top already clears
+          the header, and every extra pixel there pushes answers off screen. */}
+      <AnimatedSection priority className='py-0! sm:py-20!'>
         <div className='mx-auto w-full max-w-content'>
           <AuditApp />
         </div>

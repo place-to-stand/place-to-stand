@@ -61,7 +61,7 @@ export function AuditApp() {
     // made a recoverable session look like lost work.
     if (!result) {
       return (
-        <div className='w-full py-grid-2'>
+        <div className='w-full sm:py-grid-2'>
           <div className='relative border border-border bg-bg-panel p-6 sm:p-8'>
             <BlueprintCorners size={12} colorClassName='border-border-light' />
             <span className='bp-label font-mono'>Audit Results</span>

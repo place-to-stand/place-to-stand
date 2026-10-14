@@ -43,14 +43,14 @@ export function CaptureGate({
   }, [])
 
   return (
-    <div className='mx-auto max-w-2xl py-grid-2'>
+    <div className='mx-auto max-w-2xl sm:py-grid-2'>
       <AuditProgress
         label='All questions answered'
         title='Your blueprint'
         currentIndex={QUESTIONS.length}
       />
 
-      <div className='relative border border-border p-6 sm:p-8'>
+      <div className='relative border border-border p-4 sm:p-8'>
         <BlueprintCorners size={16} />
         <span className='inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-accent uppercase'>
           <CheckCircle2 aria-hidden className='h-4 w-4' />

@@ -112,7 +112,7 @@ export function ResultsView({
     PHASE_ORDER.length > 1 ? (activeIndex / (PHASE_ORDER.length - 1)) * 100 : 0
 
   return (
-    <div className='w-full py-grid-2'>
+    <div className='w-full sm:py-grid-2'>
       {/* Dashboard header */}
       <div className='mb-4 flex items-center justify-between'>
         <span className='bp-label font-mono'>Audit Results</span>
