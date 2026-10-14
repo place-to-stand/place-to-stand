@@ -96,6 +96,27 @@ async function deliverLead({
   }
 }
 
+/**
+ * The shape of an address the form refused, never the address itself, so a
+ * pattern (a trailing dot, a missing domain) shows up without logging PII.
+ */
+function describeRejectedEmail(value: string | undefined) {
+  const email = value ?? ''
+  const trimmed = email.trim()
+  const domain = trimmed.split('@')[1] ?? ''
+  return {
+    empty: trimmed === '',
+    length: trimmed.length,
+    has_at: trimmed.includes('@'),
+    at_count: trimmed.split('@').length - 1,
+    has_space: /\s/.test(email),
+    has_non_ascii: /[^\x00-\x7F]/.test(email),
+    domain_has_dot: domain.includes('.'),
+    ends_with_dot: trimmed.endsWith('.'),
+    has_double_dot: trimmed.includes('..'),
+  }
+}
+
 interface EmailCaptureFormProps {
   result: AuditResult
   placement: CapturePlacement
@@ -127,6 +148,16 @@ export function EmailCaptureForm({
   const emailId = `audit-email-${placement}`
   const consentId = `audit-consent-${placement}`
 
+  // A rejected address never reaches the server, so without this a visitor
+  // who keeps pressing submit on a typo leaves no trace in PostHog.
+  const onInvalid = () => {
+    posthog?.capture('audit_capture_invalid', {
+      phase: result.phase.id,
+      placement,
+      ...describeRejectedEmail(form.getValues('email')),
+    })
+  }
+
   const onSubmit = form.handleSubmit(async values => {
     const lead: AuditLeadPayload = {
       name: '',
@@ -156,7 +187,7 @@ export function EmailCaptureForm({
     })
     pushLeadConversion('audit_lead_submitted', lead.email)
     onCaptured(lead)
-  })
+  }, onInvalid)
 
   return (
     <form
