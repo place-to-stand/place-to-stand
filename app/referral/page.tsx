@@ -1,27 +1,16 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { referralContent as c } from '@/src/lib/referral-content'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: c.meta.title,
   description: c.meta.description,
-  alternates: { canonical: '/referral' },
-  openGraph: {
-    title: `${c.meta.title} | Place To Stand`,
-    description: c.meta.description,
-    url: '/referral',
-    siteName: 'Place To Stand',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    title: `${c.meta.title} | Place To Stand`,
-    description: c.meta.description,
-  },
-}
+  path: '/referral',
+})
 
 export default function ReferralPage() {
   return (

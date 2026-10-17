@@ -11,6 +11,8 @@ import { Footer } from '@/src/components/layout/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
 import { AttributionCapture } from '@/src/components/attribution-capture'
+import { JsonLd } from '@/src/components/seo/json-ld'
+import { organizationJsonLd, webSiteJsonLd } from '@/src/lib/structured-data'
 
 const GTM_ID = 'GTM-MS2BB27R'
 
@@ -91,6 +93,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           sourceSans.variable
         )}
       >
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={webSiteJsonLd} />
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}

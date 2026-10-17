@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import {
   LegalHeader,
@@ -9,12 +10,12 @@ import {
 const UPDATED = 'August 25, 2026'
 const CONTACT_EMAIL = 'hello@placetostandagency.com'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Privacy Policy',
   description:
     'How Place To Stand collects, uses, shares, and protects personal information from our website, contact form, and opportunity audit, including audits that are never finished.',
-  alternates: { canonical: '/privacy' },
-}
+  path: '/privacy',
+})
 
 export default function PrivacyPage() {
   return (
@@ -145,8 +146,8 @@ export default function PrivacyPage() {
                     address you entered is hashed in your browser and the hash
                     is sent to Google to improve that matching (Google calls
                     this enhanced conversions). Google receives the hash, not
-                    the address itself, and can only match it against an
-                    account it already knows.
+                    the address itself, and can only match it against an account
+                    it already knows.
                   </>,
                 ]}
               />

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
 import { TrackedLink } from '@/src/components/tracked-link'
 import {
   AnimatedSection,
@@ -8,12 +9,12 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { ClientsSection } from '@/src/components/sections/clients-section'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Clients',
   description:
     "A selection of the brands we've partnered with to design, build, and ship software that earns its keep.",
-  alternates: { canonical: '/clients' },
-}
+  path: '/clients',
+})
 
 export default function ClientsPage() {
   return (

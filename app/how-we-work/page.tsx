@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
@@ -14,11 +15,12 @@ import {
   TasteGraphic,
 } from '@/src/components/graphics/process-graphics'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'How We Work',
-  description: 'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
-  alternates: { canonical: '/how-we-work' },
-}
+  description:
+    'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
+  path: '/how-we-work',
+})
 
 const process = [
   {
@@ -46,7 +48,10 @@ const process = [
 // The stack, grouped by role, folded into the process list as a final row.
 const stackGroups = [
   { label: 'AI Models', items: vendors.filter(v => v.category === 'ai') },
-  { label: 'Infrastructure', items: vendors.filter(v => v.category === 'infra') },
+  {
+    label: 'Infrastructure',
+    items: vendors.filter(v => v.category === 'infra'),
+  },
 ]
 
 export default function HowWeWorkPage() {
@@ -56,11 +61,13 @@ export default function HowWeWorkPage() {
       <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>How We Work</span>
-          <h1 className='max-w-4xl text-balance font-headline text-4xl font-semibold uppercase !leading-[.9] text-text md:text-6xl'>
+          <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
             Our Process
           </h1>
           <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
-           Quick wins to unblock you, a model of how your business actually works, execution through our portal, and hard-won judgment on the details.
+            Quick wins to unblock you, a model of how your business actually
+            works, execution through our portal, and hard-won judgment on the
+            details.
           </p>
         </div>
         <div className='relative'>
@@ -71,11 +78,16 @@ export default function HowWeWorkPage() {
                 key={step.title}
                 className='relative flex flex-col gap-6 bg-bg-card p-5 md:p-8'
               >
-                <step.Graphic className='absolute right-4 top-4 h-10 w-10 md:right-6 md:top-6' aria-hidden />
-                <h3 className='max-w-[80%] text-balance font-headline text-sm font-bold uppercase leading-tight tracking-tight text-accent'>
+                <step.Graphic
+                  className='absolute top-4 right-4 h-10 w-10 md:top-6 md:right-6'
+                  aria-hidden
+                />
+                <h3 className='max-w-[80%] font-headline text-sm leading-tight font-bold tracking-tight text-balance text-accent uppercase'>
                   {step.title}
                 </h3>
-                <p className='text-sm leading-relaxed text-text-muted'>{step.body}</p>
+                <p className='text-sm leading-relaxed text-text-muted'>
+                  {step.body}
+                </p>
               </div>
             ))}
           </div>
@@ -94,20 +106,24 @@ export default function HowWeWorkPage() {
                 Our Tech Stack
               </h3>
               <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
-                The frontier AI models and modern infrastructure behind every build.
+                The frontier AI models and modern infrastructure behind every
+                build.
               </p>
             </div>
             <div className='flex flex-col gap-6'>
               {stackGroups.map(group => (
                 <div key={group.label} className='flex flex-col gap-3'>
-                  <span className='text-xs font-semibold uppercase tracking-[0.1em] text-text-muted'>
+                  <span className='text-xs font-semibold tracking-[0.1em] text-text-muted uppercase'>
                     {group.label}
                   </span>
                   <div className='grid grid-cols-2 gap-x-4 gap-y-5 md:flex md:flex-wrap md:items-center md:gap-x-8 md:gap-y-4'>
                     {group.items.map(vendor => {
                       const Icon = vendorIcons[vendor.name]
                       return (
-                        <div key={vendor.name} className='flex items-center gap-2.5'>
+                        <div
+                          key={vendor.name}
+                          className='flex items-center gap-2.5'
+                        >
                           {Icon && (
                             <Icon
                               className='h-9 w-9 shrink-0'
@@ -115,7 +131,7 @@ export default function HowWeWorkPage() {
                               aria-hidden
                             />
                           )}
-                          <span className='whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted'>
+                          <span className='font-mono text-[10px] tracking-wider whitespace-nowrap text-text-muted uppercase'>
                             {vendor.name}
                           </span>
                         </div>
@@ -154,7 +170,12 @@ export default function HowWeWorkPage() {
                 </TrackedLink>
               </Button>
               <div className='flex flex-col gap-2'>
-                <Button asChild size='lg' variant='outline' className='w-full border-2'>
+                <Button
+                  asChild
+                  size='lg'
+                  variant='outline'
+                  className='w-full border-2'
+                >
                   <TrackedLink href='/contact' location='how-we-work-cta-block'>
                     Contact Us
                   </TrackedLink>
