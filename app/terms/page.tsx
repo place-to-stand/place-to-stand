@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import {
   LegalHeader,
@@ -12,12 +13,12 @@ const CONTACT_EMAIL = 'hello@placetostandagency.com'
 // Brooklyn, NY, so this is a deliberate choice rather than an inferred default.
 const GOVERNING_LAW = 'the State of Texas'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Terms of Service',
   description:
     'The terms that govern use of the Place To Stand website and the Opportunity Audit, and the general conditions under which we deliver client work.',
-  alternates: { canonical: '/terms' },
-}
+  path: '/terms',
+})
 
 export default function TermsPage() {
   return (

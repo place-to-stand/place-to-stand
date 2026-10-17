@@ -1,18 +1,22 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
+import { JsonLd } from '@/src/components/seo/json-ld'
+import { teamJsonLd } from '@/src/lib/structured-data'
 import Image from 'next/image'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { team } from '@/src/lib/team'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Team',
   description: 'Meet the engineers and builders behind Place To Stand.',
-  alternates: { canonical: '/team' },
-}
+  path: '/team',
+})
 
 export default function TeamPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
+      <JsonLd data={teamJsonLd} />
       <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Team</span>

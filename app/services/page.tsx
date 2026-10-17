@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
+import { JsonLd } from '@/src/components/seo/json-ld'
+import { servicesJsonLd } from '@/src/lib/structured-data'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Button } from '@/src/components/ui/button'
@@ -6,16 +9,17 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { services } from '@/src/lib/services'
 import { serviceIcons } from '@/src/lib/service-icons'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Services',
   description:
     'AI automation, software development, workflow systems, and strategic advisory services from Place To Stand.',
-  alternates: { canonical: '/services' },
-}
+  path: '/services',
+})
 
 export default function ServicesPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
+      <JsonLd data={servicesJsonLd} />
       <AnimatedSection priority className='flex flex-col gap-12 md:gap-20'>
         <div className='flex flex-col gap-4'>
           <span className='bp-label font-mono'>Services</span>

@@ -1,15 +1,16 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/src/lib/page-metadata'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { Badge } from '@/src/components/ui/badge'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { fieldNotes } from '@/src/lib/field-notes'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: 'Field Notes',
   description:
     'Experiments, open-source projects, and insights from the Place To Stand team.',
-  alternates: { canonical: '/field-notes' },
-}
+  path: '/field-notes',
+})
 
 export default function FieldNotesPage() {
   return (
