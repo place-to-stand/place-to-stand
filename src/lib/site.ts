@@ -21,7 +21,11 @@ export const LOCATIONS = [
  * from other businesses with the same name, so add the LinkedIn page, Google
  * Business Profile, Bing Places, Apple Business Connect and Clutch URLs here.
  */
-export const SAME_AS: string[] = ['https://github.com/place-to-stand']
+export const SAME_AS: string[] = [
+  'https://www.linkedin.com/company/placetostandagency/',
+  'https://www.google.com/search?kgmid=/g/11zd70_knp',
+  'https://github.com/place-to-stand',
+]
 
 /** Build an absolute URL from a site path. */
 export function absoluteUrl(path: string): string {
