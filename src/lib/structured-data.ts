@@ -2,6 +2,7 @@ import { services } from '@/src/lib/services'
 import { team, type TeamMember } from '@/src/lib/team'
 import {
   CONTACT_EMAIL,
+  FOUNDING_YEAR,
   LEGAL_NAME,
   LOCATIONS,
   SAME_AS,
@@ -49,7 +50,7 @@ export const organizationJsonLd = {
   image: absoluteUrl('/opengraph-image'),
   description: SITE_DESCRIPTION,
   email: CONTACT_EMAIL,
-  foundingDate: '2026-02-24',
+  foundingDate: String(FOUNDING_YEAR),
   knowsAbout: [
     'Custom software development',
     'Workflow automation',

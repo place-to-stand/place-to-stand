@@ -7,6 +7,10 @@ export const SITE_NAME = 'Place To Stand'
 export const LEGAL_NAME = 'Place To Stand Agency'
 export const CONTACT_EMAIL = 'hello@placetostandagency.com'
 
+// The year the agency started working with clients. The Texas LLC came later
+// (February 2026); this is the brand's start, not the legal entity's.
+export const FOUNDING_YEAR = 2023
+
 export const SITE_DESCRIPTION =
   'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.'
 

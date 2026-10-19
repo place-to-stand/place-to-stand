@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { cacheLife } from 'next/cache'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { CLIENT_PORTAL_URL, NAV_LINKS } from '@/src/components/layout/nav-links'
+import { FOUNDING_YEAR } from '@/src/lib/site'
 
 // Cached rather than read per render so every page can stay static; a daily
 // refresh rolls the copyright year over without needing a redeploy.
@@ -66,7 +67,7 @@ export async function Footer() {
       <div className='border-t border-border'>
         <div className='mx-auto flex w-full max-w-content flex-col gap-grid-half px-6 py-grid-1 md:flex-row md:items-center md:justify-between lg:px-12'>
           <span className='text-xs tracking-[0.1em] text-text-muted uppercase'>
-            &copy; {year} Place To Stand. All rights reserved.
+            &copy; {FOUNDING_YEAR}&ndash;{year} Place To Stand. All rights reserved.
           </span>
           <nav
             className='flex flex-wrap items-center gap-x-6 gap-y-grid-half text-xs font-semibold tracking-[0.1em] whitespace-nowrap uppercase'
