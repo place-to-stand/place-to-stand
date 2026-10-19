@@ -67,7 +67,8 @@ export async function Footer() {
       <div className='border-t border-border'>
         <div className='mx-auto flex w-full max-w-content flex-col gap-grid-half px-6 py-grid-1 md:flex-row md:items-center md:justify-between lg:px-12'>
           <span className='text-xs tracking-[0.1em] text-text-muted uppercase'>
-            &copy; {FOUNDING_YEAR}&ndash;{year} Place To Stand. All rights reserved.
+            &copy; {FOUNDING_YEAR}&ndash;{year} Place To Stand Agency LLC. All
+            rights reserved.
           </span>
           <nav
             className='flex flex-wrap items-center gap-x-6 gap-y-grid-half text-xs font-semibold tracking-[0.1em] whitespace-nowrap uppercase'
