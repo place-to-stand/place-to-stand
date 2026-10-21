@@ -43,7 +43,7 @@ export function ManifestoSection() {
               Experienced engineers with fine-tuned AI.
             </h2>
           </Reveal>
-          <Reveal index={1} className='max-w-xl text-sm text-text-muted'>
+          <Reveal index={1} className='max-w-xl text-base text-text-muted'>
             <p>
               Building exactly what you need, directly with the people who build
               it.
@@ -76,7 +76,7 @@ export function ManifestoSection() {
                   </h3>
                   <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
-                <p className='text-sm leading-relaxed text-text-muted'>
+                <p className='text-base leading-relaxed text-text-muted'>
                   {facet.description}
                 </p>
               </div>

@@ -74,7 +74,7 @@ export function HeroSection() {
                     Start the free audit
                   </TrackedLink>
                 </Button>
-                <p className='font-mono text-[11px] tracking-[0.08em] text-text-muted'>
+                <p className='font-mono text-sm tracking-[0.08em] text-text-muted'>
                   2 minutes, free results, no email required.
                 </p>
               </div>

@@ -39,11 +39,11 @@ export default function FieldNotesPage() {
             >
               <BlueprintCorners />
               <div className='flex items-center justify-between'>
-                <span className='font-mono text-[11px] text-text-muted'>
+                <span className='font-mono text-xs text-text-muted'>
                   {note.date}
                 </span>
                 {note.repo && (
-                  <span className='font-mono text-[11px] text-accent uppercase'>
+                  <span className='font-mono text-xs text-accent uppercase'>
                     Open Source
                   </span>
                 )}
@@ -51,7 +51,7 @@ export default function FieldNotesPage() {
               <h2 className='font-headline text-xl text-text uppercase transition-colors group-hover:text-accent'>
                 {note.title}
               </h2>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {note.description}
               </p>
               <div className='mt-auto flex flex-wrap gap-2'>

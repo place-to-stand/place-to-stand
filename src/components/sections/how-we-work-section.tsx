@@ -77,7 +77,7 @@ export function HowWeWorkSection() {
               </h3>
               <p
                 className={cn(
-                  'text-xs leading-snug! transition-colors md:text-base',
+                  'text-sm leading-snug! transition-colors md:text-base',
                   isActive ? 'text-text' : 'text-text-muted'
                 )}
               >

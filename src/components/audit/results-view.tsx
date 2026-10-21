@@ -130,7 +130,7 @@ export function ResultsView({
               location: 'results-strip',
             })
           }
-          className='mb-grid-half flex items-center justify-between gap-4 border border-accent/40 bg-accent-muted px-4 py-3 text-sm text-text transition-colors hover:border-accent'
+          className='mb-grid-half flex items-center justify-between gap-4 border border-accent/40 bg-accent-muted px-4 py-3 text-base text-text transition-colors hover:border-accent'
         >
           <span className='inline-flex items-center gap-2'>
             <Mail aria-hidden className='h-4 w-4 shrink-0 text-accent' />
@@ -175,7 +175,7 @@ export function ResultsView({
               >
                 <span
                   className={cn(
-                    'grid h-6 w-6 place-items-center rounded-full border bg-bg font-mono text-[11px]',
+                    'grid h-6 w-6 place-items-center rounded-full border bg-bg font-mono text-xs',
                     isActive
                       ? 'border-border-light bg-bg-elevated font-bold text-text'
                       : reached
@@ -187,7 +187,7 @@ export function ResultsView({
                 </span>
                 <span
                   className={cn(
-                    'block w-full px-0.5 text-[10px] leading-tight tracking-wide break-words hyphens-auto uppercase sm:text-xs',
+                    'block w-full px-0.5 text-xs leading-tight tracking-wide break-words hyphens-auto uppercase',
                     isActive ? 'font-semibold text-text' : 'text-text-muted'
                   )}
                 >
@@ -213,7 +213,7 @@ export function ResultsView({
           <p className='mt-2 font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
             {phase.tagline}
           </p>
-          <p className='mt-4 text-sm text-text-muted'>{phase.description}</p>
+          <p className='mt-4 text-base text-text-muted'>{phase.description}</p>
 
           <div className='mt-6 grid gap-6 sm:grid-cols-2'>
             <div>
@@ -222,7 +222,7 @@ export function ResultsView({
               </h3>
               <ul className='mt-3 space-y-1.5'>
                 {phase.signals.map(signal => (
-                  <li key={signal} className='flex gap-2 text-sm text-text'>
+                  <li key={signal} className='flex gap-2 text-base text-text'>
                     <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
                     {signal}
                   </li>
@@ -235,7 +235,7 @@ export function ResultsView({
               </h3>
               <ul className='mt-3 space-y-1.5'>
                 {phase.nextSteps.map(step => (
-                  <li key={step} className='flex gap-2 text-sm text-text'>
+                  <li key={step} className='flex gap-2 text-base text-text'>
                     <ArrowRight className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
                     {step}
                   </li>
@@ -261,13 +261,13 @@ export function ResultsView({
                   <div className='flex items-center justify-between gap-2'>
                     <span
                       className={cn(
-                        'text-xs',
+                        'text-sm',
                         isWinner ? 'font-semibold text-text' : 'text-text-muted'
                       )}
                     >
                       {shortPhaseName(id)}
                     </span>
-                    <span className='font-mono text-[11px] text-text-muted tabular-nums'>
+                    <span className='font-mono text-xs text-text-muted tabular-nums'>
                       {score}
                     </span>
                   </div>
@@ -314,14 +314,14 @@ export function ResultsView({
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-accent-muted text-accent'>
                       <Icon className='h-5 w-5' />
                     </div>
-                    <span className='ml-auto border border-border px-2 py-0.5 font-mono text-xs font-semibold text-text-muted'>
+                    <span className='ml-auto border border-border px-2 py-0.5 font-mono text-sm font-semibold text-text-muted'>
                       #{index + 1}
                     </span>
                   </div>
                   <h3 className='mt-3 font-headline text-base font-semibold tracking-tight text-text uppercase'>
                     {rec.service.name}
                   </h3>
-                  <p className='mt-1 text-sm font-medium text-text-muted'>
+                  <p className='mt-1 text-base font-medium text-text-muted'>
                     {rec.service.tagline}
                   </p>
                 </article>
@@ -363,7 +363,7 @@ export function ResultsView({
                   ? `Unlock all ${recommendations.length} opportunities`
                   : 'Keep a copy of your blueprint'}
               </h2>
-              <p className='mt-2 text-sm text-text-muted'>
+              <p className='mt-2 text-base text-text-muted'>
                 {lockedCount > 0
                   ? "Get every opportunity, ranked by where we'd start, sent to your inbox. They unlock here too."
                   : "Get your result sent to your inbox so it's there when you need it."}{' '}
@@ -421,13 +421,13 @@ function LockedRecommendation({ rank }: { rank: number }) {
       </div>
       <div aria-hidden className='min-w-0 flex-1'>
         <div className='h-3 w-2/3 bg-bg-elevated' />
-        <p className='mt-2 font-mono text-[11px] tracking-[0.15em] text-text-muted uppercase transition-colors group-hover:text-accent'>
+        <p className='mt-2 font-mono text-xs tracking-[0.15em] text-text-muted uppercase transition-colors group-hover:text-accent'>
           Unlocks by email
         </p>
       </div>
       <span
         aria-hidden
-        className='shrink-0 border border-border px-2 py-0.5 font-mono text-xs font-semibold text-text-muted'
+        className='shrink-0 border border-border px-2 py-0.5 font-mono text-sm font-semibold text-text-muted'
       >
         #{rank}
       </span>
@@ -466,7 +466,7 @@ function CapturedPanel({
           <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
             Check your inbox
           </h2>
-          <p className='text-sm text-text-muted'>
+          <p className='text-base text-text-muted'>
             Your blueprint is on its way to{' '}
             <span className='font-medium break-all text-text'>
               {lead.email}
@@ -486,7 +486,7 @@ function CapturedPanel({
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
                 Thanks, the team has it
               </h3>
-              <p className='text-sm text-text-muted'>
+              <p className='text-base text-text-muted'>
                 Want to keep talking? Reply to your blueprint email and it lands
                 straight in our inbox.
               </p>
@@ -498,7 +498,7 @@ function CapturedPanel({
               </h3>
               {/* The portal emails the team a follow-up when a captured audit
                   gains these details (place-to-stand-portal#259). */}
-              <p className='mt-1 mb-4 text-sm text-text-muted'>
+              <p className='mt-1 mb-4 text-base text-text-muted'>
                 Optional. We&apos;ll send it to the team with your audit, so we
                 can come to the first conversation with ideas, not questions.
               </p>

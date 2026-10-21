@@ -10,7 +10,7 @@ Structural elements must line up with this grid so the architectural/schematic m
 - Base unit: `--grid: 24px` (defined in `app/globals.css :root`).
 - The background is a **centered** (`background-position: 50% 0`) 24px dot grid.
 - Because the grid is centered, a centered container snaps its edges to grid lines **only if its width is an
-  even multiple of 24px**. The one approved container width is `max-w-content` (1152px = 48 cells).
+  even multiple of 24px**. The one approved container width is `max-w-content` (1440px = 60 cells).
 
 ### Rules
 
@@ -29,6 +29,11 @@ Structural elements must line up with this grid so the architectural/schematic m
 
 Spacing bands and container edges align exactly. Arbitrary-height text/content blocks between bands will not
 each terminate on a grid line — that's expected.
+
+## Type size floor
+
+Reading text is 16px (`text-base`) and never below 14px (`text-sm`). 12px (`text-xs`) is only for short mono
+labels, dates and badges, used sparingly. Nothing under 12px.
 
 ## Design tokens
 

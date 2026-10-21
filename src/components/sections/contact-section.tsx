@@ -303,7 +303,7 @@ export function ContactSection() {
             />
             <Label
               htmlFor='marketingConsent'
-              className='text-sm leading-snug font-normal tracking-normal text-text-muted normal-case'
+              className='text-base leading-snug font-normal tracking-normal text-text-muted normal-case'
             >
               Send me occasional updates about Place To Stand&apos;s work. We
               will reply to your message either way, and you can unsubscribe at

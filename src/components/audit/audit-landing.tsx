@@ -121,7 +121,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
         {/* Row-number gutter */}
         <span
           className={cn(
-            'flex items-center justify-center font-mono text-xs tabular-nums transition-colors',
+            'flex items-center justify-center font-mono text-sm tabular-nums transition-colors',
             isOpen ? 'text-accent' : 'text-text-muted group-hover:text-accent'
           )}
         >
@@ -146,7 +146,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
         </span>
 
         {/* Tagline */}
-        <span className='hidden items-center px-grid-1 text-sm text-text-muted md:flex'>
+        <span className='hidden items-center px-grid-1 text-base text-text-muted md:flex'>
           {service.tagline}
         </span>
 
@@ -175,14 +175,14 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
       >
         <div className='overflow-hidden'>
           <div className='grid gap-grid-2 bg-bg px-grid-1 pt-9 pb-grid-1 md:grid-cols-2 md:pl-grid-3'>
-            <p className='text-sm leading-relaxed text-text-muted'>
+            <p className='text-base leading-relaxed text-text-muted'>
               {service.description}
             </p>
             <ul className='flex flex-col gap-1.5'>
               {service.features.map(feature => (
                 <li
                   key={feature}
-                  className='flex items-start gap-2 text-sm text-text-muted'
+                  className='flex items-start gap-2 text-base text-text-muted'
                 >
                   <span
                     aria-hidden
@@ -232,7 +232,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             Start the audit
             <ArrowRight className='ml-2 h-4 w-4' />
           </Button>
-          <div className='mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-text-muted'>
+          <div className='mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-base text-text-muted'>
             {HIGHLIGHTS.map(({ icon: Icon, label }) => (
               <span key={label} className='inline-flex items-center gap-1.5'>
                 <Icon className='h-4 w-4 text-accent' />
@@ -281,7 +281,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               Experienced engineers with fine-tuned AI.
             </h2>
-            <p className='mt-1 max-w-xl text-sm text-text-muted'>
+            <p className='mt-1 max-w-xl text-base text-text-muted'>
               Senior engineers building exactly what you need, directly with the
               people who build it. No layers, no hand-offs.
             </p>
@@ -299,7 +299,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                     {facet.title}
                   </h3>
-                  <p className='text-sm leading-relaxed text-text-muted'>
+                  <p className='text-base leading-relaxed text-text-muted'>
                     {facet.description}
                   </p>
                 </div>
@@ -323,10 +323,10 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                   />
                 </div>
                 <div>
-                  <p className='text-sm font-semibold text-text'>
+                  <p className='text-base font-semibold text-text'>
                     {member.name}
                   </p>
-                  <p className='text-xs text-text-muted'>{member.title}</p>
+                  <p className='text-sm text-text-muted'>{member.title}</p>
                 </div>
               </div>
             ))}
@@ -356,7 +356,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                 <h3 className='font-headline text-base font-semibold tracking-tight text-text uppercase'>
                   {title}
                 </h3>
-                <p className='text-sm text-text-muted'>{description}</p>
+                <p className='text-base text-text-muted'>{description}</p>
               </div>
             ))}
           </div>
@@ -398,7 +398,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
           <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
             Ready to find your leverage?
           </h2>
-          <p className='max-w-md text-sm text-balance text-text-muted'>
+          <p className='max-w-md text-base text-balance text-text-muted'>
             Two minutes. Zero obligation. A personalized blueprint in your inbox
             showing where custom software would move the needle most.
           </p>
@@ -411,7 +411,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             Start the audit
             <ArrowRight className='ml-2 h-4 w-4' />
           </Button>
-          <p className='text-sm text-text-muted'>
+          <p className='text-base text-text-muted'>
             Prefer to talk first?{' '}
             <TrackedLink
               href='/contact'

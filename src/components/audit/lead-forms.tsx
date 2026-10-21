@@ -216,7 +216,7 @@ export function EmailCaptureForm({
         <Checkbox id={consentId} {...form.register('marketingConsent')} />
         <Label
           htmlFor={consentId}
-          className='text-sm leading-snug font-normal tracking-normal text-text-muted normal-case'
+          className='text-base leading-snug font-normal tracking-normal text-text-muted normal-case'
         >
           Also send me occasional updates about Place To Stand&apos;s work.
           Unsubscribe any time.

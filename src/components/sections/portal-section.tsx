@@ -26,7 +26,7 @@ export function PortalSection() {
           className='flex flex-col gap-6 md:flex-row md:items-start md:justify-between'
         >
           <div className='flex flex-col gap-4'>
-            <h2 className='max-w-3xl text-balance font-headline text-3xl font-bold uppercase !leading-[.95] tracking-tight text-text md:text-4xl'>
+            <h2 className='max-w-3xl font-headline text-3xl !leading-[.95] font-bold tracking-tight text-balance text-text uppercase md:text-4xl'>
               Our Portal
             </h2>
             <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
@@ -40,7 +40,7 @@ export function PortalSection() {
             asChild
             variant='outline'
             size='sm'
-            className='h-8 shrink-0 gap-1.5 self-start px-3 text-xs md:h-9 md:gap-2 md:px-4 md:text-sm'
+            className='h-8 shrink-0 gap-1.5 self-start px-3 text-sm md:h-9 md:gap-2 md:px-4'
           >
             <TrackedLink
               href={REPO_URL}

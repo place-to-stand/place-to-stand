@@ -85,7 +85,7 @@ export default function HowWeWorkPage() {
                 <h3 className='max-w-[80%] font-headline text-sm leading-tight font-bold tracking-tight text-balance text-accent uppercase'>
                   {step.title}
                 </h3>
-                <p className='text-sm leading-relaxed text-text-muted'>
+                <p className='text-base leading-relaxed text-text-muted'>
                   {step.body}
                 </p>
               </div>
@@ -122,16 +122,15 @@ export default function HowWeWorkPage() {
                       return (
                         <div
                           key={vendor.name}
-                          className='flex items-center gap-2.5'
+                          className='flex flex-col items-center gap-3 md:w-24'
                         >
                           {Icon && (
                             <Icon
-                              className='h-9 w-9 shrink-0'
-                              style={{ color: vendor.color }}
+                              className='h-9 w-9 shrink-0 text-text'
                               aria-hidden
                             />
                           )}
-                          <span className='font-mono text-[10px] tracking-wider whitespace-nowrap text-text-muted uppercase'>
+                          <span className='font-mono text-xs tracking-wider whitespace-nowrap text-text-muted uppercase'>
                             {vendor.name}
                           </span>
                         </div>
@@ -157,7 +156,7 @@ export default function HowWeWorkPage() {
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Find your phase.
               </h2>
-              <p className='max-w-md text-sm leading-relaxed text-text-muted'>
+              <p className='max-w-md text-base leading-relaxed text-text-muted'>
                 The free audit pinpoints the phase your business is in and where
                 custom software pays off first. Two minutes, results on screen,
                 no obligation.
@@ -180,7 +179,7 @@ export default function HowWeWorkPage() {
                     Contact Us
                   </TrackedLink>
                 </Button>
-                <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
+                <p className='max-w-xs text-sm leading-relaxed text-text-muted'>
                   Already know what you want built, or want a bespoke mapping of
                   your systems? Talk to us directly.
                 </p>

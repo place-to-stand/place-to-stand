@@ -81,13 +81,13 @@ export function CaptureGate({
           <button
             type='button'
             onClick={onSkip}
-            className='text-sm text-text-muted underline underline-offset-4 transition-colors hover:text-text'
+            className='text-base text-text-muted underline underline-offset-4 transition-colors hover:text-text'
           >
             Skip, just show me my results
           </button>
         </div>
 
-        <p className='mt-6 border-t border-border pt-4 text-xs text-text-muted'>
+        <p className='mt-6 border-t border-border pt-4 text-sm text-text-muted'>
           Reply to the email any time to talk to the engineers who&apos;d build
           it.
         </p>

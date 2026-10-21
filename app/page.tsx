@@ -46,7 +46,7 @@ export default function HomePage() {
               </Reveal>
               <Reveal
                 index={1}
-                className='max-w-md text-sm leading-relaxed text-text-muted'
+                className='max-w-md text-base leading-relaxed text-text-muted'
               >
                 <p>
                   The free audit pinpoints the phase your business is in and
@@ -75,7 +75,7 @@ export default function HomePage() {
                     Contact Us
                   </TrackedLink>
                 </Button>
-                <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
+                <p className='max-w-xs text-sm leading-relaxed text-text-muted'>
                   Already know what you want built, or want a bespoke mapping of
                   your systems? Talk to us directly.
                 </p>
