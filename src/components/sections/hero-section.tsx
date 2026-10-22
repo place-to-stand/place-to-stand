@@ -17,16 +17,16 @@ export function HeroSection() {
             stops growing at 1080px, just past a 16" MacBook Pro window, so tall
             screens show the next section instead of empty space. Upright tablets
             skip the fill so they get the same even 96px steps.
-            Below lg the hero stacks and does not fill the screen: headline,
-            drawings, text and the bottom edge sit one even step apart
-            (48px on phones, 72px on tablets). */}
+            Below lg the hero does not fill the screen: headline, the text and
+            drawing row, and the bottom edge sit one even step apart (48px on
+            phones, 72px on tablets). */}
         <div className='flex flex-1 flex-col justify-center'>
           {/* Headline with blueprint corner marks */}
           <div className='hero-frame relative w-full'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
-            <h1 className='py-4 pl-3 font-headline text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
+            <h1 className='py-4 pl-3 font-headline text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
               <span
                 className='hero-line block'
                 style={{ '--hero-delay': '0s' } as CSSProperties}
@@ -53,9 +53,10 @@ export function HeroSection() {
             className='h-grid-2 md:h-grid-3 lg:h-auto lg:max-h-40 lg:min-h-grid-4 lg:flex-1'
           />
 
-          {/* Supporting subtext + CTA (left) beside the comparison graphic (right) */}
-          <div className='flex flex-col gap-grid-2 md:gap-grid-3 lg:flex-row lg:items-start lg:gap-grid-3'>
-            <div className='flex flex-col gap-8 lg:flex-1'>
+          {/* Supporting subtext + CTA (left) beside the comparison graphic (right);
+              stacked text-first on phones */}
+          <div className='flex flex-col gap-grid-2 md:flex-row md:items-start md:gap-grid-2 lg:gap-grid-3'>
+            <div className='flex flex-col gap-8 md:flex-1'>
               <div
                 className='hero-reveal flex gap-4 self-start'
                 style={{ animationDelay: '0.85s' }}
@@ -93,11 +94,11 @@ export function HeroSection() {
             </div>
 
             {/* Hero comparison set piece — turn this (clutter) into this (one app).
-                On mobile it sits between the headline and the subtext (order-first);
-                on desktop it stays in the right column. Capped in width below lg
-                so tablets don't get a full-width drawing, and left-aligned so it
-                shares the headline's left edge. */}
-            <HeroGraphic className='order-first w-full max-w-md lg:order-none lg:max-w-none lg:flex-1' />
+                Phones: below the button, so the button stays near the top.
+                Tablets and up: the right column. On laptops its width follows the
+                window height (about 33rem of headline and spacing sit above it),
+                so short screens still show the whole drawing, database included. */}
+            <HeroGraphic className='w-full max-w-md md:max-w-none md:flex-1 lg:ml-auto lg:max-w-[clamp(22rem,calc((100svh-33rem)*1.44),100%)]' />
           </div>
         </div>
       </div>
