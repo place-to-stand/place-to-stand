@@ -36,8 +36,9 @@
   --spacing-grid-6: calc(var(--grid) * 6); /* 144 */
   --spacing-grid-8: calc(var(--grid) * 8); /* 192 */
 
-  /* 1152 — the one grid-aligned container width (max-w-content) */
-  --container-content: calc(var(--grid) * 48);
+  /* 1440 — the one grid-aligned container width (max-w-content): 60 cells,
+     an even count, so a centered container's edges land on grid lines. */
+  --container-content: calc(var(--grid) * 60);
 }
 
 /* Fonts reference next/font variables set on <html>, so they must be inlined
@@ -731,7 +732,7 @@ html {
 /* ─── Blueprint section annotation label ───
    Callout label with a double-chevron terminal mark. */
 .bp-label {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);

@@ -483,10 +483,12 @@ export function HeroGraphic({ className }: { className?: string }) {
       drawDelayMs={800}
       className={`hero-compare ${className ?? ''}`}
     >
-      {/* ── Titles — each rises in with its column (stack first, your app last) ── */}
+      {/* ── Titles — each rises in with its column (stack first, your app last).
+          The stack title sits at x=56, left of the stack's box center, because
+          the windows lean right; this centers it over their visual mass. ── */}
       <g className='cmp-in' style={cmp(0)}>
         <text
-          x='62'
+          x='56'
           y='8'
           textAnchor='middle'
           className='cmp-title fill-text-muted font-headline'
@@ -494,8 +496,8 @@ export function HeroGraphic({ className }: { className?: string }) {
           fontWeight='500'
           letterSpacing='0.3'
         >
-          <tspan x='62'>Turn your</tspan>
-          <tspan x='62' dy='10'>
+          <tspan x='56'>Turn your</tspan>
+          <tspan x='56' dy='10'>
             scattered data
           </tspan>
         </text>

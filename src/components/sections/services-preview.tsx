@@ -36,14 +36,14 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
         id={id}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:px-6 md:py-6'
+        className='flex w-full cursor-pointer items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:px-6 md:py-6'
       >
         {Graphic && <Graphic className='mt-0.5 h-grid-2 w-grid-2 shrink-0' />}
         <div className='flex flex-col gap-1'>
           <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
             {service.title}
           </h3>
-          <p className='text-sm text-text-muted'>{service.tagline}</p>
+          <p className='text-base text-text-muted'>{service.tagline}</p>
         </div>
         <ChevronDown
           aria-hidden
@@ -65,14 +65,14 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
       >
         <div className='overflow-hidden'>
           <div className='flex flex-col gap-4 px-5 pb-6 md:px-6 md:pl-[5.5rem]'>
-            <p className='text-sm leading-relaxed text-text-muted'>
+            <p className='text-base leading-relaxed text-text-muted'>
               {service.description}
             </p>
             <ul className='flex flex-col gap-2'>
               {service.features.map(feature => (
                 <li
                   key={feature}
-                  className='flex items-start gap-2 text-sm text-text-muted'
+                  className='flex items-start gap-2 text-base text-text-muted'
                 >
                   <span
                     aria-hidden

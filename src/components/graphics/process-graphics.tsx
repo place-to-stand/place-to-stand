@@ -2,7 +2,7 @@ import type { SVGProps } from 'react'
 
 /**
  * Blueprint schematic graphics for the how-we-work process steps. Thin
- * border-light strokes with accent highlights, drawn on a 100x100 viewBox so
+ * border-light strokes with white highlights, drawn on a 100x100 viewBox so
  * they read as small technical diagrams that fill the right side of each row.
  * Hollow nodes are filled with the page background so connecting lines don't
  * show through.
@@ -39,7 +39,7 @@ export function QuickWinsGraphic(props: GraphicProps) {
       />
       <path
         d='M69 17 l5 -5 l5 5'
-        className='stroke-accent'
+        className='stroke-text'
         strokeWidth='2'
         strokeLinejoin='round'
         strokeLinecap='round'
@@ -49,11 +49,11 @@ export function QuickWinsGraphic(props: GraphicProps) {
         y1='24'
         x2='74'
         y2='14'
-        className='stroke-accent'
+        className='stroke-text'
         strokeWidth='2'
         strokeLinecap='round'
       />
-      <circle cx='74' cy='38' r='4.5' className='fill-accent' />
+      <circle cx='74' cy='38' r='4.5' className='fill-text' />
     </svg>
   )
 }
@@ -74,7 +74,7 @@ export function OntologyGraphic(props: GraphicProps) {
         <circle cx='78' cy='54' r='5' />
         <circle cx='40' cy='86' r='5' />
       </g>
-      <circle cx='50' cy='24' r='6.5' className='fill-accent' />
+      <circle cx='50' cy='24' r='6.5' className='fill-text' />
     </svg>
   )
 }
@@ -127,7 +127,7 @@ export function AutomationGraphic(props: GraphicProps) {
       />
       <path
         d='M80 50 l4 5 l7 -12'
-        className='stroke-accent'
+        className='stroke-text'
         strokeWidth='2.5'
         strokeLinecap='round'
         strokeLinejoin='round'
@@ -154,8 +154,8 @@ export function TasteGraphic(props: GraphicProps) {
         <circle cx='14' cy='80' r='4' />
         <circle cx='88' cy='30' r='4' />
       </g>
-      <circle cx='32' cy='22' r='4' className='fill-accent' />
-      <circle cx='68' cy='92' r='4' className='fill-accent' />
+      <circle cx='32' cy='22' r='4' className='fill-text' />
+      <circle cx='68' cy='92' r='4' className='fill-text' />
     </svg>
   )
 }

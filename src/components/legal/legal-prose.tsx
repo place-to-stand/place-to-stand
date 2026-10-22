@@ -15,7 +15,7 @@ export function LegalHeader({ title, updated, summary }: LegalHeaderProps) {
         {title}
       </h1>
       <p className='max-w-2xl text-base text-text-muted'>{summary}</p>
-      <p className='font-mono text-xs text-text-muted'>
+      <p className='font-mono text-sm text-text-muted'>
         Last updated: {updated}
       </p>
     </header>
@@ -32,14 +32,14 @@ type LegalSectionProps = {
 export function LegalSection({ index, title, children }: LegalSectionProps) {
   return (
     <section className='grid gap-grid-half border-t border-border pt-grid-1 md:grid-cols-[3rem_1fr] md:gap-0'>
-      <span className='font-mono text-xs text-text-muted tabular-nums'>
+      <span className='font-mono text-sm text-text-muted tabular-nums'>
         {String(index).padStart(2, '0')}
       </span>
       <div className='flex flex-col gap-3'>
         <h2 className='font-headline text-xl font-semibold tracking-tight text-text'>
           {title}
         </h2>
-        <div className='flex flex-col gap-3 text-sm leading-relaxed text-text-muted'>
+        <div className='flex flex-col gap-3 text-base leading-relaxed text-text-muted'>
           {children}
         </div>
       </div>

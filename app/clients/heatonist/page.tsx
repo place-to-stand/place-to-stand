@@ -54,10 +54,12 @@ function ItemGrid({
           // An odd last item spans both columns so the grid has no empty cell.
           className='flex flex-col gap-3 bg-bg-card p-6 last:odd:sm:col-span-2'
         >
-          <h3 className='font-headline text-sm leading-tight font-bold tracking-tight text-accent uppercase'>
+          <h3 className='font-headline text-base leading-tight font-bold tracking-tight text-text uppercase'>
             {item.title}
           </h3>
-          <p className='text-sm leading-relaxed text-text-muted'>{item.body}</p>
+          <p className='text-base leading-relaxed text-text-muted'>
+            {item.body}
+          </p>
         </div>
       ))}
     </div>
@@ -92,7 +94,7 @@ export default function HeatonistCaseStudyPage() {
               {cs.stats.map(stat => (
                 <li
                   key={stat}
-                  className='border-l-2 border-accent pl-4 text-sm leading-relaxed text-text md:text-base'
+                  className='border-l-2 border-accent pl-4 text-base leading-relaxed text-text'
                 >
                   {stat}
                 </li>

@@ -76,10 +76,10 @@ export default function AuditError({
           <h1 className='mt-4 font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
             We hit a snag
           </h1>
-          <p className='mt-4 text-sm text-text-muted'>
+          <p className='mt-4 text-base text-text-muted'>
             Your answers are saved. Nothing you filled in was lost.
           </p>
-          <p className='mt-2 text-sm text-text-muted'>
+          <p className='mt-2 text-base text-text-muted'>
             Try again and we will take you straight to your results.
           </p>
 

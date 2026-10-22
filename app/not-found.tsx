@@ -17,7 +17,7 @@ export default function NotFound() {
           <h1 className='mt-4 font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
             Nothing stands here
           </h1>
-          <p className='mt-4 text-sm text-text-muted'>
+          <p className='mt-4 text-base text-text-muted'>
             The page you were looking for has moved or never existed.
           </p>
 

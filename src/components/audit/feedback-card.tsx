@@ -60,7 +60,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
           <h2 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
             Thanks for the feedback
           </h2>
-          <p className='max-w-md text-sm text-balance text-text-muted'>
+          <p className='max-w-md text-base text-balance text-text-muted'>
             It helps us make the audit more useful for the next person.
           </p>
         </div>
@@ -73,7 +73,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
             <h2 className='mt-2 font-headline text-lg font-semibold tracking-tight text-text uppercase'>
               Did you find these results helpful?
             </h2>
-            <p className='mt-2 text-sm text-text-muted'>
+            <p className='mt-2 text-base text-text-muted'>
               We are always refining the audit to serve meaningful information.
               Your feedback is greatly appreciated!
             </p>

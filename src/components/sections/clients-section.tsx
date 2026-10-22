@@ -30,7 +30,7 @@ export function ClientsSection() {
           >
             <BlueprintCorners />
             {project.caseStudy && (
-              <span className='pointer-events-none absolute top-2 left-2 z-20 border border-border bg-bg-card px-2 py-1 font-mono text-[10px] tracking-wider text-accent uppercase'>
+              <span className='pointer-events-none absolute top-2 left-2 z-20 border border-border bg-bg-card px-2 py-1 font-mono text-xs tracking-wider text-accent uppercase'>
                 Case study
               </span>
             )}
@@ -76,7 +76,7 @@ export function ClientsSection() {
                 <h3 className='font-headline text-sm leading-none font-semibold text-text uppercase md:text-base'>
                   {project.title}
                 </h3>
-                <p className='line-clamp-2 min-h-[2.75em] text-xs leading-[1.375] text-text-muted md:text-sm'>
+                <p className='line-clamp-2 min-h-[2.75em] text-sm leading-[1.375] text-text-muted'>
                   {project.description}
                 </p>
               </div>

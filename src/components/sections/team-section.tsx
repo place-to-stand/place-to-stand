@@ -48,7 +48,7 @@ export function TeamSection() {
               <h3 className='font-headline text-base leading-none uppercase md:text-2xl'>
                 {member.name}
               </h3>
-              <p className='text-xs text-ink/70 md:text-sm'>{member.title}</p>
+              <p className='text-sm text-ink/70'>{member.title}</p>
             </div>
           </article>
         ))}

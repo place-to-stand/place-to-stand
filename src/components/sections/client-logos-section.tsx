@@ -2,7 +2,7 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { clients } from '@/src/lib/clients'
+import { clients, logoToneClass } from '@/src/lib/clients'
 
 /**
  * Homepage proof bar — the client roster, directly under the hero.
@@ -17,7 +17,8 @@ import { clients } from '@/src/lib/clients'
  * object-contain, so wide wordmarks and square marks share a baseline instead
  * of a bounding box. Height alone would leave a 1:1 mark towering over an 8:1
  * wordmark, so `logoScale` (see src/lib/clients.ts) knocks the heavy marks back
- * to match optical weight.
+ * to match optical weight. Marks render as white silhouettes (or grey, per
+ * `logoTone`) so client brand colors don't fight the site's muted palette.
  */
 export function ClientLogosSection() {
   return (
@@ -58,7 +59,7 @@ export function ClientLogosSection() {
                 loading='lazy'
                 decoding='async'
                 style={{ maxHeight: `${(client.logoScale ?? 1) * 100}%` }}
-                className='w-auto max-w-full object-contain'
+                className={`w-auto max-w-full object-contain ${logoToneClass(client)}`}
               />
             </a>
           ))}
