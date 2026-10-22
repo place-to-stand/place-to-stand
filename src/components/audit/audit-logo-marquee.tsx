@@ -75,7 +75,7 @@ export function AuditLogoMarquee() {
             <li
               key={`${client.title}-${i}`}
               aria-hidden={copy || undefined}
-              className='flex h-grid-2 shrink-0 items-center px-grid-1 md:h-grid-3 md:px-grid-2'
+              className='flex h-grid-2 shrink-0 items-center px-4 md:h-grid-3 md:px-9'
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
