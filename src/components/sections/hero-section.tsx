@@ -22,12 +22,13 @@ export function HeroSection() {
         <div className='flex flex-1 flex-col justify-center'>
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
-              height so the drawing below has room. */}
+              height so the drawing below has room. Below 800px tall it stops
+              shrinking and the hero runs off the bottom of the screen. */}
           <div className='hero-frame relative w-full'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
-            <h1 className='py-4 pl-3 font-headline text-[clamp(2.25rem,min(7vw,11svh),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
+            <h1 className='py-4 pl-3 font-headline text-[clamp(2.25rem,min(7vw,max(11svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
               <span
                 className='hero-line block'
                 style={{ '--hero-delay': '0s' } as CSSProperties}
@@ -104,7 +105,7 @@ export function HeroSection() {
                 On laptops it also rises 48px into the gap above
                 so it breaks the line the text sits on. */}
             <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:-mt-grid-2 lg:pr-grid-2'>
-              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((100svh-15.5rem-2.64*min(7vw,11svh,6.5rem))*1.44),100%)]' />
+              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-15.5rem-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.44),100%)]' />
             </div>
           </div>
         </div>
