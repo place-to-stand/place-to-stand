@@ -16,6 +16,13 @@ export type Client = {
    * Derived from each file's aspect ratio and ink coverage; re-derive it the
    * same way for a new logo. Defaults to 1. */
   logoScale?: number
+  /** Vertical nudge, as a percent of the logo's own height (negative moves it
+   * up), so the mark's visual centre sits on the row's centre line. Measured
+   * from the file's ink: the shift that would put the ink's centre of mass in
+   * the middle, taken at 75% so text-heavy marks don't overshoot. A small
+   * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
+   * box up and leaves the heavy part sitting low. */
+  logoNudge?: number
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
    * color fills (they'd flatten to a blob) opt into a grey version instead. */
@@ -39,6 +46,7 @@ export const clients: Client[] = [
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
     logoScale: 0.65,
+    logoNudge: -9,
     logoTone: 'grey',
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
@@ -58,6 +66,7 @@ export const clients: Client[] = [
     image: '/work-florence-by-mills-beauty.png',
     logo: '/logos/florence-by-mills-beauty.png',
     logoScale: 0.62,
+    logoNudge: 8,
     description:
       'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
@@ -87,6 +96,7 @@ export const clients: Client[] = [
     href: 'https://blondienites.com',
     logo: '/logos/blondie-nites.png',
     logoScale: 0.39,
+    logoNudge: -5,
   },
   {
     title: '9 Point Studios',
@@ -94,6 +104,7 @@ export const clients: Client[] = [
     image: '/work-9-point-studios.png',
     logo: '/logos/9-point-studios.svg',
     logoScale: 0.6,
+    logoNudge: -2,
     description:
       'A world-class recording and video production facility for creative artists.',
   },
@@ -103,6 +114,7 @@ export const clients: Client[] = [
     image: '/work-greenwatt-usa.png',
     logo: '/logos/greenwatt-usa.png',
     logoScale: 0.65,
+    logoNudge: 2,
     description:
       'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
@@ -111,7 +123,8 @@ export const clients: Client[] = [
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397.png',
     logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.78,
+    logoScale: 0.69,
+    logoNudge: 2.5,
     description:
       'A specialty shop offering elegant, functional wine and bar accessories.',
   },
@@ -120,6 +133,7 @@ export const clients: Client[] = [
     href: 'https://safetyknights.com',
     logo: '/logos/safety-knights.svg',
     logoScale: 0.68,
+    logoNudge: 3,
   },
   {
     title: 'Jeremy Turner',
@@ -143,25 +157,28 @@ export const clients: Client[] = [
     title: 'Up The Wall',
     href: 'https://upthewall.co',
     logo: '/logos/up-the-wall.svg',
-    logoScale: 0.91,
+    logoScale: 0.8,
   },
   {
     title: 'The Rounds',
     href: 'https://www.theroundsnyc.com',
     logo: '/logos/the-rounds.png',
     logoScale: 0.36,
+    logoNudge: -6,
   },
   {
     title: 'Echo & Wave',
     href: 'https://echoandwave.com',
     logo: '/logos/echo-and-wave.svg',
     logoScale: 0.28,
+    logoNudge: -4,
   },
   {
     title: 'Small Isles',
     href: 'https://smallislesmusic.com',
     logo: '/logos/small-isles.svg',
     logoScale: 0.26,
+    logoNudge: -2,
   },
   {
     title: 'so many cults',
@@ -175,6 +192,7 @@ export const clients: Client[] = [
     image: '/work-lifepacks.jpg',
     logo: '/logos/lifepacks.png',
     logoScale: 0.38,
+    logoNudge: -3.5,
     description:
       'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
   },

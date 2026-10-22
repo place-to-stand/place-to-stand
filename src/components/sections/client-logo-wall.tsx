@@ -85,6 +85,7 @@ export function ClientLogoWall() {
       {shown.map((index, slot) => (
         <LogoCell
           key={slot}
+          align={cellAlign(slot)}
           client={clients[index]}
           leaving={fading === slot}
           entering={swapped.has(slot)}
@@ -105,13 +106,32 @@ function initialSlots(): number[] {
   )
 }
 
+/**
+ * Outer columns hang off the container edges, so the grid shares the left
+ * line with the "Trusted by" label and the rest of the page; inner columns
+ * centre. Phones run two columns, wider screens five.
+ */
+function cellAlign(slot: number): string {
+  const phone = slot % 2 === 0 ? 'justify-start' : 'justify-end'
+  const col = slot % 5
+  const wide =
+    col === 0
+      ? 'md:justify-start'
+      : col === 4
+        ? 'md:justify-end'
+        : 'md:justify-center'
+  return `${phone} ${wide}`
+}
+
 function LogoCell({
+  align,
   client,
   leaving,
   entering,
   onHold,
   onRelease,
 }: {
+  align: string
   client: Client
   leaving: boolean
   entering: boolean
@@ -134,7 +154,7 @@ function LogoCell({
       <span
         key={client.title}
         style={{ transitionDuration: `${SWAP_FADE_MS}ms` }}
-        className={`flex h-full w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
+        className={`flex h-full w-full items-center ${align} transition-[opacity,filter,transform] ease-out ${
           leaving ? 'logo-swap-out' : 'opacity-80 group-hover:opacity-100'
         } ${entering ? 'logo-swap-in' : ''}`}
       >
@@ -145,7 +165,12 @@ function LogoCell({
           src={client.logo}
           alt={`${client.title} logo`}
           decoding='async'
-          style={{ maxHeight: `${(client.logoScale ?? 1) * 100}%` }}
+          style={{
+            maxHeight: `${(client.logoScale ?? 1) * 100}%`,
+            transform: client.logoNudge
+              ? `translateY(${client.logoNudge}%)`
+              : undefined,
+          }}
           className={`w-auto max-w-full object-contain ${logoToneClass(client)}`}
         />
       </span>

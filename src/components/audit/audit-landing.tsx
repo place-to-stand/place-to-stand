@@ -263,6 +263,9 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                     decoding='async'
                     style={{
                       maxHeight: `${(client.logoScale ?? 1) * 100}%`,
+                      transform: client.logoNudge
+                        ? `translateY(${client.logoNudge}%)`
+                        : undefined,
                     }}
                     className={`w-auto max-w-full object-contain ${logoToneClass(client)}`}
                   />

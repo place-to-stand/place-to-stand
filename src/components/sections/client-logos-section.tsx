@@ -23,9 +23,11 @@ import { ClientLogoWall } from './client-logo-wall'
  */
 export function ClientLogosSection() {
   return (
-    // Hugs the hero, then clears properly before the persona section, so the
-    // bar reads as attached to the hero rather than as a section of its own.
-    <AnimatedSection className='pt-grid-2 pb-grid-4'>
+    // Top and bottom padding differ on purpose: the logos sit centred in
+    // their rows, so the bottom row's ink ends well above the grid's edge.
+    // These values make the gap from the hero drawing and the gap down to
+    // the persona section look the same.
+    <AnimatedSection className='pt-grid-3 pb-grid-4'>
       <div className='flex flex-col gap-grid-1'>
         <Reveal index={0}>
           <span className='bp-label font-mono'>Trusted by</span>
