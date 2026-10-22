@@ -9,10 +9,10 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden lg:[--hero-gap:clamp(4rem,8svh,6rem)]'
+      className='relative flex flex-col overflow-hidden lg:[--hero-gap:clamp(4.5rem,9svh,6rem)]'
     >
       <div className='mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 pb-grid-2 md:pb-grid-3 lg:px-12 lg:pt-[4.3125rem] lg:pb-0'>
-        {/* On laptops one gap (--hero-gap, 64px on an 800px-tall window up to
+        {/* On laptops one gap (--hero-gap, 72px on an 800px-tall window up to
             96px) sets the space under the nav, between the headline and the row
             below, and under the drawing, so all three grow together with the
             window. lg:pt clears the 69px nav. The drawing is sized so the hero
