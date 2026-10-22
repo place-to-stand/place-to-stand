@@ -6,6 +6,7 @@ import {
   LOGO_SLOTS,
   SWAP_INTERVAL_MS,
   SWAP_FADE_MS,
+  FIRST_SWAP_DELAY_MS,
   nextSwap,
 } from './client-logo-wall-utils'
 
@@ -27,21 +28,33 @@ export function ClientLogoWall() {
   const ref = useRef<HTMLDivElement>(null)
   const shownRef = useRef(shown)
   const lastSlot = useRef<number | null>(null)
+  // The cell being hovered or focused; it never swaps out from under someone.
+  const held = useRef<number | null>(null)
 
   useEffect(() => {
     if (clients.length <= LOGO_SLOTS) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let visible = false
+    // Time of the next swap; set when the grid first scrolls into view.
+    let nextAt: number | null = null
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting
+      if (visible && nextAt === null) nextAt = Date.now() + FIRST_SWAP_DELAY_MS
     })
     if (ref.current) observer.observe(ref.current)
 
     let fadeTimer: ReturnType<typeof setTimeout> | undefined
     const tick = setInterval(() => {
-      if (!visible || document.hidden) return
-      const swap = nextSwap(shownRef.current, clients.length, lastSlot.current)
+      if (!visible || document.hidden || nextAt === null) return
+      if (Date.now() < nextAt) return
+      nextAt = Date.now() + SWAP_INTERVAL_MS
+      const swap = nextSwap(
+        shownRef.current,
+        clients.length,
+        lastSlot.current,
+        held.current
+      )
       lastSlot.current = swap.slot
       setFading(swap.slot)
       fadeTimer = setTimeout(() => {
@@ -52,7 +65,7 @@ export function ClientLogoWall() {
         setSwapped(prev => new Set(prev).add(swap.slot))
         setFading(null)
       }, SWAP_FADE_MS)
-    }, SWAP_INTERVAL_MS)
+    }, 1000)
 
     return () => {
       clearInterval(tick)
@@ -75,6 +88,10 @@ export function ClientLogoWall() {
           client={clients[index]}
           leaving={fading === slot}
           entering={swapped.has(slot)}
+          onHold={() => (held.current = slot)}
+          onRelease={() => {
+            if (held.current === slot) held.current = null
+          }}
         />
       ))}
     </div>
@@ -92,10 +109,14 @@ function LogoCell({
   client,
   leaving,
   entering,
+  onHold,
+  onRelease,
 }: {
   client: Client
   leaving: boolean
   entering: boolean
+  onHold: () => void
+  onRelease: () => void
 }) {
   return (
     <a
@@ -103,6 +124,10 @@ function LogoCell({
       target='_blank'
       rel='noreferrer noopener'
       aria-label={`Visit ${client.title} (opens in a new tab)`}
+      onPointerEnter={onHold}
+      onPointerLeave={onRelease}
+      onFocus={onHold}
+      onBlur={onRelease}
       className='group relative flex h-grid-2 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 md:h-grid-3'
     >
       {/* Keyed by client so a swap remounts it and replays the scan-in. */}

@@ -4,7 +4,8 @@ export type Client = {
   /** Screenshot for the /clients page; clients without one only appear in
    * the homepage logo grid. */
   image?: string
-  description: string
+  /** Shown on the /clients page, so only clients with an `image` need one. */
+  description?: string
   /** Brand logo on a transparent ground, for the homepage logo grid. Brands
    * that only publish a dark-on-light mark use their reversed lockup so they
    * read against the dark theme. */
@@ -74,21 +75,18 @@ export const clients: Client[] = [
     href: 'https://www.betsyandadam.com',
     logo: '/logos/betsy-and-adam.png',
     logoScale: 0.53,
-    description: 'Evening and special occasion dresses.',
   },
   {
     title: 'Xscape Evenings',
     href: 'https://xscapeevenings.com',
     logo: '/logos/xscape-evenings.png',
     logoScale: 0.43,
-    description: 'Eveningwear and occasion dresses.',
   },
   {
     title: 'Blondie Nites',
     href: 'https://blondienites.com',
     logo: '/logos/blondie-nites.png',
     logoScale: 0.39,
-    description: 'Party and prom dresses.',
   },
   {
     title: '9 Point Studios',
@@ -109,11 +107,11 @@ export const clients: Client[] = [
       'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
   {
-    title: 'Jeremy Turner Studio',
+    title: 'Jeremy Turner',
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner.png',
-    logo: '/logos/jeremy-turner-studio.svg',
-    logoScale: 0.3,
+    logo: '/logos/jeremy-turner.svg',
+    logoScale: 0.35,
     description:
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
@@ -122,7 +120,30 @@ export const clients: Client[] = [
     href: 'https://upthewall.co',
     logo: '/logos/up-the-wall.svg',
     logoScale: 0.91,
-    description: 'Print-on-demand order fulfillment for Shopify stores.',
+  },
+  {
+    title: 'Safety Knights',
+    href: 'https://safetyknights.com',
+    logo: '/logos/safety-knights.svg',
+    logoScale: 0.95,
+  },
+  {
+    title: 'The Rounds',
+    href: 'https://www.theroundsnyc.com',
+    logo: '/logos/the-rounds.png',
+    logoScale: 0.44,
+  },
+  {
+    title: 'Echo & Wave',
+    href: 'https://echoandwave.com',
+    logo: '/logos/echo-and-wave.svg',
+    logoScale: 0.32,
+  },
+  {
+    title: 'Small Isles',
+    href: 'https://smallislesmusic.com',
+    logo: '/logos/small-isles.svg',
+    logoScale: 0.3,
   },
   {
     title: 'Officina del Bere 1397',
@@ -147,9 +168,15 @@ export const clients: Client[] = [
     href: 'https://www.lifepacks.co',
     image: '/work-lifepacks.jpg',
     logo: '/logos/lifepacks.png',
-    logoScale: 0.43,
+    logoScale: 0.38,
     description:
       'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
+  },
+  {
+    title: 'so many cults',
+    href: 'https://somanycults.com',
+    logo: '/logos/so-many-cults.svg',
+    logoScale: 0.32,
   },
 ]
 
