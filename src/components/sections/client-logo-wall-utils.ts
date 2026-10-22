@@ -1,8 +1,8 @@
-/** Cells in the homepage logo grid at its widest (5×2 on laptops). */
+/** Cells in the homepage logo grid at its widest (5×2 from 1280px). */
 export const LOGO_SLOTS = 10
 
 /** Cells showing at each width: three rows of two on phones, then two rows of
- * three from 576px wide, four from 624px and five on laptops. Must match the grid classes and the
+ * three from 576px wide, four from 800px and five from 1280px. Must match the grid classes and the
  * `slotVisibility` classes in client-logo-wall.tsx. */
 export const VISIBLE_SLOTS = {
   phone: 6,

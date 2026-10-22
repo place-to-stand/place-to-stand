@@ -19,7 +19,7 @@ import {
  * whole roster gets seen without a second row of logos.
  *
  * Phones show three rows of two; from 576px it is two rows of three, then
- * four from 624px and five on laptops. Cell height (and so logo size) follows the window width, from 44px
+ * four from 800px and five from 1280px. Cell height (and so logo size) follows the window width, from 44px
  * up to 72px, so it changes smoothly instead of jumping at each breakpoint;
  * wide logos are also held to their cell's width. The extra cells are hidden
  * with CSS, and swaps only touch the
@@ -101,10 +101,10 @@ export function ClientLogoWall() {
   return (
     // Three rows of two on phones, two rows above that; cells that don't fit
     // are hidden (see slotVisibility). Two across, the rows sit 12px apart;
-    // 24px from three across, 48px on laptops.
+    // 24px from three across, 48px from 1024px.
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-y-grid-1 min-[39rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
+      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-y-grid-1 min-[50rem]:grid-cols-4 lg:gap-grid-2 min-[80rem]:grid-cols-5'
     >
       {shown.map((index, slot) => (
         <LogoCell
@@ -126,16 +126,16 @@ export function ClientLogoWall() {
 /** Hides the cells that don't fit: 6 show on phones and at three across,
  * then 8 and 10. */
 function slotVisibility(slot: number): string {
-  if (slot >= VISIBLE_SLOTS.wideTablet) return 'hidden lg:flex'
-  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[39rem]:flex'
+  if (slot >= VISIBLE_SLOTS.wideTablet) return 'hidden min-[80rem]:flex'
+  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[50rem]:flex'
   return ''
 }
 
 /** How many cells show at the current width (matches `slotVisibility`). */
 function visibleSlots(): number {
-  if (window.matchMedia('(min-width: 64rem)').matches)
+  if (window.matchMedia('(min-width: 80rem)').matches)
     return VISIBLE_SLOTS.laptop
-  if (window.matchMedia('(min-width: 39rem)').matches)
+  if (window.matchMedia('(min-width: 50rem)').matches)
     return VISIBLE_SLOTS.wideTablet
   if (window.matchMedia('(min-width: 36rem)').matches)
     return VISIBLE_SLOTS.tablet
