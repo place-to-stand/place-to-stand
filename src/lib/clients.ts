@@ -27,6 +27,8 @@ export function logoToneClass(client: Client): string {
     : 'brightness-0 invert'
 }
 
+/** Biggest names first: the homepage logo grid opens on the first ten and
+ * swaps the rest in one at a time; the audit page shows the first six. */
 export const clients: Client[] = [
   {
     title: 'Hot Ones',
@@ -47,22 +49,13 @@ export const clients: Client[] = [
       'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
   {
-    title: 'GreenWATT USA',
-    href: 'https://www.gtbsolarexchange.com',
-    image: '/work-greenwatt-usa.png',
-    logo: '/logos/greenwatt-usa.png',
-    logoScale: 0.7,
+    title: 'Florence by Mills Beauty',
+    href: 'https://florencebymillsbeauty.com',
+    image: '/work-florence-by-mills-beauty.png',
+    logo: '/logos/florence-by-mills-beauty.png',
+    logoScale: 0.64,
     description:
-      'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
-  },
-  {
-    title: 'Jeremy Turner',
-    href: 'https://jeremyturnerstudio.com',
-    image: '/work-jeremy-turner.png',
-    logo: '/logos/jeremy-turner.png',
-    logoScale: 0.5,
-    description:
-      'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
+      'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
   {
     title: 'Heatonist',
@@ -73,13 +66,25 @@ export const clients: Client[] = [
       "A curated marketplace for the world's best small-batch hot sauces.",
   },
   {
-    title: 'Florence by Mills Beauty',
-    href: 'https://florencebymillsbeauty.com',
-    image: '/work-florence-by-mills-beauty.png',
-    logo: '/logos/florence-by-mills-beauty.png',
-    logoScale: 0.64,
-    description:
-      'A clean beauty and skincare line founded by Millie Bobby Brown.',
+    title: 'Betsy & Adam',
+    href: 'https://www.betsyandadam.com',
+    logo: '/logos/betsy-and-adam.png',
+    logoScale: 0.5,
+    description: 'Evening and special occasion dresses.',
+  },
+  {
+    title: 'Xscape Evenings',
+    href: 'https://xscapeevenings.com',
+    logo: '/logos/xscape-evenings.png',
+    logoScale: 0.5,
+    description: 'Eveningwear and occasion dresses.',
+  },
+  {
+    title: 'Blondie Nites',
+    href: 'https://blondienites.com',
+    logo: '/logos/blondie-nites.png',
+    logoScale: 0.5,
+    description: 'Party and prom dresses.',
   },
   {
     title: '9 Point Studios',
@@ -89,6 +94,31 @@ export const clients: Client[] = [
     logoScale: 0.7,
     description:
       'A world-class recording and video production facility for creative artists.',
+  },
+  {
+    title: 'GreenWATT USA',
+    href: 'https://www.gtbsolarexchange.com',
+    image: '/work-greenwatt-usa.png',
+    logo: '/logos/greenwatt-usa.png',
+    logoScale: 0.7,
+    description:
+      'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
+  },
+  {
+    title: 'Jeremy Turner Studio',
+    href: 'https://jeremyturnerstudio.com',
+    image: '/work-jeremy-turner.png',
+    logo: '/logos/jeremy-turner-studio.svg',
+    logoScale: 0.3,
+    description:
+      'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
+  },
+  {
+    title: 'Up The Wall',
+    href: 'https://upthewall.co',
+    logo: '/logos/up-the-wall.svg',
+    logoScale: 0.7,
+    description: 'Print-on-demand order fulfillment for Shopify stores.',
   },
   {
     title: 'Officina del Bere 1397',
