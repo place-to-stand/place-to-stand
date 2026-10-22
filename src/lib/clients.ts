@@ -45,7 +45,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
-    logoScale: 0.65,
+    logoScale: 0.72,
     logoNudge: -9,
     logoTone: 'grey',
     description:
@@ -56,7 +56,7 @@ export const clients: Client[] = [
     href: 'https://blakebrownbeauty.com',
     image: '/work-blake-brown-beauty.png',
     logo: '/logos/blake-brown-beauty.svg',
-    logoScale: 0.53,
+    logoScale: 0.58,
     description:
       'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
@@ -140,7 +140,7 @@ export const clients: Client[] = [
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner.png',
     logo: '/logos/jeremy-turner.svg',
-    logoScale: 0.35,
+    logoScale: 0.39,
     description:
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
@@ -149,7 +149,7 @@ export const clients: Client[] = [
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club.png',
     logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.57,
+    logoScale: 0.63,
     description:
       'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
   },
