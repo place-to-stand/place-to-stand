@@ -9,17 +9,22 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden lg:min-h-[min(100svh,67.5rem)]'
+      className='relative flex flex-col overflow-hidden lg:min-h-[min(100svh,67.5rem)] lg:[--hero-gap:clamp(4rem,8svh,6rem)]'
     >
-      <div className='mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 pb-grid-2 md:pb-grid-3 lg:px-12 lg:pt-grid-6 lg:pb-grid-4'>
-        {/* When the screen is taller than the content, spare space first opens
-            the gap under the headline (the spacer below, 72px growing to 120px). The hero
-            stops growing at 1080px, just past a 16" MacBook Pro window, so tall
-            screens show the next section instead of empty space.
+      <div className='mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 pb-grid-2 md:pb-grid-3 lg:px-12 lg:pt-[4.3125rem] lg:pb-0'>
+        {/* On laptops one gap (--hero-gap, 64px on an 800px-tall window up to
+            96px) sets the space under the nav, between the headline and the row
+            below, and under the drawing, so all three grow together with the
+            window. lg:pt clears the 69px nav. The hero stops growing at 1080px,
+            and any space left over is shared between the three gaps.
             Below lg the hero does not fill the screen: headline, the text and
             drawing row, and the bottom edge sit one even step apart (48px on
             phones, 72px on tablets). */}
-        <div className='flex flex-1 flex-col justify-center'>
+        <div className='flex flex-1 flex-col'>
+          <div
+            aria-hidden
+            className='hidden lg:block lg:min-h-(--hero-gap) lg:flex-[1_1_1.75rem]'
+          />
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
@@ -52,7 +57,7 @@ export function HeroSection() {
 
           <div
             aria-hidden
-            className='h-grid-2 md:h-grid-3 lg:h-auto lg:max-h-30 lg:min-h-grid-3 lg:flex-1'
+            className='h-grid-2 md:h-grid-3 lg:h-auto lg:min-h-(--hero-gap) lg:flex-[1_1_1.75rem]'
           />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right);
@@ -100,14 +105,20 @@ export function HeroSection() {
                 Tablets and up: centered in the right column, with extra right margin
                 so it doesn't press against the page edge. On laptops its width follows the
                 window height (minus the headline, which shrinks on short screens, the spacing,
-                and 48px kept free below, matching the side margin),
+                and one gap kept free below),
                 so short screens still show the whole drawing, database included.
                 On laptops it also rises by 8% of its own height into the gap above
                 so it breaks the line the text sits on. */}
             <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:pr-grid-2'>
-              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-16.75rem-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.44),100%)] lg:-translate-y-[8%]' />
+              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-3*var(--hero-gap)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.565),100%)] lg:-translate-y-[8%]' />
             </div>
           </div>
+
+          {/* The drawing's 8% lift already leaves about 28px under it. */}
+          <div
+            aria-hidden
+            className='hidden lg:block lg:min-h-[calc(var(--hero-gap)-1.75rem)] lg:flex-1'
+          />
         </div>
       </div>
     </section>
