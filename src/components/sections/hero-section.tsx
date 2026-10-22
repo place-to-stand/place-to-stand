@@ -9,22 +9,21 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden lg:min-h-[min(100svh,67.5rem)] lg:[--hero-gap:clamp(4rem,8svh,6rem)]'
+      className='relative flex flex-col overflow-hidden lg:[--hero-gap:clamp(4rem,8svh,6rem)]'
     >
       <div className='mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 pb-grid-2 md:pb-grid-3 lg:px-12 lg:pt-[4.3125rem] lg:pb-0'>
         {/* On laptops one gap (--hero-gap, 64px on an 800px-tall window up to
             96px) sets the space under the nav, between the headline and the row
             below, and under the drawing, so all three grow together with the
-            window. lg:pt clears the 69px nav. The hero stops growing at 1080px,
-            and any space left over is shared between the three gaps.
+            window. lg:pt clears the 69px nav. The drawing is sized so the hero
+            fills the screen; once it hits its width limit (wide or tall windows)
+            the hero ends early and the next section shows, instead of the gaps
+            swelling.
             Below lg the hero does not fill the screen: headline, the text and
             drawing row, and the bottom edge sit one even step apart (48px on
             phones, 72px on tablets). */}
         <div className='flex flex-1 flex-col'>
-          <div
-            aria-hidden
-            className='hidden lg:block lg:min-h-(--hero-gap) lg:flex-[1_1_1.75rem]'
-          />
+          <div aria-hidden className='hidden lg:block lg:h-(--hero-gap)' />
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
@@ -55,10 +54,7 @@ export function HeroSection() {
             </h1>
           </div>
 
-          <div
-            aria-hidden
-            className='h-grid-2 md:h-grid-3 lg:h-auto lg:min-h-(--hero-gap) lg:flex-[1_1_1.75rem]'
-          />
+          <div aria-hidden className='h-grid-2 md:h-grid-3 lg:h-(--hero-gap)' />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right);
               stacked text-first on phones */}
@@ -118,7 +114,7 @@ export function HeroSection() {
               leaves about 28px of that. */}
           <div
             aria-hidden
-            className='hidden lg:block lg:min-h-[calc(0.6*var(--hero-gap)-1.75rem)] lg:flex-[0.6_1_0%]'
+            className='hidden lg:block lg:h-[calc(0.6*var(--hero-gap)-1.75rem)]'
           />
         </div>
       </div>
