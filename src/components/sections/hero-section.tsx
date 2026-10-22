@@ -57,9 +57,11 @@ export function HeroSection() {
           <div aria-hidden className='h-grid-2 md:h-grid-3 lg:h-(--hero-gap)' />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right);
-              stacked text-first on phones */}
+              stacked text-first on phones. The text column is indented like the
+              headline (pl-3, md:pl-6), so both sit the same distance in from the
+              corner marks. */}
           <div className='flex flex-col gap-grid-2 md:flex-row md:items-start md:gap-grid-2 lg:gap-grid-3'>
-            <div className='flex flex-col gap-8 md:flex-1'>
+            <div className='flex flex-col gap-8 pl-3 md:flex-1 md:pl-6'>
               <div
                 className='hero-reveal flex gap-4 self-start'
                 style={{ animationDelay: '0.85s' }}
@@ -98,14 +100,15 @@ export function HeroSection() {
 
             {/* Hero comparison set piece — turn this (clutter) into this (one app).
                 Phones: below the button, so the button stays near the top.
-                Tablets and up: centered in the right column, with extra right margin
-                so it doesn't press against the page edge. On laptops its width follows the
+                Tablets and up: pinned right, its ink inset from the corner mark by
+                the same 24px as the headline and the text column (pr-3.5 plus the
+                drawing's own margin). On laptops its width follows the
                 window height (minus the headline, which shrinks on short screens, the spacing,
                 and one gap kept free below),
                 so short screens still show the whole drawing, database included.
                 On laptops it also rises by 8% of its own height into the gap above
                 so it breaks the line the text sits on. */}
-            <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:pr-grid-2'>
+            <div className='md:flex md:flex-1 md:justify-end md:pr-3.5'>
               <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-2.6*var(--hero-gap)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.565),100%)] lg:-translate-y-[8%]' />
             </div>
           </div>
