@@ -7,6 +7,7 @@ import {
   VISIBLE_SLOTS,
   SWAP_INTERVAL_MS,
   SWAP_FADE_MS,
+  SCAN_IN_MS,
   FIRST_SWAP_DELAY_MS,
   nextSwap,
 } from './client-logo-wall-utils'
@@ -17,8 +18,8 @@ import {
  * seconds blurs one logo away and scans in a client that isn't showing, so the
  * whole roster gets seen without a second row of logos.
  *
- * It always shows two rows: two across on phones, three from 576px, four
- * from 672px, five on laptops. Cell height (and so logo size) follows the window width, from 44px
+ * Phones show three rows of two; from 576px it is two rows of three, then
+ * four from 624px and five on laptops. Cell height (and so logo size) follows the window width, from 44px
  * up to 72px, so it changes smoothly instead of jumping at each breakpoint;
  * wide logos are also held to their cell's width. The extra cells are hidden
  * with CSS, and swaps only touch the
@@ -30,9 +31,12 @@ import {
 export function ClientLogoWall() {
   const [shown, setShown] = useState(() => initialSlots())
   const [fading, setFading] = useState<number | null>(null)
-  // Cells that have swapped at least once; only these play the scan-in, so
-  // the first render doesn't animate on top of the section's own reveal.
-  const [swapped, setSwapped] = useState<ReadonlySet<number>>(new Set())
+  // The cell scanning in right now. It is cleared once the scan-in ends:
+  // left on, the animation would replay whenever a hidden cell is shown again
+  // (resizing across a breakpoint), which looked like several swaps at once.
+  // Nothing scans in on the first render, so it doesn't play on top of the
+  // section's own reveal.
+  const [entering, setEntering] = useState<number | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const shownRef = useRef(shown)
   const lastSlot = useRef<number | null>(null)
@@ -53,6 +57,7 @@ export function ClientLogoWall() {
     if (ref.current) observer.observe(ref.current)
 
     let fadeTimer: ReturnType<typeof setTimeout> | undefined
+    let scanTimer: ReturnType<typeof setTimeout> | undefined
     const tick = setInterval(() => {
       if (!visible || document.hidden || nextAt === null) return
       if (Date.now() < nextAt) return
@@ -79,25 +84,27 @@ export function ClientLogoWall() {
         next[swap.slot] = swap.client
         shownRef.current = next
         setShown(next)
-        setSwapped(prev => new Set(prev).add(swap.slot))
+        setEntering(swap.slot)
         setFading(null)
+        scanTimer = setTimeout(() => setEntering(null), SCAN_IN_MS)
       }, SWAP_FADE_MS)
     }, 1000)
 
     return () => {
       clearInterval(tick)
       clearTimeout(fadeTimer)
+      clearTimeout(scanTimer)
       observer.disconnect()
     }
   }, [])
 
   return (
-    // Two rows at every width; cells past the second row are hidden (see
-    // slotVisibility). Two across, the rows sit 12px apart; 24px from three
-    // across, 48px on laptops.
+    // Three rows of two on phones, two rows above that; cells that don't fit
+    // are hidden (see slotVisibility). Two across, the rows sit 12px apart;
+    // 24px from three across, 48px on laptops.
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-y-grid-1 min-[42rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
+      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-y-grid-1 min-[39rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
     >
       {shown.map((index, slot) => (
         <LogoCell
@@ -105,7 +112,7 @@ export function ClientLogoWall() {
           className={slotVisibility(slot)}
           client={clients[index]}
           leaving={fading === slot}
-          entering={swapped.has(slot)}
+          entering={entering === slot}
           onHold={() => (held.current = slot)}
           onRelease={() => {
             if (held.current === slot) held.current = null
@@ -116,11 +123,11 @@ export function ClientLogoWall() {
   )
 }
 
-/** Hides the cells past the second row: 4 on phones, then 6, 8 and 10. */
+/** Hides the cells that don't fit: 6 show on phones and at three across,
+ * then 8 and 10. */
 function slotVisibility(slot: number): string {
   if (slot >= VISIBLE_SLOTS.wideTablet) return 'hidden lg:flex'
-  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[42rem]:flex'
-  if (slot >= VISIBLE_SLOTS.phone) return 'hidden min-[36rem]:flex'
+  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[39rem]:flex'
   return ''
 }
 
@@ -128,7 +135,7 @@ function slotVisibility(slot: number): string {
 function visibleSlots(): number {
   if (window.matchMedia('(min-width: 64rem)').matches)
     return VISIBLE_SLOTS.laptop
-  if (window.matchMedia('(min-width: 42rem)').matches)
+  if (window.matchMedia('(min-width: 39rem)').matches)
     return VISIBLE_SLOTS.wideTablet
   if (window.matchMedia('(min-width: 36rem)').matches)
     return VISIBLE_SLOTS.tablet
