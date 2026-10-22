@@ -1,9 +1,10 @@
 /** Cells in the homepage logo grid (2×5 on phones, 5×2 from tablets up). */
 export const LOGO_SLOTS = 10
 
-/** Time between swaps, and how long a cell takes to fade out (then back in). */
-export const SWAP_INTERVAL_MS = 2800
-export const SWAP_FADE_MS = 450
+/** Time between swaps, and how long the old logo takes to blur away. The new
+ * logo's scan-in runs 900ms (`.logo-swap-in` in app/globals.css). */
+export const SWAP_INTERVAL_MS = 5000
+export const SWAP_FADE_MS = 400
 
 /**
  * Picks the next swap: a random cell (never the one just swapped, so the eye
