@@ -57,13 +57,15 @@ export function HeroSection() {
           <div aria-hidden className='h-grid-2 md:h-grid-3 lg:h-(--hero-gap)' />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right);
-              stacked text-first on phones. Side by side, the text column and the
-              drawing's ink sit 28px in from the corner marks, which reads level
+              stacked text-first on phones. Side by side, the drawing's ink sits 28px
+              in from the corner mark, and so does the text column once the nav
+              shows in full (lg; under it, with the menu button, the text is not
+              inset), which reads level
               with the headline's 24px once its glyph spacing is counted.
               Stacked, neither is inset, the text centres and the button runs
               full width. */}
           <div className='flex flex-col gap-grid-2 md:flex-row md:items-start md:gap-grid-2 lg:gap-grid-3'>
-            <div className='flex flex-col gap-8 text-center md:flex-1 md:pl-7 md:text-left'>
+            <div className='flex flex-col gap-8 text-center md:flex-1 md:text-left lg:pl-7'>
               <div
                 className='hero-reveal flex gap-4 self-center md:self-start'
                 style={{ animationDelay: '0.85s' }}
