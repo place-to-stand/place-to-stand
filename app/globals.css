@@ -44,9 +44,9 @@
 /* Fonts reference next/font variables set on <html>, so they must be inlined
    at the point of use rather than resolved against :root. */
 @theme inline {
-  --font-display: var(--font-bebas-neue);
   --font-logo: var(--font-space-grotesk);
   --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
   --font-headline: var(--font-space-grotesk);
 }
 
@@ -844,12 +844,12 @@ html {
 
 @media (hover: hover) {
   .group:hover .logo-hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
   }
 }
 
 .group:focus-visible .logo-hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 @keyframes logo-scan-line {
