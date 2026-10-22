@@ -2,7 +2,7 @@
 export const LOGO_SLOTS = 10
 
 /** Cells showing at each width: always two rows, two across on phones, three
- * from 640px wide, five on laptops. Must match the grid classes and the
+ * from 576px wide, five on laptops. Must match the grid classes and the
  * `slotVisibility` classes in client-logo-wall.tsx. */
 export const VISIBLE_SLOTS = { phone: 4, tablet: 6, laptop: 10 } as const
 

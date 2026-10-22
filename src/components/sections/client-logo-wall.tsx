@@ -17,9 +17,11 @@ import {
  * seconds blurs one logo away and scans in a client that isn't showing, so the
  * whole roster gets seen without a second row of logos.
  *
- * It always shows two rows: two across on phones, three from 640px, five on
- * laptops (where the cells also grow from 48px to 72px tall, so tablets keep
- * the phone logo size). The extra cells are hidden with CSS, and swaps only touch the
+ * It always shows two rows: two across on phones, three from 576px, five on
+ * laptops. Cell height (and so logo size) follows the window width, from 44px
+ * up to 72px, so it changes smoothly instead of jumping at each breakpoint;
+ * wide logos are also held to their cell's width. The extra cells are hidden
+ * with CSS, and swaps only touch the
  * cells that show, so the whole roster still comes round at every width.
  *
  * Swaps stop while the grid is off screen, while the tab is hidden, and for
@@ -94,7 +96,7 @@ export function ClientLogoWall() {
     // slotVisibility). Phones halve the row gap.
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-1 sm:grid-cols-3 lg:grid-cols-5 lg:gap-grid-2'
+      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-1 min-[36rem]:grid-cols-3 lg:grid-cols-5 lg:gap-grid-2'
     >
       {shown.map((index, slot) => (
         <LogoCell
@@ -116,7 +118,7 @@ export function ClientLogoWall() {
 /** Hides the cells past the second row: 4 show on phones, 6 on tablets. */
 function slotVisibility(slot: number): string {
   if (slot >= VISIBLE_SLOTS.tablet) return 'hidden lg:flex'
-  if (slot >= VISIBLE_SLOTS.phone) return 'hidden sm:flex'
+  if (slot >= VISIBLE_SLOTS.phone) return 'hidden min-[36rem]:flex'
   return ''
 }
 
@@ -124,7 +126,7 @@ function slotVisibility(slot: number): string {
 function visibleSlots(): number {
   if (window.matchMedia('(min-width: 64rem)').matches)
     return VISIBLE_SLOTS.laptop
-  if (window.matchMedia('(min-width: 40rem)').matches)
+  if (window.matchMedia('(min-width: 36rem)').matches)
     return VISIBLE_SLOTS.tablet
   return VISIBLE_SLOTS.phone
 }
@@ -161,7 +163,7 @@ function LogoCell({
       onPointerLeave={onRelease}
       onFocus={onHold}
       onBlur={onRelease}
-      className={`group relative flex h-grid-2 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 lg:h-grid-3 ${className ?? ''}`}
+      className={`group relative flex h-[clamp(2.75rem,6.5vw,4.5rem)] items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 ${className ?? ''}`}
     >
       {/* Keyed by client so a swap remounts it and replays the scan-in. */}
       <span

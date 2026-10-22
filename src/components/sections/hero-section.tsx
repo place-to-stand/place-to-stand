@@ -85,7 +85,7 @@ export function HeroSection() {
                     <strong className='font-semibold text-text'>
                       free audit
                     </strong>{' '}
-                    to see where custom software fits for your business.
+                    to see where custom software fits in your business.
                   </p>
                 </div>
               </div>
