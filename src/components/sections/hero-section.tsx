@@ -99,12 +99,12 @@ export function HeroSection() {
                 Tablets and up: centered in the right column, with extra right margin
                 so it doesn't press against the page edge. On laptops its width follows the
                 window height (minus the headline, which shrinks on short screens, the spacing,
-                and 72px kept free below),
+                and 48px kept free below, matching the side margin),
                 so short screens still show the whole drawing, database included.
                 On laptops it also rises 48px into the gap above
                 so it breaks the line the text sits on. */}
             <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:-mt-grid-2 lg:pr-grid-2'>
-              <HeroGraphic className='w-full max-w-md md:max-w-none lg:max-w-[clamp(20rem,calc((100svh-17rem-2.64*min(7vw,11svh,6.5rem))*1.44),100%)]' />
+              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((100svh-15.5rem-2.64*min(7vw,11svh,6.5rem))*1.44),100%)]' />
             </div>
           </div>
         </div>
