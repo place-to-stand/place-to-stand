@@ -24,9 +24,9 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-import { clients, logoToneClass } from '@/src/lib/clients'
 import { team } from '@/src/lib/team'
 import { type Service, services } from '@/src/lib/services'
+import { AuditLogoMarquee } from './audit-logo-marquee'
 
 interface AuditLandingProps {
   onStart: (location: string) => void
@@ -79,9 +79,6 @@ const AUDIT_COVERS = [
       'Specific services matched to your answers, not a generic pitch.',
   },
 ]
-
-/** Trusted-by strip uses top 6 clients for a compact row. */
-const FEATURED_CLIENTS = clients.slice(0, 6)
 
 /** Maps general service icon names to lucide components. */
 const SERVICE_ICONS: Record<string, LucideIcon> = {
@@ -247,28 +244,9 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       <Reveal index={1} className='mt-grid-4'>
         <div className='flex flex-col gap-grid-1'>
           <span className='bp-label font-mono'>Trusted by</span>
-          <div className='relative border border-border p-grid-1'>
+          <div className='relative border border-border py-grid-1'>
             <BlueprintCorners size={12} />
-            <div className='grid grid-cols-3 gap-grid-1 md:grid-cols-6'>
-              {FEATURED_CLIENTS.map(client => (
-                <div
-                  key={client.title}
-                  className='flex h-grid-2 items-center justify-center opacity-80 md:h-grid-3'
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={client.logo}
-                    alt={`${client.title} logo`}
-                    loading='lazy'
-                    decoding='async'
-                    style={{
-                      maxHeight: `${(client.logoScale ?? 1) * 100}%`,
-                    }}
-                    className={`w-auto max-w-full object-contain ${logoToneClass(client)}`}
-                  />
-                </div>
-              ))}
-            </div>
+            <AuditLogoMarquee />
           </div>
         </div>
       </Reveal>

@@ -14,4 +14,5 @@ export type NavLink = (typeof NAV_LINKS)[number]
  *  of NAV_LINKS: it's a utility link, not a marketing page. Points straight at
  *  the sign-in page because the portal root redirects there, and crawlers flag
  *  every page that links to a redirect. Render it with rel='nofollow'. */
-export const CLIENT_PORTAL_URL = 'https://clients.placetostandagency.com/sign-in'
+export const CLIENT_PORTAL_URL =
+  'https://clients.placetostandagency.com/sign-in'

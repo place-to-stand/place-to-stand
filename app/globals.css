@@ -808,3 +808,53 @@ html {
     animation-delay: 0s !important;
   }
 }
+
+/* Client logo wall swap (client-logo-wall.tsx): the old logo blurs away, then
+   the new one is scanned in left to right behind a thin accent line. */
+.logo-swap-out {
+  opacity: 0;
+  filter: blur(6px);
+  transform: scale(0.96);
+}
+
+.logo-swap-in {
+  animation: logo-scan-in 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.logo-swap-line {
+  animation: logo-scan-line 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+@keyframes logo-scan-in {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes logo-scan-line {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-swap-in,
+  .logo-swap-line {
+    animation: none;
+  }
+  .logo-swap-line {
+    display: none;
+  }
+}
