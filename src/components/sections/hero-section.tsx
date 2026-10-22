@@ -9,14 +9,13 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden lg:landscape:min-h-[min(100svh,67.5rem)]'
+      className='relative flex flex-col overflow-hidden lg:min-h-[min(100svh,67.5rem)]'
     >
       <div className='mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 pb-grid-2 md:pb-grid-3 lg:px-12 lg:pt-grid-5 lg:pb-grid-4'>
         {/* When the screen is taller than the content, spare space first opens
             the gap under the headline (the spacer below, up to 160px). The hero
             stops growing at 1080px, just past a 16" MacBook Pro window, so tall
-            screens show the next section instead of empty space. Windows taller
-            than wide skip the fill and use the full 160px gap, so it never shrinks.
+            screens show the next section instead of empty space.
             Below lg the hero does not fill the screen: headline, the text and
             drawing row, and the bottom edge sit one even step apart (48px on
             phones, 72px on tablets). */}
@@ -52,7 +51,7 @@ export function HeroSection() {
 
           <div
             aria-hidden
-            className='h-grid-2 md:h-grid-3 lg:h-auto lg:max-h-40 lg:min-h-grid-4 lg:flex-1 lg:portrait:h-40 lg:portrait:flex-none'
+            className='h-grid-2 md:h-grid-3 lg:h-auto lg:max-h-40 lg:min-h-grid-4 lg:flex-1'
           />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right);
