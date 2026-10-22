@@ -141,6 +141,7 @@ export const clients: Client[] = [
     image: '/work-jeremy-turner.png',
     logo: '/logos/jeremy-turner.svg',
     logoScale: 0.39,
+    logoNudge: 5,
     description:
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
@@ -149,7 +150,7 @@ export const clients: Client[] = [
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club.png',
     logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.63,
+    logoScale: 0.68,
     description:
       'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
   },
