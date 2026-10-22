@@ -834,10 +834,11 @@ html {
   }
 }
 
-/* Logo wall hover: a small scale that overshoots a touch and settles
-   (back-out curve). Its own wrapper, so it never fights the swap fade. */
+/* Logo wall hover: a small scale that starts quick and glides to a stop
+   (ease-out quint, no overshoot). Its own wrapper, so it never fights the
+   swap fade. */
 .logo-hover {
-  transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) {
