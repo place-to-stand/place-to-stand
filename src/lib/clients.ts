@@ -11,6 +11,9 @@ export type Client = {
    * row; square or heavy marks are knocked back so every logo carries the same
    * optical weight rather than the same pixel height. Defaults to 1. */
   logoScale?: number
+  /** Site path of this client's case study. When set, the card on /clients
+   * opens the case study instead of the client's own site. */
+  caseStudy?: string
 }
 
 export const clients: Client[] = [
@@ -19,6 +22,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
+    caseStudy: '/clients/heatonist',
     logoScale: 0.7,
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
@@ -54,6 +58,7 @@ export const clients: Client[] = [
     href: 'https://heatonist.com',
     image: '/work-heatonist.png',
     logo: '/logos/heatonist.svg',
+    caseStudy: '/clients/heatonist',
     description:
       "A curated marketplace for the world's best small-batch hot sauces.",
   },
