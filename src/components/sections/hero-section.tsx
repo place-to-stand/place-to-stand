@@ -110,14 +110,15 @@ export function HeroSection() {
                 On laptops it also rises by 8% of its own height into the gap above
                 so it breaks the line the text sits on. */}
             <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:pr-grid-2'>
-              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-3*var(--hero-gap)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.565),100%)] lg:-translate-y-[8%]' />
+              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-2.6*var(--hero-gap)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.565),100%)] lg:-translate-y-[8%]' />
             </div>
           </div>
 
-          {/* The drawing's 8% lift already leaves about 28px under it. */}
+          {/* The space under the drawing is 60% of the gap; its 8% lift already
+              leaves about 28px of that. */}
           <div
             aria-hidden
-            className='hidden lg:block lg:min-h-[calc(var(--hero-gap)-1.75rem)] lg:flex-1'
+            className='hidden lg:block lg:min-h-[calc(0.6*var(--hero-gap)-1.75rem)] lg:flex-[0.6_1_0%]'
           />
         </div>
       </div>
