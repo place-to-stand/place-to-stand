@@ -17,6 +17,14 @@ export type Client = {
   logoTone?: 'grey'
 }
 
+/** Tailwind filter that renders a client mark white (or grey, per `logoTone`)
+ * wherever logos appear, so brand colors never fight the site palette. */
+export function logoToneClass(client: Client): string {
+  return client.logoTone === 'grey'
+    ? 'brightness-150 grayscale'
+    : 'brightness-0 invert'
+}
+
 export const clients: Client[] = [
   {
     title: 'Hot Ones',

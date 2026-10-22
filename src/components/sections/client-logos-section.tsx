@@ -2,7 +2,7 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { clients } from '@/src/lib/clients'
+import { clients, logoToneClass } from '@/src/lib/clients'
 
 /**
  * Homepage proof bar — the client roster, directly under the hero.
@@ -59,11 +59,7 @@ export function ClientLogosSection() {
                 loading='lazy'
                 decoding='async'
                 style={{ maxHeight: `${(client.logoScale ?? 1) * 100}%` }}
-                className={`w-auto max-w-full object-contain ${
-                  client.logoTone === 'grey'
-                    ? 'brightness-150 grayscale'
-                    : 'brightness-0 invert'
-                }`}
+                className={`w-auto max-w-full object-contain ${logoToneClass(client)}`}
               />
             </a>
           ))}

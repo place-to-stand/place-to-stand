@@ -24,7 +24,7 @@ import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
-import { clients } from '@/src/lib/clients'
+import { clients, logoToneClass } from '@/src/lib/clients'
 import { team } from '@/src/lib/team'
 import { type Service, services } from '@/src/lib/services'
 
@@ -132,7 +132,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
         <span className='flex items-center gap-3 px-grid-1 py-5'>
           <span
             className={cn(
-              'flex h-8 w-8 shrink-0 items-center justify-center border bg-bg text-accent transition-colors',
+              'flex h-8 w-8 shrink-0 items-center justify-center border bg-bg text-text transition-colors',
               isOpen
                 ? 'border-accent'
                 : 'border-border group-hover:border-accent'
@@ -235,7 +235,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
           <div className='mt-2 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-base text-text-muted'>
             {HIGHLIGHTS.map(({ icon: Icon, label }) => (
               <span key={label} className='inline-flex items-center gap-1.5'>
-                <Icon className='h-4 w-4 text-accent' />
+                <Icon className='h-4 w-4 text-text' />
                 {label}
               </span>
             ))}
@@ -264,7 +264,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                     style={{
                       maxHeight: `${(client.logoScale ?? 1) * 100}%`,
                     }}
-                    className='w-auto max-w-full object-contain'
+                    className={`w-auto max-w-full object-contain ${logoToneClass(client)}`}
                   />
                 </div>
               ))}
@@ -350,7 +350,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                 className='relative flex flex-col gap-3 border border-border bg-bg-card p-5 transition-colors hover:border-border-light'
               >
                 <BlueprintCorners size={12} />
-                <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-accent-muted text-accent'>
+                <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
                   <Icon className='h-5 w-5' />
                 </div>
                 <h3 className='font-headline text-base font-semibold tracking-tight text-text uppercase'>

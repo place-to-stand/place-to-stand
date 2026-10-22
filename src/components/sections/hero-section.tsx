@@ -11,15 +11,15 @@ export function HeroSection() {
       data-pts-hero
       className='relative flex flex-col overflow-hidden'
     >
-      <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 pt-grid-4 pb-16 md:gap-10 md:pb-24 lg:px-12 lg:pt-grid-6'>
+      <div className='mx-auto flex w-full max-w-content flex-col gap-8 px-6 pt-grid-3 pb-grid-3 md:pb-grid-4 lg:px-12 lg:pt-grid-3'>
         {/* Main headline block — bottom-aligned */}
-        <div className='flex flex-col gap-8 md:gap-10'>
+        <div className='flex flex-col gap-8'>
           {/* Headline with blueprint corner marks */}
           <div className='hero-frame relative w-full'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
-            <h1 className='max-w-5xl py-4 pl-3 font-headline text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
+            <h1 className='py-3 pl-3 font-headline text-[clamp(2.5rem,5.5vw,5.5rem)] leading-[0.9] font-bold tracking-tight text-text md:pl-6'>
               <span
                 className='hero-line block'
                 style={{ '--hero-delay': '0s' } as CSSProperties}
@@ -82,8 +82,9 @@ export function HeroSection() {
 
             {/* Hero comparison set piece — turn this (clutter) into this (one app).
                 On mobile it sits between the headline and the subtext (order-first);
-                on desktop it stays in the right column. */}
-            <HeroGraphic className='order-first w-full lg:order-none lg:flex-1' />
+                on desktop it stays in the right column. Capped in width below lg
+                and in height above it, so it never pushes the CTA below the fold. */}
+            <HeroGraphic className='order-first mx-auto w-full max-w-md lg:order-none lg:max-h-[min(24rem,42vh)] lg:max-w-none lg:flex-1' />
           </div>
         </div>
       </div>

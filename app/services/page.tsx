@@ -41,7 +41,7 @@ export default function ServicesPage() {
                 }`}
               >
                 <BlueprintCorners />
-                {Icon && <Icon className='h-5 w-5 text-accent' aria-hidden />}
+                {Icon && <Icon className='h-5 w-5 text-text' aria-hidden />}
                 <h2 className='font-headline text-2xl text-text uppercase'>
                   {service.title}
                 </h2>

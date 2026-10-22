@@ -311,7 +311,7 @@ export function ResultsView({
                 >
                   <BlueprintCorners size={12} />
                   <div className='flex items-center gap-3'>
-                    <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-accent-muted text-accent'>
+                    <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
                       <Icon className='h-5 w-5' />
                     </div>
                     <span className='ml-auto border border-border px-2 py-0.5 font-mono text-sm font-semibold text-text-muted'>
