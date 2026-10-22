@@ -28,12 +28,13 @@ export function HeroSection() {
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
-              shrinking and the hero runs off the bottom of the screen. */}
+              shrinking and the hero runs off the bottom of the screen. Stacked, it centres with
+              the text below, inset 12px on both sides. */}
           <div className='hero-frame relative w-full'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
-            <h1 className='py-4 pl-3 font-headline text-[clamp(2.25rem,min(7vw,max(11svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
+            <h1 className='px-3 py-4 text-center font-headline text-[clamp(2.25rem,min(7vw,max(11svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pr-0 md:pl-6 md:text-left'>
               <span
                 className='hero-line block'
                 style={{ '--hero-delay': '0s' } as CSSProperties}
