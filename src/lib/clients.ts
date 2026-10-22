@@ -107,6 +107,12 @@ export const clients: Client[] = [
       'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
   {
+    title: 'Safety Knights',
+    href: 'https://safetyknights.com',
+    logo: '/logos/safety-knights.svg',
+    logoScale: 0.88,
+  },
+  {
     title: 'Jeremy Turner',
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner.png',
@@ -122,30 +128,6 @@ export const clients: Client[] = [
     logoScale: 0.91,
   },
   {
-    title: 'Safety Knights',
-    href: 'https://safetyknights.com',
-    logo: '/logos/safety-knights.svg',
-    logoScale: 0.95,
-  },
-  {
-    title: 'The Rounds',
-    href: 'https://www.theroundsnyc.com',
-    logo: '/logos/the-rounds.png',
-    logoScale: 0.44,
-  },
-  {
-    title: 'Echo & Wave',
-    href: 'https://echoandwave.com',
-    logo: '/logos/echo-and-wave.svg',
-    logoScale: 0.32,
-  },
-  {
-    title: 'Small Isles',
-    href: 'https://smallislesmusic.com',
-    logo: '/logos/small-isles.svg',
-    logoScale: 0.3,
-  },
-  {
     title: 'Officina del Bere 1397',
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397.png',
@@ -155,13 +137,10 @@ export const clients: Client[] = [
       'A specialty shop offering elegant, functional wine and bar accessories.',
   },
   {
-    title: 'The Good for Nothings Club',
-    href: 'https://www.thegoodfornothings.club',
-    image: '/work-the-good-for-nothings-club.png',
-    logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.57,
-    description:
-      'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
+    title: 'The Rounds',
+    href: 'https://www.theroundsnyc.com',
+    logo: '/logos/the-rounds.png',
+    logoScale: 0.36,
   },
   {
     title: 'Lifepacks',
@@ -173,10 +152,31 @@ export const clients: Client[] = [
       'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
   },
   {
+    title: 'The Good for Nothings Club',
+    href: 'https://www.thegoodfornothings.club',
+    image: '/work-the-good-for-nothings-club.png',
+    logo: '/logos/the-good-for-nothings-club.svg',
+    logoScale: 0.57,
+    description:
+      'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
+  },
+  {
+    title: 'Echo & Wave',
+    href: 'https://echoandwave.com',
+    logo: '/logos/echo-and-wave.svg',
+    logoScale: 0.28,
+  },
+  {
+    title: 'Small Isles',
+    href: 'https://smallislesmusic.com',
+    logo: '/logos/small-isles.svg',
+    logoScale: 0.26,
+  },
+  {
     title: 'so many cults',
     href: 'https://somanycults.com',
     logo: '/logos/so-many-cults.svg',
-    logoScale: 0.32,
+    logoScale: 0.3,
   },
 ]
 
