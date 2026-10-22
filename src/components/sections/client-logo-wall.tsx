@@ -18,7 +18,7 @@ import {
  * whole roster gets seen without a second row of logos.
  *
  * It always shows two rows: two across on phones, three from 576px, four
- * from 800px, five on laptops. Cell height (and so logo size) follows the window width, from 44px
+ * from 736px, five on laptops. Cell height (and so logo size) follows the window width, from 44px
  * up to 72px, so it changes smoothly instead of jumping at each breakpoint;
  * wide logos are also held to their cell's width. The extra cells are hidden
  * with CSS, and swaps only touch the
@@ -96,12 +96,13 @@ export function ClientLogoWall() {
     // slotVisibility). Phones halve the row gap.
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-1 min-[36rem]:grid-cols-3 min-[50rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
+      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-1 min-[36rem]:grid-cols-3 min-[46rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
     >
       {shown.map((index, slot) => (
         <LogoCell
           key={slot}
           className={slotVisibility(slot)}
+          align={slot % 2 === 0 ? 'end' : 'start'}
           client={clients[index]}
           leaving={fading === slot}
           entering={swapped.has(slot)}
@@ -118,7 +119,7 @@ export function ClientLogoWall() {
 /** Hides the cells past the second row: 4 on phones, then 6, 8 and 10. */
 function slotVisibility(slot: number): string {
   if (slot >= VISIBLE_SLOTS.wideTablet) return 'hidden lg:flex'
-  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[50rem]:flex'
+  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[46rem]:flex'
   if (slot >= VISIBLE_SLOTS.phone) return 'hidden min-[36rem]:flex'
   return ''
 }
@@ -127,7 +128,7 @@ function slotVisibility(slot: number): string {
 function visibleSlots(): number {
   if (window.matchMedia('(min-width: 64rem)').matches)
     return VISIBLE_SLOTS.laptop
-  if (window.matchMedia('(min-width: 50rem)').matches)
+  if (window.matchMedia('(min-width: 46rem)').matches)
     return VISIBLE_SLOTS.wideTablet
   if (window.matchMedia('(min-width: 36rem)').matches)
     return VISIBLE_SLOTS.tablet
@@ -141,8 +142,17 @@ function initialSlots(): number[] {
   )
 }
 
+/** Two across, each logo leans toward the middle so the pair reads as one
+ * group instead of two logos at the far edges; from three across they centre. */
+const TWO_UP_ALIGN = {
+  end: 'justify-end origin-right min-[36rem]:justify-center min-[36rem]:origin-center',
+  start:
+    'justify-start origin-left min-[36rem]:justify-center min-[36rem]:origin-center',
+} as const
+
 function LogoCell({
   className,
+  align,
   client,
   leaving,
   entering,
@@ -150,6 +160,7 @@ function LogoCell({
   onRelease,
 }: {
   className?: string
+  align: keyof typeof TWO_UP_ALIGN
   client: Client
   leaving: boolean
   entering: boolean
@@ -172,13 +183,15 @@ function LogoCell({
       <span
         key={client.title}
         style={{ transitionDuration: `${SWAP_FADE_MS}ms` }}
-        className={`flex h-full w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
+        className={`flex h-full w-full items-center ${TWO_UP_ALIGN[align]} transition-[opacity,filter,transform] ease-out ${
           leaving ? 'logo-swap-out' : 'opacity-80 group-hover:opacity-100'
         } ${entering ? 'logo-swap-in' : ''}`}
       >
         {/* Plain <img>: static, already-optimised local assets, and next/image
             would need dangerouslyAllowSVG for the vector marks. */}
-        <span className='logo-hover flex h-full w-full items-center justify-center'>
+        <span
+          className={`logo-hover flex h-full w-full items-center ${TWO_UP_ALIGN[align]}`}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={client.logo}
