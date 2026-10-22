@@ -123,7 +123,7 @@ export const clients: Client[] = [
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397.png',
     logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.69,
+    logoScale: 0.74,
     logoNudge: 2.5,
     description:
       'A specialty shop offering elegant, functional wine and bar accessories.',
