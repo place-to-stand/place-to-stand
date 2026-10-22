@@ -37,7 +37,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
-    logoScale: 0.5,
+    logoScale: 0.65,
     logoTone: 'grey',
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
@@ -47,7 +47,7 @@ export const clients: Client[] = [
     href: 'https://blakebrownbeauty.com',
     image: '/work-blake-brown-beauty.png',
     logo: '/logos/blake-brown-beauty.svg',
-    logoScale: 0.41,
+    logoScale: 0.53,
     description:
       'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
@@ -56,7 +56,7 @@ export const clients: Client[] = [
     href: 'https://florencebymillsbeauty.com',
     image: '/work-florence-by-mills-beauty.png',
     logo: '/logos/florence-by-mills-beauty.png',
-    logoScale: 0.48,
+    logoScale: 0.62,
     description:
       'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
@@ -65,7 +65,7 @@ export const clients: Client[] = [
     href: 'https://heatonist.com',
     image: '/work-heatonist.png',
     logo: '/logos/heatonist.svg',
-    logoScale: 0.37,
+    logoScale: 0.48,
     description:
       "A curated marketplace for the world's best small-batch hot sauces.",
   },
@@ -73,21 +73,21 @@ export const clients: Client[] = [
     title: 'Betsy & Adam',
     href: 'https://www.betsyandadam.com',
     logo: '/logos/betsy-and-adam.png',
-    logoScale: 0.41,
+    logoScale: 0.53,
     description: 'Evening and special occasion dresses.',
   },
   {
     title: 'Xscape Evenings',
     href: 'https://xscapeevenings.com',
     logo: '/logos/xscape-evenings.png',
-    logoScale: 0.33,
+    logoScale: 0.43,
     description: 'Eveningwear and occasion dresses.',
   },
   {
     title: 'Blondie Nites',
     href: 'https://blondienites.com',
     logo: '/logos/blondie-nites.png',
-    logoScale: 0.3,
+    logoScale: 0.39,
     description: 'Party and prom dresses.',
   },
   {
@@ -95,7 +95,7 @@ export const clients: Client[] = [
     href: 'https://9pointstudios.com',
     image: '/work-9-point-studios.png',
     logo: '/logos/9-point-studios.svg',
-    logoScale: 0.46,
+    logoScale: 0.6,
     description:
       'A world-class recording and video production facility for creative artists.',
   },
@@ -104,7 +104,7 @@ export const clients: Client[] = [
     href: 'https://www.gtbsolarexchange.com',
     image: '/work-greenwatt-usa.png',
     logo: '/logos/greenwatt-usa.png',
-    logoScale: 0.5,
+    logoScale: 0.65,
     description:
       'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
@@ -113,7 +113,7 @@ export const clients: Client[] = [
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner.png',
     logo: '/logos/jeremy-turner-studio.svg',
-    logoScale: 0.23,
+    logoScale: 0.3,
     description:
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
@@ -121,7 +121,7 @@ export const clients: Client[] = [
     title: 'Up The Wall',
     href: 'https://upthewall.co',
     logo: '/logos/up-the-wall.svg',
-    logoScale: 0.7,
+    logoScale: 0.91,
     description: 'Print-on-demand order fulfillment for Shopify stores.',
   },
   {
@@ -129,7 +129,7 @@ export const clients: Client[] = [
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397.png',
     logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.6,
+    logoScale: 0.78,
     description:
       'A specialty shop offering elegant, functional wine and bar accessories.',
   },
@@ -138,7 +138,7 @@ export const clients: Client[] = [
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club.png',
     logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.44,
+    logoScale: 0.57,
     description:
       'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
   },
@@ -147,7 +147,7 @@ export const clients: Client[] = [
     href: 'https://www.lifepacks.co',
     image: '/work-lifepacks.jpg',
     logo: '/logos/lifepacks.png',
-    logoScale: 0.33,
+    logoScale: 0.43,
     description:
       'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
   },

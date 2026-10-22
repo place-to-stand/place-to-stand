@@ -3,7 +3,7 @@ export const LOGO_SLOTS = 10
 
 /** Time between swaps, and how long the old logo takes to blur away. The new
  * logo's scan-in runs 900ms (`.logo-swap-in` in app/globals.css). */
-export const SWAP_INTERVAL_MS = 5000
+export const SWAP_INTERVAL_MS = 8000
 export const SWAP_FADE_MS = 400
 
 /**
