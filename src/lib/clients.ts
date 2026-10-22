@@ -1,7 +1,9 @@
 export type Client = {
   title: string
   href: string
-  image: string
+  /** Screenshot for the /clients page; clients without one only appear in
+   * the homepage logo grid. */
+  image?: string
   description: string
   /** Brand logo on a transparent ground, for the homepage logo grid. Brands
    * that only publish a dark-on-light mark use their reversed lockup so they
