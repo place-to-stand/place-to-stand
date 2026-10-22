@@ -21,12 +21,14 @@ export function HeroSection() {
             drawing row, and the bottom edge sit one even step apart (48px on
             phones, 72px on tablets). */}
         <div className='flex flex-1 flex-col justify-center'>
-          {/* Headline with blueprint corner marks */}
+          {/* Headline with blueprint corner marks. Its size follows the window
+              width, but short laptop windows (under about 945px tall) cap it by
+              height so the drawing below has room. */}
           <div className='hero-frame relative w-full'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
-            <h1 className='py-4 pl-3 font-headline text-[clamp(2.25rem,7vw,6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
+            <h1 className='py-4 pl-3 font-headline text-[clamp(2.25rem,min(7vw,11svh),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pl-6'>
               <span
                 className='hero-line block'
                 style={{ '--hero-delay': '0s' } as CSSProperties}
@@ -97,10 +99,12 @@ export function HeroSection() {
                 Phones: below the button, so the button stays near the top.
                 Tablets and up: centered in the right column, with extra right margin
                 so it doesn't press against the page edge. On laptops its width follows the
-                window height (about 33rem of headline and spacing sit above it, plus 72px kept free below),
-                so short screens still show the whole drawing, database included. */}
-            <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:pr-grid-2'>
-              <HeroGraphic className='w-full max-w-md md:max-w-none lg:max-w-[clamp(20rem,calc((100svh-37.5rem)*1.44),100%)]' />
+                window height (minus what sits above it, plus about 72px kept free below),
+                so short screens still show the whole drawing, database included.
+                It also rises into the gap above (24px on tablets, 48px on laptops)
+                so it breaks the line the text sits on. */}
+            <div className='md:-mt-grid-1 md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:-mt-grid-2 lg:pr-grid-2'>
+              <HeroGraphic className='w-full max-w-md md:max-w-none lg:max-w-[clamp(20rem,calc((100svh-32.5rem)*1.44),100%)]' />
             </div>
           </div>
         </div>
