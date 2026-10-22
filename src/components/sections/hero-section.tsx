@@ -44,7 +44,10 @@ export function HeroSection() {
             </h1>
           </div>
 
-          <div aria-hidden className='max-h-40 min-h-8 flex-1 md:min-h-10' />
+          <div
+            aria-hidden
+            className='max-h-40 min-h-8 flex-1 md:min-h-10 lg:min-h-grid-4'
+          />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right) */}
           <div className='flex flex-col gap-grid-2 lg:flex-row lg:items-start lg:gap-grid-3'>
@@ -53,15 +56,15 @@ export function HeroSection() {
                 className='hero-reveal flex gap-4 self-start'
                 style={{ animationDelay: '0.85s' }}
               >
-                <div className='flex max-w-lg flex-col gap-3'>
-                  <p className='text-base leading-relaxed text-text md:text-lg'>
+                <div className='flex max-w-lg flex-col gap-3 lg:max-w-xl'>
+                  <p className='text-base leading-relaxed text-text md:text-lg lg:text-xl'>
                     We build software{' '}
                     <strong className='font-semibold'>
                       shaped to how your business actually runs.
                     </strong>{' '}
                     No more juggling a stack of bloated SaaS dashboards.
                   </p>
-                  <p className='text-base leading-relaxed text-text-muted md:text-lg'>
+                  <p className='text-base leading-relaxed text-text-muted md:text-lg lg:text-xl'>
                     Take the{' '}
                     <strong className='font-semibold text-text'>
                       free audit
