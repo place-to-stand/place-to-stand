@@ -110,7 +110,7 @@ export const clients: Client[] = [
     title: 'Safety Knights',
     href: 'https://safetyknights.com',
     logo: '/logos/safety-knights.svg',
-    logoScale: 0.88,
+    logoScale: 0.68,
   },
   {
     title: 'Jeremy Turner',
