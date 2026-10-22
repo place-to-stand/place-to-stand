@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { clients, logoToneClass, type Client } from '@/src/lib/clients'
 import {
   LOGO_SLOTS,
+  VISIBLE_SLOTS,
   SWAP_INTERVAL_MS,
   SWAP_FADE_MS,
   FIRST_SWAP_DELAY_MS,
@@ -15,6 +16,10 @@ import {
  * list in src/lib/clients.ts is ordered biggest names first), then every few
  * seconds blurs one logo away and scans in a client that isn't showing, so the
  * whole roster gets seen without a second row of logos.
+ *
+ * It always shows two rows: two across on phones, three on tablets, five on
+ * laptops. The extra cells are hidden with CSS, and swaps only touch the
+ * cells that show, so the whole roster still comes round at every width.
  *
  * Swaps stop while the grid is off screen, while the tab is hidden, and for
  * anyone who asks for reduced motion.
@@ -49,8 +54,13 @@ export function ClientLogoWall() {
       if (!visible || document.hidden || nextAt === null) return
       if (Date.now() < nextAt) return
       nextAt = Date.now() + SWAP_INTERVAL_MS
+      const showing = visibleSlots()
+      // A cell that just went out of view (window narrowed) can't be the
+      // "last swapped" one any more.
+      if (lastSlot.current !== null && lastSlot.current >= showing)
+        lastSlot.current = null
       const swap = nextSwap(
-        shownRef.current,
+        shownRef.current.slice(0, showing),
         clients.length,
         lastSlot.current,
         held.current
@@ -59,6 +69,10 @@ export function ClientLogoWall() {
       setFading(swap.slot)
       fadeTimer = setTimeout(() => {
         const next = [...shownRef.current]
+        // The incoming client may sit in a hidden cell; hand that cell the
+        // outgoing client so no logo shows twice if the window widens.
+        const hiddenAt = next.indexOf(swap.client)
+        if (hiddenAt !== -1) next[hiddenAt] = next[swap.slot]
         next[swap.slot] = swap.client
         shownRef.current = next
         setShown(next)
@@ -75,16 +89,16 @@ export function ClientLogoWall() {
   }, [])
 
   return (
-    // 2 and 5 both divide the 10 cells evenly; a 3- or 4-up step would strand a
-    // lone logo on the last row. Mobile halves the row gap so the grid doesn't
-    // eat a whole phone screen.
+    // Two rows at every width; cells past the second row are hidden (see
+    // slotVisibility). Phones halve the row gap.
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-1 md:grid-cols-5 md:gap-grid-2'
+      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-1 md:grid-cols-3 md:gap-grid-2 lg:grid-cols-5'
     >
       {shown.map((index, slot) => (
         <LogoCell
           key={slot}
+          className={slotVisibility(slot)}
           client={clients[index]}
           leaving={fading === slot}
           entering={swapped.has(slot)}
@@ -98,6 +112,22 @@ export function ClientLogoWall() {
   )
 }
 
+/** Hides the cells past the second row: 4 show on phones, 6 on tablets. */
+function slotVisibility(slot: number): string {
+  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden lg:flex'
+  if (slot >= VISIBLE_SLOTS.phone) return 'hidden md:flex'
+  return ''
+}
+
+/** How many cells show at the current width (matches the md and lg breakpoints). */
+function visibleSlots(): number {
+  if (window.matchMedia('(min-width: 64rem)').matches)
+    return VISIBLE_SLOTS.laptop
+  if (window.matchMedia('(min-width: 48rem)').matches)
+    return VISIBLE_SLOTS.tablet
+  return VISIBLE_SLOTS.phone
+}
+
 function initialSlots(): number[] {
   return Array.from(
     { length: Math.min(LOGO_SLOTS, clients.length) },
@@ -106,12 +136,14 @@ function initialSlots(): number[] {
 }
 
 function LogoCell({
+  className,
   client,
   leaving,
   entering,
   onHold,
   onRelease,
 }: {
+  className?: string
   client: Client
   leaving: boolean
   entering: boolean
@@ -128,7 +160,7 @@ function LogoCell({
       onPointerLeave={onRelease}
       onFocus={onHold}
       onBlur={onRelease}
-      className='group relative flex h-grid-2 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 md:h-grid-3'
+      className={`group relative flex h-grid-2 items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 md:h-grid-3 ${className ?? ''}`}
     >
       {/* Keyed by client so a swap remounts it and replays the scan-in. */}
       <span
