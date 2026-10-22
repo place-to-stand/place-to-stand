@@ -60,11 +60,12 @@ export function HeroSection() {
               stacked text-first on phones. Side by side, the text column and the
               drawing's ink sit 28px in from the corner marks, which reads level
               with the headline's 24px once its glyph spacing is counted.
-              Stacked, neither is inset. */}
+              Stacked, neither is inset, the text centres and the button runs
+              full width. */}
           <div className='flex flex-col gap-grid-2 md:flex-row md:items-start md:gap-grid-2 lg:gap-grid-3'>
-            <div className='flex flex-col gap-8 md:flex-1 md:pl-7'>
+            <div className='flex flex-col gap-8 text-center md:flex-1 md:pl-7 md:text-left'>
               <div
-                className='hero-reveal flex gap-4 self-start'
+                className='hero-reveal flex gap-4 self-center md:self-start'
                 style={{ animationDelay: '0.85s' }}
               >
                 <div className='flex max-w-lg flex-col gap-3 lg:max-w-xl'>
@@ -85,10 +86,15 @@ export function HeroSection() {
                 </div>
               </div>
               <div
-                className='hero-reveal flex shrink-0 flex-col items-start gap-3'
+                className='hero-reveal flex shrink-0 flex-col items-stretch gap-3 md:items-start'
                 style={{ animationDelay: '1s' }}
               >
-                <Button asChild size='lg' variant='primaryInvert'>
+                <Button
+                  asChild
+                  size='lg'
+                  variant='primaryInvert'
+                  className='w-full md:w-auto md:min-w-72'
+                >
                   <TrackedLink href='/audit' location='hero' data-pts-hero-cta>
                     Start the free audit
                   </TrackedLink>
@@ -101,15 +107,16 @@ export function HeroSection() {
 
             {/* Hero comparison set piece — turn this (clutter) into this (one app).
                 Phones: below the button, so the button stays near the top.
-                Tablets and up: pinned right, its ink inset from the corner mark by
-                about 28px, like the text column (pr-4.5 plus the drawing's own
-                margin). On laptops its width follows the
+                Tablets and up: centred in the right column. At full width its ink
+                sits about 28px in from the corner mark, like the text column
+                (pr-4.5 plus the drawing's own margin); when short windows shrink
+                it, it stays centred in that space. On laptops its width follows the
                 window height (minus the headline, which shrinks on short screens, the spacing,
                 and one gap kept free below),
                 so short screens still show the whole drawing, database included.
                 On laptops it also rises by 8% of its own height into the gap above
                 so it breaks the line the text sits on. */}
-            <div className='md:flex md:flex-1 md:justify-end md:pr-4.5'>
+            <div className='md:flex md:flex-1 md:justify-center md:pr-4.5'>
               <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-2.6*var(--hero-gap)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.565),100%)] lg:-translate-y-[8%]' />
             </div>
           </div>
