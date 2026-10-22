@@ -29,8 +29,10 @@ export function HeroSection() {
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
               shrinking and the hero runs off the bottom of the screen. Stacked, it centres with
-              the text below, inset 12px on both sides. */}
-          <div className='hero-frame relative w-full'>
+              the text below, inset 12px on both sides. The frame sits 1px in
+              from the gutter (mx-px) because the corner marks hang 1px outside
+              it; that puts their outer edge flush with the header's logo mark. */}
+          <div className='hero-frame relative mx-px'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
