@@ -15,8 +15,8 @@ export function HeroSection() {
         {/* When the screen is taller than the content, spare space first opens
             the gap under the headline (the spacer below, up to 160px). The hero
             stops growing at 1080px, just past a 16" MacBook Pro window, so tall
-            screens show the next section instead of empty space. Upright tablets
-            skip the fill so they get the same even 96px steps.
+            screens show the next section instead of empty space. Windows taller
+            than wide skip the fill and use the full 160px gap, so it never shrinks.
             Below lg the hero does not fill the screen: headline, the text and
             drawing row, and the bottom edge sit one even step apart (48px on
             phones, 72px on tablets). */}
