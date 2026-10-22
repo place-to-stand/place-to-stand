@@ -175,17 +175,17 @@ export const clients: Client[] = [
     logoNudge: -4,
   },
   {
+    title: 'so many cults',
+    href: 'https://somanycults.com',
+    logo: '/logos/so-many-cults.svg',
+    logoScale: 0.3,
+  },
+  {
     title: 'Small Isles',
     href: 'https://smallislesmusic.com',
     logo: '/logos/small-isles.svg',
     logoScale: 0.28,
     logoNudge: -2,
-  },
-  {
-    title: 'so many cults',
-    href: 'https://somanycults.com',
-    logo: '/logos/so-many-cults.svg',
-    logoScale: 0.3,
   },
   {
     title: 'Lifepacks',
