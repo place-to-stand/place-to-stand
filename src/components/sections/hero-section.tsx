@@ -9,12 +9,13 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-svh flex-col overflow-hidden'
+      className='relative flex min-h-[min(100svh,67.5rem)] flex-col overflow-hidden'
     >
       <div className='mx-auto flex w-full max-w-content flex-1 flex-col gap-8 px-6 pt-grid-4 pb-16 md:gap-10 md:pb-24 lg:px-12 lg:pt-grid-5'>
         {/* When the screen is taller than the content, spare space first opens
-            the gap under the headline (the spacer below, up to 160px); past that
-            the whole block centers, so very tall screens don't get one huge gap. */}
+            the gap under the headline (the spacer below, up to 160px). The hero
+            stops growing at 1080px, just past a 16" MacBook Pro window, so tall
+            screens show the next section instead of empty space. */}
         <div className='flex flex-1 flex-col justify-center'>
           {/* Headline with blueprint corner marks */}
           <div className='hero-frame relative w-full'>
