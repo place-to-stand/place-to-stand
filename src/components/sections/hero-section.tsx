@@ -64,7 +64,7 @@ export function HeroSection() {
               inset), which reads level
               with the headline's 24px once its glyph spacing is counted.
               Stacked, neither is inset, the text centres and the button runs
-              full width. */}
+              full width up to 448px. */}
           <div className='flex flex-col gap-grid-2 md:flex-row md:items-start md:gap-grid-2 lg:gap-grid-3'>
             <div className='flex flex-col gap-8 text-center md:flex-1 md:text-left lg:pl-7'>
               <div
@@ -89,7 +89,7 @@ export function HeroSection() {
                 </div>
               </div>
               <div
-                className='hero-reveal flex shrink-0 flex-col items-stretch gap-3 md:items-start'
+                className='hero-reveal mx-auto flex w-full max-w-md shrink-0 flex-col items-stretch gap-3 md:mx-0 md:w-auto md:max-w-none md:items-start'
                 style={{ animationDelay: '1s' }}
               >
                 <Button

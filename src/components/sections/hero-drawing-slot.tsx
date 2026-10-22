@@ -2,12 +2,16 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
 
+/** The hero's edge inset (the text's lg:pl-7). */
+const EDGE_INSET = 28
+
 /**
  * The hero drawing's column. Side by side, it slides the drawing left so it
  * sits centred in all the space between the end of the text and the hero
- * frame's right edge, not just in its own half of the row. CSS can't do this
- * alone: the balanced description leaves its lines shorter than its box, so
- * the free space only shows once the text is laid out.
+ * frame's right edge, then one edge inset further right, instead of in its
+ * own half of the row. CSS can't do this alone: the balanced description
+ * leaves its lines shorter than its box, so the free space only shows once
+ * the text is laid out.
  *
  * It never moves the drawing right of where the layout put it (that keeps
  * its inset from the corner mark), and never closer to the text than the
@@ -36,7 +40,7 @@ export function HeroDrawingSlot({
       if (rowStyle.flexDirection !== 'row' || !drawing) return
       const textEnd = inkRight(text)
       const centre = (textEnd + frame.getBoundingClientRect().right) / 2
-      const want = centre - (drawing.left + drawing.right) / 2
+      const want = centre + EDGE_INSET - (drawing.left + drawing.right) / 2
       const furthestLeft =
         textEnd + parseFloat(rowStyle.columnGap) - drawing.left
       const shift = Math.min(0, Math.max(want, furthestLeft))
