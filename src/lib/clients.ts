@@ -107,6 +107,15 @@ export const clients: Client[] = [
       'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
   {
+    title: 'Officina del Bere 1397',
+    href: 'https://officinadelbere1397.com',
+    image: '/work-officina-del-bere-1397.png',
+    logo: '/logos/officina-del-bere-1397.png',
+    logoScale: 0.78,
+    description:
+      'A specialty shop offering elegant, functional wine and bar accessories.',
+  },
+  {
     title: 'Safety Knights',
     href: 'https://safetyknights.com',
     logo: '/logos/safety-knights.svg',
@@ -122,36 +131,6 @@ export const clients: Client[] = [
       'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
   {
-    title: 'Up The Wall',
-    href: 'https://upthewall.co',
-    logo: '/logos/up-the-wall.svg',
-    logoScale: 0.91,
-  },
-  {
-    title: 'Officina del Bere 1397',
-    href: 'https://officinadelbere1397.com',
-    image: '/work-officina-del-bere-1397.png',
-    logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.78,
-    description:
-      'A specialty shop offering elegant, functional wine and bar accessories.',
-  },
-  {
-    title: 'The Rounds',
-    href: 'https://www.theroundsnyc.com',
-    logo: '/logos/the-rounds.png',
-    logoScale: 0.36,
-  },
-  {
-    title: 'Lifepacks',
-    href: 'https://www.lifepacks.co',
-    image: '/work-lifepacks.jpg',
-    logo: '/logos/lifepacks.png',
-    logoScale: 0.38,
-    description:
-      'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
-  },
-  {
     title: 'The Good for Nothings Club',
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club.png',
@@ -159,6 +138,18 @@ export const clients: Client[] = [
     logoScale: 0.57,
     description:
       'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
+  },
+  {
+    title: 'Up The Wall',
+    href: 'https://upthewall.co',
+    logo: '/logos/up-the-wall.svg',
+    logoScale: 0.91,
+  },
+  {
+    title: 'The Rounds',
+    href: 'https://www.theroundsnyc.com',
+    logo: '/logos/the-rounds.png',
+    logoScale: 0.36,
   },
   {
     title: 'Echo & Wave',
@@ -177,6 +168,15 @@ export const clients: Client[] = [
     href: 'https://somanycults.com',
     logo: '/logos/so-many-cults.svg',
     logoScale: 0.3,
+  },
+  {
+    title: 'Lifepacks',
+    href: 'https://www.lifepacks.co',
+    image: '/work-lifepacks.jpg',
+    logo: '/logos/lifepacks.png',
+    logoScale: 0.38,
+    description:
+      'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
   },
 ]
 
