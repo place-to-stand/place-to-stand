@@ -97,10 +97,10 @@ export function HeroSection() {
                 Phones: below the button, so the button stays near the top.
                 Tablets and up: centered in the right column, with extra right margin
                 so it doesn't press against the page edge. On laptops its width follows the
-                window height (about 33rem of headline and spacing sit above it),
+                window height (about 33rem of headline and spacing sit above it, plus 72px kept free below),
                 so short screens still show the whole drawing, database included. */}
             <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:pr-grid-2'>
-              <HeroGraphic className='w-full max-w-md md:max-w-none lg:max-w-[clamp(22rem,calc((100svh-33rem)*1.44),100%)]' />
+              <HeroGraphic className='w-full max-w-md md:max-w-none lg:max-w-[clamp(20rem,calc((100svh-37.5rem)*1.44),100%)]' />
             </div>
           </div>
         </div>
