@@ -178,7 +178,7 @@ export const clients: Client[] = [
     title: 'Small Isles',
     href: 'https://smallislesmusic.com',
     logo: '/logos/small-isles.svg',
-    logoScale: 0.26,
+    logoScale: 0.28,
     logoNudge: -2,
   },
   {
