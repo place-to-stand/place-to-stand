@@ -70,16 +70,12 @@ function TrustTrack({
           return (
             <div
               key={`${vendor.name}-${i}`}
-              className='flex shrink-0 items-center gap-2.5 px-6'
+              className='flex w-32 shrink-0 flex-col items-center gap-3 px-4'
             >
               {Icon && (
-                <Icon
-                  className='h-7 w-7 shrink-0'
-                  style={{ color: vendor.color }}
-                  aria-hidden
-                />
+                <Icon className='h-8 w-8 shrink-0 text-text' aria-hidden />
               )}
-              <span className='font-mono text-[10px] tracking-wider whitespace-nowrap text-text-muted uppercase'>
+              <span className='font-mono text-xs tracking-wider whitespace-nowrap text-text-muted uppercase'>
                 {vendor.name}
               </span>
             </div>
@@ -156,7 +152,7 @@ export function PhasesSection({
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                     {phase.title}
                   </h3>
-                  <ul className='flex flex-col gap-2 text-sm leading-relaxed text-text-muted'>
+                  <ul className='flex flex-col gap-2 text-base leading-relaxed text-text-muted'>
                     {phase.points.map(point => (
                       <li key={point} className='flex gap-2'>
                         <span

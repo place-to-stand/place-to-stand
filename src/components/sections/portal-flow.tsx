@@ -192,7 +192,9 @@ function PipelineStage({
         <BlueprintCorners size={20} />
       </span>
       {/* Mobile crops to one stage in a square window; desktop keeps the wide strip. */}
-      <div className={mobile ? 'aspect-square w-full' : 'aspect-[159/40] w-full'}>
+      <div
+        className={mobile ? 'aspect-square w-full' : 'aspect-[159/40] w-full'}
+      >
         <PortalPipeline
           active={active}
           paused={paused}
@@ -210,10 +212,10 @@ function PipelineStage({
 function StageNarration({ scene }: { scene: Scene }) {
   return (
     <div className='flex flex-col items-center gap-3 text-center'>
-      <span className='font-headline text-balance text-xl font-bold uppercase tracking-tight text-accent md:text-2xl'>
+      <span className='font-headline text-xl font-bold tracking-tight text-balance text-accent uppercase md:text-2xl'>
         {scene.status}
       </span>
-      <p className='max-w-2xl text-balance text-sm leading-relaxed text-text-muted md:text-base'>
+      <p className='max-w-2xl text-base leading-relaxed text-balance text-text-muted'>
         {scene.description}
       </p>
     </div>
@@ -328,7 +330,7 @@ export function PortalFlow() {
           <div className='flex flex-col items-center gap-3'>
             <PipelineStage active={active} paused={paused} mobile={mobile} />
             {/* Subtle hint at the interaction available on this device. */}
-            <p className='text-center text-[11px] tracking-wide text-text-muted/60'>
+            <p className='text-center text-sm tracking-wide text-text-muted/60'>
               {mobile ? 'Swipe to explore' : 'Hover to pause'}
             </p>
           </div>

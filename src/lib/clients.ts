@@ -11,6 +11,18 @@ export type Client = {
    * row; square or heavy marks are knocked back so every logo carries the same
    * optical weight rather than the same pixel height. Defaults to 1. */
   logoScale?: number
+  /** The logo grid shows every mark as a flat white silhouette so client brand
+   * colors don't fight the site palette. Marks whose detail lives in their
+   * color fills (they'd flatten to a blob) opt into a grey version instead. */
+  logoTone?: 'grey'
+}
+
+/** Tailwind filter that renders a client mark white (or grey, per `logoTone`)
+ * wherever logos appear, so brand colors never fight the site palette. */
+export function logoToneClass(client: Client): string {
+  return client.logoTone === 'grey'
+    ? 'brightness-150 grayscale'
+    : 'brightness-0 invert'
 }
 
 export const clients: Client[] = [
@@ -20,6 +32,7 @@ export const clients: Client[] = [
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
     logoScale: 0.7,
+    logoTone: 'grey',
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
   },

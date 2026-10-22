@@ -34,7 +34,7 @@ export function QuestionField({
         {question.required && <span className='ml-1 text-accent'>*</span>}
       </legend>
       {question.helper && (
-        <p className='-mt-1 text-sm text-text-muted'>{question.helper}</p>
+        <p className='-mt-1 text-base text-text-muted'>{question.helper}</p>
       )}
 
       {question.type === 'text' ? (
@@ -73,11 +73,11 @@ export function QuestionField({
                   <Check className='h-3.5 w-3.5' strokeWidth={3} />
                 </span>
                 <span className='space-y-0.5'>
-                  <span className='block text-sm font-medium text-text'>
+                  <span className='block text-base font-medium text-text'>
                     {option.label}
                   </span>
                   {option.description && (
-                    <span className='block text-xs text-text-muted'>
+                    <span className='block text-sm text-text-muted'>
                       {option.description}
                     </span>
                   )}

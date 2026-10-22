@@ -87,7 +87,7 @@ export default function ReferralPage() {
                   {service.items.map(item => (
                     <li
                       key={item}
-                      className='flex items-center gap-2 text-sm text-text-muted'
+                      className='flex items-center gap-2 text-base text-text-muted'
                     >
                       <span
                         className='h-1.5 w-1.5 shrink-0 bg-accent'
@@ -118,7 +118,7 @@ export default function ReferralPage() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {card.title}
               </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {card.body}
               </p>
             </div>
@@ -139,7 +139,7 @@ export default function ReferralPage() {
                 key={quote}
                 className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-3 border-t border-border py-3.5'
               >
-                <span className='font-mono text-[11px] tracking-[0.2em] text-accent'>
+                <span className='font-mono text-xs tracking-[0.2em] text-accent'>
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <p className='text-[17px] leading-normal text-text'>
@@ -163,13 +163,13 @@ export default function ReferralPage() {
               className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
             >
               <BlueprintCorners size={12} />
-              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
+              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-xs text-accent'>
                 {step.number}
               </span>
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {step.title}
               </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {step.body}
               </p>
             </li>
@@ -192,7 +192,7 @@ export default function ReferralPage() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {point.title}
               </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {point.body}
               </p>
             </li>
@@ -223,7 +223,7 @@ export default function ReferralPage() {
         </div>
         <p
           id='referral-terms'
-          className='scroll-mt-grid-4 pt-grid-2 text-center text-sm leading-relaxed text-text-muted'
+          className='scroll-mt-grid-4 pt-grid-2 text-center text-base leading-relaxed text-text-muted'
         >
           <span className='font-mono text-accent' aria-hidden>
             *

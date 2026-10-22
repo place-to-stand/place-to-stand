@@ -31,10 +31,10 @@ export async function Footer() {
               Place To Stand
             </span>
           </div>
-          <p className='text-sm text-text-muted'>
+          <p className='text-base text-text-muted'>
             Austin, TX &middot; Brooklyn, NY
           </p>
-          <p className='mt-grid-half text-sm leading-relaxed text-text-muted'>
+          <p className='mt-grid-half text-base leading-relaxed text-text-muted'>
             A software agency building custom tools, automation, and AI around
             how your business actually runs. No bloated SaaS stack &mdash; just
             software that fits.
@@ -53,7 +53,7 @@ export async function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className='font-mono text-[11px] tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-accent'
+                  className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-accent'
                 >
                   {link.label}
                 </Link>

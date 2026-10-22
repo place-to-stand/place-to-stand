@@ -65,7 +65,7 @@ export function AuditApp() {
           <div className='relative border border-border bg-bg-panel p-6 sm:p-8'>
             <BlueprintCorners size={12} colorClassName='border-border-light' />
             <span className='bp-label font-mono'>Audit Results</span>
-            <p className='mt-4 text-sm text-text-muted'>
+            <p className='mt-4 text-base text-text-muted'>
               Rebuilding your results...
             </p>
           </div>

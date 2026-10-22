@@ -274,7 +274,7 @@ export function AuditWizard({
         </div>
 
         {showError && (
-          <p className='mt-6 border border-accent/30 bg-accent-muted px-4 py-2 text-sm text-text'>
+          <p className='mt-6 border border-accent/30 bg-accent-muted px-4 py-2 text-base text-text'>
             Pick an answer to continue.
           </p>
         )}

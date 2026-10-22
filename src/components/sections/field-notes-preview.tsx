@@ -22,7 +22,7 @@ export function FieldNotesPreview() {
           </Reveal>
           <Reveal
             index={1}
-            className='max-w-sm text-sm leading-relaxed text-text-muted'
+            className='max-w-sm text-base leading-relaxed text-text-muted'
           >
             <p>
               Experiments, open-source projects, and things we&apos;re learning.
@@ -53,11 +53,11 @@ export function FieldNotesPreview() {
             >
               <BlueprintCorners size={12} />
               <div className='flex items-center gap-4'>
-                <span className='font-mono text-[11px] text-text-muted'>
+                <span className='font-mono text-xs text-text-muted'>
                   {note.date}
                 </span>
                 {note.repo && (
-                  <span className='border border-accent/30 px-2 py-0.5 font-mono text-[10px] text-accent uppercase'>
+                  <span className='border border-accent/30 px-2 py-0.5 font-mono text-xs text-accent uppercase'>
                     Open Source
                   </span>
                 )}
@@ -65,7 +65,7 @@ export function FieldNotesPreview() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
                 {note.title}
               </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {note.description}
               </p>
               <div className='mt-auto flex flex-wrap gap-2 pt-2'>

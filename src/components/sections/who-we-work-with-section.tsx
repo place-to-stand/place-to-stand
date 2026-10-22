@@ -43,7 +43,7 @@ export function WhoWeWorkWithSection() {
             <br />
             without in-house engineers.
           </h2>
-          <p className='max-w-xl text-sm leading-relaxed text-text-muted'>
+          <p className='max-w-xl text-base leading-relaxed text-text-muted'>
             Established companies with real processes and a technical mindset,
             but no engineering team to build what&apos;s next. That&apos;s where
             we come in.
@@ -59,13 +59,13 @@ export function WhoWeWorkWithSection() {
             >
               <BlueprintCorners size={12} />
               <profile.Graphic className='absolute top-4 right-4 h-grid-2 w-grid-2 md:top-6 md:right-6' />
-              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-[10px] text-accent'>
+              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-xs text-accent'>
                 {profile.number}
               </span>
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {profile.title}
               </h3>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {profile.description}
               </p>
             </div>

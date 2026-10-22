@@ -6,11 +6,11 @@ import { BlueprintGraphic } from './blueprint-graphic'
 /**
  * Animated blueprint schematics for the homepage sections. Same visual language
  * as process-graphics.tsx (100x100 viewBox, thin stroke-line lines, one
- * accent highlight, hollow nodes on fill-bg-card) but wrapped in <BlueprintGraphic> so
+ * white highlight (icons stay off the accent color), hollow nodes on fill-bg-card) but wrapped in <BlueprintGraphic> so
  * each draws itself in on scroll and settles into a subtle ongoing loop.
  *
  * Element roles (see globals.css): .bp-line = structural stroke (draws in,
- * staggered by --draw-i), .bp-node = the accent highlight (snaps in),
+ * staggered by --draw-i), .bp-node = the white highlight (snaps in),
  * .bp-fx = a loop-dedicated element (fades in, then its loop takes over).
  */
 
@@ -46,7 +46,7 @@ export function SeatsGraphic({ className }: GraphicProps) {
       {/* Unlimited — the seat count that never raises the price */}
       <path
         d='M48 50 C48 44 54 44 57 50 C60 56 66 56 66 50 C66 44 60 44 57 50 C54 56 48 56 48 50 Z'
-        className='bp-node stroke-accent'
+        className='bp-node stroke-text'
         strokeWidth='2'
         fill='none'
         strokeLinejoin='round'
@@ -99,14 +99,14 @@ export function CentralizedDataGraphic({ className }: GraphicProps) {
           y1={y}
           x2='50'
           y2='50'
-          className='bp-fx bp-flow stroke-accent'
+          className='bp-fx bp-flow stroke-text'
           strokeWidth='1.5'
           strokeDasharray='2 7'
           strokeLinecap='round'
         />
       ))}
       {/* Central hub — accent */}
-      <circle cx='50' cy='50' r='8' className='bp-node fill-accent' />
+      <circle cx='50' cy='50' r='8' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -145,11 +145,11 @@ export function NoBloatGraphic({ className }: GraphicProps) {
         width='34'
         height='14'
         rx='7'
-        className='bp-line stroke-accent'
+        className='bp-line stroke-text'
         strokeWidth='1.5'
         style={di(2)}
       />
-      <circle cx='53' cy='50' r='4.5' className='bp-node fill-accent' />
+      <circle cx='53' cy='50' r='4.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -209,13 +209,7 @@ function CodeGraphic({ className }: GraphicProps) {
         strokeLinecap='round'
         style={di(4)}
       />
-      <rect
-        x='60'
-        y='54'
-        width='6'
-        height='9'
-        className='bp-node fill-accent'
-      />
+      <rect x='60' y='54' width='6' height='9' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -247,7 +241,7 @@ function BranchGraphic({ className }: GraphicProps) {
         y1='20'
         x2='34'
         y2='80'
-        className='bp-fx bp-flow stroke-accent'
+        className='bp-fx bp-flow stroke-text'
         strokeWidth='2'
         strokeDasharray='2 8'
         strokeLinecap='round'
@@ -268,7 +262,7 @@ function BranchGraphic({ className }: GraphicProps) {
         strokeWidth='1.5'
         style={di(3)}
       />
-      <circle cx='62' cy='66' r='5.5' className='bp-node fill-accent' />
+      <circle cx='62' cy='66' r='5.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -316,13 +310,13 @@ function ChartGraphic({ className }: GraphicProps) {
       />
       <polyline
         points='22,60 40,48 60,40 74,24'
-        className='bp-line stroke-accent'
+        className='bp-line stroke-text'
         strokeWidth='2'
         strokeLinejoin='round'
         strokeLinecap='round'
         style={di(4)}
       />
-      <circle cx='74' cy='24' r='4.5' className='bp-node fill-accent' />
+      <circle cx='74' cy='24' r='4.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -383,14 +377,14 @@ function CompassGraphic({ className }: GraphicProps) {
       <g className='bp-fx bp-gear'>
         <path
           d='M36 64 L50 50 L64 36'
-          className='stroke-accent'
+          className='stroke-text'
           strokeWidth='2'
           fill='none'
           strokeLinejoin='round'
           strokeLinecap='round'
         />
       </g>
-      <circle cx='50' cy='50' r='3.5' className='bp-node fill-accent' />
+      <circle cx='50' cy='50' r='3.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -428,11 +422,11 @@ function ServerGraphic({ className }: GraphicProps) {
           cx='76'
           cy='38'
           r='8'
-          className='stroke-accent'
+          className='stroke-text'
           strokeWidth='1.5'
           fill='none'
         />
-        <g className='stroke-accent' strokeWidth='1.5' strokeLinecap='round'>
+        <g className='stroke-text' strokeWidth='1.5' strokeLinecap='round'>
           <line x1='76' y1='26' x2='76' y2='30' />
           <line x1='76' y1='46' x2='76' y2='50' />
           <line x1='64' y1='38' x2='68' y2='38' />
@@ -440,7 +434,7 @@ function ServerGraphic({ className }: GraphicProps) {
         </g>
       </g>
       {/* Status light — accent, pulses */}
-      <circle cx='54' cy='31' r='3' className='bp-node fill-accent' />
+      <circle cx='54' cy='31' r='3' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -505,7 +499,7 @@ export function DraftingGraphic({ className }: GraphicProps) {
         style={di(2)}
       />
       {/* Pivot — accent */}
-      <circle cx='50' cy='20' r='5' className='bp-node fill-accent' />
+      <circle cx='50' cy='20' r='5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -559,7 +553,7 @@ export function AiNativeGraphic({ className }: GraphicProps) {
         </g>
       </g>
       {/* Core — accent, pulses */}
-      <circle cx='60' cy='50' r='4' className='bp-node fill-accent' />
+      <circle cx='60' cy='50' r='4' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -594,7 +588,7 @@ export function DirectAccessGraphic({ className }: GraphicProps) {
         y1='50'
         x2='74'
         y2='50'
-        className='bp-fx bp-flow stroke-accent'
+        className='bp-fx bp-flow stroke-text'
         strokeWidth='2'
         strokeDasharray='2 8'
         strokeLinecap='round'
@@ -608,7 +602,7 @@ export function DirectAccessGraphic({ className }: GraphicProps) {
         style={di(2)}
       />
       {/* You — accent endpoint */}
-      <circle cx='74' cy='50' r='6' className='bp-node fill-accent' />
+      <circle cx='74' cy='50' r='6' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -661,7 +655,7 @@ export function LeanMarketGraphic({ className }: GraphicProps) {
         y1='36'
         x2='70'
         y2='36'
-        className='bp-fx bp-scan stroke-accent'
+        className='bp-fx bp-scan stroke-text'
         strokeWidth='1.5'
         strokeLinecap='round'
       />
@@ -671,7 +665,7 @@ export function LeanMarketGraphic({ className }: GraphicProps) {
         y='20'
         width='10'
         height='10'
-        className='bp-node fill-accent'
+        className='bp-node fill-text'
       />
     </BlueprintGraphic>
   )
@@ -719,13 +713,7 @@ export function FounderGraphic({ className }: GraphicProps) {
         strokeLinecap='round'
         style={di(3)}
       />
-      <rect
-        x='62'
-        y='54'
-        width='7'
-        height='10'
-        className='bp-node fill-accent'
-      />
+      <rect x='62' y='54' width='7' height='10' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -753,7 +741,7 @@ export function DesignLedGraphic({ className }: GraphicProps) {
       />
       <path
         d='M28 68 C 40 30, 60 74, 72 34'
-        className='bp-fx bp-flow stroke-accent'
+        className='bp-fx bp-flow stroke-text'
         strokeWidth='2'
         fill='none'
         strokeDasharray='2 9'
@@ -778,7 +766,7 @@ export function DesignLedGraphic({ className }: GraphicProps) {
         style={di(3)}
       />
       {/* Control point — accent */}
-      <circle cx='40' cy='30' r='4.5' className='bp-node fill-accent' />
+      <circle cx='40' cy='30' r='4.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -818,7 +806,7 @@ export function PrototypeGraphic({ className }: GraphicProps) {
         strokeDasharray='3 3'
         style={di(2)}
       />
-      <circle cx='50' cy='61' r='5' className='bp-node fill-accent' />
+      <circle cx='50' cy='61' r='5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -874,7 +862,7 @@ export function RefineGraphic({ className }: GraphicProps) {
         style={di(2)}
       />
       {/* The knob we tune — accent */}
-      <circle cx='44' cy='50' r='5.5' className='bp-node fill-accent' />
+      <circle cx='44' cy='50' r='5.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -915,21 +903,21 @@ export function ScaleGraphic({ className }: GraphicProps) {
         y1='46'
         x2='76'
         y2='24'
-        className='bp-line stroke-accent'
+        className='bp-line stroke-text'
         strokeWidth='2'
         strokeLinecap='round'
         style={di(3)}
       />
       <path
         d='M71 29 l5 -5 l5 5'
-        className='bp-line stroke-accent'
+        className='bp-line stroke-text'
         strokeWidth='2'
         fill='none'
         strokeLinejoin='round'
         strokeLinecap='round'
         style={di(3)}
       />
-      <circle cx='76' cy='46' r='3.5' className='bp-node fill-accent' />
+      <circle cx='76' cy='46' r='3.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }
@@ -970,7 +958,7 @@ export function RnDGraphic({ className }: GraphicProps) {
         />
       </g>
       {/* Nucleus — accent */}
-      <circle cx='50' cy='50' r='5.5' className='bp-node fill-accent' />
+      <circle cx='50' cy='50' r='5.5' className='bp-node fill-text' />
     </BlueprintGraphic>
   )
 }

@@ -51,7 +51,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                'px-3 py-1.5 font-mono text-[11px] tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-300',
+                'px-3 py-1.5 font-mono text-xs tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-300',
                 pathname === item.href
                   ? 'border border-accent/30 text-accent'
                   : 'border border-transparent text-text-muted hover:text-text'
@@ -68,7 +68,7 @@ export function Header() {
             href={CLIENT_PORTAL_URL}
             rel='nofollow'
             location='header-portal'
-            className='hidden font-mono text-[11px] tracking-[0.1em] text-text-muted uppercase transition-colors duration-300 hover:text-text lg:inline'
+            className='hidden font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors duration-300 hover:text-text lg:inline'
           >
             Client Login
           </TrackedLink>
@@ -78,7 +78,7 @@ export function Header() {
             <Button
               asChild
               size='sm'
-              className='h-8 px-3 text-xs lg:h-9 lg:px-4 lg:text-sm'
+              className='h-8 px-3 text-sm lg:h-9 lg:px-4'
             >
               <TrackedLink href='/audit' location='header'>
                 Free Audit
@@ -151,7 +151,7 @@ export function Header() {
               href={CLIENT_PORTAL_URL}
               rel='nofollow'
               location='header-mobile-portal'
-              className='px-4 py-3 text-sm tracking-[0.08em] text-text-muted transition-colors hover:text-accent'
+              className='px-4 py-3 text-base tracking-[0.08em] text-text-muted transition-colors hover:text-accent'
               onClick={() => setMobileOpen(false)}
             >
               Client Login

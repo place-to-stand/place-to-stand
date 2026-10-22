@@ -47,9 +47,9 @@ export default function TeamPage() {
                 <h2 className='font-headline text-xl leading-none text-text uppercase'>
                   {member.name}
                 </h2>
-                <p className='text-xs text-text-muted'>{member.title}</p>
+                <p className='text-sm text-text-muted'>{member.title}</p>
               </div>
-              <p className='text-sm leading-relaxed text-text-muted'>
+              <p className='text-base leading-relaxed text-text-muted'>
                 {member.bio}
               </p>
               <div className='mt-auto flex justify-center gap-3 pt-2'>

@@ -41,13 +41,13 @@ export default function ServicesPage() {
                 }`}
               >
                 <BlueprintCorners />
-                {Icon && <Icon className='h-5 w-5 text-accent' aria-hidden />}
+                {Icon && <Icon className='h-5 w-5 text-text' aria-hidden />}
                 <h2 className='font-headline text-2xl text-text uppercase'>
                   {service.title}
                 </h2>
-                <p className='text-sm text-text-muted'>{service.tagline}</p>
+                <p className='text-base text-text-muted'>{service.tagline}</p>
                 {service.description && (
-                  <p className='text-sm leading-relaxed text-text-muted/80'>
+                  <p className='text-base leading-relaxed text-text-muted/80'>
                     {service.description}
                   </p>
                 )}
@@ -55,7 +55,7 @@ export default function ServicesPage() {
                   {service.features.map(feature => (
                     <li
                       key={feature}
-                      className='flex items-start gap-3 text-sm text-text-muted'
+                      className='flex items-start gap-3 text-base text-text-muted'
                     >
                       <span
                         className='mt-1.5 h-1.5 w-1.5 shrink-0 bg-accent'
@@ -81,7 +81,7 @@ export default function ServicesPage() {
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Not sure which you need?
               </h2>
-              <p className='max-w-md text-sm leading-relaxed text-text-muted'>
+              <p className='max-w-md text-base leading-relaxed text-text-muted'>
                 The free audit pinpoints the phase your business is in and picks
                 the services that pay off first. Two minutes, results on screen,
                 no obligation.
@@ -104,7 +104,7 @@ export default function ServicesPage() {
                     Contact Us
                   </TrackedLink>
                 </Button>
-                <p className='max-w-xs text-xs leading-relaxed text-text-muted'>
+                <p className='max-w-xs text-sm leading-relaxed text-text-muted'>
                   Already know what you want built, or want a bespoke mapping of
                   your systems? Talk to us directly.
                 </p>
