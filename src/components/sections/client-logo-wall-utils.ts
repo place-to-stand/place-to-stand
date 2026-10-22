@@ -5,7 +5,7 @@ export const LOGO_SLOTS = 10
  * logo's scan-in runs 900ms (`.logo-swap-in` in app/globals.css). */
 export const SWAP_INTERVAL_MS = 8000
 /** How long the opening set stays put once the grid first scrolls into view. */
-export const FIRST_SWAP_DELAY_MS = 15000
+export const FIRST_SWAP_DELAY_MS = 10000
 export const SWAP_FADE_MS = 400
 
 /**
