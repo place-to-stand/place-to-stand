@@ -20,13 +20,13 @@ export const metadata: Metadata = pageMetadata({
 
 const screenshots = [
   {
-    src: '/work-heatonist.png',
+    src: '/case-study-heatonist-home.jpg',
     alt: 'The heatonist.com home page',
     label: 'heatonist.com',
     href: 'https://heatonist.com',
   },
   {
-    src: '/work-hot-ones.png',
+    src: '/case-study-hotones-home.jpg',
     alt: 'The hotones.com home page',
     label: 'hotones.com',
     href: 'https://hotones.com',
