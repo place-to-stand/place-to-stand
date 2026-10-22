@@ -3,6 +3,7 @@ import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { HeroGraphic } from '@/src/components/graphics/hero-graphic'
+import { HeroDrawingSlot } from './hero-drawing-slot'
 
 export function HeroSection() {
   return (
@@ -111,16 +112,18 @@ export function HeroSection() {
                 Phones: below the button, so the button stays near the top.
                 Tablets and up: centred in the right column. At full width its ink
                 sits about 28px in from the corner mark, like the text column
-                (pr-4.5 plus the drawing's own margin); when short windows shrink
-                it, it stays centred in that space. On laptops its width follows the
+                (pr-4.5 plus the drawing's own margin); when the text leaves room
+                (short windows shrink the drawing; balanced lines end early), it
+                slides left to sit centred between the text and the frame's right
+                edge (HeroDrawingSlot). On laptops its width follows the
                 window height (minus the headline, which shrinks on short screens, the spacing,
                 and one gap kept free below),
                 so short screens still show the whole drawing, database included.
                 On laptops it also rises by 8% of its own height into the gap above
                 so it breaks the line the text sits on. */}
-            <div className='md:flex md:flex-1 md:justify-center md:pr-4.5'>
+            <HeroDrawingSlot className='md:flex md:flex-1 md:justify-center md:pr-4.5'>
               <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-2.6*var(--hero-gap)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.565),100%)] lg:-translate-y-[8%]' />
-            </div>
+            </HeroDrawingSlot>
           </div>
 
           {/* The space under the drawing is 60% of the gap; its 8% lift already
