@@ -46,7 +46,7 @@
 @theme inline {
   --font-display: var(--font-bebas-neue);
   --font-logo: var(--font-space-grotesk);
-  --font-sans: var(--font-source-sans);
+  --font-sans: var(--font-plex-sans);
   --font-headline: var(--font-space-grotesk);
 }
 

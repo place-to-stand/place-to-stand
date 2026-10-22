@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Suspense, type ReactNode } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
-import { Space_Grotesk, Bebas_Neue, Source_Sans_3 } from 'next/font/google'
+import { Space_Grotesk, Bebas_Neue, IBM_Plex_Sans } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
@@ -27,9 +27,9 @@ const bebasNeue = Bebas_Neue({
   variable: '--font-bebas-neue',
 })
 
-const sourceSans = Source_Sans_3({
+const plexSans = IBM_Plex_Sans({
   subsets: ['latin'],
-  variable: '--font-source-sans',
+  variable: '--font-plex-sans',
 })
 
 export const metadata: Metadata = {
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           'min-h-screen overflow-x-hidden bg-bg text-text',
           spaceGrotesk.variable,
           bebasNeue.variable,
-          sourceSans.variable
+          plexSans.variable
         )}
       >
         <JsonLd data={organizationJsonLd} />
