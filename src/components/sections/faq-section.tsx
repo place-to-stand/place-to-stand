@@ -61,7 +61,7 @@ function FAQItem({ question, answer, isOpen, onToggle }: FAQItemProps) {
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold tracking-[0.05em] text-text uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/30'
+        className='flex w-full cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left text-lg font-semibold tracking-[0.05em] text-text uppercase transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent/30'
       >
         <span className='text-balance'>{question}</span>
         <ChevronDown

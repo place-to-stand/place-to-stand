@@ -52,7 +52,7 @@ export function HeroSection() {
 
           <div
             aria-hidden
-            className='h-grid-2 md:h-grid-3 lg:h-auto lg:max-h-40 lg:min-h-grid-4 lg:flex-1'
+            className='h-grid-2 md:h-grid-3 lg:h-auto lg:max-h-40 lg:min-h-grid-4 lg:flex-1 lg:portrait:h-40 lg:portrait:flex-none'
           />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right);

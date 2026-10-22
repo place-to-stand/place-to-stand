@@ -114,7 +114,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
         aria-expanded={isOpen}
         aria-controls={panelId}
         className={cn(
-          'group grid w-full grid-cols-[3rem_1fr_3rem] items-stretch text-left transition-colors hover:bg-bg-elevated focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:grid-cols-[3rem_18rem_1fr_3rem]',
+          'group grid w-full cursor-pointer grid-cols-[3rem_1fr_3rem] items-stretch text-left transition-colors hover:bg-bg-elevated focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:grid-cols-[3rem_18rem_1fr_3rem]',
           isOpen && 'bg-bg-elevated'
         )}
       >

@@ -36,7 +36,7 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
         id={id}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:px-6 md:py-6'
+        className='flex w-full cursor-pointer items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:px-6 md:py-6'
       >
         {Graphic && <Graphic className='mt-0.5 h-grid-2 w-grid-2 shrink-0' />}
         <div className='flex flex-col gap-1'>
