@@ -11,9 +11,11 @@ export function HeroSection() {
       data-pts-hero
       className='relative flex min-h-svh flex-col overflow-hidden'
     >
-      <div className='mx-auto flex w-full max-w-content flex-1 flex-col justify-center gap-8 px-6 pt-grid-4 pb-16 md:gap-10 md:pb-24 lg:px-12 lg:pt-grid-5'>
-        {/* Main headline block — bottom-aligned */}
-        <div className='flex flex-col gap-8 md:gap-10'>
+      <div className='mx-auto flex w-full max-w-content flex-1 flex-col gap-8 px-6 pt-grid-4 pb-16 md:gap-10 md:pb-24 lg:px-12 lg:pt-grid-5'>
+        {/* When the screen is taller than the content, spare space first opens
+            the gap under the headline (the spacer below, up to 160px); past that
+            the whole block centers, so very tall screens don't get one huge gap. */}
+        <div className='flex flex-1 flex-col justify-center'>
           {/* Headline with blueprint corner marks */}
           <div className='hero-frame relative w-full'>
             {/* Hero keeps the full-strength accent corners — the muted default
@@ -41,8 +43,10 @@ export function HeroSection() {
             </h1>
           </div>
 
+          <div aria-hidden className='max-h-40 min-h-8 flex-1 md:min-h-10' />
+
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right) */}
-          <div className='flex flex-col gap-grid-2 lg:flex-row lg:items-center lg:gap-grid-3'>
+          <div className='flex flex-col gap-grid-2 lg:flex-row lg:items-start lg:gap-grid-3'>
             <div className='flex flex-col gap-8 lg:flex-1'>
               <div
                 className='hero-reveal flex gap-4 self-start'
@@ -58,7 +62,7 @@ export function HeroSection() {
                   </p>
                   <p className='text-base leading-relaxed text-text-muted md:text-lg'>
                     Take the{' '}
-                    <strong className='font-semibold text-accent/70'>
+                    <strong className='font-semibold text-text'>
                       free audit
                     </strong>{' '}
                     to see where custom software fits for your business.
