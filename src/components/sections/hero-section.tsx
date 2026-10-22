@@ -102,10 +102,10 @@ export function HeroSection() {
                 window height (minus the headline, which shrinks on short screens, the spacing,
                 and 48px kept free below, matching the side margin),
                 so short screens still show the whole drawing, database included.
-                On laptops it also rises 48px into the gap above
+                On laptops it also rises by 8% of its own height into the gap above
                 so it breaks the line the text sits on. */}
-            <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:-mt-grid-2 lg:pr-grid-2'>
-              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-15.5rem-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.44),100%)]' />
+            <div className='md:flex md:flex-1 md:justify-center md:pr-grid-1 lg:pr-grid-2'>
+              <HeroGraphic className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-16.75rem-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.44),100%)] lg:-translate-y-[8%]' />
             </div>
           </div>
         </div>
