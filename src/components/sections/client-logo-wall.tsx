@@ -93,10 +93,11 @@ export function ClientLogoWall() {
 
   return (
     // Two rows at every width; cells past the second row are hidden (see
-    // slotVisibility). Phones halve the row gap.
+    // slotVisibility). Two across, the rows sit 12px apart; 24px from three
+    // across, 48px on laptops.
     <div
       ref={ref}
-      className='mx-auto grid max-w-88 grid-cols-2 gap-x-grid-1 gap-y-grid-1 min-[36rem]:max-w-none min-[36rem]:grid-cols-3 min-[36rem]:gap-x-grid-2 min-[42rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
+      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-y-grid-1 min-[42rem]:grid-cols-4 lg:grid-cols-5 lg:gap-grid-2'
     >
       {shown.map((index, slot) => (
         <LogoCell
