@@ -129,33 +129,45 @@ html {
   top: calc(-1 * var(--band-pad));
   bottom: -2400px;
 }
-/* Dither edge: over the last four rows the dots thin out (75%, 50%, 25%,
-   12%) instead of stopping on a hard line. A mask keeps whole cells, so the
-   hero's dots are phased from its bottom edge to keep rows on the mask. */
+/* Fade edge: the dots run full to where they used to stop, then fade out
+   across the gap that follows, reaching nothing just as the next content
+   starts: below each hero, above the CTA box. --dot-fade is that gap (80/48
+   under an inner page's header, 120/80 under the homepage and audit heroes,
+   which set it themselves, and 120/80 above the CTA). The band's layer is
+   shifted by the same amount so its dots stay on the box's grid. */
+/* In a layer so a page's own [--dot-fade:…] utility can override it. */
+@layer base {
+  .dots-hero {
+    --dot-fade: 48px;
+  }
+  .dots-band {
+    --dot-fade: 80px;
+  }
+  @media (min-width: 48rem) {
+    .dots-hero {
+      --dot-fade: 80px;
+    }
+    .dots-band {
+      --dot-fade: 120px;
+    }
+  }
+}
 .dots-hero::before {
-  background-position: left 12px bottom 12px;
-  mask-image:
-    linear-gradient(#000, #000),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='96'%3E%3Crect x='0' y='0' width='24' height='24'/%3E%3Crect x='24' y='0' width='24' height='24'/%3E%3Crect x='72' y='0' width='24' height='24'/%3E%3Crect x='96' y='0' width='24' height='24'/%3E%3Crect x='120' y='0' width='24' height='24'/%3E%3Crect x='168' y='0' width='24' height='24'/%3E%3Crect x='0' y='24' width='24' height='24'/%3E%3Crect x='48' y='24' width='24' height='24'/%3E%3Crect x='96' y='24' width='24' height='24'/%3E%3Crect x='144' y='24' width='24' height='24'/%3E%3Crect x='24' y='48' width='24' height='24'/%3E%3Crect x='120' y='48' width='24' height='24'/%3E%3Crect x='72' y='72' width='24' height='24'/%3E%3C/svg%3E");
-  mask-size:
-    100% calc(100% - 108px),
-    192px 96px;
-  mask-position:
-    top left,
-    left 12px bottom 12px;
-  mask-repeat: no-repeat, repeat-x;
+  bottom: calc(-1 * (var(--spacing-grid-2) + var(--dot-fade)));
+  mask-image: linear-gradient(
+    to bottom,
+    #000 calc(100% - var(--dot-fade)),
+    transparent
+  );
 }
 .dots-band::before {
-  mask-image:
-    linear-gradient(#000, #000),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='96'%3E%3Crect x='72' y='0' width='24' height='24'/%3E%3Crect x='24' y='24' width='24' height='24'/%3E%3Crect x='120' y='24' width='24' height='24'/%3E%3Crect x='0' y='48' width='24' height='24'/%3E%3Crect x='48' y='48' width='24' height='24'/%3E%3Crect x='96' y='48' width='24' height='24'/%3E%3Crect x='144' y='48' width='24' height='24'/%3E%3Crect x='0' y='72' width='24' height='24'/%3E%3Crect x='24' y='72' width='24' height='24'/%3E%3Crect x='72' y='72' width='24' height='24'/%3E%3Crect x='96' y='72' width='24' height='24'/%3E%3Crect x='120' y='72' width='24' height='24'/%3E%3Crect x='168' y='72' width='24' height='24'/%3E%3C/svg%3E");
-  mask-size:
-    100% calc(100% - 108px),
-    192px 96px;
-  mask-position:
-    bottom left,
-    left 12px top 12px;
-  mask-repeat: no-repeat, repeat-x;
+  top: calc(-1 * (var(--band-pad) + var(--dot-fade)));
+  background-position: 12px calc(12px + var(--dot-fade));
+  mask-image: linear-gradient(
+    to top,
+    #000 calc(100% - var(--dot-fade)),
+    transparent
+  );
 }
 /* Clips the dot layers to the page body so they never widen or lengthen the
    page. clip (not hidden) keeps position: sticky working inside. */
