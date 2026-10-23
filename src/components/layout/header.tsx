@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { cn } from '@/src/lib/utils'
@@ -86,88 +87,100 @@ export function Header() {
             </Button>
           </div>
 
-          <button
-            type='button'
-            className='lg:hidden'
-            onClick={() => setMobileOpen(open => !open)}
-            aria-controls='mobile-nav'
-            aria-expanded={mobileOpen}
-          >
-            <span className='sr-only'>Toggle navigation</span>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              viewBox='0 0 24 24'
-              className='h-7 w-7 text-text'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='1.5'
-            >
-              {mobileOpen ? (
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M6 18L18 6M6 6l12 12'
-                />
-              ) : (
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M4 7h16M4 12h16M4 17h16'
-                />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile nav */}
-      <div
-        className={cn(
-          'absolute top-full right-0 left-0 transition-all duration-300 lg:hidden',
-          mobileOpen
-            ? 'pointer-events-auto translate-y-0 opacity-100'
-            : 'pointer-events-none -translate-y-2 opacity-0'
-        )}
-      >
-        <div className='mx-4 mt-2'>
-          <nav
-            id='mobile-nav'
-            className='flex flex-col border border-border bg-bg-card/95 p-4 backdrop-blur-lg lg:hidden'
-          >
-            {NAV_LINKS.map(item => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'border-b border-border/50 px-4 py-3 text-sm tracking-[0.08em] transition-colors last:border-0 hover:text-accent',
-                  pathname === item.href ? 'text-accent' : 'text-text-muted'
-                )}
-                onClick={() => setMobileOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <TrackedLink
-              href={CLIENT_PORTAL_URL}
-              rel='nofollow'
-              location='header-mobile-portal'
-              className='px-4 py-3 text-base tracking-[0.08em] text-text-muted transition-colors hover:text-accent'
-              onClick={() => setMobileOpen(false)}
-            >
-              Client Login
-            </TrackedLink>
-            <div className='mt-3 px-4 min-[26rem]:hidden'>
-              <Button asChild size='sm' className='w-full'>
-                <TrackedLink
-                  href='/audit'
-                  location='header-mobile'
-                  onClick={() => setMobileOpen(false)}
+          {/* Mobile menu: a sheet that slides in from the right */}
+          <Dialog.Root open={mobileOpen} onOpenChange={setMobileOpen}>
+            <Dialog.Trigger asChild>
+              <button type='button' className='lg:hidden'>
+                <span className='sr-only'>Open navigation</span>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 24 24'
+                  className='h-7 w-7 text-text'
+                  fill='none'
+                  stroke='currentColor'
+                  strokeWidth='1.5'
+                  aria-hidden
                 >
-                  Free Audit
-                </TrackedLink>
-              </Button>
-            </div>
-          </nav>
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    d='M4 7h16M4 12h16M4 17h16'
+                  />
+                </svg>
+              </button>
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className='sheet-overlay fixed inset-0 z-50 bg-bg/70 backdrop-blur-sm lg:hidden' />
+              <Dialog.Content
+                id='mobile-nav'
+                className='sheet-panel fixed inset-y-0 right-0 z-50 flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-6 pt-4 pb-grid-1 focus:outline-none lg:hidden'
+              >
+                <div className='flex items-center justify-between'>
+                  <Dialog.Title className='bp-label font-mono'>
+                    Menu
+                  </Dialog.Title>
+                  <Dialog.Close asChild>
+                    <button type='button' className='-mr-1 p-1'>
+                      <span className='sr-only'>Close navigation</span>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        viewBox='0 0 24 24'
+                        className='h-7 w-7 text-text'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='1.5'
+                        aria-hidden
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M6 18L18 6M6 6l12 12'
+                        />
+                      </svg>
+                    </button>
+                  </Dialog.Close>
+                </div>
+                <Dialog.Description className='sr-only'>
+                  Site navigation
+                </Dialog.Description>
+                <nav className='mt-grid-2 flex flex-col'>
+                  {NAV_LINKS.map(item => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        'border-b border-border py-4 font-headline text-2xl font-semibold tracking-tight transition-colors hover:text-accent',
+                        pathname === item.href ? 'text-accent' : 'text-text'
+                      )}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </nav>
+                <div className='mt-auto flex flex-col gap-4'>
+                  <Button asChild size='lg' className='w-full'>
+                    <TrackedLink
+                      href='/audit'
+                      location='header-mobile'
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Free Audit
+                    </TrackedLink>
+                  </Button>
+                  <TrackedLink
+                    href={CLIENT_PORTAL_URL}
+                    rel='nofollow'
+                    location='header-mobile-portal'
+                    className='text-center font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-text'
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Client Login
+                  </TrackedLink>
+                </div>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </div>
       </div>
     </header>
