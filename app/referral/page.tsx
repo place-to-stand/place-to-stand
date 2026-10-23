@@ -20,7 +20,7 @@ export default function ReferralPage() {
         priority
         className='flex flex-col gap-grid-1 pt-grid-1 pb-grid-3'
       >
-        <div className='flex flex-col gap-4'>
+        <div className='dots-hero flex flex-col gap-4'>
           <span className='bp-label font-mono'>{c.hero.label}</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[0.92] font-bold tracking-tight text-balance text-text md:text-6xl'>
             {c.hero.headline}
@@ -197,7 +197,7 @@ export default function ReferralPage() {
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.audit.heading}
         </h2>
-        <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
+        <div className='dots-band border border-border bg-bg-card p-grid-1 md:p-grid-2'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
             <p className='max-w-md text-base text-text md:text-lg'>

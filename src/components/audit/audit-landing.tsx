@@ -207,7 +207,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
     <div>
       {/* Hero Block */}
       <Reveal index={0}>
-        <div className='flex flex-col items-center gap-6 text-center'>
+        <div className='dots-hero flex flex-col items-center gap-6 text-center'>
           <span className='bp-label font-mono'>Opportunity Audit</span>
           <h1 className='max-w-3xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase sm:text-5xl md:text-6xl'>
             Find your biggest software opportunity
@@ -369,7 +369,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
 
       {/* Final CTA Block */}
       <Reveal index={3} className='mt-grid-4'>
-        <div className='relative flex flex-col items-center gap-6 border border-border bg-bg-card p-grid-2 text-center'>
+        <div className='dots-band flex flex-col items-center gap-6 border border-border bg-bg-card p-grid-2 text-center'>
           <BlueprintCorners size={16} />
           <div className='flex flex-col items-center gap-3 md:gap-4'>
             <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>

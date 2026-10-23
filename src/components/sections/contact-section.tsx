@@ -158,7 +158,7 @@ export function ContactSection() {
       id='contact'
       className='flex flex-col gap-10 py-24 pb-grid-8'
     >
-      <div className='flex flex-col items-center gap-4 text-center'>
+      <div className='dots-hero flex flex-col items-center gap-4 text-center'>
         <span className='bp-label font-mono'>Contact</span>
         <h1 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
           Let&apos;s talk

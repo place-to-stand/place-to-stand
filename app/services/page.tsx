@@ -21,7 +21,7 @@ export default function ServicesPage() {
     <main className='flex-1 pt-10 pb-32'>
       <JsonLd data={servicesJsonLd} />
       <AnimatedSection priority className='flex flex-col gap-12 md:gap-20'>
-        <div className='flex flex-col gap-4'>
+        <div className='dots-hero flex flex-col gap-4'>
           <span className='bp-label font-mono'>Services</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             What we build
@@ -80,7 +80,7 @@ export default function ServicesPage() {
 
       {/* CTA Block */}
       <AnimatedSection>
-        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+        <div className='dots-band border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-2.25 md:gap-3'>
