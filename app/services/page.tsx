@@ -31,13 +31,13 @@ export default function ServicesPage() {
           </p>
         </div>
         {/* One open row per service, split by a rule: no boxed cards */}
-        <ol className='flex flex-col border-b border-border'>
+        <ol className='flex flex-col divide-y divide-border'>
           {services.map((service, index) => {
             const Icon = serviceIcons[service.icon]
             return (
               <li
                 key={service.slug}
-                className='grid gap-grid-1 border-t border-border py-grid-2 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
+                className='grid gap-grid-1 py-grid-2 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
               >
                 <div className='flex flex-col gap-3 md:gap-4'>
                   <div className='flex items-center gap-3 text-text-muted'>
