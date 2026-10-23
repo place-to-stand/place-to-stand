@@ -207,7 +207,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
     <div>
       {/* Hero Block */}
       <Reveal index={0}>
-        <div className='dots-hero flex flex-col items-center gap-6 text-center [--dot-fade:80px] md:[--dot-fade:120px]'>
+        <div className='dots-hero flex flex-col items-center gap-6 text-center [--dot-fade:40px] md:[--dot-fade:60px]'>
           <span className='bp-label font-mono'>Opportunity Audit</span>
           <h1 className='max-w-3xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase sm:text-5xl md:text-6xl'>
             Find your biggest software opportunity

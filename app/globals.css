@@ -130,25 +130,25 @@ html {
   bottom: -2400px;
 }
 /* Fade edge: the dots run full to where they used to stop, then fade out
-   across the gap that follows, reaching nothing just as the next content
-   starts: below each hero, above the CTA box. --dot-fade is that gap (80/48
-   under an inner page's header, 120/80 under the homepage and audit heroes,
-   which set it themselves, and 120/80 above the CTA). The band's layer is
+   across the first half of the gap that follows: below each hero, above the
+   CTA box. --dot-fade is half that gap (40/24 under an inner page's header,
+   60/40 under the homepage and audit heroes, which set it themselves, and
+   60/40 above the CTA). The band's layer is
    shifted by the same amount so its dots stay on the box's grid. */
 /* In a layer so a page's own [--dot-fade:…] utility can override it. */
 @layer base {
   .dots-hero {
-    --dot-fade: 48px;
+    --dot-fade: 24px;
   }
   .dots-band {
-    --dot-fade: 80px;
+    --dot-fade: 40px;
   }
   @media (min-width: 48rem) {
     .dots-hero {
-      --dot-fade: 80px;
+      --dot-fade: 40px;
     }
     .dots-band {
-      --dot-fade: 120px;
+      --dot-fade: 60px;
     }
   }
 }
