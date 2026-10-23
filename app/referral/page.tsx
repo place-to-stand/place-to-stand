@@ -199,7 +199,7 @@ export default function ReferralPage() {
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.audit.heading}
         </h2>
-        <div className='dots-band border border-border bg-bg-card p-grid-1 md:p-grid-2'>
+        <div className='dots-band bg-bg-card p-grid-1 md:p-grid-2'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
             <p className='max-w-md text-base text-text md:text-lg'>

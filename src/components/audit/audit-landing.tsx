@@ -369,7 +369,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
 
       {/* Final CTA Block */}
       <Reveal index={3} className='mt-44 md:mt-66'>
-        <div className='dots-band flex flex-col items-center gap-6 border border-border bg-bg-card p-grid-2 text-center'>
+        <div className='dots-band flex flex-col items-center gap-6 bg-bg-card p-grid-2 text-center'>
           <BlueprintCorners size={16} />
           <div className='flex flex-col items-center gap-3 md:gap-4'>
             <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>

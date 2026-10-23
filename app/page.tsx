@@ -34,7 +34,7 @@ export default function HomePage() {
 
       {/* CTA Block — blueprint detail callout */}
       <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
-        <div className='dots-band border border-border bg-bg-card p-5 md:p-16'>
+        <div className='dots-band bg-bg-card p-5 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3 md:gap-4'>
