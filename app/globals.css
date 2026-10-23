@@ -836,7 +836,7 @@ html {
 
 /* Logo wall hover: a small scale and brighten (80% to full) on one long
    ease-out (expo), so both lunge
-   at first and then creeps to a stop. Its own wrapper, so it never fights
+   at first and then creep to a stop. Its own wrapper, so it never fights
    the swap fade. The scan-in clip must not stay on after it ends (fill
    backwards, not both), or it would crop wide logos as they grow. */
 .logo-hover {
