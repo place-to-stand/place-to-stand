@@ -57,9 +57,7 @@ function ItemGrid({
           <h3 className='font-headline text-base leading-tight font-bold tracking-tight text-text uppercase'>
             {item.title}
           </h3>
-          <p className='text-base leading-relaxed text-text-muted'>
-            {item.body}
-          </p>
+          <p className='text-base text-text-muted'>{item.body}</p>
         </div>
       ))}
     </div>
@@ -81,7 +79,7 @@ export default function HeatonistCaseStudyPage() {
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             {cs.headline}
           </h1>
-          <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+          <p className='max-w-2xl text-base text-text-muted md:text-lg'>
             {cs.intro}
           </p>
         </div>
@@ -94,7 +92,7 @@ export default function HeatonistCaseStudyPage() {
               {cs.stats.map(stat => (
                 <li
                   key={stat}
-                  className='border-l-2 border-accent pl-4 text-base leading-relaxed text-text'
+                  className='border-l-2 border-accent pl-4 text-base text-text'
                 >
                   {stat}
                 </li>
@@ -136,15 +134,11 @@ export default function HeatonistCaseStudyPage() {
         <div className='grid gap-grid-2 md:grid-cols-2'>
           <div className='flex flex-col gap-4'>
             <SectionHeading>The problem</SectionHeading>
-            <p className='text-base leading-relaxed text-text-muted'>
-              {cs.problem}
-            </p>
+            <p className='text-base text-text-muted'>{cs.problem}</p>
           </div>
           <div className='flex flex-col gap-4'>
             <SectionHeading>How we work together</SectionHeading>
-            <p className='text-base leading-relaxed text-text-muted'>
-              {cs.howWeWork}
-            </p>
+            <p className='text-base text-text-muted'>{cs.howWeWork}</p>
           </div>
         </div>
       </AnimatedSection>
@@ -152,7 +146,7 @@ export default function HeatonistCaseStudyPage() {
       <AnimatedSection className='flex flex-col gap-6 py-grid-2'>
         <div className='flex flex-col gap-4'>
           <SectionHeading>What we did</SectionHeading>
-          <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+          <p className='max-w-2xl text-base text-text-muted'>
             {cs.whatWeDidIntro}
           </p>
         </div>
@@ -162,7 +156,7 @@ export default function HeatonistCaseStudyPage() {
       <AnimatedSection className='flex flex-col gap-6 py-grid-2'>
         <div className='flex flex-col gap-4'>
           <SectionHeading>Beyond what Shopify offers</SectionHeading>
-          <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+          <p className='max-w-2xl text-base text-text-muted'>
             {cs.beyondShopifyIntro}
           </p>
         </div>
@@ -174,15 +168,11 @@ export default function HeatonistCaseStudyPage() {
         <div className='grid gap-grid-2 md:grid-cols-2'>
           <div className='flex flex-col gap-4'>
             <SectionHeading>hotones.com</SectionHeading>
-            <p className='text-base leading-relaxed text-text-muted'>
-              {cs.hotOnes}
-            </p>
+            <p className='text-base text-text-muted'>{cs.hotOnes}</p>
           </div>
           <div className='flex flex-col gap-4'>
             <SectionHeading>The result</SectionHeading>
-            <p className='text-base leading-relaxed text-text-muted'>
-              {cs.result}
-            </p>
+            <p className='text-base text-text-muted'>{cs.result}</p>
           </div>
         </div>
       </AnimatedSection>

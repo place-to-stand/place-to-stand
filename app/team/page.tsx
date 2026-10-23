@@ -49,9 +49,7 @@ export default function TeamPage() {
                 </h2>
                 <p className='text-sm text-text-muted'>{member.title}</p>
               </div>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {member.bio}
-              </p>
+              <p className='text-base text-text-muted'>{member.bio}</p>
               <div className='mt-auto flex justify-center gap-3 pt-2'>
                 {member.socials.linkedin && (
                   <a

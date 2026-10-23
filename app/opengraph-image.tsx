@@ -106,7 +106,7 @@ function CornerMark({ top, left }: { top?: boolean; left?: boolean }) {
 async function loadFonts() {
   'use cache'
   cacheLife('max')
-  const files = ['SpaceGrotesk-Bold.ttf', 'SourceSans3-Regular.ttf']
+  const files = ['SpaceGrotesk-Bold.ttf', 'IBMPlexSans-Regular.ttf']
   return Promise.all(
     files.map(async file =>
       (await readFile(path.join(fontDir, file))).toString('base64')
@@ -115,7 +115,7 @@ async function loadFonts() {
 }
 
 export default async function OpenGraphImage() {
-  const [spaceGrotesk, sourceSans] = (await loadFonts()).map(font =>
+  const [spaceGrotesk, plexSans] = (await loadFonts()).map(font =>
     Buffer.from(font, 'base64')
   )
 
@@ -131,7 +131,7 @@ export default async function OpenGraphImage() {
         backgroundColor: color.bg,
         overflow: 'hidden',
         color: color.text,
-        fontFamily: 'Source Sans 3',
+        fontFamily: 'IBM Plex Sans',
       }}
     >
       <DotGrid />
@@ -211,8 +211,8 @@ export default async function OpenGraphImage() {
           style: 'normal',
         },
         {
-          name: 'Source Sans 3',
-          data: sourceSans,
+          name: 'IBM Plex Sans',
+          data: plexSans,
           weight: 400,
           style: 'normal',
         },

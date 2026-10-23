@@ -1,16 +1,28 @@
 export type Client = {
   title: string
   href: string
-  image: string
-  description: string
+  /** Screenshot for the /clients page; clients without one only appear in
+   * the homepage logo grid. */
+  image?: string
+  /** Shown on the /clients page, so only clients with an `image` need one. */
+  description?: string
   /** Brand logo on a transparent ground, for the homepage logo grid. Brands
    * that only publish a dark-on-light mark use their reversed lockup so they
    * read against the dark theme. */
   logo: string
-  /** Fraction of the logo row height this mark may occupy. Wordmarks fill the
-   * row; square or heavy marks are knocked back so every logo carries the same
-   * optical weight rather than the same pixel height. Defaults to 1. */
+  /** Fraction of the logo row height this mark may occupy, set so every logo
+   * covers about the same area of ink rather than the same pixel height: wide
+   * wordmarks sit low, square marks tall, and dense marks a little smaller.
+   * Derived from each file's aspect ratio and ink coverage; re-derive it the
+   * same way for a new logo. Defaults to 1. */
   logoScale?: number
+  /** Vertical nudge, as a percent of the logo's own height (negative moves it
+   * up), so the mark's visual centre sits on the row's centre line. Measured
+   * from the file's ink: the shift that would put the ink's centre of mass in
+   * the middle, taken at 75% so text-heavy marks don't overshoot. A small
+   * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
+   * box up and leaves the heavy part sitting low. */
+  logoNudge?: number
   /** Site path of this client's case study. When set, the card on /clients
    * opens the case study instead of the client's own site. */
   caseStudy?: string
@@ -28,6 +40,8 @@ export function logoToneClass(client: Client): string {
     : 'brightness-0 invert'
 }
 
+/** Biggest names first: the homepage logo grid opens on the first ten and
+ * swaps the rest in one at a time; the audit page shows the first six. */
 export const clients: Client[] = [
   {
     title: 'Hot Ones',
@@ -35,7 +49,8 @@ export const clients: Client[] = [
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
     caseStudy: '/clients/heatonist',
-    logoScale: 0.7,
+    logoScale: 0.72,
+    logoNudge: -9,
     logoTone: 'grey',
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
@@ -45,26 +60,19 @@ export const clients: Client[] = [
     href: 'https://blakebrownbeauty.com',
     image: '/work-blake-brown-beauty.png',
     logo: '/logos/blake-brown-beauty.svg',
+    logoScale: 0.58,
     description:
       'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
   {
-    title: 'GreenWATT USA',
-    href: 'https://www.gtbsolarexchange.com',
-    image: '/work-greenwatt-usa.png',
-    logo: '/logos/greenwatt-usa.png',
-    logoScale: 0.7,
+    title: 'Florence by Mills Beauty',
+    href: 'https://florencebymillsbeauty.com',
+    image: '/work-florence-by-mills-beauty.png',
+    logo: '/logos/florence-by-mills-beauty.png',
+    logoScale: 0.62,
+    logoNudge: 8,
     description:
-      'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
-  },
-  {
-    title: 'Jeremy Turner',
-    href: 'https://jeremyturnerstudio.com',
-    image: '/work-jeremy-turner.png',
-    logo: '/logos/jeremy-turner.png',
-    logoScale: 0.5,
-    description:
-      'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
+      'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
   {
     title: 'Heatonist',
@@ -72,51 +80,125 @@ export const clients: Client[] = [
     image: '/work-heatonist.png',
     logo: '/logos/heatonist.svg',
     caseStudy: '/clients/heatonist',
+    logoScale: 0.48,
     description:
       "A curated marketplace for the world's best small-batch hot sauces.",
   },
   {
-    title: 'Florence by Mills Beauty',
-    href: 'https://florencebymillsbeauty.com',
-    image: '/work-florence-by-mills-beauty.png',
-    logo: '/logos/florence-by-mills-beauty.png',
-    logoScale: 0.64,
-    description:
-      'A clean beauty and skincare line founded by Millie Bobby Brown.',
+    title: 'Betsy & Adam',
+    href: 'https://www.betsyandadam.com',
+    logo: '/logos/betsy-and-adam.png',
+    logoScale: 0.53,
+  },
+  {
+    title: 'Xscape Evenings',
+    href: 'https://xscapeevenings.com',
+    logo: '/logos/xscape-evenings.png',
+    logoScale: 0.43,
+  },
+  {
+    title: 'Blondie Nites',
+    href: 'https://blondienites.com',
+    logo: '/logos/blondie-nites.png',
+    logoScale: 0.39,
+    logoNudge: -5,
   },
   {
     title: '9 Point Studios',
     href: 'https://9pointstudios.com',
     image: '/work-9-point-studios.png',
     logo: '/logos/9-point-studios.svg',
-    logoScale: 0.7,
+    logoScale: 0.6,
+    logoNudge: -2,
     description:
       'A world-class recording and video production facility for creative artists.',
+  },
+  {
+    title: 'GreenWATT USA',
+    href: 'https://www.gtbsolarexchange.com',
+    image: '/work-greenwatt-usa.png',
+    logo: '/logos/greenwatt-usa.png',
+    logoScale: 0.65,
+    logoNudge: 2,
+    description:
+      'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
   {
     title: 'Officina del Bere 1397',
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397.png',
     logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.85,
+    logoScale: 0.74,
+    logoNudge: 2.5,
     description:
       'A specialty shop offering elegant, functional wine and bar accessories.',
+  },
+  {
+    title: 'Safety Knights',
+    href: 'https://safetyknights.com',
+    logo: '/logos/safety-knights.svg',
+    logoScale: 0.68,
+    logoNudge: 3,
+  },
+  {
+    title: 'Jeremy Turner',
+    href: 'https://jeremyturnerstudio.com',
+    image: '/work-jeremy-turner.png',
+    logo: '/logos/jeremy-turner.svg',
+    logoScale: 0.39,
+    logoNudge: 5,
+    description:
+      'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
   {
     title: 'The Good for Nothings Club',
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club.png',
     logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.6,
+    logoScale: 0.68,
     description:
       'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
+  },
+  {
+    title: 'Up The Wall',
+    href: 'https://upthewall.co',
+    logo: '/logos/up-the-wall.svg',
+    logoScale: 0.8,
+  },
+  {
+    title: 'The Rounds',
+    href: 'https://www.theroundsnyc.com',
+    logo: '/logos/the-rounds.png',
+    logoScale: 0.36,
+    logoNudge: -6,
+  },
+  {
+    title: 'Echo & Wave',
+    href: 'https://echoandwave.com',
+    logo: '/logos/echo-and-wave.svg',
+    logoScale: 0.28,
+    logoNudge: -4,
+  },
+  {
+    title: 'so many cults',
+    href: 'https://somanycults.com',
+    logo: '/logos/so-many-cults.svg',
+    logoScale: 0.3,
+  },
+  {
+    title: 'Small Isles',
+    href: 'https://smallislesmusic.com',
+    logo: '/logos/small-isles.svg',
+    logoScale: 0.28,
+    logoNudge: -2,
   },
   {
     title: 'Lifepacks',
     href: 'https://www.lifepacks.co',
     image: '/work-lifepacks.jpg',
     logo: '/logos/lifepacks.png',
-    logoScale: 0.4,
+    logoScale: 0.38,
+    logoNudge: -3.5,
     description:
       'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
   },

@@ -20,10 +20,7 @@ export function FieldNotesPreview() {
               From the lab
             </h2>
           </Reveal>
-          <Reveal
-            index={1}
-            className='max-w-sm text-base leading-relaxed text-text-muted'
-          >
+          <Reveal index={1} className='max-w-sm text-base text-text-muted'>
             <p>
               Experiments, open-source projects, and things we&apos;re learning.
             </p>
@@ -65,9 +62,7 @@ export function FieldNotesPreview() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text transition-colors group-hover:text-accent'>
                 {note.title}
               </h3>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {note.description}
-              </p>
+              <p className='text-base text-text-muted'>{note.description}</p>
               <div className='mt-auto flex flex-wrap gap-2 pt-2'>
                 {note.tags.map(tag => (
                   <Badge key={tag} variant='outline'>

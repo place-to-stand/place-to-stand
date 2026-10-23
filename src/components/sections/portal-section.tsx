@@ -29,7 +29,7 @@ export function PortalSection() {
             <h2 className='max-w-3xl font-headline text-3xl !leading-[.95] font-bold tracking-tight text-balance text-text uppercase md:text-4xl'>
               Our Portal
             </h2>
-            <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+            <p className='max-w-2xl text-base text-text-muted md:text-lg'>
               Humans and agents, building together. We built our own delivery
               pipeline. Humans set direction and keep the taste; agents do the
               heavy building in an isolated cloud. Nothing ships until

@@ -26,10 +26,10 @@ Font.register({
 })
 
 Font.register({
-  family: 'Source Sans 3',
+  family: 'IBM Plex Sans',
   fonts: [
-    { src: path.join(fontDir, 'SourceSans3-Regular.ttf'), fontWeight: 400 },
-    { src: path.join(fontDir, 'SourceSans3-SemiBold.ttf'), fontWeight: 600 },
+    { src: path.join(fontDir, 'IBMPlexSans-Regular.ttf'), fontWeight: 400 },
+    { src: path.join(fontDir, 'IBMPlexSans-SemiBold.ttf'), fontWeight: 600 },
   ],
 })
 
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: color.bg,
     color: color.text,
-    fontFamily: 'Source Sans 3',
+    fontFamily: 'IBM Plex Sans',
     fontSize: 8.5,
     paddingTop: 28,
     paddingBottom: 26,

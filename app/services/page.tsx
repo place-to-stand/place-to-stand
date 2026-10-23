@@ -47,7 +47,7 @@ export default function ServicesPage() {
                 </h2>
                 <p className='text-base text-text-muted'>{service.tagline}</p>
                 {service.description && (
-                  <p className='text-base leading-relaxed text-text-muted/80'>
+                  <p className='text-base text-text-muted/80'>
                     {service.description}
                   </p>
                 )}
@@ -81,7 +81,7 @@ export default function ServicesPage() {
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Not sure which you need?
               </h2>
-              <p className='max-w-md text-base leading-relaxed text-text-muted'>
+              <p className='max-w-md text-base text-text-muted'>
                 The free audit pinpoints the phase your business is in and picks
                 the services that pay off first. Two minutes, results on screen,
                 no obligation.
@@ -104,7 +104,7 @@ export default function ServicesPage() {
                     Contact Us
                   </TrackedLink>
                 </Button>
-                <p className='max-w-xs text-sm leading-relaxed text-text-muted'>
+                <p className='max-w-xs text-sm text-text-muted'>
                   Already know what you want built, or want a bespoke mapping of
                   your systems? Talk to us directly.
                 </p>

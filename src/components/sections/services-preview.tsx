@@ -65,9 +65,7 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
       >
         <div className='overflow-hidden'>
           <div className='flex flex-col gap-4 px-5 pb-6 md:px-6 md:pl-[5.5rem]'>
-            <p className='text-base leading-relaxed text-text-muted'>
-              {service.description}
-            </p>
+            <p className='text-base text-text-muted'>{service.description}</p>
             <ul className='flex flex-col gap-2'>
               {service.features.map(feature => (
                 <li
@@ -96,12 +94,7 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
  *  orphaning a word or two onto the second line. */
 function AuditPrompt({ className }: { className?: string }) {
   return (
-    <p
-      className={cn(
-        'text-base leading-relaxed text-balance text-text-muted',
-        className
-      )}
-    >
+    <p className={cn('text-base text-balance text-text-muted', className)}>
       <span className='inline-block'>Not sure which of these you need?</span>{' '}
       <span className='inline-block'>
         <TrackedLink
@@ -131,7 +124,7 @@ export function ServicesPreview() {
               What we build
             </h2>
           </Reveal>
-          <Reveal index={1} className='text-md leading-relaxed text-text-muted'>
+          <Reveal index={1} className='text-md text-text-muted'>
             <p>End-to-end capabilities, from strategy to deployment.</p>
           </Reveal>
           <Reveal index={2}>

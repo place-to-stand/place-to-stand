@@ -34,7 +34,7 @@ export async function Footer() {
           <p className='text-base text-text-muted'>
             Austin, TX &middot; Brooklyn, NY
           </p>
-          <p className='mt-grid-half text-base leading-relaxed text-text-muted'>
+          <p className='mt-grid-half text-base text-text-muted'>
             A software agency building custom tools, automation, and AI around
             how your business actually runs. No bloated SaaS stack &mdash; just
             software that fits.

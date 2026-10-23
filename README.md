@@ -32,7 +32,7 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 ## Design & Brand Highlights
 
 - **Palette:** Linear gradient #BE93C5 → #7BC6CC, accent #A3A6C7, dark text #111827, light text #F9FAFB.
-- **Typography:** Afacad (logo), Bebas Neue (headings/subtitles), Source Sans Pro (body). Load via Google Fonts.
+- **Typography:** Space Grotesk (logo and headlines), IBM Plex Sans (body), IBM Plex Mono (labels). Load via Google Fonts.
 - **Motion:** Soft fade + 10px upward translate on scroll-in for each section.
 - **Accessibility:** WCAG 2.1 AA. Enforce semantic structure, high contrast, keyboard navigation, focus outlines, labeled form controls, and descriptive alt text.
 
@@ -40,16 +40,16 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 
 Single-page layout with sticky header navigation that smooth-scrolls to each section ID.
 
-| Section ID     | Purpose                                                                 |
-| -------------- | ----------------------------------------------------------------------- |
-| `#home`        | Hero headline, tagline, primary CTA (“See Our Work”) -> `#work`         |
-| `#about`       | Agency story + philosophy                                               |
-| `#services`    | Grid of shadcn UI Cards with service icon, title, description           |
-| `#how-we-work` | Numbered 4-step process                                                 |
-| `#team`        | Team card grid (photo, name, title)                                     |
-| `#work`        | Portfolio thumbnails + titles                                           |
+| Section ID     | Purpose                                                                       |
+| -------------- | ----------------------------------------------------------------------------- |
+| `#home`        | Hero headline, tagline, primary CTA (“See Our Work”) -> `#work`               |
+| `#about`       | Agency story + philosophy                                                     |
+| `#services`    | Grid of shadcn UI Cards with service icon, title, description                 |
+| `#how-we-work` | Numbered 4-step process                                                       |
+| `#team`        | Team card grid (photo, name, title)                                           |
+| `#work`        | Portfolio thumbnails + titles                                                 |
 | `#contact`     | Contact form (name, email, message) with validation, delivered via the portal |
-| Footer         | Copyright, legal links, socials                                         |
+| Footer         | Copyright, legal links, socials                                               |
 
 ## Repo Structure
 
