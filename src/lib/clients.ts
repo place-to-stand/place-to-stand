@@ -23,6 +23,9 @@ export type Client = {
    * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
    * box up and leaves the heavy part sitting low. */
   logoNudge?: number
+  /** Site path of this client's case study. When set, the card on /clients
+   * opens the case study instead of the client's own site. */
+  caseStudy?: string
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
    * color fills (they'd flatten to a blob) opt into a grey version instead. */
@@ -45,6 +48,7 @@ export const clients: Client[] = [
     href: 'https://hotones.com',
     image: '/work-hot-ones.png',
     logo: '/logos/hot-ones.png',
+    caseStudy: '/clients/heatonist',
     logoScale: 0.72,
     logoNudge: -9,
     logoTone: 'grey',
@@ -75,6 +79,7 @@ export const clients: Client[] = [
     href: 'https://heatonist.com',
     image: '/work-heatonist.png',
     logo: '/logos/heatonist.svg',
+    caseStudy: '/clients/heatonist',
     logoScale: 0.48,
     description:
       "A curated marketplace for the world's best small-batch hot sauces.",
