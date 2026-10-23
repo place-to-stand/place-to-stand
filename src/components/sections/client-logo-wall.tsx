@@ -19,8 +19,9 @@ import {
  * whole roster gets seen without a second row of logos.
  *
  * Phones show three rows of two; from 576px it is two rows of three, then
- * four from 800px and five from 1280px. Cell height (and so logo size) follows the window width, from 44px
- * up to 72px, so it changes smoothly instead of jumping at each breakpoint;
+ * four from 800px and five from 1280px. Cell height (and so logo size) and
+ * the gaps all follow the window width at one rate, the cell from 44px up to
+ * 72px, so they change smoothly instead of jumping at each breakpoint;
  * wide logos are also held to their cell's width. The extra cells are hidden
  * with CSS, and swaps only touch the
  * cells that show, so the whole roster still comes round at every width.
@@ -100,12 +101,12 @@ export function ClientLogoWall() {
 
   return (
     // Three rows of two on phones, two rows above that; cells that don't fit
-    // are hidden (see slotVisibility). Two across, the columns sit 24px apart
-    // and the rows 12px; from three across the columns are 48px apart, rows
-    // 24px (48px at five across).
+    // are hidden (see slotVisibility). Like the cell height, both gaps follow
+    // the window width: columns 6.5vw (24px to 48px), rows 3vw (12px to 48px).
+    // Only the column count changes at breakpoints.
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-1 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-x-grid-2 min-[36rem]:gap-y-grid-1 min-[50rem]:grid-cols-4 min-[80rem]:grid-cols-5 min-[80rem]:gap-y-grid-2'
+      className='grid grid-cols-2 gap-x-[clamp(1.5rem,6.5vw,3rem)] gap-y-[clamp(0.75rem,3vw,3rem)] min-[36rem]:grid-cols-3 min-[50rem]:grid-cols-4 min-[80rem]:grid-cols-5'
     >
       {shown.map((index, slot) => (
         <LogoCell
