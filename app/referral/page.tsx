@@ -195,7 +195,7 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Audit callout */}
-      <AnimatedSection className='flex flex-col gap-grid-2 pt-grid-5 pb-0'>
+      <AnimatedSection className='flex flex-col gap-grid-2 pt-[67px] pb-0 md:pt-[138px]'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.audit.heading}
         </h2>

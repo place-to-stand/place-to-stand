@@ -39,7 +39,7 @@ export default function ClientsPage() {
         <ClientsSection />
 
         {/* CTA Block */}
-        <div className='dots-band mt-grid-5 border border-border bg-bg-card p-6 md:mt-grid-4 md:p-16'>
+        <div className='dots-band mt-43 border border-border bg-bg-card p-6 md:mt-49 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3 md:gap-4'>
