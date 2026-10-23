@@ -250,8 +250,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Who We Are Block */}
-      <Reveal index={2} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
+      <Reveal index={2} className='mt-40'>
+        <div className='flex flex-col gap-12'>
           <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Who We Are</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
@@ -311,8 +311,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* What The Audit Covers */}
-      <Reveal index={2} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
+      <Reveal index={2} className='mt-40'>
+        <div className='flex flex-col gap-12'>
           <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>What You&apos;ll Learn</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
@@ -340,8 +340,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Services Overview */}
-      <Reveal index={3} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
+      <Reveal index={3} className='mt-40'>
+        <div className='flex flex-col gap-12'>
           <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Capabilities</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
