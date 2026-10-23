@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Suspense, type ReactNode } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
-import { Space_Grotesk, Hanken_Grotesk, IBM_Plex_Mono } from 'next/font/google'
+import { Space_Grotesk, Geist, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
@@ -22,9 +22,9 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 // Body text.
-const hankenGrotesk = Hanken_Grotesk({
+const geist = Geist({
   subsets: ['latin'],
-  variable: '--font-hanken-grotesk',
+  variable: '--font-geist',
 })
 
 // Labels, buttons and footnotes. Not a variable font, so list the weights used.
@@ -91,7 +91,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={cn(
           'min-h-screen overflow-x-hidden bg-bg text-text',
           spaceGrotesk.variable,
-          hankenGrotesk.variable,
+          geist.variable,
           plexMono.variable
         )}
       >

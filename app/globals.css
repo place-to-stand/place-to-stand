@@ -45,7 +45,7 @@
    at the point of use rather than resolved against :root. */
 @theme inline {
   --font-logo: var(--font-space-grotesk);
-  --font-sans: var(--font-hanken-grotesk);
+  --font-sans: var(--font-geist);
   --font-mono: var(--font-plex-mono);
   --font-headline: var(--font-space-grotesk);
 }

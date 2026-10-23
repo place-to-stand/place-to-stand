@@ -32,7 +32,7 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 ## Design & Brand Highlights
 
 - **Palette:** Linear gradient #BE93C5 → #7BC6CC, accent #A3A6C7, dark text #111827, light text #F9FAFB.
-- **Typography:** Space Grotesk (logo and headlines), Hanken Grotesk (body), IBM Plex Mono (labels). Load via Google Fonts.
+- **Typography:** Space Grotesk (logo and headlines), Geist (body), IBM Plex Mono (labels). Load via Google Fonts.
 - **Motion:** Soft fade + 10px upward translate on scroll-in for each section.
 - **Accessibility:** WCAG 2.1 AA. Enforce semantic structure, high contrast, keyboard navigation, focus outlines, labeled form controls, and descriptive alt text.
 
