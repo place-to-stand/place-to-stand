@@ -103,8 +103,8 @@ export function PhasesSection({
     <AnimatedSection className='py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
-        <div className='flex flex-col gap-4'>
-          <Reveal index={0} className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-3 md:gap-4'>
+          <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
             {showLabel && (
               <span className='bp-label font-mono'>How We Work</span>
             )}

@@ -291,7 +291,7 @@ export function ResultsView({
       {recommendations.length > 0 && (
         <section className='relative mt-grid-2 border-t border-t-accent pt-grid-2'>
           <div className='mb-grid-1 flex items-end justify-between'>
-            <div className='flex flex-col gap-2'>
+            <div className='flex flex-col gap-1.5 md:gap-2'>
               <span className='bp-label font-mono'>The Blueprint</span>
               <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
                 Where we&apos;d start

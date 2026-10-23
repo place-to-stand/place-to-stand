@@ -35,8 +35,8 @@ export function PillarsSection() {
     <AnimatedSection className='py-20'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: sticky heading */}
-        <div className='flex flex-col gap-4 md:sticky md:top-32 md:self-start'>
-          <Reveal index={0} className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
+          <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
             <span className='bp-label font-mono'>Pillars</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               Our Development

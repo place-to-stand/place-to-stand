@@ -42,8 +42,8 @@ export default function ClientsPage() {
         <div className='relative border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3'>
-              <Reveal index={0} className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 md:gap-4'>
+              <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
                 <span className='bp-label font-mono'>Next Step</span>
                 <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                   Find where to start.
