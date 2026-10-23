@@ -739,7 +739,7 @@ html {
 /* ─── Blueprint section annotation label ───
    Callout label with a double-chevron terminal mark. */
 .bp-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -751,7 +751,7 @@ html {
 
 .bp-label::after {
   content: '\00BB';
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   letter-spacing: 0;
   opacity: 0.7;
