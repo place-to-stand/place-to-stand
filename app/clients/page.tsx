@@ -18,12 +18,12 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ClientsPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-10'>
       {/* Heading, client cards, and CTA tile, one section separated by gaps */}
       <AnimatedSection
         priority
         id='clients'
-        className='flex flex-col gap-grid-3 md:gap-grid-4'
+        className='flex flex-col gap-grid-3 pb-grid-4! md:gap-grid-4 md:pb-grid-6!'
       >
         <div className='dots-hero flex flex-col gap-4'>
           <span className='bp-label font-mono'>Selected Clients</span>
@@ -39,7 +39,7 @@ export default function ClientsPage() {
         <ClientsSection />
 
         {/* CTA Block */}
-        <div className='dots-band border border-border bg-bg-card p-6 md:p-16'>
+        <div className='dots-band mt-grid-1 border border-border bg-bg-card p-6 md:mt-grid-2 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3 md:gap-4'>

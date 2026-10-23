@@ -108,10 +108,25 @@ html {
   top: -2400px;
   bottom: calc(-1 * var(--spacing-grid-2));
 }
-/* Audit callout: three bands above and below the box. */
+/* Audit callout: --band-pad of dots above the box, then dots all the way down
+   to the footer (the layer overshoots and <main> clips it). Each page leaves
+   the same --band-pad of space under the box. */
+.dots-band {
+  --band-pad: var(--spacing-grid-4);
+}
+@media (min-width: 48rem) {
+  .dots-band {
+    --band-pad: var(--spacing-grid-6);
+  }
+}
 .dots-band::before {
-  top: calc(-1 * var(--spacing-grid-3));
-  bottom: calc(-1 * var(--spacing-grid-3));
+  top: calc(-1 * var(--band-pad));
+  bottom: -2400px;
+}
+/* Clips the dot layers to the page body so they never widen or lengthen the
+   page. clip (not hidden) keeps position: sticky working inside. */
+main {
+  overflow: clip;
 }
 
 /* Mobile menu sheet (header.tsx): slides in from the right over a dimmed page. */

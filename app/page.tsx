@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className='flex-1 pb-32'>
+    <main className='flex-1'>
       <HeroSection />
       <ClientLogosSection />
       <WhoWeWorkWithSection />
@@ -33,7 +33,7 @@ export default function HomePage() {
       {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
       {/* CTA Block — blueprint detail callout */}
-      <AnimatedSection className='py-20'>
+      <AnimatedSection className='py-grid-4 md:py-grid-6'>
         <div className='dots-band border border-border bg-bg-card p-5 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
