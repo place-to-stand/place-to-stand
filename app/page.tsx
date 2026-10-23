@@ -38,7 +38,7 @@ export default function HomePage() {
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3 md:gap-4'>
-              <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
+              <Reveal index={0} className='flex flex-col gap-3 md:gap-4'>
                 <span className='bp-label font-mono'>Next Step</span>
                 <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
                   Find where to start.

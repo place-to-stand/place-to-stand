@@ -118,7 +118,7 @@ export function ServicesPreview() {
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading (sticky) */}
         <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
-          <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
+          <Reveal index={0} className='flex flex-col gap-3 md:gap-4'>
             <span className='bp-label font-mono'>Services</span>
             <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               What we build

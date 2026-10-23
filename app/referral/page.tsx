@@ -63,12 +63,12 @@ export default function ReferralPage() {
 
       {/* Who we are */}
       <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
-        <div className='flex flex-col gap-1.5 md:gap-2'>
+        <div className='flex flex-col gap-3 md:gap-4'>
           <span className='bp-label font-mono'>{c.whoWeAre.label}</span>
           <h2 className='max-w-3xl font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-4xl'>
             {c.whoWeAre.headline}
           </h2>
-          <p className='mt-1.5 max-w-2xl text-base text-text-muted md:mt-2'>
+          <p className='max-w-2xl text-base text-text-muted'>
             {c.whoWeAre.body}
           </p>
         </div>

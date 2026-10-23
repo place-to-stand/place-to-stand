@@ -36,14 +36,14 @@ export function WhoWeWorkWithSection() {
     <AnimatedSection className='py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
-        <div className='flex flex-col gap-1.5 md:gap-2'>
+        <div className='flex flex-col gap-3 md:gap-4'>
           <span className='bp-label font-mono'>Who We Work With</span>
           <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
             We build for mid-market businesses
             <br />
             without in-house engineers.
           </h2>
-          <p className='mt-1.5 max-w-xl text-base text-text-muted md:mt-2'>
+          <p className='max-w-xl text-base text-text-muted'>
             Established companies with real processes and a technical mindset,
             but no engineering team to build what&apos;s next. That&apos;s where
             we come in.

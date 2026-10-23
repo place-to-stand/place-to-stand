@@ -76,12 +76,12 @@ export default function ServicesPage() {
         <div className='relative border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-1.5 md:gap-2'>
+            <div className='flex flex-col gap-3 md:gap-4'>
               <span className='bp-label font-mono'>Next Step</span>
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Not sure which you need?
               </h2>
-              <p className='mt-1.5 max-w-md text-base text-text-muted md:mt-2'>
+              <p className='max-w-md text-base text-text-muted'>
                 The free audit pinpoints the phase your business is in and picks
                 the services that pay off first. Two minutes, results on screen,
                 no obligation.
