@@ -319,23 +319,23 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               What the audit covers
             </h2>
           </div>
-          <div className='grid gap-grid-1 sm:grid-cols-2'>
-            {AUDIT_COVERS.map(({ icon: Icon, title, description }) => (
-              <div
-                key={title}
-                className='relative flex flex-col gap-3 border border-border bg-bg-card p-5 transition-colors hover:border-border-light'
-              >
-                <BlueprintCorners size={12} />
-                <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
-                  <Icon className='h-5 w-5' />
+          {/* Four open columns under a shared rule: no boxed cards */}
+          <ol className='grid gap-x-grid-1 gap-y-grid-2 border-t border-border pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'>
+            {AUDIT_COVERS.map(({ icon: Icon, title, description }, index) => (
+              <li key={title} className='flex flex-col gap-3'>
+                <div className='flex items-center gap-3 text-text-muted'>
+                  <span className='font-mono text-xs tabular-nums'>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <Icon className='h-5 w-5 text-text' aria-hidden />
                 </div>
-                <h3 className='font-headline text-base font-semibold tracking-tight text-text uppercase'>
+                <h3 className='font-headline text-xl leading-tight font-semibold tracking-tight text-text'>
                   {title}
                 </h3>
                 <p className='text-base text-text-muted'>{description}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </Reveal>
 

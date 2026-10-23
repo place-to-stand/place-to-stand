@@ -30,45 +30,52 @@ export default function ServicesPage() {
             End-to-end capabilities from strategy to deployment.
           </p>
         </div>
-        <div className='grid gap-6 md:grid-cols-2 md:gap-10'>
-          {services.map(service => {
+        {/* One open row per service, split by a rule: no boxed cards */}
+        <ol className='flex flex-col border-b border-border'>
+          {services.map((service, index) => {
             const Icon = serviceIcons[service.icon]
             return (
-              <div
+              <li
                 key={service.slug}
-                className={`relative flex flex-col gap-4 border border-border bg-bg-card p-6 md:p-8${
-                  service.slug === 'managed-services' ? 'md:col-span-2' : ''
-                }`}
+                className='grid gap-grid-1 border-t border-border py-grid-2 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
               >
-                <BlueprintCorners />
-                {Icon && <Icon className='h-5 w-5 text-text' aria-hidden />}
-                <h2 className='font-headline text-2xl text-text uppercase'>
-                  {service.title}
-                </h2>
-                <p className='text-base text-text-muted'>{service.tagline}</p>
-                {service.description && (
-                  <p className='text-base text-text-muted/80'>
-                    {service.description}
-                  </p>
-                )}
-                <ul className='mt-2 flex flex-col gap-2 border-t border-border pt-4'>
-                  {service.features.map(feature => (
-                    <li
-                      key={feature}
-                      className='flex items-start gap-3 text-base text-text-muted'
-                    >
-                      <span
-                        className='mt-1.5 h-1.5 w-1.5 shrink-0 bg-accent'
-                        aria-hidden
-                      />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className='flex flex-col gap-3 md:gap-4'>
+                  <div className='flex items-center gap-3 text-text-muted'>
+                    <span className='font-mono text-xs tabular-nums'>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    {Icon && <Icon className='h-5 w-5 text-text' aria-hidden />}
+                  </div>
+                  <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+                    {service.title}
+                  </h2>
+                  <p className='text-lg text-text-muted'>{service.tagline}</p>
+                </div>
+                <div className='flex flex-col gap-grid-1'>
+                  {service.description && (
+                    <p className='text-base text-text-muted'>
+                      {service.description}
+                    </p>
+                  )}
+                  <ul className='grid gap-x-grid-1 gap-y-2 sm:grid-cols-2'>
+                    {service.features.map(feature => (
+                      <li
+                        key={feature}
+                        className='flex items-start gap-3 text-base text-text'
+                      >
+                        <span
+                          className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent'
+                          aria-hidden
+                        />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
             )
           })}
-        </div>
+        </ol>
       </AnimatedSection>
 
       {/* CTA Block */}
