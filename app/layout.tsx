@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Suspense, type ReactNode } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
-import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
+import { Space_Grotesk, Instrument_Sans, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
@@ -21,16 +21,16 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-const plexSans = IBM_Plex_Sans({
+// Body text.
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-plex-sans',
+  variable: '--font-instrument-sans',
 })
 
-// Labels, buttons and footnotes. Not a variable font, so list the weights used.
-const plexMono = IBM_Plex_Mono({
-  weight: ['400', '500', '600', '700'],
+// Labels, buttons and footnotes.
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-plex-mono',
+  variable: '--font-geist-mono',
 })
 
 export const metadata: Metadata = {
@@ -90,8 +90,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={cn(
           'min-h-screen overflow-x-hidden bg-bg text-text',
           spaceGrotesk.variable,
-          plexSans.variable,
-          plexMono.variable
+          instrumentSans.variable,
+          geistMono.variable
         )}
       >
         <JsonLd data={organizationJsonLd} />
