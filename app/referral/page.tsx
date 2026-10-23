@@ -14,61 +14,63 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ReferralPage() {
   return (
-    <main className='flex-1 pt-grid-4 pb-grid-4'>
+    <main className='flex-1 pt-grid-4 pb-grid-4 md:pb-grid-6'>
       {/* Hero */}
       <AnimatedSection
         priority
-        className='flex flex-col gap-grid-1 pt-grid-1 pb-grid-3'
+        className='flex flex-col gap-grid-1 pt-grid-1 pb-6 md:pb-14'
       >
-        <div className='flex flex-col gap-4'>
-          <span className='bp-label font-mono'>{c.hero.label}</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[0.92] font-bold tracking-tight text-balance text-text md:text-6xl'>
-            {c.hero.headline}
-            <a
-              href='#referral-terms'
-              aria-label='See referral program terms'
-              className='ml-1 align-super font-mono text-[0.45em] font-normal text-accent transition-colors hover:text-accent/80'
-            >
-              *
-            </a>
-          </h1>
-          <p className='max-w-2xl text-base text-text-muted md:text-lg'>
-            {c.hero.body}
-          </p>
-        </div>
-        <div className='flex flex-col gap-grid-half sm:flex-row sm:items-center sm:gap-grid-1'>
-          <Button asChild size='lg' className='w-full sm:w-auto'>
-            <TrackedLink href={c.join.href} location='referral-hero'>
-              {c.hero.joinLabel}
-            </TrackedLink>
-          </Button>
-          {/*
+        <div className='dots-hero flex flex-col gap-grid-1'>
+          <div className='flex flex-col gap-4'>
+            <span className='bp-label font-mono'>{c.hero.label}</span>
+            <h1 className='max-w-4xl font-headline text-4xl leading-[0.92] font-bold tracking-tight text-balance text-text md:text-6xl'>
+              {c.hero.headline}
+              <a
+                href='#referral-terms'
+                aria-label='See referral program terms'
+                className='ml-1 align-super font-mono text-[0.45em] font-normal text-accent transition-colors hover:text-accent/80'
+              >
+                *
+              </a>
+            </h1>
+            <p className='max-w-2xl text-base text-text-muted md:text-lg'>
+              {c.hero.body}
+            </p>
+          </div>
+          <div className='flex flex-col gap-grid-half sm:flex-row sm:items-center sm:gap-grid-1'>
+            <Button asChild size='lg' className='w-full sm:w-auto'>
+              <TrackedLink href={c.join.href} location='referral-hero'>
+                {c.hero.joinLabel}
+              </TrackedLink>
+            </Button>
+            {/*
             A plain anchor rather than next/link: the target is a route handler
             that streams a file, so client-side navigation (and prefetching)
             would generate the PDF once for the router and again for the
             browser's fallback hard navigation.
           */}
-          <Button
-            asChild
-            size='lg'
-            variant='outline'
-            className='w-full border-2 sm:w-auto'
-          >
-            <a href='/referral/pdf' download>
-              {c.hero.downloadLabel}
-            </a>
-          </Button>
+            <Button
+              asChild
+              size='lg'
+              variant='outline'
+              className='w-full border-2 sm:w-auto'
+            >
+              <a href='/referral/pdf' download>
+                {c.hero.downloadLabel}
+              </a>
+            </Button>
+          </div>
         </div>
       </AnimatedSection>
 
       {/* Who we are */}
       <AnimatedSection className='flex flex-col gap-grid-2 py-grid-3'>
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2.25 md:gap-3'>
           <span className='bp-label font-mono'>{c.whoWeAre.label}</span>
           <h2 className='max-w-3xl font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-4xl'>
             {c.whoWeAre.headline}
           </h2>
-          <p className='max-w-2xl text-base text-text-muted'>
+          <p className='mt-0.75 max-w-2xl text-base text-text-muted md:mt-1'>
             {c.whoWeAre.body}
           </p>
         </div>
@@ -193,11 +195,11 @@ export default function ReferralPage() {
       </AnimatedSection>
 
       {/* Audit callout */}
-      <AnimatedSection className='flex flex-col gap-grid-2 pt-grid-3 pb-0'>
+      <AnimatedSection className='flex flex-col gap-grid-2 pt-0 pb-0 md:pt-[110px]'>
         <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
           {c.audit.heading}
         </h2>
-        <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
+        <div className='dots-band bg-bg-card p-grid-1 md:p-grid-2'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
             <p className='max-w-md text-base text-text md:text-lg'>

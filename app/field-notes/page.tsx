@@ -16,7 +16,7 @@ export default function FieldNotesPage() {
   return (
     <main className='flex-1 pt-10 pb-32'>
       <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='flex flex-col items-center gap-4 text-center'>
+        <div className='dots-hero mb-12 flex flex-col items-center gap-4 text-center md:mb-20'>
           <span className='bp-label font-mono'>Field Notes</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             From the lab

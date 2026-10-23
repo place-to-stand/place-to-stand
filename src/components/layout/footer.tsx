@@ -15,7 +15,7 @@ async function currentYear() {
 export async function Footer() {
   const year = await currentYear()
   return (
-    <footer className='border-t border-border bg-bg-card text-text-muted'>
+    <footer className='bg-bg-card text-text-muted'>
       <div className='mx-auto flex w-full max-w-content flex-col gap-grid-2 px-6 py-grid-2 md:flex-row md:items-start md:justify-between lg:px-12'>
         {/* Brand */}
         <div className='flex max-w-md flex-col gap-grid-half'>

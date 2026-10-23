@@ -18,10 +18,10 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ServicesPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-10'>
       <JsonLd data={servicesJsonLd} />
       <AnimatedSection priority className='flex flex-col gap-12 md:gap-20'>
-        <div className='flex flex-col gap-4'>
+        <div className='dots-hero flex flex-col gap-4'>
           <span className='bp-label font-mono'>Services</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             What we build
@@ -30,58 +30,65 @@ export default function ServicesPage() {
             End-to-end capabilities from strategy to deployment.
           </p>
         </div>
-        <div className='grid gap-6 md:grid-cols-2 md:gap-10'>
-          {services.map(service => {
+        {/* One open row per service, split by a rule: no boxed cards */}
+        <ol className='flex flex-col divide-y divide-border'>
+          {services.map((service, index) => {
             const Icon = serviceIcons[service.icon]
             return (
-              <div
+              <li
                 key={service.slug}
-                className={`relative flex flex-col gap-4 border border-border bg-bg-card p-6 md:p-8${
-                  service.slug === 'managed-services' ? 'md:col-span-2' : ''
-                }`}
+                className='grid gap-grid-1 py-grid-2 last:pb-0 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
               >
-                <BlueprintCorners />
-                {Icon && <Icon className='h-5 w-5 text-text' aria-hidden />}
-                <h2 className='font-headline text-2xl text-text uppercase'>
-                  {service.title}
-                </h2>
-                <p className='text-base text-text-muted'>{service.tagline}</p>
-                {service.description && (
-                  <p className='text-base text-text-muted/80'>
-                    {service.description}
-                  </p>
-                )}
-                <ul className='mt-2 flex flex-col gap-2 border-t border-border pt-4'>
-                  {service.features.map(feature => (
-                    <li
-                      key={feature}
-                      className='flex items-start gap-3 text-base text-text-muted'
-                    >
-                      <span
-                        className='mt-1.5 h-1.5 w-1.5 shrink-0 bg-accent'
-                        aria-hidden
-                      />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <div className='flex flex-col gap-3 md:gap-4'>
+                  <div className='flex items-center gap-3 text-text-muted'>
+                    <span className='font-mono text-xs tabular-nums'>
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    {Icon && <Icon className='h-5 w-5 text-text' aria-hidden />}
+                  </div>
+                  <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+                    {service.title}
+                  </h2>
+                  <p className='text-lg text-text-muted'>{service.tagline}</p>
+                </div>
+                <div className='flex flex-col gap-grid-1'>
+                  {service.description && (
+                    <p className='text-base text-text-muted'>
+                      {service.description}
+                    </p>
+                  )}
+                  <ul className='grid gap-x-grid-1 gap-y-2 sm:grid-cols-2'>
+                    {service.features.map(feature => (
+                      <li
+                        key={feature}
+                        className='flex items-start gap-3 text-base text-text'
+                      >
+                        <span
+                          className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent'
+                          aria-hidden
+                        />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
             )
           })}
-        </div>
+        </ol>
       </AnimatedSection>
 
       {/* CTA Block */}
-      <AnimatedSection>
-        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+      <AnimatedSection className='pt-22 pb-grid-4 md:pt-44 md:pb-grid-6'>
+        <div className='dots-band bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-2.25 md:gap-3'>
               <span className='bp-label font-mono'>Next Step</span>
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Not sure which you need?
               </h2>
-              <p className='max-w-md text-base text-text-muted'>
+              <p className='mt-0.75 max-w-md text-base text-text-muted md:mt-1'>
                 The free audit pinpoints the phase your business is in and picks
                 the services that pay off first. Two minutes, results on screen,
                 no obligation.

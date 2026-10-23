@@ -36,10 +36,10 @@ export function ManifestoSection() {
     <AnimatedSection className='py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
-        <div className='flex flex-col gap-4'>
-          <Reveal index={0} className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-3 md:gap-4'>
+          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Who We Are</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-5xl'>
               Experienced engineers with fine-tuned AI.
             </h2>
           </Reveal>
