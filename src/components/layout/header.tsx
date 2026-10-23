@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState, type MouseEvent } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
@@ -13,6 +13,26 @@ export function Header() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const router = useRouter()
+
+  // Tapping a page in the mobile menu lets the sheet slide shut first, then
+  // navigates. Navigating at once ran the page transition with the sheet still
+  // open: the sheet and its dimmed overlay vanished in one frame, which read
+  // as a flash.
+  const navigateFromSheet = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    event.preventDefault()
+    const href = event.currentTarget.getAttribute('href')
+    setMobileOpen(false)
+    if (!href || href === pathname) return
+    const reduced = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+    window.setTimeout(
+      () => router.push(href as Parameters<typeof router.push>[0]),
+      reduced ? 0 : 250
+    )
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -152,7 +172,7 @@ export function Header() {
                         'border-b border-border py-4 font-headline text-2xl font-semibold tracking-tight transition-colors hover:text-accent',
                         pathname === item.href ? 'text-accent' : 'text-text'
                       )}
-                      onClick={() => setMobileOpen(false)}
+                      onClick={navigateFromSheet}
                     >
                       {item.label}
                     </Link>
@@ -163,7 +183,7 @@ export function Header() {
                     <TrackedLink
                       href='/audit'
                       location='header-mobile'
-                      onClick={() => setMobileOpen(false)}
+                      onClick={navigateFromSheet}
                     >
                       Free Audit
                     </TrackedLink>
