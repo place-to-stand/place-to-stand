@@ -100,11 +100,12 @@ export function ClientLogoWall() {
 
   return (
     // Three rows of two on phones, two rows above that; cells that don't fit
-    // are hidden (see slotVisibility). Two across, the rows sit 12px apart;
-    // 24px from three across, 48px from 1024px.
+    // are hidden (see slotVisibility). Two across, the columns sit 24px apart
+    // and the rows 12px; from three across the columns are 48px apart, rows
+    // 24px (48px at five across).
     <div
       ref={ref}
-      className='grid grid-cols-2 gap-x-grid-2 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-y-grid-1 min-[50rem]:grid-cols-4 lg:gap-grid-2 min-[80rem]:grid-cols-5'
+      className='grid grid-cols-2 gap-x-grid-1 gap-y-grid-half min-[36rem]:grid-cols-3 min-[36rem]:gap-x-grid-2 min-[36rem]:gap-y-grid-1 min-[50rem]:grid-cols-4 min-[80rem]:grid-cols-5 min-[80rem]:gap-y-grid-2'
     >
       {shown.map((index, slot) => (
         <LogoCell
