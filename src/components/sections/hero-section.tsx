@@ -49,8 +49,10 @@ export function HeroSection() {
               >
                 is built for everyone.
               </span>
+              {/* On phones "everyone." sits right above this line and its
+                  "y" tail touched the "W"; a little room keeps them apart. */}
               <span
-                className='hero-line block text-accent'
+                className='hero-line mt-[0.1em] block text-accent md:mt-0'
                 style={{ '--hero-delay': '0.24s' } as CSSProperties}
               >
                 We build for you.
