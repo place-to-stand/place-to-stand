@@ -79,7 +79,7 @@ export default function ServicesPage() {
       </AnimatedSection>
 
       {/* CTA Block */}
-      <AnimatedSection className='pt-grid-4 pb-grid-4 md:pb-grid-6'>
+      <AnimatedSection className='pt-26 pb-grid-4 md:pb-grid-6'>
         <div className='dots-band border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>

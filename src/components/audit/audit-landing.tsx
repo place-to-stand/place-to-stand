@@ -239,7 +239,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Client Trust Strip */}
-      <Reveal index={1} className='mt-grid-8'>
+      <Reveal index={1} className='mt-grid-6'>
         <div className='flex flex-col gap-grid-1'>
           <span className='bp-label font-mono'>Trusted by</span>
           <div className='relative border border-border py-grid-1'>

@@ -196,10 +196,7 @@ export function PhasesSection({
         {/* Under The Hood — the method behind every stage plus the tools that power
             it. Folds the how-we-work process into the intro, then the vendor logos. */}
         {showPoweredBy && (
-          <Reveal
-            index={3}
-            className='mt-grid-1 flex flex-col gap-grid-1 md:gap-grid-2'
-          >
+          <Reveal index={3} className='mt-grid-1 flex flex-col gap-5 md:gap-8'>
             <div className='flex flex-col gap-2'>
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
                 Under the hood
