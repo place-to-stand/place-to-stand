@@ -19,9 +19,9 @@ import {
  * whole roster gets seen without a second row of logos.
  *
  * Phones show three rows of two; from 576px it is two rows of three, then
- * four from 800px and five from 1280px. Cell height (and so logo size) and
- * the gaps all follow the window width at one rate, the cell from 44px up to
- * 72px, so they change smoothly instead of jumping at each breakpoint;
+ * four from 800px and five from 1280px. Cell height (and so logo size) is a
+ * fixed share of the cell's width, up to 72px, so logos fill their cells the
+ * same way at every column count; the gaps follow the window width;
  * wide logos are also held to their cell's width. The extra cells are hidden
  * with CSS, and swaps only touch the
  * cells that show, so the whole roster still comes round at every width.
@@ -101,8 +101,8 @@ export function ClientLogoWall() {
 
   return (
     // Three rows of two on phones, two rows above that; cells that don't fit
-    // are hidden (see slotVisibility). Like the cell height, both gaps follow
-    // the window width: columns 6.5vw (24px to 48px), rows 3vw (12px to 48px).
+    // are hidden (see slotVisibility). Both gaps follow the window width:
+    // columns 6.5vw (24px to 48px), rows 3vw (12px to 48px).
     // Only the column count changes at breakpoints.
     <div
       ref={ref}
@@ -176,13 +176,15 @@ function LogoCell({
       onPointerLeave={onRelease}
       onFocus={onHold}
       onBlur={onRelease}
-      className={`group relative flex h-[clamp(2.75rem,6.5vw,4.5rem)] items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 ${className ?? ''}`}
+      className={`group @container relative flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 ${className ?? ''}`}
     >
-      {/* Keyed by client so a swap remounts it and replays the scan-in. */}
+      {/* Keyed by client so a swap remounts it and replays the scan-in. Its
+          height is 36% of the cell's width (cqw), up to 72px, so logos keep
+          the same share of their cell whatever the column count. */}
       <span
         key={client.title}
         style={{ transitionDuration: `${SWAP_FADE_MS}ms` }}
-        className={`flex h-full w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
+        className={`flex h-[min(4.5rem,36cqw)] w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
           leaving ? 'logo-swap-out' : 'opacity-80 group-hover:opacity-100'
         } ${entering ? 'logo-swap-in' : ''}`}
       >
