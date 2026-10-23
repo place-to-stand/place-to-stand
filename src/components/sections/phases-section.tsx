@@ -91,6 +91,7 @@ export function PhasesSection({
   showPoweredBy = false,
   showLabel = true,
   showAuditLink = false,
+  largeHeading = false,
 }: {
   showHowWeWorkLink?: boolean
   showPoweredBy?: boolean
@@ -98,6 +99,8 @@ export function PhasesSection({
   /** Prompts the reader into the audit right under the phase cards. The audit's
    *  first output is the phase you are in, so this is where that question lands. */
   showAuditLink?: boolean
+  /** Homepage runs its section headings a size up. */
+  largeHeading?: boolean
 }) {
   return (
     <AnimatedSection className='py-20'>
@@ -108,7 +111,9 @@ export function PhasesSection({
             {showLabel && (
               <span className='bp-label font-mono'>How We Work</span>
             )}
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2
+              className={`font-headline leading-[0.95] font-bold tracking-tight text-text ${largeHeading ? 'text-4xl md:text-5xl' : 'text-3xl md:text-4xl'}`}
+            >
               We meet you at your stage of business.
             </h2>
           </Reveal>

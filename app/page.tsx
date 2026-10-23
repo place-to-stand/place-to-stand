@@ -26,7 +26,7 @@ export default function HomePage() {
       <HeroSection />
       <ClientLogosSection />
       <WhoWeWorkWithSection />
-      <PhasesSection showPoweredBy showAuditLink />
+      <PhasesSection showPoweredBy showAuditLink largeHeading />
       <ServicesPreview />
       <ManifestoSection />
       <PillarsSection />
@@ -40,7 +40,7 @@ export default function HomePage() {
             <div className='flex flex-col gap-3 md:gap-4'>
               <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
                 <span className='bp-label font-mono'>Next Step</span>
-                <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
+                <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
                   Find where to start.
                 </h2>
               </Reveal>

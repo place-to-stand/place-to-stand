@@ -120,7 +120,7 @@ export function ServicesPreview() {
         <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
           <Reveal index={0} className='flex flex-col gap-1.5 md:gap-2'>
             <span className='bp-label font-mono'>Services</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               What we build
             </h2>
           </Reveal>
