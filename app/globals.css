@@ -5,6 +5,12 @@
    tokens: Tailwind v4 generates both the utility classes (bg-bg, text-text,
    p-grid-2, max-w-content, …) and the :root CSS variables from this block. */
 @theme {
+  /* Reading text line height, site-wide: every text size from sm to xl uses
+     1.375, so paragraphs need no leading-* class of their own. */
+  --text-sm--line-height: 1.375;
+  --text-base--line-height: 1.375;
+  --text-lg--line-height: 1.375;
+  --text-xl--line-height: 1.375;
   --color-bg: #0e0f11;
   --color-bg-card: #1a1b1f;
   --color-bg-elevated: #242529;
@@ -66,6 +72,7 @@ html {
 @layer base {
   body {
     @apply bg-bg font-sans text-text antialiased;
+    line-height: 1.375;
     overflow-x: hidden;
     /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
        so we phase the pattern to put a dot row/column on the structural lines:

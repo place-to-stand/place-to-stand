@@ -58,7 +58,7 @@ export function ClientsSection() {
                 <h3 className='font-headline text-sm leading-none font-semibold text-text uppercase md:text-base'>
                   {project.title}
                 </h3>
-                <p className='line-clamp-2 min-h-[2.75em] text-sm leading-[1.375] text-text-muted'>
+                <p className='line-clamp-2 min-h-[2.75em] text-sm text-text-muted'>
                   {project.description}
                 </p>
               </div>

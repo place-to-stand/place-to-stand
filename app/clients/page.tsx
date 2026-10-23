@@ -49,10 +49,7 @@ export default function ClientsPage() {
                   Find where to start.
                 </h2>
               </Reveal>
-              <Reveal
-                index={1}
-                className='max-w-md text-base leading-relaxed text-text-muted'
-              >
+              <Reveal index={1} className='max-w-md text-base text-text-muted'>
                 <p>
                   The free audit pinpoints the phase your business is in and
                   where custom software pays off first. Two minutes, results on
@@ -80,7 +77,7 @@ export default function ClientsPage() {
                     Contact Us
                   </TrackedLink>
                 </Button>
-                <p className='max-w-xs text-sm leading-relaxed text-text-muted'>
+                <p className='max-w-xs text-sm text-text-muted'>
                   Already know what you want built, or want a bespoke mapping of
                   your systems? Talk to us directly.
                 </p>

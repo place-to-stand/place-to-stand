@@ -32,7 +32,7 @@ export default function ReferralPage() {
               *
             </a>
           </h1>
-          <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+          <p className='max-w-2xl text-base text-text-muted md:text-lg'>
             {c.hero.body}
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function ReferralPage() {
           <h2 className='max-w-3xl font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-4xl'>
             {c.whoWeAre.headline}
           </h2>
-          <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+          <p className='max-w-2xl text-base text-text-muted'>
             {c.whoWeAre.body}
           </p>
         </div>
@@ -118,9 +118,7 @@ export default function ReferralPage() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {card.title}
               </h3>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {card.body}
-              </p>
+              <p className='text-base text-text-muted'>{card.body}</p>
             </div>
           ))}
         </div>
@@ -142,9 +140,7 @@ export default function ReferralPage() {
                 <span className='font-mono text-xs tracking-[0.2em] text-accent'>
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <p className='text-[17px] leading-normal text-text'>
-                  &ldquo;{quote}&rdquo;
-                </p>
+                <p className='text-[17px] text-text'>&ldquo;{quote}&rdquo;</p>
               </li>
             ))}
           </ol>
@@ -169,9 +165,7 @@ export default function ReferralPage() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {step.title}
               </h3>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {step.body}
-              </p>
+              <p className='text-base text-text-muted'>{step.body}</p>
             </li>
           ))}
         </ol>
@@ -192,9 +186,7 @@ export default function ReferralPage() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {point.title}
               </h3>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {point.body}
-              </p>
+              <p className='text-base text-text-muted'>{point.body}</p>
             </li>
           ))}
         </ul>
@@ -208,7 +200,7 @@ export default function ReferralPage() {
         <div className='relative border border-border bg-bg-card p-grid-1 md:p-grid-2'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:justify-between md:gap-grid-2'>
-            <p className='max-w-md text-base leading-relaxed text-text md:text-lg'>
+            <p className='max-w-md text-base text-text md:text-lg'>
               {c.audit.body}
             </p>
             <Button asChild size='lg' className='w-full shrink-0 sm:w-auto'>
@@ -223,7 +215,7 @@ export default function ReferralPage() {
         </div>
         <p
           id='referral-terms'
-          className='scroll-mt-grid-4 pt-grid-2 text-center text-base leading-relaxed text-text-muted'
+          className='scroll-mt-grid-4 pt-grid-2 text-center text-base text-text-muted'
         >
           <span className='font-mono text-accent' aria-hidden>
             *

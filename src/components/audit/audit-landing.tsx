@@ -172,9 +172,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
       >
         <div className='overflow-hidden'>
           <div className='grid gap-grid-2 bg-bg px-grid-1 pt-9 pb-grid-1 md:grid-cols-2 md:pl-grid-3'>
-            <p className='text-base leading-relaxed text-text-muted'>
-              {service.description}
-            </p>
+            <p className='text-base text-text-muted'>{service.description}</p>
             <ul className='flex flex-col gap-1.5'>
               {service.features.map(feature => (
                 <li
@@ -277,7 +275,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                     {facet.title}
                   </h3>
-                  <p className='text-base leading-relaxed text-text-muted'>
+                  <p className='text-base text-text-muted'>
                     {facet.description}
                   </p>
                 </div>

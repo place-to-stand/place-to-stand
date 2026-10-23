@@ -64,7 +64,7 @@ export default function HowWeWorkPage() {
           <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
             Our Process
           </h1>
-          <p className='max-w-2xl text-base leading-relaxed text-text-muted md:text-lg'>
+          <p className='max-w-2xl text-base text-text-muted md:text-lg'>
             Quick wins to unblock you, a model of how your business actually
             works, execution through our portal, and hard-won judgment on the
             details.
@@ -85,9 +85,7 @@ export default function HowWeWorkPage() {
                 <h3 className='max-w-[80%] font-headline text-sm leading-tight font-bold tracking-tight text-balance text-accent uppercase'>
                   {step.title}
                 </h3>
-                <p className='text-base leading-relaxed text-text-muted'>
-                  {step.body}
-                </p>
+                <p className='text-base text-text-muted'>{step.body}</p>
               </div>
             ))}
           </div>
@@ -105,7 +103,7 @@ export default function HowWeWorkPage() {
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
                 Our Tech Stack
               </h3>
-              <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+              <p className='max-w-2xl text-base text-text-muted'>
                 The frontier AI models and modern infrastructure behind every
                 build.
               </p>
@@ -156,7 +154,7 @@ export default function HowWeWorkPage() {
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Find your phase.
               </h2>
-              <p className='max-w-md text-base leading-relaxed text-text-muted'>
+              <p className='max-w-md text-base text-text-muted'>
                 The free audit pinpoints the phase your business is in and where
                 custom software pays off first. Two minutes, results on screen,
                 no obligation.
@@ -179,7 +177,7 @@ export default function HowWeWorkPage() {
                     Contact Us
                   </TrackedLink>
                 </Button>
-                <p className='max-w-xs text-sm leading-relaxed text-text-muted'>
+                <p className='max-w-xs text-sm text-text-muted'>
                   Already know what you want built, or want a bespoke mapping of
                   your systems? Talk to us directly.
                 </p>

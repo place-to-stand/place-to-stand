@@ -76,9 +76,7 @@ export function ManifestoSection() {
                   </h3>
                   <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
-                <p className='text-base leading-relaxed text-text-muted'>
-                  {facet.description}
-                </p>
+                <p className='text-base text-text-muted'>{facet.description}</p>
               </div>
             ))}
           </div>

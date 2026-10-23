@@ -43,7 +43,7 @@ export function WhoWeWorkWithSection() {
             <br />
             without in-house engineers.
           </h2>
-          <p className='max-w-xl text-base leading-relaxed text-text-muted'>
+          <p className='max-w-xl text-base text-text-muted'>
             Established companies with real processes and a technical mindset,
             but no engineering team to build what&apos;s next. That&apos;s where
             we come in.
@@ -65,16 +65,14 @@ export function WhoWeWorkWithSection() {
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {profile.title}
               </h3>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {profile.description}
-              </p>
+              <p className='text-base text-text-muted'>{profile.description}</p>
             </div>
           ))}
         </div>
 
         {/* Each clause is an inline-block so a narrow viewport breaks the line
             between them instead of orphaning a word or two. */}
-        <p className='text-base leading-relaxed text-balance text-text-muted'>
+        <p className='text-base text-balance text-text-muted'>
           <span className='inline-block'>
             Recognize yourself in one of these?
           </span>{' '}

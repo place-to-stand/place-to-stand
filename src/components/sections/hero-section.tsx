@@ -77,14 +77,14 @@ export function HeroSection() {
                 style={{ animationDelay: '0.85s' }}
               >
                 <div className='flex max-w-lg flex-col gap-5 lg:max-w-xl'>
-                  <p className='text-base leading-snug text-balance text-text md:text-lg lg:text-xl'>
+                  <p className='text-base text-balance text-text md:text-lg lg:text-xl'>
                     We build software{' '}
                     <strong className='font-semibold'>
                       shaped to how your business actually runs.
                     </strong>{' '}
                     No more juggling a stack of bloated SaaS dashboards.
                   </p>
-                  <p className='text-base leading-snug text-balance text-text-muted md:text-lg lg:text-xl'>
+                  <p className='text-base text-balance text-text-muted md:text-lg lg:text-xl'>
                     Take the{' '}
                     <strong className='font-semibold text-text'>
                       free audit
