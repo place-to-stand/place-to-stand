@@ -254,7 +254,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
         <div className='flex flex-col gap-12'>
           <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Who We Are</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               Experienced engineers with fine-tuned AI.
             </h2>
             <p className='mt-0.75 max-w-xl text-base text-text-muted md:mt-1'>
@@ -315,7 +315,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
         <div className='flex flex-col gap-12'>
           <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>What You&apos;ll Learn</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               What the audit covers
             </h2>
           </div>
@@ -344,7 +344,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
         <div className='flex flex-col gap-12'>
           <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Capabilities</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               What we can build for you
             </h2>
           </div>
