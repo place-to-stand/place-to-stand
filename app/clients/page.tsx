@@ -25,7 +25,7 @@ export default function ClientsPage() {
         id='clients'
         className='flex flex-col gap-grid-3 pb-grid-4! md:gap-grid-4 md:pb-grid-6!'
       >
-        <div className='dots-hero flex flex-col gap-4'>
+        <div className='dots-hero mb-6 flex flex-col gap-4 md:mb-8'>
           <span className='bp-label font-mono'>Selected Clients</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             Who We Build For
@@ -39,7 +39,7 @@ export default function ClientsPage() {
         <ClientsSection />
 
         {/* CTA Block */}
-        <div className='dots-band mt-grid-1 border border-border bg-bg-card p-6 md:mt-grid-2 md:p-16'>
+        <div className='dots-band mt-grid-5 border border-border bg-bg-card p-6 md:mt-grid-4 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3 md:gap-4'>

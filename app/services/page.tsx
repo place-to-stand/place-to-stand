@@ -37,7 +37,7 @@ export default function ServicesPage() {
             return (
               <li
                 key={service.slug}
-                className='grid gap-grid-1 py-grid-2 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
+                className='grid gap-grid-1 py-grid-2 last:pb-0 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
               >
                 <div className='flex flex-col gap-3 md:gap-4'>
                   <div className='flex items-center gap-3 text-text-muted'>
@@ -79,7 +79,7 @@ export default function ServicesPage() {
       </AnimatedSection>
 
       {/* CTA Block */}
-      <AnimatedSection className='py-grid-4 md:py-grid-6'>
+      <AnimatedSection className='pt-grid-4 pb-grid-4 md:pb-grid-6'>
         <div className='dots-band border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>

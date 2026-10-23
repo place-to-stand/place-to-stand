@@ -27,7 +27,7 @@ export function ClientLogosSection() {
     // their rows, so the bottom row's ink ends well above the grid's edge.
     // These values make the gap from the hero drawing and the gap down to
     // the persona section look the same.
-    <AnimatedSection className='pt-grid-4 pb-grid-4'>
+    <AnimatedSection className='pt-grid-6 pb-grid-4 md:pt-grid-8'>
       <div className='flex flex-col gap-9'>
         <Reveal index={0}>
           <span className='bp-label font-mono'>Trusted by</span>

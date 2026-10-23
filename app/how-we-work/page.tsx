@@ -59,7 +59,7 @@ export default function HowWeWorkPage() {
     <main className='flex-1 pt-10'>
       {/* How We Work — intro + two-column process narrative */}
       <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='dots-hero flex flex-col gap-4'>
+        <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
           <span className='bp-label font-mono'>How We Work</span>
           <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
             Our Process
@@ -145,7 +145,7 @@ export default function HowWeWorkPage() {
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
       {/* CTA Block */}
-      <AnimatedSection className='py-grid-4 md:py-grid-6'>
+      <AnimatedSection className='pt-grid-6 pb-grid-4 md:pb-grid-6'>
         <div className='dots-band border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
