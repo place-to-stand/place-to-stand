@@ -252,12 +252,12 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       {/* Who We Are Block */}
       <Reveal index={2} className='mt-grid-4'>
         <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-3 md:gap-4'>
+          <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Who We Are</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               Experienced engineers with fine-tuned AI.
             </h2>
-            <p className='max-w-xl text-base text-text-muted'>
+            <p className='mt-0.75 max-w-xl text-base text-text-muted md:mt-1'>
               Senior engineers building exactly what you need, directly with the
               people who build it. No layers, no hand-offs.
             </p>
@@ -313,7 +313,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       {/* What The Audit Covers */}
       <Reveal index={2} className='mt-grid-4'>
         <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-3 md:gap-4'>
+          <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>What You&apos;ll Learn</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               What the audit covers
@@ -342,7 +342,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       {/* Services Overview */}
       <Reveal index={3} className='mt-grid-4'>
         <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-3 md:gap-4'>
+          <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Capabilities</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               What we can build for you

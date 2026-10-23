@@ -107,7 +107,7 @@ export function PhasesSection({
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-3 md:gap-4'>
-          <Reveal index={0} className='flex flex-col gap-3 md:gap-4'>
+          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
             {showLabel && (
               <span className='bp-label font-mono'>How We Work</span>
             )}

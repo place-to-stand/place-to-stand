@@ -14,7 +14,7 @@ export function FieldNotesPreview() {
       <div className='flex flex-col gap-12'>
         {/* Header — left aligned */}
         <div className='flex flex-col gap-3 md:gap-4'>
-          <Reveal index={0} className='flex flex-col gap-3 md:gap-4'>
+          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Field Notes</span>
             <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
               From the lab
