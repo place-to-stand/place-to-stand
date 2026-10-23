@@ -186,7 +186,7 @@ function LogoCell({
         key={client.title}
         style={{ transitionDuration: `${SWAP_FADE_MS}ms` }}
         className={`flex h-[min(4.5rem,36cqw)] w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
-          leaving ? 'logo-swap-out' : 'opacity-80 group-hover:opacity-100'
+          leaving ? 'logo-swap-out' : ''
         } ${entering ? 'logo-swap-in' : ''}`}
       >
         {/* Plain <img>: static, already-optimised local assets, and next/image
