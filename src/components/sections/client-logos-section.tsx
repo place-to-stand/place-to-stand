@@ -28,7 +28,7 @@ export function ClientLogosSection() {
     // These values make the gap from the hero drawing and the gap down to
     // the persona section look the same.
     <AnimatedSection className='pt-grid-3 pb-grid-4'>
-      <div className='flex flex-col gap-grid-1'>
+      <div className='flex flex-col gap-9'>
         <Reveal index={0}>
           <span className='bp-label font-mono'>Trusted by</span>
         </Reveal>

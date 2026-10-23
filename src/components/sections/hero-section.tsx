@@ -29,8 +29,10 @@ export function HeroSection() {
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
               shrinking and the hero runs off the bottom of the screen. Stacked, it centres with
-              the text below, inset 12px on both sides. */}
-          <div className='hero-frame relative w-full'>
+              the text below, inset 12px on both sides. The frame sits 1px in
+              from the gutter (mx-px) because the corner marks hang 1px outside
+              it; that puts their outer edge flush with the header's logo mark. */}
+          <div className='hero-frame relative mx-px'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
@@ -47,8 +49,10 @@ export function HeroSection() {
               >
                 is built for everyone.
               </span>
+              {/* On phones "everyone." sits right above this line and its
+                  "y" tail touched the "W"; a little room keeps them apart. */}
               <span
-                className='hero-line block text-accent'
+                className='hero-line mt-[0.1em] block text-accent md:mt-0'
                 style={{ '--hero-delay': '0.24s' } as CSSProperties}
               >
                 We build for you.
@@ -72,20 +76,20 @@ export function HeroSection() {
                 className='hero-reveal flex gap-4 self-center md:self-start'
                 style={{ animationDelay: '0.85s' }}
               >
-                <div className='flex max-w-lg flex-col gap-3 lg:max-w-xl'>
-                  <p className='text-base leading-normal text-balance text-text md:text-lg lg:text-xl'>
+                <div className='flex max-w-lg flex-col gap-5 lg:max-w-xl'>
+                  <p className='text-base text-balance text-text md:text-lg lg:text-xl'>
                     We build software{' '}
                     <strong className='font-semibold'>
                       shaped to how your business actually runs.
                     </strong>{' '}
                     No more juggling a stack of bloated SaaS dashboards.
                   </p>
-                  <p className='text-base leading-normal text-balance text-text-muted md:text-lg lg:text-xl'>
+                  <p className='text-base text-balance text-text-muted md:text-lg lg:text-xl'>
                     Take the{' '}
                     <strong className='font-semibold text-text'>
                       free audit
                     </strong>{' '}
-                    to see where custom software fits for your business.
+                    to see where custom software fits in your business.
                   </p>
                 </div>
               </div>

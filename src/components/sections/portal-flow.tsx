@@ -215,7 +215,7 @@ function StageNarration({ scene }: { scene: Scene }) {
       <span className='font-headline text-xl font-bold tracking-tight text-balance text-accent uppercase md:text-2xl'>
         {scene.status}
       </span>
-      <p className='max-w-2xl text-base leading-relaxed text-balance text-text-muted'>
+      <p className='max-w-2xl text-base text-balance text-text-muted'>
         {scene.description}
       </p>
     </div>

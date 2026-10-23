@@ -51,9 +51,7 @@ export default function FieldNotesPage() {
               <h2 className='font-headline text-xl text-text uppercase transition-colors group-hover:text-accent'>
                 {note.title}
               </h2>
-              <p className='text-base leading-relaxed text-text-muted'>
-                {note.description}
-              </p>
+              <p className='text-base text-text-muted'>{note.description}</p>
               <div className='mt-auto flex flex-wrap gap-2'>
                 {note.tags.map(tag => (
                   <Badge key={tag} variant='outline'>

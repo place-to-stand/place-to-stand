@@ -39,7 +39,7 @@ export function LegalSection({ index, title, children }: LegalSectionProps) {
         <h2 className='font-headline text-xl font-semibold tracking-tight text-text'>
           {title}
         </h2>
-        <div className='flex flex-col gap-3 text-base leading-relaxed text-text-muted'>
+        <div className='flex flex-col gap-3 text-base text-text-muted'>
           {children}
         </div>
       </div>

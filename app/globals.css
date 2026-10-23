@@ -5,6 +5,12 @@
    tokens: Tailwind v4 generates both the utility classes (bg-bg, text-text,
    p-grid-2, max-w-content, …) and the :root CSS variables from this block. */
 @theme {
+  /* Reading text line height, site-wide: every text size from sm to xl uses
+     1.375, so paragraphs need no leading-* class of their own. */
+  --text-sm--line-height: 1.375;
+  --text-base--line-height: 1.375;
+  --text-lg--line-height: 1.375;
+  --text-xl--line-height: 1.375;
   --color-bg: #0e0f11;
   --color-bg-card: #1a1b1f;
   --color-bg-elevated: #242529;
@@ -44,9 +50,9 @@
 /* Fonts reference next/font variables set on <html>, so they must be inlined
    at the point of use rather than resolved against :root. */
 @theme inline {
-  --font-display: var(--font-bebas-neue);
   --font-logo: var(--font-space-grotesk);
-  --font-sans: var(--font-source-sans);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-plex-mono);
   --font-headline: var(--font-space-grotesk);
 }
 
@@ -66,6 +72,7 @@ html {
 @layer base {
   body {
     @apply bg-bg font-sans text-text antialiased;
+    line-height: 1.375;
     overflow-x: hidden;
     /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
        so we phase the pattern to put a dot row/column on the structural lines:
@@ -733,6 +740,7 @@ html {
    Callout label with a double-chevron terminal mark. */
 .bp-label {
   font-size: 12px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -818,7 +826,7 @@ html {
 }
 
 .logo-swap-in {
-  animation: logo-scan-in 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: logo-scan-in 900ms cubic-bezier(0.65, 0, 0.35, 1) backwards;
 }
 
 .logo-swap-line {
@@ -832,6 +840,30 @@ html {
   to {
     clip-path: inset(0 0 0 0);
   }
+}
+
+/* Logo wall hover: a small scale and brighten (80% to full) on one long
+   ease-out (expo), so both lunge
+   at first and then creep to a stop. Its own wrapper, so it never fights
+   the swap fade. The scan-in clip must not stay on after it ends (fill
+   backwards, not both), or it would crop wide logos as they grow. */
+.logo-hover {
+  opacity: 0.8;
+  transition:
+    transform 1400ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) {
+  .group:hover .logo-hover {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.group:focus-visible .logo-hover {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 @keyframes logo-scan-line {
@@ -853,6 +885,9 @@ html {
   .logo-swap-in,
   .logo-swap-line {
     animation: none;
+  }
+  .logo-hover {
+    transition: none;
   }
   .logo-swap-line {
     display: none;

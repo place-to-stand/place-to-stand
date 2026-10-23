@@ -44,10 +44,7 @@ export function PillarsSection() {
               Principles
             </h2>
           </Reveal>
-          <Reveal
-            index={1}
-            className='max-w-sm text-base leading-relaxed text-text-muted'
-          >
+          <Reveal index={1} className='max-w-sm text-base text-text-muted'>
             <p>
               Own your software instead of renting SaaS, and the economics
               change. No per-seat fees, your data in one place, none of the
@@ -68,7 +65,7 @@ export function PillarsSection() {
               <h3 className='max-w-[calc(100%-3.5rem)] font-headline text-xl font-semibold tracking-tight text-text'>
                 {pillar.title}
               </h3>
-              <p className='max-w-xl text-base leading-relaxed text-accent-secondary'>
+              <p className='max-w-xl text-base text-accent-secondary'>
                 {pillar.description}
               </p>
             </div>

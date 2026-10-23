@@ -112,10 +112,7 @@ export function PhasesSection({
               We meet you at your stage of business.
             </h2>
           </Reveal>
-          <Reveal
-            index={1}
-            className='max-w-xl text-base leading-relaxed text-text-muted'
-          >
+          <Reveal index={1} className='max-w-xl text-base text-text-muted'>
             <p>
               Whether you are testing a first idea or re-architecting for scale,
               we plug in where you are and build from there.
@@ -152,7 +149,7 @@ export function PhasesSection({
                   <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                     {phase.title}
                   </h3>
-                  <ul className='flex flex-col gap-2 text-base leading-relaxed text-text-muted'>
+                  <ul className='flex flex-col gap-2 text-base text-text-muted'>
                     {phase.points.map(point => (
                       <li key={point} className='flex gap-2'>
                         <span
@@ -173,7 +170,7 @@ export function PhasesSection({
           <Reveal index={3}>
             {/* Each clause is an inline-block so a narrow viewport breaks the
                 line between them instead of orphaning a word or two. */}
-            <p className='text-base leading-relaxed text-balance text-text-muted'>
+            <p className='text-base text-balance text-text-muted'>
               <span className='inline-block'>
                 Not sure which phase you are in?
               </span>{' '}
@@ -199,7 +196,7 @@ export function PhasesSection({
               <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
                 Under the hood
               </h3>
-              <p className='max-w-2xl text-base leading-relaxed text-text-muted'>
+              <p className='max-w-2xl text-base text-text-muted'>
                 Whatever stage you are at, every build relies on a trusted stack
                 of frontier AI models and cloud infrastructure, wired into our
                 tooling and human-verified for production-grade quality.
