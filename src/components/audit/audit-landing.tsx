@@ -239,7 +239,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Client Trust Strip */}
-      <Reveal index={1} className='mt-49'>
+      <Reveal index={1} className='mt-32 md:mt-42'>
         <div className='flex flex-col gap-grid-1'>
           <span className='bp-label font-mono'>Trusted by</span>
           <div className='relative border border-border py-grid-1'>
@@ -368,7 +368,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Final CTA Block */}
-      <Reveal index={3} className='mt-61 md:mt-73'>
+      <Reveal index={3} className='mt-44 md:mt-66'>
         <div className='dots-band flex flex-col items-center gap-6 border border-border bg-bg-card p-grid-2 text-center'>
           <BlueprintCorners size={16} />
           <div className='flex flex-col items-center gap-3 md:gap-4'>

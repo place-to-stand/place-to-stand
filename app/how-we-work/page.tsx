@@ -145,7 +145,7 @@ export default function HowWeWorkPage() {
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
       {/* CTA Block */}
-      <AnimatedSection className='pt-[197px] pb-grid-4 md:pt-[245px] md:pb-grid-6'>
+      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
         <div className='dots-band border border-border bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
