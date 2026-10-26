@@ -44,7 +44,7 @@ export const organizationJsonLd = {
   '@id': ORGANIZATION_ID,
   name: SITE_NAME,
   legalName: LEGAL_NAME,
-  alternateName: ['Place To Stand Agency', 'placetostandagency.com'],
+  alternateName: ['Place To Stand', 'PTS', 'placetostandagency.com'],
   url: `${SITE_URL}/`,
   logo: absoluteUrl('/icon.png'),
   image: absoluteUrl('/opengraph-image'),
@@ -84,6 +84,7 @@ export const webSiteJsonLd = {
   '@type': 'WebSite',
   '@id': `${SITE_URL}/#website`,
   name: SITE_NAME,
+  alternateName: ['Place To Stand', 'PTS'],
   url: `${SITE_URL}/`,
   description: SITE_DESCRIPTION,
   inLanguage: 'en-US',
@@ -111,6 +112,28 @@ export const servicesJsonLd = {
       areaServed: { '@type': 'Country', name: 'United States' },
     },
   })),
+}
+
+/** A case study as an Article about a client's project, published by us. */
+export function caseStudyJsonLd(study: {
+  path: string
+  headline: string
+  description: string
+  company: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${absoluteUrl(study.path)}#article`,
+    headline: study.headline,
+    description: study.description,
+    url: absoluteUrl(study.path),
+    image: absoluteUrl('/opengraph-image'),
+    inLanguage: 'en-US',
+    author: { '@id': ORGANIZATION_ID },
+    publisher: { '@id': ORGANIZATION_ID },
+    about: { '@type': 'Organization', name: study.company },
+  }
 }
 
 /** Serialize for a `<script type="application/ld+json">` without letting a
