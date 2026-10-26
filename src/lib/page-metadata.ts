@@ -5,7 +5,7 @@ type PageMetadataInput = {
   title: string
   description: string
   path: string
-  /** Share title, when it should differ from `title | Place To Stand`. */
+  /** Share title, when it should differ from `title | Place To Stand Agency`. */
   shareTitle?: string
 }
 

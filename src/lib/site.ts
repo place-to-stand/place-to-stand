@@ -3,7 +3,7 @@
  * JSON-LD, page metadata, and llms.txt. Edit here and they update together.
  */
 export const SITE_URL = 'https://placetostandagency.com'
-export const SITE_NAME = 'Place To Stand'
+export const SITE_NAME = 'Place To Stand Agency'
 export const LEGAL_NAME = 'Place To Stand Agency'
 export const CONTACT_EMAIL = 'hello@placetostandagency.com'
 

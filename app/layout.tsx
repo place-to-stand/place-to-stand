@@ -37,17 +37,17 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
   title: {
-    default: 'Place To Stand | Custom Software & AI Development Agency',
-    template: '%s | Place To Stand',
+    default: 'Place To Stand Agency | Custom Software & AI Development',
+    template: '%s | Place To Stand Agency',
   },
   description:
     'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
   openGraph: {
-    title: 'Place To Stand | Custom Software & AI Development Agency',
+    title: 'Place To Stand Agency | Custom Software & AI Development',
     description:
       'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
     url: 'https://placetostandagency.com/',
-    siteName: 'Place To Stand',
+    siteName: 'Place To Stand Agency',
     locale: 'en_US',
     type: 'website',
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Place To Stand | Custom Software & AI Development Agency',
+    title: 'Place To Stand Agency | Custom Software & AI Development',
     description:
       'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
   },
