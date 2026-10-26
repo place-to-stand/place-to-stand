@@ -2,12 +2,11 @@ import Image from 'next/image'
 import { cn } from '@/src/lib/utils'
 import { clients, getClientHostname, type Client } from '@/src/lib/clients'
 
-/** One open row per client: a big screenshot with the name and description
+/** One open row per client: a big brand photo with the name and description
  * beside it. On large screens the image takes two thirds of the width and
  * switches sides every row; below that the image sits on top. No cards, no
- * borders: large gaps separate the rows. Every screenshot is cut to the same
- * 16:10 frame from the top of the page, so they match whatever size the file
- * is. */
+ * borders: large gaps separate the rows. Every photo is cut to the same 16:10
+ * frame from its centre, so they match whatever size the file is. */
 export function ClientsSection() {
   const featured = clients.filter(
     (client): client is Client & { image: string } => Boolean(client.image)
@@ -39,7 +38,7 @@ export function ClientsSection() {
                 fill
                 loading={index === 0 ? 'eager' : undefined}
                 sizes='(min-width: 1440px) 888px, (min-width: 1024px) 62vw, 100vw'
-                className='object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]'
+                className='object-cover transition-transform duration-700 group-hover:scale-[1.02]'
               />
             </a>
             <div
