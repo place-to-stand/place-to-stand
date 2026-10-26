@@ -18,14 +18,14 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ClientsPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-10'>
       {/* Heading, client cards, and CTA tile, one section separated by gaps */}
       <AnimatedSection
         priority
         id='clients'
-        className='flex flex-col gap-grid-3 md:gap-grid-4'
+        className='flex flex-col gap-grid-3 pb-grid-4! md:gap-grid-4 md:pb-grid-6!'
       >
-        <div className='flex flex-col gap-4'>
+        <div className='dots-hero mb-6 flex flex-col gap-4 md:mb-8'>
           <span className='bp-label font-mono'>Selected Clients</span>
           <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
             Who We Build For
@@ -39,11 +39,11 @@ export default function ClientsPage() {
         <ClientsSection />
 
         {/* CTA Block */}
-        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+        <div className='dots-band mt-26 bg-bg-card p-6 md:mt-42 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3'>
-              <Reveal index={0} className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 md:gap-4'>
+              <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
                 <span className='bp-label font-mono'>Next Step</span>
                 <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                   Find where to start.

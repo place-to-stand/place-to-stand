@@ -56,10 +56,10 @@ const stackGroups = [
 
 export default function HowWeWorkPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-10'>
       {/* How We Work — intro + two-column process narrative */}
       <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='flex flex-col gap-4'>
+        <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
           <span className='bp-label font-mono'>How We Work</span>
           <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
             Our Process
@@ -145,16 +145,16 @@ export default function HowWeWorkPage() {
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
       {/* CTA Block */}
-      <AnimatedSection>
-        <div className='relative border border-border bg-bg-card p-6 md:p-16'>
+      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
+        <div className='dots-band bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-2.25 md:gap-3'>
               <span className='bp-label font-mono'>Next Step</span>
               <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
                 Find your phase.
               </h2>
-              <p className='max-w-md text-base text-text-muted'>
+              <p className='mt-0.75 max-w-md text-base text-text-muted md:mt-1'>
                 The free audit pinpoints the phase your business is in and where
                 custom software pays off first. Two minutes, results on screen,
                 no obligation.

@@ -22,25 +22,25 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className='flex-1 pb-32'>
+    <main className='flex-1'>
       <HeroSection />
       <ClientLogosSection />
       <WhoWeWorkWithSection />
-      <PhasesSection showPoweredBy showAuditLink />
+      <PhasesSection showPoweredBy showAuditLink largeHeading />
       <ServicesPreview />
       <ManifestoSection />
       <PillarsSection />
       {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
       {/* CTA Block — blueprint detail callout */}
-      <AnimatedSection className='py-20'>
-        <div className='relative border border-border bg-bg-card p-5 md:p-16'>
+      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
+        <div className='dots-band bg-bg-card p-5 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3'>
-              <Reveal index={0} className='flex flex-col gap-3'>
+            <div className='flex flex-col gap-3 md:gap-4'>
+              <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
                 <span className='bp-label font-mono'>Next Step</span>
-                <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
+                <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
                   Find where to start.
                 </h2>
               </Reveal>

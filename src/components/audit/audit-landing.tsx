@@ -207,7 +207,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
     <div>
       {/* Hero Block */}
       <Reveal index={0}>
-        <div className='flex flex-col items-center gap-6 text-center'>
+        <div className='dots-hero flex flex-col items-center gap-6 text-center'>
           <span className='bp-label font-mono'>Opportunity Audit</span>
           <h1 className='max-w-3xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase sm:text-5xl md:text-6xl'>
             Find your biggest software opportunity
@@ -239,7 +239,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Client Trust Strip */}
-      <Reveal index={1} className='mt-grid-4'>
+      <Reveal index={1} className='mt-32 md:mt-42'>
         <div className='flex flex-col gap-grid-1'>
           <span className='bp-label font-mono'>Trusted by</span>
           <div className='relative border border-border py-grid-1'>
@@ -250,14 +250,14 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Who We Are Block */}
-      <Reveal index={2} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-2'>
+      <Reveal index={2} className='mt-40'>
+        <div className='flex flex-col gap-12'>
+          <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Who We Are</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               Experienced engineers with fine-tuned AI.
             </h2>
-            <p className='mt-1 max-w-xl text-base text-text-muted'>
+            <p className='mt-0.75 max-w-xl text-base text-text-muted md:mt-1'>
               Senior engineers building exactly what you need, directly with the
               people who build it. No layers, no hand-offs.
             </p>
@@ -311,40 +311,40 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* What The Audit Covers */}
-      <Reveal index={2} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-2'>
+      <Reveal index={2} className='mt-40'>
+        <div className='flex flex-col gap-12'>
+          <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>What You&apos;ll Learn</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               What the audit covers
             </h2>
           </div>
-          <div className='grid gap-grid-1 sm:grid-cols-2'>
-            {AUDIT_COVERS.map(({ icon: Icon, title, description }) => (
-              <div
-                key={title}
-                className='relative flex flex-col gap-3 border border-border bg-bg-card p-5 transition-colors hover:border-border-light'
-              >
-                <BlueprintCorners size={12} />
-                <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
-                  <Icon className='h-5 w-5' />
+          {/* Four open columns under a shared rule: no boxed cards */}
+          <ol className='grid gap-x-grid-1 gap-y-grid-2 border-t border-border pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'>
+            {AUDIT_COVERS.map(({ icon: Icon, title, description }, index) => (
+              <li key={title} className='flex flex-col gap-3'>
+                <div className='flex items-center gap-3 text-text-muted'>
+                  <span className='font-mono text-xs tabular-nums'>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <Icon className='h-5 w-5 text-text' aria-hidden />
                 </div>
-                <h3 className='font-headline text-base font-semibold tracking-tight text-text uppercase'>
+                <h3 className='font-headline text-xl leading-tight font-semibold tracking-tight text-text'>
                   {title}
                 </h3>
                 <p className='text-base text-text-muted'>{description}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </Reveal>
 
       {/* Services Overview */}
-      <Reveal index={3} className='mt-grid-4'>
-        <div className='flex flex-col gap-grid-1'>
-          <div className='flex flex-col gap-2'>
+      <Reveal index={3} className='mt-40'>
+        <div className='flex flex-col gap-12'>
+          <div className='flex flex-col gap-2.25 md:gap-3'>
             <span className='bp-label font-mono'>Capabilities</span>
-            <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
+            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
               What we can build for you
             </h2>
           </div>
@@ -368,16 +368,18 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Final CTA Block */}
-      <Reveal index={3} className='mt-grid-4'>
-        <div className='relative flex flex-col items-center gap-6 border border-border bg-bg-card p-grid-2 text-center'>
+      <Reveal index={3} className='mt-44 md:mt-66'>
+        <div className='dots-band flex flex-col items-center gap-6 bg-bg-card p-grid-2 text-center'>
           <BlueprintCorners size={16} />
-          <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
-            Ready to find your leverage?
-          </h2>
-          <p className='max-w-md text-base text-balance text-text-muted'>
-            Two minutes. Zero obligation. A personalized blueprint in your inbox
-            showing where custom software would move the needle most.
-          </p>
+          <div className='flex flex-col items-center gap-3 md:gap-4'>
+            <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
+              Ready to find your leverage?
+            </h2>
+            <p className='max-w-md text-base text-balance text-text-muted'>
+              Two minutes. Zero obligation. A personalized blueprint in your
+              inbox showing where custom software would move the needle most.
+            </p>
+          </div>
           <Button
             type='button'
             size='lg'

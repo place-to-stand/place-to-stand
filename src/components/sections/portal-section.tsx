@@ -25,7 +25,7 @@ export function PortalSection() {
           index={0}
           className='flex flex-col gap-6 md:flex-row md:items-start md:justify-between'
         >
-          <div className='flex flex-col gap-4'>
+          <div className='flex flex-col gap-3 md:gap-4'>
             <h2 className='max-w-3xl font-headline text-3xl !leading-[.95] font-bold tracking-tight text-balance text-text uppercase md:text-4xl'>
               Our Portal
             </h2>

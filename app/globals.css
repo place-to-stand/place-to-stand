@@ -70,24 +70,118 @@ html {
 }
 
 @layer base {
+  /* Tailwind v4 dropped the pointer cursor on buttons; bring it back. */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+
   body {
     @apply bg-bg font-sans text-text antialiased;
     line-height: 1.375;
     overflow-x: hidden;
-    /* 24px blueprint dot grid. The radial dot renders at each cell's CENTER,
-       so we phase the pattern to put a dot row/column on the structural lines:
-       - X: 50% anchors a dot at the viewport center; since every container is a
-         centered, even multiple of 24px wide, its edges land on dot columns.
-       - Y: 12px shifts the dot row onto the top origin (y = 0, 24, 48 …), so
-         page-top and 24px-multiple section bands sit on dot rows.
-       Scrolls with content. */
-    background-image: radial-gradient(
-      circle,
-      var(--grid-dot) 1px,
-      transparent 1px
-    );
-    background-size: 24px 24px;
-    background-position: 50% 12px;
+  }
+}
+
+/* Blueprint dots live in two places only: behind each page's hero and behind
+   the closing audit callout. Both draw a full-bleed layer behind the element.
+   The layer starts 2400px (100 cells) left of and above the element, so with
+   the 12px phase a dot lands on the element's own top-left corner and every
+   24px from it. Container edges sit on 24px steps from the viewport center,
+   so the dots still line up with the page frame. */
+.dots-hero,
+.dots-band {
+  position: relative;
+}
+/* The thin rule that closes the hero dots and opens the CTA dots: half the
+   strength of a normal border, so it reads quieter than the dots. */
+:root {
+  --dots-rule: color-mix(in srgb, var(--color-border) 50%, transparent);
+}
+.dots-hero::before,
+.dots-band::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -2400px;
+  right: -2400px;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle,
+    var(--grid-dot) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+  background-origin: border-box;
+}
+/* Hero: from the top of the page down to one band below the intro, closed off
+   by a thin rule. */
+.dots-hero::before {
+  top: -2400px;
+  bottom: calc(-1 * var(--spacing-grid-2));
+  border-bottom: 1px solid var(--dots-rule);
+}
+/* Audit callout: --band-pad of dots above the box, then dots all the way down
+   to the footer (the layer overshoots and <main> clips it). Each page leaves
+   the same --band-pad of space under the box. */
+.dots-band {
+  --band-pad: var(--spacing-grid-4);
+}
+@media (min-width: 48rem) {
+  .dots-band {
+    --band-pad: var(--spacing-grid-6);
+  }
+}
+/* The same thin rule opens the band. */
+.dots-band::before {
+  top: calc(-1 * var(--band-pad));
+  bottom: -2400px;
+  border-top: 1px solid var(--dots-rule);
+}
+/* Clips the dot layers to the page body so they never widen or lengthen the
+   page. clip (not hidden) keeps position: sticky working inside. */
+main {
+  overflow: clip;
+}
+
+/* Mobile menu sheet (header.tsx): slides in from the right over a dimmed page. */
+@keyframes sheet-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes sheet-out {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes overlay-out {
+  to {
+    opacity: 0;
+  }
+}
+.sheet-panel[data-state='open'] {
+  animation: sheet-in 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sheet-panel[data-state='closed'] {
+  animation: sheet-out 250ms cubic-bezier(0.7, 0, 0.84, 0);
+}
+.sheet-overlay[data-state='open'] {
+  animation: overlay-in 350ms ease-out;
+}
+.sheet-overlay[data-state='closed'] {
+  animation: overlay-out 250ms ease-in;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sheet-panel,
+  .sheet-overlay {
+    animation: none !important;
   }
 }
 
@@ -739,9 +833,9 @@ html {
 /* ─── Blueprint section annotation label ───
    Callout label with a double-chevron terminal mark. */
 .bp-label {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.125em;
   text-transform: uppercase;
   color: var(--color-accent);
   display: inline-flex;
@@ -751,7 +845,7 @@ html {
 
 .bp-label::after {
   content: '\00BB';
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1;
   letter-spacing: 0;
   opacity: 0.7;
