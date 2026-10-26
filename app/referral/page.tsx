@@ -75,8 +75,7 @@ export default function ReferralPage() {
           </p>
         </div>
         <div className='relative'>
-          <BlueprintCorners size={16} />
-          <ul className='flex flex-col gap-px border border-border bg-border'>
+          <ul className='flex flex-col gap-grid-half'>
             {c.whoWeAre.services.map(service => (
               <li
                 key={service.name}
@@ -114,9 +113,8 @@ export default function ReferralPage() {
           {c.whoToSend.cards.map(card => (
             <div
               key={card.title}
-              className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
+              className='relative flex flex-col gap-grid-half bg-bg-card p-grid-1'
             >
-              <BlueprintCorners size={12} />
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {card.title}
               </h3>
@@ -158,9 +156,8 @@ export default function ReferralPage() {
           {c.howItWorks.steps.map(step => (
             <li
               key={step.number}
-              className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
+              className='relative flex flex-col gap-grid-half bg-bg-card p-grid-1'
             >
-              <BlueprintCorners size={12} />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-xs text-accent'>
                 {step.number}
               </span>
@@ -182,9 +179,8 @@ export default function ReferralPage() {
           {c.howWeWork.points.map(point => (
             <li
               key={point.title}
-              className='relative flex flex-col gap-grid-half border border-border bg-bg-card p-grid-1'
+              className='relative flex flex-col gap-grid-half bg-bg-card p-grid-1'
             >
-              <BlueprintCorners size={12} />
               <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
                 {point.title}
               </h3>

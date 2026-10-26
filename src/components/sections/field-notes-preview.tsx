@@ -3,7 +3,6 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Badge } from '@/src/components/ui/badge'
 import { fieldNotes } from '@/src/lib/field-notes'
 
@@ -46,9 +45,8 @@ export function FieldNotesPreview() {
               rel={
                 note.url.startsWith('http') ? 'noopener noreferrer' : undefined
               }
-              className='group relative flex flex-col gap-3 border border-border bg-bg-card p-6 transition-colors hover:bg-bg-elevated'
+              className='group relative flex flex-col gap-3 bg-bg-card p-6 transition-colors hover:bg-bg-elevated'
             >
-              <BlueprintCorners size={12} />
               <div className='flex items-center gap-4'>
                 <span className='font-mono text-xs text-text-muted'>
                   {note.date}

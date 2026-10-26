@@ -7,7 +7,6 @@ import {
   useSyncExternalStore,
   type TouchEvent,
 } from 'react'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { cn } from '@/src/lib/utils'
 import { PortalPipeline } from '@/src/components/graphics/portal-pipeline'
 
@@ -188,9 +187,7 @@ function PipelineStage({
   return (
     <div className='group relative w-full'>
       {/* Corner marks appear only while the graphic is hovered. */}
-      <span className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
-        <BlueprintCorners size={20} />
-      </span>
+      <span className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'></span>
       {/* Mobile crops to one stage in a square window; desktop keeps the wide strip. */}
       <div
         className={mobile ? 'aspect-square w-full' : 'aspect-[159/40] w-full'}

@@ -143,7 +143,7 @@ export function ServicesPreview() {
         </div>
 
         {/* Right: service accordion */}
-        <Reveal index={2} className='flex flex-col border border-border'>
+        <Reveal index={2} className='flex flex-col'>
           {services.map((service, i) => (
             <ServiceRow
               key={service.slug}

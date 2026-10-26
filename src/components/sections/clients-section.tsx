@@ -37,6 +37,7 @@ export function ClientsSection() {
                 src={client.image}
                 alt=''
                 fill
+                loading={index === 0 ? 'eager' : undefined}
                 sizes='(min-width: 1440px) 888px, (min-width: 1024px) 62vw, 100vw'
                 className='object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]'
               />

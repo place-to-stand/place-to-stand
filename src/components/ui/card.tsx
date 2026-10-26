@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { cn } from '@/src/lib/utils'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -9,12 +8,11 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'group relative border border-border bg-bg-card p-8 text-text transition-colors duration-300 ease-out hover:border-accent/30',
+      'group relative bg-bg-card p-8 text-text transition-colors duration-300 ease-out hover:bg-bg-elevated',
       className
     )}
     {...props}
   >
-    <BlueprintCorners />
     {children}
   </div>
 ))

@@ -5,7 +5,6 @@ import { usePostHog } from 'posthog-js/react'
 import { CheckCircle2 } from 'lucide-react'
 import { AuditProgress } from '@/src/components/audit/audit-progress'
 import { EmailCaptureForm } from '@/src/components/audit/lead-forms'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { QUESTIONS } from '@/src/lib/audit/questions'
 import type {
   AuditLeadPayload,
@@ -43,15 +42,14 @@ export function CaptureGate({
   }, [])
 
   return (
-    <div className='mx-auto max-w-2xl sm:py-grid-2'>
+    <div className='mx-auto max-w-5xl sm:py-grid-2'>
       <AuditProgress
         label='All questions answered'
         title='Your blueprint'
         currentIndex={QUESTIONS.length}
       />
 
-      <div className='relative border border-border p-4 sm:p-8'>
-        <BlueprintCorners size={16} />
+      <div className='relative max-w-2xl pt-grid-1 sm:pt-grid-2'>
         <span className='inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-accent uppercase'>
           <CheckCircle2 aria-hidden className='h-4 w-4' />
           Analysis complete

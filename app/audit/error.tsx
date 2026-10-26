@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import { usePostHog } from 'posthog-js/react'
 import { RotateCcw } from 'lucide-react'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { getAuditSessionSnapshot } from '@/src/lib/audit/session'
@@ -70,8 +69,7 @@ export default function AuditError({
   return (
     <main className='flex-1 pt-grid-4 pb-32'>
       <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
-        <div className='relative max-w-2xl border border-border bg-bg-panel p-6 sm:p-8'>
-          <BlueprintCorners size={16} />
+        <div className='relative max-w-2xl bg-bg-panel p-6 sm:p-8'>
           <span className='bp-label font-mono'>Audit</span>
           <h1 className='mt-4 font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
             We hit a snag

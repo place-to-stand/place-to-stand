@@ -4,7 +4,6 @@ import { JsonLd } from '@/src/components/seo/json-ld'
 import { teamJsonLd } from '@/src/lib/structured-data'
 import Image from 'next/image'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { team } from '@/src/lib/team'
 
 export const metadata: Metadata = pageMetadata({
@@ -31,10 +30,9 @@ export default function TeamPage() {
           {team.map(member => (
             <article
               key={member.name}
-              className='group relative flex flex-col gap-4 border border-border bg-bg-card p-6 text-center transition-colors duration-300 hover:border-accent/30'
+              className='group relative flex flex-col gap-4 bg-bg-card p-6 text-center transition-colors duration-300 hover:bg-bg-elevated'
             >
-              <BlueprintCorners />
-              <div className='relative mx-auto aspect-square w-3/4 overflow-hidden border border-border'>
+              <div className='relative mx-auto aspect-square w-3/4 overflow-hidden'>
                 <Image
                   src={member.image}
                   alt={`${member.name}, ${member.title}`}

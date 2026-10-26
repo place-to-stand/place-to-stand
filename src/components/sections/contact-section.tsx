@@ -14,7 +14,6 @@ import { ChevronDown } from 'lucide-react'
 import { usePostHog } from 'posthog-js/react'
 
 import { AnimatedSection } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Input } from '@/src/components/ui/input'
@@ -170,8 +169,7 @@ export function ContactSection() {
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />
       </Suspense>
-      <div className='relative mx-auto w-full max-w-2xl gap-10 border border-border p-6'>
-        <BlueprintCorners size={16} />
+      <div className='relative mx-auto w-full max-w-2xl gap-10 bg-bg-card p-6 md:p-grid-2'>
         <form
           noValidate
           onSubmit={onSubmit}
@@ -244,7 +242,7 @@ export function ContactSection() {
                 id='subject'
                 {...form.register('subject')}
                 aria-invalid={!!form.formState.errors.subject}
-                className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+                className='flex h-12 w-full appearance-none bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
               >
                 <option value='' disabled>
                   Choose a subject

@@ -3,7 +3,6 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
   DraftingGraphic,
   AiNativeGraphic,
@@ -63,8 +62,7 @@ export function ManifestoSection() {
 
         {/* Facet cards — blueprint grid */}
         <Reveal index={2} className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
+          <div className='grid gap-grid-half md:grid-cols-3'>
             {facets.map(facet => (
               <div
                 key={facet.title}

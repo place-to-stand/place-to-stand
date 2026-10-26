@@ -242,8 +242,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       <Reveal index={1} className='mt-32 md:mt-42'>
         <div className='flex flex-col gap-grid-1'>
           <span className='bp-label font-mono'>Trusted by</span>
-          <div className='relative border border-border py-grid-1'>
-            <BlueprintCorners size={12} />
+          <div className='relative py-grid-1'>
             <AuditLogoMarquee />
           </div>
         </div>
@@ -265,8 +264,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
 
           {/* Facets */}
           <div className='relative'>
-            <BlueprintCorners size={16} />
-            <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
+            <div className='grid gap-grid-half md:grid-cols-3'>
               {FACETS.map(facet => (
                 <div
                   key={facet.title}
@@ -348,8 +346,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               What we can build for you
             </h2>
           </div>
-          <div className='relative border border-border bg-bg-card'>
-            <BlueprintCorners size={16} />
+          <div className='relative bg-bg-card'>
             <ul className='flex flex-col'>
               {services.map((service, index) => (
                 <ServiceRow

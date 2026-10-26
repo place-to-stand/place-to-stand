@@ -3,7 +3,6 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
@@ -139,8 +138,7 @@ export function PhasesSection({
 
         {/* Phase grid: 4 cols, blueprint-style with corner marks */}
         <Reveal index={2} className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='grid gap-px border border-border bg-border md:grid-cols-4'>
+          <div className='grid gap-grid-half md:grid-cols-4'>
             {phases.map(phase => {
               const Graphic = phase.Graphic
               return (
