@@ -10,7 +10,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden border-b border-border lg:[--hero-gap:clamp(4.5rem,9svh,6rem)]'
+      className='relative flex flex-col overflow-hidden border-b border-(--dots-rule) lg:[--hero-gap:clamp(4.5rem,9svh,6rem)]'
     >
       <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-grid-4 pb-grid-2 md:pb-grid-3 lg:px-12 lg:pt-[4.3125rem] lg:pb-0'>
         {/* On laptops one gap (--hero-gap, 72px on an 800px-tall window up to

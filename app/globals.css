@@ -93,6 +93,11 @@ html {
 .dots-band {
   position: relative;
 }
+/* The thin rule that closes the hero dots and opens the CTA dots: half the
+   strength of a normal border, so it reads quieter than the dots. */
+:root {
+  --dots-rule: color-mix(in srgb, var(--color-border) 50%, transparent);
+}
 .dots-hero::before,
 .dots-band::before {
   content: '';
@@ -115,7 +120,7 @@ html {
 .dots-hero::before {
   top: -2400px;
   bottom: calc(-1 * var(--spacing-grid-2));
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--dots-rule);
 }
 /* Audit callout: --band-pad of dots above the box, then dots all the way down
    to the footer (the layer overshoots and <main> clips it). Each page leaves
@@ -132,7 +137,7 @@ html {
 .dots-band::before {
   top: calc(-1 * var(--band-pad));
   bottom: -2400px;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--dots-rule);
 }
 /* Clips the dot layers to the page body so they never widen or lengthen the
    page. clip (not hidden) keeps position: sticky working inside. */
