@@ -23,12 +23,12 @@ export default function ClientsPage() {
       <AnimatedSection
         priority
         id='clients'
-        className='flex flex-col gap-grid-3 pb-grid-4! md:gap-grid-4 md:pb-grid-6!'
+        className='flex flex-col gap-grid-3 pb-grid-3! md:gap-grid-4 md:pb-grid-4!'
       >
         <div className='dots-hero mb-6 flex flex-col gap-4 md:mb-8'>
           <span className='bp-label font-mono'>Selected Clients</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
-            Who We Build For
+          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
+            Who we build for
           </h1>
           <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
             A selection of the brands we&apos;ve partnered with to design,
@@ -39,7 +39,7 @@ export default function ClientsPage() {
         <ClientsSection />
 
         {/* CTA Block */}
-        <div className='dots-band mt-26 bg-bg-card p-6 md:mt-42 md:p-16'>
+        <div className='dots-band mt-20 bg-bg-card p-6 md:mt-30 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-3 md:gap-4'>

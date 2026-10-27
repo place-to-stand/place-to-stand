@@ -2,7 +2,6 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
   SeatsGraphic,
   CentralizedDataGraphic,
@@ -32,7 +31,7 @@ const pillars = [
 
 export function PillarsSection() {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: sticky heading */}
         <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
@@ -60,7 +59,6 @@ export function PillarsSection() {
               key={pillar.title}
               className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
             >
-              <BlueprintCorners size={16} />
               <pillar.Graphic className='absolute top-4 right-4 h-9 w-9 md:top-6 md:right-6' />
               <h3 className='max-w-[calc(100%-3.5rem)] font-headline text-xl font-semibold tracking-tight text-text'>
                 {pillar.title}

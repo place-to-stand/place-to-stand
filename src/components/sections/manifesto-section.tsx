@@ -3,7 +3,6 @@ import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
   DraftingGraphic,
   AiNativeGraphic,
@@ -33,7 +32,7 @@ const facets = [
 
 export function ManifestoSection() {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-3 md:gap-4'>
@@ -63,8 +62,7 @@ export function ManifestoSection() {
 
         {/* Facet cards — blueprint grid */}
         <Reveal index={2} className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
+          <div className='grid gap-grid-half md:grid-cols-3'>
             {facets.map(facet => (
               <div
                 key={facet.title}
@@ -83,7 +81,7 @@ export function ManifestoSection() {
         </Reveal>
 
         {/* Desktop-only link: stays below the cards */}
-        <Reveal index={3} className='hidden md:block'>
+        <Reveal index={3} className='hidden md:flex'>
           <Link
             href='/team'
             className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'

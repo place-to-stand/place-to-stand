@@ -1,5 +1,4 @@
 import { AnimatedSection } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import {
   LeanMarketGraphic,
@@ -33,7 +32,7 @@ const profiles = [
 
 export function WhoWeWorkWithSection() {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-2.25 md:gap-3'>
@@ -55,9 +54,8 @@ export function WhoWeWorkWithSection() {
           {profiles.map(profile => (
             <div
               key={profile.number}
-              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+              className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
             >
-              <BlueprintCorners size={12} />
               <profile.Graphic className='absolute top-4 right-4 h-grid-2 w-grid-2 md:top-6 md:right-6' />
               <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-xs text-accent'>
                 {profile.number}
