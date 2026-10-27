@@ -1,7 +1,5 @@
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
+import { Section } from '@/src/components/layout/section'
+import { Reveal } from '@/src/components/layout/animated-section'
 import { ClientLogoWall } from './client-logo-wall'
 
 /**
@@ -23,13 +21,9 @@ import { ClientLogoWall } from './client-logo-wall'
  */
 export function ClientLogosSection() {
   return (
-    // Top and bottom padding differ on purpose: the logos sit centred in
-    // their rows, so the bottom row's ink ends well above the grid's edge.
-    // These values make the gap from the hero drawing and the gap down to
-    // the persona section look the same.
-    <AnimatedSection className='pt-[93px] pb-grid-4 md:pt-[133px]'>
-      <div className='flex flex-col gap-9'>
-        <Reveal index={0}>
+    <Section>
+      <div className='flex flex-col gap-label'>
+        <Reveal index={0} className='flex'>
           <span className='bp-label font-mono'>Trusted by</span>
         </Reveal>
 
@@ -37,6 +31,6 @@ export function ClientLogosSection() {
           <ClientLogoWall />
         </Reveal>
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { Check, ThumbsDown, ThumbsUp } from 'lucide-react'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { Label } from '@/src/components/ui/label'
 import { Textarea } from '@/src/components/ui/textarea'
@@ -49,17 +48,13 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
   }
 
   return (
-    <section className='relative mt-grid-1 border border-border bg-bg-panel p-6 sm:p-8'>
-      <BlueprintCorners size={12} colorClassName='border-border-light' />
-
+    <section className='relative mt-grid-1 bg-bg-panel p-card'>
       {isSent ? (
         <div className='flex flex-col items-center gap-2 text-center'>
           <span className='flex h-8 w-8 items-center justify-center bg-accent-muted text-accent'>
             <Check className='h-4 w-4' strokeWidth={3} />
           </span>
-          <h2 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
-            Thanks for the feedback
-          </h2>
+          <h2 className='type-card-title uppercase'>Thanks for the feedback</h2>
           <p className='max-w-md text-base text-balance text-text-muted'>
             It helps us make the audit more useful for the next person.
           </p>
@@ -70,7 +65,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
             <p className='font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
               Quick question
             </p>
-            <h2 className='mt-2 font-headline text-lg font-semibold tracking-tight text-text uppercase'>
+            <h2 className='mt-2 type-card-title uppercase'>
               Did you find these results helpful?
             </h2>
             <p className='mt-2 text-base text-text-muted'>

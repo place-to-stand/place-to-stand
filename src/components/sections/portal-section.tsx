@@ -1,7 +1,5 @@
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
+import { Reveal } from '@/src/components/layout/animated-section'
+import { Section } from '@/src/components/layout/section'
 import { Button } from '@/src/components/ui/button'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import { TrackedLink } from '@/src/components/tracked-link'
@@ -19,17 +17,17 @@ const REPO_URL = 'https://github.com/place-to-stand/place-to-stand-portal'
  */
 export function PortalSection() {
   return (
-    <>
-      <AnimatedSection className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-stack'>
+      <Section className='flex flex-col gap-6'>
         <Reveal
           index={0}
           className='flex flex-col gap-6 md:flex-row md:items-start md:justify-between'
         >
-          <div className='flex flex-col gap-3 md:gap-4'>
-            <h2 className='max-w-3xl font-headline text-3xl !leading-[.95] font-bold tracking-tight text-balance text-text uppercase md:text-4xl'>
+          <div className='flex flex-col gap-intro'>
+            <h2 className='max-w-3xl type-section-title text-balance uppercase'>
               Our Portal
             </h2>
-            <p className='max-w-2xl text-base text-text-muted md:text-lg'>
+            <p className='max-w-2xl type-intro'>
               Humans and agents, building together. We built our own delivery
               pipeline. Humans set direction and keep the taste; agents do the
               heavy building in an isolated cloud. Nothing ships until
@@ -53,9 +51,9 @@ export function PortalSection() {
             </TrackedLink>
           </Button>
         </Reveal>
-      </AnimatedSection>
+      </Section>
 
       <PortalFlow />
-    </>
+    </div>
   )
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { PageHeader } from '@/src/components/layout/section'
 
 type LegalHeaderProps = {
   title: string
@@ -9,16 +10,12 @@ type LegalHeaderProps = {
 /** Title block shared by the privacy and terms pages. */
 export function LegalHeader({ title, updated, summary }: LegalHeaderProps) {
   return (
-    <header className='dots-hero mb-12 flex flex-col gap-grid-1 md:mb-20'>
-      <span className='bp-label font-mono'>Legal</span>
-      <h1 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text uppercase md:text-5xl'>
-        {title}
-      </h1>
-      <p className='max-w-2xl text-base text-text-muted'>{summary}</p>
-      <p className='font-mono text-sm text-text-muted'>
-        Last updated: {updated}
-      </p>
-    </header>
+    <PageHeader
+      label='Legal'
+      title={title}
+      intro={summary}
+      meta={`Last updated: ${updated}`}
+    />
   )
 }
 
@@ -36,9 +33,7 @@ export function LegalSection({ index, title, children }: LegalSectionProps) {
         {String(index).padStart(2, '0')}
       </span>
       <div className='flex flex-col gap-3'>
-        <h2 className='font-headline text-xl font-semibold tracking-tight text-text'>
-          {title}
-        </h2>
+        <h2 className='type-card-title'>{title}</h2>
         <div className='flex flex-col gap-3 text-base text-text-muted'>
           {children}
         </div>

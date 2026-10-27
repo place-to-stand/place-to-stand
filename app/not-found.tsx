@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 
 export const metadata: Metadata = {
@@ -9,15 +8,14 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className='flex-1 pt-grid-4 pb-32'>
+    <main className='flex-1 pt-page-start pb-section'>
       <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
-        <div className='relative max-w-2xl border border-border bg-bg-panel p-6 sm:p-8'>
-          <BlueprintCorners size={16} />
+        <div className='relative max-w-2xl bg-bg-panel p-card'>
           <span className='bp-label font-mono'>404</span>
-          <h1 className='mt-4 font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
+          <h1 className='mt-grid-half type-section-title'>
             Nothing stands here
           </h1>
-          <p className='mt-4 text-base text-text-muted'>
+          <p className='mt-intro text-base text-text-muted'>
             The page you were looking for has moved or never existed.
           </p>
 

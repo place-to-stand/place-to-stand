@@ -6,15 +6,10 @@ import { PhasesSection } from '@/src/components/sections/phases-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { ServicesPreview } from '@/src/components/sections/services-preview'
 import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 // Temporarily unlinked — Field Notes content in progress, restore in a future update
 // import { FieldNotesPreview } from '@/src/components/sections/field-notes-preview'
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
-import { Button } from '@/src/components/ui/button'
-import { TrackedLink } from '@/src/components/tracked-link'
+
+import { CtaBand } from '@/src/components/layout/cta-band'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
@@ -24,63 +19,20 @@ export default function HomePage() {
   return (
     <main className='flex-1'>
       <HeroSection />
-      <ClientLogosSection />
-      <WhoWeWorkWithSection />
-      <PhasesSection showPoweredBy showAuditLink largeHeading />
-      <ServicesPreview />
-      <ManifestoSection />
-      <PillarsSection />
-      {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
+      {/* The page owns the space between sections: the edge role under the
+          hero's bottom line and above the callout's dots, the section role
+          between sections. Sections themselves carry no outer padding. */}
+      <div className='flex flex-col gap-section py-edge'>
+        <ClientLogosSection />
+        <WhoWeWorkWithSection />
+        <PhasesSection showPoweredBy showAuditLink />
+        <ServicesPreview />
+        <ManifestoSection />
+        <PillarsSection />
+        {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
+      </div>
 
-      {/* CTA Block — blueprint detail callout */}
-      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
-        <div className='dots-band bg-bg-card p-5 md:p-16'>
-          <BlueprintCorners size={20} all colorClassName='border-accent' />
-          <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-3 md:gap-4'>
-              <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
-                <span className='bp-label font-mono'>Next Step</span>
-                <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
-                  Find where to start.
-                </h2>
-              </Reveal>
-              <Reveal index={1} className='max-w-md text-base text-text-muted'>
-                <p>
-                  The free audit pinpoints the phase your business is in and
-                  where custom software pays off first. Two minutes, results on
-                  screen, no obligation.
-                </p>
-              </Reveal>
-            </div>
-            <Reveal
-              index={2}
-              className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'
-            >
-              <Button asChild size='lg' className='w-full'>
-                <TrackedLink href='/audit' location='home-cta-block'>
-                  Start the free audit
-                </TrackedLink>
-              </Button>
-              <div className='flex flex-col gap-2'>
-                <Button
-                  asChild
-                  size='lg'
-                  variant='outline'
-                  className='w-full border-2'
-                >
-                  <TrackedLink href='/contact' location='home-cta-block'>
-                    Contact Us
-                  </TrackedLink>
-                </Button>
-                <p className='max-w-xs text-sm text-text-muted'>
-                  Already know what you want built, or want a bespoke mapping of
-                  your systems? Talk to us directly.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </AnimatedSection>
+      <CtaBand location='home-cta-block' />
     </main>
   )
 }

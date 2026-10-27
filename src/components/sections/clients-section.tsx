@@ -1,70 +1,69 @@
 import Image from 'next/image'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { cn } from '@/src/lib/utils'
 import { clients, getClientHostname, type Client } from '@/src/lib/clients'
 
+/** One open row per client: a big brand photo with the name and description
+ * beside it. On large screens the image takes two thirds of the width and
+ * switches sides every row; below that the image sits on top. No cards, no
+ * borders: large gaps separate the rows. Every photo is cut to the same 16:10
+ * frame from its centre, so they match whatever size the file is. */
 export function ClientsSection() {
+  const featured = clients.filter(
+    (client): client is Client & { image: string } => Boolean(client.image)
+  )
   return (
-    // Grid: 1 col on mobile, 2 cols on md+
-    <div className='grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6'>
-      {clients
-        .filter((project): project is Client & { image: string } =>
-          Boolean(project.image)
-        )
-        .map(project => (
-          <a
-            key={project.title}
-            href={project.href}
-            target='_blank'
-            rel='noreferrer noopener'
-            aria-label={`View ${project.title} project (opens in a new tab)`}
-            className='group relative border border-border bg-bg-card no-underline transition-all duration-300 ease-out hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
+    <div className='flex flex-col gap-section'>
+      {featured.map((client, index) => {
+        const flipped = index % 2 === 1
+        const host = getClientHostname(client.href)
+        return (
+          <article
+            key={client.title}
+            className='group grid gap-grid-1 lg:grid-cols-12 lg:items-end lg:gap-x-grid-1'
           >
-            <BlueprintCorners />
-            {/* External link indicator */}
-            <span className='pointer-events-none absolute top-2 right-2 z-20 flex h-6 w-6 items-center justify-center border border-border bg-bg-card text-accent transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5'>
-              <svg
-                className='h-3.5 w-3.5'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke='currentColor'
-                strokeWidth={2}
-                aria-hidden
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M4.5 19.5 19.5 4.5m0 0H8.25m11.25 0v11.25'
-                />
-              </svg>
-            </span>
-            {/* Clean image area */}
-            <div className='relative aspect-video w-full overflow-hidden'>
+            <a
+              href={client.href}
+              target='_blank'
+              rel='noreferrer noopener'
+              tabIndex={-1}
+              aria-hidden
+              className={cn(
+                'relative block aspect-[16/10] overflow-hidden bg-bg-card lg:col-span-8 lg:row-start-1',
+                flipped ? 'lg:col-start-5' : 'lg:col-start-1'
+              )}
+            >
               <Image
-                src={project.image}
-                alt={`${project.title} project thumbnail`}
-                fill
-                sizes='(min-width: 1248px) 540px, (min-width: 768px) 50vw, 100vw'
-                className='object-cover transition-transform duration-700 group-hover:scale-105'
-              />
-            </div>
-            {/* Caption - favicon, name, and description, always visible */}
-            <div className='flex items-start gap-3 border-t border-border bg-bg-card p-3 md:gap-4 md:p-4'>
-              <img
-                src={`https://www.google.com/s2/favicons?domain=${getClientHostname(project.href)}&sz=64`}
+                src={client.image}
                 alt=''
-                className='mt-0.5 h-7 w-7 shrink-0 md:h-8 md:w-8'
+                fill
+                loading={index === 0 ? 'eager' : undefined}
+                sizes='(min-width: 1440px) 888px, (min-width: 1024px) 62vw, 100vw'
+                className='object-cover transition-transform duration-700 group-hover:scale-[1.02]'
               />
-              <div className='flex flex-col gap-1.5'>
-                <h3 className='font-headline text-sm leading-none font-semibold text-text uppercase md:text-base'>
-                  {project.title}
-                </h3>
-                <p className='line-clamp-2 min-h-[2.75em] text-sm text-text-muted'>
-                  {project.description}
-                </p>
-              </div>
+            </a>
+            <div
+              className={cn(
+                'flex flex-col gap-4 lg:row-start-1 lg:gap-5',
+                flipped
+                  ? 'lg:col-span-3 lg:col-start-1'
+                  : 'lg:col-span-3 lg:col-start-10'
+              )}
+            >
+              <h2 className='type-section-title uppercase'>{client.title}</h2>
+              <p className='type-intro'>{client.description}</p>
+              <a
+                href={client.href}
+                target='_blank'
+                rel='noreferrer noopener'
+                className='mt-1 w-fit font-mono text-sm font-medium tracking-[0.1em] text-text uppercase no-underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
+              >
+                Visit {host} <span aria-hidden>↗</span>
+                <span className='sr-only'> (opens in a new tab)</span>
+              </a>
             </div>
-          </a>
-        ))}
+          </article>
+        )
+      })}
     </div>
   )
 }

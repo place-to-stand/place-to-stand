@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ContactPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-page-start pb-section'>
       <ContactSection />
     </main>
   )

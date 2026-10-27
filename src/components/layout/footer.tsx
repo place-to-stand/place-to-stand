@@ -22,7 +22,7 @@ export async function Footer() {
           <div className='flex items-center gap-3'>
             {/* Blueprint logo mark — mirrors the header */}
             <span
-              className='inline-flex h-6 w-6 items-center justify-center border border-accent/50'
+              className='inline-flex h-6 w-6 items-center justify-center border border-accent-subtle'
               aria-hidden
             >
               <span className='h-2 w-2 bg-accent' />

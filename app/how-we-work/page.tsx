@@ -1,9 +1,7 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { TrackedLink } from '@/src/components/tracked-link'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
-import { Button } from '@/src/components/ui/button'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { PageHeader, Section } from '@/src/components/layout/section'
+import { CtaBand } from '@/src/components/layout/cta-band'
 import { PhasesSection } from '@/src/components/sections/phases-section'
 import { PortalSection } from '@/src/components/sections/portal-section'
 import { vendors } from '@/src/lib/vendors'
@@ -56,136 +54,94 @@ const stackGroups = [
 
 export default function HowWeWorkPage() {
   return (
-    <main className='flex-1 pt-10'>
-      {/* How We Work — intro + two-column process narrative */}
-      <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
-          <span className='bp-label font-mono'>How We Work</span>
-          <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
-            Our Process
-          </h1>
-          <p className='max-w-2xl text-base text-text-muted md:text-lg'>
-            Quick wins to unblock you, a model of how your business actually
-            works, execution through our portal, and hard-won judgment on the
-            details.
-          </p>
-        </div>
-        <div className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4'>
-            {process.map(step => (
-              <div
+    <main className='flex-1 pt-page-start'>
+      <div className='flex flex-col gap-section pb-edge'>
+        {/* How We Work — intro + two-column process narrative */}
+        <Section priority className='flex flex-col gap-header'>
+          <PageHeader
+            label='How We Work'
+            title='Our process'
+            intro='Quick wins to unblock you, a model of how your business actually works, execution through our portal, and hard-won judgment on the details.'
+          />
+          {/* Four open steps: rows split by a rule on small screens, four
+            columns on large ones. No boxes. */}
+          <ol className='grid divide-y divide-border lg:grid-cols-4 lg:gap-x-grid-2 lg:divide-y-0'>
+            {process.map((step, index) => (
+              <li
                 key={step.title}
-                className='relative flex flex-col gap-6 bg-bg-card p-5 md:p-8'
+                className='flex flex-col gap-4 py-grid-2 first:pt-0 last:pb-0 lg:py-0'
               >
-                <step.Graphic
-                  className='absolute top-4 right-4 h-10 w-10 md:top-6 md:right-6'
-                  aria-hidden
-                />
-                <h3 className='max-w-[80%] font-headline text-sm leading-tight font-bold tracking-tight text-balance text-accent uppercase'>
-                  {step.title}
-                </h3>
-                <p className='text-base text-text-muted'>{step.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <PortalSection />
-
-      {/* Our Tech Stack — the models and infrastructure powering the portal */}
-      <AnimatedSection>
-        <div className='relative border border-border p-6 md:p-10'>
-          <BlueprintCorners size={16} />
-          <div className='flex flex-col gap-8'>
-            <div className='flex flex-col gap-2'>
-              <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
-                Our Tech Stack
-              </h3>
-              <p className='max-w-2xl text-base text-text-muted'>
-                The frontier AI models and modern infrastructure behind every
-                build.
-              </p>
-            </div>
-            <div className='flex flex-col gap-6'>
-              {stackGroups.map(group => (
-                <div key={group.label} className='flex flex-col gap-3'>
-                  <span className='text-xs font-semibold tracking-[0.1em] text-text-muted uppercase'>
-                    {group.label}
+                <div className='flex items-start justify-between gap-grid-1'>
+                  <span className='font-mono text-sm text-text-muted tabular-nums'>
+                    {String(index + 1).padStart(2, '0')}
                   </span>
-                  <div className='grid grid-cols-2 gap-x-4 gap-y-5 md:flex md:flex-wrap md:items-center md:gap-x-8 md:gap-y-4'>
-                    {group.items.map(vendor => {
-                      const Icon = vendorIcons[vendor.name]
-                      return (
-                        <div
-                          key={vendor.name}
-                          className='flex flex-col items-center gap-3 md:w-24'
-                        >
-                          {Icon && (
-                            <Icon
-                              className='h-9 w-9 shrink-0 text-text'
-                              aria-hidden
-                            />
-                          )}
-                          <span className='font-mono text-xs tracking-wider whitespace-nowrap text-text-muted uppercase'>
-                            {vendor.name}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
+                  <step.Graphic className='h-12 w-12 shrink-0' aria-hidden />
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
+                <h2 className='type-card-title text-balance uppercase'>
+                  {step.title}
+                </h2>
+                <p className='max-w-xl text-base text-text-muted'>
+                  {step.body}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Section>
 
-      <PhasesSection showHowWeWorkLink={false} showLabel={false} />
+        <PortalSection />
 
-      {/* CTA Block */}
-      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
-        <div className='dots-band bg-bg-card p-6 md:p-16'>
-          <BlueprintCorners size={20} all />
-          <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
-            <div className='flex flex-col gap-2.25 md:gap-3'>
-              <span className='bp-label font-mono'>Next Step</span>
-              <h2 className='font-headline text-3xl font-bold tracking-tight text-text md:text-4xl'>
-                Find your phase.
-              </h2>
-              <p className='mt-0.75 max-w-md text-base text-text-muted md:mt-1'>
-                The free audit pinpoints the phase your business is in and where
-                custom software pays off first. Two minutes, results on screen,
-                no obligation.
-              </p>
-            </div>
-            <div className='flex w-full shrink-0 flex-col gap-4 sm:w-auto'>
-              <Button asChild size='lg' className='w-full'>
-                <TrackedLink href='/audit' location='how-we-work-cta-block'>
-                  Start the free audit
-                </TrackedLink>
-              </Button>
-              <div className='flex flex-col gap-2'>
-                <Button
-                  asChild
-                  size='lg'
-                  variant='outline'
-                  className='w-full border-2'
-                >
-                  <TrackedLink href='/contact' location='how-we-work-cta-block'>
-                    Contact Us
-                  </TrackedLink>
-                </Button>
-                <p className='max-w-xs text-sm text-text-muted'>
-                  Already know what you want built, or want a bespoke mapping of
-                  your systems? Talk to us directly.
+        {/* Our Tech Stack — the models and infrastructure powering the portal */}
+        <Section>
+          <div>
+            <div className='flex flex-col gap-stack'>
+              <div className='flex flex-col gap-intro'>
+                <h2 className='type-section-title'>Our Tech Stack</h2>
+                <p className='max-w-2xl text-base text-text-muted'>
+                  The frontier AI models and modern infrastructure behind every
+                  build.
                 </p>
               </div>
+              <div className='flex flex-col gap-6'>
+                {stackGroups.map(group => (
+                  <div
+                    key={group.label}
+                    className='flex flex-col gap-grid-half'
+                  >
+                    <span className='font-mono text-sm font-medium tracking-[0.1em] text-text-muted uppercase'>
+                      {group.label}
+                    </span>
+                    <div className='grid grid-cols-2 gap-x-4 gap-y-5 md:flex md:flex-wrap md:items-center md:gap-x-8 md:gap-y-4'>
+                      {group.items.map(vendor => {
+                        const Icon = vendorIcons[vendor.name]
+                        return (
+                          <div
+                            key={vendor.name}
+                            className='flex flex-col items-center gap-3 md:w-24'
+                          >
+                            {Icon && (
+                              <Icon
+                                className='h-9 w-9 shrink-0 text-text'
+                                aria-hidden
+                              />
+                            )}
+                            <span className='type-fine whitespace-nowrap'>
+                              {vendor.name}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </AnimatedSection>
+        </Section>
+
+        <PhasesSection showHowWeWorkLink={false} showLabel={false} />
+      </div>
+
+      <CtaBand location='how-we-work-cta-block' title='Find your phase.' />
     </main>
   )
 }
