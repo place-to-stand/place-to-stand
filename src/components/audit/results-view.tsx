@@ -204,7 +204,7 @@ export function ResultsView({
           <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Your phase
           </span>
-          <h1 className='mt-4 font-headline text-3xl leading-[.9]! font-semibold text-text uppercase'>
+          <h1 className='mt-4 font-headline text-3xl leading-[.9]! font-bold text-text'>
             {phase.name}
           </h1>
           <p className='mt-2 font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>

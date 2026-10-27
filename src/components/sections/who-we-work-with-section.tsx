@@ -32,7 +32,7 @@ const profiles = [
 
 export function WhoWeWorkWithSection() {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-2.25 md:gap-3'>

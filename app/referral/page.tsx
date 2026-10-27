@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ReferralPage() {
   return (
-    <main className='flex-1 pt-grid-4 pb-grid-4 md:pb-grid-6'>
+    <main className='flex-1 pt-grid-4 pb-grid-3 md:pb-grid-4'>
       {/* Hero */}
       <AnimatedSection
         priority

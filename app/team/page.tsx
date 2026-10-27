@@ -19,7 +19,7 @@ export default function TeamPage() {
       <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
           <span className='bp-label font-mono'>Team</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
+          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
             The builders
           </h1>
           <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>

@@ -32,7 +32,7 @@ const facets = [
 
 export function ManifestoSection() {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-3 md:gap-4'>
@@ -81,7 +81,7 @@ export function ManifestoSection() {
         </Reveal>
 
         {/* Desktop-only link: stays below the cards */}
-        <Reveal index={3} className='hidden md:block'>
+        <Reveal index={3} className='hidden md:flex'>
           <Link
             href='/team'
             className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'

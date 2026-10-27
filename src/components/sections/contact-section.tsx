@@ -155,14 +155,14 @@ export function ContactSection() {
     <AnimatedSection
       priority
       id='contact'
-      className='flex flex-col gap-10 py-24 pb-grid-8'
+      className='flex flex-col gap-12 md:gap-20'
     >
-      <div className='dots-hero mb-14 flex flex-col items-center gap-4 text-center md:mb-22'>
+      <div className='dots-hero flex flex-col gap-4'>
         <span className='bp-label font-mono'>Contact</span>
-        <h1 className='max-w-5xl font-headline text-3xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-5xl'>
+        <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
           Let&apos;s talk
         </h1>
-        <p className='max-w-xl text-lg leading-snug! text-balance text-text-muted'>
+        <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
           Send a message and we&apos;ll get back to you within one business day.
         </p>
       </div>

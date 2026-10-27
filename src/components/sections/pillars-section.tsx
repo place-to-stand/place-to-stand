@@ -31,7 +31,7 @@ const pillars = [
 
 export function PillarsSection() {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: sticky heading */}
         <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>

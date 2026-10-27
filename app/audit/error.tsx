@@ -71,7 +71,7 @@ export default function AuditError({
       <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
         <div className='relative max-w-2xl bg-bg-panel p-6 sm:p-8'>
           <span className='bp-label font-mono'>Audit</span>
-          <h1 className='mt-4 font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
+          <h1 className='mt-4 font-headline text-2xl font-bold tracking-tight text-text sm:text-3xl'>
             We hit a snag
           </h1>
           <p className='mt-4 text-base text-text-muted'>

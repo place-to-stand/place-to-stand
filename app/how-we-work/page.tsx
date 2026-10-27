@@ -61,8 +61,8 @@ export default function HowWeWorkPage() {
       <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
           <span className='bp-label font-mono'>How We Work</span>
-          <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
-            Our Process
+          <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-bold text-balance text-text md:text-6xl'>
+            Our process
           </h1>
           <p className='max-w-2xl text-base text-text-muted md:text-lg'>
             Quick wins to unblock you, a model of how your business actually
@@ -145,7 +145,7 @@ export default function HowWeWorkPage() {
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
       {/* CTA Block */}
-      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
+      <AnimatedSection className='pt-[105px] pb-grid-3 md:pt-[169px] md:pb-grid-4'>
         <div className='dots-band bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>

@@ -9,9 +9,9 @@ type LegalHeaderProps = {
 /** Title block shared by the privacy and terms pages. */
 export function LegalHeader({ title, updated, summary }: LegalHeaderProps) {
   return (
-    <header className='dots-hero mb-12 flex flex-col gap-grid-1 md:mb-20'>
+    <header className='dots-hero mb-12 flex flex-col gap-grid-1 [--dots-top:80px] md:mb-20'>
       <span className='bp-label font-mono'>Legal</span>
-      <h1 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text uppercase md:text-5xl'>
+      <h1 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
         {title}
       </h1>
       <p className='max-w-2xl text-base text-text-muted'>{summary}</p>
