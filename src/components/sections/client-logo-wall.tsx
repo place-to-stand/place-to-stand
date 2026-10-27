@@ -177,7 +177,7 @@ function LogoCell({
       onPointerLeave={onRelease}
       onFocus={onHold}
       onBlur={onRelease}
-      className={`group @container relative flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30 ${className ?? ''}`}
+      className={`group @container relative flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle ${className ?? ''}`}
     >
       {/* Keyed by client so a swap remounts it and replays the scan-in. Its
           height is 36% of the cell's width (cqw), up to 72px, so logos keep

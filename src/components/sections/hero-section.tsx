@@ -10,18 +10,20 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--spacing-grid-2)] [--hero-nav:61px] [--hero-pad:var(--hero-gap)] md:[--hero-gap:calc(var(--spacing-grid-3)-var(--spacing-grid-half))] md:[--hero-nav:65px] md:[--hero-pad:calc(var(--spacing-grid-3)-var(--spacing-grid-half))] lg:[--hero-gap:clamp(4.5rem,9svh,6rem)] lg:[--hero-nav:69px] lg:[--hero-pad:clamp(3.75rem,7.5svh,5rem)]'
+      className='relative flex flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--spacing-grid-2)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
-      <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-[calc(var(--hero-nav)+var(--hero-pad))] pb-(--hero-pad) [--dots-top:0px] lg:px-12'>
-        {/* One padding (--hero-pad) sets the space under the nav and under the
-            database at the bottom of the drawing, so the content always sits
-            centred in the hero: 48px on phones, 60px on tablets, and on laptops
-            60px on an 800px-tall window up to 80px. --hero-gap, between the
-            headline and the row below, matches it on phones and tablets (48px,
-            60px) and is 72-96px on laptops. The top
-            padding adds the fixed nav's height (--hero-nav), which differs per
-            breakpoint. On laptops the drawing
-            is sized so the hero fills the screen; once it hits its width limit
+      <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-6 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-12'>
+        {/* The hero's gaps: under the nav, between the headline and the
+            row below, and under the content. Phones and tablets use 48px for
+            all three. On laptops and up the top and bottom are 72px on
+            windows up to 800px tall, growing smoothly to 96px at 900px tall
+            and over, and the headline-to-content gap is one step less (48
+            growing to 72). They grow slowly enough that the drawing (sized to
+            fill the rest of the screen) keeps growing as the window gets
+            taller instead of jumping. On phones
+            only the space under the nav follows the page-top role (36px, like
+            every page's title); the other two stay 48px. On laptops the drawing is
+            sized so the hero fills the screen; once it hits its width limit
             (wide or tall windows) the hero ends early and the next section
             shows, instead of the gaps swelling. */}
         <div className='flex flex-1 flex-col'>
@@ -63,59 +65,69 @@ export function HeroSection() {
           <div aria-hidden className='h-(--hero-gap)' />
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right).
-              Phones stack the drawing, a one-sentence pitch, then the button
-              and fine print (32px under the pitch, as side by side): the text column turns into display: contents so its two
-              blocks join the row and can be reordered around the drawing, and
-              the rest of the copy is hidden. Side by side, the drawing's ink sits 28px
+              Phones put the drawing first (order-1), then the text column: a
+              one-sentence pitch, then the button and fine print, 36px apart
+              (48px on laptops); the rest of the copy is hidden. Side by side, the drawing's ink sits 28px
               in from the corner mark, and so does the text column once the nav
               shows in full (lg; under it, with the menu button, the text is not
               inset), which reads level
               with the headline's 24px once its glyph spacing is counted.
               Stacked, neither is inset, the text centres and the button runs
               full width up to 448px. */}
-          <div className='flex flex-col gap-grid-2 md:flex-row md:items-center md:gap-grid-2 lg:items-start lg:gap-grid-3'>
-            <div className='contents text-center md:flex md:flex-1 md:flex-col md:gap-8 md:text-left lg:pl-7'>
-              <div
-                className='hero-reveal flex gap-4 self-center max-md:order-2 md:self-start'
-                style={{ animationDelay: '0.85s' }}
-              >
-                <div className='flex max-w-lg flex-col gap-5 lg:max-w-xl'>
-                  <p className='text-base text-balance text-text md:text-lg lg:text-xl'>
-                    We build software{' '}
-                    <strong className='font-semibold'>
-                      shaped to how your business actually runs.
-                    </strong>
-                    <span className='hidden md:inline'>
-                      {' '}
-                      No more juggling a stack of bloated SaaS dashboards.
-                    </span>
-                  </p>
-                  <p className='hidden text-base text-balance text-text-muted md:block md:text-lg lg:text-xl'>
-                    Take the{' '}
-                    <strong className='font-semibold text-text'>
-                      free audit
-                    </strong>{' '}
-                    to see where custom software fits in your business.
+          <div className='flex flex-col gap-grid-2 md:flex-row md:items-center md:gap-grid-2 lg:gap-grid-3'>
+            {/* Side by side, the text column stretches to the row's height and
+                splits the free space 1:3 above and below its content, so the
+                text sits a touch above centre but never higher than the
+                drawing's top or lower than its bottom (the spacers shrink to
+                nothing when the text is the taller one). */}
+            <div className="flex flex-col max-md:order-2 md:flex-1 md:self-stretch md:before:flex-[1] md:before:content-[''] md:after:flex-[3] md:after:content-[''] lg:pl-7">
+              <div className='flex flex-col gap-9 text-center md:text-left lg:gap-grid-2'>
+                <div
+                  className='hero-reveal flex gap-4 self-center md:self-start'
+                  style={{ animationDelay: '0.85s' }}
+                >
+                  <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-xl lg:gap-9'>
+                    <p className='text-base text-balance text-text lg:text-xl'>
+                      We build software{' '}
+                      <strong className='font-semibold'>
+                        shaped to how your business actually runs.
+                      </strong>
+                      <span className='hidden md:inline'>
+                        {' '}
+                        No more juggling a stack of bloated SaaS dashboards.
+                      </span>
+                    </p>
+                    <p className='hidden text-base text-balance text-text-muted md:block lg:text-xl'>
+                      Take the{' '}
+                      <strong className='font-semibold text-text'>
+                        free audit
+                      </strong>{' '}
+                      to see where custom software fits in your business.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className='hero-reveal mx-auto flex w-full max-w-md shrink-0 flex-col items-stretch gap-3 md:mx-0 md:w-auto md:max-w-none md:items-start'
+                  style={{ animationDelay: '1s' }}
+                >
+                  <Button
+                    asChild
+                    size='lg'
+                    variant='primaryInvert'
+                    className='w-full md:w-auto md:min-w-72'
+                  >
+                    <TrackedLink
+                      href='/audit'
+                      location='hero'
+                      data-pts-hero-cta
+                    >
+                      Start the free audit
+                    </TrackedLink>
+                  </Button>
+                  <p className='type-fine text-balance'>
+                    2 minutes, free results, no email required.
                   </p>
                 </div>
-              </div>
-              <div
-                className='hero-reveal mx-auto flex w-full max-w-md shrink-0 flex-col items-stretch gap-3 max-md:order-3 max-md:-mt-4 md:mx-0 md:w-auto md:max-w-none md:items-start'
-                style={{ animationDelay: '1s' }}
-              >
-                <Button
-                  asChild
-                  size='lg'
-                  variant='primaryInvert'
-                  className='w-full md:w-auto md:min-w-72'
-                >
-                  <TrackedLink href='/audit' location='hero' data-pts-hero-cta>
-                    Start the free audit
-                  </TrackedLink>
-                </Button>
-                <p className='font-mono text-xs tracking-wider text-balance text-text-muted uppercase'>
-                  2 minutes, free results, no email required.
-                </p>
               </div>
             </div>
 
@@ -127,22 +139,18 @@ export function HeroSection() {
                 (short windows shrink the drawing; balanced lines end early), it
                 slides left to sit centred between the text and the frame's right
                 edge (HeroDrawingSlot). On laptops its width follows the
-                window height (minus the headline, which shrinks on short screens, the spacing,
-                and one gap kept free below),
-                so short screens still show the whole drawing, database included.
-                On laptops it also rises by 8% of its own height into the gap above
-                so it breaks the line the text sits on. */}
-            <HeroDrawingSlot className='max-md:order-1 md:flex md:flex-1 md:justify-center md:pr-4.5 lg:self-end'>
-              {/* The wrapper is the drawing's box (cqw = 1% of its width; the
-                  274x190 drawing is 69.34cqw tall). Its layout box is trimmed
-                  to the ink so the gap under it is measured from the database:
-                  the empty strip under the database (2.5cqw) is pulled in, and
-                  on laptops the 8% lift (5.55cqw) is a negative margin rather
-                  than a transform. On tablets the row centres the drawing and
-                  the text on each other; on laptops lg:self-end keeps the database the lowest
-                  thing in the hero when the text column runs taller. */}
-              <div className='@container mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.632),100%)]'>
-                <HeroGraphic className='-mb-[2.5cqw] w-full lg:-mt-[5.55cqw]' />
+                window height (minus the nav, the headline, which shrinks on
+                short screens, and the hero's gaps), so short screens still
+                show the whole drawing, database included. */}
+            <HeroDrawingSlot className='max-md:order-1 md:flex md:flex-1 md:justify-center md:pr-4.5'>
+              {/* The drawing's viewBox ends at the database, so its box is its
+                  ink. Side by side, the row centres the drawing and the text
+                  column on each other at every width. On laptops the
+                  max-width sizes the drawing so the hero fills the screen: the
+                  space left after the nav, headline and gaps, times the
+                  drawing's width-to-height ratio (274 / 183.3). */}
+              <div className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4948),100%)]'>
+                <HeroGraphic className='w-full' />
               </div>
             </HeroDrawingSlot>
           </div>

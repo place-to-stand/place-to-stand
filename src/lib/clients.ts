@@ -83,7 +83,7 @@ export const clients: Client[] = [
     title: 'Betsy & Adam',
     href: 'https://www.betsyandadam.com',
     logo: '/logos/betsy-and-adam.png',
-    logoScale: 0.53,
+    logoScale: 0.48,
   },
   {
     title: 'Xscape Evenings',

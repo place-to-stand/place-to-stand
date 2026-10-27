@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
+import { PageHeader, Section } from '@/src/components/layout/section'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { fieldNotes } from '@/src/lib/field-notes'
 
 export const metadata: Metadata = pageMetadata({
@@ -21,18 +21,14 @@ function formatNoteDate(date: string) {
 
 export default function FieldNotesPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
-      <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='dots-hero mb-12 flex flex-col items-center gap-4 text-center md:mb-20'>
-          <span className='bp-label font-mono'>Field Notes</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
-            From the lab
-          </h1>
-          <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
-            Experiments, open-source projects, and things we&apos;re learning
-            along the way.
-          </p>
-        </div>
+    <main className='flex-1 pt-page-start pb-section'>
+      <Section priority className='flex flex-col gap-header'>
+        <PageHeader
+          label='Field Notes'
+          title='From the lab'
+          intro="Experiments, open-source projects, and things we're learning along the way."
+          align='center'
+        />
         {/* One open row per note, split by a rule: no boxed cards */}
         <ol className='flex flex-col divide-y divide-border border-y border-border'>
           {fieldNotes.map(note => {
@@ -54,12 +50,10 @@ export default function FieldNotesPage() {
                     )}
                   </div>
                   <div className='flex flex-col gap-3 md:col-span-6'>
-                    <h2 className='font-headline text-2xl leading-[0.95] font-bold tracking-tight text-text uppercase transition-colors group-hover:text-accent md:text-4xl'>
+                    <h2 className='type-section-title uppercase transition-colors group-hover:text-accent'>
                       {note.title}
                     </h2>
-                    <p className='max-w-2xl text-base text-text-muted md:text-lg'>
-                      {note.description}
-                    </p>
+                    <p className='max-w-2xl type-intro'>{note.description}</p>
                   </div>
                   <p className='font-mono text-sm tracking-[0.05em] text-text-muted uppercase md:col-span-3 md:pt-1.5 md:text-right'>
                     {note.tags.join(' · ')}
@@ -69,7 +63,7 @@ export default function FieldNotesPage() {
             )
           })}
         </ol>
-      </AnimatedSection>
+      </Section>
     </main>
   )
 }

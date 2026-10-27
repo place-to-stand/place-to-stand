@@ -30,6 +30,14 @@ Structural elements must line up with this grid so the architectural/schematic m
 Spacing bands and container edges align exactly. Arbitrary-height text/content blocks between bands will not
 each terminate on a grid line — that's expected.
 
+## Design system
+
+Spacing, type, colours and accent lines all come from named roles: see **`docs/design-system.md`**. Use the
+spacing roles (`pt-page-start`, `gap-section`, `pb-edge`, `gap-header`, `gap-stack`, `gap-intro`, `p-card`,
+`p-callout`, `py-band`), the type roles (`type-page-title`, `type-section-title`, `type-card-title`, `type-intro`,
+`type-fine`, `bp-label`), and the `Section`, `PageHeader` and `CtaBand` components instead of raw sizes. Pages own
+the gaps between sections; sections have no outer padding. Accent lines use `accent-subtle` or `accent` only.
+
 ## Type size floor
 
 Reading text is 16px (`text-base`) and never below 14px (`text-sm`). 12px (`text-xs`) is only for short mono

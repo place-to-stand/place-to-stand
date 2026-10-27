@@ -1,8 +1,6 @@
+import { Section } from '@/src/components/layout/section'
 import Link from 'next/link'
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
+import { Reveal } from '@/src/components/layout/animated-section'
 import {
   DraftingGraphic,
   AiNativeGraphic,
@@ -32,13 +30,13 @@ const facets = [
 
 export function ManifestoSection() {
   return (
-    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
-      <div className='flex flex-col gap-12'>
+    <Section>
+      <div className='flex flex-col gap-stack'>
         {/* Header */}
-        <div className='flex flex-col gap-3 md:gap-4'>
-          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
+        <div className='flex flex-col gap-intro'>
+          <Reveal index={0} className='flex flex-col gap-eyebrow'>
             <span className='bp-label font-mono'>Who We Are</span>
-            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-balance text-text md:text-5xl'>
+            <h2 className='type-section-title text-balance'>
               Experienced engineers with fine-tuned AI.
             </h2>
           </Reveal>
@@ -62,16 +60,14 @@ export function ManifestoSection() {
 
         {/* Facet cards — blueprint grid */}
         <Reveal index={2} className='relative'>
-          <div className='grid gap-grid-half md:grid-cols-3'>
+          <div className='grid gap-grid-1 md:grid-cols-3'>
             {facets.map(facet => (
               <div
                 key={facet.title}
-                className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
+                className='relative flex flex-col gap-4 bg-bg-card p-card'
               >
                 <div className='flex items-center justify-between gap-4'>
-                  <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                    {facet.title}
-                  </h3>
+                  <h3 className='type-card-title'>{facet.title}</h3>
                   <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
                 <p className='text-base text-text-muted'>{facet.description}</p>
@@ -91,6 +87,6 @@ export function ManifestoSection() {
           </Link>
         </Reveal>
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

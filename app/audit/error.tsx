@@ -67,14 +67,12 @@ export default function AuditError({
   }, [error, posthog, reset])
 
   return (
-    <main className='flex-1 pt-grid-4 pb-32'>
+    <main className='flex-1 pt-page-start pb-section'>
       <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
-        <div className='relative max-w-2xl bg-bg-panel p-6 sm:p-8'>
+        <div className='relative max-w-2xl bg-bg-panel p-card'>
           <span className='bp-label font-mono'>Audit</span>
-          <h1 className='mt-4 font-headline text-2xl font-bold tracking-tight text-text sm:text-3xl'>
-            We hit a snag
-          </h1>
-          <p className='mt-4 text-base text-text-muted'>
+          <h1 className='mt-grid-half type-section-title'>We hit a snag</h1>
+          <p className='mt-intro text-base text-text-muted'>
             Your answers are saved. Nothing you filled in was lost.
           </p>
           <p className='mt-2 text-base text-text-muted'>

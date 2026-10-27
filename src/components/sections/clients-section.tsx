@@ -12,7 +12,7 @@ export function ClientsSection() {
     (client): client is Client & { image: string } => Boolean(client.image)
   )
   return (
-    <div className='flex flex-col gap-grid-4 md:gap-grid-6'>
+    <div className='flex flex-col gap-section'>
       {featured.map((client, index) => {
         const flipped = index % 2 === 1
         const host = getClientHostname(client.href)
@@ -49,17 +49,13 @@ export function ClientsSection() {
                   : 'lg:col-span-3 lg:col-start-10'
               )}
             >
-              <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text uppercase md:text-5xl'>
-                {client.title}
-              </h2>
-              <p className='text-base text-text-muted md:text-lg'>
-                {client.description}
-              </p>
+              <h2 className='type-section-title uppercase'>{client.title}</h2>
+              <p className='type-intro'>{client.description}</p>
               <a
                 href={client.href}
                 target='_blank'
                 rel='noreferrer noopener'
-                className='mt-1 w-fit font-mono text-sm font-medium tracking-[0.1em] text-text uppercase no-underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
+                className='mt-1 w-fit font-mono text-sm font-medium tracking-[0.1em] text-text uppercase no-underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
               >
                 Visit {host} <span aria-hidden>↗</span>
                 <span className='sr-only'> (opens in a new tab)</span>

@@ -1,10 +1,7 @@
-import { cn } from '@/src/lib/utils'
 import Link from 'next/link'
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
-import { TrackedLink } from '@/src/components/tracked-link'
+import { ClosingLine } from '@/src/components/layout/closing-line'
+import { Reveal } from '@/src/components/layout/animated-section'
+import { Section } from '@/src/components/layout/section'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import {
@@ -75,9 +72,7 @@ function TrustTrack({
               {Icon && (
                 <Icon className='h-8 w-8 shrink-0 text-text' aria-hidden />
               )}
-              <span className='font-mono text-xs tracking-wider whitespace-nowrap text-text-muted uppercase'>
-                {vendor.name}
-              </span>
+              <span className='type-fine whitespace-nowrap'>{vendor.name}</span>
             </div>
           )
         })}
@@ -91,7 +86,6 @@ export function PhasesSection({
   showPoweredBy = false,
   showLabel = true,
   showAuditLink = false,
-  largeHeading = false,
   className,
 }: {
   showHowWeWorkLink?: boolean
@@ -100,23 +94,19 @@ export function PhasesSection({
   /** Prompts the reader into the audit right under the phase cards. The audit's
    *  first output is the phase you are in, so this is where that question lands. */
   showAuditLink?: boolean
-  /** Homepage runs its section headings a size up. */
-  largeHeading?: boolean
-  /** Overrides the section's padding (the homepage scales it per breakpoint). */
+  /** Extra classes for the section wrapper. */
   className?: string
 }) {
   return (
-    <AnimatedSection className={cn('py-20', className)}>
-      <div className='flex flex-col gap-12'>
+    <Section className={className}>
+      <div className='flex flex-col gap-stack'>
         {/* Header */}
-        <div className='flex flex-col gap-3 md:gap-4'>
-          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
+        <div className='flex flex-col gap-intro'>
+          <Reveal index={0} className='flex flex-col gap-eyebrow'>
             {showLabel && (
               <span className='bp-label font-mono'>How We Work</span>
             )}
-            <h2
-              className={`font-headline leading-[0.95] font-bold tracking-tight text-text ${largeHeading ? 'text-4xl md:text-5xl' : 'text-3xl md:text-4xl'}`}
-            >
+            <h2 className='type-section-title'>
               We meet you at your stage of business.
             </h2>
           </Reveal>
@@ -142,20 +132,18 @@ export function PhasesSection({
 
         {/* Phase grid: 4 cols, blueprint-style with corner marks */}
         <Reveal index={2} className='relative'>
-          <div className='grid gap-grid-half md:grid-cols-4'>
+          <div className='grid gap-grid-1 md:grid-cols-4'>
             {phases.map(phase => {
               const Graphic = phase.Graphic
               return (
                 <div
                   key={phase.title}
-                  className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
+                  className='relative flex flex-col gap-4 bg-bg-card p-card'
                 >
                   {Graphic && (
                     <Graphic className='absolute top-4 right-4 h-grid-3 w-grid-3 md:top-6 md:right-6 md:h-grid-2 md:w-grid-2' />
                   )}
-                  <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                    {phase.title}
-                  </h3>
+                  <h3 className='type-card-title'>{phase.title}</h3>
                   <ul className='flex flex-col gap-2 text-base text-text-muted'>
                     {phase.points.map(point => (
                       <li key={point} className='flex gap-2'>
@@ -175,34 +163,21 @@ export function PhasesSection({
 
         {showAuditLink && (
           <Reveal index={3}>
-            {/* Each clause is an inline-block so a narrow viewport breaks the
-                line between them instead of orphaning a word or two. */}
-            <p className='text-base text-balance text-text-muted'>
-              <span className='inline-block'>
-                Not sure which phase you are in?
-              </span>{' '}
-              <span className='inline-block'>
-                <TrackedLink
-                  href='/audit'
-                  location='home-phases'
-                  className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
-                >
-                  Find out in 2 minutes
-                </TrackedLink>
-                , free.
-              </span>
-            </p>
+            <ClosingLine
+              lead='Not sure which phase you are in?'
+              linkText='Find out in 2 minutes'
+              location='home-phases'
+              after=', free.'
+            />
           </Reveal>
         )}
 
         {/* Under The Hood — the method behind every stage plus the tools that power
             it. Folds the how-we-work process into the intro, then the vendor logos. */}
         {showPoweredBy && (
-          <Reveal index={3} className='mt-grid-1 flex flex-col gap-5 md:gap-8'>
+          <Reveal index={3} className='mt-grid-1 flex flex-col gap-grid-1'>
             <div className='flex flex-col gap-2'>
-              <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
-                Under the hood
-              </h3>
+              <h3 className='type-card-title'>Under the hood</h3>
               <p className='max-w-2xl text-base text-text-muted'>
                 Whatever stage you are at, every build relies on a trusted stack
                 of frontier AI models and cloud infrastructure, wired into our
@@ -231,6 +206,6 @@ export function PhasesSection({
           </Reveal>
         )}
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

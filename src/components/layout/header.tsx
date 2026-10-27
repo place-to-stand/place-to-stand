@@ -55,7 +55,7 @@ export function Header() {
         <Link href='/' className='group flex items-center gap-3'>
           {/* Blueprint logo mark */}
           <span
-            className='inline-flex h-6 w-6 items-center justify-center border border-accent/50'
+            className='inline-flex h-6 w-6 items-center justify-center border border-accent-subtle'
             aria-hidden
           >
             <span className='h-2 w-2 bg-accent' />
@@ -74,7 +74,7 @@ export function Header() {
               className={cn(
                 'px-3 py-1.5 font-mono text-xs tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-300',
                 pathname === item.href
-                  ? 'border border-accent/30 text-accent'
+                  ? 'border border-accent-subtle text-accent'
                   : 'border border-transparent text-text-muted hover:text-text'
               )}
             >

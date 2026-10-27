@@ -61,9 +61,9 @@ export function AuditApp() {
     if (!result) {
       return (
         <div className='w-full sm:py-grid-2'>
-          <div className='relative bg-bg-panel p-6 sm:p-8'>
+          <div className='relative bg-bg-panel p-card'>
             <span className='bp-label font-mono'>Audit Results</span>
-            <p className='mt-4 text-base text-text-muted'>
+            <p className='mt-intro text-base text-text-muted'>
               Rebuilding your results...
             </p>
           </div>
