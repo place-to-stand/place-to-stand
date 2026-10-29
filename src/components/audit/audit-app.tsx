@@ -5,7 +5,6 @@ import { AuditLandingContent } from '@/src/components/audit/audit-landing'
 import { AuditWizard } from '@/src/components/audit/audit-wizard'
 import { CaptureGate } from '@/src/components/audit/capture-gate'
 import { ResultsView } from '@/src/components/audit/results-view'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { useAudit } from '@/src/hooks/use-audit'
 
 /**
@@ -62,8 +61,7 @@ export function AuditApp() {
     if (!result) {
       return (
         <div className='w-full sm:py-grid-2'>
-          <div className='relative border border-border bg-bg-panel p-6 sm:p-8'>
-            <BlueprintCorners size={12} colorClassName='border-border-light' />
+          <div className='relative bg-bg-panel p-6 sm:p-8'>
             <span className='bp-label font-mono'>Audit Results</span>
             <p className='mt-4 text-base text-text-muted'>
               Rebuilding your results...

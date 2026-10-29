@@ -23,6 +23,9 @@ export type Client = {
    * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
    * box up and leaves the heavy part sitting low. */
   logoNudge?: number
+  /** Site path of this client's case study. When set, the card on /clients
+   * opens the case study instead of the client's own site. */
+  caseStudy?: string
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
    * color fills (they'd flatten to a blob) opt into a grey version instead. */
@@ -43,8 +46,9 @@ export const clients: Client[] = [
   {
     title: 'Hot Ones',
     href: 'https://hotones.com',
-    image: '/work-hot-ones.png',
+    image: '/work-hot-ones-site.jpg',
     logo: '/logos/hot-ones.png',
+    caseStudy: '/clients/heatonist',
     logoScale: 0.72,
     logoNudge: -9,
     logoTone: 'grey',
@@ -54,7 +58,7 @@ export const clients: Client[] = [
   {
     title: 'Blake Brown Beauty',
     href: 'https://blakebrownbeauty.com',
-    image: '/work-blake-brown-beauty.png',
+    image: '/work-blake-brown-beauty-photo.jpg',
     logo: '/logos/blake-brown-beauty.svg',
     logoScale: 0.58,
     description:
@@ -63,7 +67,7 @@ export const clients: Client[] = [
   {
     title: 'Florence by Mills Beauty',
     href: 'https://florencebymillsbeauty.com',
-    image: '/work-florence-by-mills-beauty.png',
+    image: '/work-florence-by-mills-beauty-photo.jpg',
     logo: '/logos/florence-by-mills-beauty.png',
     logoScale: 0.62,
     logoNudge: 8,
@@ -73,8 +77,9 @@ export const clients: Client[] = [
   {
     title: 'Heatonist',
     href: 'https://heatonist.com',
-    image: '/work-heatonist.png',
+    image: '/work-heatonist-photo.jpg',
     logo: '/logos/heatonist.svg',
+    caseStudy: '/clients/heatonist',
     logoScale: 0.48,
     description:
       "A curated marketplace for the world's best small-batch hot sauces.",
@@ -101,7 +106,7 @@ export const clients: Client[] = [
   {
     title: '9 Point Studios',
     href: 'https://9pointstudios.com',
-    image: '/work-9-point-studios.png',
+    image: '/work-9-point-studios-photo.jpg',
     logo: '/logos/9-point-studios.svg',
     logoScale: 0.6,
     logoNudge: -2,
@@ -111,7 +116,7 @@ export const clients: Client[] = [
   {
     title: 'GreenWATT USA',
     href: 'https://www.gtbsolarexchange.com',
-    image: '/work-greenwatt-usa.png',
+    image: '/work-greenwatt-usa-photo.jpg',
     logo: '/logos/greenwatt-usa.png',
     logoScale: 0.65,
     logoNudge: 2,
@@ -121,7 +126,7 @@ export const clients: Client[] = [
   {
     title: 'Officina del Bere 1397',
     href: 'https://officinadelbere1397.com',
-    image: '/work-officina-del-bere-1397.png',
+    image: '/work-officina-del-bere-1397-photo.jpg',
     logo: '/logos/officina-del-bere-1397.png',
     logoScale: 0.74,
     logoNudge: 2.5,
@@ -138,7 +143,7 @@ export const clients: Client[] = [
   {
     title: 'Jeremy Turner',
     href: 'https://jeremyturnerstudio.com',
-    image: '/work-jeremy-turner.png',
+    image: '/work-jeremy-turner-photo.jpg',
     logo: '/logos/jeremy-turner.svg',
     logoScale: 0.39,
     logoNudge: 5,
@@ -148,7 +153,7 @@ export const clients: Client[] = [
   {
     title: 'The Good for Nothings Club',
     href: 'https://www.thegoodfornothings.club',
-    image: '/work-the-good-for-nothings-club.png',
+    image: '/work-the-good-for-nothings-club-photo.jpg',
     logo: '/logos/the-good-for-nothings-club.svg',
     logoScale: 0.68,
     description:
@@ -190,7 +195,6 @@ export const clients: Client[] = [
   {
     title: 'Lifepacks',
     href: 'https://www.lifepacks.co',
-    image: '/work-lifepacks.jpg',
     logo: '/logos/lifepacks.png',
     logoScale: 0.38,
     logoNudge: -3.5,

@@ -23,13 +23,11 @@ import { ClientLogoWall } from './client-logo-wall'
  */
 export function ClientLogosSection() {
   return (
-    // Top and bottom padding differ on purpose: the logos sit centred in
-    // their rows, so the bottom row's ink ends well above the grid's edge.
-    // These values make the gap from the hero drawing and the gap down to
-    // the persona section look the same.
-    <AnimatedSection className='pt-[93px] pb-grid-4 md:pt-[133px]'>
+    // Bottom matches every homepage section (48 / 64 / 80px). The top is the
+    // homepage's edge gap under the hero's bottom line: 72 / 96 / 120px.
+    <AnimatedSection className='pt-18 pb-12 md:pt-24 md:pb-16 lg:pt-grid-5 lg:pb-20'>
       <div className='flex flex-col gap-9'>
-        <Reveal index={0}>
+        <Reveal index={0} className='flex'>
           <span className='bp-label font-mono'>Trusted by</span>
         </Reveal>
 

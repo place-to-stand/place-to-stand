@@ -207,9 +207,9 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
     <div>
       {/* Hero Block */}
       <Reveal index={0}>
-        <div className='dots-hero flex flex-col items-center gap-6 text-center'>
+        <div className='dots-hero flex flex-col items-center gap-6 text-center [--dots-top:96px] sm:[--dots-top:176px]'>
           <span className='bp-label font-mono'>Opportunity Audit</span>
-          <h1 className='max-w-3xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase sm:text-5xl md:text-6xl'>
+          <h1 className='max-w-3xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text sm:text-5xl md:text-6xl'>
             Find your biggest software opportunity
           </h1>
           <p className='mx-auto max-w-xl text-base text-balance text-text-muted md:text-lg'>
@@ -242,8 +242,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       <Reveal index={1} className='mt-32 md:mt-42'>
         <div className='flex flex-col gap-grid-1'>
           <span className='bp-label font-mono'>Trusted by</span>
-          <div className='relative border border-border py-grid-1'>
-            <BlueprintCorners size={12} />
+          <div className='relative py-grid-1'>
             <AuditLogoMarquee />
           </div>
         </div>
@@ -265,8 +264,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
 
           {/* Facets */}
           <div className='relative'>
-            <BlueprintCorners size={16} />
-            <div className='grid gap-px border border-border bg-border md:grid-cols-3'>
+            <div className='grid gap-grid-half md:grid-cols-3'>
               {FACETS.map(facet => (
                 <div
                   key={facet.title}
@@ -348,8 +346,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               What we can build for you
             </h2>
           </div>
-          <div className='relative border border-border bg-bg-card'>
-            <BlueprintCorners size={16} />
+          <div className='relative bg-bg-card'>
             <ul className='flex flex-col'>
               {services.map((service, index) => (
                 <ServiceRow
@@ -368,7 +365,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       </Reveal>
 
       {/* Final CTA Block */}
-      <Reveal index={3} className='mt-44 md:mt-66'>
+      <Reveal index={3} className='mt-38 md:mt-54'>
         <div className='dots-band flex flex-col items-center gap-6 bg-bg-card p-grid-2 text-center'>
           <BlueprintCorners size={16} />
           <div className='flex flex-col items-center gap-3 md:gap-4'>

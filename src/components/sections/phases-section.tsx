@@ -1,9 +1,9 @@
+import { cn } from '@/src/lib/utils'
 import Link from 'next/link'
 import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
@@ -92,6 +92,7 @@ export function PhasesSection({
   showLabel = true,
   showAuditLink = false,
   largeHeading = false,
+  className,
 }: {
   showHowWeWorkLink?: boolean
   showPoweredBy?: boolean
@@ -101,9 +102,11 @@ export function PhasesSection({
   showAuditLink?: boolean
   /** Homepage runs its section headings a size up. */
   largeHeading?: boolean
+  /** Overrides the section's padding (the homepage scales it per breakpoint). */
+  className?: string
 }) {
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className={cn('py-20', className)}>
       <div className='flex flex-col gap-12'>
         {/* Header */}
         <div className='flex flex-col gap-3 md:gap-4'>
@@ -139,8 +142,7 @@ export function PhasesSection({
 
         {/* Phase grid: 4 cols, blueprint-style with corner marks */}
         <Reveal index={2} className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='grid gap-px border border-border bg-border md:grid-cols-4'>
+          <div className='grid gap-grid-half md:grid-cols-4'>
             {phases.map(phase => {
               const Graphic = phase.Graphic
               return (
@@ -218,7 +220,7 @@ export function PhasesSection({
 
         {/* Desktop-only link: stays below the cards */}
         {showHowWeWorkLink && (
-          <Reveal index={4} className='hidden md:block'>
+          <Reveal index={4} className='hidden md:flex'>
             <Link
               href='/how-we-work'
               className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'

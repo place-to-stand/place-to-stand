@@ -114,7 +114,7 @@ export function ServicesPreview() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
-    <AnimatedSection className='py-20'>
+    <AnimatedSection className='py-12 md:py-16 lg:py-20'>
       <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading (sticky) */}
         <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
@@ -143,7 +143,7 @@ export function ServicesPreview() {
         </div>
 
         {/* Right: service accordion */}
-        <Reveal index={2} className='flex flex-col border border-border'>
+        <Reveal index={2} className='flex flex-col'>
           {services.map((service, i) => (
             <ServiceRow
               key={service.slug}

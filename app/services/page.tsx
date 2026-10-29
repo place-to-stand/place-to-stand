@@ -23,7 +23,7 @@ export default function ServicesPage() {
       <AnimatedSection priority className='flex flex-col gap-12 md:gap-20'>
         <div className='dots-hero flex flex-col gap-4'>
           <span className='bp-label font-mono'>Services</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
+          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
             What we build
           </h1>
           <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
@@ -79,7 +79,7 @@ export default function ServicesPage() {
       </AnimatedSection>
 
       {/* CTA Block */}
-      <AnimatedSection className='pt-22 pb-grid-4 md:pt-44 md:pb-grid-6'>
+      <AnimatedSection className='pt-16 pb-grid-3 md:pt-32 md:pb-grid-4'>
         <div className='dots-band bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>

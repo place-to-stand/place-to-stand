@@ -26,14 +26,24 @@ export default function HomePage() {
       <HeroSection />
       <ClientLogosSection />
       <WhoWeWorkWithSection />
-      <PhasesSection showPoweredBy showAuditLink largeHeading />
+      <PhasesSection
+        showPoweredBy
+        showAuditLink
+        largeHeading
+        className='py-12 md:py-16 lg:py-20'
+      />
       <ServicesPreview />
       <ManifestoSection />
       <PillarsSection />
       {/* Field Notes section temporarily removed — content in progress, restore in a future update */}
 
-      {/* CTA Block — blueprint detail callout */}
-      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
+      {/* Homepage rhythm: sections are 96 / 128 / 160px apart (phone / tablet /
+          laptop up) and the two edges, under the hero line and above this
+          callout's dots, are 72 / 96 / 120px, 3/4 of that.
+          CTA Block — blueprint detail callout. The dots' top rule sits one edge
+          gap under the section above: that section's bottom padding plus the
+          extra here on top of --band-pad. The bottom equals --band-pad. */}
+      <AnimatedSection className='pt-24 pb-grid-3 md:pt-32 md:pb-grid-4 lg:pt-34'>
         <div className='dots-band bg-bg-card p-5 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>

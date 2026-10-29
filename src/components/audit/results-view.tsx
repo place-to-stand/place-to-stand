@@ -20,7 +20,6 @@ import {
   Users,
   Workflow,
 } from 'lucide-react'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import {
   FeedbackCard,
   type FeedbackCardProps,
@@ -143,13 +142,12 @@ export function ResultsView({
       )}
 
       {/* Phase progression timeline */}
-      <section className='relative border border-border bg-bg-panel p-6 sm:px-8'>
-        <BlueprintCorners size={12} colorClassName='border-border-light' />
+      <section className='relative bg-bg-panel p-6 sm:px-8'>
         <div className='flex items-baseline justify-between'>
-          <h2 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
+          <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Business phase
           </h2>
-          <span className='font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
+          <span className='font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>
             {activeIndex + 1} / {PHASE_ORDER.length}
           </span>
         </div>
@@ -187,7 +185,7 @@ export function ResultsView({
                 </span>
                 <span
                   className={cn(
-                    'block w-full px-0.5 text-xs leading-tight tracking-wide break-words hyphens-auto uppercase',
+                    'block w-full px-0.5 text-xs leading-tight tracking-wide break-words hyphens-auto uppercase sm:text-sm',
                     isActive ? 'font-semibold text-text' : 'text-text-muted'
                   )}
                 >
@@ -202,22 +200,21 @@ export function ResultsView({
       {/* Main grid: phase detail + score chart */}
       <div className='mt-grid-1 grid gap-grid-1 lg:grid-cols-3'>
         {/* Phase detail */}
-        <section className='relative border border-border bg-bg-panel p-6 sm:p-8 lg:col-span-2'>
-          <BlueprintCorners size={12} colorClassName='border-border-light' />
-          <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
+        <section className='relative bg-bg-panel p-6 sm:p-8 lg:col-span-2'>
+          <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Your phase
           </span>
-          <h1 className='mt-4 font-headline text-3xl leading-[.9]! font-semibold text-text uppercase'>
+          <h1 className='mt-4 font-headline text-3xl leading-[.9]! font-bold text-text'>
             {phase.name}
           </h1>
-          <p className='mt-2 font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
+          <p className='mt-2 font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>
             {phase.tagline}
           </p>
           <p className='mt-4 text-base text-text-muted'>{phase.description}</p>
 
           <div className='mt-6 grid gap-6 sm:grid-cols-2'>
             <div>
-              <h3 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
+              <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Signals
               </h3>
               <ul className='mt-3 space-y-1.5'>
@@ -230,7 +227,7 @@ export function ResultsView({
               </ul>
             </div>
             <div>
-              <h3 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
+              <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Next steps
               </h3>
               <ul className='mt-3 space-y-1.5'>
@@ -246,9 +243,8 @@ export function ResultsView({
         </section>
 
         {/* Phase score chart */}
-        <section className='relative border border-border bg-bg-panel p-5'>
-          <BlueprintCorners size={12} colorClassName='border-border-light' />
-          <h2 className='font-mono text-xs font-semibold tracking-[0.15em] text-text-muted uppercase'>
+        <section className='relative bg-bg-panel p-5'>
+          <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Audit score
           </h2>
           <div className='mt-4 space-y-2.5'>
@@ -267,7 +263,7 @@ export function ResultsView({
                     >
                       {shortPhaseName(id)}
                     </span>
-                    <span className='font-mono text-xs text-text-muted tabular-nums'>
+                    <span className='font-mono text-sm text-text-muted tabular-nums'>
                       {score}
                     </span>
                   </div>
@@ -297,7 +293,7 @@ export function ResultsView({
                 Where we&apos;d start
               </h2>
             </div>
-            <span className='hidden font-mono text-xs tracking-[0.15em] text-text-muted uppercase sm:inline'>
+            <span className='hidden font-mono text-sm tracking-[0.15em] text-text-muted uppercase sm:inline'>
               {recommendations.length} opportunities
             </span>
           </div>
@@ -307,9 +303,8 @@ export function ResultsView({
               return (
                 <article
                   key={rec.service.id}
-                  className='relative flex flex-col border border-border bg-bg-panel p-5 transition-colors hover:border-border-light'
+                  className='relative flex flex-col bg-bg-panel p-5 transition-colors hover:bg-bg-elevated'
                 >
-                  <BlueprintCorners size={12} />
                   <div className='flex items-center gap-3'>
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
                       <Icon className='h-5 w-5' />
@@ -349,13 +344,12 @@ export function ResultsView({
           id={CAPTURE_ANCHOR}
           className='relative mt-grid-1 scroll-mt-grid-4 border border-accent/40 bg-bg-panel p-6 sm:p-8'
         >
-          <BlueprintCorners size={12} />
           {/* min-w-0 on both columns: a grid item's min width is its
               content's, so an unwrappable button would push the card past
               the viewport on a phone. */}
           <div className='grid gap-grid-2 md:grid-cols-2 md:items-center'>
             <div className='min-w-0'>
-              <p className='font-mono text-xs tracking-[0.15em] text-accent uppercase'>
+              <p className='font-mono text-sm tracking-[0.15em] text-accent uppercase'>
                 Your full blueprint
               </p>
               <h2 className='mt-2 font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
@@ -421,7 +415,7 @@ function LockedRecommendation({ rank }: { rank: number }) {
       </div>
       <div aria-hidden className='min-w-0 flex-1'>
         <div className='h-3 w-2/3 bg-bg-elevated' />
-        <p className='mt-2 font-mono text-xs tracking-[0.15em] text-text-muted uppercase transition-colors group-hover:text-accent'>
+        <p className='mt-2 font-mono text-sm tracking-[0.15em] text-text-muted uppercase transition-colors group-hover:text-accent'>
           Unlocks by email
         </p>
       </div>
@@ -455,11 +449,10 @@ function CapturedPanel({
   const [detailsSent, setDetailsSent] = useState(false)
 
   return (
-    <section className='relative mt-grid-1 border border-border bg-bg-panel p-6 sm:p-8'>
-      <BlueprintCorners size={12} />
+    <section className='relative mt-grid-1 bg-bg-panel p-6 sm:p-8'>
       <div className='grid gap-grid-2 md:grid-cols-2'>
         <div className='flex min-w-0 flex-col items-start gap-3'>
-          <p className='inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-accent uppercase'>
+          <p className='inline-flex items-center gap-2 font-mono text-sm tracking-[0.15em] text-accent uppercase'>
             <CheckCircle2 aria-hidden className='h-4 w-4' />
             Blueprint sent
           </p>

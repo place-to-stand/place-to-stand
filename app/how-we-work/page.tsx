@@ -61,8 +61,8 @@ export default function HowWeWorkPage() {
       <AnimatedSection priority className='flex flex-col gap-12'>
         <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
           <span className='bp-label font-mono'>How We Work</span>
-          <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-semibold text-balance text-text uppercase md:text-6xl'>
-            Our Process
+          <h1 className='max-w-4xl font-headline text-4xl !leading-[.9] font-bold text-balance text-text md:text-6xl'>
+            Our process
           </h1>
           <p className='max-w-2xl text-base text-text-muted md:text-lg'>
             Quick wins to unblock you, a model of how your business actually
@@ -70,39 +70,39 @@ export default function HowWeWorkPage() {
             details.
           </p>
         </div>
-        <div className='relative'>
-          <BlueprintCorners size={16} />
-          <div className='grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4'>
-            {process.map(step => (
-              <div
-                key={step.title}
-                className='relative flex flex-col gap-6 bg-bg-card p-5 md:p-8'
-              >
-                <step.Graphic
-                  className='absolute top-4 right-4 h-10 w-10 md:top-6 md:right-6'
-                  aria-hidden
-                />
-                <h3 className='max-w-[80%] font-headline text-sm leading-tight font-bold tracking-tight text-balance text-accent uppercase'>
-                  {step.title}
-                </h3>
-                <p className='text-base text-text-muted'>{step.body}</p>
+        {/* Four open steps: rows split by a rule on small screens, four
+            columns on large ones. No boxes. */}
+        <ol className='grid divide-y divide-border lg:grid-cols-4 lg:gap-x-grid-2 lg:divide-y-0'>
+          {process.map((step, index) => (
+            <li
+              key={step.title}
+              className='flex flex-col gap-4 py-grid-2 first:pt-0 last:pb-0 lg:py-0'
+            >
+              <div className='flex items-start justify-between gap-grid-1'>
+                <span className='font-mono text-sm text-text-muted tabular-nums'>
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <step.Graphic className='h-12 w-12 shrink-0' aria-hidden />
               </div>
-            ))}
-          </div>
-        </div>
+              <h2 className='font-headline text-2xl leading-[0.95] font-bold tracking-tight text-balance text-text uppercase md:text-3xl'>
+                {step.title}
+              </h2>
+              <p className='max-w-xl text-base text-text-muted'>{step.body}</p>
+            </li>
+          ))}
+        </ol>
       </AnimatedSection>
 
       <PortalSection />
 
       {/* Our Tech Stack — the models and infrastructure powering the portal */}
       <AnimatedSection>
-        <div className='relative border border-border p-6 md:p-10'>
-          <BlueprintCorners size={16} />
-          <div className='flex flex-col gap-8'>
-            <div className='flex flex-col gap-2'>
-              <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
+        <div>
+          <div className='flex flex-col gap-grid-2'>
+            <div className='flex flex-col gap-3'>
+              <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text md:text-4xl'>
                 Our Tech Stack
-              </h3>
+              </h2>
               <p className='max-w-2xl text-base text-text-muted'>
                 The frontier AI models and modern infrastructure behind every
                 build.
@@ -111,7 +111,7 @@ export default function HowWeWorkPage() {
             <div className='flex flex-col gap-6'>
               {stackGroups.map(group => (
                 <div key={group.label} className='flex flex-col gap-3'>
-                  <span className='text-xs font-semibold tracking-[0.1em] text-text-muted uppercase'>
+                  <span className='font-mono text-sm font-medium tracking-[0.1em] text-text-muted uppercase'>
                     {group.label}
                   </span>
                   <div className='grid grid-cols-2 gap-x-4 gap-y-5 md:flex md:flex-wrap md:items-center md:gap-x-8 md:gap-y-4'>
@@ -145,9 +145,9 @@ export default function HowWeWorkPage() {
       <PhasesSection showHowWeWorkLink={false} showLabel={false} />
 
       {/* CTA Block */}
-      <AnimatedSection className='pt-[129px] pb-grid-4 md:pt-[217px] md:pb-grid-6'>
+      <AnimatedSection className='pt-[105px] pb-grid-3 md:pt-[169px] md:pb-grid-4'>
         <div className='dots-band bg-bg-card p-6 md:p-16'>
-          <BlueprintCorners size={20} all />
+          <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-2.25 md:gap-3'>
               <span className='bp-label font-mono'>Next Step</span>
