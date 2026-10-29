@@ -46,7 +46,7 @@ export const clients: Client[] = [
   {
     title: 'Hot Ones',
     href: 'https://hotones.com',
-    image: '/work-hot-ones-photo.jpg',
+    image: '/work-hot-ones-site.jpg',
     logo: '/logos/hot-ones.png',
     caseStudy: '/clients/heatonist',
     logoScale: 0.72,

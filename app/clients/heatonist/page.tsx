@@ -135,6 +135,8 @@ function StorefrontShot({ src, host }: { src: string; host: string }) {
 }
 
 export default function HeatonistCaseStudyPage() {
+  const [introBefore, introAfter] = cs.intro.split(cs.introLink.text)
+
   return (
     <main className='flex-1 pt-10'>
       <JsonLd data={caseStudyJsonLd(cs)} />
@@ -147,7 +149,17 @@ export default function HeatonistCaseStudyPage() {
             {cs.headline}
           </h1>
           <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
-            {cs.intro}
+            {introBefore}
+            <a
+              href={cs.introLink.href}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
+            >
+              {cs.introLink.text}
+              <span className='sr-only'> (opens in a new tab)</span>
+            </a>
+            {introAfter}
           </p>
         </div>
       </AnimatedSection>
@@ -198,7 +210,7 @@ export default function HeatonistCaseStudyPage() {
           <blockquote className='font-headline text-3xl leading-tight font-semibold text-balance text-text md:text-6xl'>
             &ldquo;{cs.quote.text}&rdquo;
           </blockquote>
-          <figcaption className='font-mono text-sm tracking-wider text-text-muted uppercase'>
+          <figcaption className='font-mono text-sm tracking-wider text-accent uppercase'>
             {cs.quote.name}, {cs.quote.company}
           </figcaption>
         </figure>

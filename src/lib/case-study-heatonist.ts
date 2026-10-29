@@ -14,6 +14,8 @@ export const heatonistCaseStudy = {
   headline: 'A tech team without the hire',
   intro:
     'Heatonist is the hot sauce shop behind the show Hot Ones. Since 2023 we have run engineering for both of its Shopify stores. Heatonist pays only for the hours we work, and never has to hire.',
+  /** Words in `intro` that link out, once. */
+  introLink: { text: 'Hot Ones', href: 'https://hotones.com' },
   stats: [
     { value: '3.5 yrs', label: 'Running engineering since April 2023' },
     { value: '1,400+', label: 'Changes shipped' },
