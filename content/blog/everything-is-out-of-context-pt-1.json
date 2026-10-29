@@ -1,0 +1,76 @@
+{
+  "title": "Everything is out of context, Pt. 1",
+  "description": "Our digital literacy is trash.",
+  "date": "2026-04-30",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Our digital literacy is trash, and the data backs that up. A 2024 study by iProov tested whether people could spot AI-generated deepfakes. Only 0.1 percent of participants correctly identified every fake. One in a thousand, even when they were told ahead of time that fakes were in the mix.[1] That same year, an Ofcom survey of over 4,000 UK adults found that one in four finds it difficult to tell the difference between true and false information online, and only about a quarter of consumers bother to verify what they see by checking other sources.[2]"
+    },
+    {
+      "type": "paragraph",
+      "text": "\"Don't believe everything you read on the internet\" used to be common sense. It went out of style somewhere along the way, and we are paying for it now. The phrase isn't new. In 1864, Anthony Trollope had a character put it plainly: \"You don't believe everything you read in the newspapers, do you?\"[3] Plato made the same argument about written language itself 2,400 years ago: \"Every word, when once it is written, is bandied about, alike among those who understand and those who have no interest in it, and it knows not to whom to speak or not to speak.\"[4]"
+    },
+    {
+      "type": "paragraph",
+      "text": "This is why I say everything is out of context. And I mean that literally. That may sound like a stretch, so let me prove it to you. The deeper you go down the physics rabbit hole, the clearer it gets. But it's not obvious unless you look."
+    },
+    {
+      "type": "paragraph",
+      "text": "Information is a physical thing. To store, move, or amplify it, you have to encode it into a state, a configuration of something. Claude Shannon built the field of Information Theory on exactly this idea.[5] Your screen and your speakers don't know what they're showing you. They hold voltages. We are the ones interpreting those voltages as words, images, and sound."
+    },
+    {
+      "type": "paragraph",
+      "text": "Our ability to encode and transmit information is the reason we have civilization. It's how knowledge outlives its author and how ideas cross oceans. But by definition, the act of encoding strips information out of its original context. As Plato saw, the same information is always vulnerable to being re-contextualized, for better or worse. To take it one step further, our own brains are doing the same thing at all times, encoding information received from our senses. So yes, literally everything is out of context."
+    },
+    {
+      "type": "paragraph",
+      "text": "We are drowning in cheap, free, instantly available information, and the cheaper it gets, the less context comes with it. Convenience is achieved by deleting context. So we need to be skeptical of all the information we receive. The easier it is to find, the more skeptical we should be."
+    },
+    {
+      "type": "paragraph",
+      "text": "But skepticism alone isn't the answer. Doubting everything is just another way of disengaging. The real solution is to *add context back*. Information arrives stripped, and we have a choice in what we do with it. We can take it as given and pass it along, or we can put it back into context using the tools we already have. Our own lived experience. The opinions of people we know and trust. Verifiable, independent sources we can check ourselves. Each of those layers is a way of widening the picture around an isolated piece of information until it starts to mean something. None of them are perfect on their own but together they're how we move from a data point to an actual understanding."
+    },
+    {
+      "type": "paragraph",
+      "text": "I felt this idea is worth addressing in many ways, so I've made this a mini-series to go deeper. Here is what to expect."
+    },
+    {
+      "type": "paragraph",
+      "text": "**Part 2: Finding base meaning.** Working back from any piece of information to its first principles is the only reliable way to know what's actually true."
+    },
+    {
+      "type": "paragraph",
+      "text": "**Part 3: The scaling revolution.** The printing press, the internet, and AI are all scaling technologies, and every one of them made the context problem worse."
+    },
+    {
+      "type": "paragraph",
+      "text": "**Part 4: Context windows.** How AI contexts work and why our own life context is the ultimate differentiator."
+    },
+    {
+      "type": "heading",
+      "text": "Sources"
+    },
+    {
+      "type": "paragraph",
+      "text": "[1]: iProov, *Deepfake Detection Study*, 2024. [https://www.iproov.com/press/study-reveals-deepfake-blindspot-detect-ai-generated-content](https://www.iproov.com/press/study-reveals-deepfake-blindspot-detect-ai-generated-content)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[2]: Ofcom, *Understanding Misinformation: An Exploration of UK Adults' Behaviour and Attitudes*, November 2024. [https://www.ofcom.org.uk/media-use-and-attitudes/attitudes-to-news/understanding-misinformation-an-exploration-of-uk-adults-behaviour-and-attitudes](https://www.ofcom.org.uk/media-use-and-attitudes/attitudes-to-news/understanding-misinformation-an-exploration-of-uk-adults-behaviour-and-attitudes)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[3]: Anthony Trollope, *The Small House at Allington*, 1864. [https://www.gutenberg.org/ebooks/4599](https://www.gutenberg.org/ebooks/4599)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[4]: Plato, *Phaedrus*, c. 370 BCE. Translated by Harold N. Fowler, Loeb Classical Library, Harvard University Press, 1925. [http://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0174:text%3DPhaedrus:section%3D275e](http://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.01.0174:text%3DPhaedrus:section%3D275e)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[5]: Claude E. Shannon, *A Mathematical Theory of Communication*, Bell System Technical Journal, 1948. [https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf](https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf)"
+    }
+  ]
+}

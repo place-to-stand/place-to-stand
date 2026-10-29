@@ -1,0 +1,68 @@
+{
+  "title": "AI Slop is Pollution. Literally.",
+  "description": "We have a responsibility to be efficient.",
+  "date": "2026-04-08",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "AI slop is not just polluting your social media feed. It has a literal physical byproduct that ends up polluting local communities and directly affecting human health. The air quality, the water supply, and the sleep deprivation are real things affecting real humans as you read this."
+    },
+    {
+      "type": "paragraph",
+      "text": "I am singling out AI slop but in reality it is all AI usage that has a byproduct. That byproduct is data centers. Every data center, efficient or not, has real localized effects on the communities around it. It's an issue I've been keeping up with for awhile but last weekend my parents brought it up so I took that as a sign it was time to dig deeper."
+    },
+    {
+      "type": "paragraph",
+      "text": "Here is what we are dealing with. There are roughly 5,400 data centers in the US, around 540 of which are hyperscale facilities running at 100 megawatts or more. A single one of those consumes roughly 2 million liters of water per day, equivalent to 6,500 households. Two thirds of new centers since 2022 have been built in regions already facing water stress.¹ That consumption is largely driven by the power plants supplying the electricity. Traditional energy sources are extraordinarily water intensive and most data centers are still running on them. Then there is the noise. Nearly a third of Virginia's data centers sit within 200 feet of homes, where residents report headaches, vertigo, and sleep disruption from cooling systems running at up to 96 decibels around the clock. Most local noise ordinances were written to handle loud parties and have no mechanism for a permanent industrial hum that never stops.²"
+    },
+    {
+      "type": "paragraph",
+      "text": "Fortunately, these problems have paths forward. Liquid cooling eliminates the fan systems driving that noise and clean energy dramatically reduces the water footprint. But for aging mid-tier facilities next to residential neighborhoods, retrofitting is expensive, complex, and nobody is requiring it."
+    },
+    {
+      "type": "paragraph",
+      "text": "What I did not fully appreciate until I dug deeper was the bottleneck sitting upstream of all of it. Over 2,300 gigawatts of proposed clean generation is waiting in interconnection queues. That's more than twice the entire installed capacity of the United States. The median wait time is nearly five years.³ Clean energy exists. The problem is the process of connecting it to the grid. The amount of capacity entering queues has risen more than 550% since 2015 and is moving through a review system that was never built for this volume.⁴ That is why data centers keep reaching for on-site power generation, which is largely fossil fuel based instead of clean power."
+    },
+    {
+      "type": "paragraph",
+      "text": "If we compare our clean energy growth to China's, it’s pretty telling. Their centralized planning allowed the country to add roughly six to seven times more wind and solar capacity than the entire US in 2025 alone⁵. This is largely because a single planning authority can cut across geographical boundaries at a national scale. The US runs a patchwork of markets and commissions that each have a say. Multi-state regulatory frameworks inflate both cost and build time."
+    },
+    {
+      "type": "paragraph",
+      "text": "These institutions need a software upgrade. The interconnection queues, the permitting handoffs, the cascading re-studies, that is exactly the kind of purpose-built problem our industry should be running toward. The AI industry created this demand and it bears the responsibility to help fix the infrastructure struggling to keep up."
+    },
+    {
+      "type": "paragraph",
+      "text": "None of this can be fixed by one person. But as individuals we can choose to be deliberate with our AI use. Not generating for the sake of it, not shipping slop because it is easy. We have a responsibility to use these tools in ways that benefit more than just ourselves."
+    },
+    {
+      "type": "paragraph",
+      "text": "I am actively looking to connect with people working on grid interconnection, clean energy permitting, or utility-side infrastructure software. If you are building in this space or know someone who is, please reach out. Let's talk."
+    },
+    {
+      "type": "paragraph",
+      "text": "Sources:"
+    },
+    {
+      "type": "paragraph",
+      "text": "1. [EthicalGEO — The Cloud is Drying Our Rivers: Water Usage of AI Data Centers](https://ethicalgeo.org/the-cloud-is-drying-our-rivers-water-usage-of-ai-data-centers/)"
+    },
+    {
+      "type": "paragraph",
+      "text": "2. [Environmental and Energy Study Institute — Communities Are Raising Noise Pollution Concerns About Data Centers](https://www.eesi.org/articles/view/communities-are-raising-noise-pollution-concernsabout-data-centers)"
+    },
+    {
+      "type": "paragraph",
+      "text": "3. [Lawrence Berkeley National Laboratory — Queued Up: 2025 Edition](https://emp.lbl.gov/queues)"
+    },
+    {
+      "type": "paragraph",
+      "text": "4. [Lawrence Berkeley National Laboratory — Queued Up: 2025 Edition](https://emp.lbl.gov/queues)"
+    },
+    {
+      "type": "paragraph",
+      "text": "5. [Carbon Credits — China Adds Power 7x More Than the US in 2025](https://carboncredits.com/china-adds-power-7x-more-than-the-us-in-2025-with-500b-energy-build-out-in-a-single-year/)"
+    }
+  ]
+}

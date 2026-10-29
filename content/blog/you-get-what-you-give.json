@@ -1,0 +1,60 @@
+{
+  "title": "You Get What You Give",
+  "description": "How to actually use AI.",
+  "date": "2026-04-01",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Instead of giving you another tired AI take, I'm going to show you how to actually use it. Hype moves fast and it buries the useful stuff. The people who need this technology most are the ones least served by the conversation around it."
+    },
+    {
+      "type": "paragraph",
+      "text": "The concept I want to leave you with is straightforward: the more you bring to the tool, the more it can give back. You get what you give."
+    },
+    {
+      "type": "paragraph",
+      "text": "To see this in practice, consider two landscapers approaching the same tool with very different levels of clarity. One new to the business. The second with many seasons under their belt."
+    },
+    {
+      "type": "paragraph",
+      "text": "**New Landscaper -**"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Prompt:** *“How do I make my landscaping business more profitable in the spring?”*"
+    },
+    {
+      "type": "paragraph",
+      "text": "**The response:** *“Great question — spring is the biggest opportunity window for landscaping businesses. Here are the most impactful ways to boost profitability…” ([real claude response](https://claude.ai/share/ab058f84-188f-4c7f-b5f1-10030b010378))*"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Seasoned Vet** -"
+    },
+    {
+      "type": "paragraph",
+      "text": "**Prompt:** *“My spring cleanup season runs six weeks. Last year I ran two crews at $4,200 weekly revenue per crew but my labor cost ate 58% of that. My consumables are mulch, edging, debris disposal which runs about $600 per crew per week. My problem is that the first and last week are always underbooked. How do I model whether adding a third crew for weeks two through five is worth the hiring and equipment cost?”*"
+    },
+    {
+      "type": "paragraph",
+      "text": "**The response:** *“Good problem — this is fundamentally a contribution margin vs. fixed cost decision. The third crew generates incremental revenue for 4 weeks, but you pay hiring and equipment costs upfront regardless of how much work they do. The model needs to test that against a realistic revenue fill rate for a new crew.*"
+    },
+    {
+      "type": "paragraph",
+      "text": "*Here's an interactive model you can tune to your numbers…” ([real claude response](https://claude.ai/share/1db1cfbe-dedc-4c99-aaa3-b318e8c3b514))*"
+    },
+    {
+      "type": "paragraph",
+      "text": "Same tool, same technology. It just met each of them exactly where they showed up. We get what we give."
+    },
+    {
+      "type": "paragraph",
+      "text": "The same principle scales beyond prompts. A client came to us with a specific problem: he needed a marketplace with automated intake, connected business workflows, and reliable outputs for buyers, sellers, and the platform. Because he knew exactly what he was solving, we built directly toward it. The only AI in the loop is OCR for document intake, a decades-old technology. The AI win was how fast and cheaply we got there. And since the problem was defined correctly from the start, there’s a stable foundation to layer in agentic services as needed. He gave us clarity. We gave him a solution."
+    },
+    {
+      "type": "paragraph",
+      "text": "My client and the seasoned landscaper didn’t get better results because they had better tools. They got results because they articulated real problems. Show up with clarity and the tool will meet you there. You get what you give."
+    }
+  ]
+}
