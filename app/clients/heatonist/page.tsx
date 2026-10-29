@@ -56,7 +56,7 @@ function SpecRow({
 }: {
   label?: string
   title: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }) {
   return (
     <div className='grid gap-grid-1 border-t border-border pt-grid-1 lg:grid-cols-12 lg:gap-x-grid-1'>
@@ -64,9 +64,11 @@ function SpecRow({
         {label && <span className='bp-label font-mono'>{label}</span>}
         <h2 className={SECTION_HEADING}>{title}</h2>
       </div>
-      <div className='flex flex-col gap-4 text-base text-text-muted md:text-lg lg:col-span-7 lg:col-start-6'>
-        {children}
-      </div>
+      {children && (
+        <div className='flex flex-col gap-4 text-base text-text-muted md:text-lg lg:col-span-7 lg:col-start-6'>
+          {children}
+        </div>
+      )}
     </div>
   )
 }
@@ -104,13 +106,7 @@ function SpecList({
 
 /** A storefront screenshot in the site's blueprint frame, linked to the
  * live store. */
-function StorefrontShot({
-  src,
-  host,
-}: {
-  src: string
-  host: string
-}) {
+function StorefrontShot({ src, host }: { src: string; host: string }) {
   return (
     <a
       href={`https://${host}`}
@@ -160,24 +156,27 @@ export default function HeatonistCaseStudyPage() {
         priority
       />
 
-      {/* Three numbers, set as type rather than a box */}
+      {/* At a glance: three numbers, set as type rather than a box */}
       <AnimatedSection className='py-grid-3 md:py-grid-4'>
-        {/* Columns wrap to a new row before a number would break: each needs
-            22rem, enough for the widest value at text-8xl. */}
-        <ul className='grid grid-cols-[repeat(auto-fit,minmax(min(100%,22rem),1fr))] gap-x-grid-1 gap-y-grid-2'>
-          {cs.stats.map((stat, index) => (
-            <li key={stat.value}>
-              <Reveal index={index} className='flex flex-col gap-2'>
-                <span className='font-headline text-6xl leading-none font-bold tracking-tight whitespace-nowrap text-text md:text-8xl'>
-                  {stat.value}
-                </span>
-                <span className='text-base text-text-muted md:text-lg'>
-                  {stat.label}
-                </span>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
+        <div className='flex flex-col gap-grid-1'>
+          <span className='bp-label font-mono'>At a glance</span>
+          {/* Columns wrap to a new row before a number would break: each needs
+              22rem, enough for the widest value at text-8xl. */}
+          <ul className='grid grid-cols-[repeat(auto-fit,minmax(min(100%,22rem),1fr))] gap-x-grid-1 gap-y-grid-2'>
+            {cs.stats.map((stat, index) => (
+              <li key={stat.value}>
+                <Reveal index={index} className='flex flex-col gap-2'>
+                  <span className='font-headline text-6xl leading-none font-bold tracking-tight whitespace-nowrap text-text md:text-8xl'>
+                    {stat.value}
+                  </span>
+                  <span className='text-base text-text-muted md:text-lg'>
+                    {stat.label}
+                  </span>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
       </AnimatedSection>
 
       {/* The problem and how we work together */}
@@ -190,6 +189,19 @@ export default function HeatonistCaseStudyPage() {
         </SpecRow>
       </AnimatedSection>
 
+      {/* Ty's quote, framed with blueprint corners on the page background */}
+      <AnimatedSection className='py-grid-2'>
+        <figure className='relative flex flex-col gap-6 border border-border p-6 md:p-grid-3'>
+          <BlueprintCorners size={16} />
+          <blockquote className='font-headline text-3xl leading-tight font-semibold text-balance text-text md:text-6xl'>
+            &ldquo;{cs.quote.text}&rdquo;
+          </blockquote>
+          <figcaption className='font-mono text-sm tracking-wider text-text-muted uppercase'>
+            {cs.quote.name}, {cs.quote.company}
+          </figcaption>
+        </figure>
+      </AnimatedSection>
+
       {/* The storefront, framed in the site's blueprint style */}
       <AnimatedSection className='py-grid-2'>
         <StorefrontShot
@@ -200,23 +212,27 @@ export default function HeatonistCaseStudyPage() {
 
       {/* What we did */}
       <AnimatedSection className={SECTION}>
-        <SpecRow label='Since April 2023' title='What we did'>
-          <p>{cs.whatWeDidIntro}</p>
-        </SpecRow>
+        <div className='flex flex-col gap-grid-1'>
+          <SpecRow label='Since April 2023' title='What we did' />
+          <p className='text-lg text-text md:text-xl'>{cs.whatWeDidIntro}</p>
+        </div>
         <SpecList items={cs.whatWeDid} />
       </AnimatedSection>
 
       {/* Beyond Shopify, in a framed panel */}
       <AnimatedSection className={SECTION}>
-        <SpecRow label='Custom builds' title='Beyond what Shopify offers'>
-          <p>{cs.beyondShopifyIntro}</p>
-        </SpecRow>
+        <div className='flex flex-col gap-grid-1'>
+          <SpecRow label='Custom builds' title='Beyond what Shopify offers' />
+          <p className='text-lg text-text md:text-xl'>
+            {cs.beyondShopifyIntro}
+          </p>
+        </div>
         <div className='relative border border-border bg-bg-card'>
           <BlueprintCorners size={16} all />
           <ul className='grid divide-y divide-border lg:grid-cols-4 lg:divide-x lg:divide-y-0'>
             {cs.beyondShopify.map(item => (
               <li key={item.title} className='flex flex-col gap-4 p-grid-1'>
-                <h3 className='font-headline text-xl leading-tight font-bold tracking-tight text-text uppercase'>
+                <h3 className='font-headline text-2xl leading-tight font-bold tracking-tight text-balance text-text uppercase'>
                   {item.title}
                 </h3>
                 <p className='text-base text-text-muted'>{item.body}</p>
@@ -228,34 +244,21 @@ export default function HeatonistCaseStudyPage() {
 
       {/* hotones.com */}
       <FullBleedImage src='/work-hot-ones-photo.jpg' alt='Hot Ones' />
-      <AnimatedSection className={SECTION}>
+      <AnimatedSection className='flex flex-col gap-grid-3 py-grid-3 md:py-grid-4'>
         <SpecRow label='Launched May 15, 2025' title='hotones.com'>
           <p>{cs.hotOnes}</p>
         </SpecRow>
-        <StorefrontShot
-          src='/case-study-hotones-home.jpg'
-          host='hotones.com'
-        />
+        <StorefrontShot src='/case-study-hotones-home.jpg' host='hotones.com' />
         <SpecRow label='Today' title='The result'>
           <p className='text-lg text-text md:text-2xl'>{cs.result}</p>
         </SpecRow>
       </AnimatedSection>
 
-      {/* Ty's quote */}
-      <AnimatedSection className='py-grid-2'>
-        <figure className='relative flex flex-col gap-6 border border-border bg-bg-card p-6 md:p-grid-3'>
-          <BlueprintCorners size={16} />
-          <blockquote className='font-headline text-3xl leading-tight font-semibold text-balance text-text md:text-6xl'>
-            &ldquo;{cs.quote.text}&rdquo;
-          </blockquote>
-          <figcaption className='font-mono text-sm tracking-wider text-text-muted uppercase'>
-            {cs.quote.name}, {cs.quote.company}
-          </figcaption>
-        </figure>
-      </AnimatedSection>
-
       {/* CTA Block, the closing callout shared with /clients */}
-      <AnimatedSection className='pt-grid-2 pb-grid-3! md:pb-grid-4!'>
+      {/* 192px above on desktop (this top padding plus the section above's
+          bottom padding), 144px below. The gap below runs into the solid
+          footer and reads larger, so it's set one step smaller to look even. */}
+      <AnimatedSection className='pt-grid-1! pb-grid-3! md:pt-grid-4! md:pb-grid-6!'>
         <div className='dots-band bg-bg-card p-6 md:p-16'>
           <BlueprintCorners size={20} all colorClassName='border-accent' />
           <div className='flex flex-col gap-8 md:flex-row md:items-center md:justify-between'>
