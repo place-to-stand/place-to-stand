@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePostHog } from 'posthog-js/react'
 import type { PostHog } from 'posthog-js'
@@ -22,6 +22,8 @@ import {
   type AuditLeadValues,
 } from '@/src/lib/validations/audit'
 import { sendAudit } from '@/app/actions/send-audit'
+import { HeardFromField } from '@/src/components/forms/heard-from-field'
+import { HEARD_FROM_OTHER, resolveHeardFrom } from '@/src/lib/forms/heard-from'
 import type {
   AuditLeadPayload,
   AuditProgressPayload,
@@ -62,6 +64,7 @@ async function deliverLead({
     company: lead.company ?? '',
     message: lead.message ?? '',
     marketingConsent: lead.marketingConsent,
+    heardFrom: lead.heardFrom ?? '',
   }
 
   try {
@@ -268,9 +271,16 @@ export function LeadDetailsForm({
   const [isPending, setIsPending] = useState(false)
   const form = useForm<AuditDetailsValues>({
     resolver: zodResolver(auditDetailsSchema),
-    defaultValues: { name: '', company: '', message: '' },
+    defaultValues: {
+      name: '',
+      company: '',
+      message: '',
+      heardFrom: '',
+      heardFromOther: '',
+    },
   })
   const { errors } = form.formState
+  const heardFromChoice = useWatch({ control: form.control, name: 'heardFrom' })
 
   const onSubmit = form.handleSubmit(async values => {
     const enriched: AuditLeadPayload = {
@@ -278,6 +288,7 @@ export function LeadDetailsForm({
       name: values.name?.trim() ?? '',
       company: values.company?.trim() || null,
       message: values.message?.trim() || null,
+      heardFrom: resolveHeardFrom(values),
     }
 
     setIsPending(true)
@@ -301,6 +312,7 @@ export function LeadDetailsForm({
       has_name: Boolean(enriched.name),
       has_company: Boolean(enriched.company),
       has_message: Boolean(enriched.message),
+      heard_from: enriched.heardFrom ?? null,
     })
     onSaved(enriched)
   })
@@ -349,6 +361,12 @@ export function LeadDetailsForm({
           <p className='text-sm text-red-400'>{errors.message.message}</p>
         ) : null}
       </div>
+      <HeardFromField
+        id='audit-details-heard-from'
+        select={form.register('heardFrom')}
+        other={form.register('heardFromOther')}
+        showOther={heardFromChoice === HEARD_FROM_OTHER}
+      />
       <Button
         type='submit'
         variant='outline'
