@@ -1,0 +1,72 @@
+{
+  "title": "Everything Is Out of Context, Pt. 4",
+  "description": "Systems are nothing without their environment.",
+  "date": "2026-09-18",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "Lately there's been a lot of talk around AI safety and agents gaining ulterior motives to “break free” from their environments. You've probably seen Jacob Coxon's posts [1], which have triggered a new frenzy of AI safety talk. It’s ultimately great that safety for this tech is now mainstream conversation, but I also think most of these claims are being received out of context and misunderstood by the general public. Here's why I think that."
+    },
+    {
+      "type": "paragraph",
+      "text": "In the previous parts of this series, I went through exactly how things like this get taken out of context. It's inherently part of the distribution channels that we use to share information. Luckily, we all have the ability to reintroduce more context to the information and decide for ourselves. An X post is inherently context-limiting [2]. How can we accurately condense years of research into one post? We can't, so we need to rebuild the context [3]. If we know this post is out of context, then what context should we be adding back? This is where your own knowledge is still important. If you don't have any technical knowledge around models, LLMs, agents, etc., then it might be very difficult to give accurate additional context to the information. This is why I feel compelled to write about this topic. Nobody knows everything, so we have to lean on people and knowledge we trust. A single X post and a couple of news interviews aren't enough to clear that bar. Every re-amplification comes at the cost of less context. No matter how nuanced Jacob Coxon's post was, the headline has become \"AI could kill us all.\" Where is the nuance in that headline? It's pretty clear that headline is going to elicit engagement for whatever platform is amplifying it, so surprise, surprise, that's the headline we see [4]. A more accurate headline would be, \"AI researcher shows speculative concern over risk of projected model capabilities.\" Less engagement-worthy but more accurate, and even that is still lacking a mountain of context. Which leads us to Part 4, where I want to talk about context management, both for your agent and for yourself."
+    },
+    {
+      "type": "paragraph",
+      "text": "Context is the environment in which your system runs. Systems can be web apps, LLMs, a screwdriver, traffic lights, your stomach, etc. None of those do anything useful without their environment, which is you, a human. You can't define a system without defining its environment. A hammer is a tool that is only useful in the hands of a human. It's excellent on a nail to build stuff but useless on an egg when cooking breakfast. Chris Fields and Michael Levin make the formal version of this argument: you can't say what a system is without also saying what it exchanges information with [5]. An LLM is a system. Its environment is the context window, and the person filling that window is you. That's why context management decides what the system even is. (Side note: please check out Michael Levin's work, it truly shifts one's light cone. [6])"
+    },
+    {
+      "type": "paragraph",
+      "text": "An LLM without context is the same. It has no knowledge of its own, just relationships between the words it was trained on. Once you give it a task, question, or idea, only then can it start to connect the dots. BUT, we have to remember that these models are trained on encoded information, which is inherently missing context, so even those relationships are a reduced version of whatever they came from. Limiting a context window to only what the task needs is not just a safety responsibility, it's how you get drastically more accurate and productive results, because everything extra in the window is noise the model has to weigh."
+    },
+    {
+      "type": "paragraph",
+      "text": "This is something I use daily with my work at Place To Stand Agency [7]. At this point we have agents touching every part of our business, from client codebases to our internal business logic and data. Context management is extremely important. For every task we scope the agent to a repo and a new branch so a rogue GitHub push doesn't ruin production apps. And the same goes for our internal agent use. We have an internal CLI tool with specific actions that we consider low-risk. Deciding which actions are low and high risk for an agent is governance. It's the guiding principle around your context and should be fundamental to any company's use of AI. For simple operations around an Excel sheet or researching topics, governance is less of a concern, but context management is still valuable and will yield much better results. For example, knowing which models can accept different modalities can provide great leverage. Using a screenshot instead of text to provide a reference to the model is a great way to specify the context in which you are working. The last important thing to remember is that the current paradigm of a chat conversation is your window to provide proper context. As the conversation gets longer the context window gets noisier and the outputs become less predictable. Don’t be afraid to clear your context by starting a new conversation and give the model a clean slate."
+    },
+    {
+      "type": "paragraph",
+      "text": "In closing, I want to leave you with this idea: context loss is fundamental. Everything is out of context in the physical and digital world. Whether you are orchestrating agents to run your business or digesting the latest viral AI claims, the way you manage your own context is at the core of it. My hope is that by using a framework or mindset like the one I've talked about in this four-part series, you will be better equipped to get the most out of your agents and tools, while also navigating the noise sphere of hype with more confidence. Continue to learn fundamental concepts, and use AI to level up your thinking, not offload it. Our collective human knowledge is ultimately the only safeguard we have."
+    },
+    {
+      "type": "paragraph",
+      "text": "Sources"
+    },
+    {
+      "type": "paragraph",
+      "text": "[1] Jacob Coxon, original X post, Sept 9, 2026. [https://x.com/hilbertspaess/status/2097476196791709843](https://x.com/hilbertspaess/status/2097476196791709843) · Time, Sept 9, 2026. [https://time.com/article/2026/09/09/ai-anthropic-openai-jacob-coxon/](https://time.com/article/2026/09/09/ai-anthropic-openai-jacob-coxon/) · Axios, Sept 9, 2026. [https://www.axios.com/2026/09/09/anthropic-researcher-ai-warning-interview](https://www.axios.com/2026/09/09/anthropic-researcher-ai-warning-interview)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[2] Everything is Out of Context, Pt. 1. [https://kriscrawford.info/blog/everything-is-out-of-context-pt-1](https://kriscrawford.info/blog/everything-is-out-of-context-pt-1)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[3] Everything is Out of Context, Pt. 2. [https://kriscrawford.info/blog/everything-is-out-of-context-pt-2](https://kriscrawford.info/blog/everything-is-out-of-context-pt-2)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[4] Everything is Out of Context, Pt. 3. [https://kriscrawford.info/blog/everything-is-out-of-context-pt-3](https://kriscrawford.info/blog/everything-is-out-of-context-pt-3)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[5] Chris Fields & Michael Levin, \"Life, its origin, and its distribution: a perspective from the Conway-Kochen Theorem and the Free Energy Principle.\" [https://www.tandfonline.com/doi/full/10.1080/19420889.2025.2466017#d1e1930](https://www.tandfonline.com/doi/full/10.1080/19420889.2025.2466017#d1e1930)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[6] Michael Levin, \"Forms of life, forms of mind.\""
+    },
+    {
+      "type": "paragraph",
+      "text": "[https://thoughtforms.life/](https://thoughtforms.life/)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[7] Place To Stand Agency, LLC"
+    },
+    {
+      "type": "paragraph",
+      "text": "[https://placetostandagency.com](https://placetostandagency.com)"
+    }
+  ]
+}

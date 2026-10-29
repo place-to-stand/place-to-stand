@@ -1,0 +1,50 @@
+{
+  "title": "Data center pollution is real, but our closets are still 4x worse.",
+  "description": "Manufacturing one shirt has the same emissions as 3,500 AI prompts.",
+  "date": "2026-04-22",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "I wrote previously about developers owning their AI footprint [LINK], and the data center numbers behind that piece are very real and rightly deserve mainstream attention. US data center emissions tripled from 31 Mt CO2e in 2018 to 100 Mt in 2023 [1][2], and projections have data centers reaching up to 12% of US electricity demand by 2030 [3]. The buildout is fast, it's loud, and it deserves the alarm it's getting. But while we're feeling virtuous about calling out AI, we're standing on a much larger problem. The garment industry. We've been talking about it for 25 years, and it's still getting worse."
+    },
+    {
+      "type": "paragraph",
+      "text": "US data centers emit roughly 100 Mt CO2e a year [1]. US clothing consumption sits around 485 Mt [4]. Our closets are currently 4.6 times larger polluters than our server racks. Per item the gap is wider. On average a new garment runs about 7 kg CO2e [5]. One AI prompt runs about 2 grams on a middle estimate (Google reporting 0.03 g for Gemini and independent estimates putting other models in the low single grams [6][7]). A single shirt equals roughly 3,500 prompts. A pair of jeans, 16,500 [8]. A wool coat, 25,000."
+    },
+    {
+      "type": "paragraph",
+      "text": "American consumption habits are particularly wasteful. We generate 17 million tons of textile waste a year and send 85% of it to landfill or incineration [10]. Per capita, US clothing-related emissions are the highest on earth at around 1,400 kg a year when you count manufacturing, laundering, and disposal [4]. Globally, we buy 60% more garments than we did in 2000 and keep them half as long [9]. Synthetic textiles are the single largest source of ocean microplastics at 35% [11]. All of this consumption and waste just so we can keep our closets trendy."
+    },
+    {
+      "type": "paragraph",
+      "text": "Being outwardly against data center pollution is easy and correct. Buying fewer shirts is also easy and correct, but it requires inaction, and that turns out to be the harder ask. After 25 years of climate advocacy, global garment production has doubled [12] and US per-capita consumption keeps climbing. The discourse hasn't moved the needle because the discourse is free. Actions aren't. Advocacy without action is theater, and we have to call a spade a spade if we actually want to make meaningful progress."
+    },
+    {
+      "type": "paragraph",
+      "text": "The two problems are shaped differently. Clothing consumption is purely extractive. Every shirt pulls resources out of the ground and leaves waste behind, with no regenerative potential. Technology, when directed well, is the opposite. It has the potential to build the very systems that reduce harm elsewhere, including its own. Our actions can be less extractive while also directing our technology toward regenerative outcomes. We don’t need one over the other, we need both."
+    },
+    {
+      "type": "heading",
+      "text": "Sources"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "[https://www.eesi.org/articles/view/data-center-energy-needs-are-upending-power-grids-and-threatening-the-climate](https://www.eesi.org/articles/view/data-center-energy-needs-are-upending-power-grids-and-threatening-the-climate)",
+        "[https://arxiv.org/html/2411.09786v1](https://arxiv.org/html/2411.09786v1)",
+        "[https://www.congress.gov/crs-product/R48646](https://www.congress.gov/crs-product/R48646)",
+        "[https://webapps.ilo.org/static/english/intserv/working-papers/wp053/index.html](https://webapps.ilo.org/static/english/intserv/working-papers/wp053/index.html)",
+        "[https://media-pro.refashion.fr/2025/10/measuring-fashion-environmental-impact-of-the-global-apparel-and-footwear-industries-study.pdf](https://media-pro.refashion.fr/2025/10/measuring-fashion-environmental-impact-of-the-global-apparel-and-footwear-industries-study.pdf)",
+        "[https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference/](https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference/)",
+        "[https://www.sustainabilitybynumbers.com/p/ai-footprint-august-2025](https://www.sustainabilitybynumbers.com/p/ai-footprint-august-2025)",
+        "[https://www.worldbank.org/en/news/feature/2019/09/23/costo-moda-medio-ambiente](https://www.worldbank.org/en/news/feature/2019/09/23/costo-moda-medio-ambiente)",
+        "[https://www.genevaenvironmentnetwork.org/resources/updates/sustainable-fashion/](https://www.genevaenvironmentnetwork.org/resources/updates/sustainable-fashion/)",
+        "[https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data](https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data)",
+        "[https://portals.iucn.org/library/sites/library/files/documents/2017-002-En.pdf](https://portals.iucn.org/library/sites/library/files/documents/2017-002-En.pdf)",
+        "[https://www.ellenmacarthurfoundation.org/a-new-textiles-economy](https://www.ellenmacarthurfoundation.org/a-new-textiles-economy)"
+      ]
+    }
+  ]
+}
