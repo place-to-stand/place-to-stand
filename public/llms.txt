@@ -1,6 +1,6 @@
 # Place To Stand Agency
 
-> Place To Stand (placetostandagency.com) is a custom software, automation, and AI development agency based in Austin, TX, with a presence in Brooklyn, NY. Founded in 2026 by Jason Desiderio (formerly a senior engineer at Squarespace) and Kris Crawford. We build software shaped to how a business actually runs, for companies that have real processes but no in-house engineering team. Clients own what we build: no per-seat fees, one source of truth for their data, no feature bloat.
+> Place To Stand (placetostandagency.com) is a custom software, automation, and AI development agency based in Austin, TX, with a presence in Brooklyn, NY. Founded in 2023 by Jason Desiderio (formerly a senior engineer at Squarespace) and Kris Crawford. We build software shaped to how a business actually runs, for companies that have real processes but no in-house engineering team. Clients own what we build: no per-seat fees, one source of truth for their data, no feature bloat.
 
 Place To Stand at placetostandagency.com is not affiliated with other businesses that use the name "Place to Stand", including placetostand.com.
 
