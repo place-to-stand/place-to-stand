@@ -122,6 +122,8 @@ function StorefrontShot({ src, host }: { src: string; host: string }) {
           alt={`The ${host} home page`}
           fill
           sizes='(min-width: 1440px) 1344px, 100vw'
+          // Screenshots are mostly text, which blurs at the default 75.
+          quality={90}
           className='object-cover object-top'
         />
       </div>
@@ -243,7 +245,6 @@ export default function HeatonistCaseStudyPage() {
       </AnimatedSection>
 
       {/* hotones.com */}
-      <FullBleedImage src='/work-hot-ones-photo.jpg' alt='Hot Ones' />
       <AnimatedSection className='flex flex-col gap-grid-3 py-grid-3 md:py-grid-4'>
         <SpecRow label='Launched May 15, 2025' title='hotones.com'>
           <p>{cs.hotOnes}</p>

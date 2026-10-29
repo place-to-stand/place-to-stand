@@ -24,6 +24,8 @@ const nextConfig = {
   images: {
     // AVIF first (~20% smaller than WebP); browsers without it get WebP.
     formats: ['image/avif', 'image/webp'],
+    // 90 is for the case study storefront screenshots, which are mostly text.
+    qualities: [75, 90],
   },
   async headers() {
     return [
