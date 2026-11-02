@@ -40,31 +40,34 @@ export async function Footer() {
             how your business actually runs. No bloated SaaS stack &mdash; just
             software that fits.
           </p>
-          <div className='mt-grid-1'>
-            <FooterSubscribe />
-          </div>
         </div>
 
-        {/* Site nav — flush with the container edge, right-aligned so it lines
-            up with the legal links below and the header CTA above */}
-        <nav
-          className='flex flex-col gap-grid-half md:items-end md:text-right'
-          aria-label='Footer'
-        >
-          <span className='bp-label font-mono'>Explore</span>
-          <ul className='flex flex-col gap-2 md:items-end'>
-            {NAV_LINKS.map(link => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-accent'
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        {/* Subscribe beside the site nav. The nav stays flush with the
+            container edge, right-aligned so it lines up with the legal links
+            below and the header CTA above */}
+        <div className='flex flex-col gap-grid-2 md:flex-row md:items-start md:gap-grid-4'>
+          <div className='md:w-[250px]'>
+            <FooterSubscribe />
+          </div>
+          <nav
+            className='flex shrink-0 flex-col gap-grid-half md:items-end md:text-right'
+            aria-label='Footer'
+          >
+            <span className='bp-label font-mono'>Explore</span>
+            <ul className='flex flex-col gap-2 md:items-end'>
+              {NAV_LINKS.map(link => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-accent'
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
 
       {/* Bottom bar */}

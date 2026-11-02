@@ -21,7 +21,7 @@ export function FooterSubscribe() {
           <label htmlFor='footer-subscribe-email' className='sr-only'>
             Email address
           </label>
-          <div className='flex gap-2'>
+          <div className='flex flex-col gap-2'>
             <Input
               id='footer-subscribe-email'
               name='email'
@@ -37,7 +37,7 @@ export function FooterSubscribe() {
               type='submit'
               size='sm'
               disabled={isPending}
-              className='shrink-0'
+              className='w-full'
             >
               {isPending ? 'Subscribing...' : 'Subscribe'}
             </Button>
