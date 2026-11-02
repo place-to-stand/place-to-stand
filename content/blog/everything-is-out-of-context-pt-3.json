@@ -1,0 +1,84 @@
+{
+  "title": "Everything is out of context, Pt. 3",
+  "description": "Scaling is the revolution.",
+  "date": "2026-06-22",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "In part 1 of this series I talked about how distributed information is inherently missing context due to encoding. In part 2 I explained how knowing that, we can build a better understanding of information by supplementing base meaning with real human context and viewing reality as a spectrum of perspectives. In part 3, I want to talk about the resources necessary in order to amplify encoded information to a mass scale. Knowledge of the resources involved to scale can give you the correct context in which to interpret the received information."
+    },
+    {
+      "type": "paragraph",
+      "text": "Each information revolution has happened because we took the ability to encode information and scaled it to be reproducible to many more observers. The Gutenberg press was revolutionary in 1450 in giving us the ability to mechanically reproduce text, but it took another ~350 years to power it with steam which 4x'd its output.[1] As a result literacy grew and ideas spread much further and for a cheaper cost. There were both positive and negative effects to this. On the positive side, more people could read and write, express themselves, and stay up to date with news. On the negative side, you have propaganda, misinformation, and bad actors. Both enabled by the same technology, literally amplifying the intentions of Humans. The same is true for every information revolution that followed: radio, TV, internet, and now AI."
+    },
+    {
+      "type": "paragraph",
+      "text": "The printing press needed presses, paper, type, and capital. Owners decided what got reproduced. The same machinery that spread fundamental scientific discovery also drove thousands of witch trials behind Kramer's *Malleus Maleficarum*.[2] Publishers pressed 30 times more witch-hunting manuals than science publications.[3] They could reliably sell witch-hunt material over science. It didn't matter what was true or morally correct; they had to recoup the investment to build and run a press. A simple chain of incentive that resulted in the wrongful deaths of thousands of people.[4]"
+    },
+    {
+      "type": "paragraph",
+      "text": "Radio, TV, and the internet each built a new distribution network on top. Transmitters and broadcast licenses, then studios and networks, then servers, fiber, and data centers. In the mid-1930s, ~90% of US households had a radio.[5] FDR used it for fireside chats; Germany used the Volksempfänger to spread propaganda.[6] By the mid-1960s, three networks decided what the country watched on TV. By 2025, 6 billion people were online.[7] The internet looks decentralized, but search, social, and hosting are consolidated into a handful of platforms. Even if you build your own site, your host, registrar, or payment processor can turn you off."
+    },
+    {
+      "type": "paragraph",
+      "text": "Now we have AI, and it is a multiplier on top of all the previous technologies. It has the ability to not only expose any information to any user, but to also apply complex reason and logic to that information, but the cost of that is heavy. It runs on GPU clusters, which you can think of as rare-earth computation devices, and it requires gigawatts of power to run at a large scale.[8] Anyone can now generate content, do complex math, code, edit videos, etc, for nearly nothing. For example, AlphaFold predicted 200 million protein structures. Humans had experimentally determined ~200,000 in the previous 70 years.[9] On the other end, the internet is now spoiled with AI slop.[10][11] Production is democratized but the compute and scaling is not. A handful of companies own the chips, data centers, and models, and they decide what runs and what doesn't."
+    },
+    {
+      "type": "paragraph",
+      "text": "What you see in any digital feed is not a full representation of what is happening in reality. It is what someone with the resources to scale allows to be amplified within the context of their distribution network. They generally don't care about the content itself, but rather one property of that content which will drive their business bottom line. A state broadcaster wants compliance. Social and news platforms want engagement to sell ads. A model provider wants usage. None of this requires a conspiracy, just a business model. No revolution has changed the underlying dynamic that a distribution network simply amplifies human intent. This doesn't mean you can't use the feed to get useful and meaningful information, but in order to do so, it requires you to keep in mind the chain of incentives that information took to reach you."
+    },
+    {
+      "type": "paragraph",
+      "text": "In part 4, I'll be going into depth on context windows of LLMs and how to accelerate your productivity by properly managing context and using your life's own context to build and do meaningful things."
+    },
+    {
+      "type": "heading",
+      "text": "Sources"
+    },
+    {
+      "type": "paragraph",
+      "text": "[1]: Friedrich Koenig and Andreas Friedrich Bauer, steam-powered printing press, first commercially used by *The Times* of London in 1814. Wikipedia, *Printing press*. [https://en.wikipedia.org/wiki/Printing_press](https://en.wikipedia.org/wiki/Printing_press)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[2]: Britannica, *Malleus maleficarum*. \"The Malleus went through 28 editions between 1486 and 1600 and was accepted by Roman Catholics and Protestants alike as an authoritative source.\" [https://www.britannica.com/topic/Malleus-maleficarum](https://www.britannica.com/topic/Malleus-maleficarum)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[3]: Cambridge HPS, *Starry Messenger: Copernicus's Book*. \"Around 400 to 500 copies were printed for both the first (Nuremberg 1543) and second editions (Basle 1566).\" Compared against 28 editions of the *Malleus Maleficarum* at typical 1,000-1,500 copies per edition. [http://www.sites.hps.cam.ac.uk/starry/coperbooks.html](http://www.sites.hps.cam.ac.uk/starry/coperbooks.html)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[4]: Britannica, *Early modern witch trial*. \"Historians estimate that nearly 100,000 people were prosecuted and that 40,000 to 60,000 were executed.\" [https://www.britannica.com/topic/early-modern-witch-trial](https://www.britannica.com/topic/early-modern-witch-trial)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[5]: Britannica, *Radio: The golden age of American radio*. [https://www.britannica.com/topic/radio/The-golden-age-of-American-radio](https://www.britannica.com/topic/radio/The-golden-age-of-American-radio)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[6]: Wikipedia, *Volksempfänger*. [https://en.wikipedia.org/wiki/Volksempf%C3%A4nger](https://en.wikipedia.org/wiki/Volksempf%C3%A4nger)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[7]: International Telecommunication Union, *Measuring digital development: Facts and Figures 2025*. [https://www.itu.int/itu-d/reports/statistics/facts-figures-2025/](https://www.itu.int/itu-d/reports/statistics/facts-figures-2025/)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[8]: International Energy Agency, *Energy and AI*, 2025. Data centers consumed approximately 415 TWh in 2024 and are projected to more than double by 2030 driven by AI. [https://www.iea.org/reports/energy-and-ai](https://www.iea.org/reports/energy-and-ai)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[9]: Nobel Prize in Chemistry 2024, Press Release. [https://www.nobelprize.org/prizes/chemistry/2024/press-release/](https://www.nobelprize.org/prizes/chemistry/2024/press-release/)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[10]: Originality.ai, *50%+ of LinkedIn Posts were Likely AI in 2025 + Engagement Insights*, 2026. Follow-up confirming the original 2024 finding that 54% of long-form LinkedIn posts are likely AI-generated. [https://originality.ai/blog/linkedin-ai-study-engagement](https://originality.ai/blog/linkedin-ai-study-engagement)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[11]: The Next Web, *LinkedIn cracks down on AI slop with 94% detection accuracy*, May 2026. [https://thenextweb.com/news/linkedin-ai-slop-crackdown-generic-content](https://thenextweb.com/news/linkedin-ai-slop-crackdown-generic-content)"
+    }
+  ]
+}

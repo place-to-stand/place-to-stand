@@ -20,6 +20,9 @@ const nextConfig = {
     // The social share image reads the same fonts.
     '/opengraph-image': ['./public/fonts/**/*'],
     '/twitter-image': ['./public/fonts/**/*'],
+    // Blog posts are JSON files read from disk.
+    '/blog': ['./content/blog/**/*'],
+    '/blog/[slug]': ['./content/blog/**/*'],
   },
   images: {
     // AVIF first (~20% smaller than WebP); browsers without it get WebP.

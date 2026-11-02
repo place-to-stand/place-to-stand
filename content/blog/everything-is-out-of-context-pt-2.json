@@ -1,0 +1,52 @@
+{
+  "title": "Everything is Out of Context, Pt. 2",
+  "description": "Finding base meaning.",
+  "date": "2026-05-08",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "In part one I outlined the basis of my claim, everything is out of context. In part 2 I want to espouse my thought process on processing a stream of continually out of context information. That is by finding Base Meaning."
+    },
+    {
+      "type": "paragraph",
+      "text": "Base meaning is the idea behind the communication. Let's take general language translation as an example. House, Casa, and Maison mean the same thing in 3 different languages. The base meaning being a structure we inhabit. This example is simple, but we can extrapolate this into more complex thoughts and ideas. Interestingly, when Google built its multilingual neural machine translation system in 2016, the engineers found the model could translate between language pairs it had never been trained on. It did this by projecting every sentence into a shared, language-agnostic space the researchers called an interlingua [1]. The model wasn't memorizing word-for-word swaps. It was finding the meaning underneath the language."
+    },
+    {
+      "type": "paragraph",
+      "text": "Base meaning is necessary, but rarely sufficient. Context is everything, and as you add more context you quickly realize one base meaning idea is usually not adequate to articulate complex thoughts. Let's look at the most fundamental thing we know, gravity. We have been measuring the gravitational constant since Cavendish in 1798, more than two centuries of refinement, and the world's best physics labs still don't exactly agree on its value. CODATA aggregates 16 independent measurements using different methods, and the two most accurate recent results disagree by enough that their error bars don't even overlap [2]. The smartest people on the planet, with precision instruments and centuries of data, cannot fully close the gap on a fundamental \"constant\" in physics. This is far from a failure of science, this is how progress is made. The answer isn't a single number, rather it's a value with bounds and every additional independent measurement narrows the band."
+    },
+    {
+      "type": "paragraph",
+      "text": "If gravity has bounds after 200 years of triangulation, every news story, every tech claim, every viral health post you scroll past has them too. You can see countless examples of this play out in the modern internet landscape everyday. For a recent example, take the wave of \"dangerous TikTok challenges\" that flooded local news and even Congressional hearings in 2024 and 2025. Researchers found many of these viral trends either barely existed on the platform or had been planted there. In one documented case, Meta hired a Republican PR firm to seed false stories about TikTok challenges into local newsrooms, some of which were actually trends from Facebook [3]. The base meaning was \"PR campaign.\" The amplified meaning was \"your kids are in danger.\""
+    },
+    {
+      "type": "paragraph",
+      "text": "The validity you grant a piece of information should match the effort that went into producing it. A single tweet has near-zero reproducibility by design. A peer-reviewed result that survived independent replication carries far more. Surface claims travel fastest precisely because no one had to do the work to make them. Over time and with proper effort (not a lot!) you can find a level of confidence in your information that will allow you to separate signal from noise."
+    },
+    {
+      "type": "paragraph",
+      "text": "Reality is not a single data point. It's a spectrum of perspectives. Light isn't one frequency, it's a spectrum. Gravity isn't a number, it's a force with bounds. A house isn't four walls, it's a home with culture. And that's what adding context back actually means. In my experience the most reliable thing you can do is talk to other humans in real life. That is the only way to truly gain an appreciation for other perspectives. The internet is a shared vector space, but it is a low-dimensional representation of reality."
+    },
+    {
+      "type": "paragraph",
+      "text": "Next week in part 3: how scaling technologies, from the printing press to AI, made the context problem worse on purpose."
+    },
+    {
+      "type": "subheading",
+      "text": "Sources"
+    },
+    {
+      "type": "paragraph",
+      "text": "[1] [https://arxiv.org/abs/1611.04558](https://arxiv.org/abs/1611.04558)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[2] [https://link.aps.org/doi/10.1103/RevModPhys.93.025010](https://link.aps.org/doi/10.1103/RevModPhys.93.025010)"
+    },
+    {
+      "type": "paragraph",
+      "text": "[3] [https://www.usermag.co/p/local-news-has-invented-another-fake](https://www.usermag.co/p/local-news-has-invented-another-fake)"
+    }
+  ]
+}
