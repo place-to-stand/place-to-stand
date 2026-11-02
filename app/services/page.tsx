@@ -8,9 +8,9 @@ import { services } from '@/src/lib/services'
 import { serviceIcons } from '@/src/lib/service-icons'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Custom Software and AI Automation for Small Business',
+  title: 'Services',
   description:
-    'Custom software for small business: AI automation, MVP development, Shopify apps, workflow systems and advisory, from first prototype to production.',
+    'AI automation, software development, workflow systems, and strategic advisory services from Place To Stand.',
   path: '/services',
 })
 
@@ -23,7 +23,7 @@ export default function ServicesPage() {
           <PageHeader
             label='Services'
             title='What we build'
-            intro='Custom software and AI automation for small businesses, from first prototype to production.'
+            intro='End-to-end capabilities from strategy to deployment.'
           />
           {/* One open row per service, split by a rule: no boxed cards */}
           <ol className='flex flex-col divide-y divide-border'>
