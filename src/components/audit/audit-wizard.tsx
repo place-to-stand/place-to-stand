@@ -12,7 +12,6 @@ import { usePostHog } from 'posthog-js/react'
 import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
 import { AuditProgress } from '@/src/components/audit/audit-progress'
 import { QuestionField } from '@/src/components/audit/question-field'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { questionsForSection, SECTIONS } from '@/src/lib/audit/questions'
 import { isAnswered } from '@/src/lib/audit/validation'
@@ -202,7 +201,7 @@ export function AuditWizard({
         'flex items-center justify-between',
         isPhone
           ? 'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 px-6 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
-          : 'mt-6'
+          : 'mt-grid-1'
       )}
     >
       {/* No side padding, so the arrow lines up with the content edge
@@ -249,15 +248,14 @@ export function AuditWizard({
   )
 
   return (
-    <div className='mx-auto max-w-2xl sm:py-grid-2'>
+    <div className='mx-auto max-w-5xl sm:py-grid-2'>
       <AuditProgress
         label={`Question ${questionNumber} of ${ALL_QUESTIONS.length}`}
         title={section.title}
         currentIndex={questionNumber - 1}
       />
 
-      <div className='relative border border-border p-4 sm:p-8'>
-        <BlueprintCorners size={16} />
+      <div className='relative pt-grid-1 sm:pt-grid-2'>
         {/* Keyed so each question mounts fresh and fades in. */}
         <div
           key={question.id}
@@ -274,7 +272,7 @@ export function AuditWizard({
         </div>
 
         {showError && (
-          <p className='mt-6 border border-accent/30 bg-accent-muted px-4 py-2 text-base text-text'>
+          <p className='mt-grid-1 border border-accent-subtle bg-accent-muted px-4 py-2 text-base text-text'>
             Pick an answer to continue.
           </p>
         )}

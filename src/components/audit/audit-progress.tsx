@@ -26,7 +26,7 @@ export function AuditProgress({
 }: AuditProgressProps) {
   return (
     <div className='mb-grid-half sm:mb-grid-1'>
-      <div className='flex items-center justify-between gap-4 font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
+      <div className='flex items-center justify-between gap-4 font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>
         <span>{label}</span>
         <span className='text-right text-accent'>{title}</span>
       </div>

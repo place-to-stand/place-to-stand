@@ -1,6 +1,5 @@
-import { AnimatedSection } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
-import { TrackedLink } from '@/src/components/tracked-link'
+import { Section } from '@/src/components/layout/section'
+import { ClosingLine } from '@/src/components/layout/closing-line'
 import {
   LeanMarketGraphic,
   FounderGraphic,
@@ -33,17 +32,19 @@ const profiles = [
 
 export function WhoWeWorkWithSection() {
   return (
-    <AnimatedSection className='py-20'>
-      <div className='flex flex-col gap-12'>
+    <Section>
+      <div className='flex flex-col gap-stack'>
         {/* Header */}
-        <div className='flex flex-col gap-2.25 md:gap-3'>
-          <span className='bp-label font-mono'>Who We Work With</span>
-          <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
-            We build for mid-market businesses
-            <br />
-            without in-house engineers.
-          </h2>
-          <p className='mt-0.75 max-w-xl text-base text-text-muted md:mt-1'>
+        <div className='flex flex-col gap-intro'>
+          <div className='flex flex-col gap-eyebrow'>
+            <span className='bp-label font-mono'>Who We Work With</span>
+            <h2 className='type-section-title'>
+              We build for mid-market businesses
+              <br />
+              without in-house engineers.
+            </h2>
+          </div>
+          <p className='max-w-xl text-base text-text-muted'>
             Established companies with real processes and a technical mindset,
             but no engineering team to build what&apos;s next. That&apos;s where
             we come in.
@@ -51,43 +52,29 @@ export function WhoWeWorkWithSection() {
         </div>
 
         {/* Profile cards */}
-        <div className='grid gap-6 md:grid-cols-3'>
+        <div className='grid gap-grid-1 md:grid-cols-3'>
           {profiles.map(profile => (
             <div
               key={profile.number}
-              className='relative flex flex-col gap-4 border border-border bg-bg-card p-5 md:p-8'
+              className='relative flex flex-col gap-4 bg-bg-card p-card'
             >
-              <BlueprintCorners size={12} />
               <profile.Graphic className='absolute top-4 right-4 h-grid-2 w-grid-2 md:top-6 md:right-6' />
-              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent/40 font-mono text-xs text-accent'>
+              <span className='inline-flex h-6 w-6 items-center justify-center border border-accent-subtle font-mono text-xs text-accent'>
                 {profile.number}
               </span>
-              <h3 className='font-headline text-xl font-semibold tracking-tight text-text'>
-                {profile.title}
-              </h3>
+              <h3 className='type-card-title'>{profile.title}</h3>
               <p className='text-base text-text-muted'>{profile.description}</p>
             </div>
           ))}
         </div>
 
-        {/* Each clause is an inline-block so a narrow viewport breaks the line
-            between them instead of orphaning a word or two. */}
-        <p className='text-base text-balance text-text-muted'>
-          <span className='inline-block'>
-            Recognize yourself in one of these?
-          </span>{' '}
-          <span className='inline-block'>
-            <TrackedLink
-              href='/audit'
-              location='home-who-we-work-with'
-              className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
-            >
-              The free audit shows where to start
-            </TrackedLink>
-            .
-          </span>
-        </p>
+        <ClosingLine
+          lead='Recognize yourself in one of these?'
+          linkText='The free audit shows where to start'
+          location='home-who-we-work-with'
+          after='.'
+        />
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

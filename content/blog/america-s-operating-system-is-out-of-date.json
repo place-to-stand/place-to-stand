@@ -1,0 +1,58 @@
+{
+  "title": "America's Operating System Is Out of Date",
+  "description": "We need a cultural update.",
+  "date": "2026-04-15",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "26 out of 100. That's what the US scores on Long-Term Orientation, a cultural index built by Dutch social psychologist Geert Hofstede after surveying over 100,000 people across 50 countries [1]. Germany scores 83. Belarus 81. Japan 88. The countries that top the list share something: healthy pension systems and durable businesses built to outlast the people who founded them. Conversely, we Americans see evidence of the 26 rating everywhere. It's the 24-hour outrage machine that punishes any politician who says, \"This will take twenty years to fix.\" It's the 15-second scroll conditioning our brains to abandon anything without an immediate reward [2]. And now it's the first wave of AI products being optimized for engagement, built for extraction, and marketed as fully replacing human judgment. Short-term thinking in America is rampant at every level, including our federal finances."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Government Accountability Office has declined to issue a clean audit opinion on the federal government's finances for 27 consecutive years [3]. The books are too disordered to sign off on. What we do know from the Treasury's own report: the federal government carries a negative net worth of $41.7 trillion [4], Social Security will be depleted by 2032 [5], and twenty of the twenty-five largest US cities are running deficits [6]. When the system only rewards the short term, everyone optimizes for the short term. The cost of deferment transfers to the next generation, with interest."
+    },
+    {
+      "type": "paragraph",
+      "text": "America's founders saw it coming. In 1789, Jefferson wrote to Madison arguing no generation should bind the next, proposing the Constitution itself should expire every 19 years and that no nation contracts more debt than it could repay within its own lifetime [7]. Madison called it a great idea, agreed in spirit, then closed his letter saying it would give him \"singular pleasure\" to see the principle encoded in American governance but this was \"a pleasure which I have little hope of enjoying\" [8]. Two hundred years later, the GAO still won't sign the books. The aspiration existed. The architecture never did."
+    },
+    {
+      "type": "paragraph",
+      "text": "Meanwhile, down the block from me in Brooklyn, Alnoor Deli has been serving the same regulars for years. The owner told me recently he's hesitant to raise prices on people he's known for a long time, but can't afford not to with rents and food costs climbing. Nobody put him there intentionally. The aggregate decision-making of rational individuals culminates into a completely different neighborhood, often void of culture. Have you been to Midtown lately?"
+    },
+    {
+      "type": "paragraph",
+      "text": "Long-term thinking gets framed as a time problem. Think further ahead. Plan for decades not quarters. But the Alnoor Deli owner points to something else: it's equally a space problem. The radius of who your decisions affect. The new tenants moving into the luxury apartments going up around him aren't doing anything wrong. They found a good deal. Their individual decision is rational. In aggregate, these decisions transform a neighborhood and quietly push out the cultures that we desperately need."
+    },
+    {
+      "type": "paragraph",
+      "text": "That radius applies to every decision you make professionally: the client you take, the product you build, the organization you join. The economic climate makes it hard to hold out for your values. The pressure to say yes to the wrong thing is highest exactly when the long-term cost of doing so is also highest. For me, the answer has been entrepreneurship. Not because business owners are inherently more virtuous, but because it gave me autonomy over time and obligation. The freedom to chase what I actually care about: choose my clients, my work, and my radius rather than an earnings statement or someone else's definition of stability. Yes, this requires sacrifice. In the early days, I had to choose between a social life and paying rent in order to pursue the long-term vision of self-autonomy. That choice isn't available to everyone in the same form, and that's okay, but the visibility into these trade-offs is. We have more access to information about who we're aligning with, what they produce, who benefits, and who pays than any previous generation."
+    },
+    {
+      "type": "paragraph",
+      "text": "Whoever you work for, whatever you build, whatever you say yes to; whose incentives are you operating inside of? Who does your work actually serve? Who pays the cost you don't see on the invoice?"
+    },
+    {
+      "type": "paragraph",
+      "text": "We can't keep measuring stability only by what's in front of us. The deli owner, the people who built our neighborhoods, the next generation inheriting whatever we build or deplete, they're all inside the radius whether we acknowledge it or not. The willingness to accept short-term sacrifice in service of something larger is ultimately the most self-interested decision you can make. What you build with integrity compounds. What you extract eventually runs out. Individually we can all decide to update our decision making. Collectively those decisions become the cultural update our future generations need."
+    },
+    {
+      "type": "heading",
+      "text": "Sources"
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "Hofstede, G., Hofstede, G.J., & Minkov, M. Long-Term Orientation scores by country — [https://geerthofstede.com/country-comparison-bar-charts/](https://geerthofstede.com/country-comparison-bar-charts/)",
+        "Short-form Video Use and Sustained Attention: A Narrative Review (2019-2025) —[https://www.researchgate.net/publication/397712802_Short-form_Video_Use_and_Sustained_Attention_A_Narrative_Review_2019-2025](https://www.researchgate.net/publication/397712802_Short-form_Video_Use_and_Sustained_Attention_A_Narrative_Review_2019-2025)",
+        "GAO, Financial Audit: Bureau of the Fiscal Service's FY2024 and FY2023 Schedules of Federal Debt —[https://www.gao.gov/federal-financial-accountability](https://www.gao.gov/federal-financial-accountability)",
+        "US Treasury FY2024 Financial Report —[https://fiscal.treasury.gov/reports-statements/financial-report/](https://fiscal.treasury.gov/reports-statements/financial-report/)",
+        "Social Security Administration, 2024 Trustees Report —[https://www.ssa.gov/oact/tr/2024/](https://www.ssa.gov/oact/tr/2024/)",
+        "National League of Cities, City Fiscal Conditions 2025 —[https://www.nlc.org/resource/city-fiscal-conditions/](https://www.nlc.org/resource/city-fiscal-conditions/)",
+        "Thomas Jefferson to James Madison, September 6, 1789 —[https://founders.archives.gov/documents/Madison/01-12-02-0248](https://founders.archives.gov/documents/Madison/01-12-02-0248)",
+        "James Madison to Thomas Jefferson, February 4, 1790 —[https://founders.archives.gov/documents/Madison/01-13-02-0020](https://founders.archives.gov/documents/Madison/01-13-02-0020)"
+      ]
+    }
+  ]
+}

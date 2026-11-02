@@ -1,8 +1,5 @@
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { Section } from '@/src/components/layout/section'
+import { Reveal } from '@/src/components/layout/animated-section'
 import {
   SeatsGraphic,
   CentralizedDataGraphic,
@@ -32,13 +29,13 @@ const pillars = [
 
 export function PillarsSection() {
   return (
-    <AnimatedSection className='py-20'>
-      <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
+    <Section>
+      <div className='grid gap-x-grid-3 gap-y-stack md:grid-cols-[1fr_1.2fr]'>
         {/* Left: sticky heading */}
-        <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
-          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
+        <div className='flex flex-col gap-intro md:sticky md:top-32 md:self-start'>
+          <Reveal index={0} className='flex flex-col gap-eyebrow'>
             <span className='bp-label font-mono'>Pillars</span>
-            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
+            <h2 className='type-section-title'>
               Our Development
               <br />
               Principles
@@ -54,15 +51,14 @@ export function PillarsSection() {
         </div>
 
         {/* Right: pillar cards */}
-        <Reveal index={3} className='flex flex-col gap-4'>
+        <Reveal index={3} className='flex flex-col gap-grid-1'>
           {pillars.map(pillar => (
             <div
               key={pillar.title}
-              className='relative flex flex-col gap-4 bg-bg-card p-5 md:p-8'
+              className='relative flex flex-col gap-4 bg-bg-card p-card'
             >
-              <BlueprintCorners size={16} />
               <pillar.Graphic className='absolute top-4 right-4 h-9 w-9 md:top-6 md:right-6' />
-              <h3 className='max-w-[calc(100%-3.5rem)] font-headline text-xl font-semibold tracking-tight text-text'>
+              <h3 className='max-w-[calc(100%-3.5rem)] type-card-title'>
                 {pillar.title}
               </h3>
               <p className='max-w-xl text-base text-accent-secondary'>
@@ -72,6 +68,6 @@ export function PillarsSection() {
           ))}
         </Reveal>
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

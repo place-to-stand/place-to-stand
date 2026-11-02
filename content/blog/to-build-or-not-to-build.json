@@ -1,0 +1,32 @@
+{
+  "title": "To Build Or Not To Build",
+  "description": "You don’t need every feature.",
+  "date": "2026-10-21",
+  "author": "Kris Crawford",
+  "body": [
+    {
+      "type": "paragraph",
+      "text": "You’ve probably seen how much software development has changed this year. As an anecdote, since January 2026 I’ve probably written 10 lines of code by hand. A drastic difference from previous years of writing thousands of lines every month. Now you can build apps, tools and features faster than ever before. Although this unlocks a lot of capability for you and your team it does still require solving the right engineering problems. The question isn’t whether we can build, it’s whether we *should*, and *how* users will interact with it. Deciding what’s useful has always been a judgment call, but when building is this cheap, that judgment is more valuable than ever. At my agency [Place To Stand](https://placetostandagency.com/), we are constantly weighing trade-offs of building new features and whether we should be removing old features that are no longer used."
+    },
+    {
+      "type": "paragraph",
+      "text": "With AI the time from idea to production is crazy fast and may appear “free” to build, but that doesn’t mean it doesn’t cost you anything. There are multiple reasons why building every feature under the sun is a bad idea. First, you still need to build it with prompts. Prompting well is its own skill, and getting the right output still takes time. Once you are happy with the outputs then you need to own the feature all the way from QA to production deployment. Someone’s name still needs to be tied to something that could cause regressions in a production environment. Lastly, the most overlooked thing, is that once you have an existing application, adding features requires you to re-test and QA all the existing features to make sure regressions weren’t made. AI tools can assist greatly with this and can catch a lot of the low-hanging fruit but the only way you truly know it passes is to use the product yourself."
+    },
+    {
+      "type": "paragraph",
+      "text": "For a second let’s assume AI continues to progress and automates this entire process I just laid out above. It still doesn’t answer the question of *should* you build it and *how* it's executed. *Should* and *How* are opinions, also known as taste, and they’re at the heart of engineering. AI agents can help guide your opinions (and they should) but at the end of the day you, the human, have to be accountable for your decisions on if you *should* build it and *how* the end-user experiences it."
+    },
+    {
+      "type": "paragraph",
+      "text": "Even after a feature or product has gone through this process and you’ve decided how to build it, the work is not done. You still need to audit the use of the feature in production and hold it accountable to the end-users’ needs. Ultimately you need to remain open to the fact that even after all of that, the best option might be to delete the feature. The core need might be real but the implementation might not actually be solving it. Good engineers take pride in their work but not so much that they can’t delete something for the greater good of the product. Something that doesn’t exist is more valuable than something that does but is not needed."
+    },
+    {
+      "type": "paragraph",
+      "text": "At Place To Stand, we built our own business portal ([repo](https://github.com/place-to-stand/place-to-stand-portal)). During this ongoing process we've had multiple features that we thought would be huge time savers in theory but in practice they didn’t move the needle the way we thought. I have to largely credit our co-founder Jason for championing the philosophy of removing features to keep the UI/UX clean. Implementing an update that removes one of the features you spent many hours on is a humbling experience but in the long run saves us and the business a lot of time. As a result our interface is clean and addresses our needs directly, no bloat, very little learning curve, and is a truly bespoke solution. There is never a question of where things are because we don’t have to visually navigate noise to find the tools we need. This is the major win when you build custom. As opposed to 3rd party software which is rife with UI noise and is not aligned with your needs directly. I’ll speak more about 3rd party vs custom apps in a future blog."
+    },
+    {
+      "type": "paragraph",
+      "text": "If you can’t convincingly answer why you *should* build and *how* to execute, then you should not do either. If no one uses a shipped feature, delete it now. Less surface area means less visual noise, less to QA, less to onboard people on, and less to own. My suggestion to people building with AI is to leave your pride at the door and remember that the end-user is the true judge."
+    }
+  ]
+}

@@ -20,12 +20,14 @@ initPostHog()
  *
  * Server actions POST to the URL of the page that invoked them, so these paths
  * cover the contact form (`/contact`) and the audit's lead-capture form
- * (`/audit`). A blanket `path: '/**'` also challenged every audit progress push
- * to `/api/audit-progress`, which adds latency to each one and errors outright
- * in local development, where the challenge cannot be served.
+ * (`/audit`). The subscribe forms (blog and footer) post to `/api/subscribe`
+ * instead, because the footer one is on every page. A blanket
+ * `path: '/**'` also challenged every audit progress push to
+ * `/api/audit-progress`, which adds latency to each one and errors outright in
+ * local development, where the challenge cannot be served.
  *
- * If either form is ever rendered on another route, add that route here or its
- * bot protection silently lapses.
+ * If any of these forms is ever rendered on another route, add that route here
+ * or its bot protection silently lapses.
  */
 initBotId({
   protect: [
@@ -38,6 +40,14 @@ initBotId({
     },
     {
       path: '/audit',
+      method: 'POST',
+      advancedOptions: {
+        checkLevel: 'basic',
+      },
+    },
+    // The blog and footer subscribe forms.
+    {
+      path: '/api/subscribe',
       method: 'POST',
       advancedOptions: {
         checkLevel: 'basic',

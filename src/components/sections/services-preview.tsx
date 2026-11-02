@@ -1,13 +1,12 @@
 'use client'
 
+import { Section } from '@/src/components/layout/section'
+import { ClosingLine } from '@/src/components/layout/closing-line'
+
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
-import { TrackedLink } from '@/src/components/tracked-link'
+import { Reveal } from '@/src/components/layout/animated-section'
 import { services, type Service } from '@/src/lib/services'
 import { serviceGraphics } from '@/src/components/graphics/home-graphics'
 import { cn } from '@/src/lib/utils'
@@ -36,13 +35,11 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
         id={id}
         aria-expanded={isOpen}
         aria-controls={contentId}
-        className='flex w-full cursor-pointer items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent/30 md:px-6 md:py-6'
+        className='flex w-full cursor-pointer items-start gap-4 p-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent-subtle md:px-6 md:py-6'
       >
         {Graphic && <Graphic className='mt-0.5 h-grid-2 w-grid-2 shrink-0' />}
         <div className='flex flex-col gap-1'>
-          <h3 className='font-headline text-lg font-semibold tracking-tight text-text'>
-            {service.title}
-          </h3>
+          <h3 className='type-card-title'>{service.title}</h3>
           <p className='text-base text-text-muted'>{service.tagline}</p>
         </div>
         <ChevronDown
@@ -87,26 +84,15 @@ function ServiceRow({ service, isOpen, onToggle }: ServiceRowProps) {
   )
 }
 
-/** Audit prompt that closes out the service list. Rendered in two places so it
- *  can sit in the sticky left column on desktop but fall below the cards on
- *  mobile, matching where the other homepage sections put their audit CTA.
- *  Each clause is an inline-block so the line breaks between them rather than
- *  orphaning a word or two onto the second line. */
 function AuditPrompt({ className }: { className?: string }) {
   return (
-    <p className={cn('text-base text-balance text-text-muted', className)}>
-      <span className='inline-block'>Not sure which of these you need?</span>{' '}
-      <span className='inline-block'>
-        <TrackedLink
-          href='/audit'
-          location='home-services-preview'
-          className='font-semibold text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:text-accent/80'
-        >
-          This free audit picks for you
-        </TrackedLink>
-        .
-      </span>
-    </p>
+    <ClosingLine
+      lead='Not sure which of these you need?'
+      linkText='This free audit picks for you'
+      location='home-services-preview'
+      after='.'
+      className={className}
+    />
   )
 }
 
@@ -114,15 +100,13 @@ export function ServicesPreview() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
   return (
-    <AnimatedSection className='py-20'>
-      <div className='grid gap-grid-3 md:grid-cols-[1fr_1.2fr]'>
+    <Section>
+      <div className='grid gap-x-grid-3 gap-y-stack md:grid-cols-[1fr_1.2fr]'>
         {/* Left: heading (sticky) */}
-        <div className='flex flex-col gap-3 md:sticky md:top-32 md:gap-4 md:self-start'>
-          <Reveal index={0} className='flex flex-col gap-2.25 md:gap-3'>
+        <div className='flex flex-col gap-intro md:sticky md:top-32 md:self-start'>
+          <Reveal index={0} className='flex flex-col gap-eyebrow'>
             <span className='bp-label font-mono'>Services</span>
-            <h2 className='font-headline text-4xl leading-[0.95] font-bold tracking-tight text-text md:text-5xl'>
-              What we build
-            </h2>
+            <h2 className='type-section-title'>What we build</h2>
           </Reveal>
           <Reveal index={1} className='text-md text-text-muted'>
             <p>End-to-end capabilities, from strategy to deployment.</p>
@@ -143,7 +127,7 @@ export function ServicesPreview() {
         </div>
 
         {/* Right: service accordion */}
-        <Reveal index={2} className='flex flex-col border border-border'>
+        <Reveal index={2} className='flex flex-col'>
           {services.map((service, i) => (
             <ServiceRow
               key={service.slug}
@@ -160,6 +144,6 @@ export function ServicesPreview() {
           <AuditPrompt />
         </Reveal>
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

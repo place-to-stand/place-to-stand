@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
+import { PageHeader, Section } from '@/src/components/layout/section'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
-import { Badge } from '@/src/components/ui/badge'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { fieldNotes } from '@/src/lib/field-notes'
 
 export const metadata: Metadata = pageMetadata({
@@ -12,57 +10,60 @@ export const metadata: Metadata = pageMetadata({
   path: '/field-notes',
 })
 
+/** "2025-11-05" -> "Nov 2025". Read as UTC so the month never slips. */
+function formatNoteDate(date: string) {
+  return new Date(`${date}T00:00:00Z`).toLocaleDateString('en-US', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  })
+}
+
 export default function FieldNotesPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
-      <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='dots-hero mb-12 flex flex-col items-center gap-4 text-center md:mb-20'>
-          <span className='bp-label font-mono'>Field Notes</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-semibold text-balance text-text uppercase md:text-6xl'>
-            From the lab
-          </h1>
-          <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
-            Experiments, open-source projects, and things we&apos;re learning
-            along the way.
-          </p>
-        </div>
-        <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {fieldNotes.map(note => (
-            <a
-              key={note.slug}
-              href={note.url}
-              target={note.url.startsWith('http') ? '_blank' : undefined}
-              rel={
-                note.url.startsWith('http') ? 'noopener noreferrer' : undefined
-              }
-              className='group relative flex flex-col gap-4 border border-border bg-bg-card p-6 transition-colors duration-300 hover:border-accent/40'
-            >
-              <BlueprintCorners />
-              <div className='flex items-center justify-between'>
-                <span className='font-mono text-xs text-text-muted'>
-                  {note.date}
-                </span>
-                {note.repo && (
-                  <span className='font-mono text-xs text-accent uppercase'>
-                    Open Source
-                  </span>
-                )}
-              </div>
-              <h2 className='font-headline text-xl text-text uppercase transition-colors group-hover:text-accent'>
-                {note.title}
-              </h2>
-              <p className='text-base text-text-muted'>{note.description}</p>
-              <div className='mt-auto flex flex-wrap gap-2'>
-                {note.tags.map(tag => (
-                  <Badge key={tag} variant='outline'>
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </a>
-          ))}
-        </div>
-      </AnimatedSection>
+    <main className='flex-1 pt-page-start pb-section'>
+      <Section priority className='flex flex-col gap-header'>
+        <PageHeader
+          label='Field Notes'
+          title='From the lab'
+          intro="Experiments, open-source projects, and things we're learning along the way."
+          align='center'
+        />
+        {/* One open row per note, split by a rule: no boxed cards */}
+        <ol className='flex flex-col divide-y divide-border border-y border-border'>
+          {fieldNotes.map(note => {
+            const external = note.url.startsWith('http')
+            return (
+              <li key={note.slug}>
+                <a
+                  href={note.url}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener noreferrer' : undefined}
+                  className='group grid gap-4 py-grid-2 no-underline md:grid-cols-12 md:gap-x-grid-1'
+                >
+                  <div className='flex items-center gap-4 font-mono text-sm text-text-muted md:col-span-3 md:flex-col md:items-start md:gap-2 md:pt-1.5'>
+                    <time dateTime={note.date}>
+                      {formatNoteDate(note.date)}
+                    </time>
+                    {note.repo && (
+                      <span className='text-accent uppercase'>Open Source</span>
+                    )}
+                  </div>
+                  <div className='flex flex-col gap-3 md:col-span-6'>
+                    <h2 className='type-section-title uppercase transition-colors group-hover:text-accent'>
+                      {note.title}
+                    </h2>
+                    <p className='max-w-2xl type-intro'>{note.description}</p>
+                  </div>
+                  <p className='font-mono text-sm tracking-[0.05em] text-text-muted uppercase md:col-span-3 md:pt-1.5 md:text-right'>
+                    {note.tags.join(' · ')}
+                  </p>
+                </a>
+              </li>
+            )
+          })}
+        </ol>
+      </Section>
     </main>
   )
 }

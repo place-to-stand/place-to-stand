@@ -26,7 +26,7 @@ export function QuestionField({
         className={cn(
           'font-headline font-semibold tracking-tight text-text uppercase',
           size === 'lg'
-            ? 'mb-3 text-2xl leading-[1.05] text-balance sm:text-3xl'
+            ? 'mb-3 text-2xl leading-[1.05] text-balance sm:text-3xl lg:text-4xl'
             : 'text-base'
         )}
       >

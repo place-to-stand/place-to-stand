@@ -22,6 +22,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 - [Home](https://placetostandagency.com/): what we build and who for
 - [Team](https://placetostandagency.com/team): the founders and their backgrounds
 - [Clients](https://placetostandagency.com/clients): brands we have built for, including Hot Ones, Heatonist, Blake Brown Beauty, Florence by Mills Beauty, GreenWATT USA, and 9 Point Studios
+- [Heatonist case study](https://placetostandagency.com/clients/heatonist): how we run engineering for Heatonist and hotones.com without a full-time hire
 
 ## Services and process
 

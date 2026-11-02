@@ -20,10 +20,15 @@ const nextConfig = {
     // The social share image reads the same fonts.
     '/opengraph-image': ['./public/fonts/**/*'],
     '/twitter-image': ['./public/fonts/**/*'],
+    // Blog posts are JSON files read from disk.
+    '/blog': ['./content/blog/**/*'],
+    '/blog/[slug]': ['./content/blog/**/*'],
   },
   images: {
     // AVIF first (~20% smaller than WebP); browsers without it get WebP.
     formats: ['image/avif', 'image/webp'],
+    // 90 is for the case study storefront screenshots, which are mostly text.
+    qualities: [75, 90],
   },
   async headers() {
     return [

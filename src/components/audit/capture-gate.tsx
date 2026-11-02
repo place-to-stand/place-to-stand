@@ -5,7 +5,6 @@ import { usePostHog } from 'posthog-js/react'
 import { CheckCircle2 } from 'lucide-react'
 import { AuditProgress } from '@/src/components/audit/audit-progress'
 import { EmailCaptureForm } from '@/src/components/audit/lead-forms'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { QUESTIONS } from '@/src/lib/audit/questions'
 import type {
   AuditLeadPayload,
@@ -43,20 +42,19 @@ export function CaptureGate({
   }, [])
 
   return (
-    <div className='mx-auto max-w-2xl sm:py-grid-2'>
+    <div className='mx-auto max-w-5xl sm:py-grid-2'>
       <AuditProgress
         label='All questions answered'
         title='Your blueprint'
         currentIndex={QUESTIONS.length}
       />
 
-      <div className='relative border border-border p-4 sm:p-8'>
-        <BlueprintCorners size={16} />
+      <div className='relative max-w-2xl pt-grid-1 sm:pt-grid-2'>
         <span className='inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-accent uppercase'>
           <CheckCircle2 aria-hidden className='h-4 w-4' />
           Analysis complete
         </span>
-        <h2 className='mt-4 font-headline text-3xl leading-[.95] font-semibold tracking-tight text-text uppercase sm:text-4xl'>
+        <h2 className='mt-grid-half type-section-title uppercase'>
           Your blueprint is ready
         </h2>
         <p className='mt-3 text-base text-balance text-text-muted'>
@@ -72,12 +70,12 @@ export function CaptureGate({
           buildCapturedPayload={buildCapturedPayload}
           onCaptured={onCaptured}
           submitLabel='Send it and show me'
-          className='mt-6'
+          className='mt-grid-1'
         />
 
         {/* Directly under the button, never below the fold: a hidden way out
             would make the free audit feel like a trap. */}
-        <div className='mt-4 text-center'>
+        <div className='mt-grid-half text-center'>
           <button
             type='button'
             onClick={onSkip}
@@ -87,7 +85,7 @@ export function CaptureGate({
           </button>
         </div>
 
-        <p className='mt-6 border-t border-border pt-4 text-sm text-text-muted'>
+        <p className='mt-grid-1 border-t border-border pt-grid-half text-sm text-text-muted'>
           Reply to the email any time to talk to the engineers who&apos;d build
           it.
         </p>

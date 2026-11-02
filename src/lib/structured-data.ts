@@ -114,6 +114,28 @@ export const servicesJsonLd = {
   })),
 }
 
+/** A case study as an Article about a client's project, published by us. */
+export function caseStudyJsonLd(study: {
+  path: string
+  headline: string
+  description: string
+  company: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${absoluteUrl(study.path)}#article`,
+    headline: study.headline,
+    description: study.description,
+    url: absoluteUrl(study.path),
+    image: absoluteUrl('/opengraph-image'),
+    inLanguage: 'en-US',
+    author: { '@id': ORGANIZATION_ID },
+    publisher: { '@id': ORGANIZATION_ID },
+    about: { '@type': 'Organization', name: study.company },
+  }
+}
+
 /** Serialize for a `<script type="application/ld+json">` without letting a
  * `</script>` in content end the tag early. */
 export function jsonLdString(data: unknown): string {

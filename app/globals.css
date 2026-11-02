@@ -21,6 +21,10 @@
   --color-text-muted: #a8a8ac;
   --color-accent: #b5f542;
   --color-accent-muted: rgba(181, 245, 66, 0.15);
+  /* Accent lines come in two strengths only: accent-subtle (borders, focus
+     rings, link underlines) and accent itself (strong: active states, corner
+     marks, highlighted panels). */
+  --color-accent-subtle: rgba(181, 245, 66, 0.4);
   --color-accent-secondary: #b4b4b4;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
@@ -42,9 +46,153 @@
   --spacing-grid-6: calc(var(--grid) * 6); /* 144 */
   --spacing-grid-8: calc(var(--grid) * 8); /* 192 */
 
+  /* Spacing roles. Use these (py-section, gap-stack, p-card, …) instead of
+     raw numbers; each one resolves to a --space-* value below that changes
+     per breakpoint, always on the 24px grid (12px half steps for fine
+     structure). See docs/design-system.md. */
+  --spacing-page-top: var(--space-page-top);
+  --spacing-page-start: calc(var(--nav-height) + var(--space-page-top));
+  --spacing-section: var(--space-section);
+  --spacing-edge: var(--space-edge);
+  --spacing-header: var(--space-header);
+  --spacing-stack: var(--space-stack);
+  --spacing-intro: var(--space-intro);
+  --spacing-label: var(--space-label);
+  --spacing-eyebrow: var(--space-eyebrow);
+  --spacing-card: var(--space-card);
+  --spacing-callout: var(--space-callout);
+  --spacing-band: var(--space-band);
+
   /* 1440 — the one grid-aligned container width (max-w-content): 60 cells,
      an even count, so a centered container's edges land on grid lines. */
   --container-content: calc(var(--grid) * 60);
+}
+
+/* Spacing role values: phone first, then tablet (md, 768px) and laptop up
+   (lg, 1024px). Every value is a multiple of 24px or 12px.
+   - page-top: under the fixed nav to a page's first content (also the home
+     hero's padding and headline gap)
+   - section: between two sections, content to content
+   - edge: the home page's outer gaps (under the hero line, above the final
+     callout's dots)
+   - header: a page header (label, title, intro) to the content below it
+   - stack: a section's heading group to its cards or list (named stack, not
+     block: Tailwind's inline-block class would read a 'block' spacing token
+     as a width)
+   - intro: a heading to its intro paragraph
+   - eyebrow: the small label above a title to that title
+   - label: a lone label (no heading) to the content it introduces, e.g.
+     "Trusted by" above the logo wall
+   - card / callout: inner padding of cards and of the dotted callout box
+   - band: depth of the callout's dots above and below its box
+   --nav-height is the fixed nav's measured height, not a grid value; it only
+   offsets content so it starts below the nav. */
+:root {
+  --nav-height: 61px;
+  --space-page-top: 36px;
+  --space-section: 96px;
+  --space-edge: 72px;
+  --space-header: 48px;
+  --space-stack: 48px;
+  --space-intro: 12px;
+  --space-label: 36px;
+  --space-eyebrow: 24px;
+  --space-card: 24px;
+  --space-callout: 24px;
+  --space-band: 84px;
+}
+@media (min-width: 48rem) {
+  :root {
+    --nav-height: 65px;
+    --space-page-top: 48px;
+    --space-section: 144px;
+    --space-edge: 96px;
+    --space-header: 72px;
+    --space-callout: 48px;
+    --space-band: 108px;
+  }
+}
+@media (min-width: 64rem) {
+  :root {
+    --nav-height: 69px;
+    --space-page-top: 72px;
+    --space-section: 168px;
+    --space-edge: 120px;
+    --space-header: 96px;
+    --space-stack: 72px;
+    --space-intro: 24px;
+    --space-label: 48px;
+    --space-card: 36px;
+    --space-callout: 72px;
+  }
+}
+
+/* Type roles. Each heading or text block uses exactly one of these instead
+   of picking sizes per page. Sizes step up at md (768px). See
+   docs/design-system.md. The home hero headline is the one exception: it is
+   sized to the window. */
+@utility type-page-title {
+  font-family: var(--font-space-grotesk);
+  font-size: 2.25rem; /* 36 */
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 3.75rem; /* 60 */
+  }
+}
+@utility type-section-title {
+  font-family: var(--font-space-grotesk);
+  font-size: 2.25rem; /* 36 */
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 3rem; /* 48 */
+  }
+}
+@utility type-card-title {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.25rem; /* 20 */
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+}
+@utility type-intro {
+  font-size: 1rem; /* 16 */
+  line-height: 1.375;
+  color: var(--color-text-muted);
+  @media (width >= 48rem) {
+    font-size: 1.125rem; /* 18 */
+  }
+}
+@utility type-fine {
+  font-family: var(--font-plex-mono);
+  font-size: 0.75rem; /* 12: short mono lines only, per the type floor */
+  line-height: 1.375;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Text trimmed to its visible letters (cap height to baseline) so spacing
+   roles measure to the ink, not to invisible line leading. Browsers without
+   text-box support (Firefox today) ignore this and keep the leading. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  p {
+    text-box: trim-both cap alphabetic;
+  }
+  /* The home hero frames its headline with corner marks sized to the full
+     line boxes; keep those untrimmed. */
+  [data-pts-hero] h1 {
+    text-box: normal;
+  }
 }
 
 /* Fonts reference next/font variables set on <html>, so they must be inlined
@@ -85,10 +233,9 @@ html {
 
 /* Blueprint dots live in two places only: behind each page's hero and behind
    the closing audit callout. Both draw a full-bleed layer behind the element.
-   The layer starts 2400px (100 cells) left of and above the element, so with
-   the 12px phase a dot lands on the element's own top-left corner and every
-   24px from it. Container edges sit on 24px steps from the viewport center,
-   so the dots still line up with the page frame. */
+   The layer reaches 2400px (100 cells) past the element on each side, and a
+   dot column sits on the element's center line, so the dots are cut off evenly
+   at both edges of the screen at any width (the element is centered). */
 .dots-hero,
 .dots-band {
   position: relative;
@@ -106,38 +253,55 @@ html {
   left: -2400px;
   right: -2400px;
   pointer-events: none;
+  /* 18px: denser than one dot per 24px cell, deliberately off the grid so
+     the texture reads finer than the layout grid. The dots are a little
+     dimmer (85% of --grid-dot over the background) to keep the overall
+     tone close to the old 24px pattern. */
   background-image: radial-gradient(
     circle,
-    var(--grid-dot) 1px,
+    color-mix(in srgb, var(--grid-dot) 85%, var(--color-bg)) 1px,
     transparent 1px
   );
-  background-size: 24px 24px;
-  background-position: 12px 12px;
-  background-origin: border-box;
+  background-size: 18px 18px;
+  background-position: center;
+  /* Centre on the area inside the rule line, so the cut above the first row
+     matches the cut below the last. */
+  background-origin: padding-box;
 }
-/* Hero: from the top of the page down to one band below the intro, closed off
-   by a thin rule. */
+/* The home hero draws its own bottom rule (on the section, which also clips
+   it), so its dot layer stops exactly at that edge: otherwise the pattern is
+   centred on a box that runs past what's visible. */
+[data-pts-hero] .dots-hero::before {
+  bottom: 0;
+  border-bottom: 0;
+}
+/* Hero: from the top of <main> down to one band below the intro, closed off
+   by a thin rule. The dots are centered top to bottom in that band too, so the
+   cut at the top matches the cut at the rule whatever the intro's height.
+   --dots-top is how far the intro sits below the top of <main>: the
+   page-start role (nav height + page top) on pages built with pt-page-start.
+   Pages laid out differently set their own. */
 .dots-hero::before {
-  top: -2400px;
+  top: calc(-1 * var(--dots-top, var(--spacing-page-start)));
+  background-position: center;
   bottom: calc(-1 * var(--spacing-grid-2));
   border-bottom: 1px solid var(--dots-rule);
 }
-/* Audit callout: --band-pad of dots above the box, then dots all the way down
-   to the footer (the layer overshoots and <main> clips it). Each page leaves
-   the same --band-pad of space under the box. */
+/* Closing callout: --band-pad of dots above the box and the same under it,
+   down to the footer. Each page ends <main> --band-pad under the box. */
 .dots-band {
-  --band-pad: var(--spacing-grid-4);
-}
-@media (min-width: 48rem) {
-  .dots-band {
-    --band-pad: var(--spacing-grid-6);
-  }
+  --band-pad: var(--space-band);
 }
 /* The same thin rule opens the band. */
 .dots-band::before {
   top: calc(-1 * var(--band-pad));
-  bottom: -2400px;
+  /* The band ends --band-pad under the box, which is where <main> ends on
+     every page with a callout, so the layer spans exactly rule to footer and
+     the dots can be centred on it: the cut under the rule matches the cut
+     at the footer whatever the box height. */
+  bottom: calc(-1 * var(--band-pad));
   border-top: 1px solid var(--dots-rule);
+  background-position: center;
 }
 /* Clips the dot layers to the page body so they never widen or lengthen the
    page. clip (not hidden) keeps position: sticky working inside. */
@@ -649,10 +813,26 @@ main {
   );
 }
 
+/* Graph bars in the finished app: each grows up from the baseline, staggered
+   left to right (--bar-delay), once. The accent bar takes a little longer. */
+.hero-compare .cmp-bar {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(0);
+  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--bp-draw-base, 0ms) + var(--bar-delay, 0ms));
+}
+.hero-compare .cmp-bar-last {
+  transition-duration: 800ms;
+}
+.hero-compare[data-visible='true'] .cmp-bar {
+  transform: scaleY(1);
+}
 @media (prefers-reduced-motion: reduce) {
   .hero-compare .cmp-in,
   .hero-compare .cmp-arrow,
-  .hero-compare .cmp-slide {
+  .hero-compare .cmp-slide,
+  .hero-compare .cmp-bar {
     transition: none;
     opacity: 1;
     transform: none;
@@ -833,20 +1013,22 @@ main {
 /* ─── Blueprint section annotation label ───
    Callout label with a double-chevron terminal mark. */
 .bp-label {
+  font-family: var(--font-plex-mono);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.125em;
   text-transform: uppercase;
   color: var(--color-accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  /* inline-block (not flex) so text-box can trim it to its letters, like
+     headings, so the gaps around a label measure to the visible caps. */
+  display: inline-block;
+  text-box: trim-both cap alphabetic;
 }
 
 .bp-label::after {
   content: '\00BB';
+  margin-left: 6px;
   font-size: 14px;
-  line-height: 1;
   letter-spacing: 0;
   opacity: 0.7;
 }

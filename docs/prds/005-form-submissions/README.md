@@ -81,12 +81,12 @@ server-rendered tree without a hydration mismatch.
 |---|---|
 | `PORTAL_API_BASE_URL` | Portal host, e.g. `https://portal.placetostandagency.com`. Paths are appended |
 | `AUDIT_INTAKE_TOKEN` | Bearer token for `/api/integrations/audit-responses` |
-| `CONTACT_INTAKE_TOKEN` | Bearer token for `/api/integrations/contact-submissions` |
+| `CONTACT_INTAKE_TOKEN` | Bearer token for `/api/integrations/contact-submissions`, and for `/api/integrations/subscribe-submissions` (blog and footer signups, via this site's `/api/subscribe`) |
 
 `PORTAL_LEADS_ENDPOINT` and `PORTAL_LEADS_TOKEN` are no longer read by any code and should be removed
 from Vercel after the cutover.
 
-Leave all three unset in local development. Both paths then log the payload to the server console
+Leave them all unset in local development. Every path then logs the payload to the server console
 instead of forwarding it and report success, so the whole flow is verifiable with no portal running.
 In production an unset value is an error the visitor sees, because nothing else delivers the message.
 
