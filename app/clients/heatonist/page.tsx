@@ -7,6 +7,7 @@ import {
   Reveal,
 } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { FullBleedVideo } from '@/src/components/layout/full-bleed-video'
 import { Button } from '@/src/components/ui/button'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { heatonistCaseStudy as cs } from '@/src/lib/case-study-heatonist'
@@ -257,6 +258,11 @@ export default function HeatonistCaseStudyPage() {
       </AnimatedSection>
 
       {/* hotones.com */}
+      <FullBleedVideo
+        src='/case-study-hotones-banner.mp4'
+        poster='/case-study-hotones-banner.jpg'
+        label='Hot Ones hot sauces'
+      />
       <AnimatedSection className='flex flex-col gap-grid-3 py-grid-3 md:py-grid-4'>
         <SpecRow label='Launched May 15, 2025' title='hotones.com'>
           <p>{cs.hotOnes}</p>
