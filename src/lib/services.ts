@@ -24,6 +24,20 @@ export const services: Service[] = [
     ],
   },
   {
+    slug: 'mvp-development',
+    title: 'MVPs and Shopify Apps',
+    tagline: 'From prototype to product',
+    description:
+      'Built a first version with AI tools or no-code and hit the ceiling? We turn it into production software you own. We also build custom Shopify apps for brands that have outgrown the app store.',
+    icon: 'Rocket',
+    features: [
+      'MVP development from a prototype or a sketch',
+      'Rebuilding AI-generated or no-code apps for production',
+      'Custom Shopify apps and storefront tools',
+      'Launch, hosting and handover',
+    ],
+  },
+  {
     slug: 'workflow-systems',
     title: 'Workflow Systems',
     tagline: 'Systematize operations, eliminate bottlenecks',

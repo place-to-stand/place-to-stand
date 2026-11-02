@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: 'How We Work',
   description:
-    'Our production cycle, delivery model, and pricing. Flat-rate blocks, direct access, and AI-powered delivery.',
+    'How our Next.js development agency works: production cycle, delivery model and pricing. Flat-rate blocks, direct access and AI-powered delivery.',
   path: '/how-we-work',
 })
 
@@ -97,8 +97,8 @@ export default function HowWeWorkPage() {
               <div className='flex flex-col gap-intro'>
                 <h2 className='type-section-title'>Our Tech Stack</h2>
                 <p className='max-w-2xl text-base text-text-muted'>
-                  The frontier AI models and modern infrastructure behind every
-                  build.
+                  Frontier AI models on a Next.js, Vercel and Supabase stack:
+                  the tools behind every build.
                 </p>
               </div>
               <div className='flex flex-col gap-6'>

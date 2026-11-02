@@ -3,6 +3,7 @@ import {
   Code2,
   Compass,
   GitBranch,
+  Rocket,
   ServerCog,
   type LucideIcon,
 } from 'lucide-react'
@@ -13,5 +14,6 @@ export const serviceIcons: Record<string, LucideIcon> = {
   GitBranch,
   BarChart3,
   Compass,
+  Rocket,
   ServerCog,
 }

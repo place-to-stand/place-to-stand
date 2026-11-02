@@ -88,7 +88,7 @@ export function HeroSection() {
                 >
                   <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-xl lg:gap-9'>
                     <p className='text-base text-balance text-text lg:text-xl'>
-                      We build software{' '}
+                      We build custom business software{' '}
                       <strong className='font-semibold'>
                         shaped to how your business actually runs.
                       </strong>

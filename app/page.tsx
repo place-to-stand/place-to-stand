@@ -11,8 +11,19 @@ import { WhoWeWorkWithSection } from '@/src/components/sections/who-we-work-with
 
 import { CtaBand } from '@/src/components/layout/cta-band'
 
+// Home targets "ai development agency", "custom business software" and
+// "custom software development austin" (keyword shortlist, Nov 2 2026).
+const homeTitle =
+  'Place To Stand Agency | AI Development Agency & Custom Business Software'
+const homeDescription =
+  'An AI development agency in Austin, TX. We build custom business software, automation and AI around how your business actually runs.'
+
 export const metadata: Metadata = {
+  title: { absolute: homeTitle },
+  description: homeDescription,
   alternates: { canonical: '/' },
+  openGraph: { title: homeTitle, description: homeDescription, url: '/' },
+  twitter: { title: homeTitle, description: homeDescription },
 }
 
 export default function HomePage() {
