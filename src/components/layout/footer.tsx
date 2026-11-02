@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { cacheLife } from 'next/cache'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { CLIENT_PORTAL_URL, NAV_LINKS } from '@/src/components/layout/nav-links'
+import { FooterSubscribe } from '@/src/components/layout/footer-subscribe'
 import { FOUNDING_YEAR } from '@/src/lib/site'
 
 // Cached rather than read per render so every page can stay static; a daily
@@ -39,6 +40,9 @@ export async function Footer() {
             how your business actually runs. No bloated SaaS stack &mdash; just
             software that fits.
           </p>
+          <div className='mt-grid-1'>
+            <FooterSubscribe />
+          </div>
         </div>
 
         {/* Site nav — flush with the container edge, right-aligned so it lines

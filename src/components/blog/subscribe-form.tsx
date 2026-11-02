@@ -1,17 +1,14 @@
 'use client'
 
-import { useActionState } from 'react'
 import Link from 'next/link'
-import { subscribe, type SubscribeState } from '@/app/actions/subscribe'
+import { useSubscribe } from '@/src/lib/forms/use-subscribe'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
 import { Input } from '@/src/components/ui/input'
 
-const INITIAL: SubscribeState = { status: 'idle' }
-
 /** Email signup for new posts, at the foot of the blog and of every post. */
 export function SubscribeForm() {
-  const [state, formAction, isPending] = useActionState(subscribe, INITIAL)
+  const { state, onSubmit, isPending } = useSubscribe('blog')
 
   return (
     <div className='relative grid gap-grid-2 border border-border p-6 md:p-grid-3 lg:grid-cols-12 lg:gap-x-grid-1'>
@@ -30,7 +27,7 @@ export function SubscribeForm() {
             up.
           </p>
         ) : (
-          <form action={formAction} className='flex flex-col gap-3'>
+          <form onSubmit={onSubmit} className='flex flex-col gap-3'>
             <label htmlFor='subscribe-email' className='sr-only'>
               Email address
             </label>

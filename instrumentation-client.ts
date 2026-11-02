@@ -19,8 +19,9 @@ initPostHog()
  * Protect only the routes whose server actions actually call `checkBotId()`.
  *
  * Server actions POST to the URL of the page that invoked them, so these paths
- * cover the contact form (`/contact`), the audit's lead-capture form
- * (`/audit`) and the blog subscribe form (`/blog`, `/blog/*`). A blanket
+ * cover the contact form (`/contact`) and the audit's lead-capture form
+ * (`/audit`). The subscribe forms (blog and footer) post to `/api/subscribe`
+ * instead, because the footer one is on every page. A blanket
  * `path: '/**'` also challenged every audit progress push to
  * `/api/audit-progress`, which adds latency to each one and errors outright in
  * local development, where the challenge cannot be served.
@@ -44,16 +45,9 @@ initBotId({
         checkLevel: 'basic',
       },
     },
-    // The blog subscribe form, on the index and on every post.
+    // The blog and footer subscribe forms.
     {
-      path: '/blog',
-      method: 'POST',
-      advancedOptions: {
-        checkLevel: 'basic',
-      },
-    },
-    {
-      path: '/blog/*',
+      path: '/api/subscribe',
       method: 'POST',
       advancedOptions: {
         checkLevel: 'basic',

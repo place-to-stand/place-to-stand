@@ -22,6 +22,7 @@ import 'server-only'
 export const PORTAL_PATHS = {
   auditResponses: '/api/integrations/audit-responses',
   contactSubmissions: '/api/integrations/contact-submissions',
+  subscribeSubmissions: '/api/integrations/subscribe-submissions',
 } as const
 
 export interface PortalTarget {
