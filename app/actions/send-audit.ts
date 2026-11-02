@@ -119,7 +119,8 @@ export async function sendAudit(
     } as const
   }
 
-  const { name, email, company, message, marketingConsent } = parsed.data
+  const { name, email, company, message, marketingConsent, heardFrom } =
+    parsed.data
   const userAgent = (await headers()).get('user-agent')?.slice(0, 1024) ?? null
 
   const payload = {
@@ -135,6 +136,7 @@ export async function sendAudit(
       company: company?.trim() || null,
       message: message?.trim() || null,
       marketingConsent: marketingConsent ?? false,
+      heardFrom: heardFrom?.trim() || null,
     },
     // Trust the request header over anything the client claims about itself.
     client: { ...progress.data.client, userAgent },

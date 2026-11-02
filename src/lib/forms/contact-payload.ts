@@ -22,6 +22,8 @@ export interface ContactSubmissionFields {
   subject: string | null
   message: string
   marketingConsent: boolean
+  /** "How did you hear about us?": a choice, "Other: <text>", or null. */
+  heardFrom: string | null
 }
 
 /**

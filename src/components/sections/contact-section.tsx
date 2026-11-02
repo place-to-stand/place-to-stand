@@ -16,6 +16,7 @@ import { usePostHog } from 'posthog-js/react'
 import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
 import { Button } from '@/src/components/ui/button'
+import { HeardFromField } from '@/src/components/forms/heard-from-field'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Input } from '@/src/components/ui/input'
 import { Label } from '@/src/components/ui/label'
@@ -35,6 +36,7 @@ import {
   readSubmissionAnalytics,
 } from '@/src/lib/forms/context'
 import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
+import { HEARD_FROM_OTHER } from '@/src/lib/forms/heard-from'
 import type { ContactSubmissionContext } from '@/src/lib/forms/contact-payload'
 import {
   CONTACT_SUBJECT_OTHER,
@@ -81,9 +83,12 @@ export function ContactSection() {
       subjectOther: '',
       message: '',
       marketingConsent: false,
+      heardFrom: '',
+      heardFromOther: '',
     },
   })
   const selectedSubject = useWatch({ control: form.control, name: 'subject' })
+  const heardFromChoice = useWatch({ control: form.control, name: 'heardFrom' })
 
   const applySubjectFromQuery = useCallback(
     (raw: string) => {
@@ -135,7 +140,9 @@ export function ContactSection() {
 
           form.reset()
           setIsSuccess(true)
-          posthog?.capture('contact_form_submitted')
+          posthog?.capture('contact_form_submitted', {
+            heard_from: values.heardFrom || null,
+          })
           pushLeadConversion('contact_form_submitted', values.email)
         })
         .catch((error: unknown) => {
@@ -296,6 +303,12 @@ export function ContactSection() {
               </p>
             ) : null}
           </div>
+          <HeardFromField
+            id='heardFrom'
+            select={form.register('heardFrom')}
+            other={form.register('heardFromOther')}
+            showOther={heardFromChoice === HEARD_FROM_OTHER}
+          />
           <div className='flex items-start gap-3 pt-1'>
             <Checkbox
               id='marketingConsent'

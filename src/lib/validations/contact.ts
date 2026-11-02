@@ -3,6 +3,7 @@ import {
   CONTACT_SUBJECT_OTHER,
   CONTACT_SUBJECTS,
 } from '@/src/lib/forms/contact-subjects'
+import { HEARD_FROM_CHOICES } from '@/src/lib/forms/heard-from'
 
 const optionalString = z
   .string()
@@ -33,6 +34,10 @@ export const contactSchema = z
     // Opt-in only. Absent or false means we reply to the enquiry but never add
     // the person to the marketing audience.
     marketingConsent: z.boolean().optional(),
+    // "How did you hear about us?" Never required; "" means skipped.
+    heardFrom: z.enum(HEARD_FROM_CHOICES).optional().or(z.literal('')),
+    // Only read when `heardFrom` is "Other".
+    heardFromOther: optionalString,
   })
   .superRefine((values, ctx) => {
     if (

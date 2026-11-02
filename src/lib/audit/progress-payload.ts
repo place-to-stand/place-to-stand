@@ -84,6 +84,8 @@ export interface AuditLeadPayload {
   /** Optional free-text note from the capture form; the portal stores it as `message`. */
   message: string | null
   marketingConsent: boolean
+  /** "How did you hear about us?"; the portal stores it as `heard_from`. */
+  heardFrom?: string | null
 }
 
 /** Results-page feedback. Either field may be null on its own. */

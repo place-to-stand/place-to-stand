@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { HEARD_FROM_CHOICES } from '@/src/lib/forms/heard-from'
+
 // 160 matches the lead caps in `auditProgressSchema` (the portal allows 255).
 // The server builds the lead after that schema runs, so this is the only
 // check a name or company gets before it is forwarded.
@@ -27,6 +29,14 @@ export const auditLeadSchema = z.object({
   // Opt-in only. Absent or false means we still send the audit result, but the
   // person is never added to the marketing audience.
   marketingConsent: z.boolean().optional(),
+  // "How did you hear about us?", already resolved to one string by the
+  // details form (a choice, or "Other: <their words>").
+  heardFrom: z
+    .string()
+    .trim()
+    .max(256, 'Must be 256 characters or fewer.')
+    .optional()
+    .or(z.literal('')),
 })
 
 export type AuditLeadValues = z.infer<typeof auditLeadSchema>
@@ -42,9 +52,15 @@ export type AuditEmailValues = z.infer<typeof auditEmailSchema>
 /** The optional follow-up once the email is in. Empty is not worth sending. */
 export const auditDetailsSchema = auditLeadSchema
   .pick({ name: true, company: true, message: true })
+  .extend({
+    heardFrom: z.enum(HEARD_FROM_CHOICES).optional().or(z.literal('')),
+    heardFromOther: optionalString,
+  })
   .refine(
     values =>
-      [values.name, values.company, values.message].some(v => v?.trim()),
+      [values.name, values.company, values.message, values.heardFrom].some(v =>
+        v?.trim()
+      ),
     { message: 'Add at least one detail.', path: ['message'] }
   )
 

@@ -19,6 +19,7 @@ import {
   submitToPortal,
 } from '@/src/lib/forms/portal'
 import { resolveContactSubject } from '@/src/lib/forms/contact-subjects'
+import { resolveHeardFrom } from '@/src/lib/forms/heard-from'
 
 export type ContactActionResult =
   | { success: true }
@@ -132,6 +133,7 @@ export async function sendContact(
       subject: resolveContactSubject(parsed.data),
       message: message.trim(),
       marketingConsent: marketingConsent ?? false,
+      heardFrom: resolveHeardFrom(parsed.data),
     },
     userAgent,
     deliver: true,

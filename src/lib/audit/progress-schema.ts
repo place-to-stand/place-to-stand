@@ -87,6 +87,7 @@ export const auditProgressSchema = z.object({
       company: z.string().max(160).nullable(),
       message: z.string().max(2000).nullable(),
       marketingConsent: z.boolean(),
+      heardFrom: z.string().max(256).nullable().optional(),
     })
     .nullable(),
   // Results-page feedback. Optional so a cached client bundle from before the
