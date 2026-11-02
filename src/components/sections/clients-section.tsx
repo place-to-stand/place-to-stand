@@ -5,7 +5,7 @@ import { cn } from '@/src/lib/utils'
 import { clients, getClientHostname, type Client } from '@/src/lib/clients'
 
 const ROW_LINK_CLASS =
-  'mt-1 w-fit font-mono text-sm font-medium tracking-[0.1em] uppercase no-underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent/30'
+  'mt-1 w-fit font-mono text-sm font-medium tracking-[0.1em] uppercase no-underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
 
 /** One open row per client: a big brand photo with the name and description
  * beside it. On large screens the image takes two thirds of the width and
@@ -18,7 +18,7 @@ export function ClientsSection() {
     (client): client is Client & { image: string } => Boolean(client.image)
   )
   return (
-    <div className='flex flex-col gap-grid-4 md:gap-grid-6'>
+    <div className='flex flex-col gap-section'>
       {featured.map((client, index) => {
         const flipped = index % 2 === 1
         const host = getClientHostname(client.href)
@@ -70,12 +70,8 @@ export function ClientsSection() {
                   : 'lg:col-span-3 lg:col-start-10'
               )}
             >
-              <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-text uppercase md:text-5xl'>
-                {client.title}
-              </h2>
-              <p className='text-base text-text-muted md:text-lg'>
-                {client.description}
-              </p>
+              <h2 className='type-section-title uppercase'>{client.title}</h2>
+              <p className='type-intro'>{client.description}</p>
               {client.caseStudy && (
                 <Link
                   href={client.caseStudy as Route}

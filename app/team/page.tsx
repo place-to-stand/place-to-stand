@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { PageHeader, Section } from '@/src/components/layout/section'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { teamJsonLd } from '@/src/lib/structured-data'
 import Image from 'next/image'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
 import { team } from '@/src/lib/team'
 
 export const metadata: Metadata = pageMetadata({
@@ -14,23 +14,19 @@ export const metadata: Metadata = pageMetadata({
 
 export default function TeamPage() {
   return (
-    <main className='flex-1 pt-10 pb-32'>
+    <main className='flex-1 pt-page-start pb-section'>
       <JsonLd data={teamJsonLd} />
-      <AnimatedSection priority className='flex flex-col gap-12'>
-        <div className='dots-hero mb-12 flex flex-col gap-4 md:mb-20'>
-          <span className='bp-label font-mono'>Team</span>
-          <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
-            The builders
-          </h1>
-          <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
-            Senior engineers who own your project end-to-end.
-          </p>
-        </div>
-        <div className='mx-auto grid w-full max-w-3xl gap-8 sm:grid-cols-2'>
+      <Section priority className='flex flex-col gap-header'>
+        <PageHeader
+          label='Team'
+          title='The builders'
+          intro='Senior engineers who own your project end-to-end.'
+        />
+        <div className='mx-auto grid w-full max-w-3xl gap-grid-1 sm:grid-cols-2'>
           {team.map(member => (
             <article
               key={member.name}
-              className='group relative flex flex-col gap-4 bg-bg-card p-6 text-center transition-colors duration-300 hover:bg-bg-elevated'
+              className='group relative flex flex-col gap-4 bg-bg-card p-card text-center transition-colors duration-300 hover:bg-bg-elevated'
             >
               <div className='relative mx-auto aspect-square w-3/4 overflow-hidden'>
                 <Image
@@ -42,9 +38,7 @@ export default function TeamPage() {
                 />
               </div>
               <div className='space-y-1'>
-                <h2 className='font-headline text-xl leading-none text-text uppercase'>
-                  {member.name}
-                </h2>
+                <h2 className='type-card-title uppercase'>{member.name}</h2>
                 <p className='text-sm text-text-muted'>{member.title}</p>
               </div>
               <p className='text-base text-text-muted'>{member.bio}</p>
@@ -121,7 +115,7 @@ export default function TeamPage() {
             </article>
           ))}
         </div>
-      </AnimatedSection>
+      </Section>
     </main>
   )
 }

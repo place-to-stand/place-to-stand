@@ -1,7 +1,5 @@
-import {
-  AnimatedSection,
-  Reveal,
-} from '@/src/components/layout/animated-section'
+import { Section } from '@/src/components/layout/section'
+import { Reveal } from '@/src/components/layout/animated-section'
 import { ClientLogoWall } from './client-logo-wall'
 
 /**
@@ -23,10 +21,8 @@ import { ClientLogoWall } from './client-logo-wall'
  */
 export function ClientLogosSection() {
   return (
-    // Bottom matches every homepage section (48 / 64 / 80px). The top is the
-    // homepage's edge gap under the hero's bottom line: 72 / 96 / 120px.
-    <AnimatedSection className='pt-18 pb-12 md:pt-24 md:pb-16 lg:pt-grid-5 lg:pb-20'>
-      <div className='flex flex-col gap-9'>
+    <Section>
+      <div className='flex flex-col gap-label'>
         <Reveal index={0} className='flex'>
           <span className='bp-label font-mono'>Trusted by</span>
         </Reveal>
@@ -35,6 +31,6 @@ export function ClientLogosSection() {
           <ClientLogoWall />
         </Reveal>
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

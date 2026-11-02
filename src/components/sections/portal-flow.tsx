@@ -209,7 +209,7 @@ function PipelineStage({
 function StageNarration({ scene }: { scene: Scene }) {
   return (
     <div className='flex flex-col items-center gap-3 text-center'>
-      <span className='font-headline text-xl font-bold tracking-tight text-balance text-accent uppercase md:text-2xl'>
+      <span className='type-card-title text-balance text-accent uppercase'>
         {scene.status}
       </span>
       <p className='max-w-2xl text-base text-balance text-text-muted'>
@@ -275,12 +275,12 @@ export function PortalFlow() {
   }
 
   return (
-    <section className='mx-auto w-full max-w-content px-6 pb-20 lg:px-12'>
+    <section className='mx-auto w-full max-w-content px-6 lg:px-12'>
       {reduced ? (
         mobile ? (
           // Reduced motion on mobile: a legible static card per stage — the crop
           // framed on that stage (fully lit, no pan) above its write-up.
-          <div className='flex flex-col gap-10'>
+          <div className='flex flex-col gap-stack'>
             {SCENES.map((scene, i) => (
               <div key={scene.key} className='flex flex-col gap-6'>
                 <PipelineStage active={null} mobile focus={i} />
@@ -290,9 +290,9 @@ export function PortalFlow() {
           </div>
         ) : (
           // Reduced motion: the fully-lit pipeline with every stage written out.
-          <div className='flex flex-col gap-10'>
+          <div className='flex flex-col gap-stack'>
             <PipelineStage active={null} />
-            <div className='flex flex-col gap-8'>
+            <div className='flex flex-col gap-grid-1'>
               {SCENES.map(scene => (
                 <StageNarration key={scene.key} scene={scene} />
               ))}
@@ -308,7 +308,7 @@ export function PortalFlow() {
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
           onTouchCancel={onTouchEnd}
-          className='flex flex-col gap-8'
+          className='flex flex-col gap-grid-1'
         >
           {/* Reserve height (and centre within it) so the taller/shorter captions
               per stage never nudge the rail and graphic below them. */}

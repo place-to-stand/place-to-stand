@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ChevronDown } from 'lucide-react'
 import { usePostHog } from 'posthog-js/react'
 
-import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { PageHeader, Section } from '@/src/components/layout/section'
 import { Button } from '@/src/components/ui/button'
 import { Checkbox } from '@/src/components/ui/checkbox'
 import { Input } from '@/src/components/ui/input'
@@ -152,20 +152,12 @@ export function ContactSection() {
   })
 
   return (
-    <AnimatedSection
-      priority
-      id='contact'
-      className='flex flex-col gap-12 md:gap-20'
-    >
-      <div className='dots-hero flex flex-col gap-4'>
-        <span className='bp-label font-mono'>Contact</span>
-        <h1 className='max-w-4xl font-headline text-4xl leading-[.9]! font-bold text-balance text-text md:text-6xl'>
-          Let&apos;s talk
-        </h1>
-        <p className='max-w-2xl text-base text-balance text-text-muted md:text-lg'>
-          Send a message and we&apos;ll get back to you within one business day.
-        </p>
-      </div>
+    <Section priority id='contact' className='flex flex-col gap-header'>
+      <PageHeader
+        label='Contact'
+        title="Let's talk"
+        intro="Send a message and we'll get back to you within one business day."
+      />
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />
       </Suspense>
@@ -242,7 +234,7 @@ export function ContactSection() {
                 id='subject'
                 {...form.register('subject')}
                 aria-invalid={!!form.formState.errors.subject}
-                className='flex h-12 w-full appearance-none bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+                className='flex h-12 w-full appearance-none bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent-subtle focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
               >
                 <option value='' disabled>
                   Choose a subject
@@ -322,9 +314,7 @@ export function ContactSection() {
 
         {isSuccess ? (
           <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
-            <h3 className='text-2xl font-semibold text-text uppercase'>
-              Thank you!
-            </h3>
+            <h3 className='type-card-title uppercase'>Thank you!</h3>
             <p className='max-w-md text-base text-balance text-text-muted'>
               Your message has been sent. We&apos;ll reach out within one
               business day.
@@ -343,6 +333,6 @@ export function ContactSection() {
           </div>
         ) : null}
       </div>
-    </AnimatedSection>
+    </Section>
   )
 }

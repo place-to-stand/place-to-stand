@@ -201,7 +201,7 @@ export function AuditWizard({
         'flex items-center justify-between',
         isPhone
           ? 'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 px-6 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
-          : 'mt-6'
+          : 'mt-grid-1'
       )}
     >
       {/* No side padding, so the arrow lines up with the content edge
@@ -272,7 +272,7 @@ export function AuditWizard({
         </div>
 
         {showError && (
-          <p className='mt-6 border border-accent/30 bg-accent-muted px-4 py-2 text-base text-text'>
+          <p className='mt-grid-1 border border-accent-subtle bg-accent-muted px-4 py-2 text-base text-text'>
             Pick an answer to continue.
           </p>
         )}

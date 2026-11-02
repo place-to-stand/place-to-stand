@@ -197,7 +197,10 @@ const RIGHT_WIN: Rect = { x: 176, y: 30, w: 92, h: 104 }
 // Sidebar: a wordmark, an accent "active" pill, then hollow nav rows (the two
 // wider gaps hint the product's grouped sections).
 const SIDEBAR_DIV = 201
-const NAV_ACTIVE: Rect = { x: 178, y: 55, w: 18, h: 6 }
+// The active pill wraps the same square and line as a nav row, with even
+// padding: 2 left and right (past the line's round cap), 1.5 top and bottom,
+// clear of the divider.
+const NAV_ACTIVE: Rect = { x: 178, y: 55, w: 20.375, h: 6 }
 const NAV_ROWS = [64, 71, 78, 87, 94]
 
 // Main column: header, one full-width graph widget, two half-width widgets.
@@ -479,7 +482,7 @@ const UNIFIED_DB: Db = { cx: 222, top: 152, w: 26, h: 20, accent: true }
 export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
-      viewBox='0 0 274 190'
+      viewBox='0 0 274 183.3'
       drawDelayMs={800}
       className={`hero-compare ${className ?? ''}`}
     >
@@ -590,7 +593,15 @@ export function HeroGraphic({ className }: { className?: string }) {
           className='fill-accent'
         />
         <rect x='180' y='56.5' width='3' height='3' className='fill-bg' />
-        <rect x='185' y='57.4' width='8' height='1.6' className='fill-bg' />
+        <line
+          x1='185'
+          y1='58.1'
+          x2='196'
+          y2='58.1'
+          className='stroke-bg'
+          strokeWidth='0.75'
+          strokeLinecap='round'
+        />
         {NAV_ROWS.map((y, i) => (
           <g key={`nav${i}`}>
             <rect
@@ -660,29 +671,38 @@ export function HeroGraphic({ className }: { className?: string }) {
           strokeWidth='1.1'
           strokeLinecap='round'
         />
-        {GRAPH_BARS.map((b, i) =>
-          i === GRAPH_BARS.length - 1 ? (
-            <rect
+        {/* Each bar grows up from the baseline once the app has slid in,
+            left to right; the accent bar lands last, then starts to breathe. */}
+        {GRAPH_BARS.map((b, i) => {
+          const last = i === GRAPH_BARS.length - 1
+          return (
+            <g
               key={`gb${i}`}
-              x={b.x}
-              y={b.y}
-              width={b.w}
-              height={b.h}
-              className='cmp-live fill-accent'
-              style={{ ['--cmp-live-delay']: '2080ms' } as CSSProperties}
-            />
-          ) : (
-            <rect
-              key={`gb${i}`}
-              x={b.x}
-              y={b.y}
-              width={b.w}
-              height={b.h}
-              className='fill-bg stroke-line'
-              strokeWidth='0.55'
-            />
+              className={last ? 'cmp-bar cmp-bar-last' : 'cmp-bar'}
+              style={{ ['--bar-delay']: `${1900 + i * 80}ms` } as CSSProperties}
+            >
+              {last ? (
+                <rect
+                  x={b.x}
+                  y={b.y}
+                  width={b.w}
+                  height={b.h}
+                  className='cmp-live fill-accent'
+                  style={{ ['--cmp-live-delay']: '3200ms' } as CSSProperties}
+                />
+              ) : (
+                <rect
+                  x={b.x}
+                  y={b.y}
+                  width={b.w}
+                  height={b.h}
+                  className='fill-bg stroke-line'
+                  strokeWidth='0.55'
+                />
+              )}
+            </g>
           )
-        )}
+        })}
         <line
           x1='209'
           y1='93'

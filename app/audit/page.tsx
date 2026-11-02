@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { Section } from '@/src/components/layout/section'
 import { AuditApp } from '@/src/components/audit/audit-app'
 
 export const metadata: Metadata = pageMetadata({
@@ -12,14 +12,12 @@ export const metadata: Metadata = pageMetadata({
 
 export default function AuditPage() {
   return (
-    <main className='flex-1 pt-grid-4 pb-grid-3 md:pb-grid-4'>
-      {/* Phones drop the section's own padding: the page top already clears
-          the header, and every extra pixel there pushes answers off screen. */}
-      <AnimatedSection priority className='py-0! sm:pt-20! sm:pb-0!'>
+    <main className='flex-1 pt-page-start pb-band'>
+      <Section priority>
         <div className='mx-auto w-full max-w-content'>
           <AuditApp />
         </div>
-      </AnimatedSection>
+      </Section>
     </main>
   )
 }

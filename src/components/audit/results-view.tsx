@@ -113,7 +113,7 @@ export function ResultsView({
   return (
     <div className='w-full sm:py-grid-2'>
       {/* Dashboard header */}
-      <div className='mb-4 flex items-center justify-between'>
+      <div className='mb-grid-half flex items-center justify-between'>
         <span className='bp-label font-mono'>Audit Results</span>
         <Button type='button' variant='ghost' size='sm' onClick={onRestart}>
           <RotateCcw className='mr-2 h-4 w-4' />
@@ -129,7 +129,7 @@ export function ResultsView({
               location: 'results-strip',
             })
           }
-          className='mb-grid-half flex items-center justify-between gap-4 border border-accent/40 bg-accent-muted px-4 py-3 text-base text-text transition-colors hover:border-accent'
+          className='mb-grid-half flex items-center justify-between gap-4 border border-accent-subtle bg-accent-muted px-4 py-3 text-base text-text transition-colors hover:border-accent'
         >
           <span className='inline-flex items-center gap-2'>
             <Mail aria-hidden className='h-4 w-4 shrink-0 text-accent' />
@@ -152,7 +152,7 @@ export function ResultsView({
           </span>
         </div>
 
-        <ol className='relative mt-6 flex items-start justify-between'>
+        <ol className='relative mt-grid-1 flex items-start justify-between'>
           {/* connector track + progress fill */}
           <div
             className='absolute top-[11px] right-0 left-0 h-px bg-border'
@@ -200,19 +200,19 @@ export function ResultsView({
       {/* Main grid: phase detail + score chart */}
       <div className='mt-grid-1 grid gap-grid-1 lg:grid-cols-3'>
         {/* Phase detail */}
-        <section className='relative bg-bg-panel p-6 sm:p-8 lg:col-span-2'>
+        <section className='relative bg-bg-panel p-card lg:col-span-2'>
           <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Your phase
           </span>
-          <h1 className='mt-4 font-headline text-3xl leading-[.9]! font-bold text-text'>
-            {phase.name}
-          </h1>
+          <h1 className='mt-grid-half type-section-title'>{phase.name}</h1>
           <p className='mt-2 font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>
             {phase.tagline}
           </p>
-          <p className='mt-4 text-base text-text-muted'>{phase.description}</p>
+          <p className='mt-intro text-base text-text-muted'>
+            {phase.description}
+          </p>
 
-          <div className='mt-6 grid gap-6 sm:grid-cols-2'>
+          <div className='mt-grid-1 grid gap-grid-1 sm:grid-cols-2'>
             <div>
               <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Signals
@@ -243,11 +243,11 @@ export function ResultsView({
         </section>
 
         {/* Phase score chart */}
-        <section className='relative bg-bg-panel p-5'>
+        <section className='relative bg-bg-panel p-card'>
           <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Audit score
           </h2>
-          <div className='mt-4 space-y-2.5'>
+          <div className='mt-grid-half space-y-2.5'>
             {PHASE_ORDER.map((id: PhaseId) => {
               const score = phaseScores[id]
               const pct = Math.round((score / maxScore) * 100)
@@ -289,7 +289,7 @@ export function ResultsView({
           <div className='mb-grid-1 flex items-end justify-between'>
             <div className='flex flex-col gap-2.25 md:gap-3'>
               <span className='bp-label font-mono'>The Blueprint</span>
-              <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase sm:text-3xl'>
+              <h2 className='type-card-title uppercase'>
                 Where we&apos;d start
               </h2>
             </div>
@@ -303,7 +303,7 @@ export function ResultsView({
               return (
                 <article
                   key={rec.service.id}
-                  className='relative flex flex-col bg-bg-panel p-5 transition-colors hover:bg-bg-elevated'
+                  className='relative flex flex-col bg-bg-panel p-card transition-colors hover:bg-bg-elevated'
                 >
                   <div className='flex items-center gap-3'>
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
@@ -313,7 +313,7 @@ export function ResultsView({
                       #{index + 1}
                     </span>
                   </div>
-                  <h3 className='mt-3 font-headline text-base font-semibold tracking-tight text-text uppercase'>
+                  <h3 className='mt-3 type-card-title uppercase'>
                     {rec.service.name}
                   </h3>
                   <p className='mt-1 text-base font-medium text-text-muted'>
@@ -342,7 +342,7 @@ export function ResultsView({
       ) : (
         <section
           id={CAPTURE_ANCHOR}
-          className='relative mt-grid-1 scroll-mt-grid-4 border border-accent/40 bg-bg-panel p-6 sm:p-8'
+          className='relative mt-grid-1 scroll-mt-grid-4 border border-accent-subtle bg-bg-panel p-card'
         >
           {/* min-w-0 on both columns: a grid item's min width is its
               content's, so an unwrappable button would push the card past
@@ -352,7 +352,7 @@ export function ResultsView({
               <p className='font-mono text-sm tracking-[0.15em] text-accent uppercase'>
                 Your full blueprint
               </p>
-              <h2 className='mt-2 font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
+              <h2 className='mt-2 type-card-title uppercase'>
                 {lockedCount > 0
                   ? `Unlock all ${recommendations.length} opportunities`
                   : 'Keep a copy of your blueprint'}
@@ -402,7 +402,7 @@ function LockedRecommendation({ rank }: { rank: number }) {
           rank,
         })
       }
-      className='group relative flex items-center gap-4 border border-dashed border-border bg-bg-panel p-4 transition-colors hover:border-accent/60'
+      className='group relative flex items-center gap-4 border border-dashed border-border bg-bg-panel p-4 transition-colors hover:border-accent'
     >
       <span className='sr-only'>
         Opportunity {rank} is included in your emailed blueprint.
@@ -449,16 +449,14 @@ function CapturedPanel({
   const [detailsSent, setDetailsSent] = useState(false)
 
   return (
-    <section className='relative mt-grid-1 bg-bg-panel p-6 sm:p-8'>
+    <section className='relative mt-grid-1 bg-bg-panel p-card'>
       <div className='grid gap-grid-2 md:grid-cols-2'>
         <div className='flex min-w-0 flex-col items-start gap-3'>
           <p className='inline-flex items-center gap-2 font-mono text-sm tracking-[0.15em] text-accent uppercase'>
             <CheckCircle2 aria-hidden className='h-4 w-4' />
             Blueprint sent
           </p>
-          <h2 className='font-headline text-2xl font-semibold tracking-tight text-text uppercase'>
-            Check your inbox
-          </h2>
+          <h2 className='type-card-title uppercase'>Check your inbox</h2>
           <p className='text-base text-text-muted'>
             Your blueprint is on its way to{' '}
             <span className='font-medium break-all text-text'>
@@ -476,7 +474,7 @@ function CapturedPanel({
         <div className='min-w-0 border-t border-border pt-grid-1 md:border-t-0 md:border-l md:pt-0 md:pl-grid-2'>
           {detailsSent ? (
             <div className='flex h-full flex-col justify-center gap-2'>
-              <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
+              <h3 className='type-card-title uppercase'>
                 Thanks, the team has it
               </h3>
               <p className='text-base text-text-muted'>
@@ -486,7 +484,7 @@ function CapturedPanel({
             </div>
           ) : (
             <>
-              <h3 className='font-headline text-lg font-semibold tracking-tight text-text uppercase'>
+              <h3 className='type-card-title uppercase'>
                 Want us to take a look?
               </h3>
               {/* The portal emails the team a follow-up when a captured audit

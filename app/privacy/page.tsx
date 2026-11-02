@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { AnimatedSection } from '@/src/components/layout/animated-section'
+import { Section } from '@/src/components/layout/section'
 import {
   LegalHeader,
   LegalList,
@@ -19,9 +19,9 @@ export const metadata: Metadata = pageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <main className='flex-1 pb-grid-4'>
-      <AnimatedSection priority>
-        <div className='flex flex-col gap-grid-2'>
+    <main className='flex-1 pt-page-start pb-section'>
+      <Section priority>
+        <div className='flex flex-col gap-header'>
           <LegalHeader
             title='Privacy Policy'
             updated={UPDATED}
@@ -335,7 +335,7 @@ export default function PrivacyPage() {
             </LegalSection>
           </div>
         </div>
-      </AnimatedSection>
+      </Section>
     </main>
   )
 }
