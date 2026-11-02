@@ -29,44 +29,36 @@
       "text": "In closing, I want to leave you with this idea: context loss is fundamental. Everything is out of context in the physical and digital world. Whether you are orchestrating agents to run your business or digesting the latest viral AI claims, the way you manage your own context is at the core of it. My hope is that by using a framework or mindset like the one I've talked about in this four-part series, you will be better equipped to get the most out of your agents and tools, while also navigating the noise sphere of hype with more confidence. Continue to learn fundamental concepts, and use AI to level up your thinking, not offload it. Our collective human knowledge is ultimately the only safeguard we have."
     },
     {
-      "type": "paragraph",
+      "type": "heading",
       "text": "Sources"
     },
     {
       "type": "paragraph",
-      "text": "[1] Jacob Coxon, original X post, Sept 9, 2026. [https://x.com/hilbertspaess/status/2097476196791709843](https://x.com/hilbertspaess/status/2097476196791709843) · Time, Sept 9, 2026. [https://time.com/article/2026/09/09/ai-anthropic-openai-jacob-coxon/](https://time.com/article/2026/09/09/ai-anthropic-openai-jacob-coxon/) · Axios, Sept 9, 2026. [https://www.axios.com/2026/09/09/anthropic-researcher-ai-warning-interview](https://www.axios.com/2026/09/09/anthropic-researcher-ai-warning-interview)"
+      "text": "[1]: Jacob Coxon, original X post, Sept 9, 2026. [https://x.com/hilbertspaess/status/2097476196791709843](https://x.com/hilbertspaess/status/2097476196791709843) · Time, Sept 9, 2026. [https://time.com/article/2026/09/09/ai-anthropic-openai-jacob-coxon/](https://time.com/article/2026/09/09/ai-anthropic-openai-jacob-coxon/) · Axios, Sept 9, 2026. [https://www.axios.com/2026/09/09/anthropic-researcher-ai-warning-interview](https://www.axios.com/2026/09/09/anthropic-researcher-ai-warning-interview)"
     },
     {
       "type": "paragraph",
-      "text": "[2] Everything is Out of Context, Pt. 1. [https://kriscrawford.info/blog/everything-is-out-of-context-pt-1](https://kriscrawford.info/blog/everything-is-out-of-context-pt-1)"
+      "text": "[2]: Everything is Out of Context, Pt. 1. [https://placetostandagency.com/blog/everything-is-out-of-context-pt-1](https://placetostandagency.com/blog/everything-is-out-of-context-pt-1)"
     },
     {
       "type": "paragraph",
-      "text": "[3] Everything is Out of Context, Pt. 2. [https://kriscrawford.info/blog/everything-is-out-of-context-pt-2](https://kriscrawford.info/blog/everything-is-out-of-context-pt-2)"
+      "text": "[3]: Everything is Out of Context, Pt. 2. [https://placetostandagency.com/blog/everything-is-out-of-context-pt-2](https://placetostandagency.com/blog/everything-is-out-of-context-pt-2)"
     },
     {
       "type": "paragraph",
-      "text": "[4] Everything is Out of Context, Pt. 3. [https://kriscrawford.info/blog/everything-is-out-of-context-pt-3](https://kriscrawford.info/blog/everything-is-out-of-context-pt-3)"
+      "text": "[4]: Everything is Out of Context, Pt. 3. [https://placetostandagency.com/blog/everything-is-out-of-context-pt-3](https://placetostandagency.com/blog/everything-is-out-of-context-pt-3)"
     },
     {
       "type": "paragraph",
-      "text": "[5] Chris Fields & Michael Levin, \"Life, its origin, and its distribution: a perspective from the Conway-Kochen Theorem and the Free Energy Principle.\" [https://www.tandfonline.com/doi/full/10.1080/19420889.2025.2466017#d1e1930](https://www.tandfonline.com/doi/full/10.1080/19420889.2025.2466017#d1e1930)"
+      "text": "[5]: Chris Fields & Michael Levin, \"Life, its origin, and its distribution: a perspective from the Conway-Kochen Theorem and the Free Energy Principle.\" [https://www.tandfonline.com/doi/full/10.1080/19420889.2025.2466017#d1e1930](https://www.tandfonline.com/doi/full/10.1080/19420889.2025.2466017#d1e1930)"
     },
     {
       "type": "paragraph",
-      "text": "[6] Michael Levin, \"Forms of life, forms of mind.\""
+      "text": "[6]: Michael Levin, \"Forms of life, forms of mind.\" [https://thoughtforms.life/](https://thoughtforms.life/)"
     },
     {
       "type": "paragraph",
-      "text": "[https://thoughtforms.life/](https://thoughtforms.life/)"
-    },
-    {
-      "type": "paragraph",
-      "text": "[7] Place To Stand Agency, LLC"
-    },
-    {
-      "type": "paragraph",
-      "text": "[https://placetostandagency.com](https://placetostandagency.com)"
+      "text": "[7]: Place To Stand Agency, LLC [https://placetostandagency.com](https://placetostandagency.com)"
     }
   ]
 }
