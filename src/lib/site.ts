@@ -29,6 +29,7 @@ export const SAME_AS: string[] = [
   'https://www.linkedin.com/company/placetostandagency/',
   'https://www.google.com/search?kgmid=/g/11zd70_knp',
   'https://github.com/place-to-stand',
+  'https://clutch.co/profile/place-stand-agency',
 ]
 
 /** Build an absolute URL from a site path. */
