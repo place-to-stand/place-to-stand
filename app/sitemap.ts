@@ -1,9 +1,12 @@
 import type { MetadataRoute } from 'next'
+import { getAllPosts } from '@/src/lib/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://placetostandagency.com'
-  // No lastModified: a build timestamp marks every URL as changed on every
-  // deploy, which teaches crawlers to ignore the field entirely.
+  // Pages carry no lastModified: a build timestamp marks every URL as changed
+  // on every deploy, which teaches crawlers to ignore the field entirely.
+  // Blog posts use their publish date, which only changes with the post.
+  const posts = getAllPosts()
 
   return [
     {
@@ -57,6 +60,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/blog`,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    ...posts.map(post => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.date,
+      changeFrequency: 'yearly' as const,
+      priority: 0.6,
+    })),
     {
       url: `${baseUrl}/privacy`,
       changeFrequency: 'yearly',
