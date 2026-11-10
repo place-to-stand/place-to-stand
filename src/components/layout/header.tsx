@@ -45,7 +45,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-200',
+        'fixed inset-x-0 top-0 z-(--z-overlay) transition-all duration-200',
         scrolled
           ? 'border-b border-border bg-bg/90 backdrop-blur-md'
           : 'border-b border-transparent bg-transparent'
@@ -114,10 +114,10 @@ export function Header() {
               </button>
             </Dialog.Trigger>
             <Dialog.Portal>
-              <Dialog.Overlay className='sheet-overlay fixed inset-0 z-50 bg-bg/70 backdrop-blur-sm lg:hidden' />
+              <Dialog.Overlay className='sheet-overlay fixed inset-0 z-(--z-overlay) bg-bg/70 backdrop-blur-sm lg:hidden' />
               <Dialog.Content
                 id='mobile-nav'
-                className='sheet-panel fixed inset-y-0 right-0 z-50 flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-grid-1 pt-grid-half pb-grid-1 focus:outline-none lg:hidden'
+                className='sheet-panel fixed inset-y-0 right-0 z-(--z-overlay) flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-grid-1 pt-grid-half pb-grid-1 focus:outline-none lg:hidden'
               >
                 <div className='flex items-center justify-between'>
                   <Dialog.Title className='bp-label font-mono'>

@@ -176,7 +176,7 @@ export function ResultsView({
               >
                 <span
                   className={cn(
-                    'grid h-6 w-6 place-items-center rounded-full border bg-bg font-mono text-xs',
+                    'grid h-6 w-6 place-items-center rounded-dot border bg-bg font-mono text-xs',
                     isActive
                       ? 'border-border-light bg-bg-elevated font-bold text-text'
                       : reached

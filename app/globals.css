@@ -9,6 +9,14 @@
      for what the eye should land on (and the logo's outer square). */
   --stroke-structure: 1px;
   --stroke-emphasis: 2px;
+  /* Corners are square everywhere; dot is the one round shape (avatars,
+     step dots, radio marks). */
+  --radius-dot: 9999px;
+  /* One shadow: the primary button's lift (tinted per use, e.g.
+     shadow-accent/10). Nothing else casts a shadow. */
+  --shadow-cta:
+    0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)),
+    0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
   /* Reading text line height, site-wide: every text size from sm to xl uses
      1.375, so paragraphs need no leading-* class of their own. */
   --text-sm--line-height: 1.375;
@@ -418,12 +426,12 @@ main {
 }
 .sheet-panel[data-state='open'] {
   animation:
-    sheet-in 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    sheet-in 220ms var(--ease-enter),
     overlay-in 220ms ease-out;
 }
 .sheet-panel[data-state='closed'] {
   animation:
-    sheet-out 180ms cubic-bezier(0.7, 0, 0.84, 0),
+    sheet-out 180ms var(--ease-exit),
     overlay-out 180ms ease-in;
 }
 .sheet-overlay[data-state='open'] {
@@ -475,7 +483,7 @@ main {
 }
 
 .pts-header-pop {
-  animation: pts-header-pop 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: pts-header-pop 260ms var(--ease-enter) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -542,7 +550,7 @@ main {
 /* Animate the BlueprintCorners (direct <span> children) of the framed headline.
    The frame draws in first (with the pitch label) so the headline wipes into it. */
 .hero-frame > span {
-  animation: hero-corner 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
+  animation: hero-corner 0.4s var(--ease-enter) 0s both;
 }
 
 /* --hero-delay is set inline per line (see hero-section.tsx) and drives both the
@@ -550,8 +558,7 @@ main {
    because the curtain is a pseudo-element and needs to inherit the same value. */
 .hero-line {
   position: relative;
-  animation: hero-line-settle 0.5s cubic-bezier(0.16, 1, 0.3, 1)
-    var(--hero-delay, 0s) both;
+  animation: hero-line-settle 0.5s var(--ease-enter) var(--hero-delay, 0s) both;
   /* The curtain covers the box; pad the bottom so glyph descenders (e.g. "y")
      stay covered, then cancel the padding with negative margin to keep leading tight. */
   padding-bottom: 0.2em;
@@ -564,13 +571,12 @@ main {
   inset: 0;
   background-color: var(--color-bg);
   transform-origin: right center;
-  animation: hero-curtain 0.5s cubic-bezier(0.16, 1, 0.3, 1)
-    var(--hero-delay, 0s) both;
+  animation: hero-curtain 0.5s var(--ease-enter) var(--hero-delay, 0s) both;
   pointer-events: none;
 }
 
 .hero-reveal {
-  animation: hero-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-rise 0.6s var(--ease-enter) both;
 }
 
 @keyframes hero-slide-left {
@@ -585,7 +591,7 @@ main {
 }
 
 .hero-slide-in {
-  animation: hero-slide-left 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-slide-left 1.3s var(--ease-enter) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -702,7 +708,7 @@ main {
 .bp-draw .bp-line {
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  transition: stroke-dashoffset 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: stroke-dashoffset 900ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms);
 }
 .bp-draw[data-visible='true'] .bp-line {
@@ -716,7 +722,7 @@ main {
   transform-origin: center;
   transition:
     opacity 400ms ease-out,
-    transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 460ms var(--ease-enter);
   transition-delay: calc(
     var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms
   );
@@ -847,7 +853,7 @@ main {
   transform: translateY(12px);
   transition:
     opacity 328ms ease,
-    transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 380ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
 }
 .hero-compare[data-visible='true'] .cmp-in {
@@ -861,7 +867,7 @@ main {
   transform: translateX(-14px);
   transition:
     opacity 252ms ease,
-    transform 328ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 328ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
 }
 .hero-compare[data-visible='true'] .cmp-arrow {
@@ -875,7 +881,7 @@ main {
   transform: translateX(52px);
   transition:
     opacity 328ms ease,
-    transform 456ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 456ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
 }
 .hero-compare[data-visible='true'] .cmp-slide {
@@ -909,7 +915,7 @@ main {
   transform-box: fill-box;
   transform-origin: 50% 100%;
   transform: scaleY(0);
-  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 520ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--bar-delay, 0ms));
 }
 .hero-compare .cmp-bar-last {
@@ -948,7 +954,7 @@ main {
 [data-hero-story] .hs-anim {
   transition:
     opacity 600ms ease,
-    transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 850ms var(--ease-enter);
 }
 
 @keyframes hs-breathe {
@@ -1195,11 +1201,11 @@ main {
 }
 
 .logo-swap-in {
-  animation: logo-scan-in 900ms cubic-bezier(0.65, 0, 0.35, 1) backwards;
+  animation: logo-scan-in 900ms var(--ease-in-out) backwards;
 }
 
 .logo-swap-line {
-  animation: logo-scan-line 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: logo-scan-line 900ms var(--ease-in-out) both;
 }
 
 @keyframes logo-scan-in {
@@ -1219,8 +1225,8 @@ main {
 .logo-hover {
   opacity: 0.8;
   transition:
-    transform 1400ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 1400ms var(--ease-enter),
+    opacity 1400ms var(--ease-enter);
 }
 
 @media (hover: hover) {
@@ -1304,13 +1310,43 @@ main {
   background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
 }
 
+/* Motion tokens. Durations by role: fast (links), base (hovers), enter (one
+   element arriving), slow (a drawing building), spin (the logo). Easings by
+   role: standard for hovers, enter for things arriving (fast start, long
+   settle), in-out for loops, exit for things leaving. Every animation and
+   transition on the site uses these; prefers-reduced-motion shows the end
+   state (see each block's reduced-motion rule). */
+:root {
+  --motion-fast: 180ms;
+  --motion-base: 250ms;
+  --motion-enter: 500ms;
+  --motion-slow: 900ms;
+  --motion-spin: 550ms;
+  --ease-standard: ease-out;
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+  /* Stacking: raised (corner marks over their box), sticky (the audit's
+     bottom bar), overlay (header, menu sheet), toast. */
+  --z-raised: 10;
+  --z-sticky: 40;
+  --z-overlay: 50;
+  --z-toast: 100;
+}
+
+/* Keyboard focus: one ring everywhere, the emphasis stroke in the accent. */
+@utility focus-ring {
+  outline: var(--stroke-emphasis) solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 /* Hover timing, shared by every hover on the site: buttons (primary fill,
    secondary outline) use --hover-dur; links use the shorter --link-dur. One
    easing for all. The logo spin has its own --spin-dur below. */
 :root {
-  --hover-dur: 250ms;
-  --link-dur: 180ms;
-  --hover-ease: ease-out;
+  --hover-dur: var(--motion-base);
+  --link-dur: var(--motion-fast);
+  --hover-ease: var(--ease-standard);
 }
 
 /* Links come in three roles, and every text link on the site is one of
@@ -1502,7 +1538,7 @@ main {
    +360deg against the outline's -180deg shows as a net clockwise half
    turn. */
 :root {
-  --spin-dur: 550ms;
+  --spin-dur: var(--motion-spin);
 }
 @keyframes logo-spin-outer {
   0% {

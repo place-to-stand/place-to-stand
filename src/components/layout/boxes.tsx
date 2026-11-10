@@ -59,7 +59,7 @@ export function LinkCard({
       href={href as Route}
       className={cn(
         CARD,
-        'group transition-colors hover:bg-bg-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+        'group transition-colors hover:bg-bg-elevated focus-visible:focus-ring',
         className
       )}
       {...props}

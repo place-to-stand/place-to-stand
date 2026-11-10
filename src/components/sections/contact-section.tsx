@@ -337,7 +337,7 @@ export function ContactSection() {
         </form>
 
         {isSuccess ? (
-          <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-grid-1 bg-bg-card/95 text-center shadow-inner'>
+          <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-grid-1 bg-bg-card/95 text-center'>
             <h3 className='type-card-title uppercase'>Thank you!</h3>
             <p className='max-w-md text-base text-balance text-text-muted'>
               Your message has been sent. We&apos;ll reach out within one

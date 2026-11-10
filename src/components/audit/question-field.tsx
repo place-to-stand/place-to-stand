@@ -64,7 +64,7 @@ export function QuestionField({
                 <span
                   className={cn(
                     'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border transition',
-                    question.type === 'multi' ? 'rounded-none' : 'rounded-full',
+                    question.type === 'multi' ? 'rounded-none' : 'rounded-dot',
                     selected
                       ? 'border-accent bg-accent text-bg'
                       : 'border-border-light bg-bg text-transparent'

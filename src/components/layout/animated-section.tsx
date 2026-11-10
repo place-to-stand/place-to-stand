@@ -143,7 +143,7 @@ export function AnimatedSection({
       data-animated-section
       style={{
         transitionProperty: 'opacity, transform',
-        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        transitionTimingFunction: 'var(--ease-enter)',
         transitionDuration: reduced || priority ? '0ms' : '2200ms',
       }}
       className={cn(
@@ -185,7 +185,7 @@ export function Reveal({
     <div
       style={{
         transitionProperty: 'opacity, transform',
-        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        transitionTimingFunction: 'var(--ease-enter)',
         transitionDuration: reduced ? '0ms' : '750ms',
         transitionDelay: reduced ? '0ms' : `${index * 320}ms`,
         ...style,

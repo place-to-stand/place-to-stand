@@ -201,7 +201,7 @@ export function AuditWizard({
         'flex items-center justify-between',
         isPhone
           ? // eslint-disable-next-line design/no-raw-spacing -- keeps the sticky bar clear of the phone home indicator (safe area)
-            'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 px-grid-1 pt-grid-half pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
+            'fixed inset-x-0 bottom-0 z-(--z-sticky) border-t border-border bg-bg/95 px-grid-1 pt-grid-half pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
           : 'mt-grid-1'
       )}
     >

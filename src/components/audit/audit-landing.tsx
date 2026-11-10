@@ -273,7 +273,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                   key={member.name}
                   className='flex items-center gap-grid-half'
                 >
-                  <div className='relative h-12 w-12 overflow-hidden rounded-full border border-border'>
+                  <div className='relative h-12 w-12 overflow-hidden rounded-dot border border-border'>
                     <Image
                       src={member.image}
                       alt={member.name}

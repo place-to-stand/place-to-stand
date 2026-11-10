@@ -122,7 +122,7 @@ async function Post({ params }: Pick<PageProps<'/blog/[slug]'>, 'params'>) {
                     alt=''
                     width={48}
                     height={48}
-                    className='size-12 rounded-full object-cover'
+                    className='size-12 rounded-dot object-cover'
                   />
                   <div className='flex flex-col'>
                     <span className='text-base font-semibold text-text'>

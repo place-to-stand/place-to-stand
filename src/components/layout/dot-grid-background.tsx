@@ -17,24 +17,24 @@ export function BlueprintCorners({
   return (
     <>
       <span
-        className={`pointer-events-none absolute -top-px -left-px z-10 border-t border-l ${colorClassName}`}
+        className={`pointer-events-none absolute -top-px -left-px z-(--z-raised) border-t border-l ${colorClassName}`}
         style={style}
         aria-hidden
       />
       <span
-        className={`pointer-events-none absolute -right-px -bottom-px z-10 border-r border-b ${colorClassName}`}
+        className={`pointer-events-none absolute -right-px -bottom-px z-(--z-raised) border-r border-b ${colorClassName}`}
         style={style}
         aria-hidden
       />
       {all && (
         <>
           <span
-            className={`pointer-events-none absolute -top-px -right-px z-10 border-t border-r ${colorClassName}`}
+            className={`pointer-events-none absolute -top-px -right-px z-(--z-raised) border-t border-r ${colorClassName}`}
             style={style}
             aria-hidden
           />
           <span
-            className={`pointer-events-none absolute -bottom-px -left-px z-10 border-b border-l ${colorClassName}`}
+            className={`pointer-events-none absolute -bottom-px -left-px z-(--z-raised) border-b border-l ${colorClassName}`}
             style={style}
             aria-hidden
           />
