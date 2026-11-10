@@ -48,7 +48,7 @@ export function LogoMark() {
     <span
       ref={ref}
       aria-hidden
-      className='logo-mark inline-flex h-6 w-6 items-center justify-center border border-accent-subtle'
+      className='logo-mark inline-flex h-6 w-6 items-center justify-center border-(length:--stroke-emphasis) border-accent-subtle'
     >
       <span className='logo-mark-inner h-2 w-2 bg-accent' />
     </span>

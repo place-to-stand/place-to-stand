@@ -164,9 +164,13 @@ All hovers read three settings in `app/globals.css`:
 
 Everything respects `prefers-reduced-motion`.
 
+## Drawings
+
+Line drawings use two stroke weights and nothing else: `--stroke-structure` (1.25px) for line-work and `--stroke-emphasis` (2.5px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` colour, lime only on the result.
+
 ## Logo
 
-`LogoLockup` (`src/components/layout/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
+`LogoLockup` (`src/components/layout/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2.5px), so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
 
 ## Checks
 
