@@ -966,28 +966,71 @@ export default function DesignPage() {
             id='voice'
             label='Guidelines'
             title='Voice'
-            when={'Not yet defined.'}
+            when='How the site sounds. Approved Nov 10. The banned phrases and British spellings fail npm run lint (scripts/voice.mjs).'
           >
-            <p className='max-w-2xl text-base text-text-muted'>
-              Not yet defined. What the site does today:
-            </p>
-            <ul className='flex flex-col gap-grid-half'>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Plain, specific, US spelling, no stock phrases.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Approved copy lives in the site copy audit doc; there is no
-                written voice guide yet.
-              </li>
-            </ul>
+            <Specimen names={['scripts/voice.mjs']} note='six rules'>
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>1. Say what we do.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Describe the work plainly. AI is a tool we use, not who we
+                    are. Never “small business” or “Next.js agency”.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>2. Short and active.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Short words, active verbs. Cut any word that can go.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>3. Concrete or nothing.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Name tools, times and numbers. Only claim what we can prove;
+                    client numbers only with the client’s OK.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>
+                    4. Sound like the engineers you’ll meet.
+                  </dt>
+                  <dd className='text-base text-text-muted'>
+                    “We” and “you”, no hype, no stock phrases.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>5. Our own words.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Never borrow phrasing from another site.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>6. House style.</dt>
+                  <dd className='text-base text-text-muted'>
+                    US spelling, sentence case for headings and buttons, no
+                    prices.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
           </DesignSection>
         </div>
       </Section>

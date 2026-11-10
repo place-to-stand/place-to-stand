@@ -266,7 +266,7 @@ Not templated yet: Process, About, Clients, Referral, the blog list, Field notes
 
 ## Guidelines
 
-These are not yet defined. Each lists what the site does today; the rules come once they are agreed.
+Voice is agreed. The others are not yet defined: each lists what the site does today, and the rules come once they are agreed.
 
 ### Imagery
 
@@ -291,8 +291,16 @@ automated contrast or focus-order checks.
 
 ### Voice
 
-Not yet defined. Today: plain, specific, US spelling, no stock phrases; approved copy lives in the site copy
-audit doc. There is no written voice guide.
+How the site sounds (approved Nov 10):
+
+1. **Say what we do.** Describe the work plainly. AI is a tool we use, not who we are. Never “small business” or “Next.js agency”.
+2. **Short and active.** Short words, active verbs. Cut any word that can go.
+3. **Concrete or nothing.** Name tools, times and numbers. Only claim what we can prove; client numbers only with the client’s OK.
+4. **Sound like the engineers you’ll meet.** “We” and “you”, no hype, no stock phrases.
+5. **Our own words.** Never borrow phrasing from another site.
+6. **House style.** US spelling, sentence case for headings and buttons, no prices.
+
+`npm run lint` fails on the banned phrases and British spellings (`scripts/voice.mjs`).
 
 ## Checks
 

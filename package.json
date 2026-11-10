@@ -7,7 +7,7 @@
     "build": "next build",
     "postbuild": "node scripts/indexnow.mjs",
     "start": "next start",
-    "lint": "eslint . && node --test eslint/tests/",
+    "lint": "eslint . && node --test eslint/tests/ && node scripts/voice.mjs",
     "perf": "node scripts/lighthouse.mjs",
     "perf:lcp": "node scripts/lcp.mjs",
     "test:visual": "node scripts/visual.mjs",
