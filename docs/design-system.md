@@ -298,4 +298,15 @@ audit doc. There is no written voice guide.
 
 `npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, no raw borders outside the boxes, every text link on a link role, pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`, and each component tier imports only from the tiers below. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
 
+Three more checks run against a production build (`npm run build && npm start`), together as
+`npm run test:design`, using the Chrome on the machine:
+
+- `npm run test:contrast`: WCAG AA for text on every background, dark and light bands, plus the focus ring.
+  Decorative lines are reported as advisory.
+- `npm run test:visual`: full-page screenshots of 15 pages at 390, 768, 1024 and 1440 against the baselines in
+  `tests/visual/baselines`, with reduced motion on so every animation sits at its end state (photos and video are
+  hidden; their frames stay). `npm run test:visual:update` accepts the current pages.
+- `npm run test:budget`: Home's FCP, LCP, CLS and JS, CSS, font and image weight on desktop and a throttled phone,
+  against the limits in `scripts/budget.json`.
+
 See every token and component live at `/design`. It is public so it can be shared with clients, but it is `noindex` and left out of the sitemap and `llms.txt`. It is deliberately not disallowed in `robots.txt`: crawlers have to fetch the page to see the noindex.
