@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { BookCallGroup } from '@/src/components/layout/cta'
@@ -38,12 +39,25 @@ export function HeroSection() {
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} colorClassName='border-accent' />
-            <h1 className='px-grid-half py-grid-half text-center type-hero md:pr-0 md:pl-grid-1 md:text-left'>
-              <span className='block'>Off-the-shelf software</span>
-              <span className='block'>is built for everyone.</span>
+            <h1 className='px-grid-half py-grid-half text-center font-headline text-[clamp(2.25rem,min(7vw,max(11svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pr-0 md:pl-grid-1 md:text-left'>
+              <span
+                className='hero-line block'
+                style={{ '--hero-delay': '0s' } as CSSProperties}
+              >
+                Off-the-shelf software
+              </span>
+              <span
+                className='hero-line block'
+                style={{ '--hero-delay': '0.12s' } as CSSProperties}
+              >
+                is built for everyone.
+              </span>
               {/* On phones "everyone." sits right above this line and its
                   "y" tail touched the "W"; a little room keeps them apart. */}
-              <span className='mt-[0.1em] block text-accent md:mt-0'>
+              <span
+                className='hero-line mt-[0.1em] block text-accent md:mt-0'
+                style={{ '--hero-delay': '0.24s' } as CSSProperties}
+              >
                 We build for you.
               </span>
             </h1>
@@ -61,15 +75,18 @@ export function HeroSection() {
               with the headline's 24px once its glyph spacing is counted.
               Stacked, neither is inset, the text centers and the button runs
               full width up to 448px. */}
-          <div className='flex flex-col gap-grid-2 lg:flex-row lg:items-center lg:gap-grid-3'>
+          <div className='flex flex-col gap-grid-2 md:flex-row md:items-center md:gap-grid-2 lg:gap-grid-3'>
             {/* Side by side, the text column stretches to the row's height and
                 splits the free space 1:3 above and below its content, so the
                 text sits a touch above center but never higher than the
                 drawing's top or lower than its bottom (the spacers shrink to
                 nothing when the text is the taller one). */}
-            <div className="flex flex-col max-lg:order-2 lg:flex-1 lg:self-stretch lg:pl-grid-1 lg:before:flex-[1] lg:before:content-[''] lg:after:flex-[3] lg:after:content-['']">
+            <div className="flex flex-col max-md:order-2 md:flex-1 md:self-stretch md:before:flex-[1] md:before:content-[''] md:after:flex-[3] md:after:content-[''] lg:pl-grid-1">
               <div className='flex flex-col gap-grid-1 text-center md:text-left lg:gap-grid-2'>
-                <div className='flex gap-grid-half self-center md:self-start'>
+                <div
+                  className='hero-reveal flex gap-grid-half self-center md:self-start'
+                  style={{ animationDelay: '0.85s' }}
+                >
                   <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-xl lg:gap-grid-1'>
                     {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
                     <p className='text-base text-balance text-text lg:text-xl'>
@@ -84,7 +101,10 @@ export function HeroSection() {
                     </p>
                   </div>
                 </div>
-                <div className='mx-auto flex w-full max-w-md shrink-0 flex-col items-stretch gap-grid-half md:mx-0 md:w-auto md:max-w-none md:items-start'>
+                <div
+                  className='hero-reveal mx-auto flex w-full max-w-md shrink-0 flex-col items-stretch gap-grid-half md:mx-0 md:w-auto md:max-w-none md:items-start'
+                  style={{ animationDelay: '1s' }}
+                >
                   <div className='flex flex-col gap-grid-1 sm:flex-row sm:items-start sm:gap-grid-half'>
                     <BookCallGroup
                       location='hero'
@@ -118,15 +138,14 @@ export function HeroSection() {
                 window height (minus the nav, the headline, which shrinks on
                 short screens, and the hero's gaps), so short screens still
                 show the whole drawing, database included. */}
-            <HeroDrawingSlot className='max-lg:order-1 lg:flex lg:flex-1 lg:justify-center lg:pr-grid-half'>
+            <HeroDrawingSlot className='max-md:order-1 md:flex md:flex-1 md:justify-center md:pr-grid-half'>
               {/* The drawing's viewBox ends at the database, so its box is its
                   ink. Side by side, the row centers the drawing and the text
-                  column on each other at every width. On laptops it is a
-                  feature, not decoration: up to 576px wide (24 grid cells),
-                  set by the window height (72% of the space under the nav)
-                  and never under 384px, so the hero can run a little past
-                  the fold on short screens rather than shrink the drawing. */}
-              <div className='mx-auto w-full max-w-md md:max-w-xl lg:mx-0 lg:max-w-[clamp(24rem,calc((100svh-var(--nav-height))*0.72),36rem)]'>
+                  column on each other at every width. On laptops the
+                  max-width sizes the drawing so the hero fills the screen: the
+                  space left after the nav, headline and gaps, times the
+                  drawing's width-to-height ratio (274 / 183.3). */}
+              <div className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4948),100%)]'>
                 <HeroGraphic className='w-full' />
               </div>
             </HeroDrawingSlot>
