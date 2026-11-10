@@ -123,7 +123,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </div>
           <Toaster />
           <ScrollDepthTracker />
-          <Analytics />
+          {/* The analytics script is served only by Vercel's hosting
+              (/_vercel/insights); anywhere else it 404s in the console. */}
+          {process.env.VERCEL ? <Analytics /> : null}
         </PostHogProvider>
       </body>
     </html>
