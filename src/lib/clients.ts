@@ -186,7 +186,7 @@ export const clients: Client[] = [
     logo: '/logos/up-the-wall.svg',
     logoScale: 0.8,
     description:
-      'Made-to-order print fulfillment for Shopify sellers: they design it, Up the Wall prints, packs and ships it.',
+      'Made-to-order print fulfillment for Shopify sellers. Sellers design it; Up the Wall prints, packs and ships it.',
   },
   {
     title: 'The Rounds',

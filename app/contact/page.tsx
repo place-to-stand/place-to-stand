@@ -54,19 +54,19 @@ const OPTIONS = [
     href: '#call',
     title: 'Book a call',
     body: "Talk it through with the people who'd build it.",
-    action: 'Pick a time',
+    action: 'Book a call',
   },
   {
     href: '#audit',
     title: 'Take the audit',
     body: 'Not ready to talk? Answer a few questions and see where software would help most.',
-    action: 'Start the audit',
+    action: 'Take the audit',
   },
   {
     href: '#message',
     title: 'Send a message',
     body: 'Prefer to write? Use the form, or email us.',
-    action: 'Write to us',
+    action: 'Send a message',
   },
 ] as const
 
