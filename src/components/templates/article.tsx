@@ -8,6 +8,7 @@ import { BlogBody } from '@/src/components/patterns/rich-text'
 import { SubscribeForm } from '@/src/components/sections/subscribe-form'
 import type { TeamMember } from '@/src/lib/team'
 import { formatPostDate, readingMinutes, type BlogPost } from '@/src/lib/blog'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 
 /**
  * An article (blog post). The shell is shared by every post so it can be
@@ -66,13 +67,15 @@ export function ArticleBody({
             <aside className='flex flex-col gap-grid-half lg:sticky lg:top-grid-4 lg:col-span-3 lg:self-start'>
               {author && (
                 <div className='flex items-center gap-grid-half'>
-                  <Image
-                    src={author.image}
-                    alt=''
-                    width={48}
-                    height={48}
-                    className='size-12 rounded-dot object-cover'
-                  />
+                  <MediaFrame shape='person' className='size-12 rounded-dot'>
+                    <Image
+                      src={author.image}
+                      alt={author.name}
+                      fill
+                      sizes='48px'
+                      className='object-cover'
+                    />
+                  </MediaFrame>
                   <div className='flex flex-col'>
                     <span className='text-base font-semibold text-text'>
                       {author.name}

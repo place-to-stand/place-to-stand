@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { cn } from '@/src/lib/utils'
 import { ALT_ROW } from '@/src/components/patterns/alt-row'
 import { clients, getClientHostname, type Client } from '@/src/lib/clients'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 
 const ROW_LINK_CLASS =
   'link-action mt-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
@@ -29,13 +30,13 @@ export function ClientsSection({ limit }: { limit?: number } = {}) {
         const flipped = index % 2 === 1
         const host = getClientHostname(client.href)
         const imageClassName = cn(
-          'relative block aspect-[16/10] overflow-hidden bg-bg-card lg:col-span-7 lg:row-start-1',
+          'block lg:col-span-7 lg:row-start-1',
           flipped ? 'lg:col-start-6' : 'lg:col-start-1'
         )
         const image = (
           <Image
             src={client.image}
-            alt=''
+            alt={client.imageAlt ?? ''}
             fill
             loading={index === 0 ? 'eager' : undefined}
             sizes='(min-width: 1440px) 764px, (min-width: 1024px) 54vw, 100vw'
@@ -48,16 +49,20 @@ export function ClientsSection({ limit }: { limit?: number } = {}) {
             className={cn('group lg:items-end', ALT_ROW)}
           >
             {client.caseStudy ? (
-              <Link
+              <MediaFrame
+                as={Link}
+                shape='work'
                 href={client.caseStudy as Route}
                 tabIndex={-1}
                 aria-hidden
                 className={imageClassName}
               >
                 {image}
-              </Link>
+              </MediaFrame>
             ) : (
-              <a
+              <MediaFrame
+                as='a'
+                shape='work'
                 href={client.href}
                 target='_blank'
                 rel='noreferrer noopener'
@@ -66,7 +71,7 @@ export function ClientsSection({ limit }: { limit?: number } = {}) {
                 className={imageClassName}
               >
                 {image}
-              </a>
+              </MediaFrame>
             )}
             <div
               className={cn(

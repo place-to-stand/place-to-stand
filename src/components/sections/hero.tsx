@@ -18,7 +18,7 @@ type PageHeroProps = ComponentProps<typeof PageHeader> & {
  * Tone: dark.
  */
 export function Hero(
-  props: ({ variant: 'home' } | ({ variant: 'page' } & PageHeroProps))
+  props: { variant: 'home' } | ({ variant: 'page' } & PageHeroProps)
 ) {
   if (props.variant === 'home') return <HeroSection />
   // eslint-disable-next-line @typescript-eslint/no-unused-vars -- variant is consumed above

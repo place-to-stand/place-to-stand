@@ -8,6 +8,7 @@ import { JsonLd } from '@/src/components/seo/json-ld'
 import { heatonistCaseStudy as cs } from '@/src/lib/case-study-heatonist'
 import { caseStudyJsonLd } from '@/src/lib/structured-data'
 import { Hero } from '@/src/components/sections/hero'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 
 /** An edge-to-edge photo between sections. */
 function FullBleedImage({
@@ -20,7 +21,7 @@ function FullBleedImage({
   priority?: boolean
 }) {
   return (
-    <div className='relative aspect-[4/3] w-full overflow-hidden bg-bg-card md:aspect-[21/9]'>
+    <MediaFrame shape='work' wideFrom='md' className='w-full'>
       <Image
         src={src}
         alt={alt}
@@ -29,7 +30,7 @@ function FullBleedImage({
         sizes='100vw'
         className='object-cover'
       />
-    </div>
+    </MediaFrame>
   )
 }
 
@@ -103,7 +104,7 @@ function StorefrontShot({ src, host }: { src: string; host: string }) {
       aria-label={`Visit ${host} (opens in a new tab)`}
       className='group block p-0 no-underline transition-colors hover:bg-bg-elevated'
     >
-      <div className='relative aspect-[16/9] w-full overflow-hidden'>
+      <MediaFrame shape='work' className='w-full bg-transparent'>
         <Image
           src={src}
           alt={`The ${host} home page`}
@@ -113,7 +114,7 @@ function StorefrontShot({ src, host }: { src: string; host: string }) {
           quality={90}
           className='object-cover object-top'
         />
-      </div>
+      </MediaFrame>
       <RuledRow as='div' className='p-grid-1 type-fine'>
         {host} ↗
       </RuledRow>

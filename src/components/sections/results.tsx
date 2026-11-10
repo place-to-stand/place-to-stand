@@ -7,6 +7,7 @@ import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { StatTile } from '@/src/components/boxes'
 import { clients, type Client } from '@/src/lib/clients'
 import { heatonistCaseStudy } from '@/src/lib/case-study-heatonist'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 
 const ROW_LINK_CLASS =
   'link-action mt-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
@@ -81,21 +82,23 @@ function FeaturedCaseStudy() {
       <div className='group grid gap-grid-1 md:grid-cols-2'>
         {brands.map((brand, index) => (
           <div key={brand.title} className='flex flex-col gap-grid-half'>
-            <Link
+            <MediaFrame
+              as={Link}
+              shape='work'
               href={cs.path as Route}
               tabIndex={-1}
               aria-hidden
-              className='relative block aspect-[16/10] overflow-hidden bg-bg-card'
+              className='block'
             >
               <Image
                 src={brand.image}
-                alt=''
+                alt={brand.imageAlt ?? ''}
                 fill
                 loading={index === 0 ? 'eager' : undefined}
                 sizes='(min-width: 1440px) 660px, (min-width: 768px) 50vw, 100vw'
                 className='object-cover transition-transform duration-700 group-hover:scale-[1.02]'
               />
-            </Link>
+            </MediaFrame>
             <p className='text-base text-text-muted'>
               <span className='text-text'>{brand.title}.</span> {brand.built}
             </p>

@@ -16,6 +16,7 @@ import { FooterSubscribe } from '@/src/components/sections/footer-subscribe'
 import { Button } from '@/src/components/primitives/button'
 import { Input } from '@/src/components/primitives/input'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { TagRow } from '@/src/components/patterns/tag-row'
 import { OfferCard } from '@/src/components/sections/offers'
 import { OwnershipSection } from '@/src/components/sections/ownership'
@@ -562,19 +563,19 @@ export default function DesignPage() {
               <ClientLogoWall />
             </Specimen>
             <Specimen
-              names={['aspect-[16/10]', 'caption']}
-              note='photos crop to a 16:10 frame from the center; the caption is body text, the name in the text color'
+              names={['MediaFrame', 'caption']}
+              note='work 16:10, person 1:1, wide 21:9, cropped from the center; the caption is body text, the name in the text color'
             >
               <figure className='flex max-w-xl flex-col gap-grid-half'>
-                <div className='relative aspect-[16/10] overflow-hidden bg-bg-card'>
+                <MediaFrame shape='work'>
                   <Image
                     src='/work-greenwatt-usa-photo.jpg'
-                    alt=''
+                    alt='Rows of solar panels across a field, seen from above.'
                     fill
                     sizes='576px'
                     className='object-cover'
                   />
-                </div>
+                </MediaFrame>
                 <figcaption className='text-base text-text-muted'>
                   <span className='text-text'>GreenWATT USA.</span> We built the
                   marketplace from scratch.
@@ -826,35 +827,62 @@ export default function DesignPage() {
             id='imagery'
             label='Guidelines'
             title='Imagery'
-            when={'Not yet defined.'}
+            when='Approved Nov 10. Lint keeps every aspect ratio inside MediaFrame (design/no-raw-aspect).'
           >
-            <p className='max-w-2xl text-base text-text-muted'>
-              Not yet defined. What the site does today:
-            </p>
-            <ul className='flex flex-col gap-grid-half'>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Client photos crop to a 16:10 frame from the center (media
-                specimen above).
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Each photo keeps its own color; there is no shared treatment.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                The Heatonist case study opens with a full-bleed video.
-              </li>
-            </ul>
+            <Specimen names={['MediaFrame']} note='five rules'>
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>1. Color.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Natural. No filters on photos or screenshots; logos keep
+                    their one-color treatment.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>2. Shapes.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Three only, through MediaFrame: 16:10 for work, 1:1 for
+                    people, 21:9 for full-width moments.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>3. What goes where.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Photos show the client’s world. Screenshots show software we
+                    built, always in a frame. Drawings explain how something
+                    works, never decoration.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>4. Founder photos.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Matching light and background.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>5. Alt text.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Describe what the work shows; alt=&quot;&quot; only for pure
+                    texture.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
           </DesignSection>
 
           <DesignSection

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 
 /** An edge-to-edge, muted, looping video between sections. Nothing loads
  * until it nears the viewport; it plays only while on screen, and anyone who
@@ -37,7 +38,7 @@ export function FullBleedVideo({
   }, [])
 
   return (
-    <div className='relative aspect-[4/3] w-full overflow-hidden bg-bg-card md:aspect-[21/9]'>
+    <MediaFrame shape='work' wideFrom='md' className='w-full'>
       <video
         ref={ref}
         src={src}
@@ -49,6 +50,6 @@ export function FullBleedVideo({
         preload='none'
         className='absolute inset-0 h-full w-full object-cover'
       />
-    </div>
+    </MediaFrame>
   )
 }

@@ -4,6 +4,8 @@ export type Client = {
   /** Screenshot for the /clients page; clients without one only appear in
    * the homepage logo grid. */
   image?: string
+  /** What the photo shows (Guidelines > Imagery: describe the work). */
+  imageAlt?: string
   /** Shown on the /clients page, so only clients with an `image` need one. */
   description?: string
   /** One plain line on what we built for them, under the description. */
@@ -51,6 +53,8 @@ export const clients: Client[] = [
       'We built hotones.com in about three months and run it alongside Heatonist.',
     href: 'https://hotones.com',
     image: '/work-hot-ones-site.jpg',
+    imageAlt:
+      'The hotones.com home page: the Hot Ones hot sauce lineup beside the Experience the Show banner.',
     logo: '/logos/hot-ones.png',
     caseStudy: '/clients/heatonist',
     logoScale: 0.72,
@@ -64,6 +68,8 @@ export const clients: Client[] = [
     built: 'We built its Shopify store.',
     href: 'https://blakebrownbeauty.com',
     image: '/work-blake-brown-beauty-photo.jpg',
+    imageAlt:
+      'A model with full, tousled hair in a metallic jacket, from a Blake Brown Beauty campaign.',
     logo: '/logos/blake-brown-beauty.svg',
     logoScale: 0.58,
     description:
@@ -74,6 +80,8 @@ export const clients: Client[] = [
     built: 'We built its Shopify store.',
     href: 'https://florencebymillsbeauty.com',
     image: '/work-florence-by-mills-beauty-photo.jpg',
+    imageAlt:
+      'Millie Bobby Brown among purple flowers in a Florence by Mills campaign photo.',
     logo: '/logos/florence-by-mills-beauty.png',
     logoScale: 0.62,
     logoNudge: 8,
@@ -86,6 +94,8 @@ export const clients: Client[] = [
       'Since 2023, their engineering team: storefront rebuilds, sharper search and filters, and a custom app for order routing.',
     href: 'https://heatonist.com',
     image: '/work-heatonist-photo.jpg',
+    imageAlt:
+      'Heatonist hot sauce poured over a burger at a backyard picnic table.',
     logo: '/logos/heatonist.svg',
     caseStudy: '/clients/heatonist',
     logoScale: 0.48,
@@ -117,6 +127,8 @@ export const clients: Client[] = [
       'We built its website, plus the client portal and payments behind it.',
     href: 'https://9pointstudios.com',
     image: '/work-9-point-studios-photo.jpg',
+    imageAlt:
+      'Two musicians playing acoustic guitars in a 9 Point Studios control room.',
     logo: '/logos/9-point-studios.svg',
     logoScale: 0.6,
     logoNudge: -2,
@@ -129,6 +141,7 @@ export const clients: Client[] = [
       'We built the marketplace from scratch, with customer intake and payments.',
     href: 'https://www.gtbsolarexchange.com',
     image: '/work-greenwatt-usa-photo.jpg',
+    imageAlt: 'Rows of solar panels across a field, seen from above.',
     logo: '/logos/greenwatt-usa.png',
     logoScale: 0.65,
     logoNudge: 2,
@@ -140,6 +153,8 @@ export const clients: Client[] = [
     built: 'We built its Shopify stores.',
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397-photo.jpg',
+    imageAlt:
+      'Shelves of wine and spirits under brass pendant lamps at Officina del Bere 1397.',
     logo: '/logos/officina-del-bere-1397.png',
     logoScale: 0.74,
     logoNudge: 2.5,
@@ -159,6 +174,7 @@ export const clients: Client[] = [
       'We designed and built his studio site, plus sites for Echo & Wave and Small Isles.',
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner-photo.jpg',
+    imageAlt: 'Jeremy Turner in headphones, recording in the studio.',
     logo: '/logos/jeremy-turner.svg',
     logoScale: 0.39,
     logoNudge: 5,
@@ -171,6 +187,8 @@ export const clients: Client[] = [
       "We designed and built the club's website, plus the portal that runs its outreach, applications, RSVPs and monthly close.",
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club-photo.jpg',
+    imageAlt:
+      'A rehearsal room with a drum kit, amps and guitars on the wall, lit red and green.',
     logo: '/logos/the-good-for-nothings-club.svg',
     logoScale: 0.68,
     description:
@@ -183,6 +201,8 @@ export const clients: Client[] = [
     href: 'https://upthewall.co',
     // 750px Instagram crop until Up the Wall sends a full-size original.
     image: '/work-up-the-wall-photo.jpg',
+    imageAlt:
+      'A customer holding a Park & Hang movie poster printed by Up the Wall.',
     logo: '/logos/up-the-wall.svg',
     logoScale: 0.8,
     description:

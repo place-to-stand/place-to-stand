@@ -266,12 +266,19 @@ Not templated yet: Process, About, Clients, Referral, the blog list, Field notes
 
 ## Guidelines
 
-Voice is agreed. The others are not yet defined: each lists what the site does today, and the rules come once they are agreed.
+Voice and Imagery are agreed. The others are not yet defined: each lists what the site does today, and the rules come once they are agreed.
 
 ### Imagery
 
-Not yet defined. Today: client photos crop to a 16:10 frame from the center; each keeps its own color (no shared
-treatment); the case study opens with a full-bleed video.
+Approved Nov 10:
+
+1. **Color.** Natural. No filters on photos or screenshots; logos keep their one-color treatment.
+2. **Shapes.** Three only, through MediaFrame: 16:10 for work, 1:1 for people, 21:9 for full-width moments.
+3. **What goes where.** Photos show the client’s world. Screenshots show software we built, always in a frame. Drawings explain how something works, never decoration.
+4. **Founder photos.** Matching light and background.
+5. **Alt text.** Describe what the work shows; alt="" only for pure texture.
+
+Every photo, screenshot and video sits in `MediaFrame` (`patterns/media-frame.tsx`): `shape='work'` (16:10), `'person'` (1:1) or `'wide'` (21:9), with `wideFrom` to switch to 21:9 from a breakpoint up. `design/no-raw-aspect` fails any other aspect ratio; drawings that need their own box say so in a disable comment.
 
 ### Icons
 

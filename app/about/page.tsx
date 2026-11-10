@@ -12,6 +12,7 @@ import { RuledRow } from '@/src/components/boxes'
 import { SocialIcon } from '@/src/components/primitives/social-icon'
 import { ALT_ROW } from '@/src/components/patterns/alt-row'
 import { Hero } from '@/src/components/sections/hero'
+import { MediaFrame } from '@/src/components/patterns/media-frame'
 
 export const metadata: Metadata = pageMetadata({
   title: 'About',
@@ -56,9 +57,10 @@ export default function AboutPage() {
                   ALT_ROW
                 )}
               >
-                <div
+                <MediaFrame
+                  shape='person'
                   className={cn(
-                    'relative aspect-square overflow-hidden bg-bg-card lg:col-span-5 lg:row-start-1',
+                    'lg:col-span-5 lg:row-start-1',
                     flipped ? 'lg:col-start-8' : 'lg:col-start-1'
                   )}
                 >
@@ -70,7 +72,7 @@ export default function AboutPage() {
                     sizes='(min-width: 1440px) 552px, (min-width: 1024px) 40vw, 100vw'
                     className='object-cover'
                   />
-                </div>
+                </MediaFrame>
                 <div
                   className={cn(
                     'flex flex-col gap-stack lg:col-span-7 lg:row-start-1',

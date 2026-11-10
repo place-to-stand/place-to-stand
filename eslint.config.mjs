@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
       'design/no-raw-text-size': 'error',
       'design/no-raw-color': 'error',
       'design/no-raw-border': 'error',
+      'design/no-raw-aspect': 'error',
       'design/link-role': 'error',
     },
   },
@@ -36,6 +37,11 @@ const eslintConfig = defineConfig([
       'design/no-raw-text-size': 'off',
       'design/no-raw-border': 'off',
     },
+  },
+  // The media frame is where aspect ratios live.
+  {
+    files: ['src/components/patterns/media-frame.tsx'],
+    rules: { 'design/no-raw-aspect': 'off' },
   },
   // Where borders are allowed outside the shared boxes: the boxes
   // themselves and the corner marks; site chrome (header, footer, the hero's

@@ -134,6 +134,15 @@ export const noRawBorder = classRule({
   test: cls => BORDER.test(cls) && !NOT_A_STROKE.test(cls),
 })
 
+// Imagery: photos, screenshots and video sit in MediaFrame, which allows three
+// shapes only (16:10, 1:1, 21:9). An aspect class anywhere else is a fourth
+// shape. Drawings that need their own box say so in an eslint-disable comment.
+export const noRawAspect = classRule({
+  description: 'Media use the three MediaFrame shapes',
+  message: `${DOC} → Imagery: "{{cls}}" sets its own aspect ratio. Put media in MediaFrame (shape work 16:10, person 1:1, wide 21:9).`,
+  test: cls => /^aspect-/.test(cls),
+})
+
 // Links: every text link is link-nav, link-action, link-inline or
 // link-icon. A link that styles its own underline or accent color is a
 // fourth style. Card links (whole blocks) don't set text decoration and
@@ -196,6 +205,7 @@ export const rules = {
   'no-raw-text-size': noRawTextSize,
   'no-raw-color': noRawColor,
   'no-raw-border': noRawBorder,
+  'no-raw-aspect': noRawAspect,
   'link-role': linkRole,
   'section-component': sectionComponent,
 }

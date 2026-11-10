@@ -105,3 +105,15 @@ run('no-raw-border', {
     { code: "<a className='hover:border-accent' />", errors: 1 },
   ],
 })
+
+run('no-raw-aspect', {
+  valid: [
+    "<MediaFrame shape='work' className='w-full' />",
+    "<div className='relative overflow-hidden' />",
+  ],
+  invalid: [
+    { code: "<div className='aspect-[4/3] w-full' />", errors: 1 },
+    { code: "<div className='md:aspect-[21/9]' />", errors: 1 },
+    { code: "<div className={cn('aspect-square', x)} />", errors: 1 },
+  ],
+})
