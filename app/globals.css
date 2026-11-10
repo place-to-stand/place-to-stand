@@ -347,9 +347,15 @@ html {
   border-bottom: 1px solid var(--dots-rule);
 }
 /* Closing callout: --band-pad of dots above the box and the same under it,
-   down to the footer. Each page ends <main> --band-pad under the box. */
+   down to the footer. Each page ends <main> --band-pad under the box.
+   --band-pad must equal the padding of the section around the box, or the
+   dots spill past it into the section above. */
 .dots-band {
   --band-pad: var(--space-band);
+}
+/* CtaBand's section takes AnimatedSection's py-grid-3 padding. */
+.dots-band.dots-band-closing {
+  --band-pad: var(--spacing-grid-3);
 }
 /* The same thin rule opens the band. */
 .dots-band::before {
