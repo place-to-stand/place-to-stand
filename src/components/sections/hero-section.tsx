@@ -96,7 +96,7 @@ export function HeroSection() {
                       for teams without engineers of their own.
                       <span className='hidden md:inline'>
                         {' '}
-                        No more juggling a stack of bloated SaaS dashboards.
+                        No more juggling a stack of bloated SaaS products.
                       </span>
                     </p>
                   </div>
