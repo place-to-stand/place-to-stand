@@ -2,6 +2,7 @@ import { Section } from '@/src/components/layout/section'
 import Link from 'next/link'
 import { Reveal } from '@/src/components/layout/animated-section'
 import { WHO_YOU_WORK_WITH } from '@/src/lib/offers'
+import { Card } from '@/src/components/layout/boxes'
 import {
   DraftingGraphic,
   AiNativeGraphic,
@@ -43,16 +44,16 @@ export function ManifestoSection() {
         <Reveal index={2} className='relative'>
           <div className='grid gap-grid-1 md:grid-cols-3'>
             {facets.map(facet => (
-              <div
+              <Card
                 key={facet.title}
-                className='relative flex flex-col gap-grid-half bg-bg-card p-card'
+                className='relative flex flex-col gap-grid-half'
               >
                 <div className='flex items-center justify-between gap-grid-half'>
                   <h3 className='type-card-title'>{facet.title}</h3>
                   <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
                 <p className='text-base text-text-muted'>{facet.body}</p>
-              </div>
+              </Card>
             ))}
           </div>
         </Reveal>

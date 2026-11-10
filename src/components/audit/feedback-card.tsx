@@ -6,6 +6,7 @@ import { Button } from '@/src/components/ui/button'
 import { Label } from '@/src/components/ui/label'
 import { Textarea } from '@/src/components/ui/textarea'
 import { cn } from '@/src/lib/utils'
+import { Panel } from '@/src/components/layout/boxes'
 
 const COMMENT_MAX_LENGTH = 2000
 
@@ -48,7 +49,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
   }
 
   return (
-    <section className='relative mt-grid-1 bg-bg-panel p-card'>
+    <Panel as='section' className='mt-grid-1'>
       {isSent ? (
         <div className='flex flex-col items-center gap-2 text-center'>
           <span className='flex h-8 w-8 items-center justify-center bg-accent-muted text-accent'>
@@ -120,7 +121,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
           </Button>
         </div>
       )}
-    </section>
+    </Panel>
   )
 }
 

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { Band, Section } from '@/src/components/layout/section'
 import { CtaBand } from '@/src/components/layout/cta-band'
+import { RuledList, RuledRow } from '@/src/components/layout/boxes'
 import { SubscribeForm } from '@/src/components/blog/subscribe-form'
 import {
   formatPostDate,
@@ -47,14 +48,11 @@ export default function BlogPage() {
         <Section className='flex flex-col gap-section'>
           {/* One ruled row per post: title on the left, date and reading time
             on the right, where "Read" appears on hover */}
-          <ul className='flex flex-col border-b border-border'>
+          <RuledList className='flex flex-col'>
             {posts.map(post => (
               // The hero's rule closes the top of the list, so the first row
               // drops its own border rather than doubling it.
-              <li
-                key={post.slug}
-                className='border-t border-border first:border-t-0'
-              >
+              <RuledRow key={post.slug} className='first:border-t-0'>
                 <Link
                   href={`/blog/${post.slug}`}
                   className='group grid gap-grid-half py-grid-1 no-underline lg:grid-cols-12 lg:gap-x-grid-1 lg:py-grid-2'
@@ -81,9 +79,9 @@ export default function BlogPage() {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </RuledRow>
             ))}
-          </ul>
+          </RuledList>
           <SubscribeForm />
         </Section>
       </Band>

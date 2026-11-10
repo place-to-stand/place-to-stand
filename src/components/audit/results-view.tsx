@@ -37,6 +37,7 @@ import type {
   AuditProgressPayload,
 } from '@/src/lib/audit/progress-payload'
 import type { AuditResult, PhaseId } from '@/src/lib/audit/types'
+import { Chip, Panel } from '@/src/components/layout/boxes'
 
 interface ResultsViewProps {
   result: AuditResult
@@ -142,7 +143,7 @@ export function ResultsView({
       )}
 
       {/* Phase progression timeline */}
-      <section className='relative bg-bg-panel p-grid-1 sm:px-grid-1'>
+      <Panel as='section' className='p-grid-1 sm:px-grid-1'>
         <div className='flex items-baseline justify-between'>
           <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Business phase
@@ -198,12 +199,12 @@ export function ResultsView({
             )
           })}
         </ol>
-      </section>
+      </Panel>
 
       {/* Main grid: phase detail + score chart */}
       <div className='mt-grid-1 grid gap-grid-1 lg:grid-cols-3'>
         {/* Phase detail */}
-        <section className='relative bg-bg-panel p-card lg:col-span-2'>
+        <Panel as='section' className='lg:col-span-2'>
           <span className='inline-flex bg-bg-elevated px-grid-half py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Your phase
           </span>
@@ -243,10 +244,10 @@ export function ResultsView({
               </ul>
             </div>
           </div>
-        </section>
+        </Panel>
 
         {/* Phase score chart */}
-        <section className='relative bg-bg-panel p-card'>
+        <Panel as='section'>
           <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Audit score
           </h2>
@@ -283,7 +284,7 @@ export function ResultsView({
               )
             })}
           </div>
-        </section>
+        </Panel>
       </div>
 
       {/* Recommendations */}
@@ -304,17 +305,16 @@ export function ResultsView({
             {visibleRecommendations.map((rec, index) => {
               const Icon = SERVICE_ICONS[rec.service.icon] ?? Sparkles
               return (
-                <article
+                <Panel
+                  as='article'
                   key={rec.service.id}
-                  className='relative flex flex-col bg-bg-panel p-card transition-colors hover:bg-bg-elevated'
+                  className='flex flex-col'
                 >
                   <div className='flex items-center gap-grid-half'>
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
                       <Icon className='h-5 w-5' />
                     </div>
-                    <span className='ml-auto border border-border px-2 py-0.5 font-mono text-sm font-semibold text-text-muted'>
-                      #{index + 1}
-                    </span>
+                    <Chip className='ml-auto'>#{index + 1}</Chip>
                   </div>
                   <h3 className='mt-grid-half type-card-title uppercase'>
                     {rec.service.name}
@@ -322,7 +322,7 @@ export function ResultsView({
                   <p className='mt-1 text-base font-medium text-text-muted'>
                     {rec.service.tagline}
                   </p>
-                </article>
+                </Panel>
               )
             })}
             {Array.from({ length: lockedCount }, (_, i) => (
@@ -343,9 +343,10 @@ export function ResultsView({
           onSaved={onCaptured}
         />
       ) : (
-        <section
+        <Panel
+          as='section'
           id={CAPTURE_ANCHOR}
-          className='relative mt-grid-1 scroll-mt-grid-4 border border-accent-subtle bg-bg-panel p-card'
+          className='mt-grid-1 scroll-mt-grid-4'
         >
           {/* min-w-0 on both columns: a grid item's min width is its
               content's, so an unwrappable button would push the card past
@@ -379,7 +380,7 @@ export function ResultsView({
               className='min-w-0'
             />
           </div>
-        </section>
+        </Panel>
       )}
 
       {/* Optional feedback on the result itself. */}
@@ -422,11 +423,8 @@ function LockedRecommendation({ rank }: { rank: number }) {
           Unlocks by email
         </p>
       </div>
-      <span
-        aria-hidden
-        className='shrink-0 border border-border px-2 py-0.5 font-mono text-sm font-semibold text-text-muted'
-      >
-        #{rank}
+      <span aria-hidden className='shrink-0'>
+        <Chip>#{rank}</Chip>
       </span>
     </a>
   )
@@ -452,7 +450,7 @@ function CapturedPanel({
   const [detailsSent, setDetailsSent] = useState(false)
 
   return (
-    <section className='relative mt-grid-1 bg-bg-panel p-card'>
+    <Panel as='section' className='mt-grid-1'>
       <div className='grid gap-grid-2 md:grid-cols-2'>
         <div className='flex min-w-0 flex-col items-start gap-grid-half'>
           <p className='inline-flex items-center gap-2 font-mono text-sm tracking-[0.15em] text-accent uppercase'>
@@ -514,6 +512,6 @@ function CapturedPanel({
           )}
         </div>
       </div>
-    </section>
+    </Panel>
   )
 }

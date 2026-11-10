@@ -6,6 +6,7 @@ import { ALT_ROW } from '@/src/components/layout/alt-row'
 import { clients, getClientHostname, type Client } from '@/src/lib/clients'
 import { heatonistCaseStudy } from '@/src/lib/case-study-heatonist'
 import { SectionHeading } from '@/src/components/layout/section'
+import { StatTile } from '@/src/components/layout/boxes'
 
 const ROW_LINK_CLASS =
   'link-action mt-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
@@ -155,13 +156,7 @@ export function FeaturedCaseStudy() {
       </div>
       <ul className='grid gap-grid-1 md:grid-cols-3'>
         {cs.stats.map(stat => (
-          <li
-            key={stat.value}
-            className='flex flex-col gap-grid-half border-t border-accent-subtle pt-grid-1'
-          >
-            <span className='type-stat text-accent'>{stat.value}</span>
-            <span className='text-base text-text-muted'>{stat.label}</span>
-          </li>
+          <StatTile key={stat.value} value={stat.value} label={stat.label} />
         ))}
       </ul>
       <Link href={cs.path as Route} className={ROW_LINK_CLASS}>

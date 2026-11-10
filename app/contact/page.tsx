@@ -11,7 +11,7 @@ import { ContactSection } from '@/src/components/sections/contact-section'
 import { BookCallButton } from '@/src/components/layout/cta'
 import { Button } from '@/src/components/ui/button'
 import { TrackedLink } from '@/src/components/tracked-link'
-import Link from 'next/link'
+import { LinkCard, RuledRow } from '@/src/components/layout/boxes'
 import { CTA } from '@/src/components/layout/cta'
 
 export const metadata: Metadata = pageMetadata({
@@ -83,9 +83,9 @@ export default function ContactPage() {
           <ul className='grid gap-grid-1 md:grid-cols-3'>
             {OPTIONS.map((option, index) => (
               <li key={option.href}>
-                <Link
+                <LinkCard
                   href={option.href}
-                  className='group flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card transition-colors hover:bg-bg-elevated'
+                  className='flex h-full flex-col gap-grid-1'
                 >
                   <span className='font-mono text-sm text-text-muted'>
                     {String(index + 1).padStart(2, '0')}
@@ -99,7 +99,7 @@ export default function ContactPage() {
                   <span className='mt-auto type-fine group-hover:text-text'>
                     {option.action} &darr;
                   </span>
-                </Link>
+                </LinkCard>
               </li>
             ))}
           </ul>
@@ -118,13 +118,14 @@ export default function ContactPage() {
           <Reveal index={1}>
             <dl className='grid gap-x-grid-2 gap-y-grid-2 sm:grid-cols-2 lg:grid-cols-4'>
               {CALL.map(item => (
-                <div
+                <RuledRow
+                  as='div'
                   key={item.label}
-                  className='flex flex-col gap-grid-half border-t border-border-light pt-grid-1'
+                  className='flex flex-col gap-grid-half pt-grid-1'
                 >
                   <dt className='type-card-title'>{item.label}</dt>
                   <dd className='text-base text-text-muted'>{item.body}</dd>
-                </div>
+                </RuledRow>
               ))}
             </dl>
           </Reveal>

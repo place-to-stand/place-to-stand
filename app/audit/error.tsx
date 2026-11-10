@@ -6,6 +6,7 @@ import { RotateCcw } from 'lucide-react'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { getAuditSessionSnapshot } from '@/src/lib/audit/session'
+import { Panel } from '@/src/components/layout/boxes'
 
 /**
  * Recovery screen for a client-side crash anywhere in the audit page.
@@ -69,7 +70,7 @@ export default function AuditError({
   return (
     <main className='flex-1 pt-page-start pb-section'>
       <div className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
-        <div className='relative max-w-2xl bg-bg-panel p-card'>
+        <Panel className='max-w-2xl'>
           <span className='bp-label font-mono'>Audit</span>
           <h1 className='mt-grid-half type-section-title'>We hit a snag</h1>
           <p className='mt-intro text-base text-text-muted'>
@@ -94,7 +95,7 @@ export default function AuditError({
               Book a call instead
             </TrackedLink>
           </div>
-        </div>
+        </Panel>
       </div>
     </main>
   )

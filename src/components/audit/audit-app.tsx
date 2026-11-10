@@ -6,6 +6,7 @@ import { AuditWizard } from '@/src/components/audit/audit-wizard'
 import { CaptureGate } from '@/src/components/audit/capture-gate'
 import { ResultsView } from '@/src/components/audit/results-view'
 import { useAudit } from '@/src/hooks/use-audit'
+import { Panel } from '@/src/components/layout/boxes'
 
 /**
  * Top-level state machine for the audit: intro, wizard, the email capture,
@@ -61,12 +62,12 @@ export function AuditApp() {
     if (!result) {
       return (
         <div className='w-full sm:py-grid-2'>
-          <div className='relative bg-bg-panel p-card'>
+          <Panel>
             <span className='bp-label font-mono'>Audit Results</span>
             <p className='mt-intro text-base text-text-muted'>
               Rebuilding your results...
             </p>
-          </div>
+          </Panel>
         </div>
       )
     }

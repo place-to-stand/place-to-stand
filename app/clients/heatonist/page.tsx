@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { Reveal } from '@/src/components/layout/animated-section'
 import { PageHeader, Section } from '@/src/components/layout/section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { Callout, Card, RuledRow } from '@/src/components/layout/boxes'
 import { FullBleedVideo } from '@/src/components/layout/full-bleed-video'
 import { CtaBand } from '@/src/components/layout/cta-band'
 import { JsonLd } from '@/src/components/seo/json-ld'
@@ -52,7 +52,10 @@ function SpecRow({
   children?: React.ReactNode
 }) {
   return (
-    <div className='grid gap-grid-1 border-t border-border pt-grid-1 lg:grid-cols-12 lg:gap-x-grid-1'>
+    <RuledRow
+      as='div'
+      className='grid gap-grid-1 pt-grid-1 lg:grid-cols-12 lg:gap-x-grid-1'
+    >
       <div className='flex flex-col items-start gap-eyebrow lg:col-span-4'>
         {label && <span className='bp-label font-mono'>{label}</span>}
         <h2 className='type-section-title text-balance'>{title}</h2>
@@ -62,7 +65,7 @@ function SpecRow({
           {children}
         </div>
       )}
-    </div>
+    </RuledRow>
   )
 }
 
@@ -77,9 +80,9 @@ function SpecList({
   return (
     <ul className='flex flex-col'>
       {items.map(item => (
-        <li
+        <RuledRow
           key={item.title}
-          className='grid gap-grid-half border-t border-border py-grid-1 lg:grid-cols-12 lg:gap-x-grid-1'
+          className='grid gap-grid-half py-grid-1 lg:grid-cols-12 lg:gap-x-grid-1'
         >
           <h3 className='flex items-baseline gap-grid-half type-card-title lg:col-span-4'>
             <span
@@ -89,7 +92,7 @@ function SpecList({
             {item.title}
           </h3>
           <p className='type-intro lg:col-span-7 lg:col-start-6'>{item.body}</p>
-        </li>
+        </RuledRow>
       ))}
     </ul>
   )
@@ -99,14 +102,14 @@ function SpecList({
  * live store. */
 function StorefrontShot({ src, host }: { src: string; host: string }) {
   return (
-    <a
+    <Card
+      as='a'
       href={`https://${host}`}
       target='_blank'
       rel='noreferrer noopener'
       aria-label={`Visit ${host} (opens in a new tab)`}
-      className='group relative block border border-border bg-bg-card no-underline transition-colors hover:border-accent/30'
+      className='group block p-0 no-underline transition-colors hover:bg-bg-elevated'
     >
-      <BlueprintCorners size={16} all />
       <div className='relative aspect-[16/9] w-full overflow-hidden'>
         <Image
           src={src}
@@ -118,8 +121,10 @@ function StorefrontShot({ src, host }: { src: string; host: string }) {
           className='object-cover object-top'
         />
       </div>
-      <div className='border-t border-border p-grid-1 type-fine'>{host} ↗</div>
-    </a>
+      <RuledRow as='div' className='p-grid-1 type-fine'>
+        {host} ↗
+      </RuledRow>
+    </Card>
   )
 }
 
@@ -188,15 +193,14 @@ export default function HeatonistCaseStudyPage() {
 
         {/* Ty's quote, then the storefront */}
         <Section className='flex flex-col gap-stack'>
-          <figure className='relative flex flex-col gap-grid-1 border border-border p-callout'>
-            <BlueprintCorners size={16} />
+          <Callout as='figure' className='flex flex-col gap-grid-1'>
             <blockquote className='type-quote text-balance'>
               &ldquo;{cs.quote.text}&rdquo;
             </blockquote>
             <figcaption className='bp-label font-mono'>
               {cs.quote.name}, {cs.quote.company}
             </figcaption>
-          </figure>
+          </Callout>
           <StorefrontShot
             src='/case-study-heatonist-home.jpg'
             host='heatonist.com'
@@ -218,20 +222,18 @@ export default function HeatonistCaseStudyPage() {
             <SpecRow label='Custom builds' title='Beyond what Shopify offers' />
             <p className='type-intro'>{cs.beyondShopifyIntro}</p>
           </div>
-          <div className='relative border border-border bg-bg-card'>
-            <BlueprintCorners size={16} all />
-            <ul className='grid divide-y divide-border lg:grid-cols-4 lg:divide-x lg:divide-y-0'>
-              {cs.beyondShopify.map(item => (
-                <li
-                  key={item.title}
-                  className='flex flex-col gap-grid-half p-card'
-                >
-                  <h3 className='type-card-title text-balance'>{item.title}</h3>
-                  <p className='text-base text-text-muted'>{item.body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-4'>
+            {cs.beyondShopify.map(item => (
+              <Card
+                as='li'
+                key={item.title}
+                className='flex flex-col gap-grid-half'
+              >
+                <h3 className='type-card-title text-balance'>{item.title}</h3>
+                <p className='text-base text-text-muted'>{item.body}</p>
+              </Card>
+            ))}
+          </ul>
         </Section>
 
         {/* hotones.com */}

@@ -30,6 +30,17 @@ import { OFFERS } from '@/src/lib/offers'
 import { DesignIndex } from './_components/design-index'
 import { DesignSection, Specimen } from './_components/specimen'
 import {
+  Callout,
+  Card,
+  Chip,
+  LinkCard,
+  Panel,
+  RuledList,
+  RuledRow,
+  SideNote,
+  StatTile,
+} from '@/src/components/layout/boxes'
+import {
   LiveVar,
   SpaceBar,
   Swatch,
@@ -196,7 +207,7 @@ export default function DesignPage() {
             <Specimen names={['Button', 'variant="outline"']} tones>
               <div className='flex flex-wrap items-center gap-grid-1'>
                 <Button size='lg'>Primary</Button>
-                <Button size='lg' variant='outline' className='border-2'>
+                <Button size='lg' variant='outline'>
                   Secondary
                 </Button>
                 <Button size='sm'>Small</Button>
@@ -304,6 +315,90 @@ export default function DesignPage() {
             <Specimen names={['FooterSubscribe']}>
               <div className='max-w-sm'>
                 <FooterSubscribe />
+              </div>
+            </Specimen>
+          </DesignSection>
+
+          <DesignSection
+            id='boxes'
+            label='Components'
+            title='Boxes and strokes'
+            when='Every box on the site is one of these, and each owns its stroke: box lines are 1px, and 2px is only for selected and focus. Pages never draw a border themselves (lint: design/no-raw-border).'
+          >
+            <Specimen
+              names={['Card', 'LinkCard', 'StatTile']}
+              note='always a 1px stroke; a link card changes fill on hover'
+              tones
+            >
+              <div className='grid gap-grid-1 md:grid-cols-3'>
+                <Card className='flex flex-col gap-grid-half'>
+                  <span className='type-card-title'>Card</span>
+                  <span className='text-base text-text-muted'>
+                    Modules, steps, facets, after-launch.
+                  </span>
+                </Card>
+                <LinkCard href='#boxes' className='flex flex-col gap-grid-half'>
+                  <span className='type-card-title'>LinkCard</span>
+                  <span className='text-base text-text-muted'>
+                    The whole card is one link.
+                  </span>
+                </LinkCard>
+                <ul>
+                  <StatTile value='3.5 yrs' label='One stat, one style.' />
+                </ul>
+              </div>
+            </Specimen>
+            <Specimen
+              names={['Callout', 'Callout band']}
+              note='the page’s one ask, or a quote: no stroke, 20px corner marks'
+            >
+              <Callout className='flex flex-col gap-grid-half'>
+                <span className='type-card-title'>Callout</span>
+                <span className='text-base text-text-muted'>
+                  Closing bands, the Heatonist quote, the newsletter box.
+                </span>
+              </Callout>
+            </Specimen>
+            <Specimen
+              names={['Panel']}
+              note='holds a form or a tool: fill only'
+            >
+              <Panel className='flex flex-col gap-grid-half'>
+                <span className='type-card-title'>Panel</span>
+                <span className='text-base text-text-muted'>
+                  The contact form, audit results.
+                </span>
+              </Panel>
+            </Specimen>
+            <Specimen
+              names={['RuledList', 'RuledRow', 'RuledRow accent']}
+              note='a 1px top rule in the tone’s rule colour; accent only on the ownership block'
+              tones
+            >
+              <RuledList className='flex flex-col'>
+                <RuledRow className='py-grid-1 text-base'>First row</RuledRow>
+                <RuledRow className='py-grid-1 text-base'>Second row</RuledRow>
+                <RuledRow accent className='py-grid-1 text-base'>
+                  Ownership rule
+                </RuledRow>
+              </RuledList>
+            </Specimen>
+            <Specimen
+              names={['SideNote', 'Chip']}
+              note='a 4px accent-line bar (ink on light, lime on dark); one tag style'
+              tones
+            >
+              <div className='flex flex-col gap-grid-1'>
+                <SideNote className='flex flex-col gap-grid-half'>
+                  <span className='type-card-title'>SideNote</span>
+                  <span className='text-base text-text-muted'>
+                    The billing promise, the proof line.
+                  </span>
+                </SideNote>
+                <div className='flex flex-wrap gap-grid-half'>
+                  <Chip>HubSpot</Chip>
+                  <Chip>#1</Chip>
+                </div>
               </div>
             </Specimen>
           </DesignSection>

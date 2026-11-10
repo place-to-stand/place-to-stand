@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { PageHeader, Section } from '@/src/components/layout/section'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { fieldNotes } from '@/src/lib/field-notes'
+import { RuledList, RuledRow } from '@/src/components/layout/boxes'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Field Notes',
@@ -30,11 +31,11 @@ export default function FieldNotesPage() {
           align='center'
         />
         {/* One open row per note, split by a rule: no boxed cards */}
-        <ol className='flex flex-col divide-y divide-border border-y border-border'>
+        <RuledList as='ol' className='flex flex-col'>
           {fieldNotes.map(note => {
             const external = note.url.startsWith('http')
             return (
-              <li key={note.slug}>
+              <RuledRow key={note.slug}>
                 <a
                   href={note.url}
                   target={external ? '_blank' : undefined}
@@ -59,10 +60,10 @@ export default function FieldNotesPage() {
                     {note.tags.join(' · ')}
                   </p>
                 </a>
-              </li>
+              </RuledRow>
             )
           })}
-        </ol>
+        </RuledList>
       </Section>
     </main>
   )

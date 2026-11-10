@@ -143,6 +143,23 @@ A typical inner page:
 </main>
 ```
 
+## Boxes and strokes
+
+Every box on the site is one of the components in `src/components/layout/boxes.tsx`, and each one owns its stroke. Box lines are 1px; 2px is only for selected and focus states. Pages never draw a border themselves: `design/no-raw-border` fails lint outside the boxes, site chrome (header, footer, hero rule, logo), form controls, the audit tool and /design.
+
+| Component              | Stroke                                             | Fill       | Use for                                                 |
+| ---------------------- | -------------------------------------------------- | ---------- | ------------------------------------------------------- |
+| `Card`                 | 1px `border`                                       | `bg-card`  | Modules, steps, facets, after-launch, anything compared |
+| `LinkCard`             | 1px `border`; hover changes fill only              | `bg-card`  | A whole card that is one link (Contact options)         |
+| `StatTile`             | a `Card`                                           | `bg-card`  | A number and what it counts, everywhere                 |
+| `Callout`              | none; 20px corner marks (`band` adds dots)         | `bg-card`  | The page's one ask, a quote, the newsletter box         |
+| `Panel`                | none                                               | `bg-panel` | Holds a form or a tool (contact form, audit results)    |
+| `RuledRow`/`RuledList` | 1px top rule in `rule` (accent only for ownership) | none       | Lists of rows: steps, FAQ, posts, legal clauses         |
+| `SideNote`             | 4px left bar in `accent-line`                      | none       | A short aside: the billing promise, the proof line      |
+| `Chip`                 | 1px `border`                                       | none       | Short tags: tools, clients, a rank                      |
+
+`rule` is one colour per tone: `#2a2b30` on dark, `#cbcac4` on light.
+
 ## Calls to action
 
 One shared definition in `src/components/layout/cta.tsx`, so every place matches:
@@ -166,7 +183,7 @@ Everything respects `prefers-reduced-motion`.
 
 ## Drawings
 
-Line drawings use two stroke weights and nothing else: `--stroke-structure` (1.25px) for line-work and `--stroke-emphasis` (2px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` colour, lime only on the result.
+Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px) for line-work and `--stroke-emphasis` (2px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` colour, lime only on the result.
 
 ## Logo
 

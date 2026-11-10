@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Card, RuledRow, SideNote } from '@/src/components/layout/boxes'
 import type { Metadata } from 'next'
 import {
   Band,
@@ -42,9 +43,10 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
       <Reveal index={1}>
         <ul className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-3'>
           {offer.modules.map((module, moduleIndex) => (
-            <li
+            <Card
+              as='li'
               key={module.name}
-              className='flex flex-col gap-grid-1 border border-border bg-bg-card p-card'
+              className='flex flex-col gap-grid-1'
             >
               <span className='font-mono text-sm text-text-muted'>
                 {String(index + 1).padStart(2, '0')}.
@@ -55,7 +57,7 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
                 <p className='text-base text-text-muted'>{module.job}</p>
               </div>
               {(module.insteadOf || module.example) && (
-                <div className='mt-auto border-t border-border pt-grid-1'>
+                <RuledRow as='div' className='mt-auto pt-grid-1'>
                   {module.insteadOf ? (
                     <TagRow label='Instead of' tags={module.insteadOf} />
                   ) : (
@@ -64,12 +66,15 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
                       tags={([] as string[]).concat(module.example ?? [])}
                     />
                   )}
-                </div>
+                </RuledRow>
               )}
-            </li>
+            </Card>
           ))}
           {offer.proof && (
-            <li className='flex flex-col justify-center gap-grid-half border-l-4 border-accent-line py-grid-1 pl-grid-1 lg:col-span-2'>
+            <SideNote
+              as='li'
+              className='flex flex-col justify-center gap-grid-half py-grid-1 lg:col-span-2'
+            >
               <p className='type-card-title'>{offer.proof}</p>
               <p className='max-w-xl text-base text-text-muted'>
                 {PLATFORM_SHARED}{' '}
@@ -82,7 +87,7 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
                 label='Built for'
                 tags={['Place To Stand', '9 Point Studios', 'Up The Wall']}
               />
-            </li>
+            </SideNote>
           )}
         </ul>
       </Reveal>
@@ -136,13 +141,14 @@ export default function PlatformPage() {
           <Reveal index={1}>
             <ul className='grid gap-grid-1 md:grid-cols-3'>
               {AFTER_LAUNCH.map(item => (
-                <li
+                <Card
+                  as='li'
                   key={item.name}
-                  className='flex flex-col gap-grid-half border border-border bg-bg-card p-card'
+                  className='flex flex-col gap-grid-half'
                 >
                   <h3 className='type-card-title'>{item.name}</h3>
                   <p className='text-base text-text-muted'>{item.body}</p>
-                </li>
+                </Card>
               ))}
             </ul>
           </Reveal>

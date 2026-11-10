@@ -1,6 +1,6 @@
 import { AuditLink, BookCallGroup } from './cta'
 import { AnimatedSection, Reveal } from './animated-section'
-import { BlueprintCorners } from './dot-grid-background'
+import { Callout } from './boxes'
 
 const DEFAULT_DESCRIPTION =
   "Book a free 30-minute intro call. Tell us what you need, and we'll say plainly whether we can help."
@@ -30,8 +30,7 @@ export function CtaBand({
 }) {
   return (
     <AnimatedSection className='py-band'>
-      <div className='dots-band bg-bg-card p-callout'>
-        <BlueprintCorners size={20} all colorClassName='border-accent' />
+      <Callout band>
         <div className='flex flex-col gap-stack md:flex-row md:items-center md:justify-between'>
           <div className='flex flex-col gap-intro'>
             <Reveal index={0} className='flex flex-col gap-eyebrow'>
@@ -57,7 +56,7 @@ export function CtaBand({
             )}
           </Reveal>
         </div>
-      </div>
+      </Callout>
     </AnimatedSection>
   )
 }

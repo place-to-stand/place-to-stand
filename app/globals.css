@@ -7,7 +7,7 @@
 @theme {
   /* Drawing strokes: two weights only. Structure for line-work, emphasis
      for what the eye should land on (and the logo's outer square). */
-  --stroke-structure: 1.25px;
+  --stroke-structure: 1px;
   --stroke-emphasis: 2px;
   /* Reading text line height, site-wide: every text size from sm to xl uses
      1.375, so paragraphs need no leading-* class of their own. */
@@ -38,6 +38,8 @@
   --color-danger: #f87171;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
+  /* Ruled rows: one rule colour per tone (RuledRow). */
+  --color-rule: #2a2b30;
   /* Mid-grey for schematic line-work — readable on card backgrounds,
      where border-light is too dark to see. */
   --color-line: #6e7078;
@@ -1259,6 +1261,7 @@ main {
   --color-accent-secondary: #55565c;
   --color-border: #dddcd6;
   --color-border-light: #cbcac4;
+  --color-rule: #cbcac4;
   --color-line: #8a8c93;
   --grid-dot: #d4d3cd;
   --color-accent-line: #0e0f11;

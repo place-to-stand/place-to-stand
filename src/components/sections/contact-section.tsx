@@ -15,6 +15,7 @@ import { usePostHog } from 'posthog-js/react'
 
 import { SectionHeading, Section } from '@/src/components/layout/section'
 import { CONTACT_EMAIL } from '@/src/lib/site'
+import { Panel } from '@/src/components/layout/boxes'
 import { Button } from '@/src/components/ui/button'
 import { HeardFromField } from '@/src/components/forms/heard-from-field'
 import { Checkbox } from '@/src/components/ui/checkbox'
@@ -178,7 +179,7 @@ export function ContactSection() {
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />
       </Suspense>
-      <div className='relative w-full max-w-3xl gap-grid-2 bg-bg-card p-card md:p-grid-2'>
+      <Panel className='w-full max-w-3xl gap-grid-2 md:p-grid-2'>
         <form
           noValidate
           onSubmit={onSubmit}
@@ -355,7 +356,7 @@ export function ContactSection() {
             </Button>
           </div>
         ) : null}
-      </div>
+      </Panel>
     </Section>
   )
 }

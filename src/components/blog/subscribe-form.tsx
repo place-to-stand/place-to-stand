@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useSubscribe } from '@/src/lib/forms/use-subscribe'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { Callout } from '@/src/components/layout/boxes'
 import { Button } from '@/src/components/ui/button'
 import { Input } from '@/src/components/ui/input'
 
@@ -11,8 +11,7 @@ export function SubscribeForm() {
   const { state, onSubmit, isPending } = useSubscribe('blog')
 
   return (
-    <div className='relative grid gap-grid-2 border border-border p-grid-1 md:p-grid-3 lg:grid-cols-12 lg:gap-x-grid-1'>
-      <BlueprintCorners size={16} />
+    <Callout className='grid gap-grid-2 lg:grid-cols-12 lg:gap-x-grid-1'>
       <div className='flex flex-col items-start gap-eyebrow lg:col-span-5'>
         <span className='bp-label font-mono'>Subscribe</span>
         <h2 className='type-section-title text-balance'>
@@ -68,6 +67,6 @@ export function SubscribeForm() {
           </form>
         )}
       </div>
-    </div>
+    </Callout>
   )
 }

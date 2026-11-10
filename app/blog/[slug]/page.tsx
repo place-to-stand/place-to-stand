@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { Band, Section } from '@/src/components/layout/section'
 import { CtaBand } from '@/src/components/layout/cta-band'
+import { RuledList, RuledRow } from '@/src/components/layout/boxes'
 import { BlogBody } from '@/src/components/blog/rich-text'
 import { SubscribeForm } from '@/src/components/blog/subscribe-form'
 import { JsonLd } from '@/src/components/seo/json-ld'
@@ -133,10 +134,13 @@ async function Post({ params }: Pick<PageProps<'/blog/[slug]'>, 'params'>) {
                   </div>
                 </div>
               )}
-              <div className='flex flex-col gap-1 border-t border-border pt-grid-half font-mono text-xs tracking-wider text-text-muted uppercase'>
+              <RuledRow
+                as='div'
+                className='flex flex-col gap-1 pt-grid-half font-mono text-xs tracking-wider text-text-muted uppercase'
+              >
                 <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 <span>{readingMinutes(post)} min read</span>
-              </div>
+              </RuledRow>
             </aside>
 
             <article className='lg:col-span-7 lg:col-start-5'>
@@ -150,9 +154,11 @@ async function Post({ params }: Pick<PageProps<'/blog/[slug]'>, 'params'>) {
           <Section>
             {/* Older on the left, newer on the right, each set to its outer
               edge with a rule between them */}
-            <nav
+            <RuledList
+              as='nav'
               aria-label='More posts'
-              className='grid divide-y divide-border border-y border-border md:grid-cols-2 md:divide-x md:divide-y-0'
+              top
+              className='grid md:grid-cols-2'
             >
               {older ? (
                 <Link
@@ -194,7 +200,7 @@ async function Post({ params }: Pick<PageProps<'/blog/[slug]'>, 'params'>) {
                   </span>
                 </Link>
               )}
-            </nav>
+            </RuledList>
           </Section>
         )}
         <Section>

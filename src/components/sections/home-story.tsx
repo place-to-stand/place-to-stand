@@ -2,6 +2,13 @@ import Link from 'next/link'
 import type { Route } from 'next'
 import { Reveal } from '@/src/components/layout/animated-section'
 import { Section, SectionHeading } from '@/src/components/layout/section'
+import {
+  Card,
+  Chip,
+  RuledRow,
+  SideNote,
+  StatTile,
+} from '@/src/components/layout/boxes'
 import { heatonistCaseStudy } from '@/src/lib/case-study-heatonist'
 import {
   AFTER_LAUNCH,
@@ -39,12 +46,7 @@ export function TagRow({ label, tags }: { label: string; tags: string[] }) {
     <div className='flex flex-wrap items-center gap-x-grid-half gap-y-2'>
       <span className='type-fine'>{label}</span>
       {tags.map(tag => (
-        <span
-          key={tag}
-          className='border border-border px-2 py-1 text-sm text-text-muted'
-        >
-          {tag}
-        </span>
+        <Chip key={tag}>{tag}</Chip>
       ))}
     </div>
   )
@@ -54,12 +56,12 @@ export function OfferCard({ offer }: { offer: Offer }) {
   const run = offer.slug === 'run'
   const tags = run ? (offer.cardTags ?? []) : SELL_ONLINE_CLIENTS
   return (
-    <div className='flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card'>
+    <Card className='flex h-full flex-col gap-grid-1'>
       <div className='flex flex-col gap-grid-half'>
         <h3 className='type-item-title'>{offer.name}</h3>
         <p className='text-base text-text-muted'>{offer.summary}</p>
       </div>
-      <ul className='grid gap-x-grid-1 border-t border-border pt-grid-1 sm:grid-cols-2'>
+      <RuledRow as='ul' className='grid gap-x-grid-1 pt-grid-1 sm:grid-cols-2'>
         {offer.modules.map(module => (
           <li
             key={module.name}
@@ -69,12 +71,12 @@ export function OfferCard({ offer }: { offer: Offer }) {
             {module.name}
           </li>
         ))}
-      </ul>
+      </RuledRow>
       <div className='mt-auto flex flex-col gap-grid-1'>
         <TagRow label={run ? 'Instead of' : 'Built for'} tags={tags} />
         <ArrowLink href={`/platform#${offer.slug}`}>See the platform</ArrowLink>
       </div>
-    </div>
+    </Card>
   )
 }
 
@@ -120,15 +122,16 @@ export function OwnershipSection({
           )}
         >
           {items.map(item => (
-            <li
+            <RuledRow
               key={item.title}
-              className='border-t border-accent-subtle pt-grid-1 text-base text-text-muted'
+              accent
+              className='pt-grid-1 text-base text-text-muted'
             >
               <strong className='block pb-grid-half type-card-title'>
                 {item.title}
               </strong>
               {item.body}
-            </li>
+            </RuledRow>
           ))}
         </ul>
       </Reveal>
@@ -149,13 +152,14 @@ export function AfterLaunchSection() {
       <Reveal index={1}>
         <ul className='grid gap-grid-1 md:grid-cols-3'>
           {AFTER_LAUNCH.map(item => (
-            <li
+            <Card
+              as='li'
               key={item.name}
-              className='flex flex-col gap-grid-half border border-border bg-bg-card p-card'
+              className='flex flex-col gap-grid-half'
             >
               <h3 className='type-card-title'>{item.name}</h3>
               <p className='text-base text-text-muted'>{item.body}</p>
-            </li>
+            </Card>
           ))}
         </ul>
       </Reveal>
@@ -187,9 +191,10 @@ export function StepsSection({
       <Reveal index={1}>
         <ol className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-3'>
           {STEPS.map(step => (
-            <li
+            <Card
+              as='li'
               key={step.number}
-              className='flex flex-col gap-grid-1 border border-border bg-bg-card p-card'
+              className='flex flex-col gap-grid-1'
             >
               <div className='flex items-baseline justify-between gap-grid-half'>
                 <span className='font-mono text-sm text-text-muted'>
@@ -201,17 +206,18 @@ export function StepsSection({
               </div>
               <h3 className='type-card-title'>{step.name}</h3>
               <p className='text-base text-text-muted'>{step.summary}</p>
-            </li>
+            </Card>
           ))}
         </ol>
       </Reveal>
       {showBilling && (
-        <Reveal
-          index={2}
-          className='flex flex-col gap-grid-half border-l-4 border-accent-line pl-grid-1'
-        >
-          <p className='type-card-title'>{BILLING.title}</p>
-          <p className='max-w-3xl text-base text-text-muted'>{BILLING.body}</p>
+        <Reveal index={2}>
+          <SideNote className='flex flex-col gap-grid-half'>
+            <p className='type-card-title'>{BILLING.title}</p>
+            <p className='max-w-3xl text-base text-text-muted'>
+              {BILLING.body}
+            </p>
+          </SideNote>
         </Reveal>
       )}
       {showLink && (
@@ -237,13 +243,12 @@ export function ResultsSection() {
       <Reveal index={1}>
         <ul className='grid gap-grid-1 md:grid-cols-3'>
           {cs.stats.map(stat => (
-            <li
+            <StatTile
               key={stat.value}
-              className='flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card'
-            >
-              <span className='type-stat text-accent'>{stat.value}</span>
-              <span className='text-base text-text-muted'>{stat.label}</span>
-            </li>
+              value={stat.value}
+              label={stat.label}
+              className='h-full'
+            />
           ))}
         </ul>
       </Reveal>

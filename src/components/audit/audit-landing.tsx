@@ -20,7 +20,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { Reveal } from '@/src/components/layout/animated-section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
+import { Callout, Card, Panel, RuledRow } from '@/src/components/layout/boxes'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
@@ -88,7 +88,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
   const Icon = SERVICE_ICONS[service.icon] ?? Code2
 
   return (
-    <li className='border-b border-border last:border-b-0'>
+    <RuledRow className='first:border-t-0'>
       <button
         type='button'
         id={id}
@@ -175,7 +175,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
           </div>
         </div>
       </div>
-    </li>
+    </RuledRow>
   )
 }
 
@@ -255,13 +255,13 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             <div className='relative'>
               <div className='grid gap-grid-1 md:grid-cols-3'>
                 {FACETS.map(facet => (
-                  <div
+                  <Card
                     key={facet.title}
-                    className='flex flex-col gap-grid-half bg-bg-card p-card'
+                    className='flex flex-col gap-grid-half'
                   >
                     <h3 className='type-card-title'>{facet.title}</h3>
                     <p className='text-base text-text-muted'>{facet.body}</p>
-                  </div>
+                  </Card>
                 ))}
               </div>
             </div>
@@ -304,7 +304,10 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               <h2 className='type-section-title'>What the audit covers</h2>
             </div>
             {/* Four open columns under a shared rule: no boxed cards */}
-            <ol className='grid gap-x-grid-1 gap-y-grid-2 border-t border-border pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'>
+            <RuledRow
+              as='ol'
+              className='grid gap-x-grid-1 gap-y-grid-2 pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'
+            >
               {AUDIT_COVERS.map(({ icon: Icon, title, description }, index) => (
                 <li key={title} className='flex flex-col gap-grid-half'>
                   <div className='flex items-center gap-grid-half text-text-muted'>
@@ -317,7 +320,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                   <p className='text-base text-text-muted'>{description}</p>
                 </li>
               ))}
-            </ol>
+            </RuledRow>
           </div>
         </Reveal>
 
@@ -328,7 +331,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               <span className='bp-label font-mono'>Capabilities</span>
               <h2 className='type-section-title'>What we can build for you</h2>
             </div>
-            <div className='relative bg-bg-card'>
+            <Panel className='p-0'>
               <ul className='flex flex-col'>
                 {services.map((service, index) => (
                   <ServiceRow
@@ -342,7 +345,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                   />
                 ))}
               </ul>
-            </div>
+            </Panel>
           </div>
         </Reveal>
       </div>
@@ -350,8 +353,10 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
       {/* Final CTA Block: one edge gap under the last block to the dots'
           top rule, then the band role of dots above the box. */}
       <Reveal index={3} className='pt-band'>
-        <div className='dots-band flex flex-col items-center gap-stack bg-bg-card p-callout text-center'>
-          <BlueprintCorners size={16} />
+        <Callout
+          band
+          className='flex flex-col items-center gap-stack text-center'
+        >
           <div className='flex flex-col items-center gap-intro'>
             <h2 className='type-section-title uppercase'>
               Ready to find your leverage?
@@ -381,7 +386,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             </TrackedLink>
             .
           </p>
-        </div>
+        </Callout>
       </Reveal>
     </div>
   )

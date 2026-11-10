@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
+import { RuledRow } from '@/src/components/layout/boxes'
 import {
   Band,
   PageHeader,
@@ -57,9 +58,9 @@ export default function ProcessPage() {
           <Reveal index={1}>
             <ol className='flex flex-col'>
               {STEPS.map(step => (
-                <li
+                <RuledRow
                   key={step.number}
-                  className='grid gap-grid-1 border-t border-border-light py-grid-2 last:pb-0 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
+                  className='grid gap-grid-1 py-grid-2 last:pb-0 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
                 >
                   <div className='flex flex-col gap-grid-1'>
                     <div className='flex items-center gap-grid-1'>
@@ -73,7 +74,7 @@ export default function ProcessPage() {
                     <h3 className='type-item-title'>{step.name}</h3>
                   </div>
                   <p className='max-w-2xl type-intro'>{step.detail}</p>
-                </li>
+                </RuledRow>
               ))}
             </ol>
           </Reveal>
@@ -90,16 +91,16 @@ export default function ProcessPage() {
             <Reveal index={1}>
               <ul className='flex flex-col'>
                 {ONCE_IT_WORKS.map(line => (
-                  <li
+                  <RuledRow
                     key={line}
-                    className='flex gap-grid-half border-t border-border-light py-grid-1 text-base text-text'
+                    className='flex gap-grid-half py-grid-1 text-base text-text'
                   >
                     <span
                       aria-hidden
                       className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
                     />
                     {line}
-                  </li>
+                  </RuledRow>
                 ))}
               </ul>
             </Reveal>
@@ -166,13 +167,14 @@ export default function ProcessPage() {
           <Reveal index={1}>
             <dl className='grid gap-x-grid-3 md:grid-cols-2'>
               {FAQ.map(item => (
-                <div
+                <RuledRow
+                  as='div'
                   key={item.q}
-                  className='flex flex-col gap-grid-half border-t border-border-light py-grid-1'
+                  className='flex flex-col gap-grid-half py-grid-1'
                 >
                   <dt className='type-card-title'>{item.q}</dt>
                   <dd className='text-base text-text-muted'>{item.a}</dd>
-                </div>
+                </RuledRow>
               ))}
             </dl>
           </Reveal>

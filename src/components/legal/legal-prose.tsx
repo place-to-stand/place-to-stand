@@ -1,3 +1,4 @@
+import { RuledRow } from '@/src/components/layout/boxes'
 import type { ReactNode } from 'react'
 import { PageHeader } from '@/src/components/layout/section'
 
@@ -28,7 +29,10 @@ type LegalSectionProps = {
 /** One numbered clause, using the same row-number gutter as the audit list. */
 export function LegalSection({ index, title, children }: LegalSectionProps) {
   return (
-    <section className='grid gap-grid-half border-t border-border pt-grid-1 md:grid-cols-[3rem_1fr] md:gap-0'>
+    <RuledRow
+      as='section'
+      className='grid gap-grid-half pt-grid-1 md:grid-cols-[3rem_1fr] md:gap-0'
+    >
       <span className='font-mono text-sm text-text-muted tabular-nums'>
         {String(index).padStart(2, '0')}
       </span>
@@ -38,7 +42,7 @@ export function LegalSection({ index, title, children }: LegalSectionProps) {
           {children}
         </div>
       </div>
-    </section>
+    </RuledRow>
   )
 }
 

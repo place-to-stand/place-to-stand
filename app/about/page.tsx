@@ -8,6 +8,7 @@ import { teamJsonLd } from '@/src/lib/structured-data'
 import Image from 'next/image'
 import { team, type TeamMember } from '@/src/lib/team'
 import { cn } from '@/src/lib/utils'
+import { RuledRow } from '@/src/components/layout/boxes'
 import { SocialIcon } from '@/src/components/layout/social-icon'
 import { ALT_ROW } from '@/src/components/layout/alt-row'
 
@@ -90,12 +91,15 @@ export default function AboutPage() {
                     <p className='type-intro'>{member.bio}</p>
                   </div>
                   {WHAT_I_BUILD[member.name] && (
-                    <div className='flex flex-col gap-grid-half border-t border-border-light pt-grid-1'>
+                    <RuledRow
+                      as='div'
+                      className='flex flex-col gap-grid-half pt-grid-1'
+                    >
                       <span className='type-fine'>What I build</span>
                       <p className='type-card-title'>
                         {WHAT_I_BUILD[member.name]}
                       </p>
-                    </div>
+                    </RuledRow>
                   )}
                   <SocialLinks member={member} />
                 </div>

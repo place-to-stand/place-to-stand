@@ -21,6 +21,7 @@ export const DESIGN_SECTION_GROUPS = [
       { id: 'marks', label: 'Labels, bullets, chips' },
       { id: 'logo', label: 'Logo' },
       { id: 'forms', label: 'Forms' },
+      { id: 'boxes', label: 'Boxes and strokes' },
     ],
   },
   {

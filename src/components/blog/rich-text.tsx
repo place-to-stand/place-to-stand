@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { BlogBlock } from '@/src/lib/blog'
 import { cn } from '@/src/lib/utils'
+import { RuledRow } from '@/src/components/layout/boxes'
 
 /** Inline markdown: [text](url), **bold** and *italic*, nested freely. */
 const INLINE_PATTERNS = [
@@ -76,29 +77,27 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
         const inSources = sourcesAt !== -1 && index >= sourcesAt
         if (block.type === 'heading' || block.type === 'subheading') {
           return block.type === 'heading' ? (
-            <h2
+            <RuledRow
+              as='h2'
               key={index}
               className={cn(
                 'type-item-title text-balance',
-                inSources
-                  ? 'mt-grid-2 border-t border-border pt-grid-1'
-                  : 'mt-grid-1'
+                inSources ? 'mt-grid-2 pt-grid-1' : 'mt-grid-1 border-t-0'
               )}
             >
               <RichText text={block.text} />
-            </h2>
+            </RuledRow>
           ) : (
-            <h3
+            <RuledRow
+              as='h3'
               key={index}
               className={cn(
                 'type-card-title text-balance',
-                inSources
-                  ? 'mt-grid-2 border-t border-border pt-grid-1'
-                  : 'mt-grid-1'
+                inSources ? 'mt-grid-2 pt-grid-1' : 'mt-grid-1 border-t-0'
               )}
             >
               <RichText text={block.text} />
-            </h3>
+            </RuledRow>
           )
         }
 
