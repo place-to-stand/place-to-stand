@@ -98,8 +98,7 @@ export default function DesignPage() {
         <PageHeader
           label='Design System'
           title='Place To Stand, piece by piece.'
-          // NEW copy, for Jason's sign-off.
-          intro='The colours, type, spacing and building blocks behind placetostandagency.com, shown live. Everything here is the real piece the site uses, so this page always matches the site.'
+          intro='The colours, type, spacing and building blocks behind placetostandagency.com, shown live.'
         />
       </Section>
 

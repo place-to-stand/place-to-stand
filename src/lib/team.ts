@@ -18,7 +18,7 @@ export const team: TeamMember[] = [
     name: 'Jason Desiderio',
     title: 'Principal Engineer',
     city: { name: 'Austin', region: 'TX' },
-    bio: 'Spent over a decade as a Senior Engineer at Squarespace, shipping systems that served millions of users. Brings that large-scale platform discipline to every project, architecting apps built to perform under real-world load.',
+    bio: 'Jason spent almost six years at Squarespace, rising to group engineering manager over three teams and 25 engineers. With AI, he now ships as much as one of those seven-person teams did.',
     image: '/1652631488914.jpeg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/jmdesiderio/',

@@ -143,8 +143,8 @@ export const referralContent = {
     label: 'How we work',
     points: [
       {
-        title: '$1k minimum to start.',
-        body: 'That buys a five-hour block. Hours belong to the client, never expire, and can be spent across any project.',
+        title: 'Five-hour minimum to start.',
+        body: 'Hours belong to the client, never expire, and can be spent across any project.',
       },
       {
         title: 'No surprise bills.',
@@ -167,7 +167,7 @@ export const referralContent = {
 
   audit: {
     heading: "Not sure if someone's a fit?",
-    body: 'Send them the free two-minute audit. No email required, results on screen.',
+    body: 'Send them the free two-minute audit: a preview on screen, the full results by email.',
     buttonLabel: 'Start the free audit',
     href: '/audit',
     url: 'https://placetostandagency.com/audit',

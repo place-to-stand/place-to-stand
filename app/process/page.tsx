@@ -9,7 +9,6 @@ import {
 import { Reveal } from '@/src/components/layout/animated-section'
 import { CtaBand } from '@/src/components/layout/cta-band'
 import { PortalSection } from '@/src/components/sections/portal-section'
-import { PhasesSection } from '@/src/components/sections/phases-section'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/icons/vendor-icons'
 import { BILLING, FAQ, STEPS } from '@/src/lib/offers'
@@ -157,7 +156,6 @@ export default function ProcessPage() {
       </Band>
 
       <Band tone='light'>
-        <PhasesSection showHowWeWorkLink={false} />
         <Section id='faq' className='flex scroll-mt-24 flex-col gap-stack'>
           <Reveal index={0}>
             <SectionHeading
