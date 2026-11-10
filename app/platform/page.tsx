@@ -14,6 +14,7 @@ import { JsonLd } from '@/src/components/seo/json-ld'
 import { servicesJsonLd } from '@/src/lib/structured-data'
 import {
   AFTER_LAUNCH,
+  AI_ACCESS,
   MOBILE_APPS,
   OFFERS,
   PLATFORM_SHARED,
@@ -23,7 +24,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: 'What we build',
   description:
-    'Custom operations software and Shopify development: one system that runs your business, stores that sell, one source of data, and you own all of it.',
+    'Custom operations software and Shopify development: one system that runs your business, stores that sell, and a model-agnostic MCP server with role-based access control, all on one source of data you own.',
   path: '/platform',
 })
 
@@ -113,6 +114,18 @@ export default function PlatformPage() {
         {OFFERS.map((offer, index) => (
           <OfferSection key={offer.slug} offer={offer} index={index} />
         ))}
+        <Section
+          id='ai-access'
+          className='flex scroll-mt-24 flex-col gap-stack'
+        >
+          <Reveal index={0}>
+            <SectionHeading
+              label='AI Access'
+              title={AI_ACCESS.title}
+              intro={AI_ACCESS.body}
+            />
+          </Reveal>
+        </Section>
         <Section>
           <Reveal index={0} className='border-l-4 border-accent pl-grid-1'>
             <p className='type-card-title'>{MOBILE_APPS}</p>

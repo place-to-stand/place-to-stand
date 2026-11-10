@@ -28,7 +28,13 @@ export type Offer = {
 
 /** True of every Run your business module; shown once under the grid. */
 export const PLATFORM_SHARED =
-  'Across all of it: one search, and each person sees only what their role allows.'
+  'Across all of it: one search, an AI connector that works with any model, and every person and every agent sees only what their role allows.'
+
+/** The built-in MCP connector, as its own block on Platform. */
+export const AI_ACCESS = {
+  title: 'Your AI can work in it too.',
+  body: 'Any AI assistant can read and update your data through a built-in connector (MCP). It follows the same roles as your team, so an agent can never see more than the person using it.',
+}
 
 /** Shown once below both offers on Platform. */
 export const MOBILE_APPS =
