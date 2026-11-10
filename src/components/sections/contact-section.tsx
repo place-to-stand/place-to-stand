@@ -14,6 +14,7 @@ import { ChevronDown } from 'lucide-react'
 import { usePostHog } from 'posthog-js/react'
 
 import { SectionHeading, Section } from '@/src/components/layout/section'
+import { CONTACT_EMAIL } from '@/src/lib/site'
 import { Button } from '@/src/components/ui/button'
 import { HeardFromField } from '@/src/components/forms/heard-from-field'
 import { Checkbox } from '@/src/components/ui/checkbox'
@@ -161,9 +162,18 @@ export function ContactSection() {
   return (
     <Section id='message' className='flex scroll-mt-24 flex-col gap-stack'>
       <SectionHeading
-        label='Or Send Us a Message'
+        label='Send a Message'
         title='Prefer to write?'
-        intro="Send a message and we'll get back to you within one business day."
+        intro={
+          <>
+            Send a message and we&apos;ll get back to you within one business
+            day. Or email{' '}
+            <a href={`mailto:${CONTACT_EMAIL}`} className='link-inline'>
+              {CONTACT_EMAIL}
+            </a>
+            .
+          </>
+        }
       />
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />

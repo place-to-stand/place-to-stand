@@ -9,12 +9,15 @@ import {
 import { Reveal } from '@/src/components/layout/animated-section'
 import { ContactSection } from '@/src/components/sections/contact-section'
 import { BookCallButton } from '@/src/components/layout/cta'
-import { CtaBand } from '@/src/components/layout/cta-band'
+import { Button } from '@/src/components/ui/button'
+import { TrackedLink } from '@/src/components/tracked-link'
+import Link from 'next/link'
+import { CTA } from '@/src/components/layout/cta'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Book a call',
   description:
-    'Book a free 30-minute intro call with the engineers who would build your software. Or send a message, or take the free two-minute audit.',
+    'Book a free 30-minute intro call with the engineers who would build your software, take the free audit, or send a message.',
   path: '/contact',
 })
 
@@ -45,16 +48,62 @@ const CALL = [
   },
 ]
 
+/** The three ways in, as equal cards under the header. */
+const OPTIONS = [
+  {
+    href: '#call',
+    title: 'Book a call',
+    body: "Talk it through with the people who'd build it.",
+    action: 'Pick a time',
+  },
+  {
+    href: '#audit',
+    title: 'Take the audit',
+    body: 'Not ready to talk? Answer a few questions and see where software would help most.',
+    action: 'Start the audit',
+  },
+  {
+    href: '#message',
+    title: 'Send a message',
+    body: 'Prefer to write? Use the form, or email us.',
+    action: 'Write to us',
+  },
+] as const
+
 export default function ContactPage() {
   return (
     <main className='flex-1 pt-page-start'>
-      <Section priority className='pb-grid-2'>
+      <Section priority className='flex flex-col gap-header pb-grid-2'>
         <PageHeader
           label='Contact'
           title="Let's talk."
-          // Approved Nov 10.
-          intro='Book a call, send a message, or take the free audit.'
+          intro='Book a call, take the free audit, or send a message.'
         />
+        <Reveal index={1}>
+          <ul className='grid gap-grid-1 md:grid-cols-3'>
+            {OPTIONS.map((option, index) => (
+              <li key={option.href}>
+                <Link
+                  href={option.href}
+                  className='group flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card transition-colors hover:bg-bg-elevated'
+                >
+                  <span className='font-mono text-sm text-text-muted'>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className='flex flex-col gap-grid-half'>
+                    <span className='type-card-title'>{option.title}</span>
+                    <span className='text-base text-text-muted'>
+                      {option.body}
+                    </span>
+                  </span>
+                  <span className='mt-auto type-fine group-hover:text-text'>
+                    {option.action} &darr;
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </Section>
 
       <Band tone='light'>
@@ -88,19 +137,33 @@ export default function ContactPage() {
             <p className='type-fine'>Opens our calendar in a new tab.</p>
           </Reveal>
         </Section>
+
+        <Section id='audit' className='flex scroll-mt-24 flex-col gap-stack'>
+          <Reveal index={0}>
+            <SectionHeading
+              label='Free Audit · 2 Min'
+              title='Not ready to talk?'
+              intro='Answer a few questions and see where software would help most. You get a preview on screen and the full results by email.'
+            />
+          </Reveal>
+          <Reveal index={1} className='flex flex-col items-start'>
+            <Button
+              asChild
+              size='lg'
+              variant='outline'
+              className='w-full sm:w-auto sm:min-w-60'
+            >
+              <TrackedLink href={CTA.audit.href} location='contact-audit'>
+                {CTA.audit.label}
+              </TrackedLink>
+            </Button>
+          </Reveal>
+        </Section>
       </Band>
 
-      <Band tone='dark'>
+      <Band tone='dark' className='pb-edge'>
         <ContactSection />
       </Band>
-
-      <CtaBand
-        location='contact-audit'
-        label='Free Audit'
-        title='Not ready to talk?'
-        description='See where custom software would help first, in two minutes.'
-        action='audit'
-      />
     </main>
   )
 }
