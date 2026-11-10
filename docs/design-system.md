@@ -176,7 +176,7 @@ Every text link is one of three roles, defined once in `app/globals.css`:
 | Action link | `link-action` (or `ArrowLink` / `AuditLink`) | Mono caps 12px in the text color, no line at rest, the same sliding bar as nav links on hover with the arrow nudging 3px right, never wraps | Standalone links: "See the platform →", "Read the case study →", "Visit site ↗", "Take the free audit" |
 | Inline link | `link-inline`                                | Text-color words with a thin, quiet underline (text color at 35%), turning to the accent line on hover; wraps with the sentence             | Links inside paragraphs: body copy, blog posts, legal pages, fine print under forms                    |
 
-Profile icons (LinkedIn, GitHub, Clutch, X, Instagram) are the nav link role's icon variant: `SocialIcon` with the `link-icon` class, a 14px monochrome glyph in a 24px hit area, muted, turning to the accent line on hover. Used on the About founder rows and the footer bar.
+Profile icons (LinkedIn, GitHub, Clutch, X, Instagram) are the nav link role's icon variant: `SocialIcon` with the `link-icon` class, a 16px monochrome glyph in a 24px hit area, muted, turning to the accent line on hover. Used on the About founder rows and the footer bar.
 
 Cards that are links (client photos, stat tiles, blog rows) are not text links: they react as a whole and keep their own hover. The phone menu's page list uses large headline type for touch.
 
@@ -282,8 +282,15 @@ Every photo, screenshot and video sits in `MediaFrame` (`patterns/media-frame.ts
 
 ### Icons
 
-Not yet defined. Today: vendor marks in the stack section and lucide icons in the audit; no shared set, size or
-stroke rule.
+Approved Nov 10.
+
+1. **One set.** Lucide, through the `Icon` primitive (`primitives/icon.tsx`). Lint (`no-restricted-imports`) keeps `lucide-react` inside it.
+2. **Sizes.** 16 beside text, 24 for a button that is only an icon (the menu). 48 for a rare feature spot. `<Icon icon={ArrowRight} size={24} />`; the default is 16.
+3. **Lines.** A fixed width at every size (Lucide's `absoluteStrokeWidth`): 2px at 16 and 24 so small icons stay legible, 1px at 48 to match the drawings' structure lines.
+4. **Where.** Only in working parts: forms, the audit, arrows, the menu. No icons as section decoration.
+5. **Brand and social marks.** Their real shapes, in one color (`currentColor`): `SocialIcon` at 16px, `vendorIcons` in the stack. Vendor marks in the stack row are logos, not icons, and keep their 36px size.
+
+Icons are `aria-hidden` by default; a button that is only an icon carries an `sr-only` label.
 
 ### Interaction states
 

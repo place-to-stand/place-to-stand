@@ -12,6 +12,7 @@ import {
   CLIENT_PORTAL_URL,
   NAV_LINKS,
 } from '@/src/components/sections/nav-links'
+import { Icon, Menu, X } from '@/src/components/primitives/icon'
 
 export function Header() {
   const pathname = usePathname()
@@ -99,21 +100,7 @@ export function Header() {
             <Dialog.Trigger asChild>
               <button type='button' className='lg:hidden'>
                 <span className='sr-only'>Open navigation</span>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  viewBox='0 0 24 24'
-                  className='h-7 w-7 text-text'
-                  fill='none'
-                  stroke='currentColor'
-                  strokeWidth='1.5'
-                  aria-hidden
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M4 7h16M4 12h16M4 17h16'
-                  />
-                </svg>
+                <Icon icon={Menu} size={24} className='text-text' />
               </button>
             </Dialog.Trigger>
             <Dialog.Portal>
@@ -129,21 +116,7 @@ export function Header() {
                   <Dialog.Close asChild>
                     <button type='button' className='-mr-1 p-1'>
                       <span className='sr-only'>Close navigation</span>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        viewBox='0 0 24 24'
-                        className='h-7 w-7 text-text'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth='1.5'
-                        aria-hidden
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          d='M6 18L18 6M6 6l12 12'
-                        />
-                      </svg>
+                      <Icon icon={X} size={24} className='text-text' />
                     </button>
                   </Dialog.Close>
                 </div>

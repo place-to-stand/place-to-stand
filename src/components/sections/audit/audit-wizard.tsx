@@ -9,7 +9,12 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { usePostHog } from 'posthog-js/react'
-import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
+import {
+  Icon,
+  ArrowLeft,
+  ArrowRight,
+  Loader2,
+} from '@/src/components/primitives/icon'
 import { AuditProgress } from '@/src/components/sections/audit/audit-progress'
 import { QuestionField } from '@/src/components/sections/audit/question-field'
 import { Button } from '@/src/components/primitives/button'
@@ -214,7 +219,7 @@ export function AuditWizard({
         disabled={isScoring}
         className='px-0'
       >
-        <ArrowLeft className='mr-2 h-4 w-4' />
+        <Icon icon={ArrowLeft} className='mr-2' />
         {isFirstQuestion ? 'Back to start' : 'Back'}
       </Button>
 
@@ -225,13 +230,13 @@ export function AuditWizard({
       >
         {isScoring ? (
           <>
-            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            <Icon icon={Loader2} className='mr-2 animate-spin' />
             Analyzing...
           </>
         ) : isFinalQuestion ? (
           <>
             Build my blueprint
-            <ArrowRight className='ml-2 h-4 w-4' />
+            <Icon icon={ArrowRight} className='ml-2' />
           </>
         ) : (
           <>
@@ -241,7 +246,7 @@ export function AuditWizard({
                 &middot; {selectedCount} selected
               </span>
             )}
-            <ArrowRight className='ml-2 h-4 w-4' />
+            <Icon icon={ArrowRight} className='ml-2' />
           </>
         )}
       </Button>

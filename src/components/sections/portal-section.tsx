@@ -48,7 +48,7 @@ export function PortalSection() {
               rel='noopener noreferrer'
               location='portal-open-source'
             >
-              <GitHubIcon className='h-3.5 w-3.5 md:h-4 md:w-4' aria-hidden />
+              <GitHubIcon className='size-4 shrink-0' aria-hidden />
               Open Source
             </TrackedLink>
           </Button>

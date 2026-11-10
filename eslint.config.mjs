@@ -3,6 +3,13 @@ import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
 import { design } from './eslint/plugin.mjs'
 
+const ICON_PRIMITIVE = 'src/components/primitives/icon.tsx'
+const LUCIDE = {
+  name: 'lucide-react',
+  message:
+    'Use the Icon primitive (@/src/components/primitives/icon): it fixes icon size and line width.',
+}
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -62,28 +69,46 @@ const eslintConfig = defineConfig([
     ],
     rules: { 'design/no-raw-border': 'off' },
   },
+  // Icons: lucide-react is imported only by the Icon primitive, which fixes
+  // size and line width (docs/design-system.md, Guidelines > Icons).
+  {
+    files: ['app/**/*.{ts,tsx}', 'src/**/*.{ts,tsx}'],
+    ignores: [ICON_PRIMITIVE],
+    rules: { 'no-restricted-imports': ['error', { paths: [LUCIDE] }] },
+  },
   // Tiers: each tier imports only from the tiers below it
   // (docs/design-system.md, Tiers). Primitives < boxes < patterns <
-  // sections < templates < pages.
+  // sections < templates < pages. These blocks repeat the Lucide rule, since a
+  // later no-restricted-imports replaces an earlier one for the same file.
   ...[
     ['primitives', ['boxes', 'patterns', 'sections', 'templates']],
     ['boxes', ['patterns', 'sections', 'templates']],
     ['patterns', ['sections', 'templates']],
     ['sections', ['templates']],
-  ].map(([tier, above]) => ({
-    files: [`src/components/${tier}/**/*.{ts,tsx}`],
-    rules: {
-      'no-restricted-imports': [
-        'error',
-        {
-          patterns: above.map(name => ({
-            group: [`@/src/components/${name}`, `@/src/components/${name}/**`],
-            message: `${tier} sit below ${name}: import only from lower tiers (docs/design-system.md, Tiers).`,
-          })),
+  ].flatMap(([tier, above]) => {
+    const patterns = above.map(name => ({
+      group: [`@/src/components/${name}`, `@/src/components/${name}/**`],
+      message: `${tier} sit below ${name}: import only from lower tiers (docs/design-system.md, Tiers).`,
+    }))
+    const files = [`src/components/${tier}/**/*.{ts,tsx}`]
+    return [
+      {
+        files,
+        ignores: [ICON_PRIMITIVE],
+        rules: {
+          'no-restricted-imports': ['error', { paths: [LUCIDE], patterns }],
         },
-      ],
-    },
-  })),
+      },
+      ...(tier === 'primitives'
+        ? [
+            {
+              files: [ICON_PRIMITIVE],
+              rules: { 'no-restricted-imports': ['error', { patterns }] },
+            },
+          ]
+        : []),
+    ]
+  }),
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

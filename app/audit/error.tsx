@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { usePostHog } from 'posthog-js/react'
-import { RotateCcw } from 'lucide-react'
+import { Icon, RotateCcw } from '@/src/components/primitives/icon'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { Button } from '@/src/components/primitives/button'
 import { getAuditSessionSnapshot } from '@/src/lib/audit/session'
@@ -82,7 +82,7 @@ export default function AuditError({
 
           <div className='mt-grid-1 flex flex-wrap items-center gap-grid-half'>
             <Button type='button' onClick={reset}>
-              <RotateCcw className='mr-2 h-4 w-4' />
+              <Icon icon={RotateCcw} className='mr-2' />
               Show my results
             </Button>
             {/* The one conversion path that does not depend on the crashed

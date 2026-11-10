@@ -1425,6 +1425,8 @@ main {
      visual weight of 12px mono caps), muted, accent line on hover. */
   .link-icon {
     display: inline-flex;
+    /* Top-aligned so the 24px box never picks up a line's descender space. */
+    vertical-align: top;
     width: 24px;
     height: 24px;
     align-items: center;
@@ -1433,8 +1435,8 @@ main {
     transition: color var(--link-dur) var(--hover-ease);
   }
   .link-icon svg {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
   }
   .link-icon:hover,
   .link-icon:focus-visible {

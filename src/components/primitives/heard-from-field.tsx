@@ -1,7 +1,7 @@
 'use client'
 
 import type { UseFormRegisterReturn } from 'react-hook-form'
-import { ChevronDown } from 'lucide-react'
+import { Icon, ChevronDown } from '@/src/components/primitives/icon'
 
 import { Input } from '@/src/components/primitives/input'
 import { Label } from '@/src/components/primitives/label'
@@ -38,9 +38,10 @@ export function HeardFromField({
             </option>
           ))}
         </select>
-        <ChevronDown
+        <Icon
+          icon={ChevronDown}
           aria-hidden='true'
-          className='pointer-events-none absolute top-1/2 right-grid-half size-4 -translate-y-1/2 text-text-muted'
+          className='pointer-events-none absolute top-1/2 right-grid-half -translate-y-1/2 text-text-muted'
         />
       </div>
       {showOther ? (

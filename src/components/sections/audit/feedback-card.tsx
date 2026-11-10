@@ -1,7 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, ThumbsDown, ThumbsUp } from 'lucide-react'
+import {
+  Icon,
+  Check,
+  ThumbsDown,
+  ThumbsUp,
+  type LucideIcon,
+} from '@/src/components/primitives/icon'
 import { Button } from '@/src/components/primitives/button'
 import { Label } from '@/src/components/primitives/label'
 import { Textarea } from '@/src/components/primitives/textarea'
@@ -53,7 +59,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
       {isSent ? (
         <div className='flex flex-col items-center gap-2 text-center'>
           <span className='flex h-8 w-8 items-center justify-center bg-accent-muted text-accent'>
-            <Check className='h-4 w-4' strokeWidth={3} />
+            <Icon icon={Check} />
           </span>
           <h2 className='type-card-title uppercase'>Thanks for the feedback</h2>
           <p className='max-w-md text-base text-balance text-text-muted'>
@@ -127,12 +133,12 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
 
 interface VoteButtonProps {
   label: string
-  icon: typeof ThumbsUp
+  icon: LucideIcon
   selected: boolean
   onClick: () => void
 }
 
-function VoteButton({ label, icon: Icon, selected, onClick }: VoteButtonProps) {
+function VoteButton({ label, icon, selected, onClick }: VoteButtonProps) {
   return (
     <button
       type='button'
@@ -146,7 +152,8 @@ function VoteButton({ label, icon: Icon, selected, onClick }: VoteButtonProps) {
       )}
     >
       <Icon
-        className={cn('h-4 w-4', selected ? 'text-accent' : 'text-text-muted')}
+        icon={icon}
+        className={cn(selected ? 'text-accent' : 'text-text-muted')}
       />
       {label}
     </button>

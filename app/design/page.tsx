@@ -17,6 +17,7 @@ import { Button } from '@/src/components/primitives/button'
 import { Input } from '@/src/components/primitives/input'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
+import { ArrowRight, Check, Icon, Menu } from '@/src/components/primitives/icon'
 import { TagRow } from '@/src/components/patterns/tag-row'
 import { OfferCard } from '@/src/components/sections/offers'
 import { OwnershipSection } from '@/src/components/sections/ownership'
@@ -889,27 +890,81 @@ export default function DesignPage() {
             id='icons'
             label='Guidelines'
             title='Icons'
-            when={'Not yet defined.'}
+            when='Approved Nov 10. Lint keeps lucide-react inside the Icon primitive.'
           >
-            <p className='max-w-2xl text-base text-text-muted'>
-              Not yet defined. What the site does today:
-            </p>
-            <ul className='flex flex-col gap-grid-half'>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Vendor marks in the stack section; lucide icons in the audit.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                No shared set, size or stroke rule for icons yet.
-              </li>
-            </ul>
+            <Specimen names={['Icon']} note='16 · 24 · 48'>
+              <div className='flex flex-wrap items-end gap-grid-2 text-text'>
+                {([16, 24, 48] as const).map(size => (
+                  <div
+                    key={size}
+                    className='flex flex-col items-start gap-grid-half'
+                  >
+                    <div className='flex items-center gap-grid-half'>
+                      <Icon icon={ArrowRight} size={size} />
+                      <Icon icon={Check} size={size} />
+                      <Icon icon={Menu} size={size} />
+                    </div>
+                    <span className='bp-label font-mono'>
+                      {size}px · {size === 48 ? 1 : 2}px line
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Specimen>
+            <Specimen names={['Icon']} note='five rules'>
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>1. One set.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Lucide, through the Icon primitive. Lint keeps lucide-react
+                    inside it.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>2. Sizes.</dt>
+                  <dd className='text-base text-text-muted'>
+                    16 beside text, 24 for a button that is only an icon (the
+                    menu). 48 for a rare feature spot.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>3. Lines.</dt>
+                  <dd className='text-base text-text-muted'>
+                    A fixed width at every size: 2px at 16 and 24, 1px at 48.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>4. Where.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Only in working parts: forms, the audit, arrows, the menu.
+                    No icons as section decoration.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>
+                    5. Brand and social marks.
+                  </dt>
+                  <dd className='text-base text-text-muted'>
+                    Their real shapes, in one color.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
           </DesignSection>
 
           <DesignSection

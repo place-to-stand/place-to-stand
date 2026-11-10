@@ -1,6 +1,6 @@
 'use client'
 
-import { Check } from 'lucide-react'
+import { Icon, Check } from '@/src/components/primitives/icon'
 import { cn } from '@/src/lib/utils'
 import { Textarea } from '@/src/components/primitives/textarea'
 import type { AnswerValue, AuditQuestion } from '@/src/lib/audit/types'
@@ -70,7 +70,7 @@ export function QuestionField({
                       : 'border-border-light bg-bg text-transparent'
                   )}
                 >
-                  <Check className='h-3.5 w-3.5' strokeWidth={3} />
+                  <Icon icon={Check} />
                 </span>
                 <span className='space-y-0.5'>
                   <span className='block text-base font-medium text-text'>

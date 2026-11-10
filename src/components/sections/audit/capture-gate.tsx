@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { usePostHog } from 'posthog-js/react'
-import { CheckCircle2 } from 'lucide-react'
+import { Icon, CheckCircle2 } from '@/src/components/primitives/icon'
 import { AuditProgress } from '@/src/components/sections/audit/audit-progress'
 import { EmailCaptureForm } from '@/src/components/sections/audit/lead-forms'
 import { QUESTIONS } from '@/src/lib/audit/questions'
@@ -51,7 +51,7 @@ export function CaptureGate({
 
       <div className='relative max-w-2xl pt-grid-1 sm:pt-grid-2'>
         <span className='inline-flex items-center gap-2 font-mono text-xs tracking-[0.15em] text-accent uppercase'>
-          <CheckCircle2 aria-hidden className='h-4 w-4' />
+          <Icon icon={CheckCircle2} />
           Analysis complete
         </span>
         <h2 className='mt-grid-half type-section-title uppercase'>

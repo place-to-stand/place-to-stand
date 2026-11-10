@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { usePostHog } from 'posthog-js/react'
 import {
+  Icon,
   ArrowRight,
   BarChart3,
   CheckCircle2,
@@ -19,7 +20,7 @@ import {
   Sparkles,
   Users,
   Workflow,
-} from 'lucide-react'
+} from '@/src/components/primitives/icon'
 import {
   FeedbackCard,
   type FeedbackCardProps,
@@ -117,7 +118,7 @@ export function ResultsView({
       <div className='mb-grid-half flex items-center justify-between'>
         <span className='bp-label font-mono'>Audit Results</span>
         <Button type='button' variant='ghost' size='sm' onClick={onRestart}>
-          <RotateCcw className='mr-2 h-4 w-4' />
+          <Icon icon={RotateCcw} className='mr-2' />
           Start over
         </Button>
       </div>
@@ -133,12 +134,12 @@ export function ResultsView({
           className='mb-grid-half flex items-center justify-between gap-grid-half border border-accent-subtle bg-accent-muted px-grid-half py-grid-half text-base text-text transition-colors hover:border-accent'
         >
           <span className='inline-flex items-center gap-2'>
-            <Mail aria-hidden className='h-4 w-4 shrink-0 text-accent' />
+            <Icon icon={Mail} className='text-accent' />
             {lockedCount > 0
               ? `Showing your top opportunity. Get all ${recommendations.length} in your inbox.`
               : 'Get a copy of your blueprint in your inbox.'}
           </span>
-          <ArrowRight aria-hidden className='h-4 w-4 shrink-0 text-accent' />
+          <Icon icon={ArrowRight} className='text-accent' />
         </a>
       )}
 
@@ -224,7 +225,10 @@ export function ResultsView({
               <ul className='mt-grid-half space-y-1.5'>
                 {phase.signals.map(signal => (
                   <li key={signal} className='flex gap-2 text-base text-text'>
-                    <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
+                    <Icon
+                      icon={CheckCircle2}
+                      className='mt-0.5 text-text-muted'
+                    />
                     {signal}
                   </li>
                 ))}
@@ -237,7 +241,10 @@ export function ResultsView({
               <ul className='mt-grid-half space-y-1.5'>
                 {phase.nextSteps.map(step => (
                   <li key={step} className='flex gap-2 text-base text-text'>
-                    <ArrowRight className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
+                    <Icon
+                      icon={ArrowRight}
+                      className='mt-0.5 text-text-muted'
+                    />
                     {step}
                   </li>
                 ))}
@@ -303,7 +310,7 @@ export function ResultsView({
           </div>
           <div className='grid gap-grid-1 sm:grid-cols-2'>
             {visibleRecommendations.map((rec, index) => {
-              const Icon = SERVICE_ICONS[rec.service.icon] ?? Sparkles
+              const glyph = SERVICE_ICONS[rec.service.icon] ?? Sparkles
               return (
                 <Panel
                   as='article'
@@ -312,7 +319,7 @@ export function ResultsView({
                 >
                   <div className='flex items-center gap-grid-half'>
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
-                      <Icon className='h-5 w-5' />
+                      <Icon icon={glyph} size={24} />
                     </div>
                     <Chip className='ml-auto'>#{index + 1}</Chip>
                   </div>
@@ -415,7 +422,7 @@ function LockedRecommendation({ rank }: { rank: number }) {
         aria-hidden
         className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text-muted transition-colors group-hover:text-accent'
       >
-        <Lock className='h-5 w-5' />
+        <Icon icon={Lock} size={24} />
       </div>
       <div aria-hidden className='min-w-0 flex-1'>
         <div className='h-3 w-2/3 bg-bg-elevated' />
@@ -454,7 +461,7 @@ function CapturedPanel({
       <div className='grid gap-grid-2 md:grid-cols-2'>
         <div className='flex min-w-0 flex-col items-start gap-grid-half'>
           <p className='inline-flex items-center gap-2 font-mono text-sm tracking-[0.15em] text-accent uppercase'>
-            <CheckCircle2 aria-hidden className='h-4 w-4' />
+            <Icon icon={CheckCircle2} />
             Blueprint sent
           </p>
           <h2 className='type-card-title uppercase'>Check your inbox</h2>

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useId, useState } from 'react'
 import { usePostHog } from 'posthog-js/react'
 import {
+  Icon,
   ArrowRight,
   BarChart3,
   ChevronDown,
@@ -18,7 +19,7 @@ import {
   Sparkles,
   Target,
   Zap,
-} from 'lucide-react'
+} from '@/src/components/primitives/icon'
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { Callout, Card, Panel, RuledRow } from '@/src/components/boxes'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
@@ -86,7 +87,7 @@ type ServiceRowProps = {
 function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
   const id = useId()
   const panelId = `${id}-panel`
-  const Icon = SERVICE_ICONS[service.icon] ?? Code2
+  const glyph = SERVICE_ICONS[service.icon] ?? Code2
 
   return (
     <RuledRow className='first:border-t-0'>
@@ -121,7 +122,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
                 : 'border-border group-hover:border-accent'
             )}
           >
-            <Icon aria-hidden className='h-4 w-4' />
+            <Icon icon={glyph} />
           </span>
           <span className='font-headline text-base font-semibold tracking-tight text-text'>
             {service.title}
@@ -135,10 +136,10 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
 
         {/* Expand indicator */}
         <span className='flex items-center justify-center'>
-          <ChevronDown
-            aria-hidden
+          <Icon
+            icon={ChevronDown}
             className={cn(
-              'h-4 w-4 transition-transform duration-300 ease-out',
+              'transition-transform duration-300 ease-out',
               isOpen ? 'rotate-180 text-accent' : 'text-text-muted'
             )}
           />
@@ -214,12 +215,12 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               className='mt-grid-1 px-grid-2'
             >
               Start the audit
-              <ArrowRight className='ml-2 h-4 w-4' />
+              <Icon icon={ArrowRight} className='ml-2' />
             </Button>
             <div className='flex flex-wrap items-center justify-center gap-x-grid-1 gap-y-2 text-base text-text-muted'>
-              {HIGHLIGHTS.map(({ icon: Icon, label }) => (
+              {HIGHLIGHTS.map(({ icon, label }) => (
                 <span key={label} className='inline-flex items-center gap-1.5'>
-                  <Icon className='h-4 w-4 text-text' />
+                  <Icon icon={icon} className='text-text' />
                   {label}
                 </span>
               ))}
@@ -312,13 +313,13 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               as='ol'
               className='grid gap-x-grid-1 gap-y-grid-2 pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'
             >
-              {AUDIT_COVERS.map(({ icon: Icon, title, description }, index) => (
+              {AUDIT_COVERS.map(({ icon, title, description }, index) => (
                 <li key={title} className='flex flex-col gap-grid-half'>
                   <div className='flex items-center gap-grid-half text-text-muted'>
                     <span className='font-mono text-xs tabular-nums'>
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <Icon className='h-5 w-5 text-text' aria-hidden />
+                    <Icon icon={icon} size={24} className='text-text' />
                   </div>
                   <h3 className='type-card-title'>{title}</h3>
                   <p className='text-base text-text-muted'>{description}</p>
@@ -377,7 +378,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             className='px-grid-2'
           >
             Start the audit
-            <ArrowRight className='ml-2 h-4 w-4' />
+            <Icon icon={ArrowRight} className='ml-2' />
           </Button>
           <p className='text-base text-text-muted'>
             Prefer to talk first?{' '}

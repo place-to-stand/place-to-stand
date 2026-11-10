@@ -439,7 +439,7 @@ function ServerGraphic({ className }: GraphicProps) {
   )
 }
 
-/** Icon-key → schematic, mirroring serviceIcons in src/lib/service-icons.ts. */
+/** Service icon key → schematic (the keys in the audit's SERVICE_ICONS). */
 export const serviceGraphics: Record<
   string,
   (props: GraphicProps) => React.ReactElement

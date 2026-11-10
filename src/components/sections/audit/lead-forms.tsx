@@ -5,7 +5,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePostHog } from 'posthog-js/react'
 import type { PostHog } from 'posthog-js'
-import { ArrowRight, Loader2 } from 'lucide-react'
+import { Icon, ArrowRight, Loader2 } from '@/src/components/primitives/icon'
 import { Button } from '@/src/components/primitives/button'
 import { Checkbox } from '@/src/components/primitives/checkbox'
 import { Input } from '@/src/components/primitives/input'
@@ -233,13 +233,13 @@ export function EmailCaptureForm({
       >
         {isPending ? (
           <>
-            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            <Icon icon={Loader2} className='mr-2 animate-spin' />
             Sending...
           </>
         ) : (
           <>
             {submitLabel}
-            <ArrowRight className='ml-2 h-4 w-4' />
+            <Icon icon={ArrowRight} className='ml-2' />
           </>
         )}
       </Button>
