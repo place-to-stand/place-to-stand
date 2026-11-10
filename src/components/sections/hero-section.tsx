@@ -38,7 +38,7 @@ export function HeroSection() {
           <div className='hero-frame relative mx-px'>
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
-            <BlueprintCorners size={20} colorClassName='border-accent' />
+            <BlueprintCorners size={20} />
             <h1 className='px-grid-half py-grid-half text-center font-headline text-[clamp(2.25rem,min(7vw,max(11svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pr-0 md:pl-grid-1 md:text-left'>
               <span
                 className='hero-line block'

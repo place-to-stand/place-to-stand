@@ -108,7 +108,7 @@ export function Callout<T extends ElementType = 'div'>({
       )}
       {...props}
     >
-      <BlueprintCorners size={20} all colorClassName='border-accent' />
+      <BlueprintCorners size={20} all />
       {children}
     </Tag>
   )

@@ -352,7 +352,7 @@ export default function DesignPage() {
             </Specimen>
             <Specimen
               names={['Callout', 'Callout band']}
-              note='the page’s one ask, or a quote: no stroke, 20px corner marks'
+              note='the page’s one ask, or a quote: no stroke, 20px corner marks at 2px in accent-subtle'
             >
               <Callout className='flex flex-col gap-grid-half'>
                 <span className='type-card-title'>Callout</span>

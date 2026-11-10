@@ -1,40 +1,39 @@
 import * as React from 'react'
 
 /**
- * Blueprint corner marks — renders accent-colored corner brackets
- * on cards, panels, and content blocks to anchor them to the schematic.
+ * Blueprint corner marks: corner brackets that anchor a block to the
+ * schematic. One rule everywhere: the 2px emphasis stroke in accent-subtle,
+ * hanging 1px outside the box.
  */
 export function BlueprintCorners({
   size = 12,
   all = false,
-  colorClassName = 'border-accent-subtle',
 }: {
   size?: number
   all?: boolean
-  colorClassName?: string
 }) {
   const style = { width: size, height: size }
   return (
     <>
       <span
-        className={`pointer-events-none absolute -top-px -left-px z-(--z-raised) border-t border-l ${colorClassName}`}
+        className={`pointer-events-none absolute -top-px -left-px z-(--z-raised) border-t-(length:--stroke-emphasis) border-l-(length:--stroke-emphasis) border-accent-subtle`}
         style={style}
         aria-hidden
       />
       <span
-        className={`pointer-events-none absolute -right-px -bottom-px z-(--z-raised) border-r border-b ${colorClassName}`}
+        className={`pointer-events-none absolute -right-px -bottom-px z-(--z-raised) border-r-(length:--stroke-emphasis) border-b-(length:--stroke-emphasis) border-accent-subtle`}
         style={style}
         aria-hidden
       />
       {all && (
         <>
           <span
-            className={`pointer-events-none absolute -top-px -right-px z-(--z-raised) border-t border-r ${colorClassName}`}
+            className={`pointer-events-none absolute -top-px -right-px z-(--z-raised) border-t-(length:--stroke-emphasis) border-r-(length:--stroke-emphasis) border-accent-subtle`}
             style={style}
             aria-hidden
           />
           <span
-            className={`pointer-events-none absolute -bottom-px -left-px z-(--z-raised) border-b border-l ${colorClassName}`}
+            className={`pointer-events-none absolute -bottom-px -left-px z-(--z-raised) border-b-(length:--stroke-emphasis) border-l-(length:--stroke-emphasis) border-accent-subtle`}
             style={style}
             aria-hidden
           />
