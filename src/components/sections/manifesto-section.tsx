@@ -1,32 +1,19 @@
 import { Section } from '@/src/components/layout/section'
 import Link from 'next/link'
 import { Reveal } from '@/src/components/layout/animated-section'
+import { WHO_YOU_WORK_WITH } from '@/src/lib/offers'
 import {
   DraftingGraphic,
   AiNativeGraphic,
   DirectAccessGraphic,
 } from '@/src/components/graphics/home-graphics'
 
-const facets = [
-  {
-    title: 'Senior Builders',
-    Graphic: DraftingGraphic,
-    description:
-      'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
-  },
-  {
-    title: 'AI-Native',
-    Graphic: AiNativeGraphic,
-    description:
-      'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
-  },
-  {
-    title: 'Direct Access',
-    Graphic: DirectAccessGraphic,
-    description:
-      'You work with the builder directly. No middle management, no handoffs, no telephone game.',
-  },
-]
+const GRAPHICS = [DraftingGraphic, AiNativeGraphic, DirectAccessGraphic]
+
+const facets = WHO_YOU_WORK_WITH.facets.map((facet, index) => ({
+  ...facet,
+  Graphic: GRAPHICS[index],
+}))
 
 export function ManifestoSection() {
   return (
@@ -37,14 +24,11 @@ export function ManifestoSection() {
           <Reveal index={0} className='flex flex-col gap-eyebrow'>
             <span className='bp-label font-mono'>Who You Work With</span>
             <h2 className='type-section-title text-balance'>
-              You work with the people who build it.
+              {WHO_YOU_WORK_WITH.title}
             </h2>
           </Reveal>
           <Reveal index={1} className='max-w-xl text-base text-text-muted'>
-            <p>
-              Senior engineers who use AI to move fast, with no account managers
-              in between.
-            </p>
+            <p>{WHO_YOU_WORK_WITH.intro}</p>
           </Reveal>
           {/* Mobile-only link: sits with the subtext, above the cards */}
           <Reveal index={2} className='pt-2 md:hidden'>
@@ -67,7 +51,7 @@ export function ManifestoSection() {
                   <h3 className='type-card-title'>{facet.title}</h3>
                   <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
-                <p className='text-base text-text-muted'>{facet.description}</p>
+                <p className='text-base text-text-muted'>{facet.body}</p>
               </div>
             ))}
           </div>

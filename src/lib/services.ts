@@ -15,37 +15,39 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: 'run-your-business',
-    title: 'Run Your Business',
-    tagline: 'One system for the work behind the scenes',
+    title: 'Run your business',
+    tagline: 'CRM, projects and workflows in one system you own',
     description:
-      'A shared workspace for your team, CRM, workflows and automations, on one source of data you own. It stands in for the stack of subscriptions and spreadsheets you juggle today.',
+      'CRM, projects and workflows in one system you own, instead of HubSpot, Asana and spreadsheets. Every person and every AI agent sees only what their role allows.',
     icon: 'GitBranch',
     features: [
-      'Team workspace: clients, projects, tasks and time',
-      'CRM with every lead, contact and company',
-      'Workflows your team repeats, done the same way',
-      'Automations for reports, reminders and syncing tools',
-      'Client portal and live reports',
+      'Team workspace: projects, tasks and time logs',
+      'Website: marketing site design and development, with every form feeding your CRM',
+      'CRM: leads, companies and people',
+      'Billing: invoices and prepaid hour blocks',
+      'Reports: the monthly close and live numbers',
+      'Client portal',
+      'Workflows and automations',
     ],
   },
   {
     slug: 'sell-online',
-    title: 'Sell Online',
+    title: 'Sell online',
     tagline: 'Shopify stores and fully custom marketplaces',
     description:
-      'Shopify and headless storefronts, custom marketplaces, Shopify apps, payments, fulfillment and inventory, built for brands like Hot Ones and Heatonist.',
+      'Shopify stores or fully custom marketplaces, plus the systems behind them: payments, fulfillment and dropshipping. Built for brands like Hot Ones and Heatonist.',
     icon: 'Code2',
     features: [
-      'Shopify stores and headless storefronts',
-      'Custom marketplaces you own',
+      'Shopify stores',
+      'Custom marketplaces',
       'Shopify apps and functions',
-      'Payments through Stripe',
-      'Fulfillment and inventory across channels',
+      'Payments',
+      'Fulfillment and inventory',
     ],
   },
   {
     slug: 'managed-services',
-    title: 'Managed Services',
+    title: 'Managed services',
     tagline: 'We keep it running after launch',
     description:
       'Security updates, error and speed monitoring, analytics and SEO reports, data checks and a weekly email, with a shared channel in Slack, Teams, Google Chat or Discord.',
@@ -59,7 +61,7 @@ export const services: Service[] = [
   },
   {
     slug: 'technical-consulting',
-    title: 'Technical Consulting',
+    title: 'Technical consulting',
     tagline: 'What to build, buy or hire for',
     description:
       'Advice from people who build every day: which tools to keep, what to build, and who to hire.',

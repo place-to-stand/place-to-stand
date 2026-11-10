@@ -11,11 +11,13 @@ export type Module = {
   /** Tools or habits this module stands in for ("Instead of"). */
   insteadOf?: string[]
   /** A client who runs it, for e-commerce modules. */
-  example?: string
+  /** Clients who run it, as "Built for" tags. */
+  example?: string | string[]
 }
 
 export type Offer = {
-  slug: 'run-your-business' | 'sell-online'
+  /** Also the section id on Platform: /platform#run, /platform#sell. */
+  slug: 'run' | 'sell'
   name: string
   /** The line under the name: the tools people already know. */
   summary: string
@@ -42,7 +44,7 @@ export const MOBILE_APPS =
 
 export const OFFERS: Offer[] = [
   {
-    slug: 'run-your-business',
+    slug: 'run',
     name: 'Run your business',
     summary:
       'CRM, projects and workflows in one system you own, instead of HubSpot, Asana and spreadsheets.',
@@ -87,7 +89,7 @@ export const OFFERS: Offer[] = [
     ],
   },
   {
-    slug: 'sell-online',
+    slug: 'sell',
     name: 'Sell online',
     summary:
       'Shopify stores or fully custom marketplaces, plus the systems behind them: payments, fulfillment and dropshipping.',
@@ -110,6 +112,7 @@ export const OFFERS: Offer[] = [
       {
         name: 'Payments',
         job: 'Checkout, subscriptions and invoices through Stripe.',
+        example: ['Heatonist', 'GreenWATT', '9 Point Studios'],
       },
       {
         name: 'Fulfillment and inventory',
@@ -127,26 +130,60 @@ export const SELL_ONLINE_CLIENTS = [
   'Blake Brown Beauty',
 ]
 
+/** The ownership promise: the same seven lines on Home, Platform and About. */
+export const OWNERSHIP_TITLE = 'You own all of it.'
+
 export const OWNERSHIP = [
   { title: 'Your code.', body: 'Everything we build for you is yours.' },
   {
     title: 'Your data.',
-    body: 'We use it only to do the work, and it never trains AI.',
+    body: 'We touch it only to do the work, and it never trains AI.',
   },
   {
     title: 'Your accounts.',
-    body: 'It runs on hosting in your name, not ours.',
+    body: 'Your software runs on hosting in your name, not ours.',
   },
-  { title: 'No seat fees.', body: 'Add people without paying more.' },
+  {
+    title: 'No license or seat fees.',
+    body: 'Add people without paying more.',
+  },
+  {
+    title: 'Free use of our tools.',
+    body: 'Any of our own code inside your software is yours to use, free and for good.',
+  },
   {
     title: 'No lock-in.',
     body: 'Walk away any time and take it all with you.',
   },
   {
-    title: 'One home for your data,',
-    body: 'so AI agents can work with it.',
+    title: 'One home for your data.',
+    body: 'Everything in one place, ready for your team and your AI agents.',
   },
 ]
+
+/** "Who you work with": Home, About's intro and the audit landing. */
+export const WHO_YOU_WORK_WITH = {
+  title: 'You work with the people who build it.',
+  intro:
+    'The people you meet on the first call are the people who build your software.',
+  facets: [
+    {
+      title: 'Senior Builders',
+      body: 'The people on the call build it. Nobody passes your notes along.',
+    },
+    {
+      title: 'AI-Native',
+      body: 'We tuned our AI setup, our stack and our own delivery system for one job: shipping fast. We build up to 5x faster than a traditional team.',
+    },
+    {
+      title: 'Direct Access',
+      body: 'Talk to us in a shared channel in your own Slack, Teams, Google Chat or Discord, and get answers from the people writing the code.',
+    },
+  ],
+}
+
+/** Where clients reach us, in this order everywhere. */
+export const CHANNELS = 'Slack, Teams, Google Chat or Discord'
 
 export type Step = {
   number: string
@@ -164,7 +201,7 @@ export const STEPS: Step[] = [
     summary:
       "Tell us what you need and roughly how big it is. We'll say plainly if we're the right fit.",
     detail:
-      "A free 30-minute call to check fit. Tell us what you need and roughly how big it is, and we'll say plainly if we're the right fit.",
+      "Tell us what you need and roughly how big it is. We'll say plainly if we're the right fit.",
   },
   {
     number: '02',

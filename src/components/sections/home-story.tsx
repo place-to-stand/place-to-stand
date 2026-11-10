@@ -8,6 +8,7 @@ import {
   BILLING,
   OFFERS,
   OWNERSHIP,
+  OWNERSHIP_TITLE,
   SELL_ONLINE_CLIENTS,
   STEPS,
   type Offer,
@@ -50,7 +51,7 @@ export function TagRow({ label, tags }: { label: string; tags: string[] }) {
 }
 
 export function OfferCard({ offer }: { offer: Offer }) {
-  const run = offer.slug === 'run-your-business'
+  const run = offer.slug === 'run'
   const tags = run ? (offer.cardTags ?? []) : SELL_ONLINE_CLIENTS
   return (
     <div className='flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card'>
@@ -100,7 +101,7 @@ export function OffersSection() {
  * same treatment on Home, Platform and About.
  */
 export function OwnershipSection({
-  title = 'You own all of it.',
+  title = OWNERSHIP_TITLE,
   items = OWNERSHIP,
 }: {
   title?: string
@@ -159,7 +160,9 @@ export function AfterLaunchSection() {
         </ul>
       </Reveal>
       <Reveal index={2}>
-        <ArrowLink href='/platform#after-launch'>See the platform</ArrowLink>
+        <ArrowLink href='/platform#after-launch'>
+          What&apos;s included in managed services
+        </ArrowLink>
       </Reveal>
     </Section>
   )
@@ -234,23 +237,20 @@ export function ResultsSection() {
       <Reveal index={1}>
         <ul className='grid gap-grid-1 md:grid-cols-3'>
           {cs.stats.map(stat => (
-            <li key={stat.value}>
-              <Link
-                href='/clients/heatonist'
-                className='group flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card transition-colors hover:bg-bg-elevated'
-              >
-                <span className='type-stat text-accent'>{stat.value}</span>
-                <span className='text-base text-text-muted'>{stat.label}</span>
-                <span className='mt-auto type-fine group-hover:text-text'>
-                  Heatonist &rarr;
-                </span>
-              </Link>
+            <li
+              key={stat.value}
+              className='flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card'
+            >
+              <span className='type-stat text-accent'>{stat.value}</span>
+              <span className='text-base text-text-muted'>{stat.label}</span>
             </li>
           ))}
         </ul>
       </Reveal>
       <Reveal index={2}>
-        <ArrowLink href='/clients'>See all clients</ArrowLink>
+        <ArrowLink href={cs.path as Route}>
+          Read the Heatonist case study
+        </ArrowLink>
       </Reveal>
     </Section>
   )

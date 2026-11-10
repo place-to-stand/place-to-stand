@@ -12,7 +12,7 @@ export const CONTACT_EMAIL = 'hello@placetostandagency.com'
 export const FOUNDING_YEAR = 2023
 
 export const SITE_DESCRIPTION =
-  'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.'
+  'Custom software, automation and online stores, shaped to how your business runs. Built by the engineers you talk to, and yours to keep.'
 
 export const LOCATIONS = [
   { locality: 'Austin', region: 'TX', country: 'US' },

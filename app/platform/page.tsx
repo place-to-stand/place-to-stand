@@ -28,24 +28,8 @@ export const metadata: Metadata = pageMetadata({
   path: '/platform',
 })
 
-const OWNERSHIP_TERMS = [
-  { title: 'Your code.', body: 'Everything we make for you is yours.' },
-  {
-    title: 'Your data.',
-    body: 'Yours alone. We use it only to do the work, and it never trains AI.',
-  },
-  {
-    title: 'Our tools.',
-    body: 'We keep our own libraries and templates. You get a free, permanent license to any part built into your software.',
-  },
-  {
-    title: 'Your exit.',
-    body: 'Walk away any time and take everything with you.',
-  },
-]
-
 function OfferSection({ offer, index }: { offer: Offer; index: number }) {
-  const run = offer.slug === 'run-your-business'
+  const run = offer.slug === 'run'
   return (
     <Section id={offer.slug} className='flex scroll-mt-24 flex-col gap-stack'>
       <Reveal index={0}>
@@ -75,7 +59,10 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
                   {module.insteadOf ? (
                     <TagRow label='Instead of' tags={module.insteadOf} />
                   ) : (
-                    <TagRow label='Built for' tags={[module.example!]} />
+                    <TagRow
+                      label='Built for'
+                      tags={([] as string[]).concat(module.example ?? [])}
+                    />
                   )}
                 </div>
               )}
@@ -91,6 +78,10 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
                 </Link>
                 .
               </p>
+              <TagRow
+                label='Built for'
+                tags={['Place To Stand', '9 Point Studios', 'Up The Wall']}
+              />
             </li>
           )}
         </ul>
@@ -128,10 +119,7 @@ export default function PlatformPage() {
         </Section>
       </Band>
       <Band tone='dark'>
-        <OwnershipSection
-          title='Built for you, owned by you.'
-          items={OWNERSHIP_TERMS}
-        />
+        <OwnershipSection />
       </Band>
       <Band tone='light'>
         <Section
