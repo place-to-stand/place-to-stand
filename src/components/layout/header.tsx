@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState, type MouseEvent } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { Button } from '@/src/components/ui/button'
+import { AuditLink, BookCallButton } from '@/src/components/layout/cta'
 import { TrackedLink } from '@/src/components/tracked-link'
 import { cn } from '@/src/lib/utils'
+import { LogoLockup } from '@/src/components/layout/logo-mark'
 import { CLIENT_PORTAL_URL, NAV_LINKS } from '@/src/components/layout/nav-links'
 
 export function Header() {
@@ -50,33 +51,19 @@ export function Header() {
           : 'border-b border-transparent bg-transparent'
       )}
     >
-      <div className='mx-auto flex max-w-content items-center justify-between px-6 py-4 lg:px-12'>
+      <div className='mx-auto flex max-w-content items-center justify-between px-grid-1 py-grid-half lg:px-grid-2'>
         {/* Logo */}
-        <Link href='/' className='group flex items-center gap-3'>
-          {/* Blueprint logo mark */}
-          <span
-            className='inline-flex h-6 w-6 items-center justify-center border border-accent-subtle'
-            aria-hidden
-          >
-            <span className='h-2 w-2 bg-accent' />
-          </span>
-          <span className='font-headline text-xl font-bold tracking-tight text-text transition-colors group-hover:text-accent'>
-            Place To Stand
-          </span>
-        </Link>
+        <LogoLockup href='/' />
 
-        {/* Desktop nav */}
-        <nav className='hidden items-center gap-1 lg:flex'>
+        {/* Desktop nav: plain links. The underline slides in on hover and
+            stays on the current page (.link-nav in globals.css). */}
+        <nav className='hidden items-center gap-grid-1 lg:flex'>
           {NAV_LINKS.map(item => (
             <Link
               key={item.href}
               href={item.href}
-              className={cn(
-                'px-3 py-1.5 font-mono text-xs tracking-[0.1em] whitespace-nowrap uppercase transition-colors duration-300',
-                pathname === item.href
-                  ? 'border border-accent-subtle text-accent'
-                  : 'border border-transparent text-text-muted hover:text-text'
-              )}
+              aria-current={pathname === item.href ? 'page' : undefined}
+              className='link-nav py-1.5 whitespace-nowrap'
             >
               {item.label}
             </Link>
@@ -84,27 +71,23 @@ export function Header() {
         </nav>
 
         {/* CTA + mobile toggle */}
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center gap-grid-half'>
           <TrackedLink
             href={CLIENT_PORTAL_URL}
             rel='nofollow'
             location='header-portal'
-            className='hidden font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors duration-300 hover:text-text lg:inline'
+            className='link-nav hidden py-1.5 whitespace-nowrap lg:inline'
           >
-            Client Login
+            Login
           </TrackedLink>
           {/* Shown beside the menu toggle from ~416px up: logo + CTA + toggle
               need ~360px, so it fits large phones but not a 375px screen. */}
           <div className='hidden min-[26rem]:inline-flex'>
-            <Button
-              asChild
+            <BookCallButton
+              location='header'
               size='sm'
-              className='h-8 px-3 text-sm lg:h-9 lg:px-4'
-            >
-              <TrackedLink href='/audit' location='header'>
-                Free Audit
-              </TrackedLink>
-            </Button>
+              className='h-8 px-grid-half text-sm lg:h-9 lg:px-grid-half'
+            />
           </div>
 
           {/* Mobile menu: a sheet that slides in from the right */}
@@ -133,7 +116,7 @@ export function Header() {
               <Dialog.Overlay className='sheet-overlay fixed inset-0 z-50 bg-bg/70 backdrop-blur-sm lg:hidden' />
               <Dialog.Content
                 id='mobile-nav'
-                className='sheet-panel fixed inset-y-0 right-0 z-50 flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-6 pt-4 pb-grid-1 focus:outline-none lg:hidden'
+                className='sheet-panel fixed inset-y-0 right-0 z-50 flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-grid-1 pt-grid-half pb-grid-1 focus:outline-none lg:hidden'
               >
                 <div className='flex items-center justify-between'>
                   <Dialog.Title className='bp-label font-mono'>
@@ -165,11 +148,12 @@ export function Header() {
                 </Dialog.Description>
                 <nav className='mt-grid-2 flex flex-col'>
                   {NAV_LINKS.map(item => (
+                    // eslint-disable-next-line design/link-role -- the phone menu lists pages in large type for touch
                     <Link
                       key={item.href}
                       href={item.href}
                       className={cn(
-                        'border-b border-border py-4 font-headline text-2xl font-semibold tracking-tight transition-colors hover:text-accent',
+                        'border-b border-border py-grid-half type-item-title transition-colors hover:text-accent',
                         pathname === item.href ? 'text-accent' : 'text-text'
                       )}
                       onClick={navigateFromSheet}
@@ -177,26 +161,27 @@ export function Header() {
                       {item.label}
                     </Link>
                   ))}
-                </nav>
-                <div className='mt-auto flex flex-col gap-4'>
-                  <Button asChild size='lg' className='w-full'>
-                    <TrackedLink
-                      href='/audit'
-                      location='header-mobile'
-                      onClick={navigateFromSheet}
-                    >
-                      Free Audit
-                    </TrackedLink>
-                  </Button>
                   <TrackedLink
                     href={CLIENT_PORTAL_URL}
                     rel='nofollow'
                     location='header-mobile-portal'
-                    className='text-center font-mono text-xs tracking-[0.1em] text-text-muted uppercase transition-colors hover:text-text'
+                    className='link-nav self-start py-grid-half'
                     onClick={() => setMobileOpen(false)}
                   >
-                    Client Login
+                    Login
                   </TrackedLink>
+                </nav>
+                <div className='mt-auto flex flex-col gap-grid-half'>
+                  <BookCallButton
+                    location='header-mobile'
+                    className='w-full'
+                    onClick={navigateFromSheet}
+                  />
+                  <AuditLink
+                    location='header-mobile'
+                    className='self-center'
+                    onClick={navigateFromSheet}
+                  />
                 </div>
               </Dialog.Content>
             </Dialog.Portal>

@@ -11,27 +11,27 @@ export function SubscribeForm() {
   const { state, onSubmit, isPending } = useSubscribe('blog')
 
   return (
-    <div className='relative grid gap-grid-2 border border-border p-6 md:p-grid-3 lg:grid-cols-12 lg:gap-x-grid-1'>
+    <div className='relative grid gap-grid-2 border border-border p-grid-1 md:p-grid-3 lg:grid-cols-12 lg:gap-x-grid-1'>
       <BlueprintCorners size={16} />
-      <div className='flex flex-col gap-3 lg:col-span-5'>
+      <div className='flex flex-col items-start gap-eyebrow lg:col-span-5'>
         <span className='bp-label font-mono'>Subscribe</span>
-        <h2 className='font-headline text-3xl leading-[0.95] font-bold tracking-tight text-balance text-text uppercase md:text-4xl'>
+        <h2 className='type-section-title text-balance'>
           New posts in your inbox
         </h2>
       </div>
 
-      <div className='flex flex-col gap-4 lg:col-span-6 lg:col-start-7 lg:justify-center'>
+      <div className='flex flex-col gap-grid-half lg:col-span-6 lg:col-start-7 lg:justify-center'>
         {state.status === 'success' ? (
-          <p className='text-lg text-text md:text-xl' role='status'>
+          <p className='type-lead' role='status'>
             You&apos;re subscribed. We&apos;ll email you when the next post is
             up.
           </p>
         ) : (
-          <form onSubmit={onSubmit} className='flex flex-col gap-3'>
+          <form onSubmit={onSubmit} className='flex flex-col gap-grid-half'>
             <label htmlFor='subscribe-email' className='sr-only'>
               Email address
             </label>
-            <div className='flex flex-col gap-3 sm:flex-row'>
+            <div className='flex flex-col gap-grid-half sm:flex-row'>
               <Input
                 id='subscribe-email'
                 name='email'
@@ -52,7 +52,7 @@ export function SubscribeForm() {
               </Button>
             </div>
             {state.status === 'error' && (
-              <p className='text-sm text-red-400' role='alert'>
+              <p className='text-sm text-danger' role='alert'>
                 {state.message}
               </p>
             )}
@@ -60,10 +60,7 @@ export function SubscribeForm() {
               By subscribing, you agree to receive new posts and occasional
               marketing emails from Place To Stand. Unsubscribe any time. See
               our{' '}
-              <Link
-                href='/privacy'
-                className='text-text underline underline-offset-4 hover:text-accent'
-              >
+              <Link href='/privacy' className='link-inline'>
                 privacy policy
               </Link>
               .

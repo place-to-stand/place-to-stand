@@ -20,14 +20,14 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 ## Company
 
 - [Home](https://placetostandagency.com/): what we build and who for
-- [Team](https://placetostandagency.com/team): the founders and their backgrounds
+- [About](https://placetostandagency.com/about): the founders, their backgrounds, and what clients own
 - [Clients](https://placetostandagency.com/clients): brands we have built for, including Hot Ones, Heatonist, Blake Brown Beauty, Florence by Mills Beauty, GreenWATT USA, and 9 Point Studios
 - [Heatonist case study](https://placetostandagency.com/clients/heatonist): how we run engineering for Heatonist and hotones.com without a full-time hire
 
-## Services and process
+## Platform and process
 
-- [Services](https://placetostandagency.com/services): software development, workflow systems, data intelligence, strategic advisory, and managed services
-- [How We Work](https://placetostandagency.com/how-we-work): the delivery process and client portal
+- [Platform](https://placetostandagency.com/platform): two offers, Run your business (team workspace, CRM, workflows, automations, client portal, reports) and Sell online (Shopify and headless stores, custom marketplaces, Shopify apps, payments, fulfillment and inventory), plus managed services, technical consulting and training
+- [Process](https://placetostandagency.com/process): a free 30-minute intro call to check fit, a one-hour discovery session, 1 to 2 weeks with your team, one problem solved in 2 to 6 weeks, then the next; billing for hands-on human time only; common questions
 - [Opportunity Audit](https://placetostandagency.com/audit): free two-minute self-assessment
 
 ## Get in touch

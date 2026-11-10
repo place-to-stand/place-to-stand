@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ChevronDown } from 'lucide-react'
 import { usePostHog } from 'posthog-js/react'
 
-import { PageHeader, Section } from '@/src/components/layout/section'
+import { SectionHeading, Section } from '@/src/components/layout/section'
 import { Button } from '@/src/components/ui/button'
 import { HeardFromField } from '@/src/components/forms/heard-from-field'
 import { Checkbox } from '@/src/components/ui/checkbox'
@@ -159,20 +159,20 @@ export function ContactSection() {
   })
 
   return (
-    <Section priority id='contact' className='flex flex-col gap-header'>
-      <PageHeader
-        label='Contact'
-        title="Let's talk"
+    <Section id='message' className='flex scroll-mt-24 flex-col gap-stack'>
+      <SectionHeading
+        label='Or Send Us a Message'
+        title='Prefer to write?'
         intro="Send a message and we'll get back to you within one business day."
       />
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />
       </Suspense>
-      <div className='relative mx-auto w-full max-w-2xl gap-10 bg-bg-card p-6 md:p-grid-2'>
+      <div className='relative w-full max-w-3xl gap-grid-2 bg-bg-card p-card md:p-grid-2'>
         <form
           noValidate
           onSubmit={onSubmit}
-          className={`flex h-full flex-col gap-3 transition-opacity ${
+          className={`flex h-full flex-col gap-grid-half transition-opacity ${
             isSuccess ? 'pointer-events-none opacity-0' : 'opacity-100'
           }`}
           aria-hidden={isSuccess}
@@ -185,7 +185,7 @@ export function ContactSection() {
               aria-invalid={!!form.formState.errors.name}
             />
             {form.formState.errors.name ? (
-              <p className='text-sm text-red-400'>
+              <p className='text-sm text-danger'>
                 {form.formState.errors.name.message}
               </p>
             ) : null}
@@ -199,12 +199,12 @@ export function ContactSection() {
               aria-invalid={!!form.formState.errors.email}
             />
             {form.formState.errors.email ? (
-              <p className='text-sm text-red-400'>
+              <p className='text-sm text-danger'>
                 {form.formState.errors.email.message}
               </p>
             ) : null}
           </div>
-          <div className='grid gap-3 md:grid-cols-2'>
+          <div className='grid gap-grid-half md:grid-cols-2'>
             <div className='flex flex-col gap-2'>
               <Label htmlFor='company'>Company Name (optional)</Label>
               <Input
@@ -213,7 +213,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.company}
               />
               {form.formState.errors.company ? (
-                <p className='text-sm text-red-400'>
+                <p className='text-sm text-danger'>
                   {form.formState.errors.company.message}
                 </p>
               ) : null}
@@ -228,7 +228,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.website}
               />
               {form.formState.errors.website ? (
-                <p className='text-sm text-red-400'>
+                <p className='text-sm text-danger'>
                   {form.formState.errors.website.message}
                 </p>
               ) : null}
@@ -241,7 +241,7 @@ export function ContactSection() {
                 id='subject'
                 {...form.register('subject')}
                 aria-invalid={!!form.formState.errors.subject}
-                className='flex h-12 w-full appearance-none bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent-subtle focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+                className='flex h-12 w-full appearance-none bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent-subtle focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
               >
                 <option value='' disabled>
                   Choose a subject
@@ -254,11 +254,11 @@ export function ContactSection() {
               </select>
               <ChevronDown
                 aria-hidden='true'
-                className='pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-text-muted'
+                className='pointer-events-none absolute top-1/2 right-grid-half size-4 -translate-y-1/2 text-text-muted'
               />
             </div>
             {form.formState.errors.subject ? (
-              <p className='text-sm text-red-400'>
+              <p className='text-sm text-danger'>
                 {form.formState.errors.subject.message}
               </p>
             ) : null}
@@ -273,7 +273,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.subjectOther}
               />
               {form.formState.errors.subjectOther ? (
-                <p className='text-sm text-red-400'>
+                <p className='text-sm text-danger'>
                   {form.formState.errors.subjectOther.message}
                 </p>
               ) : null}
@@ -288,7 +288,7 @@ export function ContactSection() {
               aria-invalid={!!form.formState.errors.message}
             />
             {form.formState.errors.message ? (
-              <p className='text-sm text-red-400'>
+              <p className='text-sm text-danger'>
                 {form.formState.errors.message.message}
               </p>
             ) : null}
@@ -299,7 +299,7 @@ export function ContactSection() {
             other={form.register('heardFromOther')}
             showOther={heardFromChoice === HEARD_FROM_OTHER}
           />
-          <div className='flex items-start gap-3 pt-1'>
+          <div className='flex items-start gap-grid-half pt-1'>
             <Checkbox
               id='marketingConsent'
               {...form.register('marketingConsent')}
@@ -313,11 +313,11 @@ export function ContactSection() {
               any time.
             </Label>
           </div>
-          <div className='mt-auto pt-3'>
+          <div className='mt-auto pt-grid-half'>
             <Button
               type='submit'
               disabled={isPending}
-              className='block w-full px-8'
+              className='block w-full px-grid-1'
               size='lg'
             >
               {isPending ? 'Sending...' : 'Send Message'}
@@ -326,7 +326,7 @@ export function ContactSection() {
         </form>
 
         {isSuccess ? (
-          <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-6 bg-bg-card/95 text-center shadow-inner'>
+          <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-grid-1 bg-bg-card/95 text-center shadow-inner'>
             <h3 className='type-card-title uppercase'>Thank you!</h3>
             <p className='max-w-md text-base text-balance text-text-muted'>
               Your message has been sent. We&apos;ll reach out within one
@@ -335,7 +335,7 @@ export function ContactSection() {
             <Button
               type='button'
               size='lg'
-              className='px-8'
+              className='px-grid-1'
               onClick={() => {
                 form.reset()
                 setIsSuccess(false)

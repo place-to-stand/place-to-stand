@@ -11,15 +11,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'relative isolate bg-accent text-bg font-bold border border-accent-subtle shadow-md shadow-accent/20 transition-colors duration-300 ease-out hover:text-accent hover:border-accent before:absolute before:inset-0 before:-z-10 before:bg-bg before:-translate-x-[101%] before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0',
+          'relative isolate bg-accent text-ink font-bold border border-accent-subtle shadow-md shadow-accent/20 transition-colors duration-(--hover-dur) ease-(--hover-ease) hover:text-accent hover:border-accent before:absolute before:inset-0 before:-z-10 before:bg-ink before:-translate-x-[101%] before:transition-transform before:duration-(--hover-dur) before:ease-(--hover-ease) hover:before:translate-x-0',
         primaryInvert:
-          'relative isolate bg-accent text-bg font-bold border border-accent shadow-md shadow-accent/10 transition-colors duration-300 ease-out hover:text-accent before:absolute before:inset-0 before:-z-10 before:bg-bg before:-translate-x-[101%] before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0',
+          'relative isolate bg-accent text-ink font-bold border border-accent shadow-md shadow-accent/10 transition-colors duration-(--hover-dur) ease-(--hover-ease) hover:text-accent before:absolute before:inset-0 before:-z-10 before:bg-ink before:-translate-x-[101%] before:transition-transform before:duration-(--hover-dur) before:ease-(--hover-ease) hover:before:translate-x-0',
         secondary:
           'bg-bg-elevated text-text border border-border hover:bg-bg-card hover:border-border-light focus-visible:ring-accent-subtle',
         ghost:
           'bg-transparent text-text-muted hover:text-text focus-visible:ring-accent-subtle',
         outline:
-          'bg-transparent border border-border text-text transition-all duration-300 hover:border-accent hover:text-accent focus-visible:ring-accent-subtle',
+          'btn-draw overflow-visible bg-transparent border border-border text-text hover:text-accent focus-visible:text-accent focus-visible:ring-accent-subtle',
       },
       size: {
         sm: 'h-9 px-4',

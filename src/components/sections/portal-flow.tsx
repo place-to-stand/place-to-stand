@@ -123,12 +123,14 @@ function FlowRail({
     <div className='relative flex'>
       {/* base line, spanning first→last station centres */}
       <div
+        // eslint-disable-next-line design/no-raw-spacing -- centres the connector line on the 12px node
         className='absolute top-[6px] h-px bg-border-light'
         style={{ left: `${50 / N}%`, right: `${50 / N}%` }}
         aria-hidden
       />
       {/* completed segments, locked in instantly as each step lands */}
       <div
+        // eslint-disable-next-line design/no-raw-spacing -- centres the connector line on the 12px node
         className='absolute top-[6px] h-px bg-line'
         style={{ left: `${50 / N}%`, width: `${active * (100 / N)}%` }}
         aria-hidden
@@ -138,6 +140,7 @@ function FlowRail({
       <div
         key={`fill-${active}`}
         onAnimationEnd={onAdvance}
+        // eslint-disable-next-line design/no-raw-spacing -- centres the connector line on the 12px node
         className='absolute top-[6px] h-px origin-left bg-line'
         style={{
           left: hasNext ? `${(0.5 + active) * (100 / N)}%` : '0%',
@@ -208,7 +211,7 @@ function PipelineStage({
  *  one-line description for the stage under the spotlight. */
 function StageNarration({ scene }: { scene: Scene }) {
   return (
-    <div className='flex flex-col items-center gap-3 text-center'>
+    <div className='flex flex-col items-center gap-grid-half text-center'>
       <span className='type-card-title text-balance text-accent uppercase'>
         {scene.status}
       </span>
@@ -275,14 +278,14 @@ export function PortalFlow() {
   }
 
   return (
-    <section className='mx-auto w-full max-w-content px-6 lg:px-12'>
+    <section className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
       {reduced ? (
         mobile ? (
           // Reduced motion on mobile: a legible static card per stage — the crop
           // framed on that stage (fully lit, no pan) above its write-up.
           <div className='flex flex-col gap-stack'>
             {SCENES.map((scene, i) => (
-              <div key={scene.key} className='flex flex-col gap-6'>
+              <div key={scene.key} className='flex flex-col gap-grid-1'>
                 <PipelineStage active={null} mobile focus={i} />
                 <StageNarration scene={scene} />
               </div>
@@ -324,7 +327,7 @@ export function PortalFlow() {
             onAdvance={advance}
             onSelect={selectScene}
           />
-          <div className='flex flex-col items-center gap-3'>
+          <div className='flex flex-col items-center gap-grid-half'>
             <PipelineStage active={active} paused={paused} mobile={mobile} />
             {/* Subtle hint at the interaction available on this device. */}
             <p className='text-center text-sm tracking-wide text-text-muted/60'>

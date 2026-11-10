@@ -29,7 +29,7 @@ export function HeardFromField({
         <select
           id={id}
           {...select}
-          className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-10 pl-3 text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+          className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
         >
           <option value=''>Choose one</option>
           {HEARD_FROM_CHOICES.map(choice => (
@@ -40,7 +40,7 @@ export function HeardFromField({
         </select>
         <ChevronDown
           aria-hidden='true'
-          className='pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-text-muted'
+          className='pointer-events-none absolute top-1/2 right-grid-half size-4 -translate-y-1/2 text-text-muted'
         />
       </div>
       {showOther ? (

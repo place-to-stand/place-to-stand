@@ -1,10 +1,9 @@
-import { TrackedLink } from '@/src/components/tracked-link'
-import { Button } from '@/src/components/ui/button'
+import { AuditLink, BookCallGroup } from './cta'
 import { AnimatedSection, Reveal } from './animated-section'
 import { BlueprintCorners } from './dot-grid-background'
 
 const DEFAULT_DESCRIPTION =
-  'The free audit pinpoints the phase your business is in and where custom software pays off first. Two minutes, results on screen, no obligation.'
+  "Book a free 30-minute intro call. Tell us what you need, and we'll say plainly whether we can help."
 
 /**
  * The closing "Find where to start" callout: a card in a band of blueprint
@@ -16,11 +15,18 @@ export function CtaBand({
   location,
   title = 'Find where to start.',
   description = DEFAULT_DESCRIPTION,
+  label = 'Next Step',
+  action = 'call',
 }: {
   /** Analytics location for the two links, e.g. 'home-cta-block'. */
   location: string
   title?: string
   description?: string
+  label?: string
+  /** 'call': the Book a call button with the audit link under it (every
+   *  page). 'audit': the audit link alone, for the Contact page, which
+   *  already offers the call above. */
+  action?: 'call' | 'audit'
 }) {
   return (
     <AnimatedSection className='py-band'>
@@ -29,7 +35,7 @@ export function CtaBand({
         <div className='flex flex-col gap-stack md:flex-row md:items-center md:justify-between'>
           <div className='flex flex-col gap-intro'>
             <Reveal index={0} className='flex flex-col gap-eyebrow'>
-              <span className='bp-label font-mono'>Next Step</span>
+              <span className='bp-label font-mono'>{label}</span>
               <h2 className='type-section-title'>{title}</h2>
             </Reveal>
             <Reveal index={1} className='max-w-md text-base text-text-muted'>
@@ -38,29 +44,17 @@ export function CtaBand({
           </div>
           <Reveal
             index={2}
-            className='flex w-full shrink-0 flex-col gap-grid-half sm:w-auto'
+            className='flex w-full shrink-0 flex-col items-center gap-grid-1 sm:w-auto sm:items-start'
           >
-            <Button asChild size='lg' className='w-full'>
-              <TrackedLink href='/audit' location={location}>
-                Start the free audit
-              </TrackedLink>
-            </Button>
-            <div className='flex flex-col gap-grid-half'>
-              <Button
-                asChild
-                size='lg'
-                variant='outline'
-                className='w-full border-2'
-              >
-                <TrackedLink href='/contact' location={location}>
-                  Contact Us
-                </TrackedLink>
-              </Button>
-              <p className='max-w-xs text-sm text-text-muted'>
-                Already know what you want built, or want a bespoke mapping of
-                your systems? Talk to us directly.
-              </p>
-            </div>
+            {action === 'call' ? (
+              <BookCallGroup
+                location={location}
+                className='w-full sm:w-auto'
+                buttonClassName='w-full sm:min-w-60'
+              />
+            ) : (
+              <AuditLink location={location} />
+            )}
           </Reveal>
         </div>
       </div>

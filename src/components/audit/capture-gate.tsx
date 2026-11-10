@@ -57,7 +57,7 @@ export function CaptureGate({
         <h2 className='mt-grid-half type-section-title uppercase'>
           Your blueprint is ready
         </h2>
-        <p className='mt-3 text-base text-balance text-text-muted'>
+        <p className='mt-grid-half text-base text-balance text-text-muted'>
           {count > 1
             ? `We found ${count} places custom software could give you leverage, ranked by where we'd start. `
             : 'We found where custom software could give you the most leverage. '}
@@ -79,7 +79,7 @@ export function CaptureGate({
           <button
             type='button'
             onClick={onSkip}
-            className='text-base text-text-muted underline underline-offset-4 transition-colors hover:text-text'
+            className='link-inline text-base'
           >
             Skip, just show me my results
           </button>

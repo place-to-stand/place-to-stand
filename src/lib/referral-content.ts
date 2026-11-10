@@ -129,7 +129,7 @@ export const referralContent = {
       {
         number: '02',
         title: 'We take it from there.',
-        body: "Discovery call, scope, proposal. You don't manage anything.",
+        body: "A 30-minute intro call, then discovery, scope and a proposal. You don't manage anything.",
       },
       {
         number: '03',

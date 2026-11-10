@@ -35,23 +35,20 @@ export function ManifestoSection() {
         {/* Header */}
         <div className='flex flex-col gap-intro'>
           <Reveal index={0} className='flex flex-col gap-eyebrow'>
-            <span className='bp-label font-mono'>Who We Are</span>
+            <span className='bp-label font-mono'>Who You Work With</span>
             <h2 className='type-section-title text-balance'>
-              Experienced engineers with fine-tuned AI.
+              You work with the people who build it.
             </h2>
           </Reveal>
           <Reveal index={1} className='max-w-xl text-base text-text-muted'>
             <p>
-              Building exactly what you need, directly with the people who build
-              it.
+              Senior engineers who use AI to move fast, with no account managers
+              in between.
             </p>
           </Reveal>
           {/* Mobile-only link: sits with the subtext, above the cards */}
           <Reveal index={2} className='pt-2 md:hidden'>
-            <Link
-              href='/team'
-              className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
-            >
+            <Link href='/about' className='link-action'>
               Meet the Team
               <span aria-hidden>&rarr;</span>
             </Link>
@@ -64,9 +61,9 @@ export function ManifestoSection() {
             {facets.map(facet => (
               <div
                 key={facet.title}
-                className='relative flex flex-col gap-4 bg-bg-card p-card'
+                className='relative flex flex-col gap-grid-half bg-bg-card p-card'
               >
-                <div className='flex items-center justify-between gap-4'>
+                <div className='flex items-center justify-between gap-grid-half'>
                   <h3 className='type-card-title'>{facet.title}</h3>
                   <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
                 </div>
@@ -78,10 +75,7 @@ export function ManifestoSection() {
 
         {/* Desktop-only link: stays below the cards */}
         <Reveal index={3} className='hidden md:flex'>
-          <Link
-            href='/team'
-            className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
-          >
+          <Link href='/about' className='link-action'>
             Meet the Team
             <span aria-hidden>&rarr;</span>
           </Link>

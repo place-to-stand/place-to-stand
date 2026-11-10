@@ -2,6 +2,7 @@
 
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   useSyncExternalStore,
@@ -22,18 +23,40 @@ const getReducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY).matches
 const getServerReducedMotion = () => false
 
 /**
- * Fires once when the element first scrolls into view. Under prefers-reduced-motion
- * it resolves to true immediately and skips the observer entirely, mirroring the
- * short-circuit in AnimatedSection so animated and static behaviour stay consistent.
+ * Fires when the element scrolls into view, so its draw-in can play. Under
+ * prefers-reduced-motion it resolves to true immediately and skips the
+ * observer entirely, mirroring the short-circuit in AnimatedSection.
+ *
+ * Replays every time the page comes back. Next 16 keeps visited pages alive
+ * but hidden (React Activity) instead of unmounting them, so without a reset
+ * the "already played" flag survives and the drawing returns at its end
+ * state while the CSS headline intro replays. The layout-effect cleanup runs
+ * as the page is hidden and clears the flag before the next paint, so the
+ * drawing is reset while invisible and plays again from frame one when
+ * shown. A page restored from the browser's back-forward cache (pageshow
+ * with persisted) is reset the same way.
  */
 export function useInView<T extends Element = HTMLElement>() {
   const ref = useRef<T>(null)
   const [intersected, setIntersected] = useState(false)
+  const [run, setRun] = useState(0)
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotion,
     getServerReducedMotion
   )
+
+  useLayoutEffect(() => () => setIntersected(false), [])
+
+  useEffect(() => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return
+      setIntersected(false)
+      setRun(value => value + 1)
+    }
+    window.addEventListener('pageshow', onPageShow)
+    return () => window.removeEventListener('pageshow', onPageShow)
+  }, [])
 
   useEffect(() => {
     const node = ref.current
@@ -51,7 +74,7 @@ export function useInView<T extends Element = HTMLElement>() {
 
     observer.observe(node)
     return () => observer.disconnect()
-  }, [reducedMotion])
+  }, [reducedMotion, run])
 
   return { ref, inView: reducedMotion || intersected }
 }

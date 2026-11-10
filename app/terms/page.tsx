@@ -226,10 +226,7 @@ export default function TermsPage() {
             <LegalSection index={16} title='Contact us'>
               <p>
                 Questions about these terms can go to{' '}
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className='text-accent underline-offset-4 hover:underline'
-                >
+                <a href={`mailto:${CONTACT_EMAIL}`} className='link-inline'>
                   {CONTACT_EMAIL}
                 </a>
                 .

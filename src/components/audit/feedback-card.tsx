@@ -60,7 +60,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
           </p>
         </div>
       ) : (
-        <div className='mx-auto flex max-w-md flex-col gap-5'>
+        <div className='mx-auto flex max-w-md flex-col gap-grid-1'>
           <div>
             <p className='font-mono text-xs tracking-[0.15em] text-text-muted uppercase'>
               Quick question
@@ -101,7 +101,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
               id='audit-feedback-comment'
               rows={3}
               maxLength={COMMENT_MAX_LENGTH}
-              className='min-h-24 p-3'
+              className='min-h-24 p-grid-half'
               placeholder='What was useful, what was missing, or what you expected to see.'
               value={comment}
               onChange={e => setComment(e.target.value)}
@@ -114,7 +114,7 @@ export function FeedbackCard({ initial, onSubmit }: FeedbackCardProps) {
             size='lg'
             onClick={send}
             disabled={helpful === null && comment.trim().length === 0}
-            className='w-full px-8'
+            className='w-full px-grid-1'
           >
             Send feedback
           </Button>
@@ -138,7 +138,7 @@ function VoteButton({ label, icon: Icon, selected, onClick }: VoteButtonProps) {
       aria-pressed={selected}
       onClick={onClick}
       className={cn(
-        'flex items-center justify-center gap-2 border px-4 py-3 text-sm font-medium transition',
+        'flex items-center justify-center gap-2 border px-grid-half py-grid-half text-sm font-medium transition',
         selected
           ? 'border-accent bg-accent-muted text-text'
           : 'border-border bg-bg-card text-text hover:border-border-light hover:bg-bg-elevated'

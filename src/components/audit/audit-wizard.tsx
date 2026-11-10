@@ -200,7 +200,8 @@ export function AuditWizard({
       className={cn(
         'flex items-center justify-between',
         isPhone
-          ? 'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 px-6 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
+          ? // eslint-disable-next-line design/no-raw-spacing -- keeps the sticky bar clear of the phone home indicator (safe area)
+            'fixed inset-x-0 bottom-0 z-40 border-t border-border bg-bg/95 px-grid-1 pt-grid-half pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
           : 'mt-grid-1'
       )}
     >
@@ -272,7 +273,7 @@ export function AuditWizard({
         </div>
 
         {showError && (
-          <p className='mt-grid-1 border border-accent-subtle bg-accent-muted px-4 py-2 text-base text-text'>
+          <p className='mt-grid-1 border border-accent-subtle bg-accent-muted px-grid-half py-2 text-base text-text'>
             Pick an answer to continue.
           </p>
         )}
