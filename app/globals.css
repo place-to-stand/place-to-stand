@@ -8,7 +8,7 @@
   /* Drawing strokes: two weights only. Structure for line-work, emphasis
      for what the eye should land on (and the logo's outer square). */
   --stroke-structure: 1.25px;
-  --stroke-emphasis: 2.5px;
+  --stroke-emphasis: 2px;
   /* Reading text line height, site-wide: every text size from sm to xl uses
      1.375, so paragraphs need no leading-* class of their own. */
   --text-sm--line-height: 1.375;
