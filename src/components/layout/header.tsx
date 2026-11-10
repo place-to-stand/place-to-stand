@@ -70,8 +70,9 @@ export function Header() {
           ))}
         </nav>
 
-        {/* CTA + mobile toggle */}
-        <div className='flex items-center gap-grid-half'>
+        {/* CTA + mobile toggle. On desktop Login sits as far from the button
+            as the nav links sit from each other (grid-1). */}
+        <div className='flex items-center gap-grid-half lg:gap-grid-1'>
           <TrackedLink
             href={CLIENT_PORTAL_URL}
             rel='nofollow'
@@ -161,11 +162,14 @@ export function Header() {
                       {item.label}
                     </Link>
                   ))}
+                  {/* Login is a menu row like the pages, in the muted color so
+                      it reads as the client door rather than a page. */}
+                  {/* eslint-disable-next-line design/link-role -- the phone menu lists pages in large type for touch */}
                   <TrackedLink
                     href={CLIENT_PORTAL_URL}
                     rel='nofollow'
                     location='header-mobile-portal'
-                    className='link-nav self-start py-grid-half'
+                    className='border-b border-border py-grid-half type-item-title text-text-muted transition-colors hover:text-accent'
                     onClick={() => setMobileOpen(false)}
                   >
                     Login
