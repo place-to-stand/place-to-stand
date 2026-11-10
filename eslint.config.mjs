@@ -56,6 +56,28 @@ const eslintConfig = defineConfig([
     ],
     rules: { 'design/no-raw-border': 'off' },
   },
+  // Tiers: each tier imports only from the tiers below it
+  // (docs/design-system.md, Tiers). Primitives < boxes < patterns <
+  // sections < templates < pages.
+  ...[
+    ['primitives', ['boxes', 'patterns', 'sections', 'templates']],
+    ['boxes', ['patterns', 'sections', 'templates']],
+    ['patterns', ['sections', 'templates']],
+    ['sections', ['templates']],
+  ].map(([tier, above]) => ({
+    files: [`src/components/${tier}/**/*.{ts,tsx}`],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: above.map(name => ({
+            group: [`@/src/components/${name}`, `@/src/components/${name}/**`],
+            message: `${tier} sit below ${name}: import only from lower tiers (docs/design-system.md, Tiers).`,
+          })),
+        },
+      ],
+    },
+  })),
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
