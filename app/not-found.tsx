@@ -1,7 +1,7 @@
-import { PageHeader, Section } from '@/src/components/layout/section'
+import { PageHeader, Section } from '@/src/components/patterns/section'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Button } from '@/src/components/ui/button'
+import { Button } from '@/src/components/primitives/button'
 
 export const metadata: Metadata = {
   title: 'Page Not Found',

@@ -1,10 +1,10 @@
 import type { CSSProperties } from 'react'
-import { Button } from '@/src/components/ui/button'
-import { TrackedLink } from '@/src/components/tracked-link'
-import { BookCallGroup } from '@/src/components/layout/cta'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
-import { HeroGraphic } from '@/src/components/graphics/hero-graphic'
-import { HeroDrawingSlot } from './hero-drawing-slot'
+import { Button } from '@/src/components/primitives/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
+import { BookCallGroup } from '@/src/components/primitives/cta'
+import { BlueprintCorners } from '@/src/components/boxes/corners'
+import { HeroGraphic } from '@/src/components/patterns/drawings/hero-graphic'
+import { HeroDrawingSlot } from '@/src/components/sections/hero-drawing-slot'
 
 export function HeroSection() {
   return (

@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
-import { Band, PageHeader, Section } from '@/src/components/layout/section'
-import { CtaBand } from '@/src/components/layout/cta-band'
-import { OwnershipSection } from '@/src/components/sections/home-story'
+import { Band, PageHeader, Section } from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
+import { OwnershipSection } from '@/src/components/sections/ownership'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { teamJsonLd } from '@/src/lib/structured-data'
 import Image from 'next/image'
 import { team, type TeamMember } from '@/src/lib/team'
 import { cn } from '@/src/lib/utils'
-import { RuledRow } from '@/src/components/layout/boxes'
-import { SocialIcon } from '@/src/components/layout/social-icon'
-import { ALT_ROW } from '@/src/components/layout/alt-row'
+import { RuledRow } from '@/src/components/boxes'
+import { SocialIcon } from '@/src/components/primitives/social-icon'
+import { ALT_ROW } from '@/src/components/patterns/alt-row'
 
 export const metadata: Metadata = pageMetadata({
   title: 'About',

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Section } from '@/src/components/layout/section'
-import { AuditApp } from '@/src/components/audit/audit-app'
+import { Section } from '@/src/components/patterns/section'
+import { AuditApp } from '@/src/components/sections/audit/audit-app'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Free Opportunity Audit',

@@ -1,18 +1,19 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { RuledRow } from '@/src/components/layout/boxes'
+import { RuledRow } from '@/src/components/boxes'
 import {
   Band,
   PageHeader,
   Section,
   SectionHeading,
-} from '@/src/components/layout/section'
-import { Reveal } from '@/src/components/layout/animated-section'
-import { CtaBand } from '@/src/components/layout/cta-band'
+} from '@/src/components/patterns/section'
+import { Reveal } from '@/src/components/primitives/animated-section'
+import { CtaBand } from '@/src/components/sections/cta-band'
 import { PortalSection } from '@/src/components/sections/portal-section'
+import { StepsSection } from '@/src/components/sections/process'
 import { vendors } from '@/src/lib/vendors'
-import { vendorIcons } from '@/src/components/icons/vendor-icons'
-import { BILLING, FAQ, STEPS } from '@/src/lib/offers'
+import { vendorIcons } from '@/src/components/primitives/vendor-icons'
+import { BILLING, FAQ } from '@/src/lib/offers'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Process',
@@ -48,37 +49,7 @@ export default function ProcessPage() {
       </Section>
 
       <Band tone='light'>
-        <Section className='flex flex-col gap-stack'>
-          <Reveal index={0}>
-            <SectionHeading
-              label='The Steps'
-              title='Five steps, each with a time.'
-            />
-          </Reveal>
-          <Reveal index={1}>
-            <ol className='flex flex-col'>
-              {STEPS.map(step => (
-                <RuledRow
-                  key={step.number}
-                  className='grid gap-grid-1 py-grid-2 last:pb-0 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-grid-3'
-                >
-                  <div className='flex flex-col gap-grid-1'>
-                    <div className='flex items-center gap-grid-1'>
-                      <span className='font-mono text-sm text-text-muted'>
-                        {step.number}
-                      </span>
-                      <span className='bp-label font-mono after:hidden'>
-                        {step.time}
-                      </span>
-                    </div>
-                    <h3 className='type-item-title'>{step.name}</h3>
-                  </div>
-                  <p className='max-w-2xl type-intro'>{step.detail}</p>
-                </RuledRow>
-              ))}
-            </ol>
-          </Reveal>
-        </Section>
+        <StepsSection variant='rows' />
 
         <Section className='grid gap-stack lg:grid-cols-2 lg:gap-grid-4'>
           <div className='flex flex-col gap-stack'>

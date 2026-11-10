@@ -1,26 +1,13 @@
-import Link from 'next/link'
-import { Card, RuledRow, SideNote } from '@/src/components/layout/boxes'
 import type { Metadata } from 'next'
-import {
-  Band,
-  PageHeader,
-  Section,
-  SectionHeading,
-} from '@/src/components/layout/section'
-import { Reveal } from '@/src/components/layout/animated-section'
-import { CtaBand } from '@/src/components/layout/cta-band'
-import { OwnershipSection, TagRow } from '@/src/components/sections/home-story'
+import { Band, PageHeader, Section } from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
+import { OffersSection } from '@/src/components/sections/offers'
+import { OwnershipSection } from '@/src/components/sections/ownership'
+import { AfterLaunchSection } from '@/src/components/sections/after-launch'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { servicesJsonLd } from '@/src/lib/structured-data'
-import {
-  AFTER_LAUNCH,
-  AI_ACCESS,
-  MOBILE_APPS,
-  OFFERS,
-  PLATFORM_SHARED,
-  type Offer,
-} from '@/src/lib/offers'
+import { MOBILE_APPS } from '@/src/lib/offers'
 
 export const metadata: Metadata = pageMetadata({
   title: 'What we build',
@@ -28,72 +15,6 @@ export const metadata: Metadata = pageMetadata({
     'Custom operations software and Shopify development: one system that runs your business, stores that sell, and a model-agnostic MCP server with role-based access control, all on one source of data you own.',
   path: '/platform',
 })
-
-function OfferSection({ offer, index }: { offer: Offer; index: number }) {
-  const run = offer.slug === 'run'
-  return (
-    <Section id={offer.slug} className='flex scroll-mt-24 flex-col gap-stack'>
-      <Reveal index={0}>
-        <SectionHeading
-          label={run ? 'Run Your Business' : 'Sell Online'}
-          title={offer.name}
-          intro={offer.summary}
-        />
-      </Reveal>
-      <Reveal index={1}>
-        <ul className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-3'>
-          {offer.modules.map((module, moduleIndex) => (
-            <Card
-              as='li'
-              key={module.name}
-              className='flex flex-col gap-grid-1'
-            >
-              <span className='font-mono text-sm text-text-muted'>
-                {String(index + 1).padStart(2, '0')}.
-                {String(moduleIndex + 1).padStart(2, '0')}
-              </span>
-              <div className='flex flex-col gap-grid-half'>
-                <h3 className='type-card-title'>{module.name}</h3>
-                <p className='text-base text-text-muted'>{module.job}</p>
-              </div>
-              {(module.insteadOf || module.example) && (
-                <RuledRow as='div' className='mt-auto pt-grid-1'>
-                  {module.insteadOf ? (
-                    <TagRow label='Instead of' tags={module.insteadOf} />
-                  ) : (
-                    <TagRow
-                      label='Built for'
-                      tags={([] as string[]).concat(module.example ?? [])}
-                    />
-                  )}
-                </RuledRow>
-              )}
-            </Card>
-          ))}
-          {offer.proof && (
-            <SideNote
-              as='li'
-              className='flex flex-col justify-center gap-grid-half py-grid-1 lg:col-span-2'
-            >
-              <p className='type-card-title'>{offer.proof}</p>
-              <p className='max-w-xl text-base text-text-muted'>
-                {PLATFORM_SHARED}{' '}
-                <Link href='/process#portal' className='link-inline'>
-                  See our portal
-                </Link>
-                .
-              </p>
-              <TagRow
-                label='Built for'
-                tags={['Place To Stand', '9 Point Studios', 'Up The Wall']}
-              />
-            </SideNote>
-          )}
-        </ul>
-      </Reveal>
-    </Section>
-  )
-}
 
 export default function PlatformPage() {
   return (
@@ -107,52 +28,13 @@ export default function PlatformPage() {
         />
       </Section>
       <Band tone='light'>
-        {OFFERS.map((offer, index) => (
-          <OfferSection key={offer.slug} offer={offer} index={index} />
-        ))}
-        <Section
-          id='ai-access'
-          className='flex scroll-mt-24 flex-col gap-stack'
-        >
-          <Reveal index={0}>
-            <SectionHeading
-              label='AI Access'
-              title={AI_ACCESS.title}
-              intro={AI_ACCESS.body}
-            />
-          </Reveal>
-        </Section>
+        <OffersSection variant='detail' />
       </Band>
       <Band tone='dark'>
         <OwnershipSection />
       </Band>
       <Band tone='light'>
-        <Section
-          id='after-launch'
-          className='flex scroll-mt-24 flex-col gap-stack'
-        >
-          <Reveal index={0}>
-            <SectionHeading
-              label='After Launch'
-              title='We stay on after it ships.'
-              intro='Once the first build is live, you choose how much help you want from us.'
-            />
-          </Reveal>
-          <Reveal index={1}>
-            <ul className='grid gap-grid-1 md:grid-cols-3'>
-              {AFTER_LAUNCH.map(item => (
-                <Card
-                  as='li'
-                  key={item.name}
-                  className='flex flex-col gap-grid-half'
-                >
-                  <h3 className='type-card-title'>{item.name}</h3>
-                  <p className='text-base text-text-muted'>{item.body}</p>
-                </Card>
-              ))}
-            </ul>
-          </Reveal>
-        </Section>
+        <AfterLaunchSection variant='detail' />
       </Band>
       <CtaBand
         location='platform-cta-block'

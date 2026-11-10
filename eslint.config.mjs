@@ -28,7 +28,9 @@ const eslintConfig = defineConfig([
   // shadcn-style UI primitives: their internal sizes and offsets are their
   // own API, used through Button, Input, Checkbox and friends.
   {
-    files: ['src/components/ui/**/*.tsx'],
+    files: [
+      'src/components/primitives/{button,input,textarea,checkbox,label,toast,use-toast}.tsx',
+    ],
     rules: {
       'design/no-raw-spacing': 'off',
       'design/no-raw-text-size': 'off',
@@ -42,15 +44,14 @@ const eslintConfig = defineConfig([
   // step dots; and /design, which shows raw specimens.
   {
     files: [
-      'src/components/layout/boxes.tsx',
-      'src/components/layout/dot-grid-background.tsx',
-      'src/components/layout/header.tsx',
-      'src/components/layout/footer.tsx',
-      'src/components/layout/logo-mark.tsx',
+      'src/components/boxes/*.tsx',
+      'src/components/sections/header.tsx',
+      'src/components/sections/footer.tsx',
+      'src/components/primitives/logo-mark.tsx',
       'src/components/sections/hero-section.tsx',
       'src/components/sections/portal-flow.tsx',
-      'src/components/forms/**/*.tsx',
-      'src/components/audit/**/*.tsx',
+      'src/components/primitives/heard-from-field.tsx',
+      'src/components/sections/audit/**/*.tsx',
       'app/design/**/*.tsx',
     ],
     rules: { 'design/no-raw-border': 'off' },

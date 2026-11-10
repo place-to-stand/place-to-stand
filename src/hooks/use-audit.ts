@@ -28,7 +28,7 @@ import {
   type AuditSession,
   type AuditStatus,
 } from '@/src/lib/audit/session'
-import { toast } from '@/src/components/ui/use-toast'
+import { toast } from '@/src/components/primitives/use-toast'
 import { sendAuditProgress } from '@/src/lib/audit/track-progress'
 import type {
   AnswerValue,

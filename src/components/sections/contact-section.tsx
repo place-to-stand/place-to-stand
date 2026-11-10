@@ -13,20 +13,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ChevronDown } from 'lucide-react'
 import { usePostHog } from 'posthog-js/react'
 
-import { SectionHeading, Section } from '@/src/components/layout/section'
+import { SectionHeading, Section } from '@/src/components/patterns/section'
 import { CONTACT_EMAIL } from '@/src/lib/site'
-import { Panel } from '@/src/components/layout/boxes'
-import { Button } from '@/src/components/ui/button'
-import { HeardFromField } from '@/src/components/forms/heard-from-field'
-import { Checkbox } from '@/src/components/ui/checkbox'
-import { Input } from '@/src/components/ui/input'
-import { Label } from '@/src/components/ui/label'
-import { Textarea } from '@/src/components/ui/textarea'
-import { toast } from '@/src/components/ui/use-toast'
+import { Panel } from '@/src/components/boxes'
+import { Button } from '@/src/components/primitives/button'
+import { HeardFromField } from '@/src/components/primitives/heard-from-field'
+import { Checkbox } from '@/src/components/primitives/checkbox'
+import { Input } from '@/src/components/primitives/input'
+import { Label } from '@/src/components/primitives/label'
+import { Textarea } from '@/src/components/primitives/textarea'
+import { toast } from '@/src/components/primitives/use-toast'
 import {
   sendContact,
   type ContactActionResult,
-} from '../../../app/actions/send-contact'
+} from '@/app/actions/send-contact'
 import {
   contactSchema,
   type ContactFormValues,

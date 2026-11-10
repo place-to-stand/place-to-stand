@@ -3,10 +3,10 @@
 import { useEffect } from 'react'
 import { usePostHog } from 'posthog-js/react'
 import { RotateCcw } from 'lucide-react'
-import { TrackedLink } from '@/src/components/tracked-link'
-import { Button } from '@/src/components/ui/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
+import { Button } from '@/src/components/primitives/button'
 import { getAuditSessionSnapshot } from '@/src/lib/audit/session'
-import { Panel } from '@/src/components/layout/boxes'
+import { Panel } from '@/src/components/boxes'
 
 /**
  * Recovery screen for a client-side crash anywhere in the audit page.

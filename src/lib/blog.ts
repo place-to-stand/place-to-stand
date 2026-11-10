@@ -7,7 +7,7 @@ import path from 'node:path'
  * a file in the same shape as the others.
  *
  * Text fields take a small inline markdown subset: **bold**, *italic* and
- * [links](https://…). See src/components/blog/rich-text.tsx.
+ * [links](https://…). See src/components/patterns/rich-text.tsx.
  */
 
 export type BlogBlock =

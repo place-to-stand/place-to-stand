@@ -1,6 +1,6 @@
-import { Section } from '@/src/components/layout/section'
-import { Reveal } from '@/src/components/layout/animated-section'
-import { ClientLogoWall } from './client-logo-wall'
+import { Section } from '@/src/components/patterns/section'
+import { Reveal } from '@/src/components/primitives/animated-section'
+import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
 
 /**
  * Homepage proof bar — the client roster, directly under the hero.

@@ -5,14 +5,14 @@ import {
   PageHeader,
   Section,
   SectionHeading,
-} from '@/src/components/layout/section'
-import { Reveal } from '@/src/components/layout/animated-section'
+} from '@/src/components/patterns/section'
+import { Reveal } from '@/src/components/primitives/animated-section'
 import { ContactSection } from '@/src/components/sections/contact-section'
-import { BookCallButton } from '@/src/components/layout/cta'
-import { Button } from '@/src/components/ui/button'
-import { TrackedLink } from '@/src/components/tracked-link'
-import { LinkCard, RuledRow } from '@/src/components/layout/boxes'
-import { CTA } from '@/src/components/layout/cta'
+import { BookCallButton } from '@/src/components/primitives/cta'
+import { Button } from '@/src/components/primitives/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
+import { LinkCard, RuledRow } from '@/src/components/boxes'
+import { CTA } from '@/src/components/primitives/cta'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Book a call',

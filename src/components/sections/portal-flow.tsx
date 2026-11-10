@@ -8,7 +8,7 @@ import {
   type TouchEvent,
 } from 'react'
 import { cn } from '@/src/lib/utils'
-import { PortalPipeline } from '@/src/components/graphics/portal-pipeline'
+import { PortalPipeline } from '@/src/components/patterns/drawings/portal-pipeline'
 
 /**
  * The portal as one full-width set piece that plays itself. A single pipeline

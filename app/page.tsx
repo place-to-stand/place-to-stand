@@ -2,15 +2,13 @@ import type { Metadata } from 'next'
 import { HeroSection } from '@/src/components/sections/hero-section'
 import { ClientLogosSection } from '@/src/components/sections/client-logos-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
-import {
-  AfterLaunchSection,
-  OffersSection,
-  OwnershipSection,
-  ResultsSection,
-  StepsSection,
-} from '@/src/components/sections/home-story'
-import { Band } from '@/src/components/layout/section'
-import { CtaBand } from '@/src/components/layout/cta-band'
+import { OffersSection } from '@/src/components/sections/offers'
+import { ResultsSection } from '@/src/components/sections/results'
+import { StepsSection } from '@/src/components/sections/process'
+import { AfterLaunchSection } from '@/src/components/sections/after-launch'
+import { OwnershipSection } from '@/src/components/sections/ownership'
+import { Band } from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },

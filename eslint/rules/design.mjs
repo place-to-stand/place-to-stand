@@ -120,8 +120,7 @@ export const noRawColor = classRule({
 })
 
 // Borders: boxes own their strokes. Card, LinkCard, StatTile, Callout,
-// Panel, RuledRow, RuledList, SideNote and Chip (src/components/layout/
-// boxes.tsx) carry every border on the site, so a page never draws one.
+// Panel, RuledRow, RuledList, SideNote and Chip (src/components/boxes) carry every border on the site, so a page never draws one.
 // Turned off in eslint.config.mjs for boxes.tsx itself and for UI
 // primitives; anything else that truly needs a border says why in an
 // eslint-disable comment.
@@ -131,7 +130,7 @@ const NOT_A_STROKE =
   /^border-(?:collapse|separate|spacing(?:-.+)?)$|^border(?:-[trblxyse])?-0$/
 export const noRawBorder = classRule({
   description: 'Borders come from the shared box components',
-  message: `${DOC} → Boxes: "{{cls}}" draws a border. Use Card, LinkCard, StatTile, Callout, Panel, RuledRow, RuledList, SideNote or Chip from src/components/layout/boxes.tsx.`,
+  message: `${DOC} → Boxes: "{{cls}}" draws a border. Use Card, LinkCard, StatTile, Callout, Panel, RuledRow, RuledList, SideNote or Chip from src/components/boxes.`,
   test: cls => BORDER.test(cls) && !NOT_A_STROKE.test(cls),
 })
 

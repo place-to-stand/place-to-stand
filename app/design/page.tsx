@@ -3,31 +3,27 @@ import {
   PageHeader,
   Section,
   SectionHeading,
-} from '@/src/components/layout/section'
-import { CtaBand } from '@/src/components/layout/cta-band'
+} from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
 import {
   AuditLink,
   BookCallButton,
   BookCallGroup,
-} from '@/src/components/layout/cta'
-import { LogoLockup } from '@/src/components/layout/logo-mark'
-import { SocialIcon } from '@/src/components/layout/social-icon'
-import { FooterSubscribe } from '@/src/components/layout/footer-subscribe'
-import { Button } from '@/src/components/ui/button'
-import { Input } from '@/src/components/ui/input'
-import {
-  ArrowLink,
-  OfferCard,
-  OwnershipSection,
-  StepsSection,
-  TagRow,
-} from '@/src/components/sections/home-story'
-import {
-  ClientsSection,
-  FeaturedCaseStudy,
-} from '@/src/components/sections/clients-section'
+} from '@/src/components/primitives/cta'
+import { LogoLockup } from '@/src/components/primitives/logo-mark'
+import { SocialIcon } from '@/src/components/primitives/social-icon'
+import { FooterSubscribe } from '@/src/components/sections/footer-subscribe'
+import { Button } from '@/src/components/primitives/button'
+import { Input } from '@/src/components/primitives/input'
+import { ArrowLink } from '@/src/components/patterns/arrow-link'
+import { TagRow } from '@/src/components/patterns/tag-row'
+import { OfferCard } from '@/src/components/sections/offers'
+import { OwnershipSection } from '@/src/components/sections/ownership'
+import { StepsSection } from '@/src/components/sections/process'
+import { ResultsSection } from '@/src/components/sections/results'
+import { ClientsSection } from '@/src/components/sections/clients-section'
 import { FAQ, OFFERS } from '@/src/lib/offers'
-import { ClientLogoWall } from '@/src/components/sections/client-logo-wall'
+import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
 import Image from 'next/image'
 import { DesignIndex } from './_components/design-index'
 import { DesignSection, Specimen } from './_components/specimen'
@@ -41,7 +37,7 @@ import {
   RuledRow,
   SideNote,
   StatTile,
-} from '@/src/components/layout/boxes'
+} from '@/src/components/boxes'
 import {
   LiveVar,
   SpaceBar,
@@ -522,7 +518,7 @@ export default function DesignPage() {
             when='The case study block that opens Clients.'
           >
             <Specimen names={['FeaturedCaseStudy']}>
-              <FeaturedCaseStudy />
+              <ResultsSection variant='featured' />
             </Specimen>
           </DesignSection>
 

@@ -1,13 +1,13 @@
-import { Section } from '@/src/components/layout/section'
+import { Section } from '@/src/components/patterns/section'
 import Link from 'next/link'
-import { Reveal } from '@/src/components/layout/animated-section'
+import { Reveal } from '@/src/components/primitives/animated-section'
 import { WHO_YOU_WORK_WITH } from '@/src/lib/offers'
-import { Card } from '@/src/components/layout/boxes'
+import { Card } from '@/src/components/boxes'
 import {
   DraftingGraphic,
   AiNativeGraphic,
   DirectAccessGraphic,
-} from '@/src/components/graphics/home-graphics'
+} from '@/src/components/patterns/drawings/home-graphics'
 
 const GRAPHICS = [DraftingGraphic, AiNativeGraphic, DirectAccessGraphic]
 

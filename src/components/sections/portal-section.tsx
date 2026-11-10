@@ -1,9 +1,9 @@
-import { Reveal } from '@/src/components/layout/animated-section'
-import { Section } from '@/src/components/layout/section'
-import { Button } from '@/src/components/ui/button'
-import { vendorIcons } from '@/src/components/icons/vendor-icons'
-import { TrackedLink } from '@/src/components/tracked-link'
-import { PortalFlow } from './portal-flow'
+import { Reveal } from '@/src/components/primitives/animated-section'
+import { Section } from '@/src/components/patterns/section'
+import { Button } from '@/src/components/primitives/button'
+import { vendorIcons } from '@/src/components/primitives/vendor-icons'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
+import { PortalFlow } from '@/src/components/sections/portal-flow'
 
 const GitHubIcon = vendorIcons.GitHub
 const REPO_URL = 'https://github.com/place-to-stand/place-to-stand-portal'

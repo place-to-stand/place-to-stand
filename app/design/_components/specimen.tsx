@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
-import { Section, SectionHeading } from '@/src/components/layout/section'
+import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { cn } from '@/src/lib/utils'
 import type { DesignSectionId } from './sections'
 

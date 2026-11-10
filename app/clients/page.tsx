@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Band, PageHeader, Section } from '@/src/components/layout/section'
-import { CtaBand } from '@/src/components/layout/cta-band'
-import {
-  ClientsSection,
-  FeaturedCaseStudy,
-} from '@/src/components/sections/clients-section'
+import { Band, PageHeader, Section } from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
+import { ClientsSection } from '@/src/components/sections/clients-section'
+import { ResultsSection } from '@/src/components/sections/results'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Clients',
@@ -27,7 +25,7 @@ export default function ClientsPage() {
       {/* Proof first: the case study clients, dark, then the rest of the
           roster on a light band. */}
       <Section id='case-study' className='scroll-mt-24 pb-band-pad'>
-        <FeaturedCaseStudy />
+        <ResultsSection variant='featured' />
       </Section>
       <Band tone='light'>
         <Section id='clients' className='scroll-mt-24'>

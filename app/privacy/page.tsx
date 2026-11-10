@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Section } from '@/src/components/layout/section'
+import { Section } from '@/src/components/patterns/section'
 import {
   LegalHeader,
   LegalList,
   LegalSection,
-} from '@/src/components/legal/legal-prose'
+} from '@/src/components/patterns/legal-prose'
 
 const UPDATED = 'August 25, 2026'
 const CONTACT_EMAIL = 'hello@placetostandagency.com'

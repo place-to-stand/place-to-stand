@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Section } from '@/src/components/layout/section'
-import { Callout, Card, RuledRow } from '@/src/components/layout/boxes'
-import { Button } from '@/src/components/ui/button'
-import { TrackedLink } from '@/src/components/tracked-link'
+import { Section } from '@/src/components/patterns/section'
+import { Callout, Card, RuledRow } from '@/src/components/boxes'
+import { Button } from '@/src/components/primitives/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { referralContent as c } from '@/src/lib/referral-content'
 
 export const metadata: Metadata = pageMetadata({

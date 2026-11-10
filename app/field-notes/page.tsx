@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { PageHeader, Section } from '@/src/components/layout/section'
+import { PageHeader, Section } from '@/src/components/patterns/section'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { fieldNotes } from '@/src/lib/field-notes'
-import { RuledList, RuledRow } from '@/src/components/layout/boxes'
+import { RuledList, RuledRow } from '@/src/components/boxes'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Field Notes',

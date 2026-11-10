@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Band, Section } from '@/src/components/layout/section'
-import { CtaBand } from '@/src/components/layout/cta-band'
-import { RuledList, RuledRow } from '@/src/components/layout/boxes'
-import { SubscribeForm } from '@/src/components/blog/subscribe-form'
+import { Band, Section } from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
+import { RuledList, RuledRow } from '@/src/components/boxes'
+import { SubscribeForm } from '@/src/components/sections/subscribe-form'
 import {
   formatPostDate,
   getAllPosts,

@@ -118,7 +118,7 @@ active states and highlighted panels. Do not use other opacities (`border-accent
 
 ## Components
 
-All in `src/components/layout/`.
+Components live in tiers under `src/components/`: `primitives/` (buttons, inputs, links, logo, reveal), `boxes/` (the six box types), `patterns/` (section scaffolding, headings, drawings, logo wall, rich text), and `sections/` (page-level blocks, each with named variants and a declared tone: offers, results, process, after-launch, ownership, cta-band, header, footer, the audit). The ones below are in `patterns/section.tsx` unless noted.
 
 - **`Section`** (`section.tsx`): a page section with no outer padding. Takes everything `AnimatedSection` does.
 - **`PageHeader`** (`section.tsx`): label, title, optional intro and `meta` line, with the blueprint dots behind it.
@@ -145,7 +145,7 @@ A typical inner page:
 
 ## Boxes and strokes
 
-Every box on the site is one of the components in `src/components/layout/boxes.tsx`, and each one owns its stroke. Box lines are 1px; 2px is only for selected and focus states. Pages never draw a border themselves: `design/no-raw-border` fails lint outside the boxes, site chrome (header, footer, hero rule, logo), form controls, the audit tool and /design.
+Every box on the site is one of the components in `src/components/boxes`, and each one owns its stroke. Box lines are 1px; 2px is only for selected and focus states. Pages never draw a border themselves: `design/no-raw-border` fails lint outside the boxes, site chrome (header, footer, hero rule, logo), form controls, the audit tool and /design.
 
 | Component              | Stroke                                                             | Fill       | Use for                                                 |
 | ---------------------- | ------------------------------------------------------------------ | ---------- | ------------------------------------------------------- |
@@ -162,7 +162,7 @@ Every box on the site is one of the components in `src/components/layout/boxes.t
 
 ## Calls to action
 
-One shared definition in `src/components/layout/cta.tsx`, so every place matches:
+One shared definition in `src/components/primitives/cta.tsx`, so every place matches:
 
 - **`BookCallButton`**: the lime "Book a call" button. Goes to `/contact`; only the Contact page opens the calendar (`toCalendar`). Header uses the small size, everywhere else large.
 - **`AuditLink`**: the "Take the free audit" action link, never a button.
@@ -187,7 +187,7 @@ Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px
 
 ## Logo
 
-`LogoLockup` (`src/components/layout/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2px), so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
+`LogoLockup` (`src/components/primitives/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2px), so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
 
 ## Checks
 
