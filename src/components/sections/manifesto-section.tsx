@@ -3,18 +3,8 @@ import Link from 'next/link'
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { WHO_YOU_WORK_WITH } from '@/src/lib/offers'
 import { Card } from '@/src/components/boxes'
-import {
-  DraftingGraphic,
-  AiNativeGraphic,
-  DirectAccessGraphic,
-} from '@/src/components/patterns/drawings/home-graphics'
 
-const GRAPHICS = [DraftingGraphic, AiNativeGraphic, DirectAccessGraphic]
-
-const facets = WHO_YOU_WORK_WITH.facets.map((facet, index) => ({
-  ...facet,
-  Graphic: GRAPHICS[index],
-}))
+const facets = WHO_YOU_WORK_WITH.facets
 
 export function ManifestoSection() {
   return (
@@ -40,18 +30,12 @@ export function ManifestoSection() {
           </Reveal>
         </div>
 
-        {/* Facet cards — blueprint grid */}
+        {/* Facet cards: the words carry them, no drawings */}
         <Reveal index={2} className='relative'>
           <div className='grid gap-grid-1 md:grid-cols-3'>
             {facets.map(facet => (
-              <Card
-                key={facet.title}
-                className='relative flex flex-col gap-grid-half'
-              >
-                <div className='flex items-center justify-between gap-grid-half'>
-                  <h3 className='type-card-title'>{facet.title}</h3>
-                  <facet.Graphic className='h-grid-2 w-grid-2 shrink-0' />
-                </div>
+              <Card key={facet.title} className='flex flex-col gap-grid-half'>
+                <h3 className='type-card-title'>{facet.title}</h3>
                 <p className='text-base text-text-muted'>{facet.body}</p>
               </Card>
             ))}

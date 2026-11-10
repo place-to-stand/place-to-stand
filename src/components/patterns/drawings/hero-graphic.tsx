@@ -25,7 +25,7 @@ import { BlueprintGraphic } from '@/src/components/patterns/drawings/blueprint-g
  * the graphic reads: we don't just consolidate the interface, we consolidate the
  * data into a single source of truth.
  *
- * Same schematic vocabulary as home-graphics.tsx (fill-bg-card hollow shapes,
+ * The site's schematic vocabulary (fill-bg-card hollow shapes,
  * stroke-line, one accent highlight). Entrance is a sequenced fade-and-rise
  * (see .hero-compare in globals.css): the tossed generic dashboards come up one
  * by one, then the front, then the arrow, then your app, then the data layer
