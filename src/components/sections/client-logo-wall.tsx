@@ -198,6 +198,8 @@ function LogoCell({
           <img
             src={client.logo}
             alt={`${client.title} logo`}
+            // The wall sits under the hero, below the fold: load as it nears.
+            loading='lazy'
             decoding='async'
             style={{
               maxHeight: `${(client.logoScale ?? 1) * 100}%`,
