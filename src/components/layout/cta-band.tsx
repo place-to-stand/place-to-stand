@@ -6,14 +6,14 @@ const DEFAULT_DESCRIPTION =
   "Book a free 30-minute intro call. Tell us what you need, and we'll say plainly whether we can help."
 
 /**
- * The closing "Find where to start" callout: a card in a band of blueprint
+ * The closing "Tell us what's slowing you down" callout: a card in a band of blueprint
  * dots that runs down to the footer. Put it last in <main>, right after a
  * block that ends with pb-edge. Its padding is the band role, so the dots'
  * top rule sits on its top edge: one edge gap under the content above.
  */
 export function CtaBand({
   location,
-  title = 'Find where to start.',
+  title = "Tell us what's slowing you down.",
   description = DEFAULT_DESCRIPTION,
   label = 'Next Step',
   action = 'call',

@@ -6,14 +6,14 @@
  * the portal never has to learn a new taxonomy when this list changes.
  *
  * Other pages can preselect a subject by linking to
- * `/contact?subject=Referral%20Program`; an unknown value lands in "Other" with
+ * `/contact?subject=Referral%20program`; an unknown value lands in "Other" with
  * the text filled in.
  */
 export const CONTACT_SUBJECT_OTHER = 'Other'
 
 export const CONTACT_SUBJECTS = [
   'New project',
-  'Referral Program',
+  'Referral program',
   'General question',
   CONTACT_SUBJECT_OTHER,
 ] as const
@@ -43,8 +43,11 @@ export function subjectFromQuery(
 ): { subject: ContactSubjectPreset; subjectOther: string } | null {
   const trimmed = raw?.trim().slice(0, 256) ?? ''
   if (!trimmed) return null
-  if (isContactSubjectPreset(trimmed)) {
-    return { subject: trimmed, subjectOther: '' }
-  }
+  // Match presets without case, so older links (?subject=Referral%20Program)
+  // still land on the right choice.
+  const preset = CONTACT_SUBJECTS.find(
+    s => s.toLowerCase() === trimmed.toLowerCase()
+  )
+  if (preset) return { subject: preset, subjectOther: '' }
   return { subject: CONTACT_SUBJECT_OTHER, subjectOther: trimmed }
 }

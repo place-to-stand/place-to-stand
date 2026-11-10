@@ -3,6 +3,8 @@
  * page and the downloadable PDF (/referral/pdf). Edit strings here; never
  * duplicate them in either renderer.
  */
+import { OFFERS } from './offers'
+import { services } from './services'
 export const referralContent = {
   meta: {
     title: 'Referral Program',
@@ -22,69 +24,20 @@ export const referralContent = {
     label: 'Who we are',
     headline: 'Off-the-shelf software is built for everyone. We build for you.',
     body: 'Place To Stand builds custom software shaped to how a business actually runs, for companies that have real processes but no engineering team. The engineer who scopes the work is the one who builds it. No account managers, no handoffs.',
+    // The same lists as Platform: the two offers' modules, then the
+    // after-launch services.
     services: [
-      {
-        name: 'Software development',
-        items: [
-          'Web, mobile, and desktop apps',
-          'E-commerce and Shopify',
-          'APIs',
-          'Internal tools',
-          'Legacy system rebuilds',
-        ],
-      },
-      {
-        name: 'Workflow systems',
-        items: [
-          'Portals',
-          'CRM',
-          'ERP',
-          'Inventory',
-          'Scheduling and booking',
-          'Quoting and invoicing',
-          'Task tracking',
-          'Approvals',
-          'Integrations',
-          'Live reports',
-        ],
-      },
-      {
-        name: 'Automation and AI',
-        items: [
-          'Workflow automation',
-          'AI agents',
-          'Chatbots',
-          'Document processing',
-        ],
-      },
-      {
-        name: 'Data intelligence',
-        items: [
-          'Pipelines',
-          'Analytics',
-          'Forecasting',
-          'AI-powered reporting',
-        ],
-      },
-      {
-        name: 'Strategic advisory',
-        items: [
-          'Fractional CTO',
-          'Roadmaps',
-          'AI readiness',
-          'Tool and vendor selection',
-        ],
-      },
-      {
-        name: 'Managed services',
-        items: [
-          'Hosting',
-          'Uptime',
-          'Security',
-          'Updates after launch',
-          'Ongoing support',
-        ],
-      },
+      ...OFFERS.map(offer => ({
+        name: offer.name,
+        items: offer.modules.map(module => module.name),
+      })),
+      ...services
+        .filter(service =>
+          ['managed-services', 'technical-consulting', 'training'].includes(
+            service.slug
+          )
+        )
+        .map(service => ({ name: service.title, items: service.features })),
     ],
   },
 
@@ -144,7 +97,7 @@ export const referralContent = {
     points: [
       {
         title: 'Five-hour minimum to start.',
-        body: 'Hours belong to the client, never expire, and can be spent across any project.',
+        body: 'Hours belong to the client, never expire, and can be spent on any project.',
       },
       {
         title: 'No surprise bills.',
@@ -161,8 +114,8 @@ export const referralContent = {
     note: 'Payouts require referrers to be accepted into the program and set up as 1099 contractors.',
     noteCta: 'Contact us to join.',
     pdfCta: 'Join at placetostandagency.com/contact.',
-    href: '/contact?subject=Referral%20Program',
-    url: 'https://placetostandagency.com/contact?subject=Referral%20Program',
+    href: '/contact?subject=Referral%20program',
+    url: 'https://placetostandagency.com/contact?subject=Referral%20program',
   },
 
   audit: {

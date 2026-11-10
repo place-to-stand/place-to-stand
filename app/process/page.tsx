@@ -21,7 +21,7 @@ export const metadata: Metadata = pageMetadata({
 })
 
 const ONCE_IT_WORKS = [
-  'We keep it running, and you reach us in a shared channel in your Slack, Teams or Google Chat.',
+  'We keep it running, and you reach us in a shared channel in your Slack, Teams, Google Chat or Discord.',
   'We teach your team to change it themselves, starting while we build.',
   "When you're ready, we start on the next problem.",
 ]

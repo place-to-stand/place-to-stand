@@ -14,7 +14,7 @@ import { ALT_ROW } from '@/src/components/layout/alt-row'
 export const metadata: Metadata = pageMetadata({
   title: 'About',
   description:
-    'Place To Stand is a small team of senior engineers in Austin and Brooklyn who build software their clients own.',
+    'Place To Stand builds software its clients own, from Austin and Brooklyn. Built by two senior engineers, one a former Squarespace group engineering manager.',
   path: '/about',
 })
 

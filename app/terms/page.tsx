@@ -89,7 +89,7 @@ export default function TermsPage() {
                 statement of work. Unless stated otherwise, invoices are due
                 within 15 days of receipt. We may pause work on overdue accounts
                 after giving written notice. Fees are exclusive of taxes and of
-                third-party costs such as hosting and software licences, which
+                third-party costs such as hosting and software licenses, which
                 are your responsibility unless we agree otherwise in writing.
               </p>
             </LegalSection>
@@ -122,12 +122,12 @@ export default function TermsPage() {
                 predates it or that we develop for general use, including our
                 internal tools, libraries, frameworks, and know-how. Where those
                 components are embedded in your deliverables, we grant you a
-                perpetual, worldwide, non-exclusive licence to use them as part
+                perpetual, worldwide, non-exclusive license to use them as part
                 of those deliverables.
               </p>
               <p>
                 Third-party and open-source components remain subject to their
-                own licences. We may describe the work publicly and include it
+                own licenses. We may describe the work publicly and include it
                 in our portfolio unless you ask us in writing not to.
               </p>
             </LegalSection>

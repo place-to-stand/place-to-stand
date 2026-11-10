@@ -1,6 +1,6 @@
 # Place To Stand Agency
 
-> Place To Stand (placetostandagency.com) is a custom software, automation, and AI development agency based in Austin, TX, with a presence in Brooklyn, NY. Founded in 2023 by Jason Desiderio (formerly a group engineering manager at Squarespace) and Kris Crawford. We build software shaped to how a business actually runs, for companies that have real processes but no in-house engineering team. Clients own what we build: no per-seat fees, one source of truth for their data, no feature bloat.
+> Place To Stand (placetostandagency.com) is a custom software, automation and AI development agency in Austin, TX and Brooklyn, NY. We build systems that run a business and online stores, for companies without engineers of their own. Founded in 2023 by Jason Desiderio (formerly a group engineering manager at Squarespace) and Kris Crawford. Clients own what we build: no per-seat fees, one source of truth for their data, no feature bloat.
 
 Place To Stand at placetostandagency.com is not affiliated with other businesses that use the name "Place to Stand", including placetostand.com.
 
@@ -27,7 +27,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 
 ## Platform and process
 
-- [Platform](https://placetostandagency.com/platform): two offers, Run your business (team workspace, CRM, workflows, automations, client portal, reports) and Sell online (Shopify and headless stores, custom marketplaces, Shopify apps, payments, fulfillment and inventory), plus managed services, technical consulting and training
+- [Platform](https://placetostandagency.com/platform): two offers, Run your business (team workspace, website, CRM, billing, reports, client portal, workflows and automations) and Sell online (Shopify stores, custom marketplaces, Shopify apps and functions, payments, fulfillment and inventory), plus managed services, technical consulting and training
 - [Process](https://placetostandagency.com/process): a free 30-minute intro call to check fit, a one-hour discovery session, 1 to 2 weeks with your team, one problem solved in 2 to 6 weeks, then the next; billing for hands-on human time only; common questions
 - [Opportunity Audit](https://placetostandagency.com/audit): free two-minute self-assessment
 

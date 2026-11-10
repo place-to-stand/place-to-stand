@@ -24,14 +24,16 @@ export function PortalSection() {
           className='flex flex-col gap-grid-1 md:flex-row md:items-start md:justify-between'
         >
           <div className='flex flex-col gap-intro'>
-            <h2 className='max-w-3xl type-section-title text-balance uppercase'>
-              Our Portal
-            </h2>
+            <div className='flex flex-col gap-eyebrow'>
+              <span className='bp-label font-mono'>Our Portal</span>
+              <h2 className='max-w-3xl type-section-title text-balance'>
+                Humans and agents, building together.
+              </h2>
+            </div>
             <p className='max-w-2xl type-intro'>
-              Humans and agents, building together. We built our own delivery
-              pipeline. Humans set direction and keep the taste; agents do the
-              heavy building in an isolated cloud. Nothing ships until
-              we&apos;ve verified it.
+              We decide what to build and how it should look and feel. AI agents
+              write the code in a walled-off workspace. Nothing ships until one
+              of us has checked it.
             </p>
           </div>
           <Button
