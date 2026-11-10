@@ -119,6 +119,22 @@ export const noRawColor = classRule({
   test: cls => PALETTE.test(cls) || /-\[#[0-9a-fA-F]{3,8}\]/.test(cls),
 })
 
+// Borders: boxes own their strokes. Card, LinkCard, StatTile, Callout,
+// Panel, RuledRow, RuledList, SideNote and Chip (src/components/layout/
+// boxes.tsx) carry every border on the site, so a page never draws one.
+// Turned off in eslint.config.mjs for boxes.tsx itself and for UI
+// primitives; anything else that truly needs a border says why in an
+// eslint-disable comment.
+const BORDER = /^(?:border(?:-[trblxyse])?(?:-.+)?|divide-.+)$/
+// Zero widths remove a rule (first:border-t-0), they don't draw one.
+const NOT_A_STROKE =
+  /^border-(?:collapse|separate|spacing(?:-.+)?)$|^border(?:-[trblxyse])?-0$/
+export const noRawBorder = classRule({
+  description: 'Borders come from the shared box components',
+  message: `${DOC} → Boxes: "{{cls}}" draws a border. Use Card, LinkCard, StatTile, Callout, Panel, RuledRow, RuledList, SideNote or Chip from src/components/layout/boxes.tsx.`,
+  test: cls => BORDER.test(cls) && !NOT_A_STROKE.test(cls),
+})
+
 // Links: every text link is link-nav, link-action, link-inline or
 // link-icon. A link that styles its own underline or accent colour is a
 // fourth style. Card links (whole blocks) don't set text decoration and
@@ -180,6 +196,7 @@ export const rules = {
   'no-raw-spacing': noRawSpacing,
   'no-raw-text-size': noRawTextSize,
   'no-raw-color': noRawColor,
+  'no-raw-border': noRawBorder,
   'link-role': linkRole,
   'section-component': sectionComponent,
 }

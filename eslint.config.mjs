@@ -14,6 +14,7 @@ const eslintConfig = defineConfig([
       'design/no-raw-spacing': 'error',
       'design/no-raw-text-size': 'error',
       'design/no-raw-color': 'error',
+      'design/no-raw-border': 'error',
       'design/link-role': 'error',
     },
   },
@@ -31,7 +32,28 @@ const eslintConfig = defineConfig([
     rules: {
       'design/no-raw-spacing': 'off',
       'design/no-raw-text-size': 'off',
+      'design/no-raw-border': 'off',
     },
+  },
+  // Where borders are allowed outside the shared boxes: the boxes
+  // themselves and the corner marks; site chrome (header, footer, the hero's
+  // closing rule, the logo square); form controls and the audit tool, whose
+  // borders show state (selected, active step, locked); the portal flow's
+  // step dots; and /design, which shows raw specimens.
+  {
+    files: [
+      'src/components/layout/boxes.tsx',
+      'src/components/layout/dot-grid-background.tsx',
+      'src/components/layout/header.tsx',
+      'src/components/layout/footer.tsx',
+      'src/components/layout/logo-mark.tsx',
+      'src/components/sections/hero-section.tsx',
+      'src/components/sections/portal-flow.tsx',
+      'src/components/forms/**/*.tsx',
+      'src/components/audit/**/*.tsx',
+      'app/design/**/*.tsx',
+    ],
+    rules: { 'design/no-raw-border': 'off' },
   },
   // Override default ignores of eslint-config-next.
   globalIgnores([

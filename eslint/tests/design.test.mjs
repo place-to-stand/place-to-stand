@@ -89,3 +89,19 @@ run('section-component', {
     { code: '<AnimatedSection className="py-20" />', errors: 1 },
   ],
 })
+
+run('no-raw-border', {
+  valid: [
+    "<Card className='flex flex-col gap-grid-1' />",
+    "<RuledRow className='first:border-t-0 pt-grid-1' />",
+    "<table className='border-collapse' />",
+    "<div className='focus-visible:outline-2' />",
+  ],
+  invalid: [
+    { code: "<div className='border border-border p-card' />", errors: 2 },
+    { code: "<li className='border-t border-rule pt-grid-1' />", errors: 2 },
+    { code: "<div className={cn('flex', 'border-l-4')} />", errors: 1 },
+    { code: "<ul className='divide-y divide-border' />", errors: 2 },
+    { code: "<a className='hover:border-accent' />", errors: 1 },
+  ],
+})
