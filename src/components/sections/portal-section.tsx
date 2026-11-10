@@ -18,10 +18,10 @@ const REPO_URL = 'https://github.com/place-to-stand/place-to-stand-portal'
 export function PortalSection() {
   return (
     <div className='flex flex-col gap-stack'>
-      <Section className='flex flex-col gap-6'>
+      <Section className='flex flex-col gap-grid-1'>
         <Reveal
           index={0}
-          className='flex flex-col gap-6 md:flex-row md:items-start md:justify-between'
+          className='flex flex-col gap-grid-1 md:flex-row md:items-start md:justify-between'
         >
           <div className='flex flex-col gap-intro'>
             <h2 className='max-w-3xl type-section-title text-balance uppercase'>
@@ -38,7 +38,7 @@ export function PortalSection() {
             asChild
             variant='outline'
             size='sm'
-            className='h-8 shrink-0 gap-1.5 self-start px-3 text-sm md:h-9 md:gap-2 md:px-4'
+            className='h-8 shrink-0 gap-1.5 self-start px-grid-half text-sm md:h-9 md:gap-2 md:px-grid-half'
           >
             <TrackedLink
               href={REPO_URL}

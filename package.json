@@ -7,12 +7,13 @@
     "build": "next build",
     "postbuild": "node scripts/indexnow.mjs",
     "start": "next start",
-    "lint": "eslint .",
+    "lint": "eslint . && node --test eslint/tests/",
     "perf": "node scripts/lighthouse.mjs",
     "perf:lcp": "node scripts/lcp.mjs",
     "format": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
     "format:write": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test:lint-rules": "node --test eslint/tests/"
   },
   "dependencies": {
     "@hookform/resolvers": "6.0.0",

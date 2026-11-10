@@ -147,7 +147,7 @@ export function AnimatedSection({
         transitionDuration: reduced || priority ? '0ms' : '2200ms',
       }}
       className={cn(
-        'mx-auto w-full max-w-content scroll-mt-24 px-6 py-20 lg:px-12',
+        'mx-auto w-full max-w-content scroll-mt-24 px-grid-1 py-grid-3 lg:px-grid-2',
         isVisible
           ? 'translate-x-0 opacity-100'
           : cn('opacity-0', fromLeft ? '-translate-x-24' : 'translate-x-24'),
