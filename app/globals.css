@@ -111,7 +111,7 @@
   --space-eyebrow: 24px;
   --space-card: 24px;
   --space-callout: 24px;
-  --space-band: 84px;
+  --space-band: 72px;
 }
 @media (min-width: 48rem) {
   :root {
@@ -121,14 +121,14 @@
     --space-edge: 96px;
     --space-header: 72px;
     --space-callout: 48px;
-    --space-band: 108px;
+    --space-band: 96px;
   }
 }
 @media (min-width: 64rem) {
   :root {
     --nav-height: 69px;
     --space-page-top: 72px;
-    --space-section: 168px;
+    --space-section: 192px;
     --space-edge: 120px;
     --space-header: 96px;
     --space-stack: 72px;
@@ -352,10 +352,6 @@ html {
    dots spill past it into the section above. */
 .dots-band {
   --band-pad: var(--space-band);
-}
-/* CtaBand's section takes AnimatedSection's py-grid-3 padding. */
-.dots-band.dots-band-closing {
-  --band-pad: var(--spacing-grid-3);
 }
 /* The same thin rule opens the band. */
 .dots-band::before {

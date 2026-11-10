@@ -16,7 +16,7 @@ they work with any spacing utility: `pt-page-start`, `gap-section`, `p-card`, `p
 | ------------ | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `page-top`   | 36 / 48 / 72            | Under the fixed nav to a page's first content (and the home hero)                                                                      |
 | `page-start` | nav height + page-top   | `<main>` top padding on every page (the nav is fixed over the page)                                                                    |
-| `section`    | 96 / 144 / 168          | Between two sections, content to content; also a page's end (`pb-…`)                                                                   |
+| `section`    | 96 / 144 / 192          | Between two sections, content to content; also a page's end (`pb-…`)                                                                   |
 | `edge`       | 72 / 96 / 120           | Last content to the closing callout's dots; home hero line to sections                                                                 |
 | `header`     | 48 / 72 / 96            | A page header to the content in the same section                                                                                       |
 | `stack`      | 48 / 48 / 72            | A section's heading group to its cards, list or form                                                                                   |
@@ -26,8 +26,8 @@ they work with any spacing utility: `pt-page-start`, `gap-section`, `p-card`, `p
 | `grid-half`  | 12                      | Tight structural pairs                                                                                                                 |
 | `card`       | 24 / 24 / 36            | Inner padding of cards and panels                                                                                                      |
 | `callout`    | 24 / 48 / 72            | Inner padding of the dotted callout box                                                                                                |
-| `band-pad`   | 48 / 72 / 84            | A light or dark `Band`'s own top and bottom padding: half the section gap, so a tone change still puts one section gap between content |
-| `band`       | 84 / 108 / 108          | Depth of the callout's dots above and below its box                                                                                    |
+| `band-pad`   | 48 / 72 / 96            | A light or dark `Band`'s own top and bottom padding: half the section gap, so a tone change still puts one section gap between content |
+| `band`       | 72 / 96 / 96            | Depth of the callout's dots above and below its box                                                                                    |
 
 Cards in a grid sit `grid-1` (24px) apart. Raw grid tokens (`grid-half` … `grid-8`) stay available for anything
 that is not one of these roles.

@@ -29,10 +29,8 @@ export function CtaBand({
   action?: 'call' | 'audit'
 }) {
   return (
-    // Padding is AnimatedSection's py-grid-3; .dots-band in globals.css uses
-    // the same value so its dots start exactly at the section's top edge.
-    <AnimatedSection>
-      <div className='dots-band dots-band-closing bg-bg-card p-callout'>
+    <AnimatedSection className='py-band'>
+      <div className='dots-band bg-bg-card p-callout'>
         <BlueprintCorners size={20} all colorClassName='border-accent' />
         <div className='flex flex-col gap-stack md:flex-row md:items-center md:justify-between'>
           <div className='flex flex-col gap-intro'>
