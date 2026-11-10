@@ -205,7 +205,7 @@ export function StepsSection({
       {showBilling && (
         <Reveal
           index={2}
-          className='flex flex-col gap-grid-half border-l-4 border-accent pl-grid-1'
+          className='flex flex-col gap-grid-half border-l-4 border-accent-line pl-grid-1'
         >
           <p className='type-card-title'>{BILLING.title}</p>
           <p className='max-w-3xl text-base text-text-muted'>{BILLING.body}</p>

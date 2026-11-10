@@ -36,9 +36,9 @@ export const AI_ACCESS = {
   body: 'Any AI assistant can read and update your data through a built-in connector (MCP). It follows the same roles as your team, so an agent can never see more than the person using it.',
 }
 
-/** Shown once below both offers on Platform. */
+/** Closes the Platform intro. */
 export const MOBILE_APPS =
-  'We also build mobile apps, for your team or your customers.'
+  'We also build mobile apps for either one, for your team or your customers.'
 
 export const OFFERS: Offer[] = [
   {

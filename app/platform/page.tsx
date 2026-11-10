@@ -82,7 +82,7 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
             </li>
           ))}
           {offer.proof && (
-            <li className='flex flex-col justify-center gap-grid-half border-l-4 border-accent py-grid-1 pl-grid-1 lg:col-span-2'>
+            <li className='flex flex-col justify-center gap-grid-half border-l-4 border-accent-line py-grid-1 pl-grid-1 lg:col-span-2'>
               <p className='type-card-title'>{offer.proof}</p>
               <p className='max-w-xl text-base text-text-muted'>
                 {PLATFORM_SHARED}{' '}
@@ -107,7 +107,7 @@ export default function PlatformPage() {
         <PageHeader
           label='Platform'
           title='Software you own, built around your business.'
-          intro='We build two kinds of systems: ones that run the business and ones that sell. Each piece works on its own, and they all share one source of data.'
+          intro={`We build two kinds of systems: ones that run the business and ones that sell. Each piece works on its own, and they all share one source of data. ${MOBILE_APPS}`}
         />
       </Section>
       <Band tone='light'>
@@ -124,11 +124,6 @@ export default function PlatformPage() {
               title={AI_ACCESS.title}
               intro={AI_ACCESS.body}
             />
-          </Reveal>
-        </Section>
-        <Section>
-          <Reveal index={0} className='border-l-4 border-accent pl-grid-1'>
-            <p className='type-card-title'>{MOBILE_APPS}</p>
           </Reveal>
         </Section>
       </Band>
