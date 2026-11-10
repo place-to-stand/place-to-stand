@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import {
   Band,
-  PageHeader,
   Section,
   SectionHeading,
 } from '@/src/components/patterns/section'
@@ -13,6 +12,7 @@ import { Button } from '@/src/components/primitives/button'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { LinkCard, RuledRow } from '@/src/components/boxes'
 import { CTA } from '@/src/components/primitives/cta'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Book a call',
@@ -73,12 +73,13 @@ const OPTIONS = [
 export default function ContactPage() {
   return (
     <main className='flex-1 pt-page-start'>
-      <Section priority className='flex flex-col gap-header pb-grid-2'>
-        <PageHeader
-          label='Contact'
-          title="Let's talk."
-          intro='Book a call, take the free audit, or send a message.'
-        />
+      <Hero
+        variant='page'
+        sectionClassName='flex flex-col gap-header pb-grid-2'
+        label='Contact'
+        title="Let's talk."
+        intro='Book a call, take the free audit, or send a message.'
+      >
         <Reveal index={1}>
           <ul className='grid gap-grid-1 md:grid-cols-3'>
             {OPTIONS.map((option, index) => (
@@ -104,7 +105,7 @@ export default function ContactPage() {
             ))}
           </ul>
         </Reveal>
-      </Section>
+      </Hero>
 
       <Band tone='light'>
         <Section id='call' className='flex scroll-mt-24 flex-col gap-stack'>

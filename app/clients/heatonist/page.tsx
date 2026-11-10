@@ -2,13 +2,14 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { Reveal } from '@/src/components/primitives/animated-section'
-import { PageHeader, Section } from '@/src/components/patterns/section'
+import { Section } from '@/src/components/patterns/section'
 import { Callout, Card, RuledRow } from '@/src/components/boxes'
 import { FullBleedVideo } from '@/src/components/patterns/full-bleed-video'
 import { CtaBand } from '@/src/components/sections/cta-band'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { heatonistCaseStudy as cs } from '@/src/lib/case-study-heatonist'
 import { caseStudyJsonLd } from '@/src/lib/structured-data'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: cs.title,
@@ -138,27 +139,26 @@ export default function HeatonistCaseStudyPage() {
       {/* The page owns every gap: the section role between all blocks,
           full-bleed media included. */}
       <div className='flex flex-col gap-section pb-section'>
-        <Section priority>
-          <PageHeader
-            label='Case Study · Heatonist'
-            title={cs.headline}
-            intro={
-              <>
-                {introBefore}
-                <a
-                  href={cs.introLink.href}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='link-inline font-semibold'
-                >
-                  {cs.introLink.text}
-                  <span className='sr-only'> (opens in a new tab)</span>
-                </a>
-                {introAfter}
-              </>
-            }
-          />
-        </Section>
+        <Hero
+          variant='page'
+          label='Case Study · Heatonist'
+          title={cs.headline}
+          intro={
+            <>
+              {introBefore}
+              <a
+                href={cs.introLink.href}
+                target='_blank'
+                rel='noopener noreferrer'
+                className='link-inline font-semibold'
+              >
+                {cs.introLink.text}
+                <span className='sr-only'> (opens in a new tab)</span>
+              </a>
+              {introAfter}
+            </>
+          }
+        />
 
         <FullBleedImage
           src='/work-heatonist-photo.jpg'

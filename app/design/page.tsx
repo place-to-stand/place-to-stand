@@ -44,6 +44,7 @@ import {
   Swatch,
   TypeSample,
 } from './_components/live-values'
+import { Hero } from '@/src/components/sections/hero'
 
 /**
  * /design: the design system, rendered from the real tokens and components
@@ -103,13 +104,13 @@ const SPACING = [
 export default function DesignPage() {
   return (
     <main className='flex-1 pt-page-start'>
-      <Section priority className='pb-section'>
-        <PageHeader
-          label='Design System'
-          title='Place To Stand, piece by piece.'
-          intro='The colors, type, spacing and building blocks behind placetostandagency.com, shown live.'
-        />
-      </Section>
+      <Hero
+        variant='page'
+        sectionClassName='pb-section'
+        label='Design System'
+        title='Place To Stand, piece by piece.'
+        intro='The colors, type, spacing and building blocks behind placetostandagency.com, shown live.'
+      />
 
       <Section className='grid gap-section pb-section lg:grid-cols-12 lg:gap-x-grid-2'>
         <div className='lg:col-span-3'>

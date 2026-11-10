@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Band, PageHeader, Section } from '@/src/components/patterns/section'
+import { Band, Section } from '@/src/components/patterns/section'
 import { CtaBand } from '@/src/components/sections/cta-band'
 import { ClientsSection } from '@/src/components/sections/clients-section'
 import { ResultsSection } from '@/src/components/sections/results'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Clients',
@@ -15,13 +16,13 @@ export const metadata: Metadata = pageMetadata({
 export default function ClientsPage() {
   return (
     <main className='flex-1 pt-page-start'>
-      <Section priority className='pb-section'>
-        <PageHeader
-          label='Selected Clients'
-          title='Who we build for'
-          intro="Some of the brands we've built software for."
-        />
-      </Section>
+      <Hero
+        variant='page'
+        sectionClassName='pb-section'
+        label='Selected Clients'
+        title='Who we build for'
+        intro="Some of the brands we've built software for."
+      />
       {/* Proof first: the case study clients, dark, then the rest of the
           roster on a light band. */}
       <Section id='case-study' className='scroll-mt-24 pb-band-pad'>

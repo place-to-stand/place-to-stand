@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Band, PageHeader, Section } from '@/src/components/patterns/section'
+import { Band, Section } from '@/src/components/patterns/section'
 import { CtaBand } from '@/src/components/sections/cta-band'
 import { OwnershipSection } from '@/src/components/sections/ownership'
 import { pageMetadata } from '@/src/lib/page-metadata'
@@ -11,6 +11,7 @@ import { cn } from '@/src/lib/utils'
 import { RuledRow } from '@/src/components/boxes'
 import { SocialIcon } from '@/src/components/primitives/social-icon'
 import { ALT_ROW } from '@/src/components/patterns/alt-row'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: 'About',
@@ -32,13 +33,13 @@ export default function AboutPage() {
   return (
     <main className='flex-1 pt-page-start'>
       <JsonLd data={teamJsonLd} />
-      <Section priority className='pb-grid-2'>
-        <PageHeader
-          label='About'
-          title='Founders who build.'
-          intro='We are senior engineers in Austin and Brooklyn. The people you meet on the first call are the people who build your software, and you own everything we make.'
-        />
-      </Section>
+      <Hero
+        variant='page'
+        sectionClassName='pb-grid-2'
+        label='About'
+        title='Founders who build.'
+        intro='We are senior engineers in Austin and Brooklyn. The people you meet on the first call are the people who build your software, and you own everything we make.'
+      />
 
       <Band tone='light'>
         {/* One full-width row per founder, the same alternating pattern as

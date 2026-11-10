@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { HeroSection } from '@/src/components/sections/hero-section'
+import { Hero } from '@/src/components/sections/hero'
 import { ClientLogosSection } from '@/src/components/sections/client-logos-section'
 import { ManifestoSection } from '@/src/components/sections/manifesto-section'
 import { OffersSection } from '@/src/components/sections/offers'
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <main className='flex-1'>
-      <HeroSection />
+      <Hero variant='home' />
       {/* Dark under the hero for the logos, then alternating bands: light for
           reading sections, dark for proof. Bands pad themselves by the section
           role, so content-to-content spacing is the same everywhere. */}

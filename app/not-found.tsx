@@ -1,7 +1,7 @@
-import { PageHeader, Section } from '@/src/components/patterns/section'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/src/components/primitives/button'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = {
   title: 'Page Not Found',
@@ -12,12 +12,13 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <main className='flex-1 pt-page-start pb-section'>
-      <Section priority className='flex flex-col gap-header'>
-        <PageHeader
-          label='404'
-          title='Nothing stands here'
-          intro='The page you were looking for has moved or never existed.'
-        />
+      <Hero
+        variant='page'
+        sectionClassName='flex flex-col gap-header'
+        label='404'
+        title='Nothing stands here'
+        intro='The page you were looking for has moved or never existed.'
+      >
         <div className='flex flex-wrap items-center gap-grid-1'>
           <Button asChild size='lg'>
             <Link href='/'>Back to home</Link>
@@ -26,7 +27,7 @@ export default function NotFound() {
             Get in touch <span aria-hidden>→</span>
           </Link>
         </div>
-      </Section>
+      </Hero>
     </main>
   )
 }

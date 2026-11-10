@@ -3,7 +3,6 @@ import { pageMetadata } from '@/src/lib/page-metadata'
 import { RuledRow } from '@/src/components/boxes'
 import {
   Band,
-  PageHeader,
   Section,
   SectionHeading,
 } from '@/src/components/patterns/section'
@@ -14,6 +13,7 @@ import { StepsSection } from '@/src/components/sections/process'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/primitives/vendor-icons'
 import { BILLING, FAQ } from '@/src/lib/offers'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Process',
@@ -40,13 +40,13 @@ const stackGroups = [
 export default function ProcessPage() {
   return (
     <main className='flex-1 pt-page-start'>
-      <Section priority className='pb-grid-2'>
-        <PageHeader
-          label='Process'
-          title='We start with the people, not a feature list.'
-          intro='Most software fails because no one asked the people who use it. So we meet them first, fix one thing all the way, and grow from there.'
-        />
-      </Section>
+      <Hero
+        variant='page'
+        sectionClassName='pb-grid-2'
+        label='Process'
+        title='We start with the people, not a feature list.'
+        intro='Most software fails because no one asked the people who use it. So we meet them first, fix one thing all the way, and grow from there.'
+      />
 
       <Band tone='light'>
         <StepsSection variant='rows' />

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { PageHeader, Section } from '@/src/components/patterns/section'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { fieldNotes } from '@/src/lib/field-notes'
 import { RuledList, RuledRow } from '@/src/components/boxes'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Field Notes',
@@ -23,13 +23,14 @@ function formatNoteDate(date: string) {
 export default function FieldNotesPage() {
   return (
     <main className='flex-1 pt-page-start pb-section'>
-      <Section priority className='flex flex-col gap-header'>
-        <PageHeader
-          label='Field Notes'
-          title='From the lab'
-          intro="Experiments, open-source projects, and things we're learning along the way."
-          align='center'
-        />
+      <Hero
+        variant='page'
+        sectionClassName='flex flex-col gap-header'
+        label='Field Notes'
+        title='From the lab'
+        intro="Experiments, open-source projects, and things we're learning along the way."
+        align='center'
+      >
         {/* One open row per note, split by a rule: no boxed cards */}
         <RuledList as='ol' className='flex flex-col'>
           {fieldNotes.map(note => {
@@ -64,7 +65,7 @@ export default function FieldNotesPage() {
             )
           })}
         </RuledList>
-      </Section>
+      </Hero>
     </main>
   )
 }
