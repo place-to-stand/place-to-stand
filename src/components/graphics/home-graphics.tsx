@@ -4,8 +4,8 @@ import type { CSSProperties } from 'react'
 import { BlueprintGraphic } from './blueprint-graphic'
 
 /**
- * Animated blueprint schematics for the homepage sections. Same visual language
- * as process-graphics.tsx (100x100 viewBox, thin stroke-line lines, one
+ * Animated blueprint schematics for the homepage sections: a 100x100 viewBox,
+ * stroke-line lines at the two stroke weights, one
  * white highlight (icons stay off the accent color), hollow nodes on fill-bg-card) but wrapped in <BlueprintGraphic> so
  * each draws itself in on scroll and settles into a subtle ongoing loop.
  *

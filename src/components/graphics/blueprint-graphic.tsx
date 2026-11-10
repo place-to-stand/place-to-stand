@@ -93,9 +93,8 @@ interface BlueprintGraphicProps extends SVGProps<SVGSVGElement> {
 
 /**
  * Client wrapper that draws a blueprint schematic in on first view, then hands
- * off to a subtle ongoing loop. The SVG body is authored in the shared
- * process-graphics style (100x100 viewBox, stroke-border-light, one fill-accent
- * node). All motion + reduced-motion handling lives in globals.css, keyed off the
+ * off to a subtle ongoing loop. The SVG body uses a 100x100 viewBox, and its
+ * lines draw at the two stroke weights (data-drawing, see globals.css). All motion + reduced-motion handling lives in globals.css, keyed off the
  * `bp-draw` class and the `data-visible` attribute this component toggles.
  */
 export function BlueprintGraphic({
