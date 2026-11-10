@@ -75,7 +75,7 @@ Type floor (from `CLAUDE.md`): reading text is 16px, never below 14px; 12px only
 | `text`             | `#e8e6e3`                                 | Headings and primary text                          |
 | `text-muted`       | `#a8a8ac`                                 | Secondary text, intros                             |
 | `accent`           | `#b5f542`                                 | Labels, links, primary buttons, strong lines       |
-| `accent-subtle`    | accent at 40% (ink at 40% on light bands) | Subtle accent lines: borders, rings, underlines    |
+| `accent-subtle`    | accent at 60% (#b5f54299; ink at 40% on light bands) | Subtle accent lines: borders, rings, underlines    |
 | `accent-line`      | lime, ink on light bands                  | Bullets, link bars and underlines, button outlines |
 | `accent-muted`     | accent at 15%                             | Accent-tinted backgrounds                          |
 | `accent-secondary` | `#b4b4b4`                                 | Pillar card text                                   |

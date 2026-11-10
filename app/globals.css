@@ -36,7 +36,7 @@
   /* Accent lines come in two strengths only: accent-subtle (borders, focus
      rings, link underlines) and accent itself (strong: active states, corner
      marks, highlighted panels). */
-  --color-accent-subtle: rgba(181, 245, 66, 0.4);
+  --color-accent-subtle: #b5f54299;
   /* Lines, bullets, underlines and focus rings that should read as the
      accent: lime on dark bands, ink on light ones (.theme-light), where lime
      only ever appears as a fill behind dark text. */
