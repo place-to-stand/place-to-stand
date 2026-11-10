@@ -115,6 +115,7 @@ export function BlueprintGraphic({
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
       aria-hidden
+      data-drawing
       data-visible={inView ? 'true' : undefined}
       className={cn('bp-draw', loop, className)}
       style={

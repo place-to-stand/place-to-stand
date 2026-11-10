@@ -111,6 +111,8 @@ function bars({ x, y, w, h }: Rect): ReactNode {
           x2={x + 3 + i * bw + bw / 2}
           y2={base - (h - 8) * f}
           className='stroke-line'
+          // A bar drawn as a thick line: keep its scaled width.
+          data-stroke='solid'
           strokeWidth={bw - 1.2}
         />
       ))}

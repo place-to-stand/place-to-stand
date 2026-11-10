@@ -19,7 +19,7 @@ const base = {
 /** Quick Wins — a rising step line that lands on an accent milestone. */
 export function QuickWinsGraphic(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       <line
         x1='12'
         y1='86'
@@ -61,7 +61,7 @@ export function QuickWinsGraphic(props: GraphicProps) {
 /** Ontology — an entity-relationship node graph, root node in accent. */
 export function OntologyGraphic(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       <g className='stroke-border-light' strokeWidth='1.5'>
         <line x1='50' y1='24' x2='24' y2='60' />
         <line x1='50' y1='24' x2='78' y2='54' />
@@ -82,7 +82,7 @@ export function OntologyGraphic(props: GraphicProps) {
 /** Automated Execution & Human Verification — input, a process gear, accent check. */
 export function AutomationGraphic(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       <rect
         x='10'
         y='42'
@@ -139,7 +139,7 @@ export function AutomationGraphic(props: GraphicProps) {
 /** Taste — a refined bezier curve with accent control points. */
 export function TasteGraphic(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       <path
         d='M14 80 C 32 22, 68 92, 88 30'
         className='stroke-border-light'

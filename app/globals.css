@@ -348,6 +348,29 @@ html {
   bottom: calc(-1 * var(--spacing-grid-2));
   border-bottom: 1px solid var(--dots-rule);
 }
+/* Drawings: two stroke weights, at the same pixel width at every size.
+   Every drawing root carries data-drawing (BlueprintGraphic and the portal
+   and process drawings). Lines don't scale with the drawing; a line the
+   drawing marks 1.5 or heavier is emphasis (2px), anything lighter is
+   structure (1px). data-stroke='solid' opts out a shape drawn as a thick
+   line, like the hero's bars. */
+[data-drawing] *:not([data-stroke='solid']) {
+  vector-effect: non-scaling-stroke;
+}
+[data-drawing] [stroke-width]:not([data-stroke='solid']) {
+  stroke-width: var(--stroke-structure);
+}
+[data-drawing]
+  :is(
+    [stroke-width='1.5'],
+    [stroke-width='1.6'],
+    [stroke-width='1.8'],
+    [stroke-width='2'],
+    [stroke-width='2.4'],
+    [stroke-width='2.5']
+  ):not([data-stroke='solid']) {
+  stroke-width: var(--stroke-emphasis);
+}
 /* Closing callout: --band-pad of dots above the box and the same under it,
    down to the footer. Each page ends <main> --band-pad under the box.
    --band-pad must equal the padding of the section around the box, or the

@@ -18,7 +18,7 @@ const base = {
 /** Comms -> Task — communications converging through an accent arrow into a task card. */
 export function CommsTaskIcon(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       {/* comm sources: three stacked message lines with terminal dots */}
       <g className='stroke-border-light' strokeWidth='2' strokeLinecap='round'>
         <line x1='16' y1='34' x2='34' y2='34' />
@@ -80,7 +80,7 @@ export function CommsTaskIcon(props: GraphicProps) {
 /** Human + Agent Handoff — a person and an agent chip joined by an accent plus. */
 export function HandoffIcon(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       {/* human */}
       <circle
         cx='24'
@@ -124,7 +124,7 @@ export function HandoffIcon(props: GraphicProps) {
  *  rising into an accent verification check. */
 export function VerifyTasteIterateIcon(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       {/* refinement / iteration curve */}
       <path
         d='M16 80 C 30 68, 40 58, 52 48'
@@ -152,7 +152,7 @@ export function VerifyTasteIterateIcon(props: GraphicProps) {
 /** Build, Validate & Deploy — build blocks launched by an accent deploy arrow. */
 export function BuildDeployIcon(props: GraphicProps) {
   return (
-    <svg {...base} {...props}>
+    <svg {...base} data-drawing {...props}>
       {/* build blocks */}
       <g className='fill-bg stroke-border-light' strokeWidth='2'>
         <rect x='16' y='58' width='16' height='16' />
