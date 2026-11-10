@@ -32,9 +32,9 @@ export function LegalSection({ index, title, children }: LegalSectionProps) {
       <span className='font-mono text-sm text-text-muted tabular-nums'>
         {String(index).padStart(2, '0')}
       </span>
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-grid-half'>
         <h2 className='type-card-title'>{title}</h2>
-        <div className='flex flex-col gap-3 text-base text-text-muted'>
+        <div className='flex flex-col gap-grid-half text-base text-text-muted'>
           {children}
         </div>
       </div>
@@ -48,7 +48,7 @@ export function LegalList({ items }: { items: ReactNode[] }) {
     <ul className='flex flex-col gap-2'>
       {items.map((item, index) => (
         <li key={index} className='flex items-start gap-2'>
-          <span aria-hidden className='mt-2 h-px w-3 shrink-0 bg-accent' />
+          <span aria-hidden className='mt-2 h-px w-3 shrink-0 bg-accent-line' />
           <span>{item}</span>
         </li>
       ))}

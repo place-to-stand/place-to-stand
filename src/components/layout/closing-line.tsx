@@ -33,7 +33,7 @@ export function ClosingLine({
         <TrackedLink
           href={href}
           location={location}
-          className='font-semibold text-accent underline decoration-accent-subtle underline-offset-4 transition-colors hover:text-accent/80'
+          className='link-inline font-semibold'
         >
           {linkText}
         </TrackedLink>

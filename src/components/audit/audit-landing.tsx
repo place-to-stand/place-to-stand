@@ -126,7 +126,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
         </span>
 
         {/* Icon + title */}
-        <span className='flex items-center gap-3 px-grid-1 py-5'>
+        <span className='flex items-center gap-grid-half px-grid-1 py-grid-1'>
           <span
             className={cn(
               'flex h-8 w-8 shrink-0 items-center justify-center border bg-bg text-text transition-colors',
@@ -171,7 +171,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
         )}
       >
         <div className='overflow-hidden'>
-          <div className='grid gap-grid-2 bg-bg px-grid-1 pt-9 pb-grid-1 md:grid-cols-2 md:pl-grid-3'>
+          <div className='grid gap-grid-2 bg-bg px-grid-1 pt-grid-1 pb-grid-1 md:grid-cols-2 md:pl-grid-3'>
             <p className='text-base text-text-muted'>{service.description}</p>
             <ul className='flex flex-col gap-1.5'>
               {service.features.map(feature => (
@@ -181,7 +181,7 @@ function ServiceRow({ service, index, isOpen, onToggle }: ServiceRowProps) {
                 >
                   <span
                     aria-hidden
-                    className='mt-1.5 h-px w-3 shrink-0 bg-accent'
+                    className='mt-1.5 h-px w-3 shrink-0 bg-accent-line'
                   />
                   {feature}
                 </li>
@@ -225,12 +225,12 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               type='button'
               size='lg'
               onClick={() => handleStart('hero')}
-              className='mt-grid-1 px-10'
+              className='mt-grid-1 px-grid-2'
             >
               Start the audit
               <ArrowRight className='ml-2 h-4 w-4' />
             </Button>
-            <div className='flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-base text-text-muted'>
+            <div className='flex flex-wrap items-center justify-center gap-x-grid-1 gap-y-2 text-base text-text-muted'>
               {HIGHLIGHTS.map(({ icon: Icon, label }) => (
                 <span key={label} className='inline-flex items-center gap-1.5'>
                   <Icon className='h-4 w-4 text-text' />
@@ -273,7 +273,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                 {FACETS.map(facet => (
                   <div
                     key={facet.title}
-                    className='flex flex-col gap-3 bg-bg-card p-card'
+                    className='flex flex-col gap-grid-half bg-bg-card p-card'
                   >
                     <h3 className='type-card-title'>{facet.title}</h3>
                     <p className='text-base text-text-muted'>
@@ -285,9 +285,12 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             </div>
 
             {/* Team strip */}
-            <div className='flex flex-wrap items-center gap-6'>
+            <div className='flex flex-wrap items-center gap-grid-1'>
               {team.map(member => (
-                <div key={member.name} className='flex items-center gap-3'>
+                <div
+                  key={member.name}
+                  className='flex items-center gap-grid-half'
+                >
                   <div className='relative h-12 w-12 overflow-hidden rounded-full border border-border'>
                     <Image
                       src={member.image}
@@ -321,8 +324,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             {/* Four open columns under a shared rule: no boxed cards */}
             <ol className='grid gap-x-grid-1 gap-y-grid-2 border-t border-border pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'>
               {AUDIT_COVERS.map(({ icon: Icon, title, description }, index) => (
-                <li key={title} className='flex flex-col gap-3'>
-                  <div className='flex items-center gap-3 text-text-muted'>
+                <li key={title} className='flex flex-col gap-grid-half'>
+                  <div className='flex items-center gap-grid-half text-text-muted'>
                     <span className='font-mono text-xs tabular-nums'>
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -380,7 +383,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             type='button'
             size='lg'
             onClick={() => handleStart('bottom')}
-            className='px-10'
+            className='px-grid-2'
           >
             Start the audit
             <ArrowRight className='ml-2 h-4 w-4' />
@@ -390,7 +393,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             <TrackedLink
               href='/contact'
               location='audit-landing-bottom-cta'
-              className='text-accent underline-offset-4 hover:underline'
+              className='link-inline'
             >
               Book a call
             </TrackedLink>

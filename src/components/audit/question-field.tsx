@@ -21,12 +21,12 @@ export function QuestionField({
   size = 'md',
 }: QuestionFieldProps) {
   return (
-    <fieldset className='space-y-3'>
+    <fieldset className='space-y-grid-half'>
       <legend
         className={cn(
           'font-headline font-semibold tracking-tight text-text uppercase',
           size === 'lg'
-            ? 'mb-3 text-2xl leading-[1.05] text-balance sm:text-3xl lg:text-4xl'
+            ? 'mb-grid-half type-section-title text-balance'
             : 'text-base'
         )}
       >
@@ -55,7 +55,7 @@ export function QuestionField({
                 aria-pressed={selected}
                 onClick={() => onChange(nextValue(question, value, option.id))}
                 className={cn(
-                  'group flex items-start gap-3 border px-4 py-3 text-left transition',
+                  'group flex items-start gap-grid-half border px-grid-half py-grid-half text-left transition',
                   selected
                     ? 'border-accent bg-accent-muted'
                     : 'border-border bg-bg-card hover:border-border-light hover:bg-bg-elevated'

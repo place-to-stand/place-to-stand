@@ -324,10 +324,7 @@ export default function PrivacyPage() {
               <p>
                 Questions about this policy or a request about your data can go
                 to{' '}
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className='text-accent underline-offset-4 hover:underline'
-                >
+                <a href={`mailto:${CONTACT_EMAIL}`} className='link-inline'>
                   {CONTACT_EMAIL}
                 </a>
                 .

@@ -68,7 +68,7 @@ export default function AuditError({
 
   return (
     <main className='flex-1 pt-page-start pb-section'>
-      <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
+      <div className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
         <div className='relative max-w-2xl bg-bg-panel p-card'>
           <span className='bp-label font-mono'>Audit</span>
           <h1 className='mt-grid-half type-section-title'>We hit a snag</h1>
@@ -79,7 +79,7 @@ export default function AuditError({
             Try again and we will take you straight to your results.
           </p>
 
-          <div className='mt-6 flex flex-wrap items-center gap-4'>
+          <div className='mt-grid-1 flex flex-wrap items-center gap-grid-half'>
             <Button type='button' onClick={reset}>
               <RotateCcw className='mr-2 h-4 w-4' />
               Show my results
@@ -89,7 +89,7 @@ export default function AuditError({
             <TrackedLink
               href='/contact'
               location='audit-error-fallback'
-              className='text-sm text-accent underline-offset-4 hover:underline'
+              className='link-inline text-sm'
             >
               Book a call instead
             </TrackedLink>

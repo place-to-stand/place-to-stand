@@ -129,7 +129,7 @@ export function ResultsView({
               location: 'results-strip',
             })
           }
-          className='mb-grid-half flex items-center justify-between gap-4 border border-accent-subtle bg-accent-muted px-4 py-3 text-base text-text transition-colors hover:border-accent'
+          className='mb-grid-half flex items-center justify-between gap-grid-half border border-accent-subtle bg-accent-muted px-grid-half py-grid-half text-base text-text transition-colors hover:border-accent'
         >
           <span className='inline-flex items-center gap-2'>
             <Mail aria-hidden className='h-4 w-4 shrink-0 text-accent' />
@@ -142,7 +142,7 @@ export function ResultsView({
       )}
 
       {/* Phase progression timeline */}
-      <section className='relative bg-bg-panel p-6 sm:px-8'>
+      <section className='relative bg-bg-panel p-grid-1 sm:px-grid-1'>
         <div className='flex items-baseline justify-between'>
           <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Business phase
@@ -155,10 +155,12 @@ export function ResultsView({
         <ol className='relative mt-grid-1 flex items-start justify-between'>
           {/* connector track + progress fill */}
           <div
+            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the centre of the 22px step dot
             className='absolute top-[11px] right-0 left-0 h-px bg-border'
             aria-hidden
           />
           <div
+            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the centre of the 22px step dot
             className='absolute top-[11px] left-0 h-px bg-border-light'
             style={{ width: `${progressPct}%` }}
             aria-hidden
@@ -185,6 +187,7 @@ export function ResultsView({
                 </span>
                 <span
                   className={cn(
+                    // eslint-disable-next-line design/no-raw-text-size -- phase tile labels shrink to fit five tiles on a phone
                     'block w-full px-0.5 text-xs leading-tight tracking-wide break-words hyphens-auto uppercase sm:text-sm',
                     isActive ? 'font-semibold text-text' : 'text-text-muted'
                   )}
@@ -201,7 +204,7 @@ export function ResultsView({
       <div className='mt-grid-1 grid gap-grid-1 lg:grid-cols-3'>
         {/* Phase detail */}
         <section className='relative bg-bg-panel p-card lg:col-span-2'>
-          <span className='inline-flex bg-bg-elevated px-3 py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
+          <span className='inline-flex bg-bg-elevated px-grid-half py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Your phase
           </span>
           <h1 className='mt-grid-half type-section-title'>{phase.name}</h1>
@@ -217,7 +220,7 @@ export function ResultsView({
               <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Signals
               </h3>
-              <ul className='mt-3 space-y-1.5'>
+              <ul className='mt-grid-half space-y-1.5'>
                 {phase.signals.map(signal => (
                   <li key={signal} className='flex gap-2 text-base text-text'>
                     <CheckCircle2 className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
@@ -230,7 +233,7 @@ export function ResultsView({
               <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
                 Next steps
               </h3>
-              <ul className='mt-3 space-y-1.5'>
+              <ul className='mt-grid-half space-y-1.5'>
                 {phase.nextSteps.map(step => (
                   <li key={step} className='flex gap-2 text-base text-text'>
                     <ArrowRight className='mt-0.5 h-4 w-4 shrink-0 text-text-muted' />
@@ -247,7 +250,7 @@ export function ResultsView({
           <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
             Audit score
           </h2>
-          <div className='mt-grid-half space-y-2.5'>
+          <div className='mt-grid-half space-y-grid-half'>
             {PHASE_ORDER.map((id: PhaseId) => {
               const score = phaseScores[id]
               const pct = Math.round((score / maxScore) * 100)
@@ -287,7 +290,7 @@ export function ResultsView({
       {recommendations.length > 0 && (
         <section className='relative mt-grid-2 border-t border-t-accent pt-grid-2'>
           <div className='mb-grid-1 flex items-end justify-between'>
-            <div className='flex flex-col gap-2.25 md:gap-3'>
+            <div className='flex flex-col gap-grid-half md:gap-grid-half'>
               <span className='bp-label font-mono'>The Blueprint</span>
               <h2 className='type-card-title uppercase'>
                 Where we&apos;d start
@@ -305,7 +308,7 @@ export function ResultsView({
                   key={rec.service.id}
                   className='relative flex flex-col bg-bg-panel p-card transition-colors hover:bg-bg-elevated'
                 >
-                  <div className='flex items-center gap-3'>
+                  <div className='flex items-center gap-grid-half'>
                     <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
                       <Icon className='h-5 w-5' />
                     </div>
@@ -313,7 +316,7 @@ export function ResultsView({
                       #{index + 1}
                     </span>
                   </div>
-                  <h3 className='mt-3 type-card-title uppercase'>
+                  <h3 className='mt-grid-half type-card-title uppercase'>
                     {rec.service.name}
                   </h3>
                   <p className='mt-1 text-base font-medium text-text-muted'>
@@ -402,7 +405,7 @@ function LockedRecommendation({ rank }: { rank: number }) {
           rank,
         })
       }
-      className='group relative flex items-center gap-4 border border-dashed border-border bg-bg-panel p-4 transition-colors hover:border-accent'
+      className='group relative flex items-center gap-grid-half border border-dashed border-border bg-bg-panel p-grid-half transition-colors hover:border-accent'
     >
       <span className='sr-only'>
         Opportunity {rank} is included in your emailed blueprint.
@@ -451,7 +454,7 @@ function CapturedPanel({
   return (
     <section className='relative mt-grid-1 bg-bg-panel p-card'>
       <div className='grid gap-grid-2 md:grid-cols-2'>
-        <div className='flex min-w-0 flex-col items-start gap-3'>
+        <div className='flex min-w-0 flex-col items-start gap-grid-half'>
           <p className='inline-flex items-center gap-2 font-mono text-sm tracking-[0.15em] text-accent uppercase'>
             <CheckCircle2 aria-hidden className='h-4 w-4' />
             Blueprint sent
@@ -464,7 +467,12 @@ function CapturedPanel({
             </span>
             . Reply to it any time to start a conversation.
           </p>
-          <Button asChild variant='outline' size='lg' className='mt-2 px-8'>
+          <Button
+            asChild
+            variant='outline'
+            size='lg'
+            className='mt-2 px-grid-1'
+          >
             <TrackedLink href='/contact' location='audit-capture-success'>
               Book a call now
             </TrackedLink>
@@ -489,7 +497,7 @@ function CapturedPanel({
               </h3>
               {/* The portal emails the team a follow-up when a captured audit
                   gains these details (place-to-stand-portal#259). */}
-              <p className='mt-1 mb-4 text-base text-text-muted'>
+              <p className='mt-1 mb-grid-half text-base text-text-muted'>
                 Optional. We&apos;ll send it to the team with your audit, so we
                 can come to the first conversation with ideas, not questions.
               </p>

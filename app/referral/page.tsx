@@ -27,7 +27,7 @@ export default function ReferralPage() {
                   <a
                     href='#referral-terms'
                     aria-label='See referral program terms'
-                    className='ml-1 align-super font-mono text-[0.45em] font-normal text-accent transition-colors hover:text-accent/80'
+                    className='link-inline ml-1 align-super font-mono text-[0.45em] font-normal'
                   >
                     *
                   </a>
@@ -68,7 +68,7 @@ export default function ReferralPage() {
             <h2 className='max-w-3xl type-section-title text-balance'>
               {c.whoWeAre.headline}
             </h2>
-            <p className='mt-0.75 max-w-2xl text-base text-text-muted md:mt-1'>
+            <p className='max-w-2xl text-base text-text-muted'>
               {c.whoWeAre.body}
             </p>
           </div>
@@ -80,14 +80,14 @@ export default function ReferralPage() {
                   className='grid gap-grid-half bg-bg-card p-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-baseline md:gap-grid-1'
                 >
                   <h3 className='type-card-title'>{service.name}</h3>
-                  <ul className='flex flex-wrap gap-x-6 gap-y-2'>
+                  <ul className='flex flex-wrap gap-x-grid-1 gap-y-2'>
                     {service.items.map(item => (
                       <li
                         key={item}
                         className='flex items-center gap-2 text-base text-text-muted'
                       >
                         <span
-                          className='h-1.5 w-1.5 shrink-0 bg-accent'
+                          className='h-1.5 w-1.5 shrink-0 bg-accent-line'
                           aria-hidden
                         />
                         {item}
@@ -127,12 +127,12 @@ export default function ReferralPage() {
               {c.whoToSend.quotes.map((quote, index) => (
                 <li
                   key={quote}
-                  className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-3 border-t border-border py-3.5'
+                  className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-grid-half border-t border-border py-grid-half'
                 >
                   <span className='font-mono text-xs tracking-[0.2em] text-accent'>
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <p className='text-[17px] text-text'>&ldquo;{quote}&rdquo;</p>
+                  <p className='type-lead'>&ldquo;{quote}&rdquo;</p>
                 </li>
               ))}
             </ol>
@@ -187,7 +187,7 @@ export default function ReferralPage() {
             <TrackedLink
               href={c.join.href}
               location='referral-join-footnote'
-              className='font-semibold text-accent underline decoration-accent-subtle underline-offset-4 transition-colors hover:text-accent/80'
+              className='link-inline font-semibold'
             >
               {c.join.noteCta}
             </TrackedLink>
@@ -200,9 +200,7 @@ export default function ReferralPage() {
           <div className='flex flex-col gap-stack md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-intro'>
               <h2 className='type-section-title'>{c.audit.heading}</h2>
-              <p className='max-w-md text-base text-text md:text-lg'>
-                {c.audit.body}
-              </p>
+              <p className='max-w-md type-lead'>{c.audit.body}</p>
             </div>
             <Button asChild size='lg' className='w-full shrink-0 sm:w-auto'>
               <TrackedLink

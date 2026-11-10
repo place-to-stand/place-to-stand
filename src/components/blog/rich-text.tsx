@@ -9,8 +9,7 @@ const INLINE_PATTERNS = [
   { kind: 'italic', re: /\*([^*]+)\*/ },
 ] as const
 
-const LINK =
-  'text-accent underline decoration-accent/40 underline-offset-4 transition-colors [overflow-wrap:anywhere] hover:decoration-accent'
+const LINK = 'link-inline [overflow-wrap:anywhere]'
 
 export function RichText({ text }: { text: string }): ReactNode {
   const nodes: ReactNode[] = []
@@ -72,7 +71,7 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
   )
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div className='flex flex-col gap-grid-1'>
       {blocks.map((block, index) => {
         const inSources = sourcesAt !== -1 && index >= sourcesAt
         if (block.type === 'heading' || block.type === 'subheading') {
@@ -80,7 +79,7 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
             <h2
               key={index}
               className={cn(
-                'font-headline text-2xl leading-tight font-bold tracking-tight text-balance text-text uppercase md:text-3xl',
+                'type-item-title text-balance',
                 inSources
                   ? 'mt-grid-2 border-t border-border pt-grid-1'
                   : 'mt-grid-1'
@@ -92,7 +91,7 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
             <h3
               key={index}
               className={cn(
-                'font-headline text-xl leading-tight font-bold tracking-tight text-balance text-text uppercase md:text-2xl',
+                'type-card-title text-balance',
                 inSources
                   ? 'mt-grid-2 border-t border-border pt-grid-1'
                   : 'mt-grid-1'
@@ -103,9 +102,7 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
           )
         }
 
-        const text = inSources
-          ? 'text-sm text-text-muted'
-          : 'text-base leading-relaxed text-text md:text-lg'
+        const text = inSources ? 'text-sm text-text-muted' : 'type-lead'
 
         if (block.type === 'list') {
           const List = block.ordered ? 'ol' : 'ul'
@@ -113,7 +110,7 @@ export function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
             <List
               key={index}
               className={cn(
-                'flex flex-col gap-3 pl-6 marker:text-text-muted',
+                'flex flex-col gap-grid-half pl-grid-1 marker:text-text-muted',
                 block.ordered ? 'list-decimal' : 'list-disc',
                 text
               )}

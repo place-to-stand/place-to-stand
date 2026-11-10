@@ -196,7 +196,7 @@ export function EmailCaptureForm({
     <form
       noValidate
       onSubmit={onSubmit}
-      className={cn('flex flex-col gap-3', className)}
+      className={cn('flex flex-col gap-grid-half', className)}
     >
       <div className='flex flex-col gap-2'>
         <Label htmlFor={emailId}>Work email</Label>
@@ -210,12 +210,12 @@ export function EmailCaptureForm({
           aria-invalid={!!form.formState.errors.email}
         />
         {form.formState.errors.email ? (
-          <p className='text-sm text-red-400'>
+          <p className='text-sm text-danger'>
             {form.formState.errors.email.message}
           </p>
         ) : null}
       </div>
-      <div className='flex items-start gap-3 pt-1'>
+      <div className='flex items-start gap-grid-half pt-1'>
         <Checkbox id={consentId} {...form.register('marketingConsent')} />
         <Label
           htmlFor={consentId}
@@ -229,7 +229,7 @@ export function EmailCaptureForm({
         type='submit'
         size='lg'
         disabled={isPending}
-        className='mt-1 w-full px-8'
+        className='mt-1 w-full px-grid-1'
       >
         {isPending ? (
           <>
@@ -318,8 +318,12 @@ export function LeadDetailsForm({
   })
 
   return (
-    <form noValidate onSubmit={onSubmit} className='flex flex-col gap-3'>
-      <div className='grid gap-3 sm:grid-cols-2'>
+    <form
+      noValidate
+      onSubmit={onSubmit}
+      className='flex flex-col gap-grid-half'
+    >
+      <div className='grid gap-grid-half sm:grid-cols-2'>
         <div className='flex flex-col gap-2'>
           <Label htmlFor='audit-details-name'>Name</Label>
           <Input
@@ -329,7 +333,7 @@ export function LeadDetailsForm({
             aria-invalid={!!errors.name}
           />
           {errors.name ? (
-            <p className='text-sm text-red-400'>{errors.name.message}</p>
+            <p className='text-sm text-danger'>{errors.name.message}</p>
           ) : null}
         </div>
         <div className='flex flex-col gap-2'>
@@ -341,7 +345,7 @@ export function LeadDetailsForm({
             aria-invalid={!!errors.company}
           />
           {errors.company ? (
-            <p className='text-sm text-red-400'>{errors.company.message}</p>
+            <p className='text-sm text-danger'>{errors.company.message}</p>
           ) : null}
         </div>
       </div>
@@ -352,13 +356,13 @@ export function LeadDetailsForm({
         <Textarea
           id='audit-details-message'
           rows={3}
-          className='min-h-24 p-3'
+          className='min-h-24 p-grid-half'
           placeholder="What you're looking for, or what's not working today."
           {...form.register('message')}
           aria-invalid={!!errors.message}
         />
         {errors.message ? (
-          <p className='text-sm text-red-400'>{errors.message.message}</p>
+          <p className='text-sm text-danger'>{errors.message.message}</p>
         ) : null}
       </div>
       <HeardFromField
@@ -372,7 +376,7 @@ export function LeadDetailsForm({
         variant='outline'
         size='lg'
         disabled={isPending}
-        className='mt-1 w-full px-8 sm:w-auto sm:self-start'
+        className='mt-1 w-full px-grid-1 sm:w-auto sm:self-start'
       >
         {isPending ? 'Sending...' : 'Send to the team'}
       </Button>
