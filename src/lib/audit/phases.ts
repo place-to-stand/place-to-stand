@@ -17,9 +17,9 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
       'Workflow still taking shape',
     ],
     nextSteps: [
-      'Ship a lean MVP to test demand',
-      'Keep tooling cheap and disposable',
-      'Spot the one thing worth automating later',
+      'Prove demand before building anything heavy',
+      'Book an hour of technical consulting to plan the first version',
+      'Join our newsletter for what to build when you are ready',
     ],
   },
   launch: {

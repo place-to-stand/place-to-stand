@@ -109,16 +109,24 @@ function topRecommendations(
   serviceScores: Map<ServiceId, number>,
   serviceReasons: Map<ServiceId, string[]>
 ): ServiceRecommendation[] {
-  return [...serviceScores.entries()]
-    .filter(([, score]) => score > 0)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, MAX_RECOMMENDATIONS)
-    .map(([serviceId, score]) => ({
-      service: SERVICES[serviceId],
-      score,
-      // De-duplicate contributing answers and keep the top three.
-      reasons: [...new Set(serviceReasons.get(serviceId) ?? [])].slice(0, 3),
-    }))
+  // Several stored ids share a display name (e.g. three map to "Workflows
+  // and automations"), so merge by name: the best-scoring id stands for the
+  // group and the reasons are pooled. Ids stay as stored for analytics.
+  const byName = new Map<string, ServiceRecommendation>()
+  for (const [serviceId, score] of [...serviceScores.entries()]
+    .filter(([, s]) => s > 0)
+    .sort((a, b) => b[1] - a[1])) {
+    const service = SERVICES[serviceId]
+    const reasons = serviceReasons.get(serviceId) ?? []
+    const existing = byName.get(service.name)
+    if (existing) existing.reasons.push(...reasons)
+    else byName.set(service.name, { service, score, reasons: [...reasons] })
+  }
+  return [...byName.values()].slice(0, MAX_RECOMMENDATIONS).map(rec => ({
+    ...rec,
+    // De-duplicate contributing answers and keep the top three.
+    reasons: [...new Set(rec.reasons)].slice(0, 3),
+  }))
 }
 
 function buildSummary(

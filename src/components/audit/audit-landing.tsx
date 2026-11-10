@@ -25,6 +25,7 @@ import { TrackedLink } from '@/src/components/tracked-link'
 import { Button } from '@/src/components/ui/button'
 import { cn } from '@/src/lib/utils'
 import { team } from '@/src/lib/team'
+import { WHO_YOU_WORK_WITH } from '@/src/lib/offers'
 import { type Service, services } from '@/src/lib/services'
 import { AuditLogoMarquee } from './audit-logo-marquee'
 
@@ -35,26 +36,10 @@ interface AuditLandingProps {
 const HIGHLIGHTS = [
   { icon: Clock, label: 'Under 2 minutes' },
   { icon: Shield, label: 'Free, no obligation' },
-  { icon: Mail, label: 'Your blueprint, emailed to you' },
+  { icon: Mail, label: 'Preview on screen, full results by email' },
 ]
 
-const FACETS = [
-  {
-    title: 'Senior Builders',
-    description:
-      'The engineer who architects your solution is the one who builds it. No account managers, no layers of delegation.',
-  },
-  {
-    title: 'AI-Native',
-    description:
-      'Fine-tuned AI systems let us design and ship exactly what you need, at 3-5x the speed of a traditional team.',
-  },
-  {
-    title: 'Direct Access',
-    description:
-      'You work with the builder directly. No middle management, no handoffs, no telephone game.',
-  },
-]
+const FACETS = WHO_YOU_WORK_WITH.facets
 
 const AUDIT_COVERS = [
   {
@@ -216,10 +201,10 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               </h1>
             </div>
             <p className='mx-auto max-w-xl type-intro text-balance'>
-              Place To Stand builds custom software for businesses ready to stop
-              duct-taping tools together. Take our free, 2-minute audit and
-              we&apos;ll send you a personalized blueprint of where
-              purpose-built software would give you the most leverage.
+              Place To Stand builds custom software for businesses that have
+              outgrown a stack of tools that don&apos;t talk to each other. Take
+              our free, 2-minute audit: see a preview on screen, then get the
+              full results by email.
             </p>
             <Button
               type='button'
@@ -256,14 +241,13 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
           <div className='flex flex-col gap-stack'>
             <div className='flex flex-col gap-intro'>
               <div className='flex flex-col gap-eyebrow'>
-                <span className='bp-label font-mono'>Who We Are</span>
+                <span className='bp-label font-mono'>Who You Work With</span>
                 <h2 className='type-section-title'>
-                  Experienced engineers with fine-tuned AI.
+                  {WHO_YOU_WORK_WITH.title}
                 </h2>
               </div>
               <p className='max-w-xl text-base text-text-muted'>
-                Senior engineers building exactly what you need, directly with
-                the people who build it. No layers, no hand-offs.
+                {WHO_YOU_WORK_WITH.intro}
               </p>
             </div>
 
@@ -276,9 +260,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
                     className='flex flex-col gap-grid-half bg-bg-card p-card'
                   >
                     <h3 className='type-card-title'>{facet.title}</h3>
-                    <p className='text-base text-text-muted'>
-                      {facet.description}
-                    </p>
+                    <p className='text-base text-text-muted'>{facet.body}</p>
                   </div>
                 ))}
               </div>
@@ -375,8 +357,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               Ready to find your leverage?
             </h2>
             <p className='max-w-md text-base text-balance text-text-muted'>
-              Two minutes. Zero obligation. A personalized blueprint in your
-              inbox showing where custom software would move the needle most.
+              Two minutes. Zero obligation. A preview on screen, then the full
+              results by email, showing where custom software would help most.
             </p>
           </div>
           <Button

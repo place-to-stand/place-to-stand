@@ -3,7 +3,7 @@
  *
  * The audit is a voluntary worksheet: a business answers a series of questions,
  * and a scoring engine maps those answers to (a) the phase of business they are
- * in and (b) the custom-software opportunities most likely to move the needle.
+ * in and (b) the custom-software opportunities most likely to help.
  *
  * These types are intentionally engine-agnostic. Today the answers are scored by
  * a deterministic rule-based engine (see `engine.ts`). Later, the same
