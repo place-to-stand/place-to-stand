@@ -83,7 +83,7 @@ export const clients: Client[] = [
   {
     title: 'Heatonist',
     built:
-      'Four years as their engineering team: storefront rebuilds, sharper search and filters, and a custom app for order routing.',
+      'Since 2023, their engineering team: storefront rebuilds, sharper search and filters, and a custom app for order routing.',
     href: 'https://heatonist.com',
     image: '/work-heatonist-photo.jpg',
     logo: '/logos/heatonist.svg',

@@ -17,7 +17,7 @@ export const SERVICES: Record<ServiceId, ServiceDefinition> = {
   },
   'internal-tools': {
     id: 'internal-tools',
-    name: 'Internal Tools & Dashboards',
+    name: 'Team workspace and Reports',
     tagline: 'Replace the spreadsheet running your business',
     description: 'Internal apps built around how your team actually works.',
     icon: 'LayoutDashboard',

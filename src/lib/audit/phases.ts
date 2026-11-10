@@ -53,7 +53,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     nextSteps: [
       'Connect your core systems',
       'Automate the high-volume bottlenecks',
-      'Add dashboards for real visibility',
+      'Add live reports for real visibility',
     ],
   },
   optimization: {
