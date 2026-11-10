@@ -18,7 +18,7 @@ const REPO_URL = 'https://github.com/place-to-stand/place-to-stand-portal'
 export function PortalSection() {
   return (
     <div className='flex flex-col gap-stack'>
-      <Section className='flex flex-col gap-grid-1'>
+      <Section id='portal' className='flex scroll-mt-24 flex-col gap-grid-1'>
         <Reveal
           index={0}
           className='flex flex-col gap-grid-1 md:flex-row md:items-start md:justify-between'

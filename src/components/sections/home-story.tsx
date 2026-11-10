@@ -51,12 +51,7 @@ export function TagRow({ label, tags }: { label: string; tags: string[] }) {
 
 export function OfferCard({ offer }: { offer: Offer }) {
   const run = offer.slug === 'run-your-business'
-  const insteadOf = run
-    ? Array.from(new Set(offer.modules.flatMap(m => m.insteadOf ?? []))).slice(
-        0,
-        5
-      )
-    : SELL_ONLINE_CLIENTS
+  const tags = run ? (offer.cardTags ?? []) : SELL_ONLINE_CLIENTS
   return (
     <div className='flex h-full flex-col gap-grid-1 border border-border bg-bg-card p-card'>
       <div className='flex flex-col gap-grid-half'>
@@ -75,7 +70,7 @@ export function OfferCard({ offer }: { offer: Offer }) {
         ))}
       </ul>
       <div className='mt-auto flex flex-col gap-grid-1'>
-        <TagRow label={run ? 'Instead of' : 'Built for'} tags={insteadOf} />
+        <TagRow label={run ? 'Instead of' : 'Built for'} tags={tags} />
         <ArrowLink href={`/platform#${offer.slug}`}>See the platform</ArrowLink>
       </div>
     </div>

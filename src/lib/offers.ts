@@ -17,36 +17,56 @@ export type Module = {
 export type Offer = {
   slug: 'run-your-business' | 'sell-online'
   name: string
+  /** The line under the name: the tools people already know. */
   summary: string
+  /** "Instead of" tags on the Home card, picked by hand. */
+  cardTags?: string[]
+  /** One line of proof under the modules on Platform. */
+  proof?: string
   modules: Module[]
 }
+
+/** True of every Run your business module; shown once under the grid. */
+export const PLATFORM_SHARED =
+  'Across all of it: one search, and each person sees only what their role allows.'
+
+/** Shown once below both offers on Platform. */
+export const MOBILE_APPS =
+  'We also build mobile apps, for your team or your customers.'
 
 export const OFFERS: Offer[] = [
   {
     slug: 'run-your-business',
     name: 'Run your business',
     summary:
-      'One system for the work behind the scenes: a shared workspace for your team, CRM, workflows and automations.',
+      'CRM, projects and workflows in one system you own, instead of HubSpot, Asana and spreadsheets.',
+    cardTags: ['HubSpot', 'Asana', 'Monday', 'Harvest', 'Zapier'],
+    proof: 'We run Place To Stand on the same platform.',
     modules: [
       {
         name: 'Team workspace',
-        job: "Your team's home screen: clients, projects, tasks and time in one place.",
+        job: 'Projects, tasks and time logs in one place.',
         insteadOf: ['Monday', 'Asana', 'ClickUp'],
       },
       {
+        name: 'Website',
+        job: 'Marketing site design and development, with every form feeding your CRM.',
+        insteadOf: ['Webflow', 'Squarespace', 'WordPress'],
+      },
+      {
         name: 'CRM',
-        job: 'Every lead, contact and company, with its whole history.',
+        job: "Leads, companies and people, with your website's forms landing straight in.",
         insteadOf: ['HubSpot', 'Salesforce', 'Pipedrive'],
       },
       {
-        name: 'Workflows',
-        job: 'The steps your team repeats, done the same way every time.',
-        insteadOf: ['Spreadsheets', 'Checklists'],
+        name: 'Billing',
+        job: 'Invoices and prepaid hour blocks, drawn from the same time logs.',
+        insteadOf: ['Harvest', 'FreshBooks'],
       },
       {
-        name: 'Automations',
-        job: 'Work that runs on its own: reports, reminders, syncing data between tools.',
-        insteadOf: ['Zapier', 'Make'],
+        name: 'Reports',
+        job: 'The monthly close and live numbers from your own data.',
+        insteadOf: ['Exported spreadsheets'],
       },
       {
         name: 'Client portal',
@@ -54,9 +74,9 @@ export const OFFERS: Offer[] = [
         insteadOf: ['Emailed PDFs', 'Status calls'],
       },
       {
-        name: 'Reports',
-        job: 'Live numbers from your own data.',
-        insteadOf: ['Exported spreadsheets'],
+        name: 'Workflows and automations',
+        job: 'The steps your team repeats, plus syncing with the tools you keep.',
+        insteadOf: ['Zapier', 'Make'],
       },
     ],
   },
@@ -64,7 +84,7 @@ export const OFFERS: Offer[] = [
     slug: 'sell-online',
     name: 'Sell online',
     summary:
-      "Stores that do what Shopify alone can't: Shopify and headless builds, custom marketplaces, Shopify apps, payments, fulfillment and inventory.",
+      'Shopify stores or fully custom marketplaces, plus the systems behind them: payments, fulfillment and dropshipping.',
     modules: [
       {
         name: 'Shopify stores',
@@ -78,7 +98,7 @@ export const OFFERS: Offer[] = [
       },
       {
         name: 'Shopify apps and functions',
-        job: "Checkout rules, order routing and discounts Shopify can't do alone.",
+        job: 'Checkout rules, order routing and discounts that extend Shopify.',
         example: 'Heatonist',
       },
       {
@@ -198,6 +218,10 @@ export const BILLING = {
 }
 
 export const FAQ = [
+  {
+    q: 'How do we start?',
+    a: 'With a block of at least five prepaid hours. You see every hour in your portal.',
+  },
   {
     q: 'How soon will something work?',
     a: 'The first problem is usually solved in 2 to 6 weeks.',

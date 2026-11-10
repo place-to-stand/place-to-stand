@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import type { Metadata } from 'next'
 import {
   Band,
@@ -11,12 +12,18 @@ import { OwnershipSection, TagRow } from '@/src/components/sections/home-story'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { servicesJsonLd } from '@/src/lib/structured-data'
-import { AFTER_LAUNCH, OFFERS, type Offer } from '@/src/lib/offers'
+import {
+  AFTER_LAUNCH,
+  MOBILE_APPS,
+  OFFERS,
+  PLATFORM_SHARED,
+  type Offer,
+} from '@/src/lib/offers'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Platform',
+  title: 'What we build',
   description:
-    'Software you own, built around your business: systems that run the business and stores that sell, on one source of data.',
+    'Custom operations software and Shopify development: one system that runs your business, stores that sell, one source of data, and you own all of it.',
   path: '/platform',
 })
 
@@ -73,6 +80,18 @@ function OfferSection({ offer, index }: { offer: Offer; index: number }) {
               )}
             </li>
           ))}
+          {offer.proof && (
+            <li className='flex flex-col justify-center gap-grid-half border-l-4 border-accent py-grid-1 pl-grid-1 lg:col-span-2'>
+              <p className='type-card-title'>{offer.proof}</p>
+              <p className='max-w-xl text-base text-text-muted'>
+                {PLATFORM_SHARED}{' '}
+                <Link href='/process#portal' className='link-inline'>
+                  See our portal
+                </Link>
+                .
+              </p>
+            </li>
+          )}
         </ul>
       </Reveal>
     </Section>
@@ -94,6 +113,11 @@ export default function PlatformPage() {
         {OFFERS.map((offer, index) => (
           <OfferSection key={offer.slug} offer={offer} index={index} />
         ))}
+        <Section>
+          <Reveal index={0} className='border-l-4 border-accent pl-grid-1'>
+            <p className='type-card-title'>{MOBILE_APPS}</p>
+          </Reveal>
+        </Section>
       </Band>
       <Band tone='dark'>
         <OwnershipSection

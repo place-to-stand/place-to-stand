@@ -31,7 +31,7 @@ export const services: Service[] = [
   {
     slug: 'sell-online',
     title: 'Sell Online',
-    tagline: "Stores that do what Shopify alone can't",
+    tagline: 'Shopify stores and fully custom marketplaces',
     description:
       'Shopify and headless storefronts, custom marketplaces, Shopify apps, payments, fulfillment and inventory, built for brands like Hot Ones and Heatonist.',
     icon: 'Code2',
