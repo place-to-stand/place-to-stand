@@ -31,6 +31,7 @@ export const DESIGN_SECTION_GROUPS = [
       { id: 'cards', label: 'Offer cards and steps' },
       { id: 'rows', label: 'Ruled rows' },
       { id: 'alt-row', label: 'Alternating row' },
+      { id: 'media', label: 'FAQ, logos, media' },
       { id: 'featured', label: 'Featured case study' },
       { id: 'cta-band', label: 'Closing band' },
     ],

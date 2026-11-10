@@ -26,7 +26,9 @@ import {
   ClientsSection,
   FeaturedCaseStudy,
 } from '@/src/components/sections/clients-section'
-import { OFFERS } from '@/src/lib/offers'
+import { FAQ, OFFERS } from '@/src/lib/offers'
+import { ClientLogoWall } from '@/src/components/sections/client-logo-wall'
+import Image from 'next/image'
 import { DesignIndex } from './_components/design-index'
 import { DesignSection, Specimen } from './_components/specimen'
 import {
@@ -462,6 +464,51 @@ export default function DesignPage() {
               className='[&_section]:px-0'
             >
               <ClientsSection limit={2} />
+            </Specimen>
+          </DesignSection>
+
+          <DesignSection
+            id='media'
+            label='Patterns'
+            title='FAQ, logos, media and captions'
+            when='Questions as ruled rows, the logo wall, every photo in a fixed frame, and a caption under it in body text.'
+          >
+            <Specimen names={['FAQ', 'RuledRow as="div"']} tones>
+              <dl className='grid gap-x-grid-3 md:grid-cols-2'>
+                {FAQ.slice(0, 2).map(item => (
+                  <RuledRow
+                    as='div'
+                    key={item.q}
+                    className='flex flex-col gap-grid-half py-grid-1'
+                  >
+                    <dt className='type-card-title'>{item.q}</dt>
+                    <dd className='text-base text-text-muted'>{item.a}</dd>
+                  </RuledRow>
+                ))}
+              </dl>
+            </Specimen>
+            <Specimen names={['ClientLogoWall']} note='white silhouettes, sized by ink'>
+              <ClientLogoWall />
+            </Specimen>
+            <Specimen
+              names={['aspect-[16/10]', 'caption']}
+              note='photos crop to a 16:10 frame from the centre; the caption is body text, the name in the text colour'
+            >
+              <figure className='flex max-w-xl flex-col gap-grid-half'>
+                <div className='relative aspect-[16/10] overflow-hidden bg-bg-card'>
+                  <Image
+                    src='/work-greenwatt-usa-photo.jpg'
+                    alt=''
+                    fill
+                    sizes='576px'
+                    className='object-cover'
+                  />
+                </div>
+                <figcaption className='text-base text-text-muted'>
+                  <span className='text-text'>GreenWATT USA.</span> We built
+                  the marketplace from scratch.
+                </figcaption>
+              </figure>
             </Specimen>
           </DesignSection>
 
