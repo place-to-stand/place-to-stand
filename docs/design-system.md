@@ -7,7 +7,23 @@ follows.
 Breakpoints: **phone** (below 768px), **tablet** (`md`, 768px up), **laptop** (`lg`, 1024px up). All structural
 values sit on the 24px grid (12px half steps for fine structure); see the grid rule in `CLAUDE.md`.
 
-## Spacing roles
+## Tiers
+
+The system is six tiers, each built only from the one below. `npm run lint` enforces the import direction for
+`src/components` (pages are not restricted yet).
+
+| Tier          | Where                        | What                                                                    |
+| ------------- | ---------------------------- | ----------------------------------------------------------------------- |
+| 1. Tokens     | `app/globals.css`            | Color, type, spacing, stroke, radius, shadow, stacking, motion          |
+| 2. Primitives | `src/components/primitives/` | Buttons, inputs, links and CTA, logo, social icons, reveal              |
+| 3. Boxes      | `src/components/boxes/`      | Card, LinkCard, StatTile, Callout, Panel, RuledRow/List, SideNote, Chip |
+| 4. Patterns   | `src/components/patterns/`   | Section scaffolding, headings, arrow link, tag row, drawings, logo wall |
+| 5. Sections   | `src/components/sections/`   | Page-level blocks with named variants and a fixed tone                  |
+| 6. Templates  | `src/components/templates/`  | Whole-page layouts that pages render                                    |
+
+## 1. Tokens
+
+### Spacing roles
 
 Defined as `--space-*` in `app/globals.css` (one value per breakpoint) and exposed to Tailwind as `--spacing-*`, so
 they work with any spacing utility: `pt-page-start`, `gap-section`, `p-card`, `py-band`, …
@@ -32,7 +48,7 @@ they work with any spacing utility: `pt-page-start`, `gap-section`, `p-card`, `p
 Cards in a grid sit `grid-1` (24px) apart. Raw grid tokens (`grid-half` … `grid-8`) stay available for anything
 that is not one of these roles.
 
-### Who owns the space
+#### Who owns the space
 
 - **The page owns the gaps between sections.** A page stacks its sections in `flex flex-col gap-section` and ends
   with `pb-edge` before a closing callout or `pb-section` before the footer. Sections themselves have no outer
@@ -42,7 +58,7 @@ that is not one of these roles.
   normal leading, which looks a few px looser but never breaks. The home hero headline is untrimmed so its corner
   marks keep their size.
 
-## Type roles
+### Type roles
 
 Utilities defined with `@utility` in `app/globals.css`. Size, weight, leading, tracking and color come with the
 role; add only layout classes (margins, max-width, `text-balance`, `uppercase`).
@@ -64,7 +80,7 @@ The home hero headline is the one exception: it is sized to the window.
 
 Type floor (from `CLAUDE.md`): reading text is 16px, never below 14px; 12px only for short mono lines.
 
-## Colors
+### Colors
 
 | Token              | Value                                                | Use                                                |
 | ------------------ | ---------------------------------------------------- | -------------------------------------------------- |
@@ -85,13 +101,70 @@ Type floor (from `CLAUDE.md`): reading text is 16px, never below 14px; 12px only
 
 No gradients; solid colors only.
 
-### Light bands
+#### Light bands
 
 Pages mix dark and light bands. Wrap reading sections in `<Band tone='light'>` (and proof or set pieces in
-`<Band tone='dark'>`). The light band redefines the color tokens above (`bg` #f4f3ef, `bg-card` white, `text`
-#0e0f11, `text-muted` #55565c, light borders), so components need no light variants. Lime never carries text on
+`<Band tone='dark'>`). The light band redefines the color tokens above (`bg` #f4f3ef, `bg-card` white, `text` #0e0f11,
+`text-muted` #55565c, light borders), so components need no light variants. Lime never carries text on
 light: labels get a lime marker with black text, and accent-colored text turns black with a lime underline. A
-band pads itself by the `section` role top and bottom.
+band pads itself by the `band-pad` role top and bottom.
+
+#### Accent on light bands
+
+Lime only appears on light bands as a fill behind dark text: the label marker and the primary button. Lines, bullets, underlines and focus rings use `accent-line`, which is lime on dark bands and ink on light ones, so a component never needs a light variant.
+
+#### Accent lines
+
+Two strengths only: **`accent-subtle`** for borders, focus rings, link underlines and the corner marks (2px), and **`accent`** (strong) for
+active states and highlighted panels. Do not use other opacities (`border-accent/50` etc.).
+
+### Motion
+
+Durations and easings are tokens by role in `app/globals.css`. Every animation and transition uses them, and
+every one has a `prefers-reduced-motion` end state.
+
+| Token             | Value                          | Role                                              |
+| ----------------- | ------------------------------ | ------------------------------------------------- |
+| `--motion-fast`   | 180ms                          | Links (`--link-dur`)                              |
+| `--motion-base`   | 250ms                          | Hovers: button fill, outline draw (`--hover-dur`) |
+| `--motion-enter`  | 500ms                          | One element arriving                              |
+| `--motion-slow`   | 900ms                          | A drawing building                                |
+| `--motion-spin`   | 550ms                          | The logo spin (`--spin-dur`)                      |
+| `--ease-standard` | ease-out                       | Hovers (`--hover-ease`)                           |
+| `--ease-enter`    | cubic-bezier(0.16, 1, 0.3, 1)  | Things arriving: fast start, long settle          |
+| `--ease-in-out`   | cubic-bezier(0.65, 0, 0.35, 1) | Loops                                             |
+| `--ease-exit`     | cubic-bezier(0.7, 0, 0.84, 0)  | Things leaving                                    |
+
+#### Reference choreography: the Home hero intro
+
+The hero intro is the site's motion reference (`sections/hero-section.tsx`, `.hero-*` in `globals.css`). New
+page-load motion should follow its shape: decoration first, content in short staged steps, the drawing after.
+
+| When             | What                                                                                                 |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| 0s               | Corner marks snap in (0.4s, ease-enter).                                                             |
+| 0s, 0.12s, 0.24s | Each headline line settles 10px while a curtain slides off it (0.5s); text is opaque from frame one. |
+| 0.85s            | The description rises 14px and fades in (0.6s).                                                      |
+| 1s               | The buttons rise and fade in (0.6s).                                                                 |
+| 0.8s on          | The drawing builds group by group (to 1.75s), bars grow from 1.9s, live detail at 3.2s.              |
+| up to 3s         | Sections already in view under the hero wait for the intro before revealing.                         |
+| reduced motion   | Every step shows its end state.                                                                      |
+
+Scroll reveals (`Reveal`, `AnimatedSection`) slide sections in once as they enter the window.
+
+### Strokes and drawings
+
+Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px) for line-work and `--stroke-emphasis` (2px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` color, lime only on the result.
+
+## 2. Primitives
+
+### Calls to action
+
+One shared definition in `src/components/primitives/cta.tsx`, so every place matches:
+
+- **`BookCallButton`**: the lime "Book a call" button. Goes to `/contact`; only the Contact page opens the calendar (`toCalendar`). Header uses the small size, everywhere else large.
+- **`AuditLink`**: the "Take the free audit" action link, never a button.
+- **`BookCallGroup`**: the button with "or Take the free audit" centered under it (24px gap, 12px mono caps, "or" muted). Used in the hero and every closing band.
 
 ### Links
 
@@ -107,43 +180,11 @@ Profile icons (LinkedIn, GitHub, Clutch, X, Instagram) are the nav link role's i
 
 Cards that are links (client photos, stat tiles, blog rows) are not text links: they react as a whole and keep their own hover. The phone menu's page list uses large headline type for touch.
 
-### Accent on light bands
+### Logo
 
-Lime only appears on light bands as a fill behind dark text: the label marker and the primary button. Lines, bullets, underlines and focus rings use `accent-line`, which is lime on dark bands and ink on light ones, so a component never needs a light variant.
+`LogoLockup` (`src/components/primitives/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2px), so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
 
-### Accent lines
-
-Two strengths only: **`accent-subtle`** for borders, focus rings, link underlines and the corner marks (2px), and **`accent`** (strong) for
-active states and highlighted panels. Do not use other opacities (`border-accent/50` etc.).
-
-## Components
-
-Components live in tiers under `src/components/`: `primitives/` (buttons, inputs, links, logo, reveal), `boxes/` (the six box types), `patterns/` (section scaffolding, headings, drawings, logo wall, rich text), and `sections/` (page-level blocks, each with named variants and a declared tone: offers, results, process, after-launch, ownership, cta-band, header, footer, the audit). The ones below are in `patterns/section.tsx` unless noted.
-
-- **`Section`** (`section.tsx`): a page section with no outer padding. Takes everything `AnimatedSection` does.
-- **`PageHeader`** (`section.tsx`): label, title, optional intro and `meta` line, with the blueprint dots behind it.
-  Put it first in the page's first section, followed by `gap-header`.
-- **`Band`** and **`SectionHeading`** (`section.tsx`): a full-width light or dark band of sections, and a
-  section's label + h2 + intro group.
-- **`CtaBand`** (`cta-band.tsx`): the closing "Find where to start" callout. Put it last in `<main>`, after a block
-  ending in `pb-edge`. Takes `location` (analytics) and optional `title` and `description`.
-
-A typical inner page:
-
-```tsx
-<main className='flex-1 pt-page-start'>
-  <div className='flex flex-col gap-section pb-edge'>
-    <Section priority className='flex flex-col gap-header'>
-      <PageHeader label='Services' title='What we build' intro='…' />
-      {/* content */}
-    </Section>
-    <Section>{/* another section */}</Section>
-  </div>
-  <CtaBand location='services-cta-block' />
-</main>
-```
-
-## Boxes and strokes
+## 3. Boxes
 
 Every box on the site is one of the components in `src/components/boxes`, and each one owns its stroke. Box lines are 1px; 2px is only for selected and focus states. Pages never draw a border themselves: `design/no-raw-border` fails lint outside the boxes, site chrome (header, footer, hero rule, logo), form controls, the audit tool and /design.
 
@@ -160,37 +201,101 @@ Every box on the site is one of the components in `src/components/boxes`, and ea
 
 `rule` is one color per tone: `#2a2b30` on dark, `#cbcac4` on light.
 
-## Calls to action
+## 4. Patterns
 
-One shared definition in `src/components/primitives/cta.tsx`, so every place matches:
+The page scaffolding in `patterns/section.tsx`:
 
-- **`BookCallButton`**: the lime "Book a call" button. Goes to `/contact`; only the Contact page opens the calendar (`toCalendar`). Header uses the small size, everywhere else large.
-- **`AuditLink`**: the "Take the free audit" action link, never a button.
-- **`BookCallGroup`**: the button with "or Take the free audit" centered under it (24px gap, 12px mono caps, "or" muted). Used in the hero and every closing band.
+- **`Section`** (`section.tsx`): a page section with no outer padding. Takes everything `AnimatedSection` does.
+- **`PageHeader`** (`section.tsx`): label, title, optional intro and `meta` line, with the blueprint dots behind it.
+  Put it first in the page's first section, followed by `gap-header`.
+- **`Band`** and **`SectionHeading`** (`section.tsx`): a full-width light or dark band of sections, and a
+  section's label + h2 + intro group.
+- **`CtaBand`** (`sections/cta-band.tsx`): the closing "Tell us what's slowing you down" callout. Put it last in `<main>`, after a block
+  ending in `pb-edge`. Takes `location` (analytics) and optional `title` and `description`.
 
-## Motion
+A typical inner page:
 
-All hovers read three settings in `app/globals.css`:
+```tsx
+<main className='flex-1 pt-page-start'>
+  <div className='flex flex-col gap-section pb-edge'>
+    <Hero
+      variant='page'
+      sectionClassName='flex flex-col gap-header'
+      label='Services'
+      title='What we build'
+      intro='…'
+    >
+      {/* content */}
+    </Hero>
+    <Section>{/* another section */}</Section>
+  </div>
+  <CtaBand location='services-cta-block' />
+</main>
+```
 
-| Setting        | Value    | Used by                                                     |
-| -------------- | -------- | ----------------------------------------------------------- |
-| `--link-dur`   | 180ms    | Nav, action and inline links, icon links, button text color |
-| `--hover-dur`  | 250ms    | Primary button fill slide, secondary button outline draw    |
-| `--hover-ease` | ease-out | All of the above                                            |
-| `--spin-dur`   | 550ms    | Logo spin (overshoot easing, plays once per hover)          |
+## 5. Sections
 
-Everything respects `prefers-reduced-motion`.
+Each section has named variants and a fixed tone (light or dark), so a page picks a section instead of composing
+raw pieces. The tone is exported on the component (`OffersSection.tone`).
 
-## Drawings
+| Section              | Variants                                                        | Tone  |
+| -------------------- | --------------------------------------------------------------- | ----- |
+| `Hero`               | `home` (the Home hero), `page` (an inner page title)            | dark  |
+| `OffersSection`      | `summary` (Home cards), `detail` (Platform sections + AI block) | light |
+| `ResultsSection`     | `tiles` (Home numbers), `featured` (top of Clients)             | dark  |
+| `StepsSection`       | `cards` (Home), `rows` (Process)                                | light |
+| `AfterLaunchSection` | `cards` (Home), `detail` (Platform, `#after-launch`)            | light |
+| `OwnershipSection`   | one layout, the same seven lines everywhere                     | dark  |
+| `ManifestoSection`   | one layout (Home, "Who you work with")                          | light |
+| `ClientLogosSection` | one layout, under the Home hero                                 | dark  |
+| `CtaBand`            | `call` (Book a call + audit link), `audit` (audit link only)    | dark  |
 
-Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px) for line-work and `--stroke-emphasis` (2px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` color, lime only on the result.
+Header, footer and the audit tool also live in `sections/`.
 
-## Logo
+## 6. Templates
 
-`LogoLockup` (`src/components/primitives/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2px), so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
+| Template                     | Page       | Layout                                                              |
+| ---------------------------- | ---------- | ------------------------------------------------------------------- |
+| `HomeTemplate`               | Home       | Hero, logos, then light and dark bands of sections, closing band    |
+| `OfferPageTemplate`          | Platform   | Hero, offers detail, ownership, after launch detail, closing band   |
+| `CaseStudyTemplate`          | Heatonist  | Hero, full-bleed media, spec rows, quote, storefronts, closing band |
+| `ArticleShell`/`ArticleBody` | Blog posts | A shell shared by every post, and the post that streams into it     |
+| `ContactTemplate`            | Contact    | Hero with three ways in, the call, the audit, the message form      |
+
+Not templated yet: Process, About, Clients, Referral, the blog list, Field notes, Privacy, Terms, the audit and 404. They compose sections directly.
+
+## Guidelines
+
+These are not yet defined. Each lists what the site does today; the rules come once they are agreed.
+
+### Imagery
+
+Not yet defined. Today: client photos crop to a 16:10 frame from the center; each keeps its own color (no shared
+treatment); the case study opens with a full-bleed video.
+
+### Icons
+
+Not yet defined. Today: vendor marks in the stack section and lucide icons in the audit; no shared set, size or
+stroke rule.
+
+### Interaction states
+
+Not yet defined. Today: hover is consistent (button fill or outline draw, link bar, link-card fill); focus is a
+2px accent ring (`focus-ring`) on link cards and Tailwind rings on buttons and inputs; selected and active use the
+2px emphasis stroke (the audit); disabled, loading, empty and error states are handled per component.
+
+### Accessibility
+
+Not yet defined. Today: reading text never under 14px (lint); every animation has a reduced-motion end state; no
+automated contrast or focus-order checks.
+
+### Voice
+
+Not yet defined. Today: plain, specific, US spelling, no stock phrases; approved copy lives in the site copy
+audit doc. There is no written voice guide.
 
 ## Checks
 
-`npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, every text link on a link role, and pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
+`npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, no raw borders outside the boxes, every text link on a link role, pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`, and each component tier imports only from the tiers below. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
 
 See every token and component live at `/design`. It is public so it can be shared with clients, but it is `noindex` and left out of the sitemap and `llms.txt`. It is deliberately not disallowed in `robots.txt`: crawlers have to fetch the page to see the noindex.

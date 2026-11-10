@@ -117,10 +117,10 @@ export default function DesignPage() {
           <DesignIndex />
         </div>
         <div className='flex flex-col gap-section lg:col-span-9'>
-          {/* ── Foundations ── */}
+          {/* ── Tokens ── */}
           <DesignSection
             id='color'
-            label='Foundations'
+            label='Tokens'
             title='Color'
             when='Tokens only, solid colors. The left stage is a dark band, the right a light band: the same names resolve differently, so components never need a light variant.'
           >
@@ -139,7 +139,7 @@ export default function DesignPage() {
 
           <DesignSection
             id='type'
-            label='Foundations'
+            label='Tokens'
             title='Type'
             when='One role per text block. Sizes shown are live for this window width; resize to see each step.'
           >
@@ -154,7 +154,7 @@ export default function DesignPage() {
 
           <DesignSection
             id='spacing'
-            label='Foundations'
+            label='Tokens'
             title='Spacing'
             when='Every structural gap is one of these roles, on the 24px grid (12px half steps). Bars show the live value at this width.'
           >
@@ -171,35 +171,119 @@ export default function DesignPage() {
 
           <DesignSection
             id='motion'
-            label='Foundations'
+            label='Tokens'
             title='Motion'
-            when='Three hover timings and one easing for the whole site; the logo spin has its own. Hover the buttons and links below to feel them.'
+            when='Durations and easings by role, as tokens. The Home hero intro is the reference choreography: content wipes and rises in a short, staged sequence, the drawing builds after it, and reduced motion shows the end state.'
           >
             <Specimen
               names={[
-                '--link-dur',
-                '--hover-dur',
-                '--hover-ease',
-                '--spin-dur',
+                '--motion-fast',
+                '--motion-base',
+                '--motion-enter',
+                '--motion-slow',
+                '--motion-spin',
+                '--ease-standard',
+                '--ease-enter',
+                '--ease-in-out',
+                '--ease-exit',
               ]}
             >
               <div className='flex flex-col'>
                 {[
-                  '--link-dur',
-                  '--hover-dur',
-                  '--hover-ease',
-                  '--spin-dur',
+                  '--motion-fast',
+                  '--motion-base',
+                  '--motion-enter',
+                  '--motion-slow',
+                  '--motion-spin',
+                  '--ease-standard',
+                  '--ease-enter',
+                  '--ease-in-out',
+                  '--ease-exit',
                 ].map(name => (
                   <LiveVar key={name} name={name} />
                 ))}
               </div>
             </Specimen>
+            <Specimen
+              names={['hero-section.tsx', '.hero-line', '.hero-reveal']}
+              note={'the Home hero intro, the reference choreography'}
+            >
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>0s</dt>
+                  <dd className='text-base text-text-muted'>
+                    Corner marks snap in (0.4s, ease-enter).
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>0s, 0.12s, 0.24s</dt>
+                  <dd className='text-base text-text-muted'>
+                    The three headline lines settle 10px and a curtain slides
+                    off each (0.5s). The text paints opaque from the first
+                    frame.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>0.85s</dt>
+                  <dd className='text-base text-text-muted'>
+                    The description rises 14px and fades in (0.6s).
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>1s</dt>
+                  <dd className='text-base text-text-muted'>
+                    The buttons rise and fade in (0.6s).
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>0.8s on</dt>
+                  <dd className='text-base text-text-muted'>
+                    The drawing builds group by group (0 to 1.75s after its
+                    start), bars grow from 1.9s, the live detail at 3.2s.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Up to 3s</dt>
+                  <dd className='text-base text-text-muted'>
+                    Sections already in view under the hero wait for the intro
+                    to finish before they reveal.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Reduced motion</dt>
+                  <dd className='text-base text-text-muted'>
+                    Every step shows its end state at once.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
           </DesignSection>
 
-          {/* ── Components ── */}
+          {/* ── Primitives ── */}
           <DesignSection
             id='buttons'
-            label='Components'
+            label='Primitives'
             title='Buttons and the call to action'
             when='Primary is always the lime Book a call; secondary is the outline that draws itself on hover. The CTA unit pairs Book a call with the audit link.'
           >
@@ -225,7 +309,7 @@ export default function DesignPage() {
 
           <DesignSection
             id='links'
-            label='Components'
+            label='Primitives'
             title='Links'
             when='Three roles only. Nav and action links get the sliding bar; inline links sit in sentences with a quiet underline.'
           >
@@ -268,7 +352,7 @@ export default function DesignPage() {
 
           <DesignSection
             id='marks'
-            label='Components'
+            label='Primitives'
             title='Labels, bullets and chips'
             when='Lime on a light band is only ever a fill behind dark text (the label marker). Bullets and rules use the accent line.'
           >
@@ -290,7 +374,7 @@ export default function DesignPage() {
 
           <DesignSection
             id='logo'
-            label='Components'
+            label='Primitives'
             title='Logo'
             when='The lockup spins on hover or focus: a half turn each way with a small overshoot, always finishing.'
           >
@@ -301,7 +385,7 @@ export default function DesignPage() {
 
           <DesignSection
             id='forms'
-            label='Components'
+            label='Primitives'
             title='Forms'
             when='Inputs and the newsletter form. The full contact form lives on /contact.'
           >
@@ -318,9 +402,10 @@ export default function DesignPage() {
             </Specimen>
           </DesignSection>
 
+          {/* ── Boxes ── */}
           <DesignSection
             id='boxes'
-            label='Components'
+            label='Boxes'
             title='Boxes and strokes'
             when='Every box on the site is one of these, and each owns its stroke: box lines are 1px, and 2px is only for selected and focus. Pages never draw a border themselves (lint: design/no-raw-border).'
           >
@@ -426,20 +511,6 @@ export default function DesignPage() {
           </DesignSection>
 
           <DesignSection
-            id='cards'
-            label='Patterns'
-            title='Offer cards and steps'
-            when='Cards sit 24px apart on the grid; steps carry a time marker.'
-          >
-            <Specimen names={['OfferCard']} tones>
-              <OfferCard offer={OFFERS[0]} />
-            </Specimen>
-            <Specimen names={['StepsSection']} className='[&_section]:px-0'>
-              <StepsSection showLink={false} />
-            </Specimen>
-          </DesignSection>
-
-          <DesignSection
             id='rows'
             label='Patterns'
             title='Ruled rows'
@@ -512,26 +583,411 @@ export default function DesignPage() {
             </Specimen>
           </DesignSection>
 
+          {/* ── Sections ── */}
+          <DesignSection
+            id='cards'
+            label='Sections'
+            title='Offers and steps'
+            when='Two sections shown in their Home variants: offers summary and steps cards.'
+          >
+            <Specimen names={['OfferCard']} tones>
+              <OfferCard offer={OFFERS[0]} />
+            </Specimen>
+            <Specimen names={['StepsSection']} className='[&_section]:px-0'>
+              <StepsSection showLink={false} />
+            </Specimen>
+          </DesignSection>
+
           <DesignSection
             id='featured'
-            label='Patterns'
-            title='Featured case study'
-            when='The case study block that opens Clients.'
+            label='Sections'
+            title='Results, featured'
+            when='The featured variant of the results section, which opens Clients.'
           >
-            <Specimen names={['FeaturedCaseStudy']}>
+            <Specimen names={['ResultsSection variant="featured"']}>
               <ResultsSection variant='featured' />
             </Specimen>
           </DesignSection>
 
           <DesignSection
             id='cta-band'
-            label='Patterns'
+            label='Sections'
             title='Closing band'
             when='Last in every page’s main, in its band of dots. The footer below this page is the real footer.'
           >
             <Specimen names={['CtaBand']} className='[&_section]:px-0'>
               <CtaBand location='design' />
             </Specimen>
+          </DesignSection>
+
+          <DesignSection
+            id='section-list'
+            label='Sections'
+            title='Sections and their variants'
+            when={
+              'Page-level blocks. Each has named variants and a fixed tone, so a page picks a section instead of composing raw pieces.'
+            }
+          >
+            <Specimen
+              names={[
+                'Hero',
+                'OffersSection',
+                'ResultsSection',
+                'StepsSection',
+                'AfterLaunchSection',
+                'OwnershipSection',
+                'CtaBand',
+              ]}
+            >
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Hero</dt>
+                  <dd className='text-base text-text-muted'>
+                    home (the Home hero), page (an inner page title). Dark.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Offers</dt>
+                  <dd className='text-base text-text-muted'>
+                    summary (Home cards), detail (Platform sections and the AI
+                    block). Light.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Results</dt>
+                  <dd className='text-base text-text-muted'>
+                    tiles (Home numbers), featured (top of Clients). Dark.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Steps</dt>
+                  <dd className='text-base text-text-muted'>
+                    cards (Home), rows (Process). Light.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>After launch</dt>
+                  <dd className='text-base text-text-muted'>
+                    cards (Home), detail (Platform). Light.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Ownership</dt>
+                  <dd className='text-base text-text-muted'>
+                    one layout, the same seven lines on every page. Dark.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Who you work with</dt>
+                  <dd className='text-base text-text-muted'>
+                    one layout (Home). Light.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Logo wall</dt>
+                  <dd className='text-base text-text-muted'>
+                    one layout under the Home hero. Dark.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Closing band</dt>
+                  <dd className='text-base text-text-muted'>
+                    call (Book a call with the audit link), audit (audit link
+                    only). Dark, last in every page.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Header, footer, audit</dt>
+                  <dd className='text-base text-text-muted'>
+                    site chrome and the audit tool.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
+          </DesignSection>
+
+          {/* ── Templates ── */}
+          <DesignSection
+            id='templates'
+            label='Templates'
+            title='Page templates'
+            when={
+              'Whole-page layouts in src/components/templates. A page file keeps its metadata and data loading and renders its template.'
+            }
+          >
+            <Specimen
+              names={[
+                'HomeTemplate',
+                'OfferPageTemplate',
+                'CaseStudyTemplate',
+                'ArticleShell',
+                'ArticleBody',
+                'ContactTemplate',
+              ]}
+            >
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Home</dt>
+                  <dd className='text-base text-text-muted'>
+                    Hero home, logos, then light and dark bands: offers,
+                    results, steps and after launch, ownership, who you work
+                    with, closing band.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Offer page</dt>
+                  <dd className='text-base text-text-muted'>
+                    Platform: hero page, offers detail, ownership, after launch
+                    detail, closing band.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Case study</dt>
+                  <dd className='text-base text-text-muted'>
+                    Heatonist: hero page, full-bleed media, spec rows, quote,
+                    storefronts, numbers, its own closing band.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Article</dt>
+                  <dd className='text-base text-text-muted'>
+                    A shell shared by every post (prefetched once) and the post
+                    body that streams into it.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Contact</dt>
+                  <dd className='text-base text-text-muted'>
+                    Hero page with three ways in, the call, the audit, the
+                    message form.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Not templated yet</dt>
+                  <dd className='text-base text-text-muted'>
+                    Process, About, Clients, Referral, Blog list, Field notes,
+                    Privacy, Terms, the audit and 404 compose sections directly.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
+          </DesignSection>
+
+          {/* ── Guidelines ── */}
+          <DesignSection
+            id='imagery'
+            label='Guidelines'
+            title='Imagery'
+            when={'Not yet defined.'}
+          >
+            <p className='max-w-2xl text-base text-text-muted'>
+              Not yet defined. What the site does today:
+            </p>
+            <ul className='flex flex-col gap-grid-half'>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Client photos crop to a 16:10 frame from the center (media
+                specimen above).
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Each photo keeps its own color; there is no shared treatment.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                The Heatonist case study opens with a full-bleed video.
+              </li>
+            </ul>
+          </DesignSection>
+
+          <DesignSection
+            id='icons'
+            label='Guidelines'
+            title='Icons'
+            when={'Not yet defined.'}
+          >
+            <p className='max-w-2xl text-base text-text-muted'>
+              Not yet defined. What the site does today:
+            </p>
+            <ul className='flex flex-col gap-grid-half'>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Vendor marks in the stack section; lucide icons in the audit.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                No shared set, size or stroke rule for icons yet.
+              </li>
+            </ul>
+          </DesignSection>
+
+          <DesignSection
+            id='states'
+            label='Guidelines'
+            title='Interaction states'
+            when={'Not yet defined.'}
+          >
+            <p className='max-w-2xl text-base text-text-muted'>
+              Not yet defined. What the site does today:
+            </p>
+            <ul className='flex flex-col gap-grid-half'>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Hover: buttons fill or draw their outline, links slide a bar in,
+                link cards change fill.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Focus: a 2px accent focus ring (focus-ring) on link cards;
+                Tailwind rings on buttons and inputs.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Selected and active: the 2px emphasis stroke, in the audit.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Disabled, loading, empty and error states are handled per
+                component.
+              </li>
+            </ul>
+          </DesignSection>
+
+          <DesignSection
+            id='a11y'
+            label='Guidelines'
+            title='Accessibility'
+            when={'Not yet defined.'}
+          >
+            <p className='max-w-2xl text-base text-text-muted'>
+              Not yet defined. What the site does today:
+            </p>
+            <ul className='flex flex-col gap-grid-half'>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Reading text never under 14px; 12px only for mono labels (lint).
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Every animation has a reduced-motion end state.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                No automated contrast or focus-order checks yet.
+              </li>
+            </ul>
+          </DesignSection>
+
+          <DesignSection
+            id='voice'
+            label='Guidelines'
+            title='Voice'
+            when={'Not yet defined.'}
+          >
+            <p className='max-w-2xl text-base text-text-muted'>
+              Not yet defined. What the site does today:
+            </p>
+            <ul className='flex flex-col gap-grid-half'>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Plain, specific, US spelling, no stock phrases.
+              </li>
+              <li className='flex gap-2 text-base text-text'>
+                <span
+                  aria-hidden
+                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
+                />
+                Approved copy lives in the site copy audit doc; there is no
+                written voice guide yet.
+              </li>
+            </ul>
           </DesignSection>
         </div>
       </Section>
