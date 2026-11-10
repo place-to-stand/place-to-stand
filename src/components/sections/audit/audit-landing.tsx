@@ -8,17 +8,11 @@ import {
   ArrowRight,
   BarChart3,
   ChevronDown,
-  Clock,
   Code2,
   Compass,
   GitBranch,
   type LucideIcon,
-  Mail,
   ServerCog,
-  Shield,
-  Sparkles,
-  Target,
-  Zap,
 } from '@/src/components/primitives/icon'
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { Callout, Card, Panel, RuledRow } from '@/src/components/boxes'
@@ -36,31 +30,27 @@ interface AuditLandingProps {
 }
 
 const HIGHLIGHTS = [
-  { icon: Clock, label: 'Under 2 minutes' },
-  { icon: Shield, label: 'Free, no obligation' },
-  { icon: Mail, label: 'Preview on screen, full results by email' },
+  'Under 2 minutes',
+  'Free, no obligation',
+  'Preview on screen, full results by email',
 ]
 
 const FACETS = WHO_YOU_WORK_WITH.facets
 
 const AUDIT_COVERS = [
   {
-    icon: Compass,
     title: 'Your business phase',
     description: 'Where you are on the journey from idea to scaled operation.',
   },
   {
-    icon: Target,
     title: 'Top software opportunities',
     description: 'The highest-leverage places custom software could help.',
   },
   {
-    icon: Zap,
     title: 'Where to start first',
     description: 'A prioritized shortlist so you know what to build next.',
   },
   {
-    icon: Sparkles,
     title: 'Tailored recommendations',
     description:
       'Specific services matched to your answers, not a generic pitch.',
@@ -218,11 +208,8 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               <Icon icon={ArrowRight} className='ml-2' />
             </Button>
             <div className='flex flex-wrap items-center justify-center gap-x-grid-1 gap-y-2 text-base text-text-muted'>
-              {HIGHLIGHTS.map(({ icon, label }) => (
-                <span key={label} className='inline-flex items-center gap-1.5'>
-                  <Icon icon={icon} className='text-text' />
-                  {label}
-                </span>
+              {HIGHLIGHTS.map(label => (
+                <span key={label}>{label}</span>
               ))}
             </div>
           </div>
@@ -313,14 +300,11 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
               as='ol'
               className='grid gap-x-grid-1 gap-y-grid-2 pt-grid-1 sm:grid-cols-2 lg:grid-cols-4'
             >
-              {AUDIT_COVERS.map(({ icon, title, description }, index) => (
+              {AUDIT_COVERS.map(({ title, description }, index) => (
                 <li key={title} className='flex flex-col gap-grid-half'>
-                  <div className='flex items-center gap-grid-half text-text-muted'>
-                    <span className='font-mono text-xs tabular-nums'>
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <Icon icon={icon} size={24} className='text-text' />
-                  </div>
+                  <span className='font-mono text-xs text-text-muted tabular-nums'>
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
                   <h3 className='type-card-title'>{title}</h3>
                   <p className='text-base text-text-muted'>{description}</p>
                 </li>

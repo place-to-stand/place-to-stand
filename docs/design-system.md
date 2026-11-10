@@ -196,7 +196,7 @@ Every box on the site is one of the components in `src/components/boxes`, and ea
 | `Callout`              | none; 20px corner marks, 2px in `accent-subtle` (`band` adds dots) | `bg-card`  | The page's one ask, a quote, the newsletter box         |
 | `Panel`                | none                                                               | `bg-panel` | Holds a form or a tool (contact form, audit results)    |
 | `RuledRow`/`RuledList` | 1px top rule in `rule` (accent only for ownership)                 | none       | Lists of rows: steps, FAQ, posts, legal clauses         |
-| `SideNote`             | 4px left bar in `accent-line`                                      | none       | A short aside: the billing promise, the proof line      |
+| `SideNote`             | 2px left bar in `accent-line` (the emphasis stroke)                | none       | A short aside: the billing promise, the proof line      |
 | `Chip`                 | 1px `border`                                                       | none       | Short tags: tools, clients, a rank                      |
 
 `rule` is one color per tone: `#2a2b30` on dark, `#cbcac4` on light.

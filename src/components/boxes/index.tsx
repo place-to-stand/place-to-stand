@@ -175,7 +175,7 @@ export function RuledList<T extends ElementType = 'ul'>({
   )
 }
 
-/** A short aside set off by a thick accent-line bar on the left. */
+/** A short aside set off by a 2px accent-line bar (the emphasis stroke) on the left. */
 export function SideNote<T extends ElementType = 'div'>({
   as,
   className,
@@ -185,7 +185,10 @@ export function SideNote<T extends ElementType = 'div'>({
   const Tag = (as ?? 'div') as ElementType
   return (
     <Tag
-      className={cn('border-l-4 border-accent-line pl-grid-1', className)}
+      className={cn(
+        'border-l-(length:--stroke-emphasis) border-accent-line pl-grid-1',
+        className
+      )}
       {...props}
     >
       {children}

@@ -18,7 +18,6 @@ export const FOOTER_GROUPS = [
   {
     label: 'Get started',
     links: [
-      { href: '/contact' as const, label: 'Book a call' },
       { href: '/audit' as const, label: 'Free audit' },
       { href: '/contact' as const, label: 'Contact' },
     ],

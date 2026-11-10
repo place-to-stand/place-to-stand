@@ -472,7 +472,7 @@ export default function DesignPage() {
             </Specimen>
             <Specimen
               names={['SideNote', 'Chip']}
-              note='a 4px accent-line bar (ink on light, lime on dark); one tag style'
+              note='a 2px accent-line bar (ink on light, lime on dark); one tag style'
               tones
             >
               <div className='flex flex-col gap-grid-1'>
