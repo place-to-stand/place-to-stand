@@ -82,6 +82,9 @@ export function ClientsSection({ limit }: { limit?: number } = {}) {
                 {client.title}
               </h2>
               <p className='type-intro'>{client.description}</p>
+              {client.built && (
+                <p className='text-base text-text-muted'>{client.built}</p>
+              )}
               {client.caseStudy && (
                 <Link
                   href={client.caseStudy as Route}
@@ -126,28 +129,30 @@ export function FeaturedCaseStudy() {
         title={cs.headline}
         intro={cs.intro}
       />
-      <Link
-        href={cs.path as Route}
-        tabIndex={-1}
-        aria-hidden
-        className='group grid gap-grid-1 md:grid-cols-2'
-      >
+      <div className='group grid gap-grid-1 md:grid-cols-2'>
         {brands.map((brand, index) => (
-          <div
-            key={brand.title}
-            className='relative aspect-[16/10] overflow-hidden bg-bg-card'
-          >
-            <Image
-              src={brand.image}
-              alt=''
-              fill
-              loading={index === 0 ? 'eager' : undefined}
-              sizes='(min-width: 1440px) 660px, (min-width: 768px) 50vw, 100vw'
-              className='object-cover transition-transform duration-700 group-hover:scale-[1.02]'
-            />
+          <div key={brand.title} className='flex flex-col gap-grid-half'>
+            <Link
+              href={cs.path as Route}
+              tabIndex={-1}
+              aria-hidden
+              className='relative block aspect-[16/10] overflow-hidden bg-bg-card'
+            >
+              <Image
+                src={brand.image}
+                alt=''
+                fill
+                loading={index === 0 ? 'eager' : undefined}
+                sizes='(min-width: 1440px) 660px, (min-width: 768px) 50vw, 100vw'
+                className='object-cover transition-transform duration-700 group-hover:scale-[1.02]'
+              />
+            </Link>
+            <p className='text-base text-text-muted'>
+              <span className='text-text'>{brand.title}.</span> {brand.built}
+            </p>
           </div>
         ))}
-      </Link>
+      </div>
       <ul className='grid gap-grid-1 md:grid-cols-3'>
         {cs.stats.map(stat => (
           <li

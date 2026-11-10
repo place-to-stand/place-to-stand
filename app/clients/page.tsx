@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: 'Clients',
   description:
-    "A selection of the brands we've partnered with to design, build, and ship software that earns its keep.",
+    "Some of the brands we've built software for: Shopify stores, custom marketplaces, and the systems that run them.",
   path: '/clients',
 })
 
@@ -21,7 +21,7 @@ export default function ClientsPage() {
         <PageHeader
           label='Selected Clients'
           title='Who we build for'
-          intro="A selection of the brands we've partnered with to design, build, and ship software that earns its keep."
+          intro="Some of the brands we've built software for."
         />
       </Section>
       {/* Proof first: the case study clients, dark, then the rest of the

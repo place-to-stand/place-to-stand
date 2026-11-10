@@ -6,6 +6,8 @@ export type Client = {
   image?: string
   /** Shown on the /clients page, so only clients with an `image` need one. */
   description?: string
+  /** One plain line on what we built for them, under the description. */
+  built?: string
   /** Brand logo on a transparent ground, for the homepage logo grid. Brands
    * that only publish a dark-on-light mark use their reversed lockup so they
    * read against the dark theme. */
@@ -45,6 +47,8 @@ export function logoToneClass(client: Client): string {
 export const clients: Client[] = [
   {
     title: 'Hot Ones',
+    built:
+      'We built hotones.com in about three months and run it alongside Heatonist.',
     href: 'https://hotones.com',
     image: '/work-hot-ones-site.jpg',
     logo: '/logos/hot-ones.png',
@@ -57,6 +61,7 @@ export const clients: Client[] = [
   },
   {
     title: 'Blake Brown Beauty',
+    built: 'We built its Shopify store.',
     href: 'https://blakebrownbeauty.com',
     image: '/work-blake-brown-beauty-photo.jpg',
     logo: '/logos/blake-brown-beauty.svg',
@@ -66,6 +71,7 @@ export const clients: Client[] = [
   },
   {
     title: 'Florence by Mills Beauty',
+    built: 'We built its Shopify store.',
     href: 'https://florencebymillsbeauty.com',
     image: '/work-florence-by-mills-beauty-photo.jpg',
     logo: '/logos/florence-by-mills-beauty.png',
@@ -76,6 +82,8 @@ export const clients: Client[] = [
   },
   {
     title: 'Heatonist',
+    built:
+      'Four years as their engineering team: storefront rebuilds, sharper search and filters, and a custom app for order routing.',
     href: 'https://heatonist.com',
     image: '/work-heatonist-photo.jpg',
     logo: '/logos/heatonist.svg',
@@ -105,6 +113,8 @@ export const clients: Client[] = [
   },
   {
     title: '9 Point Studios',
+    built:
+      'We built its website, plus the client portal and payments behind it.',
     href: 'https://9pointstudios.com',
     image: '/work-9-point-studios-photo.jpg',
     logo: '/logos/9-point-studios.svg',
@@ -115,6 +125,8 @@ export const clients: Client[] = [
   },
   {
     title: 'GreenWATT USA',
+    built:
+      'We built the marketplace from scratch, with customer intake and payments.',
     href: 'https://www.gtbsolarexchange.com',
     image: '/work-greenwatt-usa-photo.jpg',
     logo: '/logos/greenwatt-usa.png',
@@ -125,6 +137,7 @@ export const clients: Client[] = [
   },
   {
     title: 'Officina del Bere 1397',
+    built: 'We built its Shopify stores.',
     href: 'https://officinadelbere1397.com',
     image: '/work-officina-del-bere-1397-photo.jpg',
     logo: '/logos/officina-del-bere-1397.png',
@@ -142,6 +155,8 @@ export const clients: Client[] = [
   },
   {
     title: 'Jeremy Turner',
+    built:
+      'We designed and built his studio site, plus sites for Echo & Wave and Small Isles.',
     href: 'https://jeremyturnerstudio.com',
     image: '/work-jeremy-turner-photo.jpg',
     logo: '/logos/jeremy-turner.svg',
@@ -152,6 +167,8 @@ export const clients: Client[] = [
   },
   {
     title: 'The Good for Nothings Club',
+    built:
+      "We designed and built the club's website, plus the portal that runs its outreach, applications, RSVPs and monthly close.",
     href: 'https://www.thegoodfornothings.club',
     image: '/work-the-good-for-nothings-club-photo.jpg',
     logo: '/logos/the-good-for-nothings-club.svg',
@@ -161,9 +178,15 @@ export const clients: Client[] = [
   },
   {
     title: 'Up The Wall',
+    built:
+      'We built its fulfillment admin and the custom dropshipping app that feeds it.',
     href: 'https://upthewall.co',
+    // 750px Instagram crop until Up the Wall sends a full-size original.
+    image: '/work-up-the-wall-photo.jpg',
     logo: '/logos/up-the-wall.svg',
     logoScale: 0.8,
+    description:
+      'Made-to-order print fulfillment for Shopify sellers: they design it, Up the Wall prints, packs and ships it.',
   },
   {
     title: 'The Rounds',
