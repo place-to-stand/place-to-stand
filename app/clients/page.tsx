@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ClientsPage() {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <Hero
         variant='page'
         sectionClassName='pb-section'

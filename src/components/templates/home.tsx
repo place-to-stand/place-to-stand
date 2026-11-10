@@ -12,7 +12,7 @@ import { CtaBand } from '@/src/components/sections/cta-band'
 /** The Home page: hero, logos, then light and dark bands of sections and the closing band. */
 export function HomeTemplate() {
   return (
-    <main className='flex-1'>
+    <main id='main' className='flex-1'>
       <Hero variant='home' />
       {/* Dark under the hero for the logos, then alternating bands: light for
           reading sections, dark for proof. Bands pad themselves by the section

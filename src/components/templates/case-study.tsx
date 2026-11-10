@@ -127,7 +127,7 @@ export function CaseStudyTemplate() {
   const [introBefore, introAfter] = cs.intro.split(cs.introLink.text)
 
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <JsonLd data={caseStudyJsonLd(cs)} />
 
       {/* The page owns every gap: the section role between all blocks,

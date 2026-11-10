@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function AuditPage() {
   return (
-    <main className='flex-1 pt-page-start pb-band'>
+    <main id='main' className='flex-1 pt-page-start pb-band'>
       <Section priority>
         <div className='mx-auto w-full max-w-content'>
           <AuditApp />

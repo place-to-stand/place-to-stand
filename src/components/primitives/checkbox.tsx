@@ -16,9 +16,9 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         type='checkbox'
         ref={ref}
         className={cn(
-          'relative mt-0.5 h-5 w-5 shrink-0 appearance-none border border-border bg-bg-card transition-colors',
+          'relative mt-0.5 h-5 w-5 shrink-0 appearance-none border border-control bg-bg-card transition-colors',
           'checked:border-accent checked:bg-accent',
-          'disabled:cursor-not-allowed disabled:bg-bg',
+          'disabled:cursor-not-allowed disabled:border-border disabled:bg-bg',
           // Check mark: a rotated L drawn with borders, shown only when checked.
           "after:absolute after:top-[2px] after:left-[6px] after:hidden after:h-[10px] after:w-[5px] after:rotate-45 after:border-r-2 after:border-b-2 after:border-ink after:content-['']",
           'checked:after:block',

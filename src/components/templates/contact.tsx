@@ -64,7 +64,7 @@ const OPTIONS = [
 /** Contact: three ways in under the hero, the call, the audit and the message form. */
 export function ContactTemplate() {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <Hero
         variant='page'
         sectionClassName='flex flex-col gap-header pb-grid-2'

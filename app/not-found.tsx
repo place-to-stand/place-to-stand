@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className='flex-1 pt-page-start pb-section'>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
       <Hero
         variant='page'
         sectionClassName='flex flex-col gap-header'

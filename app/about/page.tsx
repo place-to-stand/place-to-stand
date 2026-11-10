@@ -32,7 +32,7 @@ const WHAT_I_BUILD: Record<string, string> = {
 
 export default function AboutPage() {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <JsonLd data={teamJsonLd} />
       <Hero
         variant='page'

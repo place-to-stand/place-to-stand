@@ -68,7 +68,7 @@ export default function AuditError({
   }, [error, posthog, reset])
 
   return (
-    <main className='flex-1 pt-page-start pb-section'>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
       <div className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
         <Panel className='max-w-2xl'>
           <span className='bp-label font-mono'>Audit</span>

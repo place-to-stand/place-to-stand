@@ -38,7 +38,7 @@ const eslintConfig = defineConfig([
   // own API, used through Button, Input, Checkbox and friends.
   {
     files: [
-      'src/components/primitives/{button,input,textarea,checkbox,label,toast,use-toast}.tsx',
+      'src/components/primitives/{button,input,textarea,checkbox,select,label,toast,use-toast}.tsx',
     ],
     rules: {
       'design/no-raw-spacing': 'off',
@@ -65,6 +65,7 @@ const eslintConfig = defineConfig([
       'src/components/sections/hero-section.tsx',
       'src/components/sections/portal-flow.tsx',
       'src/components/primitives/heard-from-field.tsx',
+      'src/components/primitives/select.tsx',
       'src/components/sections/audit/**/*.tsx',
       'app/design/**/*.tsx',
     ],

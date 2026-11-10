@@ -26,7 +26,7 @@ const buttonVariants = cva(
           'bg-bg-elevated text-text border border-border hover:bg-bg-card hover:border-border-light',
         ghost: 'bg-transparent text-text-muted hover:text-text',
         outline:
-          'btn-draw overflow-visible bg-transparent border border-border text-text hover:text-accent focus-visible:text-accent',
+          'btn-draw overflow-visible bg-transparent border border-control text-text hover:text-accent focus-visible:text-accent',
       },
       size: {
         sm: 'h-9 px-4',

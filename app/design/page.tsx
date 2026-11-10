@@ -106,7 +106,7 @@ const SPACING = [
 
 export default function DesignPage() {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <Hero
         variant='page'
         sectionClassName='pb-section'
@@ -1091,34 +1091,79 @@ export default function DesignPage() {
             id='a11y'
             label='Guidelines'
             title='Accessibility'
-            when={'Not yet defined.'}
+            when='Approved Nov 10. npm run test:a11y and npm run test:contrast check it on every page.'
           >
-            <p className='max-w-2xl text-base text-text-muted'>
-              Not yet defined. What the site does today:
-            </p>
-            <ul className='flex flex-col gap-grid-half'>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Reading text never under 14px; 12px only for mono labels (lint).
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Every animation has a reduced-motion end state.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                No automated contrast or focus-order checks yet.
-              </li>
-            </ul>
+            <Specimen
+              names={['Input', 'Checkbox', 'Button']}
+              note='control edges at 3:1, next to a soft decorative line'
+            >
+              <div className='grid max-w-2xl gap-grid-1 md:grid-cols-2'>
+                <Input placeholder='Field edge: control' />
+                <Card className='flex items-center p-grid-half text-base text-text-muted'>
+                  Card edge: border (decorative)
+                </Card>
+                <Button variant='outline' className='self-start'>
+                  Outline button
+                </Button>
+              </div>
+            </Specimen>
+            <Specimen names={['SkipLink']} note='the five rules'>
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>1. The bar.</dt>
+                  <dd className='text-base text-text-muted'>
+                    WCAG 2.2 AA on every page.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>2. Focus.</dt>
+                  <dd className='text-base text-text-muted'>
+                    The one focus ring from Interaction states, 3:1 on dark and
+                    light bands.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>3. Skip to content.</dt>
+                  <dd className='text-base text-text-muted'>
+                    The first thing Tab reaches on every page, shown only on
+                    keyboard focus. It jumps past the header to the page’s main
+                    content.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>4. Checked, not hoped.</dt>
+                  <dd className='text-base text-text-muted'>
+                    An axe scan of every page at 390 and 1440 fails on serious
+                    or critical issues, and checks one h1 per page with no
+                    skipped heading levels, no repeated ids and the skip link
+                    (npm run test:a11y).
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>5. Lines that matter.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Decorative lines stay soft. The edge of anything you click
+                    or type into (fields, checkboxes, outline buttons) reaches
+                    3:1, from the control color.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
           </DesignSection>
 
           <DesignSection

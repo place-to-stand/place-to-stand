@@ -23,7 +23,7 @@ export default function BlogPage() {
   const posts = getAllPosts()
 
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <Section priority className='pb-grid-2'>
         {/* What the blog covers on the left, why it exists on the right */}
         <div className='dots-hero grid gap-grid-1 lg:grid-cols-12 lg:gap-x-grid-1'>

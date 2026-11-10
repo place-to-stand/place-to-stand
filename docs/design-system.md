@@ -306,8 +306,15 @@ Lint: `design/no-raw-focus` fails `ring-*` and `outline-*` classes and `disabled
 
 ### Accessibility
 
-Not yet defined. Today: reading text never under 14px (lint); every animation has a reduced-motion end state; no
-automated contrast or focus-order checks.
+Approved Nov 10.
+
+1. **The bar.** WCAG 2.2 AA on every page.
+2. **Focus.** The one focus ring from Interaction states, 3:1 on dark and light bands.
+3. **Skip to content.** `SkipLink` (`primitives/skip-link.tsx`) is the first element in `<body>`: the first Tab stop on every page, shown only on keyboard focus, jumping to `<main id='main'>`. Every page's `<main>` carries that id.
+4. **Checked, not hoped.** `npm run test:a11y` (`scripts/a11y.mjs`) runs axe-core (WCAG 2.2 A and AA) on every page at 390 and 1440 and fails on serious or critical issues. It also fails a page without exactly one h1, a skipped heading level, an id used twice, or a skip link that isn't the first Tab stop.
+5. **Lines that matter.** Decorative lines (`border`, `rule`) stay soft. The edge of anything you click or type into (`Input`, `Textarea`, `Select`, `Checkbox`, the outline button, the audit's check boxes) uses `border-control`, which reaches 3:1 against the page and the field fill on both bands; `npm run test:contrast` requires it. Disabled controls drop back to `border-border`.
+
+Also: reading text never under 14px (lint); every animation has a reduced-motion end state.
 
 ### Voice
 
@@ -326,11 +333,13 @@ How the site sounds (approved Nov 10):
 
 `npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, no raw borders outside the boxes, every text link on a link role, pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`, and each component tier imports only from the tiers below. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
 
-Three more checks run against a production build (`npm run build && npm start`), together as
+Four more checks run against a production build (`npm run build && npm start`), together as
 `npm run test:design`, using the Chrome on the machine:
 
-- `npm run test:contrast`: WCAG AA for text on every background, dark and light bands, plus the focus ring.
-  Decorative lines are reported as advisory.
+- `npm run test:contrast`: WCAG AA for text on every background, dark and light bands, plus the focus ring and
+  control edges (3:1). Decorative lines are reported as advisory.
+- `npm run test:a11y`: axe-core on 15 pages at 390 and 1440, plus headings, repeated ids and the skip link
+  (Guidelines > Accessibility).
 - `npm run test:visual`: full-page screenshots of 15 pages at 390, 768, 1024 and 1440 against the baselines in
   `tests/visual/baselines`, with reduced motion on so every animation sits at its end state (photos and video are
   hidden; their frames stay). `npm run test:visual:update` accepts the current pages.

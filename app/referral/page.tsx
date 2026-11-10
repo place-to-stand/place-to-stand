@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ReferralPage() {
   return (
-    <main className='flex-1 pt-page-start pb-band'>
+    <main id='main' className='flex-1 pt-page-start pb-band'>
       <div className='flex flex-col gap-section pb-edge'>
         {/* Hero */}
         <Section priority>

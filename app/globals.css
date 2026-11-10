@@ -54,6 +54,10 @@
   /* Mid-gray for schematic line-work — readable on card backgrounds,
      where border-light is too dark to see. */
   --color-line: #6e7078;
+  /* The edge of something you can click or type into (fields, checkboxes,
+     outline buttons): 3:1 against the page and cards, where decorative
+     lines (border, rule) stay soft. Same value as line, set per band. */
+  --color-control: #6e7078;
   /* ink: the dark site color in every band. The primary button uses it so
      its text and hover fill stay dark inside light bands too. */
   --color-ink: #0e0f11;
@@ -1295,6 +1299,7 @@ main {
   --color-border-light: #cbcac4;
   --color-rule: #cbcac4;
   --color-line: #8a8c93;
+  --color-control: #8a8c93;
   --grid-dot: #d4d3cd;
   --color-accent-line: #0e0f11;
   --color-accent-subtle: rgba(14, 15, 17, 0.4);

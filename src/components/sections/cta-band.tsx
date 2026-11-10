@@ -10,7 +10,7 @@ const DEFAULT_DESCRIPTION =
 
 /**
  * The closing "Tell us what's slowing you down" callout: a card in a band of blueprint
- * dots that runs down to the footer. Put it last in <main>, right after a
+ * dots that runs down to the footer. Put it last in <main id='main'>, right after a
  * block that ends with pb-edge. Its padding is the band role, so the dots'
  * top rule sits on its top edge: one edge gap under the content above.
  */

@@ -1,7 +1,7 @@
 'use client'
 
 import type { UseFormRegisterReturn } from 'react-hook-form'
-import { Icon, ChevronDown } from '@/src/components/primitives/icon'
+import { Select } from '@/src/components/primitives/select'
 
 import { Input } from '@/src/components/primitives/input'
 import { Label } from '@/src/components/primitives/label'
@@ -25,25 +25,14 @@ export function HeardFromField({
   return (
     <div className='flex flex-col gap-2'>
       <Label htmlFor={id}>How did you hear about us? (optional)</Label>
-      <div className='relative'>
-        <select
-          id={id}
-          {...select}
-          className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition disabled:cursor-not-allowed disabled:text-text-muted'
-        >
-          <option value=''>Choose one</option>
-          {HEARD_FROM_CHOICES.map(choice => (
-            <option key={choice} value={choice}>
-              {choice}
-            </option>
-          ))}
-        </select>
-        <Icon
-          icon={ChevronDown}
-          aria-hidden='true'
-          className='pointer-events-none absolute top-1/2 right-grid-half -translate-y-1/2 text-text-muted'
-        />
-      </div>
+      <Select id={id} {...select}>
+        <option value=''>Choose one</option>
+        {HEARD_FROM_CHOICES.map(choice => (
+          <option key={choice} value={choice}>
+            {choice}
+          </option>
+        ))}
+      </Select>
       {showOther ? (
         <Input
           id={`${id}-other`}

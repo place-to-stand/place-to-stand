@@ -22,7 +22,7 @@ export function ArticleShell({
   location: string
 }) {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <Suspense fallback={<div className='min-h-svh' />}>{children}</Suspense>
       <CtaBand location={location} />
     </main>

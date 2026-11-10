@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
 import { Toaster } from '@/src/components/primitives/use-toast'
 import { Header } from '@/src/components/sections/header'
+import { SkipLink } from '@/src/components/primitives/skip-link'
 import { Footer } from '@/src/components/sections/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           plexMono.variable
         )}
       >
+        <SkipLink />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={webSiteJsonLd} />
         <noscript>

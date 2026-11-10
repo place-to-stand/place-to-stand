@@ -10,7 +10,7 @@ import {
 import { useSearchParams } from 'next/navigation'
 import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Icon, ChevronDown } from '@/src/components/primitives/icon'
+import { Select } from '@/src/components/primitives/select'
 import { usePostHog } from 'posthog-js/react'
 
 import { SectionHeading, Section } from '@/src/components/patterns/section'
@@ -240,28 +240,20 @@ export function ContactSection() {
           </div>
           <div className='flex flex-col gap-2'>
             <Label htmlFor='subject'>Subject</Label>
-            <div className='relative'>
-              <select
-                id='subject'
-                {...form.register('subject')}
-                aria-invalid={!!form.formState.errors.subject}
-                className='flex h-12 w-full appearance-none bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition disabled:cursor-not-allowed disabled:text-text-muted'
-              >
-                <option value='' disabled>
-                  Choose a subject
+            <Select
+              id='subject'
+              {...form.register('subject')}
+              aria-invalid={!!form.formState.errors.subject}
+            >
+              <option value='' disabled>
+                Choose a subject
+              </option>
+              {CONTACT_SUBJECTS.map(subject => (
+                <option key={subject} value={subject}>
+                  {subject}
                 </option>
-                {CONTACT_SUBJECTS.map(subject => (
-                  <option key={subject} value={subject}>
-                    {subject}
-                  </option>
-                ))}
-              </select>
-              <Icon
-                icon={ChevronDown}
-                aria-hidden='true'
-                className='pointer-events-none absolute top-1/2 right-grid-half -translate-y-1/2 text-text-muted'
-              />
-            </div>
+              ))}
+            </Select>
             {form.formState.errors.subject ? (
               <FieldError>{form.formState.errors.subject.message}</FieldError>
             ) : null}
@@ -283,9 +275,9 @@ export function ContactSection() {
             </div>
           ) : null}
           <div className='flex flex-col gap-2'>
-            <Label htmlFor='message'>Message</Label>
+            <Label htmlFor='contact-message'>Message</Label>
             <Textarea
-              id='message'
+              id='contact-message'
               rows={5}
               {...form.register('message')}
               aria-invalid={!!form.formState.errors.message}

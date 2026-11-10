@@ -67,7 +67,7 @@ export function QuestionField({
                     question.type === 'multi' ? 'rounded-none' : 'rounded-dot',
                     selected
                       ? 'border-accent bg-accent text-bg'
-                      : 'border-border-light bg-bg text-transparent'
+                      : 'border-control bg-bg text-transparent'
                   )}
                 >
                   <Icon icon={Check} />

@@ -39,7 +39,7 @@ const stackGroups = [
 
 export default function ProcessPage() {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <Hero
         variant='page'
         sectionClassName='pb-grid-2'

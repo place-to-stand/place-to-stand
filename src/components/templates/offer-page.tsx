@@ -11,7 +11,7 @@ import { Hero } from '@/src/components/sections/hero'
 /** An offer page (Platform): page hero, the offers in detail, ownership, after launch, closing band. */
 export function OfferPageTemplate() {
   return (
-    <main className='flex-1 pt-page-start'>
+    <main id='main' className='flex-1 pt-page-start'>
       <JsonLd data={servicesJsonLd} />
       <Hero
         variant='page'

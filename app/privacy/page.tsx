@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <main className='flex-1 pt-page-start pb-section'>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
       <Section priority>
         <div className='flex flex-col gap-header'>
           <LegalHeader
