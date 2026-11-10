@@ -21,6 +21,7 @@ import {
   Users,
   Workflow,
 } from '@/src/components/primitives/icon'
+import { BookCallButton } from '@/src/components/primitives/cta'
 import {
   FeedbackCard,
   type FeedbackCardProps,
@@ -29,7 +30,6 @@ import {
   EmailCaptureForm,
   LeadDetailsForm,
 } from '@/src/components/sections/audit/lead-forms'
-import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { Button } from '@/src/components/primitives/button'
 import { cn } from '@/src/lib/utils'
 import { PHASE_ORDER, PHASES } from '@/src/lib/audit/phases'
@@ -472,16 +472,10 @@ function CapturedPanel({
             </span>
             . Reply to it any time to start a conversation.
           </p>
-          <Button
-            asChild
-            variant='outline'
-            size='lg'
+          <BookCallButton
+            location='audit-capture-success'
             className='mt-2 px-grid-1'
-          >
-            <TrackedLink href='/contact' location='audit-capture-success'>
-              Book a call now
-            </TrackedLink>
-          </Button>
+          />
         </div>
 
         <div className='min-w-0 border-t border-border pt-grid-1 md:border-t-0 md:border-l md:pt-0 md:pl-grid-2'>

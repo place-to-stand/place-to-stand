@@ -189,8 +189,6 @@ function PipelineStage({
 }) {
   return (
     <div className='group relative w-full'>
-      {/* Corner marks appear only while the graphic is hovered. */}
-      <span className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'></span>
       {/* Mobile crops to one stage in a square window; desktop keeps the wide strip. */}
       <div
         // eslint-disable-next-line design/no-raw-aspect -- a drawing's own box (the portal pipeline), not a photo
