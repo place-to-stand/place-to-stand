@@ -30,6 +30,14 @@ const nextConfig = {
     // 90 is for the case study storefront screenshots, which are mostly text.
     qualities: [75, 90],
   },
+  // The Nov 2026 restructure renamed three pages.
+  async redirects() {
+    return [
+      { source: '/services', destination: '/platform', permanent: true },
+      { source: '/how-we-work', destination: '/process', permanent: true },
+      { source: '/team', destination: '/about', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {

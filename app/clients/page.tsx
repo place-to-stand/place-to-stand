@@ -1,8 +1,11 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { PageHeader, Section } from '@/src/components/layout/section'
+import { Band, PageHeader, Section } from '@/src/components/layout/section'
 import { CtaBand } from '@/src/components/layout/cta-band'
-import { ClientsSection } from '@/src/components/sections/clients-section'
+import {
+  ClientsSection,
+  FeaturedCaseStudy,
+} from '@/src/components/sections/clients-section'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Clients',
@@ -14,16 +17,23 @@ export const metadata: Metadata = pageMetadata({
 export default function ClientsPage() {
   return (
     <main className='flex-1 pt-page-start'>
-      <div className='pb-edge'>
-        <Section priority id='clients' className='flex flex-col gap-header'>
-          <PageHeader
-            label='Selected Clients'
-            title='Who we build for'
-            intro="A selection of the brands we've partnered with to design, build, and ship software that earns its keep."
-          />
+      <Section priority className='pb-section'>
+        <PageHeader
+          label='Selected Clients'
+          title='Who we build for'
+          intro="A selection of the brands we've partnered with to design, build, and ship software that earns its keep."
+        />
+      </Section>
+      {/* Proof first: the case study clients, dark, then the rest of the
+          roster on a light band. */}
+      <Section id='case-study' className='scroll-mt-24 pb-band-pad'>
+        <FeaturedCaseStudy />
+      </Section>
+      <Band tone='light'>
+        <Section id='clients' className='scroll-mt-24'>
           <ClientsSection />
         </Section>
-      </div>
+      </Band>
       <CtaBand location='clients-cta-block' />
     </main>
   )

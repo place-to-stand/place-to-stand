@@ -89,7 +89,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <GoogleTagManager gtmId={GTM_ID} />
       <body
         className={cn(
-          'min-h-screen overflow-x-hidden bg-bg text-text',
+          'min-h-screen overflow-x-clip bg-bg text-text',
           spaceGrotesk.variable,
           plexSans.variable,
           plexMono.variable
@@ -114,7 +114,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AttributionCapture />
         </Suspense>
         <PostHogProvider>
-          <div className='relative flex min-h-screen flex-col overflow-x-hidden'>
+          <div className='relative flex min-h-screen flex-col overflow-x-clip'>
             <Header />
             {children}
             <Footer />

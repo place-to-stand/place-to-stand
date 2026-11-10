@@ -67,7 +67,7 @@ function TrustTrack({
           return (
             <div
               key={`${vendor.name}-${i}`}
-              className='flex w-32 shrink-0 flex-col items-center gap-3 px-4'
+              className='flex w-32 shrink-0 flex-col items-center gap-grid-half px-grid-half'
             >
               {Icon && (
                 <Icon className='h-8 w-8 shrink-0 text-text' aria-hidden />
@@ -104,7 +104,7 @@ export function PhasesSection({
         <div className='flex flex-col gap-intro'>
           <Reveal index={0} className='flex flex-col gap-eyebrow'>
             {showLabel && (
-              <span className='bp-label font-mono'>How We Work</span>
+              <span className='bp-label font-mono'>Stages of Business</span>
             )}
             <h2 className='type-section-title'>
               We meet you at your stage of business.
@@ -119,10 +119,7 @@ export function PhasesSection({
           {/* Mobile-only link: sits with the subtext, above the cards */}
           {showHowWeWorkLink && (
             <Reveal index={2} className='pt-2 md:hidden'>
-              <Link
-                href='/how-we-work'
-                className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
-              >
+              <Link href='/process' className='link-action'>
                 See our full process
                 <span aria-hidden>&rarr;</span>
               </Link>
@@ -138,17 +135,17 @@ export function PhasesSection({
               return (
                 <div
                   key={phase.title}
-                  className='relative flex flex-col gap-4 bg-bg-card p-card'
+                  className='relative flex flex-col gap-grid-half bg-bg-card p-card'
                 >
                   {Graphic && (
-                    <Graphic className='absolute top-4 right-4 h-grid-3 w-grid-3 md:top-6 md:right-6 md:h-grid-2 md:w-grid-2' />
+                    <Graphic className='absolute top-grid-half right-grid-half h-grid-3 w-grid-3 md:top-grid-1 md:right-grid-1 md:h-grid-2 md:w-grid-2' />
                   )}
                   <h3 className='type-card-title'>{phase.title}</h3>
                   <ul className='flex flex-col gap-2 text-base text-text-muted'>
                     {phase.points.map(point => (
                       <li key={point} className='flex gap-2'>
                         <span
-                          className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent'
+                          className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
                           aria-hidden
                         />
                         <span>{point}</span>
@@ -186,7 +183,7 @@ export function PhasesSection({
             </div>
             {/* Auto-scrolling trust banner: one row on desktop, two rows scrolling
                 opposite directions on mobile. Full-bleed to the section edges. */}
-            <div className='-mx-6 flex flex-col gap-4 lg:-mx-12'>
+            <div className='-mx-grid-1 flex flex-col gap-grid-half lg:-mx-grid-2'>
               <TrustTrack />
               <TrustTrack reverse className='md:hidden' />
             </div>
@@ -196,10 +193,7 @@ export function PhasesSection({
         {/* Desktop-only link: stays below the cards */}
         {showHowWeWorkLink && (
           <Reveal index={4} className='hidden md:flex'>
-            <Link
-              href='/how-we-work'
-              className='inline-flex items-center gap-2 font-mono text-xs tracking-wider text-accent uppercase transition-colors hover:text-accent/80'
-            >
+            <Link href='/process' className='link-action'>
               See our full process
               <span aria-hidden>&rarr;</span>
             </Link>

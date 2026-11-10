@@ -7,78 +7,79 @@ export type Service = {
   features: string[]
 }
 
+/**
+ * The services list used by the audit page and the Services structured data.
+ * It mirrors the two offers and the after-launch services in
+ * src/lib/offers.ts; keep the two in step.
+ */
 export const services: Service[] = [
   {
-    slug: 'software-development',
-    title: 'Software Development',
-    tagline: 'Applications built for scale',
+    slug: 'run-your-business',
+    title: 'Run Your Business',
+    tagline: 'One system for the work behind the scenes',
     description:
-      'End-to-end software development from architecture to deployment. We build web applications, APIs, and internal tools using modern frameworks and cloud infrastructure.',
-    icon: 'Code2',
-    features: [
-      'Full-stack web, desktop, and mobile applications',
-      'API design and development',
-      'Database architecture',
-      'Cloud infrastructure (AWS, Vercel)',
-      'CI/CD pipeline setup',
-    ],
-  },
-  {
-    slug: 'workflow-systems',
-    title: 'Workflow Systems',
-    tagline: 'Systematize operations, eliminate bottlenecks',
-    description:
-      'Custom workflow systems that connect your tools, automate handoffs, and give you visibility into every process. Built around how your team actually works.',
+      'A shared workspace for your team, CRM, workflows and automations, on one source of data you own. It stands in for the stack of subscriptions and spreadsheets you juggle today.',
     icon: 'GitBranch',
     features: [
-      'Custom portal development',
-      'Task tracking and management systems',
-      'Approval and review workflows',
-      'Cross-platform integrations',
-      'Real-time dashboards and reporting',
+      'Team workspace: clients, projects, tasks and time',
+      'CRM with every lead, contact and company',
+      'Workflows your team repeats, done the same way',
+      'Automations for reports, reminders and syncing tools',
+      'Client portal and live reports',
     ],
   },
   {
-    slug: 'data-intelligence',
-    title: 'Data Intelligence',
-    tagline: 'Turn raw data into strategic advantage',
+    slug: 'sell-online',
+    title: 'Sell Online',
+    tagline: "Stores that do what Shopify alone can't",
     description:
-      'We build data pipelines, analytics dashboards, and AI-powered insights that help you make better decisions faster. From data collection to actionable intelligence.',
-    icon: 'BarChart3',
+      'Shopify and headless storefronts, custom marketplaces, Shopify apps, payments, fulfillment and inventory, built for brands like Hot Ones and Heatonist.',
+    icon: 'Code2',
     features: [
-      'Data pipeline architecture',
-      'Analytics dashboard development',
-      'Business intelligence reporting',
-      'Predictive modeling',
-      'Data warehouse design',
-    ],
-  },
-  {
-    slug: 'strategic-advisory',
-    title: 'Strategic Advisory',
-    tagline: 'Expert guidance for digital transformation',
-    description:
-      'Fractional CTO and strategic advisory services for businesses navigating digital transformation. We help you identify the highest-impact opportunities and build a roadmap to get there.',
-    icon: 'Compass',
-    features: [
-      'Digital transformation roadmapping',
-      'Technology stack evaluation',
-      'AI readiness assessment',
-      'Process optimization consulting',
-      'Vendor evaluation and selection',
+      'Shopify stores and headless storefronts',
+      'Custom marketplaces you own',
+      'Shopify apps and functions',
+      'Payments through Stripe',
+      'Fulfillment and inventory across channels',
     ],
   },
   {
     slug: 'managed-services',
     title: 'Managed Services',
-    tagline: 'Long-term support for your IT infrastructure',
+    tagline: 'We keep it running after launch',
     description:
-      'Ongoing support, monitoring, and maintenance that keeps your software running long after launch. We handle uptime, security, and updates so your team can stay focused on the business instead of babysitting infrastructure.',
+      'Security updates, error and speed monitoring, analytics and SEO reports, data checks and a weekly email, with a shared channel in Slack, Teams, Google Chat or Discord.',
     icon: 'ServerCog',
     features: [
-      'Uptime guarantees',
-      'Security updates & monitoring',
-      'Contingency planning',
+      'Security updates and monitoring',
+      'Analytics and SEO reports',
+      'Data checks and a weekly email',
+      'A shared channel where your team already works',
+    ],
+  },
+  {
+    slug: 'technical-consulting',
+    title: 'Technical Consulting',
+    tagline: 'What to build, buy or hire for',
+    description:
+      'Advice from people who build every day: which tools to keep, what to build, and who to hire.',
+    icon: 'Compass',
+    features: [
+      'Stack and vendor reviews',
+      'Build, buy or hire decisions',
+      'Roadmaps sized to your stage',
+    ],
+  },
+  {
+    slug: 'training',
+    title: 'Training',
+    tagline: 'Your team on AI tools, on real work',
+    description:
+      'We teach your team to use AI tools on their own real tasks while we build, so they move faster from day one.',
+    icon: 'BarChart3',
+    features: [
+      'Small groups, real tasks from their own jobs',
+      'Starts while the build happens',
     ],
   },
 ]

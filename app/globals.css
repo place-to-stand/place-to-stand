@@ -25,13 +25,20 @@
      rings, link underlines) and accent itself (strong: active states, corner
      marks, highlighted panels). */
   --color-accent-subtle: rgba(181, 245, 66, 0.4);
+  /* Lines, bullets, underlines and focus rings that should read as the
+     accent: lime on dark bands, ink on light ones (.theme-light), where lime
+     only ever appears as a fill behind dark text. */
+  --color-accent-line: #b5f542;
   --color-accent-secondary: #b4b4b4;
+  /* Form errors. */
+  --color-danger: #f87171;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
   /* Mid-grey for schematic line-work — readable on card backgrounds,
      where border-light is too dark to see. */
   --color-line: #6e7078;
-  /* Old tokens kept as aliases for backward compatibility */
+  /* ink: the dark site colour in every band. The primary button uses it so
+     its text and hover fill stay dark inside light bands too. */
   --color-ink: #0e0f11;
   --color-ink-light: #e8e6e3;
 
@@ -53,6 +60,7 @@
   --spacing-page-top: var(--space-page-top);
   --spacing-page-start: calc(var(--nav-height) + var(--space-page-top));
   --spacing-section: var(--space-section);
+  --spacing-band-pad: calc(var(--space-section) / 2);
   --spacing-edge: var(--space-edge);
   --spacing-header: var(--space-header);
   --spacing-stack: var(--space-stack);
@@ -153,6 +161,19 @@
     font-size: 3rem; /* 48 */
   }
 }
+/* Titles of list items and big cards: offer names, process steps, blog
+   rows, the phone menu. Between the section and card titles. */
+@utility type-item-title {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.5rem; /* 24 */
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 1.875rem; /* 30 */
+  }
+}
 @utility type-card-title {
   font-family: var(--font-space-grotesk);
   font-size: 1.25rem; /* 20 */
@@ -165,6 +186,40 @@
   font-size: 1rem; /* 16 */
   line-height: 1.375;
   color: var(--color-text-muted);
+  @media (width >= 48rem) {
+    font-size: 1.125rem; /* 18 */
+  }
+}
+/* Big numbers in stat tiles and the case study's "At a glance". */
+@utility type-stat {
+  font-family: var(--font-space-grotesk);
+  font-size: 3rem; /* 48 */
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  @media (width >= 48rem) {
+    font-size: 3.75rem; /* 60 */
+  }
+}
+/* A pull quote. */
+@utility type-quote {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.875rem; /* 30 */
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 3rem; /* 48 */
+  }
+}
+/* Reading text one step up, in the text colour: blog bodies, quotes,
+   statements. type-intro is the same size, muted. */
+@utility type-lead {
+  font-size: 1rem; /* 16 */
+  line-height: 1.5;
+  color: var(--color-text);
   @media (width >= 48rem) {
     font-size: 1.125rem; /* 18 */
   }
@@ -331,16 +386,20 @@ main {
   }
 }
 .sheet-panel[data-state='open'] {
-  animation: sheet-in 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation:
+    sheet-in 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    overlay-in 220ms ease-out;
 }
 .sheet-panel[data-state='closed'] {
-  animation: sheet-out 250ms cubic-bezier(0.7, 0, 0.84, 0);
+  animation:
+    sheet-out 180ms cubic-bezier(0.7, 0, 0.84, 0),
+    overlay-out 180ms ease-in;
 }
 .sheet-overlay[data-state='open'] {
-  animation: overlay-in 350ms ease-out;
+  animation: overlay-in 220ms ease-out;
 }
 .sheet-overlay[data-state='closed'] {
-  animation: overlay-out 250ms ease-in;
+  animation: overlay-out 180ms ease-in;
 }
 @media (prefers-reduced-motion: reduce) {
   .sheet-panel,
@@ -1022,6 +1081,9 @@ main {
   /* inline-block (not flex) so text-box can trim it to its letters, like
      headings, so the gaps around a label measure to the visible caps. */
   display: inline-block;
+  /* Never stretch to the column: in a light band the label carries a lime
+     marker that should hug the text. */
+  width: fit-content;
   text-box: trim-both cap alphabetic;
 }
 
@@ -1167,5 +1229,284 @@ main {
   }
   .logo-swap-line {
     display: none;
+  }
+}
+
+/* ─── Light sections ───
+   The site mixes dark and light bands: the hero, client proof and closing
+   callout stay dark; reading sections sit on a light band. .theme-light
+   redefines the colour tokens for everything inside it, so every utility
+   (text-text, bg-bg-card, border-border, …) flips without per-component
+   variants. Wrap sections in <Band tone='light'> rather than using the class
+   directly. Lime can't carry text on a light background, so inside a light
+   band the accent stays lime only as a fill: labels get a lime marker with
+   black text, and accent-coloured text (links, arrows) turns black with a
+   lime underline. No second colour. */
+.theme-light {
+  color-scheme: light;
+  --color-bg: #f4f3ef;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #ebeae5;
+  --color-bg-panel: rgba(255, 255, 255, 0.92);
+  --color-text: #0e0f11;
+  --color-text-muted: #55565c;
+  --color-accent-secondary: #55565c;
+  --color-border: #dddcd6;
+  --color-border-light: #cbcac4;
+  --color-line: #8a8c93;
+  --grid-dot: #d4d3cd;
+  --color-accent-line: #0e0f11;
+  --color-accent-subtle: rgba(14, 15, 17, 0.4);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+.theme-light .bp-label {
+  background-color: var(--color-accent);
+  color: #0e0f11;
+  padding: 6px 8px;
+}
+.theme-light .text-accent {
+  color: var(--color-text);
+}
+.theme-light .bg-accent-muted {
+  background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+/* Hover timing, shared by every hover on the site: buttons (primary fill,
+   secondary outline) use --hover-dur; links use the shorter --link-dur. One
+   easing for all. The logo spin has its own --spin-dur below. */
+:root {
+  --hover-dur: 250ms;
+  --link-dur: 180ms;
+  --hover-ease: ease-out;
+}
+
+/* Links come in three roles, and every text link on the site is one of
+   them (see docs/design-system.md):
+   - .link-nav: header, footer and fine-print navigation. Mono caps 12px,
+     muted; on hover the text lightens and an accent bar slides in under it
+     from the left. The current page keeps the bar.
+   - .link-action: a standalone link that does something ("See the platform
+     ->", "Read the case study ->", "Visit site", "Take the free audit").
+     Mono caps 12px in the text colour, no line at rest (the caps and arrow
+     mark it as a link), the same sliding bar as nav links on hover, and the
+     arrow nudges 3px right. Never wraps, so an arrow can't drop onto its
+     own line.
+   - .link-inline: a link inside running text. Plain text-colour words with a
+     thin, quiet underline (the text colour at 35%) that turns to the accent
+     line on hover. It wraps with the sentence, so no sliding bar.
+   The accent is --color-accent-line: lime on dark bands, ink on light ones.
+   The slide uses the shared link timing. */
+@layer components {
+  .link-nav,
+  .link-action {
+    position: relative;
+    font-family: var(--font-plex-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color var(--link-dur) var(--hover-ease);
+  }
+  .link-nav {
+    color: var(--color-text-muted);
+  }
+  .link-action {
+    display: inline-flex;
+    width: fit-content;
+    align-items: baseline;
+    gap: 0.5em;
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--color-text);
+  }
+  /* The arrow nudges right as the bar slides in. */
+  .link-action > [aria-hidden] {
+    transition: transform var(--link-dur) var(--hover-ease);
+  }
+  .link-action:hover > [aria-hidden],
+  .link-action:focus-visible > [aria-hidden] {
+    transform: translateX(3px);
+  }
+  .link-nav::after,
+  .link-action::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background-color: var(--color-accent-line);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--link-dur) var(--hover-ease);
+  }
+  .link-nav:hover,
+  .link-nav:focus-visible,
+  .link-nav[aria-current='page'] {
+    color: var(--color-text);
+  }
+  .link-nav:hover::after,
+  .link-nav:focus-visible::after,
+  .link-nav[aria-current='page']::after,
+  .link-action:hover::after,
+  .link-action:focus-visible::after {
+    transform: scaleX(1);
+  }
+  /* Nav link, icon variant: a 24px hit area around a 14px glyph (about the
+     visual weight of 12px mono caps), muted, accent line on hover. */
+  .link-icon {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transition: color var(--link-dur) var(--hover-ease);
+  }
+  .link-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+  .link-icon:hover,
+  .link-icon:focus-visible {
+    color: var(--color-accent-line);
+  }
+  .link-inline {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color var(--link-dur) var(--hover-ease);
+  }
+  .link-inline:hover,
+  .link-inline:focus-visible {
+    text-decoration-color: var(--color-accent-line);
+    text-decoration-thickness: 2px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-nav,
+  .link-action,
+  .link-nav::after,
+  .link-action::after,
+  .link-action > [aria-hidden],
+  .link-icon {
+    transition: none;
+  }
+}
+
+/* Outline (secondary) buttons: on hover or keyboard focus a line in the
+   accent-line colour draws around the button as one continuous stroke,
+   starting at the top-left corner: top edge left to right, down the right
+   side, bottom edge right to left, up the left side. One registered
+   property, --draw, runs 0 to 1 with a single easing (the shared hover
+   timing), and each edge maps its own slice of that run, so there is no
+   pause at the corners. The slices follow a typical 240x48 button (top and
+   bottom ~42% each, the sides ~8%), so the line moves at an even speed. It
+   retracts along the same path. ::before draws top + right, ::after bottom +
+   left, 2px outside the faint resting border, which stays underneath. */
+@property --draw {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+.btn-draw {
+  position: relative;
+  --draw: 0;
+  transition:
+    --draw var(--hover-dur) var(--hover-ease),
+    color var(--link-dur) var(--hover-ease);
+}
+.btn-draw:hover,
+.btn-draw:focus-visible {
+  --draw: 1;
+}
+.btn-draw::before,
+.btn-draw::after {
+  content: '';
+  position: absolute;
+  border: 0 solid var(--color-accent-line);
+  pointer-events: none;
+}
+.btn-draw::before {
+  left: -2px;
+  top: -2px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+  width: calc(clamp(0, var(--draw) / 0.4167, 1) * (100% + 4px));
+  height: calc(
+    2px + clamp(0, (var(--draw) - 0.4167) / 0.0833, 1) * (100% + 2px)
+  );
+  opacity: clamp(0, var(--draw) * 1000, 1);
+}
+.btn-draw::after {
+  right: -2px;
+  bottom: -2px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+  width: calc(clamp(0, (var(--draw) - 0.5) / 0.4167, 1) * (100% + 4px));
+  height: calc(
+    2px + clamp(0, (var(--draw) - 0.9167) / 0.0833, 1) * (100% + 2px)
+  );
+  opacity: clamp(0, (var(--draw) - 0.5) * 1000, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-draw {
+    transition: none;
+  }
+}
+
+/* Logo spin (LogoMark adds .is-spinning when the pointer enters the logo
+   or it gets keyboard focus, and clears it when the spin ends). The inner
+   square turns a half turn clockwise and the outline a half turn
+   anticlockwise, both starting together so the middle mirrors the outline
+   frame for frame. A
+   square looks the same after a half turn, so nothing visibly jumps when
+   the class comes off. Each overshoots by 12deg, then settles back (550ms,
+   ease-out into the overshoot and ease-in-out back). The inner square sits
+   inside the outline, so its own keyframes add the outline's turn back in:
+   +360deg against the outline's -180deg shows as a net clockwise half
+   turn. */
+:root {
+  --spin-dur: 550ms;
+}
+@keyframes logo-spin-outer {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: ease-out;
+  }
+  70% {
+    transform: rotate(-192deg);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+@keyframes logo-spin-inner {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: ease-out;
+  }
+  70% {
+    transform: rotate(384deg);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.logo-mark.is-spinning {
+  animation: logo-spin-outer var(--spin-dur) both;
+}
+.logo-mark.is-spinning .logo-mark-inner {
+  animation: logo-spin-inner var(--spin-dur) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark.is-spinning,
+  .logo-mark.is-spinning .logo-mark-inner {
+    animation: none;
   }
 }

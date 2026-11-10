@@ -39,9 +39,9 @@ export default function FieldNotesPage() {
                   href={note.url}
                   target={external ? '_blank' : undefined}
                   rel={external ? 'noopener noreferrer' : undefined}
-                  className='group grid gap-4 py-grid-2 no-underline md:grid-cols-12 md:gap-x-grid-1'
+                  className='group grid gap-grid-half py-grid-2 no-underline md:grid-cols-12 md:gap-x-grid-1'
                 >
-                  <div className='flex items-center gap-4 font-mono text-sm text-text-muted md:col-span-3 md:flex-col md:items-start md:gap-2 md:pt-1.5'>
+                  <div className='flex items-center gap-grid-half font-mono text-sm text-text-muted md:col-span-3 md:flex-col md:items-start md:gap-2 md:pt-1.5'>
                     <time dateTime={note.date}>
                       {formatNoteDate(note.date)}
                     </time>
@@ -49,7 +49,7 @@ export default function FieldNotesPage() {
                       <span className='text-accent uppercase'>Open Source</span>
                     )}
                   </div>
-                  <div className='flex flex-col gap-3 md:col-span-6'>
+                  <div className='flex flex-col gap-grid-half md:col-span-6'>
                     <h2 className='type-section-title uppercase transition-colors group-hover:text-accent'>
                       {note.title}
                     </h2>

@@ -64,3 +64,59 @@ export function PageHeader({
     </div>
   )
 }
+
+/**
+ * A full-width band of sections in one tone. Light bands hold the reading
+ * sections; dark bands hold proof and set pieces. A band pads itself by half
+ * the section role (band-pad) at top and bottom, so two bands meeting put
+ * exactly one section gap between their content, the same as two sections
+ * inside one band, with the tone change halfway.
+ */
+export function Band({
+  tone,
+  className,
+  children,
+}: {
+  tone: 'light' | 'dark'
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <div
+      className={cn(
+        'flex flex-col gap-section py-band-pad',
+        tone === 'light' && 'theme-light',
+        className
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+/**
+ * A section's heading group: label, h2 and an optional intro, with the
+ * eyebrow and intro roles between them. The space below is the section's
+ * job (usually gap-stack).
+ */
+export function SectionHeading({
+  label,
+  title,
+  intro,
+  className,
+}: {
+  label: ReactNode
+  title: ReactNode
+  intro?: ReactNode
+  className?: string
+}) {
+  return (
+    <div className={cn('flex flex-col gap-intro', className)}>
+      <div className='flex flex-col items-start gap-eyebrow'>
+        <span className='bp-label font-mono'>{label}</span>
+        <h2 className='max-w-3xl type-section-title text-balance'>{title}</h2>
+      </div>
+      {intro && <p className='max-w-2xl type-intro text-balance'>{intro}</p>}
+    </div>
+  )
+}
