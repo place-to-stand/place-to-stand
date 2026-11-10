@@ -121,16 +121,16 @@ function FlowRail({
   const hasNext = active < N - 1
   return (
     <div className='relative flex'>
-      {/* base line, spanning first→last station centres */}
+      {/* base line, spanning first→last station centers */}
       <div
-        // eslint-disable-next-line design/no-raw-spacing -- centres the connector line on the 12px node
+        // eslint-disable-next-line design/no-raw-spacing -- centers the connector line on the 12px node
         className='absolute top-[6px] h-px bg-border-light'
         style={{ left: `${50 / N}%`, right: `${50 / N}%` }}
         aria-hidden
       />
       {/* completed segments, locked in instantly as each step lands */}
       <div
-        // eslint-disable-next-line design/no-raw-spacing -- centres the connector line on the 12px node
+        // eslint-disable-next-line design/no-raw-spacing -- centers the connector line on the 12px node
         className='absolute top-[6px] h-px bg-line'
         style={{ left: `${50 / N}%`, width: `${active * (100 / N)}%` }}
         aria-hidden
@@ -140,7 +140,7 @@ function FlowRail({
       <div
         key={`fill-${active}`}
         onAnimationEnd={onAdvance}
-        // eslint-disable-next-line design/no-raw-spacing -- centres the connector line on the 12px node
+        // eslint-disable-next-line design/no-raw-spacing -- centers the connector line on the 12px node
         className='absolute top-[6px] h-px origin-left bg-line'
         style={{
           left: hasNext ? `${(0.5 + active) * (100 / N)}%` : '0%',
@@ -313,7 +313,7 @@ export function PortalFlow() {
           onTouchCancel={onTouchEnd}
           className='flex flex-col gap-grid-1'
         >
-          {/* Reserve height (and centre within it) so the taller/shorter captions
+          {/* Reserve height (and center within it) so the taller/shorter captions
               per stage never nudge the rail and graphic below them. */}
           <div
             key={`caption-${active}`}

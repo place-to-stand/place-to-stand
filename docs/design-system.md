@@ -1,6 +1,6 @@
 # Design system
 
-Every structural space, text size, colour and accent line on the site comes from a named role. Pages never pick
+Every structural space, text size, color and accent line on the site comes from a named role. Pages never pick
 raw numbers for these. To change how the site looks, change a role's value in `app/globals.css`, and every page
 follows.
 
@@ -44,7 +44,7 @@ that is not one of these roles.
 
 ## Type roles
 
-Utilities defined with `@utility` in `app/globals.css`. Size, weight, leading, tracking and colour come with the
+Utilities defined with `@utility` in `app/globals.css`. Size, weight, leading, tracking and color come with the
 role; add only layout classes (margins, max-width, `text-balance`, `uppercase`).
 
 | Role                 | Size (phone / tablet up) | Weight | Use                                                               |
@@ -53,7 +53,7 @@ role; add only layout classes (margins, max-width, `text-balance`, `uppercase`).
 | `type-section-title` | 36 / 48                  | Bold   | Section and callout headings                                      |
 | `type-card-title`    | 20                       | Semi   | Card, panel, step and list-item headings                          |
 | `type-intro`         | 16 / 18, muted           | Normal | The paragraph under a page/section title                          |
-| `type-lead`          | 16 / 18, text colour     | Normal | Reading text one step up: blog bodies, statements, quotes in copy |
+| `type-lead`          | 16 / 18, text color      | Normal | Reading text one step up: blog bodies, statements, quotes in copy |
 | `type-stat`          | 48 / 60                  | Bold   | Big numbers in stat tiles                                         |
 | `type-quote`         | 30 / 48                  | Semi   | Pull quotes                                                       |
 | body (`text-base`)   | 16                       | Normal | Reading text                                                      |
@@ -64,7 +64,7 @@ The home hero headline is the one exception: it is sized to the window.
 
 Type floor (from `CLAUDE.md`): reading text is 16px, never below 14px; 12px only for short mono lines.
 
-## Colours
+## Colors
 
 | Token              | Value                                     | Use                                                |
 | ------------------ | ----------------------------------------- | -------------------------------------------------- |
@@ -83,25 +83,25 @@ Type floor (from `CLAUDE.md`): reading text is 16px, never below 14px; 12px only
 | `border-light`     | `#3a3b40`                                 | Lighter dividers                                   |
 | `line`             | `#6e7078`                                 | Schematic line-work in drawings                    |
 
-No gradients; solid colours only.
+No gradients; solid colors only.
 
 ### Light bands
 
 Pages mix dark and light bands. Wrap reading sections in `<Band tone='light'>` (and proof or set pieces in
-`<Band tone='dark'>`). The light band redefines the colour tokens above (`bg` #f4f3ef, `bg-card` white, `text`
+`<Band tone='dark'>`). The light band redefines the color tokens above (`bg` #f4f3ef, `bg-card` white, `text`
 #0e0f11, `text-muted` #55565c, light borders), so components need no light variants. Lime never carries text on
-light: labels get a lime marker with black text, and accent-coloured text turns black with a lime underline. A
+light: labels get a lime marker with black text, and accent-colored text turns black with a lime underline. A
 band pads itself by the `section` role top and bottom.
 
 ### Links
 
 Every text link is one of three roles, defined once in `app/globals.css`:
 
-| Role        | Class                                        | Looks like                                                                                                                                   | Use                                                                                                    |
-| ----------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Nav link    | `link-nav`                                   | Mono caps 12px, muted; on hover the text lightens and an accent bar slides in under it; the current page keeps the bar                       | Header, footer, fine print, phone menu Login                                                           |
-| Action link | `link-action` (or `ArrowLink` / `AuditLink`) | Mono caps 12px in the text colour, no line at rest, the same sliding bar as nav links on hover with the arrow nudging 3px right, never wraps | Standalone links: "See the platform →", "Read the case study →", "Visit site ↗", "Take the free audit" |
-| Inline link | `link-inline`                                | Text-colour words with a thin, quiet underline (text colour at 35%), turning to the accent line on hover; wraps with the sentence            | Links inside paragraphs: body copy, blog posts, legal pages, fine print under forms                    |
+| Role        | Class                                        | Looks like                                                                                                                                  | Use                                                                                                    |
+| ----------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Nav link    | `link-nav`                                   | Mono caps 12px, muted; on hover the text lightens and an accent bar slides in under it; the current page keeps the bar                      | Header, footer, fine print, phone menu Login                                                           |
+| Action link | `link-action` (or `ArrowLink` / `AuditLink`) | Mono caps 12px in the text color, no line at rest, the same sliding bar as nav links on hover with the arrow nudging 3px right, never wraps | Standalone links: "See the platform →", "Read the case study →", "Visit site ↗", "Take the free audit" |
+| Inline link | `link-inline`                                | Text-color words with a thin, quiet underline (text color at 35%), turning to the accent line on hover; wraps with the sentence             | Links inside paragraphs: body copy, blog posts, legal pages, fine print under forms                    |
 
 Profile icons (LinkedIn, GitHub, Clutch, X, Instagram) are the nav link role's icon variant: `SocialIcon` with the `link-icon` class, a 14px monochrome glyph in a 24px hit area, muted, turning to the accent line on hover. Used on the About founder rows and the footer bar.
 
@@ -158,7 +158,7 @@ Every box on the site is one of the components in `src/components/layout/boxes.t
 | `SideNote`             | 4px left bar in `accent-line`                      | none       | A short aside: the billing promise, the proof line      |
 | `Chip`                 | 1px `border`                                       | none       | Short tags: tools, clients, a rank                      |
 
-`rule` is one colour per tone: `#2a2b30` on dark, `#cbcac4` on light.
+`rule` is one color per tone: `#2a2b30` on dark, `#cbcac4` on light.
 
 ## Calls to action
 
@@ -166,24 +166,24 @@ One shared definition in `src/components/layout/cta.tsx`, so every place matches
 
 - **`BookCallButton`**: the lime "Book a call" button. Goes to `/contact`; only the Contact page opens the calendar (`toCalendar`). Header uses the small size, everywhere else large.
 - **`AuditLink`**: the "Take the free audit" action link, never a button.
-- **`BookCallGroup`**: the button with "or Take the free audit" centred under it (24px gap, 12px mono caps, "or" muted). Used in the hero and every closing band.
+- **`BookCallGroup`**: the button with "or Take the free audit" centered under it (24px gap, 12px mono caps, "or" muted). Used in the hero and every closing band.
 
 ## Motion
 
 All hovers read three settings in `app/globals.css`:
 
-| Setting        | Value    | Used by                                                      |
-| -------------- | -------- | ------------------------------------------------------------ |
-| `--link-dur`   | 180ms    | Nav, action and inline links, icon links, button text colour |
-| `--hover-dur`  | 250ms    | Primary button fill slide, secondary button outline draw     |
-| `--hover-ease` | ease-out | All of the above                                             |
-| `--spin-dur`   | 550ms    | Logo spin (overshoot easing, plays once per hover)           |
+| Setting        | Value    | Used by                                                     |
+| -------------- | -------- | ----------------------------------------------------------- |
+| `--link-dur`   | 180ms    | Nav, action and inline links, icon links, button text color |
+| `--hover-dur`  | 250ms    | Primary button fill slide, secondary button outline draw    |
+| `--hover-ease` | ease-out | All of the above                                            |
+| `--spin-dur`   | 550ms    | Logo spin (overshoot easing, plays once per hover)          |
 
 Everything respects `prefers-reduced-motion`.
 
 ## Drawings
 
-Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px) for line-work and `--stroke-emphasis` (2px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` colour, lime only on the result.
+Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px) for line-work and `--stroke-emphasis` (2px) for what the eye should land on. Round caps, square corners, schematic lines in the `line` color, lime only on the result.
 
 ## Logo
 
@@ -191,6 +191,6 @@ Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px
 
 ## Checks
 
-`npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colours, every text link on a link role, and pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
+`npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, every text link on a link role, and pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
 
 See every token and component live at `/design`. It is public so it can be shared with clients, but it is `noindex` and left out of the sitemap and `llms.txt`. It is deliberately not disallowed in `robots.txt`: crawlers have to fetch the page to see the noindex.

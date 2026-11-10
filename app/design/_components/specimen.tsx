@@ -55,8 +55,8 @@ export function CopyName({ name }: { name: string }) {
 }
 
 /**
- * A labelled stage. `tones` shows the same children on a dark and a light
- * band side by side, so section-aware colours can be checked at a glance.
+ * A labeled stage. `tones` shows the same children on a dark and a light
+ * band side by side, so section-aware colors can be checked at a glance.
  */
 export function Specimen({
   names,

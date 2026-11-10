@@ -6,7 +6,7 @@ import { DESIGN_SECTION_GROUPS } from './sections'
 
 /** Sticky left index with scroll-spy: the section in view is underlined. */
 export function DesignIndex() {
-  const [active, setActive] = useState<string>('colour')
+  const [active, setActive] = useState<string>('color')
 
   useEffect(() => {
     const sections = [

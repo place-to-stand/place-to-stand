@@ -3,7 +3,7 @@ import { extendTailwindMerge } from 'tailwind-merge'
 
 /**
  * The spacing names from the @theme block in app/globals.css. tailwind-merge
- * only resolves conflicts between classes it recognises, so without these a
+ * only resolves conflicts between classes it recognizes, so without these a
  * base `py-grid-3` and a later `py-0` both stayed on the element and the CSS
  * order, not the caller, decided which won.
  */

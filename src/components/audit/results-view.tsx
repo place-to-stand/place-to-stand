@@ -156,12 +156,12 @@ export function ResultsView({
         <ol className='relative mt-grid-1 flex items-start justify-between'>
           {/* connector track + progress fill */}
           <div
-            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the centre of the 22px step dot
+            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
             className='absolute top-[11px] right-0 left-0 h-px bg-border'
             aria-hidden
           />
           <div
-            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the centre of the 22px step dot
+            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
             className='absolute top-[11px] left-0 h-px bg-border-light'
             style={{ width: `${progressPct}%` }}
             aria-hidden

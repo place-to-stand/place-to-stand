@@ -80,8 +80,8 @@ export function AuditLink({
 
 /**
  * The primary call to action as one unit: the "Book a call" button with
- * "or Take the free audit" centred under it. Used wherever the two appear
- * together (hero, closing bands), so the audit line always sits centred on
+ * "or Take the free audit" centered under it. Used wherever the two appear
+ * together (hero, closing bands), so the audit line always sits centered on
  * the button itself, even when another button stands beside it.
  */
 export function BookCallGroup({
@@ -103,9 +103,9 @@ export function BookCallGroup({
         {...data}
       />
       {/* One label style for the whole line: mono caps at 12px under the
-          button text, "or" muted and the link in the normal link colour. The
+          button text, "or" muted and the link in the normal link color. The
           negative right margin cancels the letter-spacing after the last
-          letter, so the line centres on its ink, not its box. */}
+          letter, so the line centers on its ink, not its box. */}
       <p className='-mr-[0.1em] font-mono text-xs tracking-[0.1em] text-text-muted uppercase'>
         or <AuditLink location={location} />
       </p>

@@ -15,7 +15,7 @@ const ROW_LINK_CLASS =
  * beside it. On large screens the image takes two thirds of the width and
  * switches sides every row; below that the image sits on top. No cards, no
  * borders: large gaps separate the rows. Every photo is cut to the same 16:10
- * frame from its centre, so they match whatever size the file is. A client
+ * frame from its center, so they match whatever size the file is. A client
  * with a case study opens it from the photo, with its own site linked below. */
 export function ClientsSection({ limit }: { limit?: number } = {}) {
   // Clients with a case study (Hot Ones, Heatonist) lead the page in

@@ -2,9 +2,9 @@ import type { ReactElement } from 'react'
 
 /**
  * Simplified, monochrome SaaS logo marks for the hero's "sprawl" side. Authored
- * on a 24x24 grid using currentColor, so a parent group sets the (muted grey)
- * colour and a transform scales them into the scattered field. Recognisable by
- * silhouette; deliberately not brand-coloured, to stay within the site palette
+ * on a 24x24 grid using currentColor, so a parent group sets the (muted gray)
+ * color and a transform scales them into the scattered field. Recognizable by
+ * silhouette; deliberately not brand-colored, to stay within the site palette
  * and let the single accent app read as the resolution.
  */
 

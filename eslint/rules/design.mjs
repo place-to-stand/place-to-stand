@@ -110,12 +110,12 @@ export const noRawTextSize = classRule({
     /^text-\[\d[\d.]*(?:px|rem|em)\]$/.test(cls),
 })
 
-// Colours: tokens only. No Tailwind palette colours, no hex.
+// Colors: tokens only. No Tailwind palette colors, no hex.
 const PALETTE =
   /^(?:text|bg|border|ring|fill|stroke|outline|decoration|from|to|via|shadow)-(?:white|black|(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3})(?:\/\d+)?$/
 export const noRawColor = classRule({
-  description: 'Colours come from the tokens',
-  message: `${DOC} → Colours: "{{cls}}" is a raw colour. Use a token (text-text, bg-bg-card, border-border, accent, accent-line, …).`,
+  description: 'Colors come from the tokens',
+  message: `${DOC} → Colors: "{{cls}}" is a raw color. Use a token (text-text, bg-bg-card, border-border, accent, accent-line, …).`,
   test: cls => PALETTE.test(cls) || /-\[#[0-9a-fA-F]{3,8}\]/.test(cls),
 })
 
@@ -136,7 +136,7 @@ export const noRawBorder = classRule({
 })
 
 // Links: every text link is link-nav, link-action, link-inline or
-// link-icon. A link that styles its own underline or accent colour is a
+// link-icon. A link that styles its own underline or accent color is a
 // fourth style. Card links (whole blocks) don't set text decoration and
 // pass.
 const ROLE = /(?:^|\s)link-(?:nav|action|inline|icon)(?:\s|$)/
@@ -148,7 +148,7 @@ export const linkRole = {
     docs: { description: 'Text links use one of the three link roles' },
     schema: [],
     messages: {
-      role: `${DOC} → Links: this link styles its own underline or accent colour. Use link-nav, link-action, link-inline (or SocialIcon / ArrowLink / AuditLink).`,
+      role: `${DOC} → Links: this link styles its own underline or accent color. Use link-nav, link-action, link-inline (or SocialIcon / ArrowLink / AuditLink).`,
     },
   },
   create(context) {

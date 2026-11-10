@@ -13,7 +13,7 @@ import { BlueprintCorners } from './dot-grid-background'
  * - Callout: the page's one ask (or a quote). No border; corner marks set it
  *   apart, with the dot band when it closes a page.
  * - Panel: holds a form or a tool. No border; its fill sets it apart.
- * - Ruled row: a 1px top rule, one colour per tone (`rule`). The ownership
+ * - Ruled row: a 1px top rule, one color per tone (`rule`). The ownership
  *   block alone uses the accent rule.
  * - Side note: a 4px accent-line bar on the left (ink on light, lime on dark).
  * - Chip: a 1px border around a short tag.
@@ -129,7 +129,7 @@ export function Panel<T extends ElementType = 'div'>({
   )
 }
 
-/** One row in a ruled list: a 1px top rule in the tone's rule colour. */
+/** One row in a ruled list: a 1px top rule in the tone's rule color. */
 export function RuledRow<T extends ElementType = 'li'>({
   as,
   accent = false,

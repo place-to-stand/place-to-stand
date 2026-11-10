@@ -12,8 +12,8 @@ import { BlueprintGraphic } from './blueprint-graphic'
  * hero-graphic.tsx.
  *
  * Layout: each stage is authored in local coordinates, placed by an outer
- * translate that centres its box on the mid-line, and scaled by an inner group
- * about its own centre. Connectors are computed from the *resting* edges, so a
+ * translate that centers its box on the mid-line, and scaled by an inner group
+ * about its own center. Connectors are computed from the *resting* edges, so a
  * zoomed stage only ever grows over its connector (covered by the opaque box) —
  * it never opens a gap. The stages are deliberately small relative to the
  * viewBox: generous side padding, wide gaps, and vertical breathing room, so
@@ -44,7 +44,7 @@ const CROP_W = 186
 
 type StageMeta = { key: string; xo: number; w: number; cy: number }
 
-// xo = local x placement; w = content width; cy = local y of the box centre
+// xo = local x placement; w = content width; cy = local y of the box center
 // (used to sit each box on the mid-line). Stages stay compact while the viewBox
 // carries ~50u of side padding and ~46u gaps, so each graphic reads narrow with
 // wide margins around it.
@@ -204,7 +204,7 @@ export function PortalPipeline({
   const titleTone = (i: number): 'muted' | 'accent' =>
     active === i ? 'accent' : 'muted'
 
-  // Mobile: every stage's box centre sits on MID_Y (see place), so framing one
+  // Mobile: every stage's box center sits on MID_Y (see place), so framing one
   // stage in the square window is a pure horizontal pan — translateX in user
   // units, CSS-transitioned so it glides as the autoplay advances.
   const idx = focus ?? active ?? 0
@@ -280,7 +280,7 @@ export function PortalPipeline({
               <circle cx={5} cy={64} r={2.3} className='fill-bg' />
             </g>
             {/* collect the comms onto a bus, then feed the board with a plain
-              grey line (accent arrows are reserved for between steps) */}
+              gray line (accent arrows are reserved for between steps) */}
             <g
               className='bp-line stroke-line'
               style={di(3)}
@@ -420,7 +420,7 @@ export function PortalPipeline({
           </g>
         </g>
 
-        {/* ── 2 · Cloud sandbox (centrepiece) ── */}
+        {/* ── 2 · Cloud sandbox (centerpiece) ── */}
         <g transform={place(2)}>
           <g style={stageStyle(2)}>
             <rect
@@ -510,7 +510,7 @@ export function PortalPipeline({
               <path d='M13 111.5 a9 3 0 0 0 18 0' />
             </g>
 
-            {/* the agent: a spinning cog at the centre */}
+            {/* the agent: a spinning cog at the center */}
             <g className='bp-fx bp-gear'>
               {[0, 45, 90, 135, 180, 225, 270, 315].map(deg => (
                 <rect

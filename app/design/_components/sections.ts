@@ -7,7 +7,7 @@ export const DESIGN_SECTION_GROUPS = [
   {
     title: 'Foundations',
     sections: [
-      { id: 'colour', label: 'Colour' },
+      { id: 'color', label: 'Color' },
       { id: 'type', label: 'Type' },
       { id: 'spacing', label: 'Spacing' },
       { id: 'motion', label: 'Motion' },

@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-const COLOURS = [
+const COLORS = [
   '--color-bg',
   '--color-bg-card',
   '--color-bg-elevated',
@@ -81,7 +81,7 @@ const TYPE = [
   { cls: 'type-card-title', sample: 'Discovery session' },
   { cls: 'type-stat', sample: '1,400+' },
   { cls: 'type-quote', sample: '“A tech team without the hire.”' },
-  { cls: 'type-lead', sample: 'Reading text one step up, in the text colour.' },
+  { cls: 'type-lead', sample: 'Reading text one step up, in the text color.' },
   { cls: 'type-intro', sample: 'The paragraph under a page or section title.' },
   { cls: 'text-base', sample: 'Body text: reading text at 16px.' },
   { cls: 'type-fine', sample: 'Short fine print and tags' },
@@ -111,7 +111,7 @@ export default function DesignPage() {
         <PageHeader
           label='Design System'
           title='Place To Stand, piece by piece.'
-          intro='The colours, type, spacing and building blocks behind placetostandagency.com, shown live.'
+          intro='The colors, type, spacing and building blocks behind placetostandagency.com, shown live.'
         />
       </Section>
 
@@ -122,10 +122,10 @@ export default function DesignPage() {
         <div className='flex flex-col gap-section lg:col-span-9'>
           {/* ── Foundations ── */}
           <DesignSection
-            id='colour'
+            id='color'
             label='Foundations'
-            title='Colour'
-            when='Tokens only, solid colours. The left stage is a dark band, the right a light band: the same names resolve differently, so components never need a light variant.'
+            title='Color'
+            when='Tokens only, solid colors. The left stage is a dark band, the right a light band: the same names resolve differently, so components never need a light variant.'
           >
             <Specimen
               names={['bg-*', 'text-*', 'border-*', 'accent-line']}
@@ -133,7 +133,7 @@ export default function DesignPage() {
               tones
             >
               <div className='grid gap-grid-1 sm:grid-cols-2'>
-                {COLOURS.map(name => (
+                {COLORS.map(name => (
                   <Swatch key={name} name={name} />
                 ))}
               </div>
@@ -374,7 +374,7 @@ export default function DesignPage() {
             </Specimen>
             <Specimen
               names={['RuledList', 'RuledRow', 'RuledRow accent']}
-              note='a 1px top rule in the tone’s rule colour; accent only on the ownership block'
+              note='a 1px top rule in the tone’s rule color; accent only on the ownership block'
               tones
             >
               <RuledList className='flex flex-col'>
@@ -487,12 +487,15 @@ export default function DesignPage() {
                 ))}
               </dl>
             </Specimen>
-            <Specimen names={['ClientLogoWall']} note='white silhouettes, sized by ink'>
+            <Specimen
+              names={['ClientLogoWall']}
+              note='white silhouettes, sized by ink'
+            >
               <ClientLogoWall />
             </Specimen>
             <Specimen
               names={['aspect-[16/10]', 'caption']}
-              note='photos crop to a 16:10 frame from the centre; the caption is body text, the name in the text colour'
+              note='photos crop to a 16:10 frame from the center; the caption is body text, the name in the text color'
             >
               <figure className='flex max-w-xl flex-col gap-grid-half'>
                 <div className='relative aspect-[16/10] overflow-hidden bg-bg-card'>
@@ -505,8 +508,8 @@ export default function DesignPage() {
                   />
                 </div>
                 <figcaption className='text-base text-text-muted'>
-                  <span className='text-text'>GreenWATT USA.</span> We built
-                  the marketplace from scratch.
+                  <span className='text-text'>GreenWATT USA.</span> We built the
+                  marketplace from scratch.
                 </figcaption>
               </figure>
             </Specimen>

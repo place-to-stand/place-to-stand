@@ -145,7 +145,7 @@ export default function TermsPage() {
             <LegalSection index={9} title='Acceptable use of this site'>
               <p>
                 Do not use this site to break the law, interfere with its
-                operation, attempt to gain unauthorised access, scrape it at a
+                operation, attempt to gain unauthorized access, scrape it at a
                 volume that degrades service, or submit false information
                 through our forms. We may block access for any of these reasons.
               </p>

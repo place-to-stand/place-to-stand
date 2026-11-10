@@ -189,7 +189,7 @@ function LogoCell({
           leaving ? 'logo-swap-out' : ''
         } ${entering ? 'logo-swap-in' : ''}`}
       >
-        {/* Plain <img>: static, already-optimised local assets, and next/image
+        {/* Plain <img>: static, already-optimized local assets, and next/image
             would need dangerouslyAllowSVG for the vector marks. */}
         <span
           className={`logo-hover flex h-full w-full items-center justify-center`}

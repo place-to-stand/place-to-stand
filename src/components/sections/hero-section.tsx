@@ -31,7 +31,7 @@ export function HeroSection() {
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
-              shrinking and the hero runs off the bottom of the screen. Stacked, it centres with
+              shrinking and the hero runs off the bottom of the screen. Stacked, it centers with
               the text below, inset 12px on both sides. The frame sits 1px in
               from the gutter (mx-px) because the corner marks hang 1px outside
               it; that puts their outer edge flush with the header's logo mark. */}
@@ -73,12 +73,12 @@ export function HeroSection() {
               shows in full (lg; under it, with the menu button, the text is not
               inset), which reads level
               with the headline's 24px once its glyph spacing is counted.
-              Stacked, neither is inset, the text centres and the button runs
+              Stacked, neither is inset, the text centers and the button runs
               full width up to 448px. */}
           <div className='flex flex-col gap-grid-2 md:flex-row md:items-center md:gap-grid-2 lg:gap-grid-3'>
             {/* Side by side, the text column stretches to the row's height and
                 splits the free space 1:3 above and below its content, so the
-                text sits a touch above centre but never higher than the
+                text sits a touch above center but never higher than the
                 drawing's top or lower than its bottom (the spacers shrink to
                 nothing when the text is the taller one). */}
             <div className="flex flex-col max-md:order-2 md:flex-1 md:self-stretch md:before:flex-[1] md:before:content-[''] md:after:flex-[3] md:after:content-[''] lg:pl-grid-1">
@@ -129,18 +129,18 @@ export function HeroSection() {
 
             {/* Hero comparison set piece — turn this (clutter) into this (one app).
                 Phones: right under the headline, above the button.
-                Tablets and up: centred in the right column. At full width its ink
+                Tablets and up: centered in the right column. At full width its ink
                 sits about 28px in from the corner mark, like the text column
                 (pr-4.5 plus the drawing's own margin); when the text leaves room
                 (short windows shrink the drawing; balanced lines end early), it
-                slides left to sit centred between the text and the frame's right
+                slides left to sit centered between the text and the frame's right
                 edge (HeroDrawingSlot). On laptops its width follows the
                 window height (minus the nav, the headline, which shrinks on
                 short screens, and the hero's gaps), so short screens still
                 show the whole drawing, database included. */}
             <HeroDrawingSlot className='max-md:order-1 md:flex md:flex-1 md:justify-center md:pr-grid-half'>
               {/* The drawing's viewBox ends at the database, so its box is its
-                  ink. Side by side, the row centres the drawing and the text
+                  ink. Side by side, the row centers the drawing and the text
                   column on each other at every width. On laptops the
                   max-width sizes the drawing so the hero fills the screen: the
                   space left after the nav, headline and gaps, times the

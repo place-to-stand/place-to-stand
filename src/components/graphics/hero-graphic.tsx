@@ -465,7 +465,7 @@ function DbCylinder({ cx, top, w, h, accent = false, rot = 0 }: Db) {
 }
 
 // One data silo per dashboard in the clutter pile — each sits directly below the
-// window that owns it (cx = that window's centre) and is fed by a straight line
+// window that owns it (cx = that window's center) and is fed by a straight line
 // dropping from the stack above. Different sizes/tilts and depth-staggered tops
 // so the cluster reads as scattered, disconnected islands and occludes like the
 // pile. Ordered back-to-front (behind windows first, the front one last) so the

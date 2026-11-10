@@ -38,12 +38,12 @@
   --color-danger: #f87171;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
-  /* Ruled rows: one rule colour per tone (RuledRow). */
+  /* Ruled rows: one rule color per tone (RuledRow). */
   --color-rule: #2a2b30;
-  /* Mid-grey for schematic line-work — readable on card backgrounds,
+  /* Mid-gray for schematic line-work — readable on card backgrounds,
      where border-light is too dark to see. */
   --color-line: #6e7078;
-  /* ink: the dark site colour in every band. The primary button uses it so
+  /* ink: the dark site color in every band. The primary button uses it so
      its text and hover fill stay dark inside light bands too. */
   --color-ink: #0e0f11;
   --color-ink-light: #e8e6e3;
@@ -220,7 +220,7 @@
     font-size: 3rem; /* 48 */
   }
 }
-/* Reading text one step up, in the text colour: blog bodies, quotes,
+/* Reading text one step up, in the text color: blog bodies, quotes,
    statements. type-intro is the same size, muted. */
 @utility type-lead {
   font-size: 1rem; /* 16 */
@@ -325,13 +325,13 @@ html {
   );
   background-size: 18px 18px;
   background-position: center;
-  /* Centre on the area inside the rule line, so the cut above the first row
+  /* Center on the area inside the rule line, so the cut above the first row
      matches the cut below the last. */
   background-origin: padding-box;
 }
 /* The home hero draws its own bottom rule (on the section, which also clips
    it), so its dot layer stops exactly at that edge: otherwise the pattern is
-   centred on a box that runs past what's visible. */
+   centered on a box that runs past what's visible. */
 [data-pts-hero] .dots-hero::before {
   bottom: 0;
   border-bottom: 0;
@@ -383,7 +383,7 @@ html {
   top: calc(-1 * var(--band-pad));
   /* The band ends --band-pad under the box, which is where <main> ends on
      every page with a callout, so the layer spans exactly rule to footer and
-     the dots can be centred on it: the cut under the rule matches the cut
+     the dots can be centered on it: the cut under the rule matches the cut
      at the footer whatever the box height. */
   bottom: calc(-1 * var(--band-pad));
   border-top: 1px solid var(--dots-rule);
@@ -1266,13 +1266,13 @@ main {
 /* ─── Light sections ───
    The site mixes dark and light bands: the hero, client proof and closing
    callout stay dark; reading sections sit on a light band. .theme-light
-   redefines the colour tokens for everything inside it, so every utility
+   redefines the color tokens for everything inside it, so every utility
    (text-text, bg-bg-card, border-border, …) flips without per-component
    variants. Wrap sections in <Band tone='light'> rather than using the class
    directly. Lime can't carry text on a light background, so inside a light
    band the accent stays lime only as a fill: labels get a lime marker with
-   black text, and accent-coloured text (links, arrows) turns black with a
-   lime underline. No second colour. */
+   black text, and accent-colored text (links, arrows) turns black with a
+   lime underline. No second color. */
 .theme-light {
   color-scheme: light;
   --color-bg: #f4f3ef;
@@ -1320,12 +1320,12 @@ main {
      from the left. The current page keeps the bar.
    - .link-action: a standalone link that does something ("See the platform
      ->", "Read the case study ->", "Visit site", "Take the free audit").
-     Mono caps 12px in the text colour, no line at rest (the caps and arrow
+     Mono caps 12px in the text color, no line at rest (the caps and arrow
      mark it as a link), the same sliding bar as nav links on hover, and the
      arrow nudges 3px right. Never wraps, so an arrow can't drop onto its
      own line.
-   - .link-inline: a link inside running text. Plain text-colour words with a
-     thin, quiet underline (the text colour at 35%) that turns to the accent
+   - .link-inline: a link inside running text. Plain text-color words with a
+     thin, quiet underline (the text color at 35%) that turns to the accent
      line on hover. It wraps with the sentence, so no sliding bar.
    The accent is --color-accent-line: lime on dark bands, ink on light ones.
    The slide uses the shared link timing. */
@@ -1430,7 +1430,7 @@ main {
 }
 
 /* Outline (secondary) buttons: on hover or keyboard focus a line in the
-   accent-line colour draws around the button as one continuous stroke,
+   accent-line color draws around the button as one continuous stroke,
    starting at the top-left corner: top edge left to right, down the right
    side, bottom edge right to left, up the left side. One registered
    property, --draw, runs 0 to 1 with a single easing (the shared hover

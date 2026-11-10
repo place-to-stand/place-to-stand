@@ -8,7 +8,7 @@ const SECONDS_PER_LOGO = 5
 
 /**
  * The audit page's "Trusted by" strip: every client logo on a slow loop,
- * sized and centred the same way as the homepage grid (`logoScale`,
+ * sized and centered the same way as the homepage grid (`logoScale`,
  * `logoNudge`). The list is drawn twice and slides one copy's width
  * (`.marquee` in app/globals.css), pausing on hover and standing still for
  * reduced motion. It opens with the first client (Hot Ones) in the middle of
@@ -43,11 +43,11 @@ export function AuditLogoMarquee() {
       const first = track.current?.firstElementChild as HTMLElement | null
       if (!live || !strip.current || !track.current || !first) return
       const copy = track.current.scrollWidth / 2
-      const centre = first.offsetLeft + first.offsetWidth / 2
+      const center = first.offsetLeft + first.offsetWidth / 2
       // How far the track must already have slid for the first logo to sit
       // in the middle, wrapped into one copy's width.
       const slid =
-        (((centre - strip.current.clientWidth / 2) % copy) + copy) % copy
+        (((center - strip.current.clientWidth / 2) % copy) + copy) % copy
       setDelay(-(slid / copy) * duration)
     })
     return () => {

@@ -295,11 +295,11 @@ export default function PrivacyPage() {
             <LegalSection index={11} title='Security'>
               <p>
                 Data is transmitted over encrypted connections and held with
-                established providers that maintain their own security
-                programmes. Access within our team is limited to the people who
-                need it. No system is perfectly secure, and we cannot guarantee
-                absolute security, but we will notify affected people and
-                regulators as required if a breach occurs.
+                established providers that maintain their own security programs.
+                Access within our team is limited to the people who need it. No
+                system is perfectly secure, and we cannot guarantee absolute
+                security, but we will notify affected people and regulators as
+                required if a breach occurs.
               </p>
             </LegalSection>
 

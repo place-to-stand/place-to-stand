@@ -19,8 +19,8 @@ export type Client = {
    * same way for a new logo. Defaults to 1. */
   logoScale?: number
   /** Vertical nudge, as a percent of the logo's own height (negative moves it
-   * up), so the mark's visual centre sits on the row's centre line. Measured
-   * from the file's ink: the shift that would put the ink's centre of mass in
+   * up), so the mark's visual center sits on the row's center line. Measured
+   * from the file's ink: the shift that would put the ink's center of mass in
    * the middle, taken at 75% so text-heavy marks don't overshoot. A small
    * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
    * box up and leaves the heavy part sitting low. */
@@ -30,14 +30,14 @@ export type Client = {
   caseStudy?: string
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
-   * color fills (they'd flatten to a blob) opt into a grey version instead. */
-  logoTone?: 'grey'
+   * color fills (they'd flatten to a blob) opt into a gray version instead. */
+  logoTone?: 'gray'
 }
 
-/** Tailwind filter that renders a client mark white (or grey, per `logoTone`)
+/** Tailwind filter that renders a client mark white (or gray, per `logoTone`)
  * wherever logos appear, so brand colors never fight the site palette. */
 export function logoToneClass(client: Client): string {
-  return client.logoTone === 'grey'
+  return client.logoTone === 'gray'
     ? 'brightness-150 grayscale'
     : 'brightness-0 invert'
 }
@@ -55,7 +55,7 @@ export const clients: Client[] = [
     caseStudy: '/clients/heatonist',
     logoScale: 0.72,
     logoNudge: -9,
-    logoTone: 'grey',
+    logoTone: 'gray',
     description:
       'The official online sauce shop for the hit interview show "Hot Ones."',
   },
