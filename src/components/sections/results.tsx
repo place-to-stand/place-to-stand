@@ -9,8 +9,7 @@ import { clients, type Client } from '@/src/lib/clients'
 import { heatonistCaseStudy } from '@/src/lib/case-study-heatonist'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 
-const ROW_LINK_CLASS =
-  'link-action mt-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
+const ROW_LINK_CLASS = 'link-action mt-1'
 
 /**
  * Proof from the Heatonist case study. Variants:

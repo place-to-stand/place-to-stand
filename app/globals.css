@@ -37,10 +37,13 @@
      rings, link underlines) and accent itself (strong: active states, corner
      marks, highlighted panels). */
   --color-accent-subtle: #b5f54299;
-  /* Lines, bullets, underlines and focus rings that should read as the
-     accent: lime on dark bands, ink on light ones (.theme-light), where lime
-     only ever appears as a fill behind dark text. */
+  /* Lines, bullets and underlines that should read as the accent: lime on
+     dark bands, ink on light ones (.theme-light), where lime only ever
+     appears as a fill behind dark text. */
   --color-accent-line: #b5f542;
+  /* Keyboard focus ring (focus-ring): accent-subtle on dark bands, solid ink
+     on light ones (.theme-light) so it reaches 3:1 there. */
+  --color-focus: #b5f54299;
   --color-accent-secondary: #b4b4b4;
   /* Form errors. */
   --color-danger: #f87171;
@@ -1295,6 +1298,7 @@ main {
   --grid-dot: #d4d3cd;
   --color-accent-line: #0e0f11;
   --color-accent-subtle: rgba(14, 15, 17, 0.4);
+  --color-focus: #0e0f11;
   background-color: var(--color-bg);
   color: var(--color-text);
 }
@@ -1334,10 +1338,25 @@ main {
   --z-toast: 100;
 }
 
-/* Keyboard focus: one ring everywhere, the emphasis stroke in the accent. */
+/* Keyboard focus: one ring everywhere (Guidelines > Interaction states), 2px
+   with a 2px gap, on :focus-visible only, so a mouse click never shows it.
+   Every focusable element gets it from the base rule below; components don't
+   set their own rings or outlines (lint: design/no-raw-focus). */
 @utility focus-ring {
-  outline: var(--stroke-emphasis) solid var(--color-accent);
+  outline: var(--stroke-emphasis) solid var(--color-focus);
   outline-offset: 2px;
+}
+@layer base {
+  /* The ring color is set on everything up front: elements with a color
+     transition would otherwise fade the ring in from their text color. */
+  *,
+  ::before,
+  ::after {
+    outline-color: var(--color-focus);
+  }
+  :focus-visible {
+    @apply focus-ring;
+  }
 }
 
 /* Hover timing, shared by every hover on the site: buttons (primary fill,

@@ -111,7 +111,7 @@ band pads itself by the `band-pad` role top and bottom.
 
 #### Accent on light bands
 
-Lime only appears on light bands as a fill behind dark text: the label marker and the primary button. Lines, bullets, underlines and focus rings use `accent-line`, which is lime on dark bands and ink on light ones, so a component never needs a light variant.
+Lime only appears on light bands as a fill behind dark text: the label marker and the primary button. Lines, bullets and underlines use `accent-line`, which is lime on dark bands and ink on light ones, so a component never needs a light variant.
 
 #### Accent lines
 
@@ -294,9 +294,15 @@ Icons are `aria-hidden` by default; a button that is only an icon carries an `sr
 
 ### Interaction states
 
-Not yet defined. Today: hover is consistent (button fill or outline draw, link bar, link-card fill); focus is a
-2px accent ring (`focus-ring`) on link cards and Tailwind rings on buttons and inputs; selected and active use the
-2px emphasis stroke (the audit); disabled, loading, empty and error states are handled per component.
+Approved Nov 10.
+
+1. **Focus.** One ring: 2px with a 2px gap, on keyboard focus only (`:focus-visible`). `--color-focus` is accent-subtle on dark bands and solid ink on light ones (`.theme-light`), so it reaches 3:1 on both (`npm run test:contrast`). The `focus-ring` utility is applied to every element by one base `:focus-visible` rule in `app/globals.css`; components don't set their own.
+2. **Pressed.** Buttons move down 1px while pressed (`active:translate-y-px` in `Button`), nothing else.
+3. **Disabled.** One look for every button variant and field: muted text (`text-text-muted`) on the muted line (`border-border`), no fill, `cursor-not-allowed`. Never faded with opacity.
+4. **Loading.** `<Button loading={isPending} loadingLabel='Sending…'>`: the button disables itself and shows a 16px Lucide spinner in front of the loading label. The audit keeps its progress bar.
+5. **Errors and success.** `FieldError` (`primitives/field-error.tsx`): one plain sentence right under its field, in `text-danger`, with `role='alert'`. Success replaces the form in place.
+
+Lint: `design/no-raw-focus` fails `ring-*` and `outline-*` classes and `disabled:opacity-*` anywhere. An element focused only by script (the audit moves focus to each new question) says so in a disable comment.
 
 ### Accessibility
 

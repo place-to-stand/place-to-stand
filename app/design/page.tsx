@@ -15,6 +15,7 @@ import { SocialIcon } from '@/src/components/primitives/social-icon'
 import { FooterSubscribe } from '@/src/components/sections/footer-subscribe'
 import { Button } from '@/src/components/primitives/button'
 import { Input } from '@/src/components/primitives/input'
+import { FieldError } from '@/src/components/primitives/field-error'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { ArrowRight, Check, Icon, Menu } from '@/src/components/primitives/icon'
@@ -971,44 +972,119 @@ export default function DesignPage() {
             id='states'
             label='Guidelines'
             title='Interaction states'
-            when={'Not yet defined.'}
+            when='Approved Nov 10. Lint (design/no-raw-focus) blocks hand-made focus rings, outlines and opacity-faded disabled states.'
           >
-            <p className='max-w-2xl text-base text-text-muted'>
-              Not yet defined. What the site does today:
-            </p>
-            <ul className='flex flex-col gap-grid-half'>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Hover: buttons fill or draw their outline, links slide a bar in,
-                link cards change fill.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Focus: a 2px accent focus ring (focus-ring) on link cards;
-                Tailwind rings on buttons and inputs.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Selected and active: the 2px emphasis stroke, in the audit.
-              </li>
-              <li className='flex gap-2 text-base text-text'>
-                <span
-                  aria-hidden
-                  className='mt-2 h-1.5 w-1.5 shrink-0 bg-accent-line'
-                />
-                Disabled, loading, empty and error states are handled per
-                component.
-              </li>
-            </ul>
+            <Specimen
+              names={['focus-ring']}
+              note='keyboard focus, shown here held on (tab through the page to see it live)'
+            >
+              <div className='flex flex-wrap items-start gap-grid-1'>
+                <div className='flex flex-col items-start gap-grid-half p-card'>
+                  <span className='bp-label font-mono'>Dark band</span>
+                  <Button className='focus-ring'>Book a call</Button>
+                </div>
+                <div className='theme-light flex flex-col items-start gap-grid-half p-card'>
+                  <span className='bp-label font-mono'>Light band</span>
+                  <Button variant='outline' className='focus-ring'>
+                    See the platform
+                  </Button>
+                </div>
+              </div>
+            </Specimen>
+            <Specimen
+              names={['Button']}
+              note='rest · pressed (down 1px) · disabled · loading'
+            >
+              <div className='flex flex-wrap items-center gap-grid-1'>
+                <Button>Send message</Button>
+                <Button className='translate-y-px'>Send message</Button>
+                <Button disabled>Send message</Button>
+                <Button loading loadingLabel='Sending…'>
+                  Send message
+                </Button>
+              </div>
+              <div className='mt-grid-1 flex flex-wrap items-center gap-grid-1'>
+                <Button variant='outline'>Send to the team</Button>
+                <Button variant='outline' disabled>
+                  Send to the team
+                </Button>
+                <Button variant='outline' loading loadingLabel='Sending…'>
+                  Send to the team
+                </Button>
+              </div>
+            </Specimen>
+            <Specimen
+              names={['Input', 'FieldError']}
+              note='disabled · error under the field'
+            >
+              <div className='grid max-w-2xl gap-grid-1 md:grid-cols-2'>
+                <div className='flex flex-col gap-2'>
+                  <Input placeholder='you@company.com' disabled />
+                </div>
+                <div className='flex flex-col gap-2'>
+                  <Input defaultValue='name@' aria-invalid />
+                  <FieldError>Please enter a valid email address.</FieldError>
+                </div>
+              </div>
+            </Specimen>
+            <Specimen names={['Button']} note='the five rules'>
+              <RuledList as='dl' className='flex flex-col'>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>1. Focus.</dt>
+                  <dd className='text-base text-text-muted'>
+                    One ring: 2px with a 2px gap, on keyboard focus only
+                    (:focus-visible). Accent-subtle on dark bands, solid ink on
+                    light ones, so it reaches 3:1 on both. Every focusable
+                    element gets it from the global focus-ring; nothing sets its
+                    own.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>2. Pressed.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Buttons move down 1px while pressed, nothing else.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>3. Disabled.</dt>
+                  <dd className='text-base text-text-muted'>
+                    One look: muted text on the muted line, no fill, and a
+                    not-allowed cursor. Never faded with opacity.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>4. Loading.</dt>
+                  <dd className='text-base text-text-muted'>
+                    The button’s label changes (“Sending…”) with a 16px spinner
+                    in front, and the button is disabled until it’s done. The
+                    audit keeps its progress bar.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>5. Errors and success.</dt>
+                  <dd className='text-base text-text-muted'>
+                    An error is one plain sentence right under its field, in the
+                    danger color, announced as it appears. Success replaces the
+                    form in place.
+                  </dd>
+                </RuledRow>
+              </RuledList>
+            </Specimen>
           </DesignSection>
 
           <DesignSection

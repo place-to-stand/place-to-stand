@@ -6,8 +6,7 @@ import { ALT_ROW } from '@/src/components/patterns/alt-row'
 import { clients, getClientHostname, type Client } from '@/src/lib/clients'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 
-const ROW_LINK_CLASS =
-  'link-action mt-1 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
+const ROW_LINK_CLASS = 'link-action mt-1'
 
 /** One open row per client: a big brand photo with the name and description
  * beside it. On large screens the image takes two thirds of the width and

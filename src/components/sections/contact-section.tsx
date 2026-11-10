@@ -16,6 +16,7 @@ import { usePostHog } from 'posthog-js/react'
 import { SectionHeading, Section } from '@/src/components/patterns/section'
 import { CONTACT_EMAIL } from '@/src/lib/site'
 import { Panel } from '@/src/components/boxes'
+import { FieldError } from '@/src/components/primitives/field-error'
 import { Button } from '@/src/components/primitives/button'
 import { HeardFromField } from '@/src/components/primitives/heard-from-field'
 import { Checkbox } from '@/src/components/primitives/checkbox'
@@ -196,9 +197,7 @@ export function ContactSection() {
               aria-invalid={!!form.formState.errors.name}
             />
             {form.formState.errors.name ? (
-              <p className='text-sm text-danger'>
-                {form.formState.errors.name.message}
-              </p>
+              <FieldError>{form.formState.errors.name.message}</FieldError>
             ) : null}
           </div>
           <div className='flex flex-col gap-2'>
@@ -210,9 +209,7 @@ export function ContactSection() {
               aria-invalid={!!form.formState.errors.email}
             />
             {form.formState.errors.email ? (
-              <p className='text-sm text-danger'>
-                {form.formState.errors.email.message}
-              </p>
+              <FieldError>{form.formState.errors.email.message}</FieldError>
             ) : null}
           </div>
           <div className='grid gap-grid-half md:grid-cols-2'>
@@ -224,9 +221,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.company}
               />
               {form.formState.errors.company ? (
-                <p className='text-sm text-danger'>
-                  {form.formState.errors.company.message}
-                </p>
+                <FieldError>{form.formState.errors.company.message}</FieldError>
               ) : null}
             </div>
             <div className='flex flex-col gap-2'>
@@ -239,9 +234,7 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.website}
               />
               {form.formState.errors.website ? (
-                <p className='text-sm text-danger'>
-                  {form.formState.errors.website.message}
-                </p>
+                <FieldError>{form.formState.errors.website.message}</FieldError>
               ) : null}
             </div>
           </div>
@@ -252,7 +245,7 @@ export function ContactSection() {
                 id='subject'
                 {...form.register('subject')}
                 aria-invalid={!!form.formState.errors.subject}
-                className='flex h-12 w-full appearance-none bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent-subtle focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+                className='flex h-12 w-full appearance-none bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition disabled:cursor-not-allowed disabled:text-text-muted'
               >
                 <option value='' disabled>
                   Choose a subject
@@ -270,9 +263,7 @@ export function ContactSection() {
               />
             </div>
             {form.formState.errors.subject ? (
-              <p className='text-sm text-danger'>
-                {form.formState.errors.subject.message}
-              </p>
+              <FieldError>{form.formState.errors.subject.message}</FieldError>
             ) : null}
           </div>
           {selectedSubject === CONTACT_SUBJECT_OTHER ? (
@@ -285,9 +276,9 @@ export function ContactSection() {
                 aria-invalid={!!form.formState.errors.subjectOther}
               />
               {form.formState.errors.subjectOther ? (
-                <p className='text-sm text-danger'>
+                <FieldError>
                   {form.formState.errors.subjectOther.message}
-                </p>
+                </FieldError>
               ) : null}
             </div>
           ) : null}
@@ -300,9 +291,7 @@ export function ContactSection() {
               aria-invalid={!!form.formState.errors.message}
             />
             {form.formState.errors.message ? (
-              <p className='text-sm text-danger'>
-                {form.formState.errors.message.message}
-              </p>
+              <FieldError>{form.formState.errors.message.message}</FieldError>
             ) : null}
           </div>
           <HeardFromField
@@ -328,11 +317,12 @@ export function ContactSection() {
           <div className='mt-auto pt-grid-half'>
             <Button
               type='submit'
-              disabled={isPending}
-              className='block w-full px-grid-1'
+              loading={isPending}
+              loadingLabel='Sending…'
+              className='w-full px-grid-1'
               size='lg'
             >
-              {isPending ? 'Sending...' : 'Send Message'}
+              Send Message
             </Button>
           </div>
         </form>

@@ -107,7 +107,7 @@ export function Header() {
               <Dialog.Overlay className='sheet-overlay fixed inset-0 z-(--z-overlay) bg-bg/70 backdrop-blur-sm lg:hidden' />
               <Dialog.Content
                 id='mobile-nav'
-                className='sheet-panel fixed inset-y-0 right-0 z-(--z-overlay) flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-grid-1 pt-grid-half pb-grid-1 focus:outline-none lg:hidden'
+                className='sheet-panel fixed inset-y-0 right-0 z-(--z-overlay) flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-grid-1 pt-grid-half pb-grid-1 lg:hidden'
               >
                 <div className='flex items-center justify-between'>
                   <Dialog.Title className='bp-label font-mono'>

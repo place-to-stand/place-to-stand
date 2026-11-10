@@ -5,7 +5,8 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { usePostHog } from 'posthog-js/react'
 import type { PostHog } from 'posthog-js'
-import { Icon, ArrowRight, Loader2 } from '@/src/components/primitives/icon'
+import { Icon, ArrowRight } from '@/src/components/primitives/icon'
+import { FieldError } from '@/src/components/primitives/field-error'
 import { Button } from '@/src/components/primitives/button'
 import { Checkbox } from '@/src/components/primitives/checkbox'
 import { Input } from '@/src/components/primitives/input'
@@ -87,7 +88,7 @@ async function deliverLead({
     return false
   } catch (error: unknown) {
     // The action itself rejected (deploy skew, cold-start failure). Without
-    // this the button stays stuck on "Sending..." with no explanation.
+    // this the button stays stuck on "Sending…" with no explanation.
     posthog?.capture(event, { reason: 'action_threw', phase: result.phase.id })
     posthog?.captureException(error)
     toast({
@@ -210,9 +211,7 @@ export function EmailCaptureForm({
           aria-invalid={!!form.formState.errors.email}
         />
         {form.formState.errors.email ? (
-          <p className='text-sm text-danger'>
-            {form.formState.errors.email.message}
-          </p>
+          <FieldError>{form.formState.errors.email.message}</FieldError>
         ) : null}
       </div>
       <div className='flex items-start gap-grid-half pt-1'>
@@ -228,20 +227,12 @@ export function EmailCaptureForm({
       <Button
         type='submit'
         size='lg'
-        disabled={isPending}
+        loading={isPending}
+        loadingLabel='Sending…'
         className='mt-1 w-full px-grid-1'
       >
-        {isPending ? (
-          <>
-            <Icon icon={Loader2} className='mr-2 animate-spin' />
-            Sending...
-          </>
-        ) : (
-          <>
-            {submitLabel}
-            <Icon icon={ArrowRight} className='ml-2' />
-          </>
-        )}
+        {submitLabel}
+        <Icon icon={ArrowRight} className='ml-2' />
       </Button>
     </form>
   )
@@ -332,9 +323,7 @@ export function LeadDetailsForm({
             {...form.register('name')}
             aria-invalid={!!errors.name}
           />
-          {errors.name ? (
-            <p className='text-sm text-danger'>{errors.name.message}</p>
-          ) : null}
+          {errors.name ? <FieldError>{errors.name.message}</FieldError> : null}
         </div>
         <div className='flex flex-col gap-2'>
           <Label htmlFor='audit-details-company'>Company</Label>
@@ -345,7 +334,7 @@ export function LeadDetailsForm({
             aria-invalid={!!errors.company}
           />
           {errors.company ? (
-            <p className='text-sm text-danger'>{errors.company.message}</p>
+            <FieldError>{errors.company.message}</FieldError>
           ) : null}
         </div>
       </div>
@@ -362,7 +351,7 @@ export function LeadDetailsForm({
           aria-invalid={!!errors.message}
         />
         {errors.message ? (
-          <p className='text-sm text-danger'>{errors.message.message}</p>
+          <FieldError>{errors.message.message}</FieldError>
         ) : null}
       </div>
       <HeardFromField
@@ -375,10 +364,11 @@ export function LeadDetailsForm({
         type='submit'
         variant='outline'
         size='lg'
-        disabled={isPending}
+        loading={isPending}
+        loadingLabel='Sending…'
         className='mt-1 w-full px-grid-1 sm:w-auto sm:self-start'
       >
-        {isPending ? 'Sending...' : 'Send to the team'}
+        Send to the team
       </Button>
     </form>
   )

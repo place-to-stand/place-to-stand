@@ -159,11 +159,11 @@ function FlowRail({
             onClick={() => onSelect(i)}
             aria-current={i === active ? 'step' : undefined}
             aria-label={scene.label}
-            className='group relative z-(--z-raised) flex flex-1 flex-col items-center pb-1 focus-visible:outline-none'
+            className='group relative z-(--z-raised) flex flex-1 flex-col items-center pb-1'
           >
             <span
               className={cn(
-                'h-3 w-3 rounded-dot border transition-colors duration-300 group-hover:border-text-muted group-focus-visible:ring-2 group-focus-visible:ring-text-muted/40',
+                'h-3 w-3 rounded-dot border transition-colors duration-300 group-hover:border-text-muted',
                 done ? 'border-line bg-line' : 'border-border-light bg-bg'
               )}
             />

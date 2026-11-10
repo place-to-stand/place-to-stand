@@ -9,12 +9,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { usePostHog } from 'posthog-js/react'
-import {
-  Icon,
-  ArrowLeft,
-  ArrowRight,
-  Loader2,
-} from '@/src/components/primitives/icon'
+import { Icon, ArrowLeft, ArrowRight } from '@/src/components/primitives/icon'
 import { AuditProgress } from '@/src/components/sections/audit/audit-progress'
 import { QuestionField } from '@/src/components/sections/audit/question-field'
 import { Button } from '@/src/components/primitives/button'
@@ -226,14 +221,10 @@ export function AuditWizard({
       <Button
         type='button'
         onClick={() => advance(isAnswered(question, answers))}
-        disabled={isScoring}
+        loading={isScoring}
+        loadingLabel='Analyzing…'
       >
-        {isScoring ? (
-          <>
-            <Icon icon={Loader2} className='mr-2 animate-spin' />
-            Analyzing...
-          </>
-        ) : isFinalQuestion ? (
+        {isFinalQuestion ? (
           <>
             Build my blueprint
             <Icon icon={ArrowRight} className='ml-2' />
@@ -267,6 +258,7 @@ export function AuditWizard({
           key={question.id}
           ref={questionRef}
           tabIndex={-1}
+          // eslint-disable-next-line design/no-raw-focus -- focused only by script, to announce the next question; not a control
           className='duration-300 animate-in outline-none fade-in slide-in-from-right-2 motion-reduce:animate-none'
         >
           <QuestionField

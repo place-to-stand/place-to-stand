@@ -29,7 +29,7 @@ export function HeardFromField({
         <select
           id={id}
           {...select}
-          className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition focus-visible:ring-1 focus-visible:ring-accent/40 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50'
+          className='flex h-12 w-full appearance-none border border-border bg-bg-card pr-grid-2 pl-grid-half text-base text-text transition disabled:cursor-not-allowed disabled:text-text-muted'
         >
           <option value=''>Choose one</option>
           {HEARD_FROM_CHOICES.map(choice => (

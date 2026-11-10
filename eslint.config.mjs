@@ -23,6 +23,7 @@ const eslintConfig = defineConfig([
       'design/no-raw-color': 'error',
       'design/no-raw-border': 'error',
       'design/no-raw-aspect': 'error',
+      'design/no-raw-focus': 'error',
       'design/link-role': 'error',
     },
   },

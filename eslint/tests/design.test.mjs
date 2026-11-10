@@ -106,6 +106,23 @@ run('no-raw-border', {
   ],
 })
 
+run('no-raw-focus', {
+  valid: [
+    "<button className='bg-bg-card text-text' />",
+    "<input className='disabled:cursor-not-allowed disabled:text-text-muted' />",
+    "<div className='opacity-60' />",
+  ],
+  invalid: [
+    {
+      code: "<input className='focus-visible:ring-1 focus-visible:ring-accent-subtle' />",
+      errors: 2,
+    },
+    { code: "<a className='focus-visible:outline-2' />", errors: 1 },
+    { code: "<div className='outline-none' />", errors: 1 },
+    { code: "<button className='disabled:opacity-50' />", errors: 1 },
+  ],
+})
+
 run('no-raw-aspect', {
   valid: [
     "<MediaFrame shape='work' className='w-full' />",

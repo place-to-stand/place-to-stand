@@ -60,7 +60,7 @@ function classRule({ description, message, test, allow = () => false }) {
           )) {
             if (allow(value)) continue
             for (const cls of value.split(/\s+/).filter(Boolean)) {
-              if (test(bare(cls))) {
+              if (test(bare(cls), cls)) {
                 context.report({
                   node: literal,
                   messageId: 'bad',
@@ -143,6 +143,19 @@ export const noRawAspect = classRule({
   test: cls => /^aspect-/.test(cls),
 })
 
+// Interaction states: keyboard focus is the one global ring (focus-ring, from
+// a base :focus-visible rule), so no element sets its own ring or outline;
+// disabled is muted tokens and cursor-not-allowed, never faded with opacity.
+// An element focused only by script (a question the audit moves focus to)
+// says so in an eslint-disable comment.
+export const noRawFocus = classRule({
+  description: 'Focus and disabled states come from the shared styles',
+  message: `${DOC} → Interaction states: "{{cls}}" sets its own focus ring or disabled look. Focus comes from the global focus-ring; disabled uses muted text and line tokens with cursor-not-allowed.`,
+  test: (base, cls) =>
+    /^(?:ring|outline)(?:-|$)/.test(base) ||
+    (/(?:^|:)disabled:/.test(cls) && /^opacity-/.test(base)),
+})
+
 // Links: every text link is link-nav, link-action, link-inline or
 // link-icon. A link that styles its own underline or accent color is a
 // fourth style. Card links (whole blocks) don't set text decoration and
@@ -206,6 +219,7 @@ export const rules = {
   'no-raw-color': noRawColor,
   'no-raw-border': noRawBorder,
   'no-raw-aspect': noRawAspect,
+  'no-raw-focus': noRawFocus,
   'link-role': linkRole,
   'section-component': sectionComponent,
 }

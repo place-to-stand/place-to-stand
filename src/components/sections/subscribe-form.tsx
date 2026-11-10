@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useSubscribe } from '@/src/lib/forms/use-subscribe'
 import { Callout } from '@/src/components/boxes'
+import { FieldError } from '@/src/components/primitives/field-error'
 import { Button } from '@/src/components/primitives/button'
 import { Input } from '@/src/components/primitives/input'
 
@@ -44,16 +45,15 @@ export function SubscribeForm() {
               <Button
                 type='submit'
                 size='lg'
-                disabled={isPending}
+                loading={isPending}
+                loadingLabel='Subscribing…'
                 className='shrink-0'
               >
-                {isPending ? 'Subscribing...' : 'Subscribe'}
+                Subscribe
               </Button>
             </div>
             {state.status === 'error' && (
-              <p className='text-sm text-danger' role='alert'>
-                {state.message}
-              </p>
+              <FieldError>{state.message}</FieldError>
             )}
             <p id='subscribe-consent' className='text-sm text-text-muted'>
               By subscribing, you agree to receive new posts and occasional

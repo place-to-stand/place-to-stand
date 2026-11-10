@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useSubscribe } from '@/src/lib/forms/use-subscribe'
+import { FieldError } from '@/src/components/primitives/field-error'
 import { Button } from '@/src/components/primitives/button'
 import { Input } from '@/src/components/primitives/input'
 
@@ -38,17 +39,14 @@ export function FooterSubscribe() {
             <Button
               type='submit'
               size='lg'
-              disabled={isPending}
+              loading={isPending}
+              loadingLabel='Subscribing…'
               className='w-full sm:w-auto sm:shrink-0 xl:w-full'
             >
-              {isPending ? 'Subscribing...' : 'Subscribe'}
+              Subscribe
             </Button>
           </div>
-          {state.status === 'error' && (
-            <p className='text-sm text-danger' role='alert'>
-              {state.message}
-            </p>
-          )}
+          {state.status === 'error' && <FieldError>{state.message}</FieldError>}
           <p id='footer-subscribe-consent' className='text-sm text-text-muted'>
             New posts and occasional marketing email. Unsubscribe any time.{' '}
             <Link href='/privacy' className='link-inline'>
