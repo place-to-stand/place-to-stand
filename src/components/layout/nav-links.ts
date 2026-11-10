@@ -1,15 +1,33 @@
 export const NAV_LINKS = [
-  { href: '/services' as const, label: 'Services' },
+  { href: '/platform' as const, label: 'Platform' },
+  { href: '/process' as const, label: 'Process' },
   { href: '/clients' as const, label: 'Clients' },
-  { href: '/how-we-work' as const, label: 'How We Work' },
-  { href: '/team' as const, label: 'Team' },
+  { href: '/about' as const, label: 'About' },
   { href: '/blog' as const, label: 'Blog' },
-  // Temporarily unlinked — Field Notes content in progress, restore in a future update
-  // { href: '/field-notes' as const, label: 'Field Notes' },
   { href: '/contact' as const, label: 'Contact' },
 ] as const
 
 export type NavLink = (typeof NAV_LINKS)[number]
+
+/** The footer's link columns. Every page appears once. */
+export const FOOTER_GROUPS = [
+  {
+    label: 'Explore',
+    links: NAV_LINKS.filter(link => link.href !== '/contact'),
+  },
+  {
+    label: 'Get started',
+    links: [
+      { href: '/contact' as const, label: 'Book a call' },
+      { href: '/audit' as const, label: 'Free audit' },
+      { href: '/contact' as const, label: 'Contact' },
+    ],
+  },
+  {
+    label: 'Company',
+    links: [{ href: '/referral' as const, label: 'Referral program' }],
+  },
+] as const
 
 /** Where existing clients log in to see invoices, hours, and tasks. Kept out
  *  of NAV_LINKS: it's a utility link, not a marketing page. Points straight at
