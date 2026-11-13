@@ -5,7 +5,7 @@ import { OfferPageTemplate } from '@/src/components/templates/offer-page'
 export const metadata: Metadata = pageMetadata({
   title: 'What we build',
   description:
-    'Custom operations software and Shopify development: one system that runs your business, stores that sell, and a model-agnostic MCP server with role-based access control, all on one source of data you own.',
+    'Custom software you own: one system that runs your business, custom stores and Shopify apps that sell, and senior engineers for teams that already write code, all sharing one home for your data.',
   path: '/platform',
 })
 

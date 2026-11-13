@@ -1,160 +1,176 @@
-import Link from 'next/link'
+import type { Route } from 'next'
+import type { ReactNode } from 'react'
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { TagRow } from '@/src/components/patterns/tag-row'
-import { Card, RuledRow, SideNote } from '@/src/components/boxes'
 import {
-  AI_ACCESS,
-  OFFERS,
-  PLATFORM_SHARED,
-  SELL_ONLINE_CLIENTS,
+  CodeReviewPiece,
+  CrmPiece,
+  OrderIntakePiece,
+} from '@/src/components/patterns/pieces/platform'
+import { Card, RuledList, RuledRow } from '@/src/components/boxes'
+import {
+  DATA_HOME,
+  SENIOR_HELP,
+  type Module,
   type Offer,
 } from '@/src/lib/offers'
+import { cn } from '@/src/lib/utils'
 
 /**
- * The two offers. Variants:
- * - summary: both offers as cards with their modules and tags (Home).
- * - detail: each offer as its own section of module cards, then the AI
- *   connector (Platform). Sections #run and #sell are the link targets.
- * Tone: light.
+ * What we build, on Platform: three kinds of work, each its own section
+ * (#run, #sell, #senior-help), then "One home for your data". Tone: whatever
+ * band the page puts each one in; the Platform template composes them.
  */
-export function OffersSection({
-  variant = 'summary',
-}: {
-  variant?: 'summary' | 'detail'
-}) {
-  return variant === 'detail' ? <OffersDetail /> : <OffersSummary />
-}
-OffersSection.tone = 'light' as const
 
-export function OfferCard({ offer }: { offer: Offer }) {
-  const run = offer.slug === 'run'
-  const tags = run ? (offer.cardTags ?? []) : SELL_ONLINE_CLIENTS
+/** A Platform section's title and intro, with no label: the title is the
+ *  label's job here. */
+function KindHeading({ title, intro }: { title: string; intro: string }) {
   return (
-    <Card className='flex h-full flex-col gap-grid-1'>
-      <div className='flex flex-col gap-grid-half'>
-        <h3 className='type-item-title'>{offer.name}</h3>
-        <p className='text-base text-text-muted'>{offer.summary}</p>
-      </div>
-      <RuledRow as='ul' className='grid gap-x-grid-1 pt-grid-1 sm:grid-cols-2'>
-        {offer.modules.map(module => (
-          <li
-            key={module.name}
-            className='flex items-center gap-2 py-1.5 text-base'
-          >
-            <span aria-hidden className='h-1.5 w-1.5 shrink-0 bg-accent-line' />
-            {module.name}
-          </li>
+    <div className='flex flex-col gap-intro'>
+      <h2 className='max-w-3xl type-section-title text-balance'>{title}</h2>
+      <p className='max-w-2xl type-intro text-balance'>{intro}</p>
+    </div>
+  )
+}
+
+/** "Sound familiar?": visitors' own words, one per ruled row, the same in
+ *  all three sections. */
+function SoundFamiliar({ quotes }: { quotes: string[] }) {
+  return (
+    <div className='flex flex-col gap-grid-1'>
+      <h3 className='type-card-title'>Sound familiar?</h3>
+      <RuledList>
+        {quotes.map(quote => (
+          <RuledRow key={quote} className='py-grid-half'>
+            <q className='type-lead'>{quote}</q>
+          </RuledRow>
         ))}
-      </RuledRow>
-      <div className='mt-auto flex flex-col gap-grid-1'>
-        <TagRow label={run ? 'Instead of' : 'Built for'} tags={tags} />
-        <ArrowLink href={`/platform#${offer.slug}`}>See the platform</ArrowLink>
+      </RuledList>
+    </div>
+  )
+}
+
+/** One module or service as a card, with its "Instead of" or "Built for" tags. */
+function ModuleCard({ module }: { module: Module }) {
+  const tags = module.insteadOf ?? module.builtFor
+  return (
+    <Card as='li' className='flex flex-col gap-grid-1'>
+      <div className='flex flex-col gap-grid-half'>
+        <h3 className='type-card-title'>{module.name}</h3>
+        <p className='text-base text-text-muted'>{module.job}</p>
       </div>
+      {tags && (
+        <RuledRow as='div' className='mt-auto pt-grid-1'>
+          <TagRow
+            label={module.insteadOf ? 'Instead of' : 'Built for'}
+            tags={tags}
+          />
+        </RuledRow>
+      )}
     </Card>
   )
 }
 
-function OffersSummary() {
+/** The shared layout of the three kinds of work: heading and quotes beside
+ *  a lifted-out piece, then the modules. */
+function KindSection({
+  id,
+  title,
+  intro,
+  quotes,
+  piece,
+  modules,
+  columns,
+  after,
+}: {
+  id: string
+  title: string
+  intro: string
+  quotes: string[]
+  piece: ReactNode
+  modules: Module[]
+  columns: 3 | 4
+  after?: ReactNode
+}) {
   return (
-    <Section id='what-we-build' className='flex flex-col gap-stack'>
-      <Reveal index={0}>
-        <SectionHeading
-          label='What We Build'
-          title='Two kinds of work. One source of data.'
-        />
-      </Reveal>
-      <Reveal index={1} className='grid gap-grid-1 lg:grid-cols-2'>
-        {OFFERS.map(offer => (
-          <OfferCard key={offer.slug} offer={offer} />
-        ))}
-      </Reveal>
-    </Section>
-  )
-}
-
-function OfferDetail({ offer, index }: { offer: Offer; index: number }) {
-  const run = offer.slug === 'run'
-  return (
-    <Section id={offer.slug} className='flex scroll-mt-24 flex-col gap-stack'>
-      <Reveal index={0}>
-        <SectionHeading
-          label={run ? 'Run Your Business' : 'Sell Online'}
-          title={offer.name}
-          intro={offer.summary}
-        />
-      </Reveal>
-      <Reveal index={1}>
-        <ul className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-3'>
-          {offer.modules.map((module, moduleIndex) => (
-            <Card
-              as='li'
-              key={module.name}
-              className='flex flex-col gap-grid-1'
-            >
-              <span className='font-mono text-sm text-text-muted'>
-                {String(index + 1).padStart(2, '0')}.
-                {String(moduleIndex + 1).padStart(2, '0')}
-              </span>
-              <div className='flex flex-col gap-grid-half'>
-                <h3 className='type-card-title'>{module.name}</h3>
-                <p className='text-base text-text-muted'>{module.job}</p>
-              </div>
-              {(module.insteadOf || module.example) && (
-                <RuledRow as='div' className='mt-auto pt-grid-1'>
-                  {module.insteadOf ? (
-                    <TagRow label='Instead of' tags={module.insteadOf} />
-                  ) : (
-                    <TagRow
-                      label='Built for'
-                      tags={([] as string[]).concat(module.example ?? [])}
-                    />
-                  )}
-                </RuledRow>
-              )}
-            </Card>
-          ))}
-          {offer.proof && (
-            <SideNote
-              as='li'
-              className='flex flex-col justify-center gap-grid-half py-grid-1 lg:col-span-2'
-            >
-              <p className='type-card-title'>{offer.proof}</p>
-              <p className='max-w-xl text-base text-text-muted'>
-                {PLATFORM_SHARED}{' '}
-                <Link href='/process#portal' className='link-inline'>
-                  See our portal
-                </Link>
-                .
-              </p>
-              <TagRow
-                label='Built for'
-                tags={['Place To Stand', '9 Point Studios', 'Up The Wall']}
-              />
-            </SideNote>
+    <Section id={id} className='flex scroll-mt-24 flex-col gap-stack'>
+      <div className='grid gap-stack lg:grid-cols-12 lg:gap-x-grid-2'>
+        <Reveal index={0} className='flex flex-col gap-stack lg:col-span-6'>
+          <KindHeading title={title} intro={intro} />
+          <SoundFamiliar quotes={quotes} />
+        </Reveal>
+        <Reveal index={1} className='lg:col-span-6 lg:self-center'>
+          {piece}
+        </Reveal>
+      </div>
+      <Reveal index={2}>
+        <ul
+          className={cn(
+            'grid gap-grid-1 md:grid-cols-2',
+            columns === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3'
           )}
+        >
+          {modules.map(module => (
+            <ModuleCard key={module.name} module={module} />
+          ))}
+          {after && <li className='flex items-center p-card'>{after}</li>}
         </ul>
       </Reveal>
     </Section>
   )
 }
 
-function OffersDetail() {
+/** Run your business (#run) or Sell online (#sell). */
+export function OfferDetail({ offer }: { offer: Offer }) {
+  const run = offer.slug === 'run'
   return (
-    <>
-      {OFFERS.map((offer, index) => (
-        <OfferDetail key={offer.slug} offer={offer} index={index} />
-      ))}
-      <Section id='ai-access' className='flex scroll-mt-24 flex-col gap-stack'>
-        <Reveal index={0}>
-          <SectionHeading
-            label='AI Access'
-            title={AI_ACCESS.title}
-            intro={AI_ACCESS.body}
-          />
-        </Reveal>
-      </Section>
-    </>
+    <KindSection
+      id={offer.slug}
+      title={offer.name}
+      intro={offer.summary}
+      quotes={offer.quotes}
+      piece={run ? <CrmPiece /> : <OrderIntakePiece />}
+      modules={offer.modules}
+      columns={run ? 4 : 3}
+      after={
+        run ? (
+          <ArrowLink href={'/platform/portal' as Route}>
+            See the portal it starts from
+          </ArrowLink>
+        ) : undefined
+      }
+    />
+  )
+}
+
+/** Senior help for your team (#senior-help). */
+export function SeniorHelpSection() {
+  return (
+    <KindSection
+      id='senior-help'
+      title={SENIOR_HELP.name}
+      intro={SENIOR_HELP.summary}
+      quotes={SENIOR_HELP.quotes}
+      piece={<CodeReviewPiece />}
+      modules={SENIOR_HELP.items}
+      columns={4}
+    />
+  )
+}
+
+/** One home for your data: the shared source under all three. */
+export function DataHomeSection() {
+  return (
+    <Section id='data' className='scroll-mt-24'>
+      <Reveal index={0}>
+        <SectionHeading
+          label={DATA_HOME.label}
+          title={DATA_HOME.title}
+          intro={DATA_HOME.body}
+        />
+      </Reveal>
+    </Section>
   )
 }

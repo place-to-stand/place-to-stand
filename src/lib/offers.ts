@@ -10,81 +10,116 @@ export type Module = {
   job: string
   /** Tools or habits this module stands in for ("Instead of"). */
   insteadOf?: string[]
-  /** A client who runs it, for e-commerce modules. */
-  /** Clients who run it, as "Built for" tags. */
-  example?: string | string[]
+  /** Clients who run it ("Built for"). */
+  builtFor?: string[]
 }
+
+/** A visitor's own words: the "Sound familiar?" lines on Platform. */
+export type Quote = string
 
 export type Offer = {
   /** Also the section id on Platform: /platform#run, /platform#sell. */
   slug: 'run' | 'sell'
   name: string
-  /** The line under the name: the tools people already know. */
+  /** The intro under the title on Platform. */
   summary: string
-  /** "Instead of" tags on the Home card, picked by hand. */
-  cardTags?: string[]
-  /** One line of proof under the modules on Platform. */
-  proof?: string
+  quotes: Quote[]
   modules: Module[]
 }
 
-/** True of every Run your business module; shown once under the grid. */
-export const PLATFORM_SHARED =
-  'Across all of it: one search, an AI connector that works with any model, and every person and every agent sees only what their role allows.'
-
-/** The built-in MCP connector, as its own block on Platform. */
-export const AI_ACCESS = {
-  title: 'Your AI can work in it too.',
-  body: 'Any AI assistant can read and update your data through a built-in connector (MCP). It follows the same roles as your team, so an agent can never see more than the person using it.',
+/** The Platform header (approved Nov 13). */
+export const PLATFORM_HEADER = {
+  label: 'Platform',
+  title: 'Software you own, built around how you work.',
+  intro:
+    'One team, three kinds of work: systems that run the business, stores that sell, and senior help for teams that already write code. Each piece works on its own, and they all share one home for your data.',
 }
 
-/** Closes the Platform intro. */
-export const MOBILE_APPS =
-  'We also build mobile apps for either one, for your team or your customers.'
+/** "Your data, ready for AI" on Platform (approved Nov 13). */
+export const DATA_HOME = {
+  label: 'Your Data, Ready for AI',
+  title: 'One home for your data.',
+  body: "Everything we build shares one source of data, so you can answer questions about your business in one place. Your own AI tools can work with it too, and each person's tools see only what their role allows.",
+}
 
+/** "Senior help for your team" on Platform (#senior-help, approved Nov 13). */
+export const SENIOR_HELP = {
+  name: 'Senior help for your team',
+  summary:
+    'For teams that already have code, and sometimes developers, and need someone senior beside them.',
+  quotes: [
+    'We need a developer but can’t hire one full-time.',
+    'Someone built this for us and disappeared.',
+    'We built it with AI and now it keeps breaking.',
+  ],
+  items: [
+    {
+      name: 'Pick up where others left off',
+      job: 'We read what’s there, tell you plainly what state it’s in, and fix what matters first.',
+    },
+    {
+      name: 'Make an AI-built first version solid',
+      job: 'Tests, security, hosting and the parts that break under real use.',
+    },
+    {
+      name: 'Work beside your developers',
+      job: 'Senior engineers on your team for as many hours as you need.',
+    },
+    {
+      name: 'Technical consulting',
+      job: 'Advice on what to build, buy or hire for, from people who build every day.',
+    },
+  ],
+}
+
+/** The two product offers (approved Nov 13). */
 export const OFFERS: Offer[] = [
   {
     slug: 'run',
     name: 'Run your business',
     summary:
-      'CRM, projects and workflows in one system you own, instead of HubSpot, Asana and spreadsheets.',
-    cardTags: ['HubSpot', 'Asana', 'Monday', 'Harvest', 'Zapier'],
-    proof: 'We run Place To Stand on the same platform.',
+      'One system for the work behind the scenes, built around how your team works. It starts as a copy of the portal we run on, trimmed to what you need.',
+    quotes: [
+      'We run this on spreadsheets and it’s breaking.',
+      'We pay for five tools that don’t talk to each other.',
+      'Per-seat pricing is killing us. We can’t add people without the software bill doubling.',
+      'One admin task eats my week and I can’t grow the business around it.',
+      'I have all this data and still can’t answer one simple question about my business.',
+    ],
     modules: [
       {
         name: 'Team workspace',
-        job: 'Projects, tasks and time logs in one place.',
+        job: 'Clients, projects, tasks and time in one place.',
         insteadOf: ['Monday', 'Asana', 'ClickUp'],
       },
       {
-        name: 'Website',
-        job: 'Marketing site design and development, with every form feeding your CRM.',
-        insteadOf: ['Webflow', 'Squarespace', 'WordPress'],
-      },
-      {
         name: 'CRM',
-        job: "Leads, companies and people, with your website's forms landing straight in.",
+        job: 'Every lead, contact and company, with its whole history.',
         insteadOf: ['HubSpot', 'Salesforce', 'Pipedrive'],
       },
       {
-        name: 'Billing',
-        job: 'Invoices and prepaid hour blocks, drawn from the same time logs.',
-        insteadOf: ['Harvest', 'FreshBooks'],
+        name: 'Workflows',
+        job: 'The steps your team repeats, done the same way every time.',
+        insteadOf: ['Spreadsheets', 'Checklists'],
       },
       {
-        name: 'Reports',
-        job: 'The monthly close and live numbers from your own data.',
-        insteadOf: ['Exported spreadsheets'],
+        name: 'Automations',
+        job: 'Work that runs on its own: reports, reminders, syncing data between tools.',
+        insteadOf: ['Zapier', 'Make'],
       },
       {
         name: 'Client portal',
-        job: 'Where your customers check progress, approve work and pay.',
+        job: 'Where your customers check progress, see their hours and pay.',
         insteadOf: ['Emailed PDFs', 'Status calls'],
       },
       {
-        name: 'Workflows and automations',
-        job: 'The steps your team repeats, plus syncing with the tools you keep.',
-        insteadOf: ['Zapier', 'Make'],
+        name: 'Reports',
+        job: 'Live numbers from your own data.',
+        insteadOf: ['Exported spreadsheets'],
+      },
+      {
+        name: 'Website',
+        job: 'Your marketing site, designed and built by us, with every form feeding the CRM. Our own site is the proof.',
       },
     ],
   },
@@ -92,42 +127,43 @@ export const OFFERS: Offer[] = [
     slug: 'sell',
     name: 'Sell online',
     summary:
-      'Shopify stores or fully custom marketplaces, plus the systems behind them: payments, fulfillment and dropshipping.',
+      'Custom stores and marketplaces for things standard store tools can’t sell well, on Shopify when it fits.',
+    quotes: [
+      'Our Shopify store can’t do the thing we need.',
+      'Orders come in by DM, text and email, and we lose track of them.',
+      'Off-the-shelf store tools weren’t built to sell what we sell.',
+    ],
     modules: [
       {
-        name: 'Shopify stores',
-        job: 'Themes and headless storefronts your team can change without a developer.',
-        example: 'hotones.com',
-      },
-      {
         name: 'Custom marketplaces',
-        job: 'Buyers and sellers on one platform you own.',
-        example: 'GreenWATT USA',
+        job: 'Buyers and sellers, or leads and installers, on one platform you own.',
+        builtFor: ['GreenWATT USA (solar leads)'],
       },
       {
-        name: 'Shopify apps and functions',
-        job: 'Checkout rules, order routing and discounts that extend Shopify.',
-        example: 'Heatonist',
+        name: 'Shopify stores and apps',
+        job: 'Themes, headless storefronts and apps for checkout rules and discounts Shopify can’t do alone.',
+        builtFor: ['Heatonist', 'Hot Ones', 'Blake Brown Beauty'],
+      },
+      {
+        name: 'Made-to-order and drop-ship',
+        job: 'Products made or shipped by someone else, sold as if they were on your shelf.',
+        builtFor: ['Up the Wall (print on demand)'],
+      },
+      {
+        name: 'Order intake',
+        job: 'One form that sends every order, files and all, to a single queue, instead of hunting through DMs and email threads.',
       },
       {
         name: 'Payments',
         job: 'Checkout, subscriptions and invoices through Stripe.',
-        example: ['Heatonist', 'GreenWATT', '9 Point Studios'],
       },
       {
-        name: 'Fulfillment and inventory',
-        job: 'Each order goes to the right warehouse, and stock stays in step across channels.',
-        example: 'Heatonist',
+        name: 'Order routing',
+        job: 'Each order goes to the right warehouse at checkout, so no one sorts them by hand.',
+        builtFor: ['Heatonist'],
       },
     ],
   },
-]
-
-/** Clients shown under "Sell online" on Home. */
-export const SELL_ONLINE_CLIENTS = [
-  'Hot Ones',
-  'Heatonist',
-  'Blake Brown Beauty',
 ]
 
 /** The ownership promise (approved Nov 13). The full six lines live only on
@@ -238,18 +274,22 @@ export const STEPS: Step[] = [
   },
 ]
 
+/** After launch on Platform (#after-launch, approved Nov 13). */
+export const AFTER_LAUNCH_INTRO =
+  'Once the first build is live, you choose how much help you want.'
+
 export const AFTER_LAUNCH = [
   {
     name: 'Managed services',
-    body: 'We keep it running: security updates, error and speed monitoring, analytics and SEO reports, data checks, a weekly email, and a shared channel in Slack, Teams, Google Chat or Discord. Ask us for a price.',
-  },
-  {
-    name: 'Technical consulting',
-    body: 'Advice on what to build, buy or hire for, from people who build every day.',
+    body: 'We keep it running: security updates, error and speed checks, analytics and SEO reports, data checks, a weekly email, and a shared channel in Slack, Teams, Google Chat or Discord. Ask us for a price.',
   },
   {
     name: 'Training',
     body: 'We teach your team to use AI tools on their own real tasks while we build.',
+  },
+  {
+    name: 'The next fix',
+    body: 'When something else starts to hurt, we start on it.',
   },
 ]
 
@@ -265,12 +305,8 @@ export const PAYMENT = {
 
 export const FAQ = [
   {
-    q: 'How do we start?',
-    a: 'With a block of at least five prepaid hours. You see every hour in your portal.',
-  },
-  {
     q: 'How soon will something work?',
-    a: 'The first problem is usually solved in 2 to 6 weeks.',
+    a: 'The first fix is usually in daily use within 2 to 6 weeks.',
   },
   {
     q: 'Do I have to replace my software?',
@@ -278,16 +314,31 @@ export const FAQ = [
   },
   {
     q: "How much of my team's time does it take?",
-    a: 'A few hours in the first two weeks, then a short weekly check-in.',
+    a: 'A few hours in the first two weeks, then a short check-in every week or two.',
   },
-  { q: 'Who owns the code?', a: 'You do, along with your data.' },
   {
-    q: 'What happens after launch?',
-    a: "We keep it running and answer in a shared channel, we teach your team to change it, and we start the next problem when you're ready.",
+    q: 'We built it with AI and now it keeps breaking. Can you help?',
+    a: "Yes. We read what you have, tell you plainly what's wrong, then fix it or rebuild the parts that need it.",
   },
+  {
+    q: 'We have developers. Can you work with them?',
+    a: 'Yes. We can join your team, review its code, or advise on what to build, buy or hire for.',
+  },
+  {
+    q: 'Who owns the code?',
+    a: 'You do, along with your data and your accounts.',
+  },
+  { q: 'Does my data train AI?', a: 'No. Never.' },
   {
     q: 'How do you charge?',
-    a: 'Only for the hours a person works on your project.',
+    a: "Only for the hours a person works on your project. You buy hours in prepaid blocks. They aren't refunded, but they never expire.",
   },
-  { q: 'Can I leave?', a: 'Any time.' },
+  {
+    q: 'What happens after launch?',
+    a: "You choose. If you want, we keep it running for an agreed price, with a shared channel for your team. We can teach your team to change it, and we start the next fix when you're ready. Either way, we're always an email or a message away.",
+  },
+  {
+    q: 'Can I leave?',
+    a: "Any time. There's no contract to get out of. Hours you haven't used never expire, so they're there if you come back, and you keep everything we built.",
+  },
 ]
