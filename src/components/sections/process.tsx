@@ -42,7 +42,7 @@ function StepsCards({
       <Reveal index={0}>
         <SectionHeading
           label='How It Works'
-          title='One problem at a time, solved all the way.'
+          title='Start where it hurts most.'
         />
       </Reveal>
       <Reveal index={1}>
@@ -69,17 +69,14 @@ function StepsCards({
       </Reveal>
       {showBilling && (
         <Reveal index={2}>
-          <SideNote className='flex flex-col gap-grid-half'>
-            <p className='type-card-title'>{BILLING.title}</p>
-            <p className='max-w-3xl text-base text-text-muted'>
-              {BILLING.body}
-            </p>
+          <SideNote>
+            <p className='max-w-3xl text-base text-text-muted'>{BILLING}</p>
           </SideNote>
         </Reveal>
       )}
       {showLink && (
         <Reveal index={3}>
-          <ArrowLink href='/process'>How we work</ArrowLink>
+          <ArrowLink href='/process'>See the full process</ArrowLink>
         </Reveal>
       )}
     </Section>

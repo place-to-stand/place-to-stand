@@ -125,7 +125,6 @@ export function ContactTemplate() {
           <Reveal index={2} className='flex flex-col items-start gap-grid-half'>
             <BookCallButton
               location='contact'
-              toCalendar
               className='w-full sm:w-auto sm:min-w-60'
             />
             <p className='type-fine'>Opens our calendar in a new tab.</p>

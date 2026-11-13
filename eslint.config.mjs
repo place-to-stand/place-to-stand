@@ -55,7 +55,8 @@ const eslintConfig = defineConfig([
   // themselves and the corner marks; site chrome (header, footer, the hero's
   // closing rule, the logo square); form controls and the audit tool, whose
   // borders show state (selected, active step, locked); the portal flow's
-  // step dots; and /design, which shows raw specimens.
+  // step dots; lifted-out UI pieces, whose lines are the client app's own
+  // (UiPiece and patterns/pieces); and /design, which shows raw specimens.
   {
     files: [
       'src/components/boxes/*.tsx',
@@ -64,6 +65,8 @@ const eslintConfig = defineConfig([
       'src/components/primitives/logo-mark.tsx',
       'src/components/sections/hero-section.tsx',
       'src/components/sections/portal-flow.tsx',
+      'src/components/patterns/ui-piece.tsx',
+      'src/components/patterns/pieces/**/*.tsx',
       'src/components/primitives/heard-from-field.tsx',
       'src/components/primitives/select.tsx',
       'src/components/sections/audit/**/*.tsx',

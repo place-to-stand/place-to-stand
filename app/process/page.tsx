@@ -12,7 +12,7 @@ import { PortalSection } from '@/src/components/sections/portal-section'
 import { StepsSection } from '@/src/components/sections/process'
 import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/primitives/vendor-icons'
-import { BILLING, FAQ } from '@/src/lib/offers'
+import { PAYMENT, FAQ } from '@/src/lib/offers'
 import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
@@ -79,8 +79,8 @@ export default function ProcessPage() {
           <Reveal index={2} className='flex flex-col gap-stack'>
             <SectionHeading
               label='How You Pay'
-              title={BILLING.title}
-              intro={BILLING.body}
+              title={PAYMENT.title}
+              intro={PAYMENT.body}
             />
           </Reveal>
         </Section>

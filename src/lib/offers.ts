@@ -130,36 +130,34 @@ export const SELL_ONLINE_CLIENTS = [
   'Blake Brown Beauty',
 ]
 
-/** The ownership promise: the same seven lines on Home, Platform and About. */
+/** The ownership promise (approved Nov 13). The full six lines live only on
+ *  Platform (#own); Home shows the short version and links there. */
 export const OWNERSHIP_TITLE = 'You own all of it.'
 
 export const OWNERSHIP = [
   { title: 'Your code.', body: 'Everything we build for you is yours.' },
   {
     title: 'Your data.',
-    body: 'We touch it only to do the work, and it never trains AI.',
+    body: 'We use it only to do the work, and it never trains AI.',
   },
   {
-    title: 'Your accounts.',
-    body: 'Your software runs on hosting in your name, not ours.',
+    title: 'Your infrastructure.',
+    body: 'It runs on accounts in your name, not ours.',
   },
+  { title: 'No seat fees.', body: 'Add people without paying more.' },
   {
-    title: 'No license or seat fees.',
-    body: 'Add people without paying more.',
-  },
-  {
-    title: 'Free use of our tools.',
-    body: 'Any of our own code inside your software is yours to use, free and for good.',
+    title: 'No paying twice.',
+    body: 'Features our portal already has cost nothing; you pay for the hours to install and change them.',
   },
   {
     title: 'No lock-in.',
     body: 'Walk away any time and take it all with you.',
   },
-  {
-    title: 'One home for your data.',
-    body: 'Everything in one place, ready for your team and your AI agents.',
-  },
 ]
+
+/** Home's short version of the ownership promise. */
+export const OWNERSHIP_SHORT =
+  'Your code, your data and your accounts, running on your own infrastructure. No seat fees, no lock-in, and your data never trains AI.'
 
 /** "Who you work with": Home, About's intro and the audit landing. */
 export const WHO_YOU_WORK_WITH = {
@@ -193,50 +191,50 @@ export type Step = {
   detail: string
 }
 
+/** The five steps (approved Nov 13): `summary` is Home's wording, `detail`
+ *  Process's longer wording. */
 export const STEPS: Step[] = [
   {
     number: '01',
     name: 'Intro call',
-    time: '30 min · Free',
+    time: '30 min, free',
     summary:
-      "Tell us what you need and roughly how big it is. We'll say plainly if we're the right fit.",
+      "Tell us what's wrong and we'll say plainly if we're the right fit.",
     detail:
-      "Tell us what you need and roughly how big it is. We'll say plainly if we're the right fit.",
+      "Tell us what's wrong and roughly how big it is. We'll say plainly if we're the right fit.",
   },
   {
     number: '02',
-    name: 'Discovery session',
+    name: 'Discovery',
     time: '1 hour',
-    summary:
-      'We dig into what slows the business down and ask the questions that shape the plan.',
+    summary: 'We dig into what slows the business down.',
     detail:
-      'You tell us what slows the business down, and we ask the questions that shape the plan.',
+      'You walk us through what slows the business down, and we ask the questions that shape the plan.',
   },
   {
     number: '03',
     name: 'Meet your team',
     time: '1 to 2 weeks',
     summary:
-      'We sit with the people who live the problem, then send a written plan and estimate.',
+      'We sit with the people who feel the problem, then send a written plan and estimate.',
     detail:
-      'We sit with the people who do the work and feel the problem every day. Then you get a written plan: what we’d build first, how long it takes, and what it costs.',
+      'We sit with the people who do the work and feel the problem every day. Then you get a written plan: what we’d fix first, how long it takes and how many hours it needs.',
   },
   {
     number: '04',
-    name: 'Solve one problem',
+    name: 'Fix the biggest pain',
     time: '2 to 6 weeks',
-    summary:
-      'We build one thing completely and put it into daily use. Not a demo.',
+    summary: 'Built all the way and in daily use, not a demo.',
     detail:
-      'We build one thing completely, connect it to the tools you keep, and put it into daily use.',
+      'We build it all the way, connect it to the tools you keep, and put it into daily use. Not a demo.',
   },
   {
     number: '05',
-    name: 'Grow from there',
+    name: 'Then the next one',
     time: 'Days, not months',
-    summary:
-      'Your data already sits in one place, so each next problem goes faster.',
-    detail: 'With your data in one place, each next problem takes days.',
+    summary: 'Your data is already in one place, so each fix goes faster.',
+    detail:
+      'Your data already sits in one place, so each next fix goes faster.',
   },
 ]
 
@@ -255,9 +253,14 @@ export const AFTER_LAUNCH = [
   },
 ]
 
-export const BILLING = {
+/** The billing promise under the steps on Home (approved Nov 13). */
+export const BILLING =
+  "You pay for people's time, nothing else. Hours come in prepaid blocks, five to start, and they never expire. AI costs nothing extra, and neither do features our portal already has. Walk away any time."
+
+/** "How you pay" on Process (approved Nov 13). */
+export const PAYMENT = {
   title: "You pay for people's time. Nothing else.",
-  body: 'We bill only for the hours a person spends on your work, in prepaid blocks. AI tools and agents that run in the background cost you nothing extra. No long-term contract: walk away any time.',
+  body: 'We bill only for the hours a person spends on your work. Hours come in prepaid blocks, five to start, and they never expire. AI tools and agents cost nothing extra, and neither do features our portal already has: you pay only for the time to set them up and shape them. No contract. Walk away any time.',
 }
 
 export const FAQ = [

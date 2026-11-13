@@ -1,36 +1,44 @@
+import type { Route } from 'next'
 import { AuditLink, BookCallGroup } from '@/src/components/primitives/cta'
 import {
   AnimatedSection,
   Reveal,
 } from '@/src/components/primitives/animated-section'
+import { Button } from '@/src/components/primitives/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { Callout } from '@/src/components/boxes'
 
-const DEFAULT_DESCRIPTION =
-  "Book a free 30-minute intro call. Tell us what you need, and we'll say plainly whether we can help."
+/** The closing title on Home, Platform, Process, Clients and About
+ *  (approved Nov 13). */
+export const CTA_BAND_TITLE = 'Tell us where it hurts most.'
 
 /**
- * The closing "Tell us what's slowing you down" callout: a card in a band of blueprint
- * dots that runs down to the footer. Put it last in <main id='main'>, right after a
- * block that ends with pb-edge. Its padding is the band role, so the dots'
- * top rule sits on its top edge: one edge gap under the content above.
+ * The closing callout: a card in a band of blueprint dots that runs down to
+ * the footer. Put it last in <main id='main'>, right after a block that ends
+ * with pb-edge. Its padding is the band role, so the dots' top rule sits on
+ * its top edge: one edge gap under the content above.
  */
 export function CtaBand({
   location,
-  title = "Tell us what's slowing you down.",
-  description = DEFAULT_DESCRIPTION,
+  title = CTA_BAND_TITLE,
+  description,
   label = 'Next Step',
   action = 'call',
+  secondary,
 }: {
-  /** Analytics location for the two links, e.g. 'home-cta-block'. */
+  /** Analytics location for the links, e.g. 'home-cta-block'. */
   location: string
   title?: string
   description?: string
   label?: string
-  /** 'call': the Book a call button with the audit link under it (every
-   *  page). 'audit': the audit link alone, for the Contact page, which
-   *  already offers the call above. */
+  /** 'call': the Book a call button with "or send us a note" under it (every
+   *  page). 'audit': the audit link alone. */
   action?: 'call' | 'audit'
+  /** A second button beside Book a call, in place of the note line (Portal:
+   *  "See the code"). External links open in a new tab. */
+  secondary?: { label: string; href: string }
 }) {
+  const external = secondary?.href.startsWith('http')
   return (
     <AnimatedSection className='py-band'>
       <Callout band>
@@ -40,22 +48,45 @@ export function CtaBand({
               <span className='bp-label font-mono'>{label}</span>
               <h2 className='type-section-title'>{title}</h2>
             </Reveal>
-            <Reveal index={1} className='max-w-md text-base text-text-muted'>
-              <p>{description}</p>
-            </Reveal>
+            {description && (
+              <Reveal index={1} className='max-w-md text-base text-text-muted'>
+                <p>{description}</p>
+              </Reveal>
+            )}
           </div>
           <Reveal
             index={2}
-            className='flex w-full shrink-0 flex-col items-center gap-grid-1 sm:w-auto sm:items-start'
+            className='flex w-full shrink-0 flex-col items-center gap-grid-1 sm:w-auto sm:flex-row sm:items-start sm:gap-grid-half'
           >
-            {action === 'call' ? (
-              <BookCallGroup
-                location={location}
-                className='w-full sm:w-auto'
-                buttonClassName='w-full sm:min-w-60'
-              />
-            ) : (
+            {action === 'audit' ? (
               <AuditLink location={location} />
+            ) : (
+              <>
+                <BookCallGroup
+                  location={location}
+                  secondary={secondary ? 'none' : 'note'}
+                  className='w-full sm:w-auto'
+                  buttonClassName='w-full sm:min-w-60'
+                />
+                {secondary && (
+                  <Button
+                    asChild
+                    size='lg'
+                    variant='outline'
+                    className='w-full sm:w-auto'
+                  >
+                    <TrackedLink
+                      href={secondary.href as Route}
+                      location={location}
+                      {...(external
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                    >
+                      {secondary.label}
+                    </TrackedLink>
+                  </Button>
+                )}
+              </>
             )}
           </Reveal>
         </div>

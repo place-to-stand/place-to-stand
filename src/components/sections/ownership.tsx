@@ -1,20 +1,39 @@
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { RuledRow } from '@/src/components/boxes'
-import { OWNERSHIP, OWNERSHIP_TITLE } from '@/src/lib/offers'
+import { ArrowLink } from '@/src/components/patterns/arrow-link'
+import { OWNERSHIP, OWNERSHIP_SHORT, OWNERSHIP_TITLE } from '@/src/lib/offers'
 import { cn } from '@/src/lib/utils'
 
 /**
- * The ownership promise as a set piece. It always sits in a dark band: the
- * same treatment on Home, Platform and About.
+ * The ownership promise as a set piece, in a dark band. Variants:
+ * - full: the six lines (Platform, #own). The only full ownership block.
+ * - short: the title, one line and a link to the full list (Home).
  */
 export function OwnershipSection({
+  variant = 'full',
   title = OWNERSHIP_TITLE,
   items = OWNERSHIP,
 }: {
+  variant?: 'full' | 'short'
   title?: string
   items?: { title: string; body: string }[]
 }) {
+  if (variant === 'short')
+    return (
+      <Section className='flex flex-col gap-stack'>
+        <Reveal index={0}>
+          <SectionHeading
+            label='What You Own'
+            title={title}
+            intro={OWNERSHIP_SHORT}
+          />
+        </Reveal>
+        <Reveal index={1}>
+          <ArrowLink href='/platform#own'>What you own, in full</ArrowLink>
+        </Reveal>
+      </Section>
+    )
   return (
     <Section className='flex flex-col gap-stack'>
       <Reveal index={0}>
