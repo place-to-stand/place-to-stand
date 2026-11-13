@@ -30,7 +30,7 @@ const LEADS = [
   {
     name: 'Harbor & Pine',
     source: 'Referral',
-    stage: 'Proposal',
+    stage: 'Scoping',
     when: '2 days ago',
   },
   {
