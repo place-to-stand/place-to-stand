@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react'
 import { Button } from '@/src/components/primitives/button'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
-import { BookCallGroup } from '@/src/components/primitives/cta'
+import { AuditLink, BookCallGroup } from '@/src/components/primitives/cta'
+import { HOME_HERO } from '@/src/lib/home'
 import { BlueprintCorners } from '@/src/components/boxes/corners'
 import { HeroGraphic } from '@/src/components/patterns/drawings/hero-graphic'
 import { HeroDrawingSlot } from '@/src/components/sections/hero-drawing-slot'
@@ -67,8 +68,8 @@ export function HeroSection() {
 
           {/* Supporting subtext + CTA (left) beside the comparison graphic (right).
               Phones put the drawing first (order-1), then the text column: a
-              one-sentence pitch, then the button and fine print, 36px apart
-              (48px on laptops); the rest of the copy is hidden. Side by side, the drawing's ink sits 28px
+              two-sentence pitch, then the button and fine print, 36px apart
+              (48px on laptops). Side by side, the drawing's ink sits 28px
               in from the corner mark, and so does the text column once the nav
               shows in full (lg; under it, with the menu button, the text is not
               inset), which reads level
@@ -91,13 +92,9 @@ export function HeroSection() {
                     {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
                     <p className='text-base text-balance text-text lg:text-xl'>
                       <strong className='font-semibold'>
-                        Systems that run your business and stores that sell,
+                        {HOME_HERO.lead}
                       </strong>{' '}
-                      for teams without engineers of their own.
-                      <span className='hidden md:inline'>
-                        {' '}
-                        No more juggling a stack of bloated SaaS products.
-                      </span>
+                      {HOME_HERO.rest}
                     </p>
                   </div>
                 </div>
@@ -106,12 +103,24 @@ export function HeroSection() {
                   style={{ animationDelay: '1s' }}
                 >
                   <div className='flex flex-col gap-grid-1 sm:flex-row sm:items-start sm:gap-grid-half'>
-                    <BookCallGroup
-                      location='hero'
-                      className='w-full sm:w-auto'
-                      buttonClassName='w-full md:min-w-60'
-                      data-pts-hero-cta
-                    />
+                    {/* The button with "Not ready to talk? Take the free
+                        audit." under it, in the same mono line style as
+                        BookCallGroup's "or …" line: centered on phones, and
+                        from sm up on one line from the button's left edge,
+                        running on under "See our work" (w-0, so the line
+                        never widens the button). */}
+                    <div className='flex w-full flex-col items-center gap-grid-1 sm:w-auto sm:items-start'>
+                      <BookCallGroup
+                        location='hero'
+                        secondary='none'
+                        className='w-full'
+                        buttonClassName='w-full md:min-w-60'
+                        data-pts-hero-cta
+                      />
+                      <p className='-mr-[0.1em] font-mono text-xs tracking-[0.1em] whitespace-nowrap text-text-muted uppercase sm:w-0'>
+                        {HOME_HERO.auditLead} <AuditLink location='hero' />
+                      </p>
+                    </div>
                     <Button
                       asChild
                       size='lg'

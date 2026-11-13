@@ -1,0 +1,80 @@
+/**
+ * Home page copy (approved Nov 13). The hero, steps, ownership and closing
+ * band keep their copy in their own components and src/lib/offers.ts; this
+ * holds the sections built for Home: proof, the "Sound familiar?" groups and
+ * who you work with. Referral reuses WHO_YOU_WORK_WITH_HOME.
+ */
+
+export const HOME_HERO = {
+  lead: 'Your engineering team, by the hour.',
+  rest: 'Senior engineers who build software you own, ship it fast, and stay on after launch.',
+  auditLead: 'Not ready to talk?',
+} as const
+
+export const HOME_PROOF = {
+  label: 'Client Results',
+  title: 'Hot Ones and Heatonist, since 2023.',
+  body: "We build and run the online stores and Shopify apps for Heatonist and its long-time partner, Hot Ones. Over 1,400 changes shipped so far, and we're still on the team.",
+  links: [
+    { label: 'Read the Heatonist story', href: '/clients/heatonist' },
+    { label: 'See all clients', href: '/clients' },
+  ],
+} as const
+
+export const SOUND_FAMILIAR = {
+  label: 'Sound Familiar?',
+  title: 'Most clients start with one of these.',
+  groups: [
+    {
+      name: 'Run your business',
+      quotes: [
+        "We run this on spreadsheets and it's breaking.",
+        "We pay for five tools that don't talk to each other.",
+        "I have all this data and still can't answer one simple question about my business.",
+      ],
+      build:
+        'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is public.',
+      links: [
+        { label: 'See Run your business', href: '/platform#run' },
+        { label: 'See the portal', href: '/platform/portal' },
+      ],
+    },
+    {
+      name: 'Sell online',
+      quotes: [
+        "Our Shopify store can't do the thing we need.",
+        'Orders come in by DM, text and phone, and we lose track of them.',
+        "Off-the-shelf store tools weren't built to sell what we sell.",
+      ],
+      build:
+        'Custom stores and marketplaces, on Shopify when it fits. Or one order form that sends every request, files and all, to a single queue.',
+      links: [{ label: 'See Sell online', href: '/platform#sell' }],
+    },
+    {
+      name: 'Senior help',
+      quotes: [
+        "We need a developer but can't hire one full-time.",
+        'Someone built this for us and disappeared.',
+        'We built it with AI and now it keeps breaking.',
+      ],
+      build:
+        "We pick up where others left off, or work beside your developers. When you need advice more than code, that's technical consulting.",
+      links: [
+        { label: 'See how we help teams', href: '/platform#senior-help' },
+      ],
+    },
+  ],
+} as const
+
+export const WHO_YOU_WORK_WITH_HOME = {
+  label: 'Who You Work With',
+  title: 'The people on the call build it.',
+  body: "No account managers and no handoffs. Humans decide what to build, AI agents write much of the code, and nothing ships until one of us has checked it. That's how we work up to 5x faster than a traditional team.",
+  /** Home's one line per founder, matched to src/lib/team.ts by name. */
+  founders: {
+    'Jason Desiderio':
+      'Years of leading engineering teams, including at Squarespace.',
+    'Kris Crawford':
+      'Designed physical systems meant to last decades before he turned to software, and has run his own businesses for ten years.',
+  } as Record<string, string>,
+} as const

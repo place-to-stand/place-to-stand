@@ -1,45 +1,40 @@
 import { Hero } from '@/src/components/sections/hero'
 import { ClientLogosSection } from '@/src/components/sections/client-logos-section'
-import { ManifestoSection } from '@/src/components/sections/manifesto-section'
-import { OffersSection } from '@/src/components/sections/offers'
-import { ResultsSection } from '@/src/components/sections/results'
+import { ProofSection } from '@/src/components/sections/proof'
+import { SoundFamiliarSection } from '@/src/components/sections/sound-familiar'
+import { WhoYouWorkWithSection } from '@/src/components/sections/who-you-work-with'
 import { StepsSection } from '@/src/components/sections/process'
-import { AfterLaunchSection } from '@/src/components/sections/after-launch'
 import { OwnershipSection } from '@/src/components/sections/ownership'
 import { Band } from '@/src/components/patterns/section'
 import { CtaBand } from '@/src/components/sections/cta-band'
 
-/** The Home page: hero, logos, then light and dark bands of sections and the closing band. */
+/** The Home page (approved Nov 13): hero, logos and proof, then light and
+ *  dark bands of sections and the closing band. */
 export function HomeTemplate() {
   return (
     <main id='main' className='flex-1'>
       <Hero variant='home' />
-      {/* Dark under the hero for the logos, then alternating bands: light for
-          reading sections, dark for proof. Bands pad themselves by the section
-          role, so content-to-content spacing is the same everywhere. */}
-      <div className='py-edge'>
+      {/* The logos and the Heatonist proof share the dark under the hero,
+          then the bands alternate: light for reading sections, dark for the
+          founders and ownership. Bands pad themselves by the section role,
+          so content-to-content spacing is the same everywhere. */}
+      <Band tone='dark' className='pt-edge'>
         <ClientLogosSection />
-      </div>
+        <ProofSection />
+      </Band>
       <Band tone='light'>
-        <OffersSection />
+        <SoundFamiliarSection />
       </Band>
       <Band tone='dark'>
-        <ResultsSection />
+        <WhoYouWorkWithSection />
       </Band>
       <Band tone='light'>
         <StepsSection showBilling />
-        <AfterLaunchSection />
       </Band>
       <Band tone='dark'>
-        <OwnershipSection />
+        <OwnershipSection variant='short' />
       </Band>
-      <Band tone='light'>
-        <ManifestoSection />
-      </Band>
-      <CtaBand
-        location='home-cta-block'
-        title="Tell us what's slowing you down."
-      />
+      <CtaBand location='home-cta-block' />
     </main>
   )
 }

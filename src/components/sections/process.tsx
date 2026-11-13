@@ -46,14 +46,14 @@ function StepsCards({
         />
       </Reveal>
       <Reveal index={1}>
-        <ol className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-3'>
+        <ol className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5'>
           {STEPS.map(step => (
             <Card
               as='li'
               key={step.number}
               className='flex flex-col gap-grid-1'
             >
-              <div className='flex items-baseline justify-between gap-grid-half'>
+              <div className='flex flex-wrap items-baseline justify-between gap-grid-half'>
                 <span className='font-mono text-sm text-text-muted'>
                   {step.number}
                 </span>

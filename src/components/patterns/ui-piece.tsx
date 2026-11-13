@@ -27,6 +27,7 @@ export function UiPiece({
   alt,
   caption,
   width = 'md',
+  compact = false,
   className,
   children,
 }: {
@@ -36,6 +37,8 @@ export function UiPiece({
   caption?: ReactNode
   /** The piece's widest size on the stage. */
   width?: keyof typeof WIDTH
+  /** A shallower stage, where several pieces share a section (Home). */
+  compact?: boolean
   className?: string
   children: ReactNode
 }) {
@@ -44,7 +47,10 @@ export function UiPiece({
       <div
         role='img'
         aria-label={alt}
-        className='relative flex items-center justify-center bg-bg-card px-card py-grid-2 md:px-grid-2 md:py-grid-3'
+        className={cn(
+          'relative flex items-center justify-center bg-bg-card px-card py-grid-2 md:px-grid-2',
+          compact ? 'md:py-grid-2' : 'md:py-grid-3'
+        )}
       >
         <BlueprintCorners size={20} all />
         <div

@@ -4,6 +4,7 @@
  * duplicate them in either renderer.
  */
 import { OFFERS } from './offers'
+import { WHO_YOU_WORK_WITH_HOME } from './home'
 import { services } from './services'
 export const referralContent = {
   meta: {
@@ -22,8 +23,9 @@ export const referralContent = {
 
   whoWeAre: {
     label: 'Who we are',
-    headline: 'Off-the-shelf software is built for everyone. We build for you.',
-    body: 'Place To Stand builds custom software shaped to how a business actually runs, for companies that have real processes but no engineering team. The engineer who scopes the work is the one who builds it. No account managers, no handoffs.',
+    // Home's "Who you work with" title and body.
+    headline: WHO_YOU_WORK_WITH_HOME.title,
+    body: WHO_YOU_WORK_WITH_HOME.body,
     // The same lists as Platform: the two offers' modules, then the
     // after-launch services.
     services: [

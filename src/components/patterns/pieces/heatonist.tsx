@@ -11,6 +11,8 @@ import { cn } from '@/src/lib/utils'
  * Bottles are drawn as line work, the site's drawing language, not photos.
  */
 
+type PieceProps = { className?: string; compact?: boolean }
+
 /** A hot sauce bottle in line work. `level` fills the label in steps. */
 function Bottle({
   className,
@@ -59,12 +61,13 @@ function Heat({ level, of = 10 }: { level: number; of?: number }) {
   )
 }
 
-export function ProductCardPiece({ className }: { className?: string }) {
+export function ProductCardPiece({ className, compact }: PieceProps) {
   return (
     <UiPiece
       alt='A product card from the Heatonist store: a hot sauce bottle, its name, heat level 10 of 10 and an Add to cart button.'
       caption='Product card · heatonist.com'
       width='sm'
+      compact={compact}
       className={className}
     >
       <div className='flex flex-col'>
@@ -92,12 +95,13 @@ const CART = [
   { name: 'The Last Dab: Apollo', note: 'Limit 2 during Heat Week', qty: 2 },
 ]
 
-export function CartPiece({ className }: { className?: string }) {
+export function CartPiece({ className, compact }: PieceProps) {
   return (
     <UiPiece
       alt='The Heatonist cart: two items, a Heat Week purchase limit enforced by our checkout rule, and a Checkout button.'
       caption='Cart and checkout rules · heatonist.com'
       width='md'
+      compact={compact}
       className={className}
     >
       <div className='flex flex-col'>
@@ -136,12 +140,13 @@ export function CartPiece({ className }: { className?: string }) {
   )
 }
 
-export function LineupPiece({ className }: { className?: string }) {
+export function LineupPiece({ className, compact }: PieceProps) {
   return (
     <UiPiece
       alt='The Hot Ones lineup on hotones.com: ten sauces in a row, numbered 1 to 10 by heat.'
       caption='The lineup · hotones.com'
       width='lg'
+      compact={compact}
       className={className}
     >
       <div className='flex flex-col gap-grid-half p-grid-1'>
@@ -170,19 +175,20 @@ const CHANGES = [
   { tag: 'Promo', text: 'Banner, hero and prices, no developer needed' },
 ]
 
-export function ChangeLogPiece({ className }: { className?: string }) {
+export function ChangeLogPiece({ className, compact }: PieceProps) {
   return (
     <UiPiece
       alt='A strip of the Heatonist change log: search filters, Heat Week limits, order routing and promotions, part of more than 1,400 changes.'
       caption='Change log · 1,400+ changes since April 2023'
       width='lg'
+      compact={compact}
       className={className}
     >
       <ul className='flex flex-col'>
         {CHANGES.map((change, index) => (
           <li
             key={change.text}
-            className='flex items-center gap-grid-half border-b border-border px-grid-1 py-grid-half last:border-b-0'
+            className='flex items-start gap-grid-half border-b border-border px-grid-1 py-grid-half last:border-b-0'
           >
             <span
               className={cn(
@@ -193,9 +199,7 @@ export function ChangeLogPiece({ className }: { className?: string }) {
             <span className='w-20 shrink-0 font-mono text-xs text-text-muted uppercase'>
               {change.tag}
             </span>
-            <span className='min-w-0 flex-1 truncate text-sm'>
-              {change.text}
-            </span>
+            <span className='min-w-0 flex-1 text-sm'>{change.text}</span>
           </li>
         ))}
       </ul>
