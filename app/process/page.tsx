@@ -14,27 +14,19 @@ import { vendors } from '@/src/lib/vendors'
 import { vendorIcons } from '@/src/components/primitives/vendor-icons'
 import { PAYMENT, FAQ } from '@/src/lib/offers'
 import { Hero } from '@/src/components/sections/hero'
+import { BookCallGroup } from '@/src/components/primitives/cta'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Process',
   description:
-    'How we work: a free 30-minute intro call, a one-hour discovery session, time with your team, one problem solved completely, then the next. You pay only for hands-on human time.',
+    "How we work: a free 30-minute intro call, a one-hour discovery session, time with your team, the biggest pain fixed first, then the next. You pay only for people's time.",
   path: '/process',
 })
 
 const ONCE_IT_WORKS = [
-  'We keep it running, and you reach us in a shared channel in your Slack, Teams, Google Chat or Discord.',
+  'If you want, we keep it running for an agreed price, with a shared channel in your Slack, Teams or Google Chat.',
   'We teach your team to change it themselves, starting while we build.',
-  "When you're ready, we start on the next problem.",
-]
-
-// The stack, grouped by role.
-const stackGroups = [
-  { label: 'AI Models', items: vendors.filter(v => v.category === 'ai') },
-  {
-    label: 'Infrastructure',
-    items: vendors.filter(v => v.category === 'infra'),
-  },
+  'When something else starts to hurt, we start on it.',
 ]
 
 export default function ProcessPage() {
@@ -42,15 +34,27 @@ export default function ProcessPage() {
     <main id='main' className='flex-1 pt-page-start'>
       <Hero
         variant='page'
-        sectionClassName='pb-grid-2'
+        sectionClassName='flex flex-col gap-stack pb-grid-2'
         label='Process'
         title='We start with the people, not a feature list.'
-        intro='Most software fails because no one asked the people who use it. So we meet them first, fix one thing all the way, and grow from there.'
-      />
+        intro='Most software fails because no one asked the people who use it. So we meet them first, fix what hurts most, and grow from there.'
+      >
+        <BookCallGroup
+          location='process-hero'
+          className='w-full self-start sm:w-auto'
+          buttonClassName='w-full md:min-w-60'
+        />
+      </Hero>
 
       <Band tone='light'>
         <StepsSection variant='rows' />
+      </Band>
 
+      <Band tone='dark'>
+        <PortalSection />
+      </Band>
+
+      <Band tone='light'>
         <Section className='grid gap-stack lg:grid-cols-2 lg:gap-grid-4'>
           <div className='flex flex-col gap-stack'>
             <Reveal index={0}>
@@ -87,42 +91,41 @@ export default function ProcessPage() {
       </Band>
 
       <Band tone='dark'>
-        <PortalSection />
         <Section className='flex flex-col gap-stack'>
           <Reveal index={0}>
             <SectionHeading
               label='Our Stack'
-              title='What we build with.'
-              intro='Our preferred tools for speed and security. We have worked with plenty of others, and we fit in with what you already run.'
+              title='Our usual stack.'
+              intro="The tools we reach for first, because they're fast, safe and cheap to run."
             />
           </Reveal>
-          <Reveal index={1} className='flex flex-col gap-grid-2'>
-            {stackGroups.map(group => (
-              <div key={group.label} className='flex flex-col gap-grid-1'>
-                <span className='type-fine'>{group.label}</span>
-                <div className='grid grid-cols-2 gap-x-grid-half gap-y-grid-1 sm:grid-cols-4 md:flex md:flex-wrap md:items-center md:gap-x-grid-1 md:gap-y-grid-half'>
-                  {group.items.map(vendor => {
-                    const Icon = vendorIcons[vendor.name]
-                    return (
-                      <div
-                        key={vendor.name}
-                        className='flex flex-col items-center gap-grid-half md:w-24'
-                      >
-                        {Icon && (
-                          <Icon
-                            className='h-9 w-9 shrink-0 text-text'
-                            aria-hidden
-                          />
-                        )}
-                        <span className='type-fine whitespace-nowrap'>
-                          {vendor.name}
-                        </span>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            ))}
+          <Reveal index={1} className='flex flex-col gap-stack'>
+            <ul className='grid grid-cols-3 gap-x-grid-half gap-y-grid-1 sm:grid-cols-5 md:flex md:flex-wrap md:items-start md:gap-x-grid-1 md:gap-y-grid-1'>
+              {vendors.map(vendor => {
+                const Icon = vendorIcons[vendor.name]
+                return (
+                  <li
+                    key={vendor.name}
+                    className='flex flex-col items-center gap-grid-half md:w-24'
+                  >
+                    {Icon && (
+                      <Icon
+                        className='h-9 w-9 shrink-0 text-text'
+                        aria-hidden
+                      />
+                    )}
+                    <span className='type-fine whitespace-nowrap'>
+                      {vendor.name}
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+            <p className='max-w-2xl text-base text-text-muted'>
+              We also work in what you already run, like ChatGPT, Gemini,
+              Convex, AWS, Google Cloud, Google Workspace, Slack, Teams and
+              Google Chat.
+            </p>
           </Reveal>
         </Section>
       </Band>
@@ -152,10 +155,7 @@ export default function ProcessPage() {
         </Section>
       </Band>
 
-      <CtaBand
-        location='process-cta-block'
-        title="Tell us what's slowing you down."
-      />
+      <CtaBand location='process-cta-block' />
     </main>
   )
 }
