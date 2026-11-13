@@ -14,7 +14,6 @@ import { Select } from '@/src/components/primitives/select'
 import { usePostHog } from 'posthog-js/react'
 
 import { SectionHeading, Section } from '@/src/components/patterns/section'
-import { CONTACT_EMAIL } from '@/src/lib/site'
 import { Panel } from '@/src/components/boxes'
 import { FieldError } from '@/src/components/primitives/field-error'
 import { Button } from '@/src/components/primitives/button'
@@ -164,18 +163,9 @@ export function ContactSection() {
   return (
     <Section id='message' className='flex scroll-mt-24 flex-col gap-stack'>
       <SectionHeading
-        label='Send a Message'
+        label='Or Send Us a Message'
         title='Prefer to write?'
-        intro={
-          <>
-            Send a message and we&apos;ll get back to you within one business
-            day. Or email{' '}
-            <a href={`mailto:${CONTACT_EMAIL}`} className='link-inline'>
-              {CONTACT_EMAIL}
-            </a>
-            .
-          </>
-        }
+        intro="Send a note and we'll get back to you within one business day."
       />
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />

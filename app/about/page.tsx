@@ -1,14 +1,18 @@
 import type { Metadata } from 'next'
-import { Band, Section } from '@/src/components/patterns/section'
+import {
+  Band,
+  Section,
+  SectionHeading,
+} from '@/src/components/patterns/section'
 import { CtaBand } from '@/src/components/sections/cta-band'
-import { OwnershipSection } from '@/src/components/sections/ownership'
 import { pageMetadata } from '@/src/lib/page-metadata'
 import { JsonLd } from '@/src/components/seo/json-ld'
 import { teamJsonLd } from '@/src/lib/structured-data'
 import Image from 'next/image'
 import { team, type TeamMember } from '@/src/lib/team'
 import { cn } from '@/src/lib/utils'
-import { RuledRow } from '@/src/components/boxes'
+import { Reveal } from '@/src/components/primitives/animated-section'
+import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { SocialIcon } from '@/src/components/primitives/social-icon'
 import { ALT_ROW } from '@/src/components/patterns/alt-row'
 import { Hero } from '@/src/components/sections/hero'
@@ -21,15 +25,6 @@ export const metadata: Metadata = pageMetadata({
   path: '/about',
 })
 
-/**
- * One line per founder on what they build, taken from their bios. Kris's line
- * is adapted from his bio (approved Nov 10).
- */
-const WHAT_I_BUILD: Record<string, string> = {
-  'Jason Desiderio': 'Apps built to perform under real-world load.',
-  'Kris Crawford': 'Software built to last: measure twice, build once.',
-}
-
 export default function AboutPage() {
   return (
     <main id='main' className='flex-1 pt-page-start'>
@@ -39,7 +34,7 @@ export default function AboutPage() {
         sectionClassName='pb-grid-2'
         label='About'
         title='Founders who build.'
-        intro='We are senior engineers in Austin and Brooklyn. The people you meet on the first call are the people who build your software, and you own everything we make.'
+        intro='Senior engineers in Austin and Brooklyn, building for clients since 2023. The people on your first call are the people who build your software.'
       />
 
       <Band tone='light'>
@@ -93,17 +88,6 @@ export default function AboutPage() {
                     </div>
                     <p className='type-intro'>{member.bio}</p>
                   </div>
-                  {WHAT_I_BUILD[member.name] && (
-                    <RuledRow
-                      as='div'
-                      className='flex flex-col gap-grid-half pt-grid-1'
-                    >
-                      <span className='type-fine'>What I build</span>
-                      <p className='type-card-title'>
-                        {WHAT_I_BUILD[member.name]}
-                      </p>
-                    </RuledRow>
-                  )}
                   <SocialLinks member={member} />
                 </div>
               </article>
@@ -113,12 +97,24 @@ export default function AboutPage() {
       </Band>
 
       <Band tone='dark'>
-        <OwnershipSection />
+        <Section className='flex flex-col gap-stack'>
+          <Reveal index={0}>
+            <SectionHeading
+              label='How We Work'
+              title='No account managers. No handoffs.'
+              intro='You talk to our engineers from the first call to launch and after. We decide what to build with you, AI agents write much of the code, and nothing ships until one of us has checked it.'
+            />
+          </Reveal>
+          <Reveal
+            index={1}
+            className='flex flex-wrap gap-x-grid-2 gap-y-grid-half'
+          >
+            <ArrowLink href='/process'>See how we work</ArrowLink>
+            <ArrowLink href='/platform#own'>What you own, in full</ArrowLink>
+          </Reveal>
+        </Section>
       </Band>
-      <CtaBand
-        location='about-cta-block'
-        title="Tell us what's slowing you down."
-      />
+      <CtaBand location='about-cta-block' />
     </main>
   )
 }
