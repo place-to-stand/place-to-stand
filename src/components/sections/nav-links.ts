@@ -13,7 +13,16 @@ export type NavLink = (typeof NAV_LINKS)[number]
 export const FOOTER_GROUPS = [
   {
     label: 'Explore',
-    links: NAV_LINKS.filter(link => link.href !== '/contact'),
+    // The nav's pages minus Contact, with the Portal page under Platform (it
+    // isn't in the header nav).
+    links: [
+      { href: '/platform' as const, label: 'Platform' },
+      { href: '/platform/portal' as const, label: 'Portal' },
+      { href: '/process' as const, label: 'Process' },
+      { href: '/clients' as const, label: 'Clients' },
+      { href: '/about' as const, label: 'About' },
+      { href: '/blog' as const, label: 'Blog' },
+    ],
   },
   {
     label: 'Get started',
