@@ -1,8 +1,9 @@
 /**
  * Copy for the Heatonist case study, approved by Heatonist (Ty Bostain) on
- * Oct 22, 2026. The intro and the three stats are trimmed from that version;
- * every fact still comes from it. Keep hard traffic, order and dollar figures
- * out of it.
+ * Oct 22, 2026. The headline and intro are the Nov 13 versions (shared with
+ * /clients) and go past Ty before launch; the three stats are trimmed from
+ * the approved version, and every fact still comes from it. Keep hard
+ * traffic, order and dollar figures out of it.
  */
 
 export const heatonistCaseStudy = {
@@ -11,9 +12,9 @@ export const heatonistCaseStudy = {
   title: 'Heatonist Case Study',
   description:
     'How Place To Stand runs engineering for Heatonist and hotones.com: two busy Shopify stores, no full-time hire, and hotones.com built in under three months.',
-  headline: 'A tech team without the hire',
+  headline: 'Their engineering team, by the hour.',
   intro:
-    'Heatonist is the hot sauce shop behind the show Hot Ones. Since 2023 we have run engineering for both of its Shopify stores. Heatonist pays only for the hours we work, and never has to hire.',
+    "Heatonist and its long-time partner, Hot Ones, sell hot sauce to fans everywhere. Since 2023 we've run engineering for both of their Shopify stores, and Heatonist pays only for the hours we work.",
   /** Words in `intro` that link out, once. */
   introLink: { text: 'Hot Ones', href: 'https://hotones.com' },
   stats: [

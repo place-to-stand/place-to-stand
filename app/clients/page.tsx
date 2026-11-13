@@ -19,14 +19,14 @@ export default function ClientsPage() {
       <Hero
         variant='page'
         sectionClassName='pb-section'
-        label='Selected Clients'
-        title='Who we build for'
-        intro="Some of the brands we've built software for."
+        label='Clients'
+        title='Who we build for.'
+        intro="Stores, marketplaces and the systems behind them, for brands you know and some you'll meet here first."
       />
-      {/* Proof first: the case study clients, dark, then the rest of the
-          roster on a light band. */}
+      {/* Proof first: the case study, dark, then the client rows in three
+          groups on a light band. */}
       <Section id='case-study' className='scroll-mt-24 pb-band-pad'>
-        <ResultsSection variant='featured' />
+        <ResultsSection />
       </Section>
       <Band tone='light'>
         <Section id='clients' className='scroll-mt-24'>

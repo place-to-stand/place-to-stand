@@ -1,15 +1,8 @@
+/** A client in the logo wall (Home) and the audit page's logo strip. The
+ * rows on /clients are in `CLIENT_GROUPS` below. */
 export type Client = {
   title: string
   href: string
-  /** Screenshot for the /clients page; clients without one only appear in
-   * the homepage logo grid. */
-  image?: string
-  /** What the photo shows (Guidelines > Imagery: describe the work). */
-  imageAlt?: string
-  /** Shown on the /clients page, so only clients with an `image` need one. */
-  description?: string
-  /** One plain line on what we built for them, under the description. */
-  built?: string
   /** Brand logo on a transparent ground, for the homepage logo grid. Brands
    * that only publish a dark-on-light mark use their reversed lockup so they
    * read against the dark theme. */
@@ -27,9 +20,6 @@ export type Client = {
    * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
    * box up and leaves the heavy part sitting low. */
   logoNudge?: number
-  /** Site path of this client's case study. When set, the card on /clients
-   * opens the case study instead of the client's own site. */
-  caseStudy?: string
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
    * color fills (they'd flatten to a blob) opt into a gray version instead. */
@@ -49,58 +39,30 @@ export function logoToneClass(client: Client): string {
 export const clients: Client[] = [
   {
     title: 'Hot Ones',
-    built:
-      'We built hotones.com in about three months and run it alongside Heatonist.',
     href: 'https://hotones.com',
-    image: '/work-hot-ones-site.jpg',
-    imageAlt:
-      'The hotones.com home page: the Hot Ones hot sauce lineup beside the Experience the Show banner.',
     logo: '/logos/hot-ones.png',
-    caseStudy: '/clients/heatonist',
     logoScale: 0.72,
     logoNudge: -9,
     logoTone: 'gray',
-    description:
-      'The official online sauce shop for the hit interview show "Hot Ones."',
   },
   {
     title: 'Blake Brown Beauty',
-    built: 'We built its Shopify store.',
     href: 'https://blakebrownbeauty.com',
-    image: '/work-blake-brown-beauty-photo.jpg',
-    imageAlt:
-      'A model with full, tousled hair in a metallic jacket, from a Blake Brown Beauty campaign.',
     logo: '/logos/blake-brown-beauty.svg',
     logoScale: 0.58,
-    description:
-      'A direct-to-consumer brand focused on healthy, high-performance haircare founded by Blake Lively.',
   },
   {
     title: 'Florence by Mills Beauty',
-    built: 'We built its Shopify store.',
     href: 'https://florencebymillsbeauty.com',
-    image: '/work-florence-by-mills-beauty-photo.jpg',
-    imageAlt:
-      'Millie Bobby Brown among purple flowers in a Florence by Mills campaign photo.',
     logo: '/logos/florence-by-mills-beauty.png',
     logoScale: 0.62,
     logoNudge: 8,
-    description:
-      'A clean beauty and skincare line founded by Millie Bobby Brown.',
   },
   {
     title: 'Heatonist',
-    built:
-      'Since 2023, their engineering team: storefront rebuilds, sharper search and filters, and a custom app for order routing.',
     href: 'https://heatonist.com',
-    image: '/work-heatonist-photo.jpg',
-    imageAlt:
-      'Heatonist hot sauce poured over a burger at a backyard picnic table.',
     logo: '/logos/heatonist.svg',
-    caseStudy: '/clients/heatonist',
     logoScale: 0.48,
-    description:
-      "A curated marketplace for the world's best small-batch hot sauces.",
   },
   {
     title: 'Betsy & Adam',
@@ -123,43 +85,24 @@ export const clients: Client[] = [
   },
   {
     title: '9 Point Studios',
-    built:
-      'We built its website, plus the client portal and payments behind it.',
     href: 'https://9pointstudios.com',
-    image: '/work-9-point-studios-photo.jpg',
-    imageAlt:
-      'Two musicians playing acoustic guitars in a 9 Point Studios control room.',
     logo: '/logos/9-point-studios.svg',
     logoScale: 0.6,
     logoNudge: -2,
-    description:
-      'A world-class recording and video production facility for creative artists.',
   },
   {
     title: 'GreenWATT USA',
-    built:
-      'We built the marketplace from scratch, with customer intake and payments.',
     href: 'https://www.gtbsolarexchange.com',
-    image: '/work-greenwatt-usa-photo.jpg',
-    imageAlt: 'Rows of solar panels across a field, seen from above.',
     logo: '/logos/greenwatt-usa.png',
     logoScale: 0.65,
     logoNudge: 2,
-    description:
-      'A marketplace connecting community solar providers with enrollment-ready small commercial customers.',
   },
   {
     title: 'Officina del Bere 1397',
-    built: 'We built its Shopify stores.',
     href: 'https://officinadelbere1397.com',
-    image: '/work-officina-del-bere-1397-photo.jpg',
-    imageAlt:
-      'Shelves of wine and spirits under brass pendant lamps at Officina del Bere 1397.',
     logo: '/logos/officina-del-bere-1397.png',
     logoScale: 0.74,
     logoNudge: 2.5,
-    description:
-      'A specialty shop offering elegant, functional wine and bar accessories.',
   },
   {
     title: 'Safety Knights',
@@ -170,43 +113,22 @@ export const clients: Client[] = [
   },
   {
     title: 'Jeremy Turner',
-    built:
-      'We designed and built his studio site, plus sites for Echo & Wave and Small Isles.',
     href: 'https://jeremyturnerstudio.com',
-    image: '/work-jeremy-turner-photo.jpg',
-    imageAlt: 'Jeremy Turner in headphones, recording in the studio.',
     logo: '/logos/jeremy-turner.svg',
     logoScale: 0.39,
     logoNudge: 5,
-    description:
-      'A composer, conductor, and multi-instrumentalist creating innovative music for the moving image and the stage.',
   },
   {
     title: 'The Good for Nothings Club',
-    built:
-      "We designed and built the club's website, plus the portal that runs its outreach, applications, RSVPs and monthly close.",
     href: 'https://www.thegoodfornothings.club',
-    image: '/work-the-good-for-nothings-club-photo.jpg',
-    imageAlt:
-      'A rehearsal room with a drum kit, amps and guitars on the wall, lit red and green.',
     logo: '/logos/the-good-for-nothings-club.svg',
     logoScale: 0.68,
-    description:
-      'A creators club from Austin, TX made up of designers, engineers, filmmakers, musicians, and writers.',
   },
   {
-    title: 'Up The Wall',
-    built:
-      'We built its fulfillment admin and the custom dropshipping app that feeds it.',
+    title: 'Up the Wall',
     href: 'https://upthewall.co',
-    // 750px Instagram crop until Up the Wall sends a full-size original.
-    image: '/work-up-the-wall-photo.jpg',
-    imageAlt:
-      'A customer holding a Park & Hang movie poster printed by Up the Wall.',
     logo: '/logos/up-the-wall.svg',
     logoScale: 0.8,
-    description:
-      'Made-to-order print fulfillment for Shopify sellers. Sellers design it; Up the Wall prints, packs and ships it.',
   },
   {
     title: 'The Rounds',
@@ -241,8 +163,138 @@ export const clients: Client[] = [
     logo: '/logos/lifepacks.png',
     logoScale: 0.38,
     logoNudge: -3.5,
-    description:
-      'Easily create product guides and earn commission, just like the pros at Wirecutter and Consumer Reports.',
+  },
+]
+
+/** The site of a client in the list above, so the rows below reuse its URL.
+ * Throws on a typo so a row never ships without its link. */
+function site(title: string): string {
+  const client = clients.find(c => c.title === title)
+  if (!client) throw new Error(`No client named ${title}`)
+  return client.href
+}
+
+/** One row on /clients: who they are, what we built, and their sites (or,
+ * for us, a page on this site). */
+export type ClientRow = {
+  name: string
+  who: string
+  built: string
+  /** Their own sites, opened in a new tab. */
+  sites?: readonly string[]
+  /** A page on this site instead (our own row). */
+  page?: { href: string; label: string }
+}
+
+/** The rows on /clients, grouped like the Platform page so a visitor finds
+ * proof for the offer they came for (approved Nov 13). Safety Knights is a
+ * logo only, with no row. */
+export const CLIENT_GROUPS: ReadonlyArray<{
+  title: string
+  rows: readonly ClientRow[]
+}> = [
+  {
+    title: 'Sell online',
+    rows: [
+      {
+        name: 'Blake Brown Beauty',
+        who: 'Haircare founded by Blake Lively.',
+        built: 'We build and run its Shopify store.',
+        sites: [site('Blake Brown Beauty')],
+      },
+      {
+        name: 'Florence by Mills',
+        who: 'Clean beauty and skincare founded by Millie Bobby Brown.',
+        built: 'We built and ran its Shopify store.',
+        sites: [site('Florence by Mills Beauty')],
+      },
+      {
+        name: 'Betsy & Adam, Blondie Nites and Xscape Evenings',
+        who: 'Three eveningwear brands under one owner.',
+        built: 'We run all three Shopify stores.',
+        sites: [
+          site('Betsy & Adam'),
+          site('Blondie Nites'),
+          site('Xscape Evenings'),
+        ],
+      },
+      {
+        name: 'GreenWATT USA',
+        who: 'A marketplace that connects community solar providers with business customers ready to sign up.',
+        built: 'We built the marketplace and the way customers apply.',
+        sites: [site('GreenWATT USA')],
+      },
+      {
+        name: 'Up the Wall',
+        who: 'Print on demand for the highest-quality prints: “Design it, publish it, sell it. We’ll print it, pack it, and ship it.”',
+        built:
+          'We built the Shopify app behind it and their own copy of our portal.',
+        sites: [site('Up the Wall')],
+      },
+      {
+        // Only officinadelbere1397.com is on file; add the Officina 1397
+        // store's address here once we have it.
+        name: 'Officina del Bere 1397',
+        who: 'Wine and bar accessories.',
+        built:
+          'We built both of its Shopify stores, Officina 1397 and Officina del Bere 1397.',
+        sites: [site('Officina del Bere 1397')],
+      },
+      {
+        name: 'The Rounds',
+        who: 'A bakery in Brooklyn.',
+        built: 'We look after its Shopify store and keep adding to it.',
+        sites: [site('The Rounds')],
+      },
+    ],
+  },
+  {
+    title: 'Run your business',
+    rows: [
+      {
+        name: 'Place To Stand',
+        who: 'Us.',
+        built:
+          'We run our whole company on our portal: leads, projects, hours and invoices. The code is public.',
+        page: { href: '/platform/portal', label: 'See the portal' },
+      },
+      {
+        name: '9 Point Studios',
+        who: 'A recording and video studio for artists.',
+        built: 'They run on their own copy of our portal.',
+        sites: [site('9 Point Studios')],
+      },
+      {
+        name: 'The Good for Nothings Club',
+        who: 'A creators club in Austin.',
+        built: 'We built its website and member portal.',
+        sites: [site('The Good for Nothings Club')],
+      },
+    ],
+  },
+  {
+    title: 'Websites and products',
+    rows: [
+      {
+        name: 'Jeremy Turner',
+        who: 'A composer for film and stage.',
+        built:
+          "We built his studio's site and sites for two of his projects, Echo & Wave and Small Isles.",
+        sites: [site('Jeremy Turner')],
+      },
+      {
+        name: 'Lifepacks',
+        who: 'Product guides that earn their writers a commission.',
+        built: 'We built all of it.',
+        sites: [site('Lifepacks')],
+      },
+      {
+        name: 'so many cults',
+        who: 'A band.',
+        built: 'We built its website.',
+        sites: [site('so many cults')],
+      },
+    ],
   },
 ]
 
