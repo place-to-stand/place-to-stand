@@ -20,16 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/platform/portal`,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/audit`,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    // Temporarily unlinked — Field Notes content in progress, restore in a future update
-    // {
-    //   url: `${baseUrl}/field-notes`,
-    //   changeFrequency: 'weekly',
-    //   priority: 0.7,
-    // },
     {
       url: `${baseUrl}/about`,
       changeFrequency: 'monthly',

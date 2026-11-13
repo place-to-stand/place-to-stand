@@ -36,7 +36,7 @@ const PAGES = [
   '/audit',
   '/blog',
   '/blog/to-build-or-not-to-build',
-  '/field-notes',
+  '/platform/portal',
   '/privacy',
   '/terms',
   '/nope-404',
