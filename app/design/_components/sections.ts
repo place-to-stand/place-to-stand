@@ -34,15 +34,16 @@ export const DESIGN_SECTION_GROUPS = [
     sections: [
       { id: 'headings', label: 'Page and section headings' },
       { id: 'rows', label: 'Ruled rows' },
-      { id: 'alt-row', label: 'Alternating row' },
+      { id: 'grouped-rows', label: 'Grouped ruled rows' },
       { id: 'media', label: 'FAQ, logos, media' },
+      { id: 'pieces', label: 'Lifted-out UI pieces' },
     ],
   },
   {
     title: 'Sections',
     sections: [
-      { id: 'cards', label: 'Offers and steps' },
-      { id: 'featured', label: 'Results, featured' },
+      { id: 'cards', label: 'Steps' },
+      { id: 'featured', label: 'Results' },
       { id: 'cta-band', label: 'Closing band' },
       { id: 'section-list', label: 'All sections and variants' },
     ],

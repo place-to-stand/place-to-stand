@@ -12,14 +12,14 @@ values sit on the 24px grid (12px half steps for fine structure); see the grid r
 The system is six tiers, each built only from the one below. `npm run lint` enforces the import direction for
 `src/components` (pages are not restricted yet).
 
-| Tier          | Where                        | What                                                                    |
-| ------------- | ---------------------------- | ----------------------------------------------------------------------- |
-| 1. Tokens     | `app/globals.css`            | Color, type, spacing, stroke, radius, shadow, stacking, motion          |
-| 2. Primitives | `src/components/primitives/` | Buttons, inputs, links and CTA, logo, social icons, reveal              |
-| 3. Boxes      | `src/components/boxes/`      | Card, LinkCard, StatTile, Callout, Panel, RuledRow/List, SideNote, Chip |
-| 4. Patterns   | `src/components/patterns/`   | Section scaffolding, headings, arrow link, tag row, drawings, logo wall |
-| 5. Sections   | `src/components/sections/`   | Page-level blocks with named variants and a fixed tone                  |
-| 6. Templates  | `src/components/templates/`  | Whole-page layouts that pages render                                    |
+| Tier          | Where                        | What                                                                               |
+| ------------- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| 1. Tokens     | `app/globals.css`            | Color, type, spacing, stroke, radius, shadow, stacking, motion                     |
+| 2. Primitives | `src/components/primitives/` | Buttons, inputs, links and CTA, logo, social icons, reveal                         |
+| 3. Boxes      | `src/components/boxes/`      | Card, LinkCard, StatTile, Callout, Panel, RuledRow/List, SideNote, Chip            |
+| 4. Patterns   | `src/components/patterns/`   | Section scaffolding, headings, arrow link, tag row, drawings, logo wall, UI pieces |
+| 5. Sections   | `src/components/sections/`   | Page-level blocks with named variants and a fixed tone                             |
+| 6. Templates  | `src/components/templates/`  | Whole-page layouts that pages render                                               |
 
 ## 1. Tokens
 
@@ -162,9 +162,10 @@ Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px
 
 One shared definition in `src/components/primitives/cta.tsx`, so every place matches:
 
-- **`BookCallButton`**: the lime "Book a call" button. Goes to `/contact`; only the Contact page opens the calendar (`toCalendar`). Header uses the small size, everywhere else large.
+- **`BookCallButton`**: the lime "Book a call" button. Goes to the calendar embedded on Contact (`/contact#call`). Header uses the small size, everywhere else large.
 - **`AuditLink`**: the "Take the free audit" action link, never a button.
-- **`BookCallGroup`**: the button with "or Take the free audit" centered under it (24px gap, 12px mono caps, "or" muted). Used in the hero and every closing band.
+- **`NoteLink`**: the "send us a note" action link, to the Contact message form (`/contact#message`).
+- **`BookCallGroup`**: the button with one line centered under it (24px gap, 12px mono caps, "or" muted). `secondary` picks the line: `audit` ("or Take the free audit", the default), `note` ("or send us a note", the closing bands) or `none` (when a second button stands beside it).
 
 ### Links
 
@@ -210,8 +211,21 @@ The page scaffolding in `patterns/section.tsx`:
   Put it first in the page's first section, followed by `gap-header`.
 - **`Band`** and **`SectionHeading`** (`section.tsx`): a full-width light or dark band of sections, and a
   section's label + h2 + intro group.
-- **`CtaBand`** (`sections/cta-band.tsx`): the closing "Tell us what's slowing you down" callout. Put it last in `<main>`, after a block
-  ending in `pb-edge`. Takes `location` (analytics) and optional `title` and `description`.
+- **`CtaBand`** (`sections/cta-band.tsx`): the closing callout. Default title "Tell us where it hurts most." with Book a
+  call and "or send us a note" under it. Put it last in `<main>`, after a block ending in `pb-edge`. Takes `location`
+  (analytics) and optional `title`, `description`, and `secondary` (`{ label, href }`): a second outline button beside
+  Book a call in place of the note line (Portal: "See the code").
+
+Other patterns:
+
+- **`UiPiece`** (`patterns/ui-piece.tsx`): one piece of real UI lifted out of a screen, enlarged and layered on the
+  blueprint (Guidelines > Imagery). Takes `alt`, `caption`, `width` (`sm`, `md`, `lg`, `full`) and `compact`; the
+  children are the piece's HTML. The pieces themselves live in `patterns/pieces/`, one file per source
+  (`heatonist.tsx`, `platform.tsx`, `portal.tsx`): plain HTML made of site tokens, sample data only, no links,
+  buttons or headings inside.
+- **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
+- **`ALT_ROW`** (`patterns/alt-row.ts`): the shared grid for a big image beside its text, switching sides each row
+  (About's founders).
 
 A typical inner page:
 
@@ -236,33 +250,36 @@ A typical inner page:
 ## 5. Sections
 
 Each section has named variants and a fixed tone (light or dark), so a page picks a section instead of composing
-raw pieces. The tone is exported on the component (`OffersSection.tone`).
+raw pieces. The tone is exported on the component (`StepsSection.tone`).
 
-| Section              | Variants                                                        | Tone  |
-| -------------------- | --------------------------------------------------------------- | ----- |
-| `Hero`               | `home` (the Home hero), `page` (an inner page title)            | dark  |
-| `OffersSection`      | `summary` (Home cards), `detail` (Platform sections + AI block) | light |
-| `ResultsSection`     | `tiles` (Home numbers), `featured` (top of Clients)             | dark  |
-| `StepsSection`       | `cards` (Home), `rows` (Process)                                | light |
-| `AfterLaunchSection` | `cards` (Home), `detail` (Platform, `#after-launch`)            | light |
-| `OwnershipSection`   | one layout, the same seven lines everywhere                     | dark  |
-| `ManifestoSection`   | one layout (Home, "Who you work with")                          | light |
-| `ClientLogosSection` | one layout, under the Home hero                                 | dark  |
-| `CtaBand`            | `call` (Book a call + audit link), `audit` (audit link only)    | dark  |
+| Section                 | Variants                                                                                                   | Tone                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `Hero`                  | `home` (the Home hero), `page` (an inner page title)                                                       | dark                                      |
+| `ClientLogosSection`    | one layout, under the Home hero                                                                            | dark                                      |
+| `ProofSection`          | one layout (Home, `#results`): the Heatonist and Hot Ones copy beside four lifted-out pieces               | dark                                      |
+| `SoundFamiliarSection`  | one layout (Home): three cards of clients' own words, each closed by what we build for it                  | light                                     |
+| `WhoYouWorkWithSection` | one layout (Home): the promise beside the two founders                                                     | dark                                      |
+| Offers (`offers.tsx`)   | detail only: `OfferDetail` (Run, Sell), `SeniorHelpSection`, `DataHomeSection`, each its own Platform band | the band it sits in (Platform alternates) |
+| `ResultsSection`        | one layout: the Heatonist case study, featured at the top of Clients                                       | dark                                      |
+| `StepsSection`          | `cards` (Home, with `showBilling`), `rows` (Process)                                                       | light                                     |
+| `AfterLaunchSection`    | one layout (Platform, `#after-launch`)                                                                     | light                                     |
+| `OwnershipSection`      | `full` (the six lines, Platform `#own`), `short` (Home)                                                    | dark                                      |
+| `ClientsSection`        | one layout (Clients): grouped ruled rows, the group title in the left third                                | light                                     |
+| `CtaBand`               | `call` (Book a call + note line, or a `secondary` button), `audit` (audit link only)                       | dark                                      |
 
 Header, footer and the audit tool also live in `sections/`.
 
 ## 6. Templates
 
-| Template                     | Page       | Layout                                                              |
-| ---------------------------- | ---------- | ------------------------------------------------------------------- |
-| `HomeTemplate`               | Home       | Hero, logos, then light and dark bands of sections, closing band    |
-| `OfferPageTemplate`          | Platform   | Hero, offers detail, ownership, after launch detail, closing band   |
-| `CaseStudyTemplate`          | Heatonist  | Hero, full-bleed media, spec rows, quote, storefronts, closing band |
-| `ArticleShell`/`ArticleBody` | Blog posts | A shell shared by every post, and the post that streams into it     |
-| `ContactTemplate`            | Contact    | Hero with three ways in, the call, the audit, the message form      |
+| Template                     | Page       | Layout                                                                                   |
+| ---------------------------- | ---------- | ---------------------------------------------------------------------------------------- |
+| `HomeTemplate`               | Home       | Hero, logos and proof, then light and dark bands of sections, closing band               |
+| `OfferPageTemplate`          | Platform   | Hero, Run, Sell, Senior help, data and ownership, after launch, closing band             |
+| `CaseStudyTemplate`          | Heatonist  | Hero with the numbers, spec rows, quote, the work beside lifted-out pieces, closing band |
+| `ArticleShell`/`ArticleBody` | Blog posts | A shell shared by every post, and the post that streams into it                          |
+| `ContactTemplate`            | Contact    | Hero with three ways in, the call, the audit, the message form                           |
 
-Not templated yet: Process, About, Clients, Referral, the blog list, Field notes, Privacy, Terms, the audit and 404. They compose sections directly.
+Not templated yet: Process, About, Clients, Portal (`/platform/portal`), Referral, the blog list, Privacy, Terms, the audit and 404. They compose sections directly.
 
 ## Guidelines
 
@@ -277,6 +294,10 @@ Approved Nov 10:
 3. **What goes where.** Photos show the client’s world. Screenshots show software we built, always in a frame. Drawings explain how something works, never decoration.
 4. **Founder photos.** Matching light and background.
 5. **Alt text.** Describe what the work shows; alt="" only for pure texture.
+
+Approved Nov 13:
+
+6. **Lifted-out pieces.** Client work and the portal are shown as lifted-out pieces of real UI (UiPiece): one piece of the screen, enlarged and layered on the blueprint, built as HTML, sample data only. No full-page screenshots or lifestyle photos in new sections.
 
 Every photo, screenshot and video sits in `MediaFrame` (`patterns/media-frame.tsx`): `shape='work'` (16:10), `'person'` (1:1) or `'wide'` (21:9), with `wideFrom` to switch to 21:9 from a breakpoint up. `design/no-raw-aspect` fails any other aspect ratio; drawings that need their own box say so in a disable comment.
 

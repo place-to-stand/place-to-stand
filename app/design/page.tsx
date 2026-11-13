@@ -9,6 +9,7 @@ import {
   AuditLink,
   BookCallButton,
   BookCallGroup,
+  NoteLink,
 } from '@/src/components/primitives/cta'
 import { LogoLockup } from '@/src/components/primitives/logo-mark'
 import { SocialIcon } from '@/src/components/primitives/social-icon'
@@ -20,12 +21,16 @@ import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { ArrowRight, Check, Icon, Menu } from '@/src/components/primitives/icon'
 import { TagRow } from '@/src/components/patterns/tag-row'
-import { OfferCard } from '@/src/components/sections/offers'
 import { OwnershipSection } from '@/src/components/sections/ownership'
 import { StepsSection } from '@/src/components/sections/process'
 import { ResultsSection } from '@/src/components/sections/results'
 import { ClientsSection } from '@/src/components/sections/clients-section'
-import { FAQ, OFFERS } from '@/src/lib/offers'
+import { FAQ } from '@/src/lib/offers'
+import { team } from '@/src/lib/team'
+import {
+  CartPiece,
+  ProductCardPiece,
+} from '@/src/components/patterns/pieces/heatonist'
 import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
 import Image from 'next/image'
 import { DesignIndex } from './_components/design-index'
@@ -288,7 +293,7 @@ export default function DesignPage() {
             id='buttons'
             label='Primitives'
             title='Buttons and the call to action'
-            when='Primary is always the lime Book a call; secondary is the outline that draws itself on hover. The CTA unit pairs Book a call with the audit link.'
+            when='Primary is always the lime Book a call, which goes to the calendar on Contact (/contact#call); secondary is the outline that draws itself on hover. The CTA unit puts one quiet line under the button: or Take the free audit, or send us a note.'
           >
             <Specimen names={['Button', 'variant="outline"']} tones>
               <div className='flex flex-wrap items-center gap-grid-1'>
@@ -300,12 +305,17 @@ export default function DesignPage() {
               </div>
             </Specimen>
             <Specimen
-              names={['BookCallButton', 'BookCallGroup']}
-              note='header size, then the CTA unit'
+              names={['BookCallButton', 'BookCallGroup', 'secondary']}
+              note='header size, then the CTA unit with audit and note'
             >
               <div className='flex flex-wrap items-start gap-stack'>
                 <BookCallButton location='design' size='sm' />
                 <BookCallGroup location='design' buttonClassName='min-w-60' />
+                <BookCallGroup
+                  location='design'
+                  secondary='note'
+                  buttonClassName='min-w-60'
+                />
               </div>
             </Specimen>
           </DesignSection>
@@ -336,10 +346,14 @@ export default function DesignPage() {
                 />
               </div>
             </Specimen>
-            <Specimen names={['link-action', 'ArrowLink', 'AuditLink']} tones>
+            <Specimen
+              names={['link-action', 'ArrowLink', 'AuditLink', 'NoteLink']}
+              tones
+            >
               <div className='flex flex-wrap items-center gap-grid-1'>
                 <ArrowLink href='/platform'>See the platform</ArrowLink>
                 <AuditLink location='design' />
+                <NoteLink location='design' />
               </div>
             </Specimen>
             <Specimen names={['link-inline']} tones>
@@ -507,7 +521,7 @@ export default function DesignPage() {
             <Specimen names={['SectionHeading']} tones>
               <SectionHeading
                 label='What we build'
-                title='Two kinds of work.'
+                title='Three kinds of work.'
                 intro='Intro paragraph, one intro gap under the title.'
               />
             </Specimen>
@@ -525,13 +539,13 @@ export default function DesignPage() {
           </DesignSection>
 
           <DesignSection
-            id='alt-row'
+            id='grouped-rows'
             label='Patterns'
-            title='Alternating row'
-            when='A big image beside its text, switching sides each row (Clients, About). One shared grid, ALT_ROW.'
+            title='Grouped ruled rows'
+            when='A group title in the left third and its ruled rows down the rest, the title on top below lg (Clients). One line per client: the name, who they are, what we built, their site.'
           >
             <Specimen
-              names={['ALT_ROW', 'ClientsSection']}
+              names={['ClientsSection', 'limit']}
               className='[&_section]:px-0'
             >
               <ClientsSection limit={2} />
@@ -568,21 +582,38 @@ export default function DesignPage() {
               names={['MediaFrame', 'caption']}
               note='work 16:10, person 1:1, wide 21:9, cropped from the center; the caption is body text, the name in the text color'
             >
-              <figure className='flex max-w-xl flex-col gap-grid-half'>
-                <MediaFrame shape='work'>
+              <figure className='flex max-w-72 flex-col gap-grid-half'>
+                <MediaFrame shape='person'>
                   <Image
-                    src='/work-greenwatt-usa-photo.jpg'
-                    alt='Rows of solar panels across a field, seen from above.'
+                    src={team[0].image}
+                    alt={`${team[0].name}, ${team[0].title}`}
                     fill
-                    sizes='576px'
+                    sizes='288px'
                     className='object-cover'
                   />
                 </MediaFrame>
                 <figcaption className='text-base text-text-muted'>
-                  <span className='text-text'>GreenWATT USA.</span> We built the
-                  marketplace from scratch.
+                  <span className='text-text'>Jason Desiderio.</span>{' '}
+                  Co-founder, engineer.
                 </figcaption>
               </figure>
+            </Specimen>
+          </DesignSection>
+
+          <DesignSection
+            id='pieces'
+            label='Patterns'
+            title='Lifted-out UI pieces'
+            when='How client work and the portal are shown: one piece of the real screen, enlarged and layered on the blueprint, built as HTML with sample data. Use it instead of a screenshot.'
+          >
+            <Specimen
+              names={['UiPiece', 'patterns/pieces']}
+              note='two Heatonist pieces'
+            >
+              <div className='grid gap-grid-1 md:grid-cols-2'>
+                <ProductCardPiece />
+                <CartPiece />
+              </div>
             </Specimen>
           </DesignSection>
 
@@ -590,25 +621,25 @@ export default function DesignPage() {
           <DesignSection
             id='cards'
             label='Sections'
-            title='Offers and steps'
-            when='Two sections shown in their Home variants: offers summary and steps cards.'
+            title='Steps'
+            when='The steps in their Home variant: five cards, with how billing works under them.'
           >
-            <Specimen names={['OfferCard']} tones>
-              <OfferCard offer={OFFERS[0]} />
-            </Specimen>
-            <Specimen names={['StepsSection']} className='[&_section]:px-0'>
-              <StepsSection showLink={false} />
+            <Specimen
+              names={['StepsSection', 'showBilling']}
+              className='[&_section]:px-0'
+            >
+              <StepsSection showBilling showLink={false} />
             </Specimen>
           </DesignSection>
 
           <DesignSection
             id='featured'
             label='Sections'
-            title='Results, featured'
-            when='The featured variant of the results section, which opens Clients.'
+            title='Results'
+            when='The Heatonist case study as one block: heading and intro beside the Hot Ones lineup, then the numbers. It opens Clients.'
           >
-            <Specimen names={['ResultsSection variant="featured"']}>
-              <ResultsSection variant='featured' />
+            <Specimen names={['ResultsSection']}>
+              <ResultsSection />
             </Specimen>
           </DesignSection>
 
@@ -616,7 +647,7 @@ export default function DesignPage() {
             id='cta-band'
             label='Sections'
             title='Closing band'
-            when='Last in every page’s main, in its band of dots. The footer below this page is the real footer.'
+            when='Last in every page’s main, in its band of dots. Default title “Tell us where it hurts most.” with Book a call and “or send us a note”; pass secondary for a second button in place of the note line. The footer below this page is the real footer.'
           >
             <Specimen names={['CtaBand']} className='[&_section]:px-0'>
               <CtaBand location='design' />
@@ -634,11 +665,14 @@ export default function DesignPage() {
             <Specimen
               names={[
                 'Hero',
-                'OffersSection',
+                'ProofSection',
+                'SoundFamiliarSection',
+                'OfferDetail',
                 'ResultsSection',
                 'StepsSection',
                 'AfterLaunchSection',
                 'OwnershipSection',
+                'WhoYouWorkWithSection',
                 'CtaBand',
               ]}
             >
@@ -656,10 +690,32 @@ export default function DesignPage() {
                   as='div'
                   className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
                 >
+                  <dt className='type-card-title'>Proof</dt>
+                  <dd className='text-base text-text-muted'>
+                    one layout (Home, #results): the Heatonist and Hot Ones copy
+                    beside four lifted-out pieces. Dark.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>Sound familiar</dt>
+                  <dd className='text-base text-text-muted'>
+                    one layout (Home): three cards of clients&rsquo; own words,
+                    each closed by what we build for it. Light.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
                   <dt className='type-card-title'>Offers</dt>
                   <dd className='text-base text-text-muted'>
-                    summary (Home cards), detail (Platform sections and the AI
-                    block). Light.
+                    detail: Platform&rsquo;s Run, Sell and Senior help sections
+                    and the data block (OfferDetail, SeniorHelpSection,
+                    DataHomeSection). Each takes the tone of its band; Platform
+                    alternates light and dark.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -668,7 +724,7 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Results</dt>
                   <dd className='text-base text-text-muted'>
-                    tiles (Home numbers), featured (top of Clients). Dark.
+                    one layout (top of Clients). Dark.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -677,7 +733,7 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Steps</dt>
                   <dd className='text-base text-text-muted'>
-                    cards (Home), rows (Process). Light.
+                    cards (Home, with billing), rows (Process). Light.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -686,7 +742,7 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>After launch</dt>
                   <dd className='text-base text-text-muted'>
-                    cards (Home), detail (Platform). Light.
+                    one layout (Platform, #after-launch). Light.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -695,7 +751,7 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Ownership</dt>
                   <dd className='text-base text-text-muted'>
-                    one layout, the same seven lines on every page. Dark.
+                    full (the six lines, Platform) and short (Home). Dark.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -704,7 +760,8 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Who you work with</dt>
                   <dd className='text-base text-text-muted'>
-                    one layout (Home). Light.
+                    one layout (Home): the promise beside the two founders.
+                    Dark.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -722,8 +779,9 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Closing band</dt>
                   <dd className='text-base text-text-muted'>
-                    call (Book a call with the audit link), audit (audit link
-                    only). Dark, last in every page.
+                    call (Book a call with &ldquo;or send us a note&rdquo;, or a
+                    second button), audit (audit link only). Dark, last in every
+                    page.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -765,9 +823,9 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Home</dt>
                   <dd className='text-base text-text-muted'>
-                    Hero home, logos, then light and dark bands: offers,
-                    results, steps and after launch, ownership, who you work
-                    with, closing band.
+                    Hero home, logos and proof, then light and dark bands: sound
+                    familiar, who you work with, steps with billing, ownership
+                    short, closing band.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -776,8 +834,8 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Offer page</dt>
                   <dd className='text-base text-text-muted'>
-                    Platform: hero page, offers detail, ownership, after launch
-                    detail, closing band.
+                    Platform: hero page, Run, Sell, Senior help, the data block
+                    with ownership full, after launch, closing band.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -786,8 +844,8 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Case study</dt>
                   <dd className='text-base text-text-muted'>
-                    Heatonist: hero page, full-bleed media, spec rows, quote,
-                    storefronts, numbers, its own closing band.
+                    Heatonist: hero page with the numbers, spec rows, quote, the
+                    work beside lifted-out pieces, its own closing band.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -816,7 +874,7 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Not templated yet</dt>
                   <dd className='text-base text-text-muted'>
-                    Process, About, Clients, Referral, Blog list, Field notes,
+                    Process, About, Clients, Portal, Referral, Blog list,
                     Privacy, Terms, the audit and 404 compose sections directly.
                   </dd>
                 </RuledRow>
@@ -829,9 +887,9 @@ export default function DesignPage() {
             id='imagery'
             label='Guidelines'
             title='Imagery'
-            when='Approved Nov 10. Lint keeps every aspect ratio inside MediaFrame (design/no-raw-aspect).'
+            when='Approved Nov 10, rule 6 Nov 13. Lint keeps every aspect ratio inside MediaFrame (design/no-raw-aspect).'
           >
-            <Specimen names={['MediaFrame']} note='five rules'>
+            <Specimen names={['MediaFrame', 'UiPiece']} note='six rules'>
               <RuledList as='dl' className='flex flex-col'>
                 <RuledRow
                   as='div'
@@ -881,6 +939,19 @@ export default function DesignPage() {
                   <dd className='text-base text-text-muted'>
                     Describe what the work shows; alt=&quot;&quot; only for pure
                     texture.
+                  </dd>
+                </RuledRow>
+                <RuledRow
+                  as='div'
+                  className='grid gap-grid-half py-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-grid-1'
+                >
+                  <dt className='type-card-title'>6. Lifted-out pieces.</dt>
+                  <dd className='text-base text-text-muted'>
+                    Approved Nov 13. Client work and the portal are shown as
+                    lifted-out pieces of real UI (UiPiece): one piece of the
+                    screen, enlarged and layered on the blueprint, built as
+                    HTML, sample data only. No full-page screenshots or
+                    lifestyle photos in new sections.
                   </dd>
                 </RuledRow>
               </RuledList>

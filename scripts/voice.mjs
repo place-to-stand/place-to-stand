@@ -27,6 +27,21 @@ const BANNED = [
   [/earns its keep/i, 'earns its keep'],
   [/telephone game/i, 'telephone game'],
   [/shopify alone can/i, `what Shopify alone can't`],
+  // Retired by the Nov 13 redesign.
+  [
+    /solve one problem|one problem at a time/i,
+    'solve one problem (say "start where it hurts most")',
+  ],
+  [/without the hire/i, 'without the hire (say "by the hour")'],
+  // A blog post may say it in its own voice; the site's pages may not.
+  [
+    /let[’']s talk\./i,
+    `"Let's talk." (Contact is "Book a call.")`,
+    { skip: /^content\// },
+  ],
+  [/over a decade/i, 'over a decade'],
+  [/field notes/i, 'Field notes (the page is gone)'],
+  [/stages of business/i, 'Stages of business'],
 ]
 const BRITISH = [
   /\bcolour(s|ed|ing|ful)?\b/i,
@@ -70,7 +85,8 @@ for (const file of ROOTS.flatMap(root => walk(root))) {
     .split('\n')
     .forEach((line, i) => {
       if (line.includes('voice-ok')) return
-      for (const [re, label] of BANNED) {
+      for (const [re, label, opts] of BANNED) {
+        if (opts?.skip?.test(file)) continue
         if (re.test(line))
           problems.push(`${file}:${i + 1}  banned phrase: ${label}`)
       }
