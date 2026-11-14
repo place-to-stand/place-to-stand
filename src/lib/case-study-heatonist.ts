@@ -79,7 +79,7 @@ export const heatonistCaseStudy = {
     },
   ],
   hotOnes:
-    'In 2025 Heatonist wanted a home for Hot Ones fans. We built hotones.com in under three months, from the first line of code to launch day on May 15, 2025. It now draws more visits than heatonist.com.',
+    'In 2025 Heatonist wanted a home for Hot Ones fans. We built hotones.com in under three months, from the first line of code to launch day on May 15, 2025.',
   result:
     'Heatonist runs two busy stores with the output of a dedicated team, for about a third less than one junior engineer. Both stores have stayed up through every holiday rush and every new season of the show, and the team changes most of the site without us.',
   quote: {
