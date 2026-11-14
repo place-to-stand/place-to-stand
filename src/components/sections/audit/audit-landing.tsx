@@ -13,6 +13,7 @@ import {
   GitBranch,
   type LucideIcon,
   ServerCog,
+  Users,
 } from '@/src/components/primitives/icon'
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { Callout, Card, Panel, RuledRow } from '@/src/components/boxes'
@@ -64,6 +65,7 @@ const SERVICE_ICONS: Record<string, LucideIcon> = {
   BarChart3,
   Compass,
   ServerCog,
+  Users,
 }
 
 type ServiceRowProps = {

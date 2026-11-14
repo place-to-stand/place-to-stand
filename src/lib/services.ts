@@ -8,41 +8,57 @@ export type Service = {
 }
 
 /**
- * The services list used by the audit page and the Services structured data.
- * It mirrors the two offers and the after-launch services in
- * src/lib/offers.ts; keep the two in step.
+ * The services list used by the audit page, Referral and the Services
+ * structured data. It mirrors Platform (src/lib/offers.ts): the three kinds
+ * of work, then the after-launch services. Keep the two in step, and keep
+ * the slugs: stored audit results refer to them.
  */
 export const services: Service[] = [
   {
     slug: 'run-your-business',
     title: 'Run your business',
-    tagline: 'CRM, projects and workflows in one system you own',
+    tagline: 'One system for the work behind the scenes',
     description:
-      'CRM, projects and workflows in one system you own, instead of HubSpot, Asana and spreadsheets. Every person and every AI agent sees only what their role allows.',
+      'One system for the work behind the scenes, built around how your team works. It starts as a copy of the portal we run on, trimmed to what you need. Every person and every AI tool sees only what their role allows.',
     icon: 'GitBranch',
     features: [
-      'Team workspace: projects, tasks and time logs',
-      'Website: marketing site design and development, with every form feeding your CRM',
-      'CRM: leads, companies and people',
-      'Billing: invoices and prepaid hour blocks',
-      'Reports: the monthly close and live numbers',
-      'Client portal',
-      'Workflows and automations',
+      'Team workspace: clients, projects, tasks and time',
+      'CRM: every lead, contact and company, with its whole history',
+      'Workflows: the steps your team repeats, done the same way every time',
+      'Automations: reports, reminders and syncing data between tools',
+      'Client portal: progress, hours and payments for your customers',
+      'Reports: live numbers from your own data',
+      'Website: your marketing site, with every form feeding the CRM',
     ],
   },
   {
     slug: 'sell-online',
     title: 'Sell online',
-    tagline: 'Shopify stores and fully custom marketplaces',
+    tagline: 'Custom stores and marketplaces, on Shopify when it fits',
     description:
-      'Shopify stores or fully custom marketplaces, plus the systems behind them: payments, fulfillment and dropshipping. Built for brands like Hot Ones and Heatonist.',
+      "Custom stores and marketplaces for things standard store tools can't sell well, on Shopify when it fits. Built for brands like Hot Ones and Heatonist.",
     icon: 'Code2',
     features: [
-      'Shopify stores',
       'Custom marketplaces',
-      'Shopify apps and functions',
+      'Shopify stores and apps',
+      'Made-to-order and drop-ship',
+      'Order intake',
       'Payments',
-      'Fulfillment and inventory',
+      'Order routing',
+    ],
+  },
+  {
+    slug: 'senior-help',
+    title: 'Senior help for your team',
+    tagline: 'Someone senior beside the team you have',
+    description:
+      'For teams that already have code, and sometimes developers, and need someone senior beside them.',
+    icon: 'Users',
+    features: [
+      'Pick up where others left off',
+      'Make an AI-built first version solid',
+      'Work beside your developers',
+      'Technical consulting',
     ],
   },
   {
@@ -50,10 +66,10 @@ export const services: Service[] = [
     title: 'Managed services',
     tagline: 'We keep it running after launch',
     description:
-      'Security updates, error and speed monitoring, analytics and SEO reports, data checks and a weekly email, with a shared channel in Slack, Teams, Google Chat or Discord.',
+      'Security updates, error and speed checks, analytics and SEO reports, data checks and a weekly email, with a shared channel in Slack, Teams, Google Chat or Discord.',
     icon: 'ServerCog',
     features: [
-      'Security updates and monitoring',
+      'Security updates, error and speed checks',
       'Analytics and SEO reports',
       'Data checks and a weekly email',
       'A shared channel where your team already works',

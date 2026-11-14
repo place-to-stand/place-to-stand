@@ -26,8 +26,8 @@ export const referralContent = {
     // Home's "Who you work with" title and body.
     headline: WHO_YOU_WORK_WITH_HOME.title,
     body: WHO_YOU_WORK_WITH_HOME.body,
-    // The same lists as Platform: the two offers' modules, then the
-    // after-launch services.
+    // The same lists as Platform: the two offers' modules, Senior help, then
+    // the after-launch services.
     services: [
       ...OFFERS.map(offer => ({
         name: offer.name,
@@ -35,9 +35,7 @@ export const referralContent = {
       })),
       ...services
         .filter(service =>
-          ['managed-services', 'technical-consulting', 'training'].includes(
-            service.slug
-          )
+          ['senior-help', 'managed-services', 'training'].includes(service.slug)
         )
         .map(service => ({ name: service.title, items: service.features })),
     ],
@@ -84,11 +82,11 @@ export const referralContent = {
       {
         number: '02',
         title: 'We take it from there.',
-        body: "A 30-minute intro call, then discovery, scope and a proposal. You don't manage anything.",
+        body: "A free intro call, then a written plan. You don't manage anything.",
       },
       {
         number: '03',
-        title: 'They sign, you get paid.',
+        title: 'They buy hours, you get paid.',
         body: 'On the 15th of each month we pay you 10% of everything they paid us the month before. No cap, no expiration.',
       },
     ],
