@@ -12,6 +12,10 @@ import { cn } from '@/src/lib/utils'
  * ours), over a dashed outline offset half a cell down and right: the layer
  * it was lifted from. A mono caption under the stage names what it is.
  *
+ * `screenshot`: the piece is a capture of the real screen (a client's store,
+ * the portal in dark mode). It keeps its own colors, so it sits straight on
+ * the stage with a quiet edge, no light surface around it.
+ *
  * Pieces are drawings for the eye. The stage is one image to assistive tech,
  * described by `alt`; the parts inside are hidden from it and hold no links,
  * buttons or headings.
@@ -28,6 +32,7 @@ export function UiPiece({
   caption,
   width = 'md',
   compact = false,
+  screenshot = false,
   className,
   children,
 }: {
@@ -39,6 +44,8 @@ export function UiPiece({
   width?: keyof typeof WIDTH
   /** A shallower stage, where several pieces share a section (Home). */
   compact?: boolean
+  /** A real screen capture, not HTML: no light surface around it. */
+  screenshot?: boolean
   className?: string
   children: ReactNode
 }) {
@@ -48,7 +55,7 @@ export function UiPiece({
         role='img'
         aria-label={alt}
         className={cn(
-          'relative flex items-center justify-center bg-bg-card px-card py-grid-2 md:px-grid-2',
+          'relative flex flex-1 items-center justify-center bg-bg-card px-card py-grid-2 md:px-grid-2',
           compact ? 'md:py-grid-2' : 'md:py-grid-3'
         )}
       >
@@ -58,7 +65,14 @@ export function UiPiece({
           className={cn('relative w-full min-w-0', WIDTH[width])}
         >
           <div className='absolute inset-0 translate-x-grid-half translate-y-grid-half border border-dashed border-line' />
-          <div className='theme-light relative border border-border-light'>
+          <div
+            className={cn(
+              'relative border',
+              screenshot
+                ? 'overflow-hidden border-border [&_img]:block [&_img]:h-auto [&_img]:w-full'
+                : 'theme-light border-border-light'
+            )}
+          >
             {children}
           </div>
         </div>
