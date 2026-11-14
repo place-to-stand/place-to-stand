@@ -57,7 +57,7 @@ function isValidUrl(value: string): boolean {
  * This action sends no email. It hands the submission to the portal, which
  * records it and sends both the team notification and the visitor's
  * confirmation (`deliver: true`). The portal records before it sends, so a
- * mail-provider outage delays an email rather than losing the enquiry; the
+ * mail-provider outage delays an email rather than losing the inquiry; the
  * only failure a visitor sees is the portal not accepting the request at all.
  */
 export async function sendContact(

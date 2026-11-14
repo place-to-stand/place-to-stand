@@ -48,8 +48,8 @@ export default function TermsPage() {
                 design, and software development services to businesses. This
                 website describes those services and lets you get in touch or
                 request an Opportunity Audit. Nothing on this site is an offer
-                to enter into a contract, and no engagement begins until both
-                parties sign a written agreement.
+                of services. Work begins once you accept our terms of engagement
+                in writing and buy your first block of prepaid hours.
               </p>
             </LegalSection>
 

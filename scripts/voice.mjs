@@ -56,6 +56,7 @@ const BRITISH = [
   /\bcancelled\b/i,
   /\bfulfil(s|ment)?\b/i,
   /\bwhilst\b/i,
+  /\benquir(y|ies)\b/i,
   /\bamongst\b/i,
   /\bmetres?\b/i,
   /\btheatres?\b/i,

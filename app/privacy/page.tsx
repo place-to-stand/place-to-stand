@@ -141,7 +141,7 @@ export default function PrivacyPage() {
                   <>
                     <strong className='text-text'>Advertising:</strong> Google
                     Tag Manager loads a Google Ads conversion tag, used to
-                    attribute enquiries to the ads that produced them. When you
+                    attribute inquiries to the ads that produced them. When you
                     successfully submit the contact form or the audit, the email
                     address you entered is hashed in your browser and the hash
                     is sent to Google to improve that matching (Google calls
@@ -162,9 +162,9 @@ export default function PrivacyPage() {
             <LegalSection index={5} title='How we use your information'>
               <LegalList
                 items={[
-                  'To reply to your enquiry and send you a copy of what you submitted.',
+                  'To reply to your inquiry and send you a copy of what you submitted.',
                   'To generate and deliver your Opportunity Audit results.',
-                  'To evaluate whether we are a good fit for your project and to prepare a proposal.',
+                  'To evaluate whether we are a good fit for your project and to plan the work.',
                   'To send occasional updates about our work, if you have opted in.',
                   'To understand how the site is used and improve it.',
                   'To see where the Opportunity Audit loses people, including from responses that were never finished, so we can make it clearer.',
@@ -207,9 +207,9 @@ export default function PrivacyPage() {
                     <strong className='text-text'>
                       Our own client portal:
                     </strong>{' '}
-                    infrastructure we operate to record enquiries and audit
+                    infrastructure we operate to record inquiries and audit
                     responses, including unfinished ones, and to track them
-                    through to proposal.
+                    until work begins.
                   </>,
                 ]}
               />
@@ -226,12 +226,12 @@ export default function PrivacyPage() {
                 We add your name and email address to our mailing list only if
                 you tick the opt-in box on the contact form or the audit. The
                 box is unticked by default, and leaving it that way has no
-                effect on your enquiry or your audit results.
+                effect on your inquiry or your audit results.
               </p>
               <p>
                 Every marketing email includes an unsubscribe link, and
                 unsubscribing takes effect immediately. Unsubscribing does not
-                stop transactional messages such as replies to your enquiry or
+                stop transactional messages such as replies to your inquiry or
                 your audit results. You can ask us to remove you entirely by
                 emailing {CONTACT_EMAIL}.
               </p>
@@ -239,7 +239,7 @@ export default function PrivacyPage() {
 
             <LegalSection index={8} title='How long we keep it'>
               <p>
-                Enquiry and completed audit records are kept for three years
+                Inquiry and completed audit records are kept for three years
                 from your last contact with us, so we have context if you
                 return. An unfinished audit response has no contact to measure
                 from, so we keep it for three years from the date you took it.
@@ -268,7 +268,7 @@ export default function PrivacyPage() {
                 of your consent (for marketing and non-essential cookies), our
                 legitimate interest in operating and improving our business (for
                 analytics, for recording audit responses including unfinished
-                ones, and for responding to enquiries), and our legal
+                ones, and for responding to inquiries), and our legal
                 obligations.
               </p>
               <p>
