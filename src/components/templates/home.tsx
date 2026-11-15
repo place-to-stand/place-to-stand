@@ -19,7 +19,10 @@ export function HomeTemplate() {
           light, dark, light, dark, light, and the dark closing band. Bands
           pad themselves by the section role, so content-to-content spacing
           is the same everywhere. */}
-      <Band tone='dark' className='pt-edge'>
+      <Band
+        tone='dark'
+        className='pt-edge pb-[calc(var(--spacing-edge)-var(--spacing-grid-half))]'
+      >
         <ClientLogosSection />
       </Band>
       <Band tone='light'>
