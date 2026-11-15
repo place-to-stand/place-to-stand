@@ -1,6 +1,7 @@
 /**
  * The heat meter on the back of a hotones.com lineup card, rebuilt from their
- * SVG (same paths and colors): a black plate with a red outline, the pepper
+ * SVG (same paths and colors; without their clip, which cut the black
+ * plate's left and right ends): a black plate with a red outline, the pepper
  * with ten bands lit up to the sauce's level (green, yellow, red, then the
  * hottest band orange), "HEAT LEVEL" and the level. Text is live, in Passion
  * One like theirs.
@@ -75,7 +76,7 @@ export function HeatMeter({
       className={className}
       style={style}
     >
-      <g clipPath='url(#ho-heat-clip)'>
+      <g>
         <rect
           x='31'
           y='75.4984'
@@ -128,11 +129,6 @@ export function HeatMeter({
           <path key={b.at} d={b.d} fill={level > b.at ? b.on : '#2E2C2C'} />
         ))}
       </g>
-      <defs>
-        <clipPath id='ho-heat-clip'>
-          <rect width='512.451' height='300' transform='translate(38.7744 6)' />
-        </clipPath>
-      </defs>
     </svg>
   )
 }

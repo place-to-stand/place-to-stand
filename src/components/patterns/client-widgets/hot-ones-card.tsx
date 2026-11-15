@@ -107,6 +107,8 @@ export function HotOnesCard({
             <img
               src={bottle}
               alt=''
+              loading='lazy'
+              decoding='async'
               style={{
                 position: 'absolute',
                 left: u(12),

@@ -11,28 +11,36 @@ import { Bangers, Open_Sans, Passion_One, Poppins } from 'next/font/google'
  *   fonts they use).
  */
 export const passionOne = Passion_One({
-  weight: ['400', '700'],
+  weight: '400',
   subsets: ['latin'],
   variable: '--font-passion-one',
   display: 'swap',
+  // Below the fold: don't compete with the hero for the first paint.
+  preload: false,
 })
 export const bangers = Bangers({
   weight: '400',
   subsets: ['latin'],
   variable: '--font-bangers',
   display: 'swap',
+  // Below the fold: don't compete with the hero for the first paint.
+  preload: false,
 })
 export const poppins = Poppins({
   weight: ['700'],
   subsets: ['latin'],
   variable: '--font-poppins',
   display: 'swap',
+  // Below the fold: don't compete with the hero for the first paint.
+  preload: false,
 })
 export const openSans = Open_Sans({
   weight: ['400', '600', '700'],
   subsets: ['latin'],
   variable: '--font-open-sans',
   display: 'swap',
+  // Below the fold: don't compete with the hero for the first paint.
+  preload: false,
 })
 
 export const CLIENT_FONTS = [passionOne, bangers, poppins, openSans]

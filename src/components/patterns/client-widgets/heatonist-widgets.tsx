@@ -4,7 +4,7 @@ import type { CSSProperties } from 'react'
 /**
  * heatonist.com's collection page, two pieces rebuilt in HTML from their live
  * markup (sizes, fonts, colors and copy as measured on Nov 15): the Heat
- * filter group and the Trio Pack product card. Each scales as one object:
+ * filter group and the 10 Pack (Season 31) product card. Each scales as one object:
  * every size is a share of its width (u), so text stays sharp at any size.
  * Both sit on the shared object treatment (their 8px radius, a hairline, a
  * solid red top rule, the composition's shadow).
@@ -112,7 +112,7 @@ export function HeatFilter({
               }}
             />
             <span>{label}</span>
-            <span style={{ fontSize: u(12), color: '#909090' }}>({n})</span>
+            <span style={{ fontSize: u(12), color: '#707070' }}>({n})</span>
           </div>
         ))}
       </div>
@@ -120,7 +120,7 @@ export function HeatFilter({
   )
 }
 
-export function TrioCard({
+export function BundleCard({
   className,
   style,
   fill = false,
@@ -150,8 +150,10 @@ export function TrioCard({
         }}
       >
         <img
-          src='/work/heatonist-trio-photo.webp'
+          src='/work/heatonist-ten-pack-photo.webp'
           alt=''
+          loading='lazy'
+          decoding='async'
           style={
             fill
               ? {
@@ -180,7 +182,7 @@ export function TrioCard({
             textTransform: 'uppercase',
           }}
         >
-          Save 9%
+          Save 13%
         </span>
         <div
           style={{
@@ -200,22 +202,22 @@ export function TrioCard({
               color: '#000',
             }}
           >
-            Hot Ones Hot Sauce Trio Pack - Season 31
+            Hot Ones Hot Sauce 10 Pack - Season 31
           </div>
           <p
             style={{
               fontSize: u(12),
               lineHeight: 1.4,
               marginTop: u(4),
-              color: 'rgba(0,0,0,0.54)',
+              color: 'rgba(0,0,0,0.62)',
             }}
           >
-            House Sauce, Rojo, Thermageddon. Mild to wild.
+            All ten of Season 31, ending at Thermageddon.
           </p>
           <div style={{ fontSize: u(14), marginTop: u(6), color: RED }}>
-            $40{' '}
-            <span style={{ color: '#909090', textDecoration: 'line-through' }}>
-              $44
+            $120{' '}
+            <span style={{ color: '#707070', textDecoration: 'line-through' }}>
+              $138
             </span>
           </div>
         </div>

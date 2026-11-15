@@ -8,7 +8,7 @@ import { CLIENT_FONTS } from '@/src/components/patterns/client-widgets/client-fo
 import { HotOnesCard } from '@/src/components/patterns/client-widgets/hot-ones-card'
 import {
   HeatFilter,
-  TrioCard,
+  BundleCard,
 } from '@/src/components/patterns/client-widgets/heatonist-widgets'
 
 const HO_BLACK = '#0d0d0d'
@@ -21,13 +21,12 @@ const HOUSE_SAUCE = {
   level: 2,
   bottle: '/work/hotones-bottle-house-sauce.webp',
 }
-const BEACH_BONNET = {
-  number: 3,
-  name: 'Beach Bonnet',
-  maker: 'Double Comfort',
-  notes: ['Tropical fruits & island peppers'],
-  level: 3,
-  bottle: '/work/hotones-bottle-beach-bonnet.webp',
+const LOS_CALIENTES_ROJO = {
+  number: 5,
+  name: 'Los Calientes Rojo',
+  notes: ['Red jalapeño & habanero', 'Sweet apricot', 'Vibrant citrus'],
+  level: 5,
+  bottle: '/work/hotones-bottle-los-calientes-rojo.webp',
 }
 
 /**
@@ -81,11 +80,14 @@ function LabelThenLeader({
         <span className='font-semibold'>{title}</span>
         <span className='opacity-75'>{detail}</span>
       </span>
-      <span className='h-px flex-1' style={{ backgroundColor: LABEL_INK }} />
-      <span
-        className='size-[7px] shrink-0 rounded-full'
-        style={{ backgroundColor: LABEL_INK, marginRight: -3.5 }}
-      />
+      {/* Line and dot in one run, so the line always ends at the dot. */}
+      <span className='flex flex-1 items-center'>
+        <span className='h-px flex-1' style={{ backgroundColor: LABEL_INK }} />
+        <span
+          className='size-[7px] shrink-0 rounded-full'
+          style={{ backgroundColor: LABEL_INK, marginRight: -3.5 }}
+        />
+      </span>
     </div>
   )
 }
@@ -167,14 +169,14 @@ function GridOverlay() {
 const CALLOUTS = [
   { title: 'Flip cards', detail: 'Tasting notes + heat level' },
   { title: 'Heat filter', detail: '4 levels' },
-  { title: 'Bundles', detail: 'Trio pack' },
+  { title: 'Bundles', detail: '10 pack' },
 ]
 
 /**
  * Home's proof (#results): the Heatonist and Hot Ones work, approved Nov 15.
  * The copy, then one panel in the clients' colors, black for Heatonist and
- * yellow for Hot Ones, on its own grid: the Trio Pack card and Heat filter,
- * and lineup cards #2 and #3, all rebuilt in HTML from the live sites so
+ * yellow for Hot Ones, on its own grid: the 10 Pack card and Heat filter,
+ * and lineup cards #2 and #5, Hot Ones' own House Sauce and Los Calientes Rojo, all rebuilt in HTML from the live sites so
  * they stay sharp, with blueprint callouts saying what we built and each
  * site's name in its half. The cards flip on click, tap, Enter or Space
  * (#2 once on scroll). Phones: the hero card, the callouts as a list, then
@@ -215,10 +217,10 @@ export function ProofSection() {
                 backgroundSize: '24px 24px',
               }}
             />
-            {/* Heatonist: the Trio card in columns 1-2, top margin to bottom
+            {/* Heatonist: the 10 Pack card in columns 1-2, top margin to bottom
               margin; the filter in columns 2-3 over the right half of its
               photo, one row down, clear of its text. */}
-            <TrioCard
+            <BundleCard
               className='absolute'
               style={{
                 left: g(colX(1)),
@@ -234,13 +236,13 @@ export function ProofSection() {
                 top: g(MARGIN + 3),
               }}
             />
-            {/* Hot Ones: #3 across the seam (columns 8-9), its bottom on the
+            {/* Hot Ones: #5 across the seam (columns 8-9), its bottom on the
               bottom margin; #2 in columns 10-12, rising 4g out of the top. */}
             <HotOnesCard
-              {...BEACH_BONNET}
+              {...LOS_CALIENTES_ROJO}
               className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
               style={{
-                left: g(colX(8) - COL / 2),
+                left: g(colX(8)),
                 width: g(2 * COL + 1),
                 bottom: g(MARGIN),
               }}
@@ -250,17 +252,17 @@ export function ProofSection() {
               autoFlip
               className='absolute z-20 rotate-[5deg]'
               style={{
-                left: g(colX(9)),
+                left: g(colX(9) + COL / 2),
                 width: g(colR(11) - colX(9)),
                 top: g(-4),
               }}
             />
             {/* Labels: the two Heatonist ones share the column-5 line; the
               flip-cards one is right-aligned to the column-7 line, its
-              leader on the top margin, above #3. */}
+              leader on the top margin, above #5. */}
             {/* All three labels left-aligned on the column-5 line, stacked:
-              bundles at the Trio card's top, the filter at its middle, the
-              flip cards low, its leader running right to #3's edge. */}
+              bundles at the 10 Pack card's top, the filter at its middle, the
+              flip cards low, its leader running right to #5's edge. */}
             <GridCallout
               from={colR(2)}
               to={colX(5)}
@@ -275,7 +277,7 @@ export function ProofSection() {
             />
             <LabelThenLeader
               at={colX(5)}
-              to={colX(8) - COL / 2 + 0.6}
+              to={colX(8) + 0.6}
               y={MARGIN + 12}
               {...CALLOUTS[0]}
             />
@@ -348,7 +350,7 @@ export function ProofSection() {
             </ul>
             <div className='flex flex-col gap-grid-1 border-x border-b border-border bg-bg-card p-grid-1'>
               <div className='flex items-start justify-center gap-grid-1'>
-                <TrioCard className='w-[44%] max-w-[15rem]' />
+                <BundleCard className='w-[44%] max-w-[15rem]' />
                 <HeatFilter className='mt-grid-2 w-[44%] max-w-[15rem]' />
               </div>
               <span
