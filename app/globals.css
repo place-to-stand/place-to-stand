@@ -239,6 +239,23 @@
     font-size: 3rem; /* 48 */
   }
 }
+/* Spoken words: the things people say, set apart from body text and
+   headings. Light and large, with the opening quote mark hung into the
+   margin (a negative first-line indent) so the words, not the mark, line up
+   with the text around it. Lead each block with “. */
+@utility type-voice {
+  font-family: var(--font-plex-sans);
+  font-size: 1.375rem; /* 22 */
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-indent: -0.4em;
+  text-wrap: balance;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 1.75rem; /* 28 */
+  }
+}
 /* Reading text one step up, in the text color: blog bodies, quotes,
    statements. type-intro is the same size, muted. */
 @utility type-lead {

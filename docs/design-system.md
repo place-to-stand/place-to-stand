@@ -72,11 +72,17 @@ role; add only layout classes (margins, max-width, `text-balance`, `uppercase`).
 | `type-lead`          | 16 / 18, text color      | Normal | Reading text one step up: blog bodies, statements, quotes in copy |
 | `type-stat`          | 48 / 60                  | Bold   | Big numbers in stat tiles                                         |
 | `type-quote`         | 30 / 48                  | Semi   | Pull quotes                                                       |
+| `type-voice`         | 22 / 28, text color      | Light  | Proposed (Nov 15), not yet in use: spoken words, first “ hung     |
 | body (`text-base`)   | 16                       | Normal | Reading text                                                      |
 | `bp-label`           | mono 14, caps, accent    | Medium | The small label above a heading                                   |
 | `type-fine`          | mono 12, caps, muted     | Normal | Short fine print and tags only                                    |
 
 The home hero headline is the one exception: it is sized to the window.
+
+`type-voice` (proposed, Nov 15, on `/mock/signals` only): things people say, set apart from both body text and
+headings. Plex Sans Light, balanced lines, and a `-0.4em` first-line indent so the opening “ hangs in the margin
+and the words line up with the label above. Lead each block with “. Keep it one level below the section title and
+above everything else in its section; don't pair it with bold item titles or boxes.
 
 Type floor (from `CLAUDE.md`): reading text is 16px, never below 14px; 12px only for short mono lines.
 
@@ -228,6 +234,10 @@ Other patterns:
   (`heatonist.tsx`, `platform.tsx`, `portal.tsx`): plain HTML made of site tokens, sample data only, no links,
   buttons or headings inside.
 - **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
+- **`SplitSection`** (`patterns/split-section.tsx`, proposed Nov 15, on `/mock/signals` only): the asymmetric
+  split. The aside (usually a `SectionHeading`) takes columns 1-5 and sticks under the nav; the content takes columns
+  7-12, with column 6 left as air (at 1440: 546px, a 138px gap, 636px). Below `lg` they stack and nothing sticks.
+  Use it for one statement plus a long run of content, not for equal pieces (a grid of `Card`s).
 - **`ALT_ROW`** (`patterns/alt-row.ts`): the shared grid for a big image beside its text, switching sides each row
   (About's founders).
 

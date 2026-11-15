@@ -7,9 +7,10 @@ import { SoundFamiliarSection } from '@/src/components/sections/sound-familiar'
 import { SOUND_FAMILIAR } from '@/src/lib/home'
 import { SelfCheck, SignalTabs } from './interactive'
 import { Heading, Marker, SHORT } from './shared'
+import { SplitSection } from '@/src/components/patterns/split-section'
 
 /**
- * Mock (temporary, Nov 15): five takes on Home's "Warning signs", stacked,
+ * Mock (temporary, Nov 15): six takes on Home's "Warning signs", stacked,
  * for Jason to judge in the browser. Same copy in each. Not linked, not
  * indexed; drop with its commit.
  */
@@ -42,6 +43,41 @@ function Variant({
         {children}
       </div>
     </Band>
+  )
+}
+
+/** F: the split. One hero (the headline, held still on the left), the
+ *  signals in the voice style on the right, everything else quiet: a mono
+ *  label per place, the fix in muted body text, a hairline between places.
+ *  No boxes, markers or bold titles. */
+function Split() {
+  return (
+    <SplitSection aside={<Heading />}>
+      {groups.map(group => (
+        <RuledRow
+          key={group.name}
+          as='div'
+          className='flex flex-col gap-grid-1 py-grid-2 first:border-t-0 first:pt-0 last:pb-0'
+        >
+          <h3 className='type-fine'>{group.name}</h3>
+          <ul className='flex flex-col gap-grid-1'>
+            {group.quotes.map(quote => (
+              <li key={quote}>
+                <blockquote className='type-voice'>
+                  &ldquo;{quote}&rdquo;
+                </blockquote>
+              </li>
+            ))}
+          </ul>
+          <div className='flex flex-col gap-grid-half pt-grid-half'>
+            <p className='text-base text-text-muted'>{group.build}</p>
+            <ArrowLink href={group.link.href as Route}>
+              {group.link.label}
+            </ArrowLink>
+          </div>
+        </RuledRow>
+      ))}
+    </SplitSection>
   )
 }
 
@@ -134,6 +170,12 @@ function BigList() {
 export default function SignalsMockPage() {
   return (
     <main id='main' className='flex-1 pt-page-start'>
+      <Variant
+        letter='F'
+        note='Split: the headline held still, the signals in a voice style'
+      >
+        <Split />
+      </Variant>
       <Variant
         letter='A'
         note='Current: the three cards, as on Home now (reference)'
