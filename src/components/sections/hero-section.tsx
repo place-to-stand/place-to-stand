@@ -12,7 +12,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
+      className='relative flex min-h-svh flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
       <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2'>
         {/* The hero's gaps: under the nav, between the headline and the
@@ -26,9 +26,13 @@ export function HeroSection() {
             only the space under the nav follows the page-top role (36px, like
             every page's title); the other two stay 48px. On laptops the drawing is
             sized so the hero fills the screen; once it hits its width limit
-            (wide or tall windows) the hero ends early and the next section
-            shows, instead of the gaps swelling. */}
-        <div className='flex flex-1 flex-col'>
+            (wide or tall windows) the leftover height goes above and below
+            the content instead of into the gaps. */}
+        {/* The hero always fills one screen (min-h-svh: the fixed nav sits
+            over its top padding), so the next section never peeks in. Where
+            the capped headline and drawing leave height over (tablets, tall
+            or very large windows), the content block centers in it. */}
+        <div className='flex flex-1 flex-col justify-center'>
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
               height so the drawing below has room. Below 800px tall it stops
