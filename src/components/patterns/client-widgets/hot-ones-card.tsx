@@ -49,20 +49,42 @@ export function HotOnesCard({
   useEffect(() => {
     const el = ref.current
     if (!autoFlip || !el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     let timer: ReturnType<typeof setTimeout> | undefined
+    let frame = 0
+    let done = false
+    // Wait until the card can actually be seen: in view, its section's
+    // fade-in finished (every ancestor fully opaque) and its fonts loaded.
+    // Otherwise the turn plays under the fade and it just appears flipped,
+    // as it did on a refresh with the section already on screen.
+    const opaque = () => {
+      for (let n: HTMLElement | null = el; n; n = n.parentElement)
+        if (parseFloat(getComputedStyle(n).opacity) < 0.99) return false
+      return true
+    }
+    const whenShown = () => {
+      if (done) return
+      if (!opaque()) {
+        frame = requestAnimationFrame(whenShown)
+        return
+      }
+      done = true
+      timer = setTimeout(() => {
+        if (!touched.current) setFlipped(true)
+      }, 500)
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
         observer.disconnect()
-        timer = setTimeout(() => {
-          if (!touched.current) setFlipped(true)
-        }, 700)
+        document.fonts.ready.then(whenShown)
       },
       { threshold: 0.6 }
     )
     observer.observe(el)
     return () => {
       observer.disconnect()
+      cancelAnimationFrame(frame)
       clearTimeout(timer)
     }
   }, [autoFlip])

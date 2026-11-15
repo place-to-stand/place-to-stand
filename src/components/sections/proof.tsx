@@ -4,7 +4,7 @@ import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { Reveal } from '@/src/components/primitives/animated-section'
 import { HOME_PROOF } from '@/src/lib/home'
-import { CLIENT_FONTS } from '@/src/components/patterns/client-widgets/client-fonts'
+import { ClientFontsScope } from '@/src/components/patterns/client-widgets/client-fonts-scope'
 import { HotOnesCard } from '@/src/components/patterns/client-widgets/hot-ones-card'
 import {
   HeatFilter,
@@ -194,174 +194,176 @@ export function ProofSection() {
         />
       </Reveal>
       <Reveal index={1}>
-        <figure className={`flex flex-col ${CLIENT_FONTS}`}>
-          {/* Laptops: the composition on its grid (see PANEL_W). The panel's
+        <ClientFontsScope>
+          <figure className='flex flex-col'>
+            {/* Laptops: the composition on its grid (see PANEL_W). The panel's
             height is its own 56:19 shape: 456px at the 1344px content
             width. */}
-          <div
-            className='[container-type:inline-size] relative hidden aspect-[56/19] lg:block'
-            style={{
-              backgroundColor: HO_BLACK,
-              // Let the hero rise out of the top; clip the sides.
-              clipPath: 'inset(-600px 0 0 0)',
-            }}
-          >
-            {/* Yellow from the column-9 line to the panel's right edge. */}
             <div
-              className='absolute inset-y-0 right-0'
+              className='[container-type:inline-size] relative hidden aspect-[56/19] lg:block'
               style={{
-                left: g(colX(9)),
-                backgroundColor: HO_YELLOW,
-                backgroundImage:
-                  'radial-gradient(rgba(14,15,17,0.14) 1px, transparent 1.2px)',
-                backgroundSize: '24px 24px',
+                backgroundColor: HO_BLACK,
+                // Let the hero rise out of the top; clip the sides.
+                clipPath: 'inset(-600px 0 0 0)',
               }}
-            />
-            {/* Heatonist: the 10 Pack card in columns 1-2, top margin to bottom
+            >
+              {/* Yellow from the column-9 line to the panel's right edge. */}
+              <div
+                className='absolute inset-y-0 right-0'
+                style={{
+                  left: g(colX(9)),
+                  backgroundColor: HO_YELLOW,
+                  backgroundImage:
+                    'radial-gradient(rgba(14,15,17,0.14) 1px, transparent 1.2px)',
+                  backgroundSize: '24px 24px',
+                }}
+              />
+              {/* Heatonist: the 10 Pack card in columns 1-2, top margin to bottom
               margin; the filter in columns 2-3 over the right half of its
               photo, one row down, clear of its text. */}
-            <BundleCard
-              className='absolute'
-              style={{
-                left: g(colX(1)),
-                width: g(colR(2) - colX(1)),
-                top: g(MARGIN),
-              }}
-            />
-            <HeatFilter
-              className='absolute z-10'
-              style={{
-                left: g(colX(3) - 2),
-                width: g(FILTER_W),
-                top: g(MARGIN + 3),
-              }}
-            />
-            {/* Hot Ones: #5 across the seam (columns 8-9), its bottom on the
+              <BundleCard
+                className='absolute'
+                style={{
+                  left: g(colX(1)),
+                  width: g(colR(2) - colX(1)),
+                  top: g(MARGIN),
+                }}
+              />
+              <HeatFilter
+                className='absolute z-10'
+                style={{
+                  left: g(colX(3) - 2),
+                  width: g(FILTER_W),
+                  top: g(MARGIN + 3),
+                }}
+              />
+              {/* Hot Ones: #5 across the seam (columns 8-9), its bottom on the
               bottom margin; #2 in columns 10-12, rising 4g out of the top. */}
-            <HotOnesCard
-              {...LOS_CALIENTES_ROJO}
-              className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
-              style={{
-                left: g(colX(8)),
-                width: g(2 * COL + 1),
-                bottom: g(MARGIN),
-              }}
-            />
-            <HotOnesCard
-              {...HOUSE_SAUCE}
-              autoFlip
-              className='absolute z-20 rotate-[5deg]'
-              style={{
-                left: g(colX(9) + COL / 2),
-                width: g(colR(11) - colX(9)),
-                top: g(-4),
-              }}
-            />
-            {/* Labels: the two Heatonist ones share the column-5 line; the
+              <HotOnesCard
+                {...HOUSE_SAUCE}
+                className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
+                style={{
+                  left: g(colX(8)),
+                  width: g(2 * COL + 1),
+                  bottom: g(MARGIN),
+                }}
+              />
+              <HotOnesCard
+                {...LOS_CALIENTES_ROJO}
+                autoFlip
+                className='absolute z-20 rotate-[5deg]'
+                style={{
+                  left: g(colX(9) + COL / 2),
+                  width: g(colR(11) - colX(9)),
+                  top: g(-4),
+                }}
+              />
+              {/* Labels: the two Heatonist ones share the column-5 line; the
               flip-cards one is right-aligned to the column-7 line, its
               leader on the top margin, above #5. */}
-            {/* All three labels left-aligned on the column-5 line, stacked:
+              {/* All three labels left-aligned on the column-5 line, stacked:
               bundles at the 10 Pack card's top, the filter at its middle, the
               flip cards low, its leader running right to #5's edge. */}
-            <GridCallout
-              from={colR(2)}
-              to={colX(5)}
-              y={MARGIN + 0.5}
-              {...CALLOUTS[2]}
-            />
-            <GridCallout
-              from={colX(3) - 2 + FILTER_W}
-              to={colX(5)}
-              y={MARGIN + 6.5}
-              {...CALLOUTS[1]}
-            />
-            <LabelThenLeader
-              at={colX(5)}
-              to={colX(8) + 0.6}
-              y={MARGIN + 12}
-              {...CALLOUTS[0]}
-            />
-            {/* Site credits on the margin, one per half. */}
-            <span
-              aria-hidden
-              className='absolute font-mono text-xs tracking-[0.1em] uppercase'
-              style={{
-                color: 'rgba(255,255,255,0.72)',
-                left: g(MARGIN),
-                bottom: g(MARGIN / 2),
-                transform: 'translateY(50%)',
-              }}
-            >
-              Heatonist.com
-            </span>
-            <span
-              aria-hidden
-              className='absolute font-mono text-xs tracking-[0.1em] uppercase'
-              style={{
-                color: 'rgba(14,15,17,0.78)',
-                right: g(MARGIN),
-                bottom: g(MARGIN / 2),
-                transform: 'translateY(50%)',
-              }}
-            >
-              Hotones.com
-            </span>
-            <GridOverlay />
-          </div>
-
-          {/* Phones and tablets: the headline and hero card on the split, the
-            callouts as a list, then the Heatonist pieces. */}
-          <div className='flex flex-col lg:hidden'>
-            <div
-              className='relative overflow-hidden'
-              style={{ backgroundColor: HO_BLACK }}
-            >
-              <div
-                className='absolute inset-x-0 bottom-0 h-[42%]'
-                style={{ backgroundColor: HO_YELLOW }}
+              <GridCallout
+                from={colR(2)}
+                to={colX(5)}
+                y={MARGIN + 0.5}
+                {...CALLOUTS[2]}
               />
-              <div className='relative flex flex-col items-center gap-grid-1 px-grid-1 py-grid-2'>
-                <HotOnesCard
-                  {...HOUSE_SAUCE}
-                  autoFlip
-                  className='w-[58%] max-w-[18rem] rotate-[3deg]'
-                />
-                <span
-                  aria-hidden
-                  className='self-end font-mono text-xs tracking-[0.1em] uppercase'
-                  style={{ color: 'rgba(14,15,17,0.78)' }}
-                >
-                  Hotones.com
-                </span>
-              </div>
-            </div>
-            <ul className='flex flex-col border-x border-b border-border bg-bg-card'>
-              {CALLOUTS.map(c => (
-                <li
-                  key={c.title}
-                  className='flex items-baseline gap-grid-half border-t border-border px-grid-1 py-grid-half font-mono text-xs tracking-[0.1em] uppercase first:border-t-0'
-                >
-                  <span className='font-semibold whitespace-nowrap text-text'>
-                    {c.title}
-                  </span>
-                  <span className='text-text-muted'>{c.detail}</span>
-                </li>
-              ))}
-            </ul>
-            <div className='flex flex-col gap-grid-1 border-x border-b border-border bg-bg-card p-grid-1'>
-              <div className='flex items-start justify-center gap-grid-1'>
-                <BundleCard className='w-[44%] max-w-[15rem]' />
-                <HeatFilter className='mt-grid-2 w-[44%] max-w-[15rem]' />
-              </div>
+              <GridCallout
+                from={colX(3) - 2 + FILTER_W}
+                to={colX(5)}
+                y={MARGIN + 6.5}
+                {...CALLOUTS[1]}
+              />
+              <LabelThenLeader
+                at={colX(5)}
+                to={colX(8) + 0.6}
+                y={MARGIN + 12}
+                {...CALLOUTS[0]}
+              />
+              {/* Site credits on the margin, one per half. */}
               <span
                 aria-hidden
-                className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase'
+                className='absolute font-mono text-xs tracking-[0.1em] uppercase'
+                style={{
+                  color: 'rgba(255,255,255,0.72)',
+                  left: g(MARGIN),
+                  bottom: g(MARGIN / 2),
+                  transform: 'translateY(50%)',
+                }}
               >
                 Heatonist.com
               </span>
+              <span
+                aria-hidden
+                className='absolute font-mono text-xs tracking-[0.1em] uppercase'
+                style={{
+                  color: 'rgba(14,15,17,0.78)',
+                  right: g(MARGIN),
+                  bottom: g(MARGIN / 2),
+                  transform: 'translateY(50%)',
+                }}
+              >
+                Hotones.com
+              </span>
+              <GridOverlay />
             </div>
-          </div>
-        </figure>
+
+            {/* Phones and tablets: the headline and hero card on the split, the
+            callouts as a list, then the Heatonist pieces. */}
+            <div className='flex flex-col lg:hidden'>
+              <div
+                className='relative overflow-hidden'
+                style={{ backgroundColor: HO_BLACK }}
+              >
+                <div
+                  className='absolute inset-x-0 bottom-0 h-[42%]'
+                  style={{ backgroundColor: HO_YELLOW }}
+                />
+                <div className='relative flex flex-col items-center gap-grid-1 px-grid-1 py-grid-2'>
+                  <HotOnesCard
+                    {...LOS_CALIENTES_ROJO}
+                    autoFlip
+                    className='w-[58%] max-w-[18rem] rotate-[3deg]'
+                  />
+                  <span
+                    aria-hidden
+                    className='self-end font-mono text-xs tracking-[0.1em] uppercase'
+                    style={{ color: 'rgba(14,15,17,0.78)' }}
+                  >
+                    Hotones.com
+                  </span>
+                </div>
+              </div>
+              <ul className='flex flex-col border-x border-b border-border bg-bg-card'>
+                {CALLOUTS.map(c => (
+                  <li
+                    key={c.title}
+                    className='flex items-baseline gap-grid-half border-t border-border px-grid-1 py-grid-half font-mono text-xs tracking-[0.1em] uppercase first:border-t-0'
+                  >
+                    <span className='font-semibold whitespace-nowrap text-text'>
+                      {c.title}
+                    </span>
+                    <span className='text-text-muted'>{c.detail}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className='flex flex-col gap-grid-1 border-x border-b border-border bg-bg-card p-grid-1'>
+                <div className='flex items-start justify-center gap-grid-1'>
+                  <BundleCard className='w-[44%] max-w-[15rem]' />
+                  <HeatFilter className='mt-grid-2 w-[44%] max-w-[15rem]' />
+                </div>
+                <span
+                  aria-hidden
+                  className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase'
+                >
+                  Heatonist.com
+                </span>
+              </div>
+            </div>
+          </figure>
+        </ClientFontsScope>
       </Reveal>
       <Reveal index={2} className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
         {HOME_PROOF.links.map(link => (
