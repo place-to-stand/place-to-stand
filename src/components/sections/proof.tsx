@@ -55,7 +55,7 @@ const SEAM = 106 / 3
  *  (Jason, Nov 15): at 4, 9.5 and 15 units down. */
 const LABEL_STEP = 5.5
 
-/** The Heat filter: two columns and a gutter wide (columns 2-3). */
+/** The search filter: two columns and a gutter wide (columns 2-3). */
 const FILTER_W = 2 * COL + 1
 
 /** Columns, gutters and margins, drawn when <html> has data-grid
@@ -82,13 +82,15 @@ function GridOverlay() {
   )
 }
 
-/** The label column: one shared left edge, centered (by the widest
- *  label, 156px) in the black between the filter's right edge and #2's
- *  leftmost tilted point (measured at 31.49 units) (Jason, Nov 15). */
-const LABEL_W = 156
+/** The label column: one shared left edge, centered (by the widest line,
+ *  "Know the flavor profile", 193px) in the black between the filter's
+ *  right edge and #2's leftmost tilted point (measured at 31.49 units)
+ *  (Jason, Nov 15). The gap always leaves at least 24px leaders either
+ *  side, so the lines never wrap past their set two. */
 const GAP_LEFT = colX(3) - 2 + FILTER_W
 const GAP_RIGHT = 31.49
-const LABEL_X = `calc(${(GAP_LEFT + GAP_RIGHT) / 2} * 100cqw / ${PANEL_W} - ${LABEL_W / 2}px)`
+const LABEL_W = `min(194px, ${GAP_RIGHT - GAP_LEFT} * 100cqw / ${PANEL_W} - 48px)`
+const LABEL_X = `calc(${(GAP_LEFT + GAP_RIGHT) / 2} * 100cqw / ${PANEL_W} - ${LABEL_W} / 2)`
 
 /** A callout: the label on the shared column, a 1px leader level with it,
  *  and a dot on its piece's edge. `side` says which side of the column the
@@ -106,14 +108,14 @@ function Callout({
   side: 'left' | 'right'
   y: number
   title: string
-  detail: string
+  detail: readonly [string, string]
 }) {
   const line =
     side === 'left'
       ? { left: g(dot), width: `calc(${LABEL_X} - 12px - ${g(dot)})` }
       : {
-          left: `calc(${LABEL_X} + ${LABEL_W + 12}px)`,
-          width: `calc(${g(dot)} - ${LABEL_X} - ${LABEL_W + 12}px)`,
+          left: `calc(${LABEL_X} + ${LABEL_W} + 12px)`,
+          width: `calc(${g(dot)} - ${LABEL_X} - ${LABEL_W} - 12px)`,
         }
   return (
     <div aria-hidden className='pointer-events-none absolute inset-0 z-30'>
@@ -139,22 +141,34 @@ function Callout({
         }}
       >
         <span className='font-semibold'>{title}</span>
-        <span className='opacity-75'>{detail}</span>
+        <span className='opacity-75'>
+          {detail.map(l => (
+            <span key={l} className='block whitespace-nowrap'>
+              {l}
+            </span>
+          ))}
+        </span>
       </span>
     </div>
   )
 }
 
+/** Each sub line is set as two lines on purpose, so the three labels have
+ *  the same shape at every desktop width (Jason, Nov 15). The phone list
+ *  joins them. */
 const CALLOUTS = [
-  { title: 'Flip cards', detail: 'Tasting notes + heat level' },
-  { title: 'Heat filter', detail: '4 levels' },
-  { title: 'Bundles', detail: '10 pack' },
-]
+  {
+    title: 'Flip cards',
+    detail: ['Know the flavor profile', 'before you buy'],
+  },
+  { title: 'Search filters', detail: ['Find your', 'sauce faster'] },
+  { title: 'Bundles', detail: ['A whole season', 'in one box'] },
+] as const
 
 /**
  * Home's proof (#results): the Heatonist and Hot Ones work, approved Nov 15.
  * The copy, then one panel in the clients' colors, black for Heatonist and
- * yellow for Hot Ones, on its own grid: the 10 Pack card and Heat filter,
+ * yellow for Hot Ones, on its own grid: the 10 Pack card and search filter,
  * and lineup cards #2 and #5, Hot Ones' own House Sauce and Los Calientes Rojo, all rebuilt in HTML from the live sites so
  * they stay sharp, with blueprint callouts saying what we built and each
  * site's name in its half. The cards flip on click, tap, Enter or Space
@@ -296,7 +310,9 @@ export function ProofSection() {
                     <span className='font-semibold whitespace-nowrap text-text'>
                       {c.title}
                     </span>
-                    <span className='text-text-muted'>{c.detail}</span>
+                    <span className='text-text-muted'>
+                      {c.detail.join(' ')}
+                    </span>
                   </li>
                 ))}
               </ul>
