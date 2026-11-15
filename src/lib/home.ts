@@ -12,11 +12,9 @@ export const HOME_HERO = {
 
 export const HOME_PROOF = {
   label: 'Client Results',
-  title: 'Hot Ones and Heatonist, since 2023.',
-  body: "We build and run the online stores and Shopify apps for Heatonist and its long-time partner, Hot Ones. Over 1,400 changes shipped so far, and we're still on the team.",
-  links: [
-    { label: 'Read the Heatonist story', href: '/clients/heatonist' },
-  ],
+  title: 'Building the Hot Ones and Heatonist stores since 2023.',
+  body: "Online stores and Shopify apps for Heatonist and its long-time partner, Hot Ones. Over 1,400 changes shipped so far, and we're still on the team.",
+  links: [{ label: 'Read the Heatonist story', href: '/clients/heatonist' }],
 } as const
 
 export const SOUND_FAMILIAR = {
