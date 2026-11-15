@@ -23,7 +23,9 @@ export const HOME_PROOF = {
 export const SOUND_FAMILIAR = {
   label: 'Warning Signs',
   /** Proposal (Nov 15): the signs to listen for in your own company. */
-  title: 'If your team is saying these, it’s time to call.',
+  // Jason’s headline (Nov 15). No-break spaces keep “any of these”
+  // together, so it breaks after “saying”.
+  title: 'If your team is saying any\u00a0of\u00a0these, it’s time to call.',
   intro: 'Each one means your software is holding the business back.',
   // Each group is shown as a team chat (Nov 15): made-up first names and
   // roles, times and reactions; the quotes are the messages, in order.
