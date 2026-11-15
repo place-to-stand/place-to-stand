@@ -6,7 +6,7 @@
  */
 
 export const HOME_HERO = {
-  sub: 'Our senior engineers build the systems you run your business on and the stores you sell through, then keep building on them after launch, for as long as you want. You own the code and the data, with no per-user fees.',
+  sub: 'Our senior engineers build the systems behind your business and the stores in front of it. We keep building after launch, for as long as you want. You own the code and the data, with no per-user fees.',
   auditLead: 'Not ready to talk?',
 } as const
 
