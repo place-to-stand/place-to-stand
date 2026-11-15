@@ -12,7 +12,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(1.5rem,calc(1.5rem+(100svh-50rem)*0.24),3rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
+      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:calc(var(--space-page-top)+0.75rem)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
       <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2 lg:pt-[calc(var(--nav-height)+var(--spacing-grid-1))] lg:pb-grid-1'>
         {/* The hero's gaps: under the nav, between the headline and the
@@ -82,13 +82,13 @@ export function HeroSection() {
               with the headline's 24px once its glyph spacing is counted.
               Stacked, neither is inset, the text centers and the button runs
               full width up to 448px. */}
-          <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:gap-grid-2 lg:gap-grid-3'>
-            {/* Side by side, the text column stretches to the row's height and
-                splits the free space 1:3 above and below its content, so the
-                text sits a touch above center but never higher than the
-                drawing's top or lower than its bottom (the spacers shrink to
-                nothing when the text is the taller one). */}
-            <div className="flex flex-col max-md:order-2 md:flex-1 md:self-stretch md:before:flex-[1] md:before:content-[''] md:after:flex-[3] md:after:content-[''] lg:pl-grid-1">
+          <div className='flex flex-col gap-grid-1 md:flex-row md:items-start md:gap-grid-2 lg:gap-grid-3'>
+            {/* Side by side, the row is top-aligned and the text column
+                drops its first line level with the drawings' windows, under
+                their titles (--draw-top, set by HeroDrawingSlot; 48px until
+                it has measured), less the line's half-leading. */}
+            {/* eslint-disable-next-line design/no-raw-spacing -- a measured offset, not a spacing role */}
+            <div className='flex flex-col max-md:order-2 md:flex-1 md:pt-[calc(var(--draw-top,3rem)-0.25rem)] lg:pl-grid-1'>
               <div className='flex flex-col gap-grid-1 text-center md:text-left lg:gap-grid-2'>
                 <div
                   className='hero-reveal flex gap-grid-half self-center md:self-start'
