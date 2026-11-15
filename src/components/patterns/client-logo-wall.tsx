@@ -9,8 +9,46 @@ import {
   SWAP_FADE_MS,
   SCAN_IN_MS,
   FIRST_SWAP_DELAY_MS,
+  ROW_SLOTS,
+  ROW_PINNED,
   nextSwap,
 } from '@/src/components/patterns/client-logo-wall-utils'
+
+/** The two layouts: the original grid (two or three rows) and the hero's
+ *  single quiet row. Each lists its grid classes, the cells that show at
+ *  each width, and the classes that hide the rest. */
+const LAYOUTS = {
+  grid: {
+    slots: VISIBLE_SLOTS,
+    total: LOGO_SLOTS,
+    pinned: 0,
+    className:
+      'grid grid-cols-2 gap-x-[clamp(2.25rem,9vw,4rem)] gap-y-[clamp(0.75rem,3vw,2.25rem)] min-[36rem]:grid-cols-3 min-[50rem]:grid-cols-4 min-[80rem]:grid-cols-5 min-[80rem]:gap-x-grid-2',
+    hide: (slot: number) =>
+      slot >= VISIBLE_SLOTS.wideTablet
+        ? 'hidden min-[80rem]:flex'
+        : slot >= VISIBLE_SLOTS.tablet
+          ? 'hidden min-[50rem]:flex'
+          : '',
+    logo: 'h-[min(4.5rem,36cqw)]',
+  },
+  row: {
+    slots: ROW_SLOTS,
+    total: ROW_SLOTS.laptop,
+    pinned: ROW_PINNED,
+    className:
+      'grid grid-cols-4 gap-x-[clamp(1.5rem,5vw,3rem)] min-[36rem]:grid-cols-5 min-[50rem]:grid-cols-6 min-[80rem]:grid-cols-7',
+    hide: (slot: number) =>
+      slot >= ROW_SLOTS.wideTablet
+        ? 'hidden min-[80rem]:flex'
+        : slot >= ROW_SLOTS.tablet
+          ? 'hidden min-[50rem]:flex'
+          : slot >= ROW_SLOTS.phone
+            ? 'hidden min-[36rem]:flex'
+            : '',
+    logo: 'h-[min(2rem,40cqw)]',
+  },
+} as const
 
 /**
  * The homepage logo grid. It opens on the first `LOGO_SLOTS` clients (the
@@ -29,8 +67,15 @@ import {
  * Swaps stop while the grid is off screen, while the tab is hidden, and for
  * anyone who asks for reduced motion.
  */
-export function ClientLogoWall() {
-  const [shown, setShown] = useState(() => initialSlots())
+export function ClientLogoWall({
+  variant = 'grid',
+}: {
+  /** 'row': one quiet row, for the bottom of the home hero (loads eagerly,
+   *  keeps the first two pinned). */
+  variant?: 'grid' | 'row'
+} = {}) {
+  const layout = LAYOUTS[variant]
+  const [shown, setShown] = useState(() => initialSlots(layout.total))
   const [fading, setFading] = useState<number | null>(null)
   // The cell scanning in right now. It is cleared once the scan-in ends:
   // left on, the animation would replay whenever a hidden cell is shown again
@@ -45,7 +90,7 @@ export function ClientLogoWall() {
   const held = useRef<number | null>(null)
 
   useEffect(() => {
-    if (clients.length <= LOGO_SLOTS) return
+    if (clients.length <= layout.total) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let visible = false
@@ -63,7 +108,7 @@ export function ClientLogoWall() {
       if (!visible || document.hidden || nextAt === null) return
       if (Date.now() < nextAt) return
       nextAt = Date.now() + SWAP_INTERVAL_MS
-      const showing = visibleSlots()
+      const showing = visibleSlots(layout.slots)
       // A cell that just went out of view (window narrowed) can't be the
       // "last swapped" one any more.
       if (lastSlot.current !== null && lastSlot.current >= showing)
@@ -72,7 +117,9 @@ export function ClientLogoWall() {
         shownRef.current.slice(0, showing),
         clients.length,
         lastSlot.current,
-        held.current
+        held.current,
+        Math.random,
+        layout.pinned
       )
       lastSlot.current = swap.slot
       setFading(swap.slot)
@@ -97,7 +144,7 @@ export function ClientLogoWall() {
       clearTimeout(scanTimer)
       observer.disconnect()
     }
-  }, [])
+  }, [layout])
 
   return (
     // Three rows of two on phones, two rows above that; cells that don't fit
@@ -105,14 +152,13 @@ export function ClientLogoWall() {
     // columns 9vw (36px to 64px; 48px at five across), rows 3vw (12px to
     // 36px).
     // Only the column count changes at breakpoints.
-    <div
-      ref={ref}
-      className='grid grid-cols-2 gap-x-[clamp(2.25rem,9vw,4rem)] gap-y-[clamp(0.75rem,3vw,2.25rem)] min-[36rem]:grid-cols-3 min-[50rem]:grid-cols-4 min-[80rem]:grid-cols-5 min-[80rem]:gap-x-grid-2'
-    >
+    <div ref={ref} className={layout.className}>
       {shown.map((index, slot) => (
         <LogoCell
           key={slot}
-          className={slotVisibility(slot)}
+          className={layout.hide(slot)}
+          logoClassName={layout.logo}
+          eager={variant === 'row'}
           client={clients[index]}
           leaving={fading === slot}
           entering={entering === slot}
@@ -126,34 +172,27 @@ export function ClientLogoWall() {
   )
 }
 
-/** Hides the cells that don't fit: 6 show on phones and at three across,
- * then 8 and 10. */
-function slotVisibility(slot: number): string {
-  if (slot >= VISIBLE_SLOTS.wideTablet) return 'hidden min-[80rem]:flex'
-  if (slot >= VISIBLE_SLOTS.tablet) return 'hidden min-[50rem]:flex'
-  return ''
+/** How many cells show at the current width (matches the layout's `hide`). */
+function visibleSlots(slots: {
+  phone: number
+  tablet: number
+  wideTablet: number
+  laptop: number
+}): number {
+  if (window.matchMedia('(min-width: 80rem)').matches) return slots.laptop
+  if (window.matchMedia('(min-width: 50rem)').matches) return slots.wideTablet
+  if (window.matchMedia('(min-width: 36rem)').matches) return slots.tablet
+  return slots.phone
 }
 
-/** How many cells show at the current width (matches `slotVisibility`). */
-function visibleSlots(): number {
-  if (window.matchMedia('(min-width: 80rem)').matches)
-    return VISIBLE_SLOTS.laptop
-  if (window.matchMedia('(min-width: 50rem)').matches)
-    return VISIBLE_SLOTS.wideTablet
-  if (window.matchMedia('(min-width: 36rem)').matches)
-    return VISIBLE_SLOTS.tablet
-  return VISIBLE_SLOTS.phone
-}
-
-function initialSlots(): number[] {
-  return Array.from(
-    { length: Math.min(LOGO_SLOTS, clients.length) },
-    (_, i) => i
-  )
+function initialSlots(total: number): number[] {
+  return Array.from({ length: Math.min(total, clients.length) }, (_, i) => i)
 }
 
 function LogoCell({
   className,
+  logoClassName,
+  eager,
   client,
   leaving,
   entering,
@@ -161,6 +200,8 @@ function LogoCell({
   onRelease,
 }: {
   className?: string
+  logoClassName: string
+  eager: boolean
   client: Client
   leaving: boolean
   entering: boolean
@@ -185,7 +226,7 @@ function LogoCell({
       <span
         key={client.title}
         style={{ transitionDuration: `${SWAP_FADE_MS}ms` }}
-        className={`flex h-[min(4.5rem,36cqw)] w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
+        className={`flex ${logoClassName} w-full items-center justify-center transition-[opacity,filter,transform] ease-out ${
           leaving ? 'logo-swap-out' : ''
         } ${entering ? 'logo-swap-in' : ''}`}
       >
@@ -198,8 +239,9 @@ function LogoCell({
           <img
             src={client.logo}
             alt={`${client.title} logo`}
-            // The wall sits under the hero, below the fold: load as it nears.
-            loading='lazy'
+            // The grid sits below the fold: load as it nears. The hero row
+            // is on the first screen.
+            loading={eager ? 'eager' : 'lazy'}
             decoding='async'
             style={{
               maxHeight: `${(client.logoScale ?? 1) * 100}%`,
