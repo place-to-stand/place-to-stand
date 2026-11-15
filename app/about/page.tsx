@@ -21,7 +21,7 @@ import { MediaFrame } from '@/src/components/patterns/media-frame'
 export const metadata: Metadata = pageMetadata({
   title: 'About',
   description:
-    'Place To Stand builds software its clients own, from Austin and Brooklyn. Built by experienced engineers, including a former Squarespace group engineering manager.',
+    'Place To Stand builds software its clients own, from Austin and Brooklyn. Built by senior engineers, including a former Squarespace group engineering manager.',
   path: '/about',
 })
 
@@ -34,7 +34,7 @@ export default function AboutPage() {
         sectionClassName='pb-grid-2'
         label='About'
         title='Founders who build.'
-        intro='Experienced engineers in Austin and Brooklyn, building for clients since 2023. The people on your first call are the people who build your software.'
+        intro='Senior engineers in Austin and Brooklyn, building for clients since 2023. The people on your first call are the people who build your software.'
       />
 
       <Band tone='light'>

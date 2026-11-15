@@ -256,20 +256,20 @@ A typical inner page:
 Each section has named variants and a fixed tone (light or dark), so a page picks a section instead of composing
 raw pieces. The tone is exported on the component (`StepsSection.tone`).
 
-| Section                 | Variants                                                                                                        | Tone                                      |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| `Hero`                  | `home` (the Home hero), `page` (an inner page title)                                                            | dark                                      |
-| `ClientLogosSection`    | one layout, under the Home hero                                                                                 | dark                                      |
-| `ProofSection`          | one layout (Home, `#results`): the Heatonist and Hot Ones copy beside four lifted-out pieces                    | dark                                      |
-| `SoundFamiliarSection`  | one layout (Home): three cards of clients' own words, each closed by what we build for it                       | light                                     |
-| `WhoYouWorkWithSection` | one layout (Home): the promise beside the two founders                                                          | dark                                      |
-| Offers (`offers.tsx`)   | detail only: `OfferDetail` (Run, Sell), `EngineeringHelpSection`, `DataHomeSection`, each its own Platform band | the band it sits in (Platform alternates) |
-| `ResultsSection`        | one layout: the Heatonist case study, featured at the top of Clients                                            | dark                                      |
-| `StepsSection`          | `cards` (Home, with `showBilling`), `rows` (Process)                                                            | light                                     |
-| `AfterLaunchSection`    | one layout (Platform, `#after-launch`)                                                                          | light                                     |
-| `OwnershipSection`      | `full` (the six lines, Platform `#own`), `short` (Home)                                                         | dark                                      |
-| `ClientsSection`        | one layout (Clients): grouped ruled rows, the group title in the left third                                     | light                                     |
-| `CtaBand`               | `call` (Book a call + note line, or a `secondary` button), `audit` (audit link only)                            | dark                                      |
+| Section                 | Variants                                                                                                   | Tone                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `Hero`                  | `home` (the Home hero), `page` (an inner page title)                                                       | dark                                      |
+| `ClientLogosSection`    | one layout, under the Home hero                                                                            | dark                                      |
+| `ProofSection`          | one layout (Home, `#results`): the Heatonist and Hot Ones copy beside four lifted-out pieces               | dark                                      |
+| `SoundFamiliarSection`  | one layout (Home): three cards of clients' own words, each closed by what we build for it                  | light                                     |
+| `WhoYouWorkWithSection` | one layout (Home): the promise beside the two founders                                                     | dark                                      |
+| Offers (`offers.tsx`)   | detail only: `OfferDetail` (Run, Sell), `SeniorHelpSection`, `DataHomeSection`, each its own Platform band | the band it sits in (Platform alternates) |
+| `ResultsSection`        | one layout: the Heatonist case study, featured at the top of Clients                                       | dark                                      |
+| `StepsSection`          | `cards` (Home, with `showBilling`), `rows` (Process)                                                       | light                                     |
+| `AfterLaunchSection`    | one layout (Platform, `#after-launch`)                                                                     | light                                     |
+| `OwnershipSection`      | `full` (the six lines, Platform `#own`), `short` (Home)                                                    | dark                                      |
+| `ClientsSection`        | one layout (Clients): grouped ruled rows, the group title in the left third                                | light                                     |
+| `CtaBand`               | `call` (Book a call + note line, or a `secondary` button), `audit` (audit link only)                       | dark                                      |
 
 Header, footer and the audit tool also live in `sections/`.
 
@@ -278,7 +278,7 @@ Header, footer and the audit tool also live in `sections/`.
 | Template                     | Page       | Layout                                                                                   |
 | ---------------------------- | ---------- | ---------------------------------------------------------------------------------------- |
 | `HomeTemplate`               | Home       | Hero, logos and proof, then light and dark bands of sections, closing band               |
-| `OfferPageTemplate`          | Platform   | Hero, Run, Sell, Engineering help, data and ownership, after launch, closing band        |
+| `OfferPageTemplate`          | Platform   | Hero, Run, Sell, Senior help, data and ownership, after launch, closing band             |
 | `CaseStudyTemplate`          | Heatonist  | Hero with the numbers, spec rows, quote, the work beside lifted-out pieces, closing band |
 | `ArticleShell`/`ArticleBody` | Blog posts | A shell shared by every post, and the post that streams into it                          |
 | `ContactTemplate`            | Contact    | Hero with three ways in, the call, the audit, the message form                           |

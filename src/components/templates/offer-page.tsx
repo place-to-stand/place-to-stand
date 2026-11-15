@@ -3,7 +3,7 @@ import { CtaBand } from '@/src/components/sections/cta-band'
 import {
   DataHomeSection,
   OfferDetail,
-  EngineeringHelpSection,
+  SeniorHelpSection,
 } from '@/src/components/sections/offers'
 import { OwnershipSection } from '@/src/components/sections/ownership'
 import { AfterLaunchSection } from '@/src/components/sections/after-launch'
@@ -14,7 +14,7 @@ import { Hero } from '@/src/components/sections/hero'
 
 /**
  * The Platform page (approved Nov 13): header, the three kinds of work (#run,
- * #sell, #engineering-help), one home for your data, the full ownership block
+ * #sell, #senior-help), one home for your data, the full ownership block
  * (#own), after launch (#after-launch) and the closing band.
  */
 export function OfferPageTemplate() {
@@ -36,7 +36,7 @@ export function OfferPageTemplate() {
         <OfferDetail offer={sell} />
       </Band>
       <Band tone='light'>
-        <EngineeringHelpSection />
+        <SeniorHelpSection />
       </Band>
       <Band tone='dark'>
         <DataHomeSection />

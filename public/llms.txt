@@ -1,6 +1,6 @@
 # Place To Stand Agency
 
-> Place To Stand (placetostandagency.com) is your engineering team, by the hour: experienced engineers in Austin, TX and Brooklyn, NY who build the tools a business runs on and stay as long as the client wants. Clients own the code and the data. We build systems that run a business, custom stores and marketplaces, and give engineering help to teams that already write code. Founded in 2023 by Jason Desiderio (formerly a group engineering manager at Squarespace) and Kris Crawford. The people on the first call are the people who build the software. Clients own the code, the data and the accounts: no seat fees, no lock-in, and their data never trains AI.
+> Place To Stand (placetostandagency.com) is your engineering team, by the hour: senior engineers in Austin, TX and Brooklyn, NY who build the software a business runs on and stay as long as the client wants them to. Clients own the code and the data. We build systems that run a business, custom stores and marketplaces, and give senior help to teams that already write code. Founded in 2023 by Jason Desiderio (formerly a group engineering manager at Squarespace) and Kris Crawford. The people on the first call are the people who build the software. Clients own the code, the data and the accounts: no seat fees, no lock-in, and their data never trains AI.
 
 Place To Stand at placetostandagency.com is not affiliated with other businesses that use the name "Place to Stand", including placetostand.com.
 
@@ -11,7 +11,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 - A business has data spread across tools and can't answer simple questions about itself.
 - A Shopify store can't do what the business needs, orders arrive by DM, text and email and get lost, or off-the-shelf store tools weren't built to sell what it sells (custom marketplaces, made-to-order and drop-ship, order intake, order routing).
 - A team needs a developer but can't hire one full-time, someone built its software and disappeared, or it built a first version with AI and now it keeps breaking.
-- A team with its own developers wants experienced engineers beside them, or technical consulting on what to build, buy or hire for.
+- A team with its own developers wants senior engineers beside them, or technical consulting on what to build, buy or hire for.
 
 **When not to.** Off-the-shelf software already fits, or the need is a single full-time hire.
 
@@ -19,7 +19,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 
 **How billing works.** Clients pay only for the hours a person spends on their work. Hours come in prepaid blocks, five to start. They aren't refunded, but they never expire. AI tools and agents cost nothing extra, and neither do features the portal already has: clients pay only for the time to set them up and change them. There is no contract: walk away any time and keep everything that was built.
 
-**How to engage.** Book a free 30-minute call at https://placetostandagency.com/contact, send a note through the form on the same page (subjects: new project; fix or take over software we already have; engineering help for our team; referral program; general question; other), or email hello@placetostandagency.com. The free two-minute audit at https://placetostandagency.com/audit shows where custom software would help first.
+**How to engage.** Book a free 30-minute call at https://placetostandagency.com/contact, send a note through the form on the same page (subjects: new project; fix or take over software we already have; senior help for our team; referral program; general question; other), or email hello@placetostandagency.com. The free two-minute audit at https://placetostandagency.com/audit shows where custom software would help first.
 
 ## Company
 
@@ -30,7 +30,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 
 ## Platform and process
 
-- [Platform](https://placetostandagency.com/platform): three kinds of work sharing one home for your data. Run your business (team workspace, CRM, workflows, automations, client portal, reports, website), Sell online (custom marketplaces, Shopify stores and apps, made-to-order and drop-ship, order intake, payments, order routing), and Engineering help for your team (picking up where others left off, making an AI-built first version solid, working beside your developers, technical consulting); what clients own; and after launch: managed services, training and the next fix
+- [Platform](https://placetostandagency.com/platform): three kinds of work sharing one home for your data. Run your business (team workspace, CRM, workflows, automations, client portal, reports, website), Sell online (custom marketplaces, Shopify stores and apps, made-to-order and drop-ship, order intake, payments, order routing), and Senior help for your team (picking up where others left off, making an AI-built first version solid, working beside your developers, technical consulting); what clients own; and after launch: managed services, training and the next fix
 - [Portal](https://placetostandagency.com/platform/portal): the open-source system Place To Stand runs on (leads, projects, time, invoices, reports, client view, website forms, AI access with role-based limits, roles and access, activity log, search). A client's system starts as a copy of it, trimmed to what they need, running on their own infrastructure. Code: https://github.com/place-to-stand/place-to-stand-portal
 - [Process](https://placetostandagency.com/process): the five steps with their times, how we build with AI agents, what happens once it works, how billing works, our usual stack, and common questions
 - [Audit](https://placetostandagency.com/audit): free two-minute self-assessment

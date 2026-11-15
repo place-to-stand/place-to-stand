@@ -26,7 +26,7 @@ export const referralContent = {
     // Home's "Who you work with" title and body.
     headline: WHO_YOU_WORK_WITH_HOME.title,
     body: WHO_YOU_WORK_WITH_HOME.body,
-    // The same lists as Platform: the two offers' modules, Engineering help, then
+    // The same lists as Platform: the two offers' modules, Senior help, then
     // the after-launch services.
     services: [
       ...OFFERS.map(offer => ({

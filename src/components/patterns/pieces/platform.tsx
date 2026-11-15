@@ -4,7 +4,7 @@ import { cn } from '@/src/lib/utils'
 /**
  * Three pieces for Platform, lifted out for UiPiece: a CRM lead list (Run
  * your business), an order form feeding one queue (Sell online) and the
- * checks on a pull request (Engineering help). Sample data only: made-up names,
+ * checks on a pull request (Senior help). Sample data only: made-up names,
  * no prices.
  */
 
@@ -154,7 +154,7 @@ const CHECKS = [
 export function CodeReviewPiece({ className }: { className?: string }) {
   return (
     <UiPiece
-      alt='The checks on a pull request that hardens an app before launch: tests, type check, security scan and load test all passing, and the change approved by a reviewer.'
+      alt='The checks on a pull request that hardens an app before launch: tests, type check, security scan and load test all passing, and the change approved by a senior reviewer.'
       caption='Pull request · checks before launch'
       width='lg'
       className={className}
@@ -186,7 +186,9 @@ export function CodeReviewPiece({ className }: { className?: string }) {
         </ul>
         <div className='flex items-center gap-grid-half px-grid-1 py-grid-half'>
           <Marker on />
-          <span className='text-sm font-semibold'>Approved by a reviewer</span>
+          <span className='text-sm font-semibold'>
+            Approved by a senior engineer
+          </span>
         </div>
       </div>
     </UiPiece>
