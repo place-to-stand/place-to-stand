@@ -25,6 +25,7 @@ export const SOUND_FAMILIAR = {
   /** Moved here from the hero (Nov 14) while the hero tries the logos. */
   title: 'Stop bending your business to fit your software.',
   intro: 'Most clients start with one of these.',
+  // No-break spaces keep "can't do" and "for us" together.
   groups: [
     {
       name: 'Run your business',
@@ -40,7 +41,7 @@ export const SOUND_FAMILIAR = {
     {
       name: 'Sell online',
       quotes: [
-        "Our Shopify store can't do the thing we need.",
+        "Our Shopify store can't\u00a0do the thing we need.",
         'Orders come in by DM, text and phone, and we lose track of them.',
         "Off-the-shelf store tools weren't built to sell what we sell.",
       ],
@@ -52,7 +53,7 @@ export const SOUND_FAMILIAR = {
       name: 'Senior help',
       quotes: [
         "We need a developer but can't hire one full-time.",
-        'Someone built this for us and disappeared.',
+        'Someone built this for\u00a0us and disappeared.',
         'We built it with AI and now it keeps breaking.',
       ],
       build:
