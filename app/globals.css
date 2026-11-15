@@ -1547,11 +1547,6 @@ main {
     2px calc(var(--close) * 50%),
     2px calc(var(--close) * 50%);
 }
-/* A 1px-edged box (the hero's case study card) draws the same 2px stroke
-   over its own edge: flush with the outer edge, 1px inward. */
-.btn-draw-thin::after {
-  inset: -1px;
-}
 /* On light bands the drawn ink stroke would land on an ink edge and not
    show, so the outline button also fills ink from the left, like the
    primary, and its label turns light. */
