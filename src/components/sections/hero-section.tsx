@@ -4,6 +4,7 @@ import { HOME_HERO } from '@/src/lib/home'
 import { BlueprintCorners } from '@/src/components/boxes/corners'
 import { HeroGraphic } from '@/src/components/patterns/drawings/hero-graphic'
 import { HeroDrawingSlot } from '@/src/components/sections/hero-drawing-slot'
+import { CaseStudyCard } from '@/src/components/patterns/case-study-card'
 
 export function HeroSection() {
   return (
@@ -123,6 +124,9 @@ export function HeroSection() {
                       </p>
                     </div>
                   </div>
+                  {/* The Heatonist case study, under the audit line (it
+                      replaces "See our work"). */}
+                  <CaseStudyCard location='hero' className='mt-grid-1' />
                 </div>
               </div>
             </div>
