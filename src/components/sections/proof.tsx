@@ -84,7 +84,7 @@ function GridOverlay() {
 
 /** The label column: one shared left edge, centered (by the widest line,
  *  "Know the flavor", 126px) in the black between the filter's right edge
- *  and #2's leftmost tilted point (measured at 31.49 units) (Jason, Nov
+ *  and the small card's leftmost tilted point (measured at 31.49 units) (Jason, Nov
  *  15). The gap always leaves at least 36px leaders either side, so the
  *  lines never wrap past their set two. */
 const GAP_LEFT = colX(3) - 2 + FILTER_W
@@ -169,10 +169,11 @@ const CALLOUTS = [
  * Home's proof (#results): the Heatonist and Hot Ones work, approved Nov 15.
  * The copy, then one panel in the clients' colors, black for Heatonist and
  * yellow for Hot Ones, on its own grid: the 10 Pack card and search filter,
- * and lineup cards #2 and #5, Hot Ones' own House Sauce and Los Calientes Rojo, all rebuilt in HTML from the live sites so
+ * and two of Hot Ones' own sauces as lineup cards (House Sauce big, Los
+ * Calientes Rojo small), all rebuilt in HTML from the live sites so
  * they stay sharp, with blueprint callouts saying what we built and each
  * site's name in its half. The cards flip on click, tap, Enter or Space
- * (#2 once on scroll). Phones: the hero card, the callouts as a list, then
+ * (the small one once on scroll). Phones: the hero card, the callouts as a list, then
  * the Heatonist pieces. The links close the section.
  * Tone: light.
  */
@@ -230,10 +231,13 @@ export function ProofSection() {
                   top: g(MARGIN + 4),
                 }}
               />
-              {/* Hot Ones: #5 across the seam (columns 8-9), its bottom on the
-              bottom margin; #2 in columns 10-12, rising 5 rows out of the top (2 below 1280px). */}
+              {/* Hot Ones: the small card (Los Calientes Rojo, flips once on
+              view) across the seam (columns 8-9), its bottom on the bottom
+              margin; the big card (House Sauce) in columns 10-12, rising 5
+              rows out of the top (2 below 1280px). */}
               <HotOnesCard
-                {...HOUSE_SAUCE}
+                {...LOS_CALIENTES_ROJO}
+                autoFlip
                 className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
                 style={{
                   left: g(colX(8)),
@@ -242,8 +246,7 @@ export function ProofSection() {
                 }}
               />
               <HotOnesCard
-                {...LOS_CALIENTES_ROJO}
-                autoFlip
+                {...HOUSE_SAUCE}
                 // Rises 5 rows out of the panel from 1280px up; 2 rows below
                 // that, where the intro runs wide and the card would cover
                 // its last line.
@@ -254,13 +257,10 @@ export function ProofSection() {
                   top: `calc(var(--rise) * -100cqw / ${PANEL_W})`,
                 }}
               />
-              {/* Labels: the two Heatonist ones share the column-5 line; the
-              flip-cards one is right-aligned to the column-7 line, its
-              leader on the top margin, above #5. */}
               {/* All three labels left-aligned on the column-5 line, evenly
               spaced and centered on the panel's middle (LABEL_STEP); each
               leader runs level to a dot on its piece's edge: the 10 Pack
-              card, the filter, and #2's left edge. */}
+              card, the filter, and the small card's left edge. */}
               <Callout
                 dot={colR(2)}
                 side='left'
