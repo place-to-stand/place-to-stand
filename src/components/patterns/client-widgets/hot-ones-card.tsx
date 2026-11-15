@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element, design/no-raw-color, design/no-raw-aspect, design/no-raw-focus -- a mock rebuild of hotones.com's lineup card, in their colors and sizes */
+/* eslint-disable @next/next/no-img-element, design/no-raw-color, design/no-raw-aspect, design/no-raw-focus -- hotones.com's lineup card rebuilt in HTML for Home's proof, in their colors and sizes */
 'use client'
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react'

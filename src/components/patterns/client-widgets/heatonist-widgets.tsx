@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element, design/no-raw-color, design/no-raw-border -- a mock rebuild of heatonist.com's filter and product card, in their colors and sizes */
+/* eslint-disable @next/next/no-img-element, design/no-raw-color, design/no-raw-border -- heatonist.com's filter and product card rebuilt in HTML for Home's proof, in their colors and sizes */
 import type { CSSProperties } from 'react'
 
 /**
@@ -150,7 +150,7 @@ export function TrioCard({
         }}
       >
         <img
-          src='/mock/a3/trio-photo.webp'
+          src='/work/heatonist-trio-photo.webp'
           alt=''
           style={
             fill

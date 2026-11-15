@@ -1,7 +1,7 @@
 import { Bangers, Open_Sans, Passion_One, Poppins } from 'next/font/google'
 
 /**
- * The clients' own type, for the mock widgets only (loaded by this page, set
+ * The clients' own type, for the client widgets on Home's proof only (set
  * as variables on the panel, so nothing leaks into the site):
  * - Passion One: hotones.com's card numbers, names, notes and headline (the
  *   same Google font they use).
