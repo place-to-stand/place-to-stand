@@ -12,9 +12,9 @@ const WINDOW_TOP = 0.155
 
 /**
  * The hero drawing's column. Side by side, it slides the drawing so the
- * clean app's outer edge sits on the hero frame's right line (the right
- * corner mark, level with the nav's Book a call), mirroring the headline on
- * the left (Jason, Nov 14). CSS can't do this alone: the drawing's viewBox
+ * clean app's outer edge sits as far inside the hero frame's right line
+ * (the right corner mark) as the body text sits inside its left one
+ * (Jason, Nov 14). CSS can't do this alone: the drawing's viewBox
  * has room to the right of the app, and the slot centers it.
  *
  * It never moves the drawing closer to the text than the row's gap.
@@ -54,13 +54,16 @@ export function HeroDrawingSlot({
         '--draw-top',
         `${drawing.top - row.getBoundingClientRect().top + drawing.height * WINDOW_TOP}px`
       )
-      // The clean app's outer edge goes on the frame's right line (the
-      // right corner mark and the nav's Book a call), mirroring the
-      // headline's corner mark on the left. Never closer to the text than
-      // the row's gap.
+      // The clean app's outer edge sits as far inside the frame's right
+      // line (the right corner mark) as the body text sits inside its left
+      // one, so the row is symmetric (Jason, Nov 14). Never closer to the
+      // text than the row's gap.
       const textEnd = inkRight(text)
+      const frameBox = frame.getBoundingClientRect()
+      const body = text.querySelector('p')?.getBoundingClientRect()
+      const inset = body ? body.left - frameBox.left : 0
       const appRight = drawing.left + drawing.width * APP_RIGHT
-      const want = frame.getBoundingClientRect().right - appRight
+      const want = frameBox.right - inset - appRight
       const furthestLeft =
         textEnd + parseFloat(rowStyle.columnGap) - drawing.left
       const shift = Math.max(want, furthestLeft)
