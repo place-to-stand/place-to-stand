@@ -24,7 +24,7 @@ export function ClientLogosSection() {
     <Section>
       <div className='flex flex-col gap-label'>
         <Reveal index={0} className='flex'>
-          <span className='bp-label font-mono'>Trusted by</span>
+          <span className='bp-label bp-chip font-mono'>Trusted by</span>
         </Reveal>
 
         <Reveal index={1}>

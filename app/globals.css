@@ -1314,6 +1314,15 @@ main {
   background-color: var(--color-bg);
   color: var(--color-text);
 }
+/* Section and page labels (bp-chip) sit on a flat chip in the card
+   surface on dark bands, the same shape and padding as the lime marker on
+   light bands, so a heading's label looks like one object on every band
+   (Nov 15, on trial). Labels inside cards and the footer stay bare: they
+   already sit on that surface. */
+.bp-label.bp-chip {
+  background-color: var(--color-bg-card);
+  padding: 6px 8px;
+}
 .theme-light .bp-label {
   background-color: var(--color-accent);
   color: #0e0f11;
