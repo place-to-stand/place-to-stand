@@ -536,6 +536,30 @@ main {
   }
 }
 
+/* A reaction count's bump when it changes (TeamChat). */
+@keyframes chip-bump {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.chip-bump {
+  display: inline-block;
+  animation: chip-bump var(--motion-fast) var(--ease-enter);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-bump {
+    animation: none;
+  }
+}
+
 /* ── Hero intro: sharp architectural reveal ──
    Registration corners snap in → headline wipes in line-by-line
    (left-to-right clip, like a drafted line) → supporting content rises.

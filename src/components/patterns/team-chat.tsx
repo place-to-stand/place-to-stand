@@ -114,13 +114,7 @@ export function TeamChat({
                   {(m.reactions || m.replies) && (
                     <div className='flex flex-wrap items-center gap-2 pt-2'>
                       {m.reactions?.map(([emoji, n]) => (
-                        <span
-                          key={emoji}
-                          className='border border-border-light bg-bg-elevated px-2 text-sm leading-6 text-text'
-                        >
-                          <span aria-hidden>{emoji}</span>
-                          <span className='sr-only'>Reaction:</span> {n}
-                        </span>
+                        <Reaction key={emoji} emoji={emoji} count={n} />
                       ))}
                       {m.replies && (
                         <span className='text-sm font-semibold text-accent'>
@@ -155,6 +149,42 @@ export function TeamChat({
         )}
       </ol>
     </figure>
+  )
+}
+
+/** A reaction chip you can add to, as in a real chat: a click adds yours
+ *  (+1, lime edge and tint), a second click takes it back. Local state
+ *  only; nothing is stored. */
+function Reaction({ emoji, count }: { emoji: string; count: number }) {
+  const [mine, setMine] = useState(false)
+  const [bumps, setBumps] = useState(0)
+  const total = count + (mine ? 1 : 0)
+  return (
+    <button
+      type='button'
+      aria-pressed={mine}
+      aria-label={`React with ${emoji}, ${total} ${total === 1 ? 'reaction' : 'reactions'}`}
+      onClick={() => {
+        setMine(v => !v)
+        setBumps(b => b + 1)
+      }}
+      className={cn(
+        'cursor-pointer touch-manipulation border px-2 text-sm leading-6 text-text tabular-nums transition-colors duration-(--motion-fast) ease-(--ease-standard)',
+        mine
+          ? 'border-accent bg-accent-muted'
+          : 'border-border-light bg-bg-elevated hover:border-text-muted'
+      )}
+    >
+      <span aria-hidden>{emoji}</span>{' '}
+      {/* Remounts on each click so the count bumps; not on first view. */}
+      <span
+        key={bumps}
+        aria-hidden
+        className={cn('inline-block min-w-[1ch]', bumps > 0 && 'chip-bump')}
+      >
+        {total}
+      </span>
+    </button>
   )
 }
 
