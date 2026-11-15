@@ -50,7 +50,7 @@ export const SOUND_FAMILIAR = {
         messages: [
           { by: 0, time: '9:12 AM', reactions: [['😩', 2]] },
           { by: 1, time: '9:14 AM', reactions: [['💯', 3]] },
-          { by: 2, time: '9:31 AM', replies: 3 },
+          { by: 2, time: '9:31 AM' },
         ],
         newBefore: 2,
       },
