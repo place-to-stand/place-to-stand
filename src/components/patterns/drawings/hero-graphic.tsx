@@ -567,9 +567,10 @@ export function HeroGraphic({ className }: { className?: string }) {
 
       {/* ── Your app: a clean, squared-off mini of the real product. Slides in
              dramatically from the right, last of all. It and its database sit
-             6.5 units higher than the stack (translate), so the stack gets
-             the extra room under its title and both visible gaps match. ── */}
-      <g transform='translate(0 -6.5)'>
+             3.75 units higher than the stack (translate): its gap under the
+             title reads about 4px (at 1440) more than the stack's tilted top
+             corner, which Jason preferred to an exact match (Nov 14). ── */}
+      <g transform='translate(0 -3.75)'>
         <g className='cmp-slide' style={cmp(1544)}>
           <AppWindow {...RIGHT_WIN} rx='0' fill='fill-bg' />
 
@@ -798,7 +799,7 @@ export function HeroGraphic({ className }: { className?: string }) {
         </g>
       ))}
 
-      <g transform='translate(0 -6.5)'>
+      <g transform='translate(0 -3.75)'>
         <g className='cmp-in' style={cmp(1750)}>
           {/* one clean connector from the app down to the unified store */}
           <line
