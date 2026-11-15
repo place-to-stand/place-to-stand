@@ -1,6 +1,6 @@
 # Place To Stand Agency
 
-> Place To Stand (placetostandagency.com) is your engineering team, by the hour: senior engineers in Austin, TX and Brooklyn, NY who build software you own, ship it fast, and stay on after launch. We build systems that run a business, custom stores and marketplaces, and give senior help to teams that already write code. Founded in 2023 by Jason Desiderio (formerly a group engineering manager at Squarespace) and Kris Crawford. The people on the first call are the people who build the software. Clients own the code, the data and the accounts: no seat fees, no lock-in, and their data never trains AI.
+> Place To Stand (placetostandagency.com) is your engineering team, by the hour: senior engineers in Austin, TX and Brooklyn, NY who build the software a business runs on and stay as long as the client wants. Clients own the code and the data. We build systems that run a business, custom stores and marketplaces, and give senior help to teams that already write code. Founded in 2023 by Jason Desiderio (formerly a group engineering manager at Squarespace) and Kris Crawford. The people on the first call are the people who build the software. Clients own the code, the data and the accounts: no seat fees, no lock-in, and their data never trains AI.
 
 Place To Stand at placetostandagency.com is not affiliated with other businesses that use the name "Place to Stand", including placetostand.com.
 

@@ -21,7 +21,7 @@ import { MediaFrame } from '@/src/components/patterns/media-frame'
 export const metadata: Metadata = pageMetadata({
   title: 'About',
   description:
-    'Place To Stand builds software its clients own, from Austin and Brooklyn. Built by two senior engineers, one a former Squarespace group engineering manager.',
+    'Place To Stand builds software its clients own, from Austin and Brooklyn. Built by senior engineers, including a former Squarespace group engineering manager.',
   path: '/about',
 })
 
