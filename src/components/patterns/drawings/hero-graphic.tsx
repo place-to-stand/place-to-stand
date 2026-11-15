@@ -220,74 +220,6 @@ const HALF_CARDS: Rect[] = [
   { x: 237, y: 102, w: 27, h: 28 },
 ]
 
-/** The store tile in the finished app: a card holding a product (hatched
- *  image box, title line, a heavier price line) and a cart with an accent
- *  count badge in its top right. Same strokes as the KPI card beside it. */
-function StoreTile({ x, y, w, h }: Rect) {
-  const img = { x: x + 4, y: y + 4, w: 12, h: 11 }
-  return (
-    <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        className='fill-bg-card stroke-line'
-        strokeWidth='0.9'
-      />
-      <rect
-        x={img.x}
-        y={img.y}
-        width={img.w}
-        height={img.h}
-        className='fill-bg stroke-line'
-        strokeWidth='0.55'
-      />
-      {hatch(img)}
-      <line
-        x1={x + 4}
-        y1={y + 19.5}
-        x2={x + 18}
-        y2={y + 19.5}
-        className='stroke-line'
-        strokeWidth='0.8'
-        strokeLinecap='round'
-      />
-      <line
-        x1={x + 4}
-        y1={y + 24}
-        x2={x + 10}
-        y2={y + 24}
-        className='stroke-line'
-        strokeWidth='1.8'
-        strokeLinecap='round'
-      />
-      {/* Cart: basket and two wheels, with the count badge on its corner. */}
-      <path
-        d={`M${x + 17.6} ${y + 6.2} h1.3 l1 3.6 h3.4 l0.8 -2.6 h-4.7`}
-        className='stroke-line'
-        fill='none'
-        strokeWidth='0.6'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
-      <circle cx={x + 20.4} cy={y + 11.1} r='0.5' className='fill-line' />
-      <circle cx={x + 22.9} cy={y + 11.1} r='0.5' className='fill-line' />
-      <circle cx={x + 23.6} cy={y + 5.2} r='1.9' className='fill-accent' />
-      <text
-        x={x + 23.6}
-        y={y + 6.25}
-        textAnchor='middle'
-        className='fill-bg font-mono'
-        fontSize='2.6'
-        fontWeight='700'
-      >
-        2
-      </text>
-    </g>
-  )
-}
-
 /** App window chrome: frame + title bar + three dots. Thin borders. `rx` sets
  *  the corner radius (default rounded; the finished app passes 0 for hard edges).
  *  `fill` sets the interior (default the card tone; the finished app uses the
@@ -790,12 +722,8 @@ export function HeroGraphic({ className }: { className?: string }) {
             strokeLinecap='round'
           />
 
-          {/* Two half-width widgets below: a clean KPI card, and the store
-            half of the business (Nov 14): a product tile with a hatched
-            image, a title and a price, and a cart with a small accent count
-            badge. */}
-          <StoreTile {...HALF_CARDS[1]} />
-          {HALF_CARDS.slice(0, 1).map((c, i) => (
+          {/* Two half-width widgets below — clean KPI cards */}
+          {HALF_CARDS.map((c, i) => (
             <g key={`half${i}`}>
               <rect
                 x={c.x}
