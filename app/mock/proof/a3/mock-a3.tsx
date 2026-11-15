@@ -100,11 +100,11 @@ export function ProofA3() {
         className={`flex flex-col gap-grid-half lg:flex-1 ${CLIENT_FONTS}`}
       >
         {/* Laptops: the panel takes the height the section leaves on one
-            screen (384-760px). Inside it, the composition keeps its
+            screen (360-760px). Inside it, the composition keeps its
             1344:576 shape (sized by container units, centered), so every
             piece stays in place; the black and the yellow fill the rest. */}
         <div
-          className='[container-type:size] relative hidden min-h-96 flex-1 basis-0 lg:block lg:max-h-[760px]'
+          className='[container-type:size] relative hidden min-h-[360px] flex-1 basis-0 lg:block lg:max-h-[760px]'
           style={{
             backgroundColor: HO_BLACK,
             // Let the hero rise out of the top; clip the sides.
@@ -202,7 +202,7 @@ export function ProofA3() {
           Heatonist.com · Hotones.com
         </figcaption>
       </figure>
-      <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
+      <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1 lg:-mt-grid-1'>
         {HOME_PROOF.links.map(link => (
           <ArrowLink key={link.href} href={link.href as Route}>
             {link.label}
