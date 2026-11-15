@@ -10,7 +10,7 @@ import { SOUND_FAMILIAR } from '@/src/lib/home'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Home's warning signs: "Sound familiar? It’s time to call." The team says
+ * Home's warning signs: "These sound familiar? It’s time to call." The team says
  * them. Each place (back office, store, tech side) is a short chat whose
  * messages are the signals, and under it what we build for it and one
  * lime link (Nov 15).
