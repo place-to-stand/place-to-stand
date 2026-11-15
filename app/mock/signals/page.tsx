@@ -6,11 +6,12 @@ import { RuledRow } from '@/src/components/boxes'
 import { SoundFamiliarSection } from '@/src/components/sections/sound-familiar'
 import { SOUND_FAMILIAR } from '@/src/lib/home'
 import { SelfCheck, SignalTabs } from './interactive'
+import { TeamChats } from './chat'
 import { Heading, Marker, SHORT } from './shared'
 import { SplitSection } from '@/src/components/patterns/split-section'
 
 /**
- * Mock (temporary, Nov 15): six takes on Home's "Warning signs", stacked,
+ * Mock (temporary, Nov 15): seven takes on Home's "Warning signs", stacked,
  * for Jason to judge in the browser. Same copy in each. Not linked, not
  * indexed; drop with its commit.
  */
@@ -170,6 +171,12 @@ function BigList() {
 export default function SignalsMockPage() {
   return (
     <main id='main' className='flex-1 pt-page-start'>
+      <Variant
+        letter='G'
+        note='Team chat: show the team saying them, one thread per place'
+      >
+        <TeamChats />
+      </Variant>
       <Variant
         letter='F'
         note='Split: the headline held still, the signals in a voice style'
