@@ -23,16 +23,16 @@ export const HOME_PROOF = {
 export const SOUND_FAMILIAR = {
   label: 'Warning Signs',
   /** Proposal (Nov 15): the signs to listen for in your own company. */
-  title: "If your team is saying these, it's time to call.",
+  title: 'If your team is saying these, it’s time to call.',
   intro: 'Each one means your software is holding the business back.',
-  // No-break spaces keep "can't do" and "for us" together.
+  // No-break spaces keep "can’t do" and "for us" together.
   groups: [
     {
       name: 'In the back office',
       quotes: [
-        "We run this on spreadsheets and it's breaking.",
-        "We pay for five tools that don't talk to each other.",
-        "I have all this data and still can't answer one simple question about my business.",
+        'We run this on spreadsheets and it’s breaking.',
+        'We pay for five tools that don’t talk to each other.',
+        'I have all this data and still can’t answer one simple question about my business.',
       ],
       build:
         'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is public.',
@@ -41,9 +41,9 @@ export const SOUND_FAMILIAR = {
     {
       name: 'In your store',
       quotes: [
-        "Our Shopify store can't\u00a0do the thing we need.",
+        'Our Shopify store can’t\u00a0do the thing we need.',
         'Orders come in by DM, text and phone, and we lose track of them.',
-        "Off-the-shelf store tools weren't built to sell what we sell.",
+        'Off-the-shelf store tools weren’t built to sell what we sell.',
       ],
       build:
         'Custom stores and marketplaces, on Shopify when it fits. Or one order form that sends every request, files and all, to a single queue.',
@@ -52,12 +52,12 @@ export const SOUND_FAMILIAR = {
     {
       name: 'On your tech team',
       quotes: [
-        "We need a developer but can't hire one full-time.",
+        'We need a developer but can’t hire one full-time.',
         'Someone built this for\u00a0us and disappeared.',
         'We built it with AI and now it keeps breaking.',
       ],
       build:
-        "We pick up where others left off, or work beside your developers. When you need advice more than code, that's technical consulting.",
+        'We pick up where others left off, or work beside your developers. When you need advice more than code, that’s technical consulting.',
       link: { label: 'See Senior help', href: '/platform#senior-help' },
     },
   ],
