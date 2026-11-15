@@ -12,7 +12,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-svh flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
+      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
       <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2'>
         {/* The hero's gaps: under the nav, between the headline and the
@@ -28,10 +28,12 @@ export function HeroSection() {
             sized so the hero fills the screen; once it hits its width limit
             (wide or tall windows) the leftover height goes above and below
             the content instead of into the gaps. */}
-        {/* The hero always fills one screen (min-h-svh: the fixed nav sits
-            over its top padding), so the next section never peeks in. Where
-            the capped headline and drawing leave height over (tablets, tall
-            or very large windows), the content block centers in it. */}
+        {/* The hero fills one screen (the fixed nav sits over its top
+            padding), clamped to 600-1200px (25 and 50 grid cells): very short
+            windows and landscape phones get their content's height, and
+            windows over 1200px tall stop there and the next section begins.
+            Content taller than that sets the height itself. Where the capped
+            headline and drawing leave height over, the content centers. */}
         <div className='flex flex-1 flex-col justify-center'>
           {/* Headline with blueprint corner marks. Its size follows the window
               width, but short laptop windows (under about 945px tall) cap it by
