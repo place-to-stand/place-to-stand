@@ -14,7 +14,7 @@ export function ArrowLink({
 }) {
   return (
     <Link href={href as Route} className={cn('link-action', className)}>
-      {children}
+      <span className='link-label'>{children}</span>
       <span aria-hidden>&rarr;</span>
     </Link>
   )

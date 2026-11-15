@@ -24,7 +24,8 @@ export default function NotFound() {
             <Link href='/'>Back to home</Link>
           </Button>
           <Link href='/contact' className='link-action'>
-            Get in touch <span aria-hidden>→</span>
+            <span className='link-label'>Get in touch</span>{' '}
+            <span aria-hidden>→</span>
           </Link>
         </div>
       </Hero>

@@ -67,7 +67,8 @@ function Row({ row }: { row: ClientRow }) {
               rel='noreferrer noopener'
               className='link-action'
             >
-              {getClientHostname(href)} <span aria-hidden>↗</span>
+              <span className='link-label'>{getClientHostname(href)}</span>{' '}
+              <span aria-hidden>↗</span>
               <span className='sr-only'> (opens in a new tab)</span>
             </a>
           ))}

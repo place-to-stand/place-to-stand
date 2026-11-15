@@ -10,7 +10,8 @@ import { cn } from '@/src/lib/utils'
  *   /contact (#call), which sits on the page itself. The header may use the
  *   small size; everywhere else is lg.
  * - Secondary: always a quiet text link, never a button: "Take the free
- *   audit" or "send us a note" (the Contact message form).
+ *   audit ->" (an action link with the arrow, like "See the platform ->") or
+ *   "send us a note" (the Contact message form).
  */
 export const CTA = {
   book: {
@@ -68,7 +69,8 @@ export function AuditLink({
       onClick={onClick}
       className={cn('link-action', className)}
     >
-      {CTA.audit.label}
+      <span className='link-label'>{CTA.audit.label}</span>
+      <span aria-hidden>&rarr;</span>
     </TrackedLink>
   )
 }

@@ -34,7 +34,8 @@ export function PortalSection() {
               location='process-how-we-build'
               className='link-action'
             >
-              Read the code <span aria-hidden>↗</span>
+              <span className='link-label'>Read the code</span>{' '}
+              <span aria-hidden>↗</span>
               <span className='sr-only'> (opens in a new tab)</span>
             </TrackedLink>
           </div>

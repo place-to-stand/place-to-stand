@@ -1357,11 +1357,11 @@ main {
      muted; on hover the text lightens and an accent bar slides in under it
      from the left. The current page keeps the bar.
    - .link-action: a standalone link that does something ("See the platform
-     ->", "Read the case study ->", "Visit site", "Take the free audit").
+     ->", "Read the case study ->", "Visit site", "Take the free audit ->").
      Mono caps 12px in the text color, no line at rest (the caps and arrow
      mark it as a link), the same sliding bar as nav links on hover, and the
-     arrow nudges 3px right. Never wraps, so an arrow can't drop onto its
-     own line.
+     arrow nudges 3px right; with an arrow the bar runs under the words only.
+     Never wraps, so an arrow can't drop onto its own line.
    - .link-inline: a link inside running text. Plain text-color words with a
      thin, quiet underline (the text color at 35%) that turns to the accent
      line on hover. It wraps with the sentence, so no sliding bar.
@@ -1410,6 +1410,31 @@ main {
     transform: scaleX(0);
     transform-origin: left center;
     transition: transform var(--link-dur) var(--hover-ease);
+  }
+  /* With an arrow, the bar runs under the words only: the label span carries
+     it and the link's own bar is off. Its right edge stops at the last
+     letter's ink, not its trailing letter-spacing. */
+  .link-action > .link-label {
+    position: relative;
+  }
+  .link-action:has(> .link-label)::after {
+    content: none;
+  }
+  .link-action > .link-label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0.1em;
+    bottom: -4px;
+    height: 2px;
+    background-color: var(--color-accent-line);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--link-dur) var(--hover-ease);
+  }
+  .link-action:hover > .link-label::after,
+  .link-action:focus-visible > .link-label::after {
+    transform: scaleX(1);
   }
   .link-nav:hover,
   .link-nav:focus-visible,
@@ -1463,6 +1488,7 @@ main {
   .link-action,
   .link-nav::after,
   .link-action::after,
+  .link-action > .link-label::after,
   .link-action > [aria-hidden],
   .link-icon {
     transition: none;
