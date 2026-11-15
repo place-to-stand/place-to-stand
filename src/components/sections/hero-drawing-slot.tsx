@@ -2,24 +2,23 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
 
-/** The hero's edge inset (the text's lg:pl-7). */
-const EDGE_INSET = 28
+/** The clean app window's outer edge, as a share of the drawing's width
+ *  (x 176 + w 92 of the 274-unit viewBox, plus half its stroke). */
+const APP_RIGHT = 268.4 / 274
 
 /** The drawings' window tops (between the stack's tilted corner and the
  *  clean app's frame), as a share of the drawing's height. */
 const WINDOW_TOP = 0.155
 
 /**
- * The hero drawing's column. Side by side, it slides the drawing left so it
- * sits centered in all the space between the end of the text and the hero
- * frame's right edge, then one edge inset further right, instead of in its
- * own half of the row. CSS can't do this alone: the balanced description
- * leaves its lines shorter than its box, so the free space only shows once
- * the text is laid out.
+ * The hero drawing's column. Side by side, it slides the drawing so the
+ * clean app's outer edge sits on the hero frame's right line (the right
+ * corner mark, level with the nav's Book a call), mirroring the headline on
+ * the left (Jason, Nov 14). CSS can't do this alone: the drawing's viewBox
+ * has room to the right of the app, and the slot centers it.
  *
- * It never moves the drawing right of where the layout put it (that keeps
- * its inset from the corner mark), and never closer to the text than the
- * row's gap. Stacked, it leaves the drawing alone.
+ * It never moves the drawing closer to the text than the row's gap.
+ * Stacked, it leaves the drawing alone.
  *
  * Side by side it also sets --draw-top on the row: how far down the
  * drawings' windows start, so the text column can start its first line
@@ -55,13 +54,17 @@ export function HeroDrawingSlot({
         '--draw-top',
         `${drawing.top - row.getBoundingClientRect().top + drawing.height * WINDOW_TOP}px`
       )
+      // The clean app's outer edge goes on the frame's right line (the
+      // right corner mark and the nav's Book a call), mirroring the
+      // headline's corner mark on the left. Never closer to the text than
+      // the row's gap.
       const textEnd = inkRight(text)
-      const center = (textEnd + frame.getBoundingClientRect().right) / 2
-      const want = center + EDGE_INSET - (drawing.left + drawing.right) / 2
+      const appRight = drawing.left + drawing.width * APP_RIGHT
+      const want = frame.getBoundingClientRect().right - appRight
       const furthestLeft =
         textEnd + parseFloat(rowStyle.columnGap) - drawing.left
-      const shift = Math.min(0, Math.max(want, furthestLeft))
-      if (shift < -0.5) slot.style.transform = `translateX(${shift}px)`
+      const shift = Math.max(want, furthestLeft)
+      if (Math.abs(shift) > 0.5) slot.style.transform = `translateX(${shift}px)`
     }
 
     place()
