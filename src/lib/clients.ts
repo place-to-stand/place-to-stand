@@ -201,19 +201,19 @@ export const CLIENT_GROUPS: ReadonlyArray<{
       {
         name: 'Blake Brown Beauty',
         who: 'Haircare founded by Blake Lively.',
-        built: 'We build and run its Shopify store.',
+        built: 'We built and maintain its Shopify store.',
         sites: [site('Blake Brown Beauty')],
       },
       {
         name: 'Florence by Mills',
         who: 'Clean beauty and skincare founded by Millie Bobby Brown.',
-        built: 'We built and ran its Shopify store.',
+        built: 'We built and maintained its Shopify store.',
         sites: [site('Florence by Mills Beauty')],
       },
       {
         name: 'Betsy & Adam, Blondie Nites and Xscape Evenings',
         who: 'Three eveningwear brands under one owner.',
-        built: 'We run all three Shopify stores.',
+        built: "We're the engineering team for all three Shopify stores.",
         sites: [
           site('Betsy & Adam'),
           site('Blondie Nites'),
