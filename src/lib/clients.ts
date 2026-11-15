@@ -76,7 +76,7 @@ export const clients: Client[] = [
     title: 'Xscape Evenings',
     href: 'https://xscapeevenings.com',
     logo: '/logos/xscape-evenings.png',
-    logoScale: 0.36,
+    logoScale: 0.33,
   },
   {
     title: 'Blondie Nites',
