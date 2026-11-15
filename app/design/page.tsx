@@ -707,7 +707,7 @@ export default function DesignPage() {
                 aside={
                   <SectionHeading
                     label='Warning Signs'
-                    title='If your team is saying any of these, it’s time to call.'
+                    title='Sound familiar? It’s time to call.'
                   />
                 }
               >

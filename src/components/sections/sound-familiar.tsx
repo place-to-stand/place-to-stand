@@ -10,7 +10,7 @@ import { SOUND_FAMILIAR } from '@/src/lib/home'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Home's warning signs: "If your team is saying these", so the team says
+ * Home's warning signs: "Sound familiar? It’s time to call." The team says
  * them. Each place (back office, store, tech side) is a short chat whose
  * messages are the signals, and under it what we build for it and one
  * lime link (Nov 15).
@@ -65,7 +65,12 @@ export function SoundFamiliarSection() {
       <Reveal index={0}>
         <SectionHeading
           label={SOUND_FAMILIAR.label}
-          title={SOUND_FAMILIAR.title}
+          // Always two lines, one heading: the question, then the answer.
+          title={SOUND_FAMILIAR.title.split(/(?<=\?) /).map(line => (
+            <span key={line} className='block'>
+              {line}
+            </span>
+          ))}
           intro={SOUND_FAMILIAR.intro}
         />
       </Reveal>
