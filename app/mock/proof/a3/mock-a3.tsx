@@ -1,4 +1,4 @@
-/* eslint-disable design/no-raw-border -- a throwaway mock (Nov 15): the clients' colors, a composition placed by percent */
+/* eslint-disable design/no-raw-aspect, design/no-raw-border -- a throwaway mock (Nov 15): the clients' colors, a composition placed by percent */
 import type { Route } from 'next'
 import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
@@ -26,94 +26,136 @@ const BEACH_BONNET = {
   bottle: '/mock/a3/bottle-beach-bonnet.webp',
 }
 
-/** One leader for every callout: a 7px dot on the piece, a 40px rule and the
- *  label 12px off its end. White on the black, ink on the yellow. */
-const LEADER = 40
-function Callout({
-  x,
+/**
+ * The laptop composition's grid (Nov 15). The panel is 56 x 16 units, one
+ * unit (g) being 24px at the 1344px content width and scaling with the
+ * panel (container units). Inside: a 2g margin on all four sides and 12
+ * columns with 1g gutters. Every piece and label sits on these lines.
+ */
+const PANEL_W = 56
+const PANEL_H = 16
+const MARGIN = 2
+const COL = (PANEL_W - 2 * MARGIN - 11) / 12
+const g = (n: number) => `calc(${n} * 100cqw / ${PANEL_W})`
+/** Left edge of column k (1-12), in g. */
+const colX = (k: number) => MARGIN + (k - 1) * (COL + 1)
+/** Right edge of column k, in g. */
+const colR = (k: number) => colX(k) + COL
+
+const LABEL_INK = 'rgba(255,255,255,0.92)'
+/** The Heat filter: two columns and a gutter wide (columns 2-3). */
+const FILTER_W = 2 * COL + 1
+
+/** A label left-aligned on a column line with its leader running right
+ *  from the label's end to a piece's edge (the flip cards). */
+function LabelThenLeader({
+  at,
+  to,
   y,
-  dir,
-  tone,
   title,
   detail,
 }: {
-  x: number
+  at: number
+  to: number
   y: number
-  dir: 'left' | 'right'
-  tone: 'light' | 'dark'
   title: string
   detail: string
 }) {
-  const ink = tone === 'light' ? 'rgba(255,255,255,0.92)' : '#0e0f11'
   return (
     <div
       aria-hidden
-      className='pointer-events-none absolute z-30 flex items-center'
+      className='pointer-events-none absolute z-30 flex items-center gap-grid-half pl-grid-half'
       style={{
-        left: `${x}%`,
-        top: `${y}%`,
-        transform: `translate(${dir === 'right' ? '-3.5px' : 'calc(-100% + 3.5px)'}, -50%)`,
-        flexDirection: dir === 'right' ? 'row' : 'row-reverse',
-        color: ink,
+        left: g(at),
+        width: g(to - at),
+        top: g(y),
+        transform: 'translateY(-50%)',
+        color: LABEL_INK,
       }}
     >
+      <span className='flex max-w-[13em] flex-col gap-0.5 font-mono text-xs leading-tight tracking-[0.1em] uppercase'>
+        <span className='font-semibold'>{title}</span>
+        <span className='opacity-75'>{detail}</span>
+      </span>
+      <span className='h-px flex-1' style={{ backgroundColor: LABEL_INK }} />
       <span
         className='size-[7px] shrink-0 rounded-full'
-        style={{ backgroundColor: ink }}
+        style={{ backgroundColor: LABEL_INK, marginRight: -3.5 }}
       />
-      <span
-        className='h-px shrink-0'
-        style={{ width: LEADER, backgroundColor: ink }}
-      />
-      <span
-        className={`flex flex-col gap-0.5 font-mono text-xs leading-tight tracking-[0.1em] uppercase ${dir === 'right' ? 'pl-grid-half text-left' : 'pr-grid-half text-right'}`}
-      >
-        <span className='font-semibold whitespace-nowrap'>{title}</span>
-        <span className='max-w-[13em] opacity-75'>{detail}</span>
-      </span>
     </div>
   )
 }
 
-/** The flip-cards callout runs from a point on the hero back to the
- *  black/yellow seam, so its label always ends on the black whatever the
- *  composition's size: its leader is a share of the composition, not px. */
-function SeamCallout({
+/** A callout on the grid: a dot on a piece's edge, a 1px leader to the
+ *  label's column line, and the label on that line (12px off it). */
+function GridCallout({
   from,
   to,
   y,
   title,
   detail,
 }: {
-  /** The dot on the hero, and the label's right end, in percent. */
+  /** The dot (on the piece) and the label's column line, in g. When `to`
+   *  is left of `from`, the label sits left of the line, right-aligned. */
   from: number
   to: number
   y: number
   title: string
   detail: string
 }) {
-  const ink = 'rgba(255,255,255,0.92)'
+  const left = Math.min(from, to)
+  const labelLeft = to > from
   return (
     <div
       aria-hidden
       className='pointer-events-none absolute z-30 flex items-center'
       style={{
-        left: `${to}%`,
-        width: `${from - to}%`,
-        top: `${y}%`,
+        left: g(left),
+        width: g(Math.abs(to - from)),
+        top: g(y),
         transform: 'translateY(-50%)',
-        color: ink,
+        color: LABEL_INK,
+        flexDirection: labelLeft ? 'row' : 'row-reverse',
       }}
     >
-      <span className='absolute right-full flex flex-col items-end gap-0.5 pr-grid-half font-mono text-xs leading-tight tracking-[0.1em] whitespace-nowrap uppercase'>
+      <span
+        className='size-[7px] shrink-0 rounded-full'
+        style={{
+          backgroundColor: LABEL_INK,
+          [labelLeft ? 'marginLeft' : 'marginRight']: -3.5,
+        }}
+      />
+      <span className='h-px flex-1' style={{ backgroundColor: LABEL_INK }} />
+      <span
+        className={`absolute flex flex-col gap-0.5 font-mono text-xs leading-tight tracking-[0.1em] whitespace-nowrap uppercase ${labelLeft ? 'left-full items-start pl-grid-half' : 'right-full items-end pr-grid-half'}`}
+      >
         <span className='font-semibold'>{title}</span>
         <span className='opacity-75'>{detail}</span>
       </span>
-      <span className='h-px flex-1' style={{ backgroundColor: ink }} />
-      <span
-        className='size-[7px] shrink-0 rounded-full'
-        style={{ backgroundColor: ink, marginRight: -3.5 }}
-      />
+    </div>
+  )
+}
+
+/** Columns, gutters and margins, drawn when <html> has data-grid
+ *  (for checking the layout). */
+function GridOverlay() {
+  return (
+    <div
+      aria-hidden
+      className='pointer-events-none absolute inset-0 z-50 hidden [[data-grid]_&]:block'
+    >
+      {Array.from({ length: 12 }, (_, i) => (
+        <div
+          key={i}
+          className='absolute bg-[rgba(0,160,255,0.18)]'
+          style={{
+            left: g(colX(i + 1)),
+            width: g(COL),
+            top: g(MARGIN),
+            height: g(PANEL_H - 2 * MARGIN),
+          }}
+        />
+      ))}
     </div>
   )
 }
@@ -131,77 +173,102 @@ const CALLOUTS = [
  */
 export function ProofA3() {
   return (
-    // Laptops: the whole section, label to links, is one screen under the
-    // nav; the panel takes what's left (see the figure).
-    <Section className='flex flex-col gap-stack lg:min-h-[calc(100svh-var(--nav-height))]'>
+    <Section className='flex flex-col gap-stack'>
       <SectionHeading
         label={HOME_PROOF.label}
         title={HOME_PROOF.title}
         intro={HOME_PROOF.body}
       />
-      <figure
-        className={`flex flex-col gap-grid-half lg:flex-1 ${CLIENT_FONTS}`}
-      >
-        {/* Laptops: the panel takes the height the section leaves on one
-            screen (360-760px). Inside it, the composition keeps its
-            1344:576 shape (sized by container units, centered), so every
-            piece stays in place; the black and the yellow fill the rest. */}
+      <figure className={`flex flex-col gap-grid-half ${CLIENT_FONTS}`}>
+        {/* Laptops: the composition on its grid (see PANEL_W). The panel's
+            height is its own 56:16 shape: 384px at the 1344px content
+            width. */}
         <div
-          className='[container-type:size] relative hidden min-h-[360px] flex-1 basis-0 lg:block lg:max-h-[760px]'
+          className='[container-type:inline-size] relative hidden aspect-[56/16] lg:block'
           style={{
             backgroundColor: HO_BLACK,
             // Let the hero rise out of the top; clip the sides.
             clipPath: 'inset(-600px 0 0 0)',
           }}
         >
+          {/* Yellow from the column-9 line to the panel's right edge. */}
           <div
             className='absolute inset-y-0 right-0'
             style={{
-              width:
-                'calc((100cqw - min(100cqw, 233.333cqh)) / 2 + min(100cqw, 233.333cqh) * 0.4)',
+              left: g(colX(9)),
               backgroundColor: HO_YELLOW,
               backgroundImage:
                 'radial-gradient(rgba(14,15,17,0.14) 1px, transparent 1.2px)',
               backgroundSize: '24px 24px',
             }}
           />
-          <div
-            className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+          {/* Heatonist: the Trio card in columns 1-2, top margin to bottom
+              margin; the filter in columns 2-3 over the right half of its
+              photo, one row down, clear of its text. */}
+          <TrioCard
+            fill
+            className='absolute'
             style={{
-              width: 'min(100cqw, 233.333cqh)',
-              height: 'min(100cqh, 42.857cqw)',
+              left: g(colX(1)),
+              width: g(colR(2) - colX(1)),
+              top: g(MARGIN),
+              height: g(PANEL_H - 2 * MARGIN),
             }}
-          >
-            <TrioCard className='absolute top-[19.25%] left-[5.4%] w-[13.5%]' />
-            <HeatFilter className='absolute top-[39.25%] left-[14%] z-10 w-[14.5%]' />
-            {/* Card #3, leaning left across the seam, under the hero. */}
-            <HotOnesCard
-              {...BEACH_BONNET}
-              className='absolute top-[34%] left-[53%] z-10 w-[14%] -rotate-[7deg] brightness-[0.94]'
-            />
-            {/* The hero, leaning right, rising out of the panel's top into
-                the space beside the section's copy. */}
-            <HotOnesCard
-              {...HOUSE_SAUCE}
-              autoFlip
-              className='absolute -top-[10%] left-[65%] z-20 w-[22%] rotate-[5deg] xl:-top-[30%]'
-            />
-            <SeamCallout from={66} to={56} y={14} {...CALLOUTS[0]} />
-            <Callout
-              x={28.5}
-              y={49.25}
-              dir='right'
-              tone='light'
-              {...CALLOUTS[1]}
-            />
-            <Callout
-              x={18.9}
-              y={27.25}
-              dir='right'
-              tone='light'
-              {...CALLOUTS[2]}
-            />
-          </div>
+          />
+          <HeatFilter
+            className='absolute z-10'
+            style={{
+              left: g(colX(2)),
+              width: g(FILTER_W),
+              top: g(MARGIN + 1),
+            }}
+          />
+          {/* Hot Ones: #3 across the seam (columns 8-9), its bottom on the
+              bottom margin; #2 in columns 10-12, rising 4g out of the top. */}
+          <HotOnesCard
+            {...BEACH_BONNET}
+            className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
+            style={{
+              left: g(colX(8)),
+              width: g(colR(9) - colX(8)),
+              bottom: g(MARGIN),
+            }}
+          />
+          <HotOnesCard
+            {...HOUSE_SAUCE}
+            autoFlip
+            className='absolute z-20 rotate-[5deg]'
+            style={{
+              left: g(colX(10)),
+              width: g(colR(12) - colX(10)),
+              top: g(-4),
+            }}
+          />
+          {/* Labels: the two Heatonist ones share the column-5 line; the
+              flip-cards one is right-aligned to the column-7 line, its
+              leader on the top margin, above #3. */}
+          {/* All three labels left-aligned on the column-5 line, stacked:
+              bundles at the Trio card's top, the filter at its middle, the
+              flip cards low, its leader running right to #3's edge. */}
+          <GridCallout
+            from={colR(2)}
+            to={colX(5)}
+            y={MARGIN + 0.5}
+            {...CALLOUTS[2]}
+          />
+          <GridCallout
+            from={colX(2) + FILTER_W}
+            to={colX(5)}
+            y={MARGIN + 4}
+            {...CALLOUTS[1]}
+          />
+          <LabelThenLeader
+            at={colX(5)}
+            to={colX(8) + 0.6}
+            y={MARGIN + 10.5}
+            {...CALLOUTS[0]}
+          />
+          <GridOverlay />
         </div>
 
         {/* Phones and tablets: the headline and hero card on the split, the

@@ -17,9 +17,12 @@ function Shell({
   className,
   style,
   children,
+  fill = false,
 }: {
   /** The piece's width on heatonist.com, in px. */
   base: number
+  /** Take the outer box's height (set by the composition). */
+  fill?: boolean
   className?: string
   style?: CSSProperties
   children: React.ReactNode
@@ -27,7 +30,7 @@ function Shell({
   return (
     <div className={`@container ${className ?? ''}`} style={style}>
       <div
-        className='overflow-hidden rounded-[3.2cqw] border border-black/10 bg-white shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.6)]'
+        className={`overflow-hidden rounded-[3.2cqw] border border-black/10 bg-white shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.6)] ${fill ? 'flex h-full flex-col' : ''}`}
         style={{ '--ht-u': `calc(100cqw / ${base})` } as CSSProperties}
       >
         <div style={{ height: u(3), backgroundColor: '#ce2a39' }} />
@@ -120,15 +123,27 @@ export function HeatFilter({
 export function TrioCard({
   className,
   style,
+  fill = false,
 }: {
   className?: string
   style?: CSSProperties
+  /** Fill a set height: the photo takes what the text leaves, cropped
+   *  around the box and bottles. */
+  fill?: boolean
 }) {
   return (
-    <Shell base={250} className={className} style={style}>
+    <Shell base={250} className={className} style={style} fill={fill}>
       <div
         aria-hidden
         style={{
+          ...(fill
+            ? {
+                flex: 1,
+                minHeight: 0,
+                display: 'flex',
+                flexDirection: 'column',
+              }
+            : {}),
           position: 'relative',
           padding: `${u(16)} ${u(16)} ${u(4)}`,
           fontFamily: 'var(--font-open-sans)',
@@ -137,7 +152,18 @@ export function TrioCard({
         <img
           src='/mock/a3/trio-photo.webp'
           alt=''
-          style={{ display: 'block', width: '100%', height: 'auto' }}
+          style={
+            fill
+              ? {
+                  display: 'block',
+                  width: '100%',
+                  flex: 1,
+                  minHeight: 0,
+                  objectFit: 'cover',
+                  objectPosition: '50% 38%',
+                }
+              : { display: 'block', width: '100%', height: 'auto' }
+          }
         />
         <span
           style={{
