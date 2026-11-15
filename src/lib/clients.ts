@@ -17,8 +17,9 @@ export type Client = {
    * up), so the mark's visual center sits on the row's center line. Measured
    * from the file's ink: the shift that would put the ink's center of mass in
    * the middle, taken at 75% so text-heavy marks don't overshoot. A small
-   * superscript, like Hot Ones' flame, otherwise drags the box up and leaves
-   * the heavy part sitting low. */
+   * superscript, like Hot Ones' "First We Feast presents" and flame, otherwise
+   * drags the box up and leaves the heavy part sitting low (Hot Ones is set by
+   * its letters: their center is 18.5% of the image below the box's). */
   logoNudge?: number
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
@@ -42,8 +43,8 @@ export const clients: Client[] = [
     title: 'Hot Ones',
     href: 'https://hotones.com',
     logo: '/logos/hot-ones.png',
-    logoScale: 0.68,
-    logoNudge: -5,
+    logoScale: 0.72,
+    logoNudge: -18,
     logoTone: 'gray',
   },
   {
