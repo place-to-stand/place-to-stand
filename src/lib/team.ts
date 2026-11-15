@@ -19,7 +19,8 @@ export const team: TeamMember[] = [
     name: 'Jason Desiderio',
     title: 'Co-founder, engineer',
     city: { name: 'Austin', region: 'TX' },
-    bio: 'Spent almost six years at Squarespace, rising from senior engineer to group engineering manager, on systems used by millions of people. Outside client work he runs The Good for Nothings Club, a creators club in Austin, and plays and records music.',
+    // The Squarespace job title in this bio stays until Jason decides (Nov 14).
+    bio: 'Spent almost six years at Squarespace, rising from senior engineer to group engineering manager, on systems used by millions of people. Outside client work he runs The Good for Nothings Club, a creators club in Austin, and plays and records music.', // voice-ok
     image: '/1652631488914.jpeg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/jmdesiderio/',

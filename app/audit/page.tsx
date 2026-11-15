@@ -6,7 +6,7 @@ import { AuditApp } from '@/src/components/sections/audit/audit-app'
 export const metadata: Metadata = pageMetadata({
   title: 'Free Opportunity Audit',
   description:
-    'Take our 2-minute audit to discover where custom software would give your business the most leverage. Built by senior engineers, including a former Squarespace group engineering manager.',
+    'Take our 2-minute audit to discover where custom software would give your business the most leverage. Built by experienced engineers, including a former Squarespace group engineering manager.',
   path: '/audit',
 })
 

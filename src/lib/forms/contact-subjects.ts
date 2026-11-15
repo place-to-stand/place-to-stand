@@ -14,7 +14,7 @@ export const CONTACT_SUBJECT_OTHER = 'Other'
 export const CONTACT_SUBJECTS = [
   'New project',
   'Fix or take over software we already have',
-  'Senior help for our team',
+  'Engineering help for our team',
   'Referral program',
   'General question',
   CONTACT_SUBJECT_OTHER,
