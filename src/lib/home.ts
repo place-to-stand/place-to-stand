@@ -25,6 +25,8 @@ export const SOUND_FAMILIAR = {
   /** Proposal (Nov 15): the signs to listen for in your own company. */
   title: 'If your team is saying these, it’s time to call.',
   intro: 'Each one means your software is holding the business back.',
+  // Each group is shown as a team chat (Nov 15): made-up first names and
+  // roles, times and reactions; the quotes are the messages, in order.
   // No-break spaces keep "can’t do" and "for us" together.
   groups: [
     {
@@ -37,6 +39,20 @@ export const SOUND_FAMILIAR = {
       build:
         'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is public.',
       link: { label: 'See Run your business', href: '/platform#run' },
+      chat: {
+        room: 'ops',
+        people: [
+          { name: 'Dana', role: 'Ops lead' },
+          { name: 'Marcus', role: 'Finance' },
+          { name: 'Rachel', role: 'Owner' },
+        ],
+        messages: [
+          { by: 0, time: '9:12 AM', reactions: [['😩', 2]] },
+          { by: 1, time: '9:14 AM', reactions: [['💯', 3]] },
+          { by: 2, time: '9:31 AM', replies: 3 },
+        ],
+        newBefore: 2,
+      },
     },
     {
       name: 'In your store',
@@ -48,6 +64,25 @@ export const SOUND_FAMILIAR = {
       build:
         'Custom stores and marketplaces, on Shopify when it fits. Or one order form that sends every request, files and all, to a single queue.',
       link: { label: 'See Sell online', href: '/platform#sell' },
+      chat: {
+        room: 'store',
+        people: [
+          { name: 'Priya', role: 'Marketing' },
+          { name: 'Leo', role: 'Support' },
+        ],
+        messages: [
+          { by: 0, time: '2:03 PM', reactions: [['👀', 4]] },
+          {
+            by: 1,
+            time: '2:05 PM',
+            reactions: [
+              ['😩', 1],
+              ['🙃', 2],
+            ],
+          },
+          { by: 0, time: '2:09 PM', replies: 2 },
+        ],
+      },
     },
     {
       name: 'On your tech team',
@@ -59,6 +94,19 @@ export const SOUND_FAMILIAR = {
       build:
         'We pick up where others left off, or work beside your developers. When you need advice more than code, that’s technical consulting.',
       link: { label: 'See Senior help', href: '/platform#senior-help' },
+      chat: {
+        room: 'product',
+        people: [
+          { name: 'Sam', role: 'Founder' },
+          { name: 'Jordan', role: 'Head of ops' },
+        ],
+        messages: [
+          { by: 0, time: '4:40 PM', reactions: [['🙏', 1]] },
+          { by: 1, time: '4:42 PM', reactions: [['😬', 5]] },
+          { by: 0, time: '4:47 PM' },
+        ],
+        typing: 1,
+      },
     },
   ],
 } as const
