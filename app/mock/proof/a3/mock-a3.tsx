@@ -1,8 +1,7 @@
-/* eslint-disable design/no-raw-color, design/no-raw-border, design/no-raw-aspect -- a throwaway mock (Nov 15): the clients' colors, a composition placed by percent */
+/* eslint-disable design/no-raw-border -- a throwaway mock (Nov 15): the clients' colors, a composition placed by percent */
 import type { Route } from 'next'
 import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
-import { BlueprintCorners } from '@/src/components/boxes/corners'
 import { HOME_PROOF } from '@/src/lib/home'
 import { CLIENT_FONTS } from './fonts'
 import { HotOnesCard } from './hot-ones-card'
@@ -89,52 +88,77 @@ const CALLOUTS = [
  */
 export function ProofA3() {
   return (
-    <Section className='flex flex-col gap-stack'>
+    // Laptops: the whole section, label to links, is one screen under the
+    // nav; the panel takes what's left (see the figure).
+    <Section className='flex flex-col gap-stack lg:min-h-[calc(100svh-var(--nav-height))]'>
       <SectionHeading
         label={HOME_PROOF.label}
         title={HOME_PROOF.title}
         intro={HOME_PROOF.body}
       />
-      <figure className={`flex flex-col gap-grid-half ${CLIENT_FONTS}`}>
-        {/* Laptops: one composition, placed by percent so it scales whole. */}
+      <figure
+        className={`flex flex-col gap-grid-half lg:flex-1 ${CLIENT_FONTS}`}
+      >
+        {/* Laptops: the panel takes the height the section leaves on one
+            screen (384-760px). Inside it, the composition keeps its
+            1344:576 shape (sized by container units, centered), so every
+            piece stays in place; the black and the yellow fill the rest. */}
         <div
-          className='relative hidden aspect-[1344/576] lg:block'
-          style={{ backgroundColor: HO_BLACK }}
+          className='[container-type:size] relative hidden min-h-96 flex-1 basis-0 lg:block lg:max-h-[760px]'
+          style={{
+            backgroundColor: HO_BLACK,
+            // Let the hero rise out of the top; clip the sides.
+            clipPath: 'inset(-600px 0 0 0)',
+          }}
         >
-          <BlueprintCorners size={20} all />
           <div
-            className='absolute inset-y-0 right-0 w-[40%]'
+            className='absolute inset-y-0 right-0'
             style={{
+              width:
+                'calc((100cqw - min(100cqw, 233.333cqh)) / 2 + min(100cqw, 233.333cqh) * 0.4)',
               backgroundColor: HO_YELLOW,
               backgroundImage:
                 'radial-gradient(rgba(14,15,17,0.14) 1px, transparent 1.2px)',
               backgroundSize: '24px 24px',
             }}
           />
-          <p
-            aria-hidden
-            className='absolute top-[8%] left-[5.4%] text-[4.6cqw] leading-none text-white uppercase'
-            style={{ fontFamily: 'var(--font-passion-one)' }}
+          <div
+            className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'
+            style={{
+              width: 'min(100cqw, 233.333cqh)',
+              height: 'min(100cqh, 42.857cqw)',
+            }}
           >
-            Explore the sauces
-          </p>
-          <TrioCard className='absolute top-[26%] left-[5.4%] w-[13.5%]' />
-          <HeatFilter className='absolute top-[36%] left-[16%] z-10 w-[14.5%]' />
-          {/* Card #3 tucked under the hero's lower right. */}
-          <HotOnesCard
-            {...BEACH_BONNET}
-            className='absolute top-[40%] left-[73%] z-10 w-[14%] rotate-[7deg] brightness-[0.94]'
-          />
-          {/* The hero: across the seam, rising out of the panel's top into
-              the space beside the section's copy. */}
-          <HotOnesCard
-            {...HOUSE_SAUCE}
-            autoFlip
-            className='absolute -top-[10%] left-[53%] z-20 w-[22%] -rotate-[4deg] xl:-top-[30%]'
-          />
-          <Callout x={75.6} y={22} dir='right' tone='dark' {...CALLOUTS[0]} />
-          <Callout x={30.5} y={62} dir='right' tone='light' {...CALLOUTS[1]} />
-          <Callout x={18.9} y={30} dir='right' tone='light' {...CALLOUTS[2]} />
+            <TrioCard className='absolute top-[14%] left-[5.4%] w-[13.5%]' />
+            <HeatFilter className='absolute top-[34%] left-[14%] z-10 w-[14.5%]' />
+            {/* Card #3, leaning left across the seam, under the hero. */}
+            <HotOnesCard
+              {...BEACH_BONNET}
+              className='absolute top-[34%] left-[48%] z-10 w-[14%] -rotate-[7deg] brightness-[0.94]'
+            />
+            {/* The hero, leaning right, rising out of the panel's top into
+                the space beside the section's copy. */}
+            <HotOnesCard
+              {...HOUSE_SAUCE}
+              autoFlip
+              className='absolute -top-[10%] left-[60%] z-20 w-[22%] rotate-[5deg] xl:-top-[30%]'
+            />
+            <Callout x={61} y={14} dir='left' tone='light' {...CALLOUTS[0]} />
+            <Callout
+              x={28.5}
+              y={44}
+              dir='right'
+              tone='light'
+              {...CALLOUTS[1]}
+            />
+            <Callout
+              x={18.9}
+              y={22}
+              dir='right'
+              tone='light'
+              {...CALLOUTS[2]}
+            />
+          </div>
         </div>
 
         {/* Phones and tablets: the headline and hero card on the split, the
@@ -144,23 +168,15 @@ export function ProofA3() {
             className='relative overflow-hidden'
             style={{ backgroundColor: HO_BLACK }}
           >
-            <BlueprintCorners size={16} all />
             <div
               className='absolute inset-x-0 bottom-0 h-[42%]'
               style={{ backgroundColor: HO_YELLOW }}
             />
             <div className='relative flex flex-col items-center gap-grid-1 px-grid-1 py-grid-2'>
-              <p
-                aria-hidden
-                className='text-[11cqw] leading-none text-white uppercase'
-                style={{ fontFamily: 'var(--font-passion-one)' }}
-              >
-                Explore the sauces
-              </p>
               <HotOnesCard
                 {...HOUSE_SAUCE}
                 autoFlip
-                className='w-[58%] max-w-[18rem] -rotate-[3deg]'
+                className='w-[58%] max-w-[18rem] rotate-[3deg]'
               />
             </div>
           </div>

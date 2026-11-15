@@ -56,7 +56,7 @@ export function HeatFilter({
       <div
         aria-hidden
         style={{
-          padding: `${u(18)} ${u(20)} ${u(20)}`,
+          padding: `${u(26)} ${u(28)} ${u(28)}`,
           fontFamily: 'var(--font-open-sans)',
           color: '#000',
         }}
@@ -128,7 +128,11 @@ export function TrioCard({
     <Shell base={250} className={className} style={style}>
       <div
         aria-hidden
-        style={{ position: 'relative', fontFamily: 'var(--font-open-sans)' }}
+        style={{
+          position: 'relative',
+          padding: `${u(16)} ${u(16)} ${u(4)}`,
+          fontFamily: 'var(--font-open-sans)',
+        }}
       >
         <img
           src='/mock/a3/trio-photo.webp'
@@ -138,8 +142,8 @@ export function TrioCard({
         <span
           style={{
             position: 'absolute',
-            left: u(10),
-            top: u(10),
+            left: u(24),
+            top: u(24),
             padding: `${u(4)} ${u(8)}`,
             borderRadius: u(6),
             background: RED,
@@ -151,31 +155,6 @@ export function TrioCard({
           }}
         >
           Save 9%
-        </span>
-        <span
-          style={{
-            position: 'absolute',
-            right: u(8),
-            top: u(8),
-            width: u(36),
-            height: u(36),
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.9)',
-            border: `${u(1)} solid #e5e5e5`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <svg viewBox='0 0 24 24' style={{ width: u(20), height: u(20) }}>
-            <path
-              d='M12 20.3 4.6 13a4.7 4.7 0 0 1 6.7-6.7l.7.7.7-.7A4.7 4.7 0 0 1 19.4 13Z'
-              fill='none'
-              stroke='#666'
-              strokeWidth='1.6'
-              strokeLinejoin='round'
-            />
-          </svg>
         </span>
         <div
           style={{
