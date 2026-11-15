@@ -12,9 +12,9 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:calc(var(--space-page-top)+0.75rem)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
+      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:calc(var(--space-page-top)+0.75rem)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad-b:clamp(1.5rem,calc(1.5rem+(100svh-50rem)*0.24),3rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
-      <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2 lg:pt-[calc(var(--nav-height)+var(--spacing-grid-1))] lg:pb-grid-1'>
+      <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2 lg:pt-[calc(var(--nav-height)+var(--hero-pad))] lg:pb-(--hero-pad-b)'>
         {/* The hero's gaps: under the nav, between the headline and the
             row below, and under the content. Phones and tablets use 48px for
             all three. On laptops and up the top and bottom are 72px on
@@ -160,7 +160,7 @@ export function HeroSection() {
               {/* On phones (below sm), the drawing's width follows the window
                   height too (21svh tall at most), so the hero's content,
                   "See our work" included, fits one phone screen. */}
-              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(21svh*1.4629))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4629),100%)]'>
+              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(21svh*1.4629))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-var(--hero-pad)-var(--hero-pad-b)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4629),100%)]'>
                 <HeroGraphic className='w-full' />
               </div>
             </HeroDrawingSlot>
