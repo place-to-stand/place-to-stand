@@ -46,6 +46,12 @@ export const clients: Client[] = [
     logoTone: 'gray',
   },
   {
+    title: 'Heatonist',
+    href: 'https://heatonist.com',
+    logo: '/logos/heatonist.svg',
+    logoScale: 0.48,
+  },
+  {
     title: 'Blake Brown Beauty',
     href: 'https://blakebrownbeauty.com',
     logo: '/logos/blake-brown-beauty.svg',
@@ -57,12 +63,6 @@ export const clients: Client[] = [
     logo: '/logos/florence-by-mills-beauty.png',
     logoScale: 0.62,
     logoNudge: 8,
-  },
-  {
-    title: 'Heatonist',
-    href: 'https://heatonist.com',
-    logo: '/logos/heatonist.svg',
-    logoScale: 0.48,
   },
   {
     title: 'Betsy & Adam',
