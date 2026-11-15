@@ -51,7 +51,7 @@ export const SOUND_FAMILIAR = {
       links: [{ label: 'See Sell online', href: '/platform#sell' }],
     },
     {
-      name: 'Engineering help',
+      name: 'Senior help',
       quotes: [
         "We need a developer but can't hire one full-time.",
         'Someone built this for us and disappeared.',
@@ -60,7 +60,7 @@ export const SOUND_FAMILIAR = {
       build:
         "We pick up where others left off, or work beside your developers. When you need advice more than code, that's technical consulting.",
       links: [
-        { label: 'See how we help teams', href: '/platform#engineering-help' },
+        { label: 'See how we help teams', href: '/platform#senior-help' },
       ],
     },
   ],

@@ -12,7 +12,7 @@ import {
 import { Card, RuledList, RuledRow } from '@/src/components/boxes'
 import {
   DATA_HOME,
-  ENGINEERING_HELP,
+  SENIOR_HELP,
   type Module,
   type Offer,
 } from '@/src/lib/offers'
@@ -20,7 +20,7 @@ import { cn } from '@/src/lib/utils'
 
 /**
  * What we build, on Platform: three kinds of work, each its own section
- * (#run, #sell, #engineering-help), then "One home for your data". Tone: whatever
+ * (#run, #sell, #senior-help), then "One home for your data". Tone: whatever
  * band the page puts each one in; the Platform template composes them.
  */
 
@@ -145,16 +145,16 @@ export function OfferDetail({ offer }: { offer: Offer }) {
   )
 }
 
-/** Engineering help for your team (#engineering-help). */
-export function EngineeringHelpSection() {
+/** Senior help for your team (#senior-help). */
+export function SeniorHelpSection() {
   return (
     <KindSection
-      id='engineering-help'
-      title={ENGINEERING_HELP.name}
-      intro={ENGINEERING_HELP.summary}
-      quotes={ENGINEERING_HELP.quotes}
+      id='senior-help'
+      title={SENIOR_HELP.name}
+      intro={SENIOR_HELP.summary}
+      quotes={SENIOR_HELP.quotes}
       piece={<CodeReviewPiece />}
-      modules={ENGINEERING_HELP.items}
+      modules={SENIOR_HELP.items}
       columns={4}
     />
   )

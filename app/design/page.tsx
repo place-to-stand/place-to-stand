@@ -712,10 +712,10 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Offers</dt>
                   <dd className='text-base text-text-muted'>
-                    detail: Platform&rsquo;s Run, Sell and Engineering help
-                    sections and the data block (OfferDetail,
-                    EngineeringHelpSection, DataHomeSection). Each takes the
-                    tone of its band; Platform alternates light and dark.
+                    detail: Platform&rsquo;s Run, Sell and Senior help sections
+                    and the data block (OfferDetail, SeniorHelpSection,
+                    DataHomeSection). Each takes the tone of its band; Platform
+                    alternates light and dark.
                   </dd>
                 </RuledRow>
                 <RuledRow
@@ -834,8 +834,8 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>Offer page</dt>
                   <dd className='text-base text-text-muted'>
-                    Platform: hero page, Run, Sell, Engineering help, the data
-                    block with ownership full, after launch, closing band.
+                    Platform: hero page, Run, Sell, Senior help, the data block
+                    with ownership full, after launch, closing band.
                   </dd>
                 </RuledRow>
                 <RuledRow

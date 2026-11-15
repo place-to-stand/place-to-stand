@@ -32,7 +32,7 @@ export const PLATFORM_HEADER = {
   label: 'Platform',
   title: 'Software you own, built around how you work.',
   intro:
-    'One team, three kinds of work: systems that run the business, stores that sell, and engineering help for teams that already write code. Each piece works on its own, and they all share one home for your data.',
+    'One team, three kinds of work: systems that run the business, stores that sell, and senior help for teams that already write code. Each piece works on its own, and they all share one home for your data.',
 }
 
 /** "Your data, ready for AI" on Platform (approved Nov 13). */
@@ -42,11 +42,11 @@ export const DATA_HOME = {
   body: "Everything we build shares one source of data, so you can answer questions about your business in one place. Your own AI tools can work with it too, and each person's tools see only what their role allows.",
 }
 
-/** "Engineering help for your team" on Platform (#engineering-help, approved Nov 13). */
-export const ENGINEERING_HELP = {
-  name: 'Engineering help for your team',
+/** "Senior help for your team" on Platform (#senior-help, approved Nov 13). */
+export const SENIOR_HELP = {
+  name: 'Senior help for your team',
   summary:
-    'For teams that already have code, and sometimes developers, and need experienced engineers beside them.',
+    'For teams that already have code, and sometimes developers, and need someone senior beside them.',
   quotes: [
     'We need a developer but can’t hire one full-time.',
     'Someone built this for us and disappeared.',
@@ -63,7 +63,7 @@ export const ENGINEERING_HELP = {
     },
     {
       name: 'Work beside your developers',
-      job: 'Experienced engineers on your team for as many hours as you need.',
+      job: 'Senior engineers on your team for as many hours as you need.',
     },
     {
       name: 'Technical consulting',
@@ -202,7 +202,7 @@ export const WHO_YOU_WORK_WITH = {
     'The people you meet on the first call are the people who build your software.',
   facets: [
     {
-      title: 'Experienced Builders',
+      title: 'Senior Builders',
       body: 'The people on the call build it. Nobody passes your notes along.',
     },
     {

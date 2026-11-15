@@ -48,12 +48,11 @@ export const services: Service[] = [
     ],
   },
   {
-    // The slug stays: stored audit results refer to it.
-    slug: 'senior-help', // voice-ok
-    title: 'Engineering help for your team',
-    tagline: 'Experienced engineers beside the team you have',
+    slug: 'senior-help',
+    title: 'Senior help for your team',
+    tagline: 'Someone senior beside the team you have',
     description:
-      'For teams that already have code, and sometimes developers, and need experienced engineers beside them.',
+      'For teams that already have code, and sometimes developers, and need someone senior beside them.',
     icon: 'Users',
     features: [
       'Pick up where others left off',

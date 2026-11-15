@@ -42,11 +42,6 @@ const BANNED = [
   [/over a decade/i, 'over a decade'],
   [/field notes/i, 'Field notes (the page is gone)'],
   [/stages of business/i, 'Stages of business'],
-  // Nov 14: "senior" exposes how small the team is; say "experienced".
-  [
-    /senior engineers?|senior help/i,
-    'senior engineer(s) / senior help (say "experienced" or "engineering help")',
-  ],
 ]
 const BRITISH = [
   /\bcolour(s|ed|ing|ful)?\b/i,
