@@ -217,7 +217,7 @@ export function ProofSection() {
                 }}
               />
               {/* Hot Ones: #5 across the seam (columns 8-9), its bottom on the
-              bottom margin; #2 in columns 10-12, rising 4g out of the top. */}
+              bottom margin; #2 in columns 10-12, rising 5 rows out of the top (2 below 1280px). */}
               <HotOnesCard
                 {...HOUSE_SAUCE}
                 className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
@@ -230,11 +230,14 @@ export function ProofSection() {
               <HotOnesCard
                 {...LOS_CALIENTES_ROJO}
                 autoFlip
-                className='absolute z-20 rotate-[5deg]'
+                // Rises 5 rows out of the panel from 1280px up; 2 rows below
+                // that, where the intro runs wide and the card would cover
+                // its last line.
+                className='absolute z-20 rotate-[5deg] [--rise:2] xl:[--rise:5]'
                 style={{
                   left: g(colX(9) + COL / 2),
                   width: g(colR(11) - colX(9)),
-                  top: g(-4),
+                  top: `calc(var(--rise) * -100cqw / ${PANEL_W})`,
                 }}
               />
               {/* Labels: the two Heatonist ones share the column-5 line; the
