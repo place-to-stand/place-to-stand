@@ -1,4 +1,6 @@
 import type { CSSProperties } from 'react'
+import { Button } from '@/src/components/primitives/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { AuditLink, BookCallGroup } from '@/src/components/primitives/cta'
 import { HOME_HERO } from '@/src/lib/home'
 import { BlueprintCorners } from '@/src/components/boxes/corners'
@@ -104,12 +106,12 @@ export function HeroSection() {
                   style={{ animationDelay: '1s' }}
                 >
                   <div className='flex flex-col gap-grid-1 sm:flex-row sm:items-start sm:gap-grid-half'>
-                    {/* The one button (Book a call) with "Not ready to
-                        talk? Take the free audit." under it, in the same mono
-                        line style as BookCallGroup's "or …" line: centered on
-                        phones, and from sm up on one line from the button's
-                        left edge (w-0, so the line never widens the
-                        button). */}
+                    {/* The button with "Not ready to talk? Take the free
+                        audit." under it, in the same mono line style as
+                        BookCallGroup's "or …" line: centered on phones, and
+                        from sm up on one line from the button's left edge,
+                        running on under "See our work" (w-0, so the line
+                        never widens the button). */}
                     <div className='flex w-full flex-col items-center gap-grid-1 sm:w-auto sm:items-start'>
                       <BookCallGroup
                         location='hero'
@@ -122,6 +124,16 @@ export function HeroSection() {
                         {HOME_HERO.auditLead} <AuditLink location='hero' />
                       </p>
                     </div>
+                    <Button
+                      asChild
+                      size='lg'
+                      variant='outline'
+                      className='w-full sm:w-auto'
+                    >
+                      <TrackedLink href='/#results' location='hero'>
+                        See our work
+                      </TrackedLink>
+                    </Button>
                   </div>
                 </div>
               </div>
