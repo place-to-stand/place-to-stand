@@ -9,6 +9,7 @@ import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { BlueprintCorners } from '@/src/components/boxes/corners'
 import { HOME_PROOF } from '@/src/lib/home'
 import { MockA2 } from './mock-a2'
+import { ProofA3 } from './a3/mock-a3'
 
 export const metadata: Metadata = {
   title: 'Proof mocks',
@@ -142,6 +143,12 @@ function MockB() {
 export default function ProofMocks() {
   return (
     <main id='main' className='flex-1 pt-page-start'>
+      <Band tone='light'>
+        <div className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
+          <MockHeading>Mock A3 · rebuilt widgets, links at the end</MockHeading>
+        </div>
+        <ProofA3 />
+      </Band>
       <Band tone='light'>
         <Section className='flex flex-col gap-stack'>
           <MockHeading>Mock A2 · showcase</MockHeading>
