@@ -7,7 +7,7 @@
 
 export const HOME_HERO = {
   lead: 'Stop bending your business to fit your software.',
-  rest: 'Our senior engineers build the software your business runs on and stay as long as you want us to. You own the code and the data.',
+  rest: 'Our senior engineers build the software your business runs on and keep building on it after launch, for as long as you want. You own the code and the data.',
   auditLead: 'Not ready to talk?',
 } as const
 
