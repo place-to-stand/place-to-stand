@@ -40,14 +40,14 @@ export function ProofSection() {
           screenshot
           compact
           width='full'
-          alt='A Heatonist collection page: the filter panel (heat from Mild to Hottest, then type, diet, fruit, garlic and more) beside Hot Ones packs with their prices.'
+          alt='A Heatonist collection page: the filter panel (heat from Mild to Hottest, then availability, type, diet, fruit, garlic and more) beside the Hot Ones 10 pack and trio pack with their prices.'
           caption='Search and filters · heatonist.com'
         >
           <Image
-            src='/work/heatonist-filters.webp'
+            src='/work/heatonist-search-filters.webp'
             alt=''
-            width={1600}
-            height={890}
+            width={1692}
+            height={1214}
             sizes='(min-width: 1440px) 640px, (min-width: 1024px) 47vw, (min-width: 768px) 90vw, 75vw'
           />
         </UiPiece>
