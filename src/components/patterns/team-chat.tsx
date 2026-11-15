@@ -84,7 +84,7 @@ export function TeamChat({
       aria-label={`${label}: a team chat`}
       className={cn('flex flex-col border border-border bg-bg-card', className)}
     >
-      <figcaption className='border-b border-border bg-bg-elevated px-grid-1 py-grid-half text-base font-semibold text-text'>
+      <figcaption className='border-b border-border bg-bg-elevated px-grid-1 py-grid-half type-card-title leading-6'>
         {label}
       </figcaption>
       {/* Anchored to the bottom, like any chat: if the window is taller
@@ -97,7 +97,7 @@ export function TeamChat({
             <li key={i} {...reveal()}>
               <div className='flex gap-grid-half'>
                 <Avatar name={person.name} tone={m.by} />
-                <div className='flex min-w-0 flex-col gap-1'>
+                <div className='flex min-w-0 flex-col gap-1.5'>
                   <p className='flex flex-wrap items-baseline gap-x-2 leading-snug'>
                     <span className='text-base font-semibold text-text'>
                       {person.name}
@@ -108,11 +108,11 @@ export function TeamChat({
                   </p>
                   {/* Plain wrapping, not the site's "pretty" wrap, so a
                       message uses the window's full width. */}
-                  <p className='text-base leading-snug text-wrap text-text'>
+                  <p className='text-base leading-[1.3] text-wrap text-text'>
                     {m.text}
                   </p>
                   {(m.reactions || m.replies) && (
-                    <div className='flex flex-wrap items-center gap-2 pt-1'>
+                    <div className='flex flex-wrap items-center gap-2 pt-2'>
                       {m.reactions?.map(([emoji, n]) => (
                         <span
                           key={emoji}
