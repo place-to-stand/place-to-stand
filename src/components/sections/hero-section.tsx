@@ -154,11 +154,11 @@ export function HeroSection() {
                   column on each other at every width. On laptops the
                   max-width sizes the drawing so the hero fills the screen: the
                   space left after the nav, headline and gaps, times the
-                  drawing's width-to-height ratio (274 / 191.3). */}
+                  drawing's width-to-height ratio (274 / 187.3). */}
               {/* On phones (below sm), the drawing's width follows the window
                   height too (23svh tall at most), so the hero's content,
                   "See our work" included, fits one phone screen. */}
-              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(23svh*1.4323))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4323),100%)]'>
+              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(23svh*1.4629))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4629),100%)]'>
                 <HeroGraphic className='w-full' />
               </div>
             </HeroDrawingSlot>

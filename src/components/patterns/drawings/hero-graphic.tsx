@@ -484,18 +484,18 @@ const UNIFIED_DB: Db = { cx: 222, top: 152, w: 26, h: 20, accent: true }
 export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
-      viewBox='0 -8 274 191.3'
+      viewBox='0 -4 274 187.3'
       drawDelayMs={800}
       className={`hero-compare ${className ?? ''}`}
     >
       {/* ── Titles — each rises in with its column (stack first, your app
-          last). The viewBox starts 8 units above 0, so each title sits one
-          clear gap (about 12px on a laptop) above its drawing. The stack title sits at x=56, left of the stack's box center, because
+          last). The viewBox starts 4 units above 0, giving the stack a clear
+          gap (about 6px more on a laptop) under its title. The stack title sits at x=56, left of the stack's box center, because
           the windows lean right; this centers it over their visual mass. ── */}
       <g className='cmp-in' style={cmp(0)}>
         <text
           x='56'
-          y='0'
+          y='4'
           textAnchor='middle'
           className='cmp-title fill-text-muted font-headline'
           fontSize='8.5'
@@ -511,7 +511,7 @@ export function HeroGraphic({ className }: { className?: string }) {
       <g className='cmp-in' style={cmp(1315)}>
         <text
           x='222'
-          y='0'
+          y='4'
           textAnchor='middle'
           className='cmp-title fill-accent font-headline'
           fontSize='8.5'
