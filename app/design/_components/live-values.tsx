@@ -63,7 +63,15 @@ export function SpaceBar({ name }: { name: string }) {
 }
 
 /** The computed font size of a type role, at the current breakpoint. */
-export function TypeSample({ cls, sample }: { cls: string; sample: string }) {
+export function TypeSample({
+  cls,
+  sample,
+  proposed = false,
+}: {
+  cls: string
+  sample: string
+  proposed?: boolean
+}) {
   const ref = useRef<HTMLDivElement>(null)
   const size = useSyncExternalStore(
     subscribe,
@@ -82,6 +90,7 @@ export function TypeSample({ cls, sample }: { cls: string; sample: string }) {
       </div>
       <span className='font-mono text-xs text-text-muted'>
         {cls} · {size}
+        {proposed && <span className='text-accent'> · proposed</span>}
       </span>
     </div>
   )

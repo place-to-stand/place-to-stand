@@ -13,7 +13,7 @@ import { DESIGN_SECTION_GROUPS } from './sections'
  * marker matches what sits at the top of the reading area. The active item
  * gets a 2px accent-line bar on its left and full text color; the rest stay
  * muted. As the page scrolls, the index scrolls to keep the active item in
- * its middle.
+ * its middle. Below lg the list folds into a Contents disclosure.
  */
 export function DesignIndex() {
   const [active, setActive] = useState<string>('color')
@@ -49,16 +49,12 @@ export function DesignIndex() {
     })
   }, [active])
 
-  return (
-    <nav
-      ref={navRef}
-      aria-label='Design system'
-      className='flex flex-col gap-stack lg:sticky lg:top-(--nav-height) lg:h-[calc(100svh-var(--nav-height))] lg:self-start lg:overflow-y-auto lg:overscroll-contain lg:py-grid-2'
-    >
+  const list = (
+    <div className='flex flex-col gap-grid-1'>
       {DESIGN_SECTION_GROUPS.map(group => (
         <div key={group.title} className='flex flex-col gap-grid-half'>
-          <span className='bp-label self-start font-mono'>{group.title}</span>
-          <ul className='flex flex-col gap-grid-half'>
+          <span className='type-fine'>{group.title}</span>
+          <ul className='flex flex-col gap-1'>
             {group.sections.map(section => {
               const current = active === section.id
               return (
@@ -75,7 +71,7 @@ export function DesignIndex() {
                     href={`#${section.id}`}
                     aria-current={current ? 'location' : undefined}
                     className={cn(
-                      'link-nav transition-colors duration-(--motion-base)',
+                      'text-sm text-text-muted transition-colors duration-(--motion-base) hover:text-text',
                       current && 'text-text'
                     )}
                   >
@@ -87,6 +83,28 @@ export function DesignIndex() {
           </ul>
         </div>
       ))}
-    </nav>
+    </div>
+  )
+
+  return (
+    <>
+      {/* Phones and tablets: one "Contents" line that opens the list, so the
+          page starts with the content, not 26 links. */}
+      <details className='border-y border-border lg:hidden'>
+        <summary className='cursor-pointer py-grid-half type-fine'>
+          Contents
+        </summary>
+        <nav aria-label='Design system' className='pb-grid-1'>
+          {list}
+        </nav>
+      </details>
+      <nav
+        ref={navRef}
+        aria-label='Design system'
+        className='hidden lg:sticky lg:top-(--nav-height) lg:flex lg:h-[calc(100svh-var(--nav-height))] lg:flex-col lg:self-start lg:overflow-y-auto lg:overscroll-contain lg:py-grid-2'
+      >
+        {list}
+      </nav>
+    </>
   )
 }

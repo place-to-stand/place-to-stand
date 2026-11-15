@@ -1,9 +1,20 @@
 'use client'
 
 import { useState, type ReactNode } from 'react'
-import { Section, SectionHeading } from '@/src/components/patterns/section'
+import { Section } from '@/src/components/patterns/section'
 import { cn } from '@/src/lib/utils'
-import type { DesignSectionId } from './sections'
+import {
+  DESIGN_SECTION_GROUPS,
+  type DesignGroupTitle,
+  type DesignSectionId,
+} from './sections'
+
+/** Each section's number, in page order (01, 02, …). */
+const SECTION_NUMBERS = Object.fromEntries(
+  DESIGN_SECTION_GROUPS.flatMap(g =>
+    g.sections.map(s => s.id as DesignSectionId)
+  ).map((id, i) => [id, i + 1])
+) as Record<DesignSectionId, number>
 
 /**
  * Framing for /design. Everything inside a specimen is a real component or
@@ -14,6 +25,7 @@ export function DesignSection({
   label,
   title,
   when,
+  proposed = false,
   children,
 }: {
   id: DesignSectionId
@@ -21,17 +33,47 @@ export function DesignSection({
   title: string
   /** One line on when to reach for this. */
   when: ReactNode
+  /** Documented but not yet used on the live site. */
+  proposed?: boolean
   children: ReactNode
 }) {
+  const number = String(SECTION_NUMBERS[id]).padStart(2, '0')
   return (
     <Section
       id={id}
       data-design-section
-      className='flex scroll-mt-24 flex-col gap-stack px-0 lg:px-0'
+      className='flex scroll-mt-24 flex-col gap-grid-2 border-t border-border px-0 pt-grid-2 lg:px-0'
     >
-      <SectionHeading label={label} title={title} intro={when} />
+      {/* Quiet on purpose: a numbered mono line, a title one step under the
+          group heading, and the intro in muted body text. */}
+      <div className='flex flex-col gap-intro'>
+        <p className='flex flex-wrap gap-x-grid-half type-fine'>
+          <span>
+            {number} · {label}
+          </span>
+          {proposed && (
+            <span className='text-accent'>Proposed · not yet in use</span>
+          )}
+        </p>
+        <h3 className='type-item-title'>{title}</h3>
+        <p className='max-w-2xl text-base text-pretty text-text-muted'>
+          {when}
+        </p>
+      </div>
       <div className='flex flex-col gap-stack'>{children}</div>
     </Section>
+  )
+}
+
+/** A tier's heading (Tokens, Primitives, …): the one loud level under the
+ *  page title. */
+export function DesignGroup({ title }: { title: DesignGroupTitle }) {
+  const group = DESIGN_SECTION_GROUPS.find(g => g.title === title)!
+  return (
+    <div className='flex flex-col gap-intro'>
+      <h2 className='type-section-title'>{group.title}</h2>
+      <p className='max-w-2xl type-intro text-pretty'>{group.intro}</p>
+    </div>
   )
 }
 
@@ -46,7 +88,7 @@ export function CopyName({ name }: { name: string }) {
         setCopied(true)
         window.setTimeout(() => setCopied(false), 1200)
       }}
-      className='link-nav normal-case'
+      className='font-mono text-xs text-text-muted transition-colors hover:text-text'
       title='Copy'
     >
       {copied ? 'Copied' : name}
@@ -62,6 +104,7 @@ export function Specimen({
   names,
   note,
   tones = false,
+  stack = false,
   children,
   className,
 }: {
@@ -69,6 +112,9 @@ export function Specimen({
   names: string[]
   note?: ReactNode
   tones?: boolean
+  /** Wide specimens: the dark and light stages one above the other, full
+   *  width, instead of side by side. */
+  stack?: boolean
   children: ReactNode
   className?: string
 }) {
@@ -85,14 +131,16 @@ export function Specimen({
   )
   return (
     <div className='flex flex-col gap-grid-half'>
-      <div className='flex flex-wrap items-baseline gap-x-grid-1 gap-y-grid-half'>
+      <div className='flex flex-wrap items-baseline gap-x-grid-half gap-y-grid-half'>
         {names.map(name => (
           <CopyName key={name} name={name} />
         ))}
-        {note && <span className='text-sm text-text-muted'>{note}</span>}
+        {note && (
+          <span className='font-mono text-xs text-text-muted'>· {note}</span>
+        )}
       </div>
       {tones ? (
-        <div className='grid gap-grid-1 md:grid-cols-2'>
+        <div className={cn('grid gap-grid-1', !stack && 'md:grid-cols-2')}>
           {stage(false)}
           {stage(true)}
         </div>

@@ -34,7 +34,8 @@ import {
 import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
 import Image from 'next/image'
 import { DesignIndex } from './_components/design-index'
-import { DesignSection, Specimen } from './_components/specimen'
+import { DesignGroup, DesignSection, Specimen } from './_components/specimen'
+import { SplitSection } from '@/src/components/patterns/split-section'
 import {
   Callout,
   Card,
@@ -86,6 +87,11 @@ const TYPE = [
   { cls: 'type-card-title', sample: 'Discovery session' },
   { cls: 'type-stat', sample: '1,400+' },
   { cls: 'type-quote', sample: '“A tech team without the hire.”' },
+  {
+    cls: 'type-voice',
+    sample: '“We run this on spreadsheets and it’s breaking.”',
+    proposed: true,
+  },
   { cls: 'type-lead', sample: 'Reading text one step up, in the text color.' },
   { cls: 'type-intro', sample: 'The paragraph under a page or section title.' },
   { cls: 'text-base', sample: 'Body text: reading text at 16px.' },
@@ -114,18 +120,19 @@ export default function DesignPage() {
     <main id='main' className='flex-1 pt-page-start'>
       <Hero
         variant='page'
-        sectionClassName='pb-section'
+        sectionClassName='pb-header'
         label='Design System'
         title='Place To Stand, piece by piece.'
         intro='The colors, type, spacing and building blocks behind placetostandagency.com, shown live.'
       />
 
       <Section className='grid gap-section pb-section lg:grid-cols-12 lg:gap-x-grid-2'>
-        <div className='lg:col-span-3'>
+        <div className='min-w-0 lg:col-span-3'>
           <DesignIndex />
         </div>
-        <div className='flex flex-col gap-section lg:col-span-9'>
+        <div className='flex min-w-0 flex-col gap-band lg:col-span-9'>
           {/* ── Tokens ── */}
+          <DesignGroup title='Tokens' />
           <DesignSection
             id='color'
             label='Tokens'
@@ -154,7 +161,12 @@ export default function DesignPage() {
             <Specimen names={TYPE.map(t => t.cls.split(' ')[0])}>
               <div className='flex flex-col gap-grid-1'>
                 {TYPE.map(t => (
-                  <TypeSample key={t.cls} cls={t.cls} sample={t.sample} />
+                  <TypeSample
+                    key={t.cls}
+                    cls={t.cls}
+                    sample={t.sample}
+                    proposed={'proposed' in t}
+                  />
                 ))}
               </div>
             </Specimen>
@@ -289,6 +301,7 @@ export default function DesignPage() {
           </DesignSection>
 
           {/* ── Primitives ── */}
+          <DesignGroup title='Primitives' />
           <DesignSection
             id='buttons'
             label='Primitives'
@@ -416,6 +429,7 @@ export default function DesignPage() {
           </DesignSection>
 
           {/* ── Boxes ── */}
+          <DesignGroup title='Boxes' />
           <DesignSection
             id='boxes'
             label='Boxes'
@@ -426,6 +440,7 @@ export default function DesignPage() {
               names={['Card', 'LinkCard', 'StatTile']}
               note='always a 1px stroke; a link card changes fill on hover'
               tones
+              stack
             >
               <div className='grid gap-grid-1 md:grid-cols-3'>
                 <Card className='flex flex-col gap-grid-half'>
@@ -501,6 +516,7 @@ export default function DesignPage() {
           </DesignSection>
 
           {/* ── Patterns ── */}
+          <DesignGroup title='Patterns' />
           <DesignSection
             id='headings'
             label='Patterns'
@@ -514,7 +530,7 @@ export default function DesignPage() {
                 intro='The paragraph under the title uses the intro role.'
               />
             </Specimen>
-            <Specimen names={['SectionHeading']} tones>
+            <Specimen names={['SectionHeading']} tones stack>
               <SectionHeading
                 label='What we build'
                 title='Three kinds of work.'
@@ -554,7 +570,7 @@ export default function DesignPage() {
             title='FAQ, logos, media and captions'
             when='Questions as ruled rows, the logo wall, every photo in a fixed frame, and a caption under it in body text.'
           >
-            <Specimen names={['FAQ', 'RuledRow as="div"']} tones>
+            <Specimen names={['FAQ', 'RuledRow as="div"']} tones stack>
               <dl className='grid gap-x-grid-3 md:grid-cols-2'>
                 {FAQ.slice(0, 2).map(item => (
                   <RuledRow
@@ -613,7 +629,41 @@ export default function DesignPage() {
             </Specimen>
           </DesignSection>
 
+          <DesignSection
+            id='split'
+            label='Patterns'
+            title='Split section'
+            proposed
+            when='One statement held still on the left, a long run of content on the right: columns 1-5 and 7-12, with column 6 as air. Below lg the two stack and nothing sticks. On /mock/signals as option F; not on any live page yet.'
+          >
+            <Specimen
+              names={['SplitSection', 'type-voice']}
+              note='aside sticks under the nav'
+            >
+              <SplitSection
+                aside={
+                  <SectionHeading
+                    label='Warning Signs'
+                    title='If your team is saying these, it’s time to call.'
+                  />
+                }
+              >
+                <div className='flex flex-col gap-grid-1'>
+                  <span className='type-fine'>In the back office</span>
+                  <blockquote className='type-voice'>
+                    &ldquo;We run this on spreadsheets and it’s breaking.&rdquo;
+                  </blockquote>
+                  <blockquote className='type-voice'>
+                    &ldquo;We pay for five tools that don’t talk to each
+                    other.&rdquo;
+                  </blockquote>
+                </div>
+              </SplitSection>
+            </Specimen>
+          </DesignSection>
+
           {/* ── Sections ── */}
+          <DesignGroup title='Sections' />
           <DesignSection
             id='cards'
             label='Sections'
@@ -794,6 +844,7 @@ export default function DesignPage() {
           </DesignSection>
 
           {/* ── Templates ── */}
+          <DesignGroup title='Templates' />
           <DesignSection
             id='templates'
             label='Templates'
@@ -879,6 +930,7 @@ export default function DesignPage() {
           </DesignSection>
 
           {/* ── Guidelines ── */}
+          <DesignGroup title='Guidelines' />
           <DesignSection
             id='imagery'
             label='Guidelines'
