@@ -22,13 +22,15 @@ export function SoundFamiliarSection() {
       </Reveal>
       <Reveal index={1}>
         <ul className='grid gap-grid-1 lg:grid-cols-3'>
-          {/* Each card spans two rows of a shared grid, so the "What we
-              build" lines start level across the three cards. */}
+          {/* Each card spans three rows of a shared grid: the quotes, the
+              payoff and the link. The "What we build" labels start level
+              across the three cards, and each card's one link sits on the
+              same line at the card's bottom; any slack sits above it. */}
           {SOUND_FAMILIAR.groups.map(group => (
             <Card
               as='li'
               key={group.name}
-              className='flex flex-col gap-grid-2 lg:row-span-2 lg:grid lg:grid-rows-subgrid'
+              className='flex flex-col gap-grid-1 lg:row-span-3 lg:grid lg:grid-rows-subgrid'
             >
               <div className='flex flex-col gap-grid-1'>
                 <h3 className='type-card-title'>{group.name}</h3>
@@ -36,25 +38,21 @@ export function SoundFamiliarSection() {
                 <ul className='flex flex-col'>
                   {group.quotes.map(quote => (
                     <RuledRow key={quote} className='py-grid-half'>
-                      <blockquote className='type-lead'>
+                      <blockquote className='type-lead text-balance'>
                         &ldquo;{quote}&rdquo;
                       </blockquote>
                     </RuledRow>
                   ))}
                 </ul>
               </div>
-              <div className='flex flex-col gap-grid-1'>
-                <div className='flex flex-col gap-grid-half'>
-                  <span className='type-fine'>What we build</span>
-                  <p className='text-base text-text-muted'>{group.build}</p>
-                </div>
-                <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-half'>
-                  {group.links.map(link => (
-                    <ArrowLink key={link.href} href={link.href as Route}>
-                      {link.label}
-                    </ArrowLink>
-                  ))}
-                </div>
+              <div className='flex flex-col gap-grid-half'>
+                <span className='type-fine'>What we build</span>
+                <p className='text-base text-text'>{group.build}</p>
+              </div>
+              <div className='mt-auto lg:self-end'>
+                <ArrowLink href={group.link.href as Route}>
+                  {group.link.label}
+                </ArrowLink>
               </div>
             </Card>
           ))}
