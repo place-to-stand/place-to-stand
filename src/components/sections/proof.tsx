@@ -12,7 +12,6 @@ import {
 } from '@/src/components/patterns/client-widgets/heatonist-widgets'
 
 const HO_BLACK = '#0d0d0d'
-const HO_YELLOW = '#ffd305'
 
 const HOUSE_SAUCE = {
   number: 2,
@@ -46,10 +45,6 @@ const colX = (k: number) => MARGIN + (k - 1) * (COL + 1)
 const colR = (k: number) => colX(k) + COL
 
 const LABEL_INK = 'rgba(255,255,255,0.92)'
-/** The black/yellow seam, 35⅓ units in (Jason, Nov 15, set in the
- *  browser). No column or gutter line sits within half a unit of it (the
- *  nearest is column 8's right edge at 36⅓), so it is its own line. */
-const SEAM = 106 / 3
 
 /** The three callouts sit 5.5 rows apart, centered on the panel's middle
  *  (Jason, Nov 15): at 4, 9.5 and 15 units down. */
@@ -167,14 +162,13 @@ const CALLOUTS = [
 
 /**
  * Home's proof (#results): the Heatonist and Hot Ones work, approved Nov 15.
- * The copy, then one panel in the clients' colors, black for Heatonist and
- * yellow for Hot Ones, on its own grid: the 10 Pack card and search filter,
+ * The copy, then one black panel (Hot Ones' black; the yellow half was
+ * removed Nov 15) on its own grid: the 10 Pack card and search filter,
  * and two of Hot Ones' own sauces as lineup cards (House Sauce big, Los
  * Calientes Rojo small), all rebuilt in HTML from the live sites so
- * they stay sharp, with blueprint callouts saying what we built and each
- * site's name in its half. The cards flip on click, tap, Enter or Space
+ * they stay sharp, with blueprint callouts saying what we built. The cards flip on click, tap, Enter or Space
  * (the small one once on scroll). Phones: the hero card, the callouts as a list, then
- * the Heatonist pieces. The links close the section.
+ * the Heatonist pieces. The link closes the section.
  * Tone: light.
  */
 export function ProofSection() {
@@ -201,17 +195,6 @@ export function ProofSection() {
                 clipPath: 'inset(-600px 0 0 0)',
               }}
             >
-              {/* Yellow from the seam to the panel's right edge. */}
-              <div
-                className='absolute inset-y-0 right-0'
-                style={{
-                  left: g(SEAM),
-                  backgroundColor: HO_YELLOW,
-                  backgroundImage:
-                    'radial-gradient(rgba(14,15,17,0.14) 1px, transparent 1.2px)',
-                  backgroundSize: '24px 24px',
-                }}
-              />
               {/* Heatonist: the 10 Pack card in columns 1-2, top margin to bottom
               margin; the filter in columns 2-3 over the right half of its
               photo, one row down, clear of its text. */}
@@ -232,7 +215,7 @@ export function ProofSection() {
                 }}
               />
               {/* Hot Ones: the small card (Los Calientes Rojo, flips once on
-              view) across the seam (columns 8-9), its bottom on the bottom
+              view) in columns 8-9, its bottom on the bottom
               margin; the big card (House Sauce) in columns 10-12, rising 5
               rows out of the top (2 below 1280px). */}
               <HotOnesCard
@@ -283,17 +266,13 @@ export function ProofSection() {
               <GridOverlay />
             </div>
 
-            {/* Phones and tablets: the headline and hero card on the split, the
+            {/* Phones and tablets: the hero card on black, the
             callouts as a list, then the Heatonist pieces. */}
             <div className='flex flex-col lg:hidden'>
               <div
                 className='relative overflow-hidden'
                 style={{ backgroundColor: HO_BLACK }}
               >
-                <div
-                  className='absolute inset-x-0 bottom-0 h-[42%]'
-                  style={{ backgroundColor: HO_YELLOW }}
-                />
                 <div className='relative flex flex-col items-center gap-grid-1 px-grid-1 py-grid-2'>
                   <HotOnesCard
                     {...LOS_CALIENTES_ROJO}
