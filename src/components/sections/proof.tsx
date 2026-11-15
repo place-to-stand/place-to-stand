@@ -83,13 +83,13 @@ function GridOverlay() {
 }
 
 /** The label column: one shared left edge, centered (by the widest line,
- *  "Know the flavor profile", 193px) in the black between the filter's
- *  right edge and #2's leftmost tilted point (measured at 31.49 units)
- *  (Jason, Nov 15). The gap always leaves at least 24px leaders either
- *  side, so the lines never wrap past their set two. */
+ *  "Know the flavor", 126px) in the black between the filter's right edge
+ *  and #2's leftmost tilted point (measured at 31.49 units) (Jason, Nov
+ *  15). The gap always leaves at least 36px leaders either side, so the
+ *  lines never wrap past their set two. */
 const GAP_LEFT = colX(3) - 2 + FILTER_W
 const GAP_RIGHT = 31.49
-const LABEL_W = `min(194px, ${GAP_RIGHT - GAP_LEFT} * 100cqw / ${PANEL_W} - 48px)`
+const LABEL_W = `min(127px, ${GAP_RIGHT - GAP_LEFT} * 100cqw / ${PANEL_W} - 72px)`
 const LABEL_X = `calc(${(GAP_LEFT + GAP_RIGHT) / 2} * 100cqw / ${PANEL_W} - ${LABEL_W} / 2)`
 
 /** A callout: the label on the shared column, a 1px leader level with it,
@@ -159,7 +159,7 @@ function Callout({
 const CALLOUTS = [
   {
     title: 'Flip cards',
-    detail: ['Know the flavor profile', 'before you buy'],
+    detail: ['Know the flavor', 'before you buy'],
   },
   { title: 'Search filters', detail: ['Find your', 'sauce faster'] },
   { title: 'Bundles', detail: ['A whole season', 'in one box'] },

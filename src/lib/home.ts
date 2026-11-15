@@ -16,7 +16,6 @@ export const HOME_PROOF = {
   body: "We build and run the online stores and Shopify apps for Heatonist and its long-time partner, Hot Ones. Over 1,400 changes shipped so far, and we're still on the team.",
   links: [
     { label: 'Read the Heatonist story', href: '/clients/heatonist' },
-    { label: 'See all clients', href: '/clients' },
   ],
 } as const
 
