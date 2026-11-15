@@ -63,7 +63,7 @@ export const SOUND_FAMILIAR = {
         'Off-the-shelf store tools weren’t built to sell what we sell.',
       ],
       build:
-        'Custom stores and marketplaces, on Shopify when it fits. Or one order form that sends every request, files and all, to a single queue.',
+        'A store built for what you sell, on Shopify when it fits, and one place where every order lands, however it comes in.',
       link: { label: 'Sell online', href: '/platform#sell' },
       chat: {
         people: [
