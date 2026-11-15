@@ -5,6 +5,7 @@ import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { UiPiece } from '@/src/components/patterns/ui-piece'
 import { HOME_PROOF } from '@/src/lib/home'
+import { HotOnesLineup } from '@/src/components/patterns/hotones-lineup'
 
 /**
  * Home's proof: the Heatonist and Hot Ones work (#results, the hero's "See
@@ -58,16 +59,10 @@ export function ProofSection() {
           screenshot
           tight
           width='lineup'
-          alt='The Hot Ones lineup on hotones.com: the first five sauces of the Season 31 pack, numbered by heat.'
+          alt='The Hot Ones lineup on hotones.com: the first five sauces of the Season 31 pack, numbered by heat, with card #2 flipped to its tasting notes: House Sauce, tangy, peppery, heat level 2 of 10.'
           caption='The lineup · hotones.com'
         >
-          <Image
-            src='/work/hotones-lineup-sauces.webp'
-            alt=''
-            width={1600}
-            height={828}
-            sizes='(min-width: 1440px) 580px, (min-width: 1024px) 43vw, (min-width: 768px) 85vw, 80vw'
-          />
+          <HotOnesLineup sizes='(min-width: 1440px) 580px, (min-width: 1024px) 43vw, (min-width: 768px) 85vw, 80vw' />
         </UiPiece>
       </Reveal>
     </Section>
