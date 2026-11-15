@@ -18,7 +18,8 @@ import { cn } from '@/src/lib/utils'
  *
  * Laptops: three columns. The tech-team chat starts at the top right,
  * beside the heading, so that corner isn't empty; the back-office and store
- * chats sit side by side under the heading, and the three end together.
+ * chats sit side by side under the heading. The three "What we build" notes
+ * are pinned to one bottom line, so they read as a row.
  *
  * Phones and tablets: one chat at a time in a sideways scroll-snap row,
  * the next one peeking in, with dot buttons under it (no carousel library;
@@ -94,10 +95,8 @@ export function SoundFamiliarSection() {
               i === 2 && 'lg:col-start-3 lg:row-span-2 lg:row-start-1'
             )}
           >
-            <span className='type-fine'>{group.name}</span>
             <TeamChat
               label={group.name}
-              room={group.chat.room}
               people={group.chat.people}
               messages={group.chat.messages.map((m, k) => ({
                 ...m,
@@ -108,7 +107,7 @@ export function SoundFamiliarSection() {
               }
               typing={'typing' in group.chat ? group.chat.typing : undefined}
             />
-            <SideNote className='flex flex-col gap-grid-half'>
+            <SideNote className='mt-auto flex flex-col gap-grid-half'>
               <span className='type-fine'>What we build</span>
               <p className='text-base text-text'>{group.build}</p>
               <ArrowLink href={group.link.href as Route}>

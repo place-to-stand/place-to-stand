@@ -16,7 +16,7 @@ export type ChatMessage = {
 
 /**
  * A short team chat, in our own plain chat UI (not any real product's look
- * or name): a header with the room and how many people are in it, then the
+ * or name): a header with where it happens and how many people are in it, then the
  * messages, each with an initials avatar, name, role and time. Optional: a
  * "New" divider above one message and a typing line at the end.
  *
@@ -24,7 +24,6 @@ export type ChatMessage = {
  * view (or is swiped into view); with reduced motion they're simply there.
  */
 export function TeamChat({
-  room,
   label,
   people,
   messages,
@@ -32,8 +31,8 @@ export function TeamChat({
   typing,
   className,
 }: {
-  room: string
-  /** What the chat shows, for screen readers ("In the back office"). */
+  /** Where the chat happens ("In the back office"): the header, and the
+   *  name screen readers hear. */
   label: string
   people: readonly ChatPerson[]
   messages: readonly ChatMessage[]
@@ -82,13 +81,8 @@ export function TeamChat({
       aria-label={`${label}: a team chat`}
       className={cn('flex flex-col border border-border bg-bg-card', className)}
     >
-      <figcaption className='flex items-center justify-between border-b border-border px-grid-1 py-grid-half font-mono text-xs'>
-        <span className='text-text'>
-          <span aria-hidden className='text-accent'>
-            /{' '}
-          </span>
-          {room}
-        </span>
+      <figcaption className='flex items-center justify-between gap-grid-half border-b border-border px-grid-1 py-grid-half font-mono text-xs tracking-[0.05em] uppercase'>
+        <span className='text-text'>{label}</span>
         <span className='text-text-muted'>{people.length} people</span>
       </figcaption>
       <ol className='flex flex-col gap-grid-half px-grid-1 py-grid-1'>
@@ -99,7 +93,7 @@ export function TeamChat({
             <li key={i} {...reveal()}>
               <div className='flex gap-grid-half'>
                 <Avatar name={person.name} tone={m.by} />
-                <div className='flex min-w-0 flex-col gap-0.5'>
+                <div className='flex min-w-0 flex-col gap-1'>
                   <p className='flex flex-wrap items-baseline gap-x-2 text-sm'>
                     <span className='font-semibold text-text'>
                       {person.name}

@@ -40,7 +40,6 @@ export const SOUND_FAMILIAR = {
         'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is public.',
       link: { label: 'See Run your business', href: '/platform#run' },
       chat: {
-        room: 'ops',
         people: [
           { name: 'Dana', role: 'Ops lead' },
           { name: 'Marcus', role: 'Finance' },
@@ -65,7 +64,6 @@ export const SOUND_FAMILIAR = {
         'Custom stores and marketplaces, on Shopify when it fits. Or one order form that sends every request, files and all, to a single queue.',
       link: { label: 'See Sell online', href: '/platform#sell' },
       chat: {
-        room: 'store',
         people: [
           { name: 'Priya', role: 'Marketing' },
           { name: 'Leo', role: 'Support' },
@@ -95,7 +93,6 @@ export const SOUND_FAMILIAR = {
         'We pick up where others left off, or work beside your developers. When you need advice more than code, that’s technical consulting.',
       link: { label: 'See Senior help', href: '/platform#senior-help' },
       chat: {
-        room: 'product',
         people: [
           { name: 'Sam', role: 'Founder' },
           { name: 'Jordan', role: 'Head of ops' },

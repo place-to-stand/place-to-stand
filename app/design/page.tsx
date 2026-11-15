@@ -637,7 +637,7 @@ export default function DesignPage() {
             id='chat'
             label='Patterns'
             title='Team chat'
-            when='A short team chat in our own plain chat UI, for showing what people say at work (Home’s warning signs). Room and head count on top, then messages with initials, name, role and time; reactions, replies, a New divider and a typing line are optional. Messages appear one by one on first view.'
+            when='A short team chat in our own plain chat UI, for showing what people say at work (Home’s warning signs). Where it happens and head count on top, then messages with initials, name, role and time; reactions, replies, a New divider and a typing line are optional. Messages appear one by one on first view.'
           >
             <Specimen
               names={['TeamChat', 'SideNote']}
@@ -646,7 +646,6 @@ export default function DesignPage() {
               <div className='flex max-w-md flex-col gap-grid-1'>
                 <TeamChat
                   label='In your store'
-                  room='store'
                   people={[
                     { name: 'Priya', role: 'Marketing' },
                     { name: 'Leo', role: 'Support' },
