@@ -310,12 +310,8 @@ export default function DesignPage() {
             >
               <div className='flex flex-wrap items-start gap-stack'>
                 <BookCallButton location='design' size='sm' />
-                <BookCallGroup location='design' buttonClassName='min-w-60' />
-                <BookCallGroup
-                  location='design'
-                  secondary='note'
-                  buttonClassName='min-w-60'
-                />
+                <BookCallGroup location='design' />
+                <BookCallGroup location='design' secondary='note' />
               </div>
             </Specimen>
           </DesignSection>

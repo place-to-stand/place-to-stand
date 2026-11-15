@@ -21,9 +21,9 @@ import { BlueprintGraphic } from '@/src/components/patterns/drawings/blueprint-g
  * business's data ends up fragmented across silos. Under the clutter sits one
  * small, tilted database cylinder per dashboard, each fed by a straight line from
  * the window above it; under the clean app sits one unified accent cylinder. The
- * headings carry the copy ("Turn your scattered data" → "Into one source of truth"), so
+ * headings carry the copy ("Turn your scattered tools and data" → "Into one system you own"), so
  * the graphic reads: we don't just consolidate the interface, we consolidate the
- * data into a single source of truth.
+ * data into one system the client owns.
  *
  * The site's schematic vocabulary (fill-bg-card hollow shapes,
  * stroke-line, one accent highlight). Entrance is a sequenced fade-and-rise
@@ -484,33 +484,34 @@ const UNIFIED_DB: Db = { cx: 222, top: 152, w: 26, h: 20, accent: true }
 export function HeroGraphic({ className }: { className?: string }) {
   return (
     <BlueprintGraphic
-      viewBox='0 0 274 183.3'
+      viewBox='0 -8 274 191.3'
       drawDelayMs={800}
       className={`hero-compare ${className ?? ''}`}
     >
-      {/* ── Titles — each rises in with its column (stack first, your app last).
-          The stack title sits at x=56, left of the stack's box center, because
+      {/* ── Titles — each rises in with its column (stack first, your app
+          last). The viewBox starts 8 units above 0, so each title sits one
+          clear gap (about 12px on a laptop) above its drawing. The stack title sits at x=56, left of the stack's box center, because
           the windows lean right; this centers it over their visual mass. ── */}
       <g className='cmp-in' style={cmp(0)}>
         <text
           x='56'
-          y='8'
+          y='0'
           textAnchor='middle'
           className='cmp-title fill-text-muted font-headline'
           fontSize='8.5'
           fontWeight='500'
           letterSpacing='0.3'
         >
-          <tspan x='56'>Turn your</tspan>
+          <tspan x='56'>Turn your scattered</tspan>
           <tspan x='56' dy='10'>
-            scattered data
+            tools and data
           </tspan>
         </text>
       </g>
       <g className='cmp-in' style={cmp(1315)}>
         <text
           x='222'
-          y='8'
+          y='0'
           textAnchor='middle'
           className='cmp-title fill-accent font-headline'
           fontSize='8.5'
@@ -519,7 +520,7 @@ export function HeroGraphic({ className }: { className?: string }) {
         >
           <tspan x='222'>Into one</tspan>
           <tspan x='222' dy='10'>
-            source of truth
+            system you own
           </tspan>
         </text>
       </g>
@@ -565,196 +566,202 @@ export function HeroGraphic({ className }: { className?: string }) {
       </g>
 
       {/* ── Your app: a clean, squared-off mini of the real product. Slides in
-             dramatically from the right, last of all. ── */}
-      <g className='cmp-slide' style={cmp(1544)}>
-        <AppWindow {...RIGHT_WIN} rx='0' fill='fill-bg' />
+             dramatically from the right, last of all. It and its database sit
+             6.5 units higher than the stack (translate), so the stack gets
+             the extra room under its title and both visible gaps match. ── */}
+      <g transform='translate(0 -6.5)'>
+        <g className='cmp-slide' style={cmp(1544)}>
+          <AppWindow {...RIGHT_WIN} rx='0' fill='fill-bg' />
 
-        {/* Sidebar: divider, wordmark, an accent active item, hollow nav rows */}
-        <line
-          x1={SIDEBAR_DIV}
-          y1='45'
-          x2={SIDEBAR_DIV}
-          y2='130'
-          className='stroke-line'
-          strokeWidth='0.6'
-        />
-        <line
-          x1='180'
-          y1='49'
-          x2='193'
-          y2='49'
-          className='stroke-line'
-          strokeWidth='1.3'
-          strokeLinecap='round'
-        />
-        <rect
-          x={NAV_ACTIVE.x}
-          y={NAV_ACTIVE.y}
-          width={NAV_ACTIVE.w}
-          height={NAV_ACTIVE.h}
-          className='fill-accent'
-        />
-        <rect x='180' y='56.5' width='3' height='3' className='fill-bg' />
-        <line
-          x1='185'
-          y1='58.1'
-          x2='196'
-          y2='58.1'
-          className='stroke-bg'
-          strokeWidth='0.75'
-          strokeLinecap='round'
-        />
-        {NAV_ROWS.map((y, i) => (
-          <g key={`nav${i}`}>
-            <rect
-              x='180'
-              y={y}
-              width='3'
-              height='3'
-              className='fill-bg stroke-line'
-              strokeWidth='0.55'
-            />
-            <line
-              x1='185'
-              y1={y + 1.6}
-              x2='196'
-              y2={y + 1.6}
-              className='stroke-line'
-              strokeWidth='0.75'
-              strokeLinecap='round'
-            />
-          </g>
-        ))}
-
-        {/* Page header: icon, title, subtitle */}
-        <rect
-          x={HOME_ICON.x}
-          y={HOME_ICON.y}
-          width={HOME_ICON.w}
-          height={HOME_ICON.h}
-          className='fill-bg stroke-line'
-          strokeWidth='0.7'
-        />
-        <line
-          x1='214'
-          y1='48'
-          x2='236'
-          y2='48'
-          className='stroke-line'
-          strokeWidth='1.5'
-          strokeLinecap='round'
-        />
-        <line
-          x1='214'
-          y1='52.5'
-          x2='255'
-          y2='52.5'
-          className='stroke-line'
-          strokeWidth='0.8'
-          strokeLinecap='round'
-        />
-
-        {/* Full-width graph widget — a bar chart whose tallest, final column is
-            the accent and slowly blinks */}
-        <rect
-          x={GRAPH_CARD.x}
-          y={GRAPH_CARD.y}
-          width={GRAPH_CARD.w}
-          height={GRAPH_CARD.h}
-          className='fill-bg-card stroke-line'
-          strokeWidth='0.9'
-        />
-        <line
-          x1='209'
-          y1='64'
-          x2='224'
-          y2='64'
-          className='stroke-line'
-          strokeWidth='1.1'
-          strokeLinecap='round'
-        />
-        {/* Each bar grows up from the baseline once the app has slid in,
-            left to right; the accent bar lands last, then starts to breathe. */}
-        {GRAPH_BARS.map((b, i) => {
-          const last = i === GRAPH_BARS.length - 1
-          return (
-            <g
-              key={`gb${i}`}
-              className={last ? 'cmp-bar cmp-bar-last' : 'cmp-bar'}
-              style={{ ['--bar-delay']: `${1900 + i * 80}ms` } as CSSProperties}
-            >
-              {last ? (
-                <rect
-                  x={b.x}
-                  y={b.y}
-                  width={b.w}
-                  height={b.h}
-                  className='cmp-live fill-accent'
-                  style={{ ['--cmp-live-delay']: '3200ms' } as CSSProperties}
-                />
-              ) : (
-                <rect
-                  x={b.x}
-                  y={b.y}
-                  width={b.w}
-                  height={b.h}
-                  className='fill-bg stroke-line'
-                  strokeWidth='0.55'
-                />
-              )}
+          {/* Sidebar: divider, wordmark, an accent active item, hollow nav rows */}
+          <line
+            x1={SIDEBAR_DIV}
+            y1='45'
+            x2={SIDEBAR_DIV}
+            y2='130'
+            className='stroke-line'
+            strokeWidth='0.6'
+          />
+          <line
+            x1='180'
+            y1='49'
+            x2='193'
+            y2='49'
+            className='stroke-line'
+            strokeWidth='1.3'
+            strokeLinecap='round'
+          />
+          <rect
+            x={NAV_ACTIVE.x}
+            y={NAV_ACTIVE.y}
+            width={NAV_ACTIVE.w}
+            height={NAV_ACTIVE.h}
+            className='fill-accent'
+          />
+          <rect x='180' y='56.5' width='3' height='3' className='fill-bg' />
+          <line
+            x1='185'
+            y1='58.1'
+            x2='196'
+            y2='58.1'
+            className='stroke-bg'
+            strokeWidth='0.75'
+            strokeLinecap='round'
+          />
+          {NAV_ROWS.map((y, i) => (
+            <g key={`nav${i}`}>
+              <rect
+                x='180'
+                y={y}
+                width='3'
+                height='3'
+                className='fill-bg stroke-line'
+                strokeWidth='0.55'
+              />
+              <line
+                x1='185'
+                y1={y + 1.6}
+                x2='196'
+                y2={y + 1.6}
+                className='stroke-line'
+                strokeWidth='0.75'
+                strokeLinecap='round'
+              />
             </g>
-          )
-        })}
-        <line
-          x1='209'
-          y1='93'
-          x2='259'
-          y2='93'
-          className='stroke-line'
-          strokeWidth='0.5'
-          strokeLinecap='round'
-        />
+          ))}
 
-        {/* Two half-width widgets below — clean KPI cards */}
-        {HALF_CARDS.map((c, i) => (
-          <g key={`half${i}`}>
-            <rect
-              x={c.x}
-              y={c.y}
-              width={c.w}
-              height={c.h}
-              className='fill-bg-card stroke-line'
-              strokeWidth='0.9'
-            />
-            <line
-              x1={c.x + 4}
-              y1={c.y + 7}
-              x2={c.x + 15}
-              y2={c.y + 7}
-              className='stroke-line'
-              strokeWidth='0.8'
-              strokeLinecap='round'
-            />
-            <line
-              x1={c.x + 4}
-              y1={c.y + 15}
-              x2={c.x + 12}
-              y2={c.y + 15}
-              className='stroke-line'
-              strokeWidth='1.8'
-              strokeLinecap='round'
-            />
-            <line
-              x1={c.x + 4}
-              y1={c.y + 21}
-              x2={c.x + 19}
-              y2={c.y + 21}
-              className='stroke-line'
-              strokeWidth='0.5'
-              strokeLinecap='round'
-            />
-          </g>
-        ))}
+          {/* Page header: icon, title, subtitle */}
+          <rect
+            x={HOME_ICON.x}
+            y={HOME_ICON.y}
+            width={HOME_ICON.w}
+            height={HOME_ICON.h}
+            className='fill-bg stroke-line'
+            strokeWidth='0.7'
+          />
+          <line
+            x1='214'
+            y1='48'
+            x2='236'
+            y2='48'
+            className='stroke-line'
+            strokeWidth='1.5'
+            strokeLinecap='round'
+          />
+          <line
+            x1='214'
+            y1='52.5'
+            x2='255'
+            y2='52.5'
+            className='stroke-line'
+            strokeWidth='0.8'
+            strokeLinecap='round'
+          />
+
+          {/* Full-width graph widget — a bar chart whose tallest, final column is
+            the accent and slowly blinks */}
+          <rect
+            x={GRAPH_CARD.x}
+            y={GRAPH_CARD.y}
+            width={GRAPH_CARD.w}
+            height={GRAPH_CARD.h}
+            className='fill-bg-card stroke-line'
+            strokeWidth='0.9'
+          />
+          <line
+            x1='209'
+            y1='64'
+            x2='224'
+            y2='64'
+            className='stroke-line'
+            strokeWidth='1.1'
+            strokeLinecap='round'
+          />
+          {/* Each bar grows up from the baseline once the app has slid in,
+            left to right; the accent bar lands last, then starts to breathe. */}
+          {GRAPH_BARS.map((b, i) => {
+            const last = i === GRAPH_BARS.length - 1
+            return (
+              <g
+                key={`gb${i}`}
+                className={last ? 'cmp-bar cmp-bar-last' : 'cmp-bar'}
+                style={
+                  { ['--bar-delay']: `${1900 + i * 80}ms` } as CSSProperties
+                }
+              >
+                {last ? (
+                  <rect
+                    x={b.x}
+                    y={b.y}
+                    width={b.w}
+                    height={b.h}
+                    className='cmp-live fill-accent'
+                    style={{ ['--cmp-live-delay']: '3200ms' } as CSSProperties}
+                  />
+                ) : (
+                  <rect
+                    x={b.x}
+                    y={b.y}
+                    width={b.w}
+                    height={b.h}
+                    className='fill-bg stroke-line'
+                    strokeWidth='0.55'
+                  />
+                )}
+              </g>
+            )
+          })}
+          <line
+            x1='209'
+            y1='93'
+            x2='259'
+            y2='93'
+            className='stroke-line'
+            strokeWidth='0.5'
+            strokeLinecap='round'
+          />
+
+          {/* Two half-width widgets below — clean KPI cards */}
+          {HALF_CARDS.map((c, i) => (
+            <g key={`half${i}`}>
+              <rect
+                x={c.x}
+                y={c.y}
+                width={c.w}
+                height={c.h}
+                className='fill-bg-card stroke-line'
+                strokeWidth='0.9'
+              />
+              <line
+                x1={c.x + 4}
+                y1={c.y + 7}
+                x2={c.x + 15}
+                y2={c.y + 7}
+                className='stroke-line'
+                strokeWidth='0.8'
+                strokeLinecap='round'
+              />
+              <line
+                x1={c.x + 4}
+                y1={c.y + 15}
+                x2={c.x + 12}
+                y2={c.y + 15}
+                className='stroke-line'
+                strokeWidth='1.8'
+                strokeLinecap='round'
+              />
+              <line
+                x1={c.x + 4}
+                y1={c.y + 21}
+                x2={c.x + 19}
+                y2={c.y + 21}
+                className='stroke-line'
+                strokeWidth='0.5'
+                strokeLinecap='round'
+              />
+            </g>
+          ))}
+        </g>
       </g>
 
       {/* ── Transformation arrow. Rendered last so it always sits above the
@@ -791,18 +798,20 @@ export function HeroGraphic({ className }: { className?: string }) {
         </g>
       ))}
 
-      <g className='cmp-in' style={cmp(1750)}>
-        {/* one clean connector from the app down to the unified store */}
-        <line
-          x1={UNIFIED_DB.cx}
-          y1='135'
-          x2={UNIFIED_DB.cx}
-          y2={UNIFIED_DB.top}
-          className='stroke-accent'
-          strokeWidth='1'
-          strokeLinecap='round'
-        />
-        <DbCylinder {...UNIFIED_DB} />
+      <g transform='translate(0 -6.5)'>
+        <g className='cmp-in' style={cmp(1750)}>
+          {/* one clean connector from the app down to the unified store */}
+          <line
+            x1={UNIFIED_DB.cx}
+            y1='135'
+            x2={UNIFIED_DB.cx}
+            y2={UNIFIED_DB.top}
+            className='stroke-accent'
+            strokeWidth='1'
+            strokeLinecap='round'
+          />
+          <DbCylinder {...UNIFIED_DB} />
+        </g>
       </g>
     </BlueprintGraphic>
   )

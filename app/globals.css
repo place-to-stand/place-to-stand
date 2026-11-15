@@ -58,6 +58,10 @@
      outline buttons): 3:1 against the page and cards, where decorative
      lines (border, rule) stay soft. Same value as line, set per band. */
   --color-control: #6e7078;
+  /* Button edges, 2px at rest (Nov 14): the outline button's and the primary
+     button's. Per band: gray and lime on dark, ink on light. */
+  --color-button-edge: #6e7078;
+  --color-primary-edge: #b5f542;
   /* ink: the dark site color in every band. The primary button uses it so
      its text and hover fill stay dark inside light bands too. */
   --color-ink: #0e0f11;
@@ -304,6 +308,22 @@ html {
     @apply bg-bg font-sans text-text antialiased;
     line-height: 1.375;
     overflow-x: hidden;
+  }
+
+  /* No lone last words: reading text wraps "pretty" and headings balance
+     their lines (Nov 14). A text-balance or text-pretty class still wins. */
+  p,
+  li,
+  dd,
+  figcaption,
+  blockquote {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
   }
 }
 
@@ -946,7 +966,7 @@ main {
 }
 
 /* On mobile the graphic renders narrower, so its titles shrink with it — bump
-   the "Turn all of this" / "Into one source of truth" headings up a touch
+   the "Turn your scattered tools and data" / "Into one system you own" headings up a touch
    (font-size is in SVG user units, so this scales relative to the viewBox). */
 @media (max-width: 767px) {
   .hero-compare .cmp-title {
@@ -1256,6 +1276,8 @@ main {
   --color-rule: #cbcac4;
   --color-line: #8a8c93;
   --color-control: #8a8c93;
+  --color-button-edge: #0e0f11;
+  --color-primary-edge: #0e0f11;
   --grid-dot: #d4d3cd;
   --color-accent-line: #0e0f11;
   --color-accent-subtle: rgba(14, 15, 17, 0.4);
@@ -1455,7 +1477,8 @@ main {
    --draw, runs 0 to 1 over the primary's duration and easing; each stroke
    takes its own slice, sized for a typical 240x48 button (each half side
    ~8%, the long edges ~84%) so the line moves at an even speed. The strokes
-   are five solid fills on one layer over the faint resting border. */
+   are five solid fills on one layer (::after) over the resting border. The
+   primary button draws the same stroke while its fill slides in (::before). */
 @property --draw {
   syntax: '<number>';
   inherits: true;
@@ -1469,16 +1492,17 @@ main {
   --close: clamp(0, (var(--draw) - 0.9167) / 0.0833, 1);
   transition:
     --draw var(--hover-dur) var(--hover-ease),
-    color var(--link-dur) var(--hover-ease);
+    color var(--link-dur) var(--hover-ease),
+    border-color var(--hover-dur) var(--hover-ease);
 }
 .btn-draw:hover,
 .btn-draw:focus-visible {
   --draw: 1;
 }
-.btn-draw::before {
+.btn-draw::after {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   pointer-events: none;
   --line: linear-gradient(var(--color-accent-line), var(--color-accent-line));
   background-image:
@@ -1497,8 +1521,30 @@ main {
     2px calc(var(--close) * 50%),
     2px calc(var(--close) * 50%);
 }
+/* On light bands the drawn ink stroke would land on an ink edge and not
+   show, so the outline button also fills ink from the left, like the
+   primary, and its label turns light. */
+.theme-light .btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--hover-dur) var(--hover-ease);
+}
+.theme-light .btn-outline:hover::before,
+.theme-light .btn-outline:focus-visible::before {
+  transform: scaleX(1);
+}
+.theme-light .btn-outline:hover,
+.theme-light .btn-outline:focus-visible {
+  color: var(--color-bg);
+}
 @media (prefers-reduced-motion: reduce) {
-  .btn-draw {
+  .btn-draw,
+  .theme-light .btn-outline::before {
     transition: none;
   }
 }

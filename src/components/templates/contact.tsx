@@ -51,7 +51,7 @@ export function ContactTemplate() {
               asChild
               size='lg'
               variant='outline'
-              className='w-full sm:w-auto sm:min-w-60'
+              className='w-full sm:w-auto'
             >
               <TrackedLink href={CTA.audit.href} location='contact-audit'>
                 {CTA.audit.label}

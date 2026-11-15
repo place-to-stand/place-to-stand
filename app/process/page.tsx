@@ -42,7 +42,7 @@ export default function ProcessPage() {
         <BookCallGroup
           location='process-hero'
           className='w-full self-start sm:w-auto'
-          buttonClassName='w-full md:min-w-60'
+          buttonClassName='w-full'
         />
       </Hero>
 

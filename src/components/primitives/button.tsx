@@ -19,14 +19,14 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'relative isolate bg-accent text-ink font-bold border border-accent-subtle shadow-cta shadow-accent/20 transition-colors duration-(--hover-dur) ease-(--hover-ease) hover:text-accent hover:border-accent before:absolute before:inset-0 before:-z-10 before:bg-ink before:-translate-x-[101%] before:transition-transform before:duration-(--hover-dur) before:ease-(--hover-ease) hover:before:translate-x-0',
+          'btn-draw overflow-visible relative isolate bg-accent text-ink font-bold border-2 border-primary-edge shadow-cta shadow-accent/20 transition-colors duration-(--hover-dur) ease-(--hover-ease) hover:text-accent before:absolute before:inset-0 before:-z-10 before:bg-ink before:origin-left before:scale-x-0 before:transition-transform before:duration-(--hover-dur) before:ease-(--hover-ease) hover:before:scale-x-100',
         primaryInvert:
-          'relative isolate bg-accent text-ink font-bold border border-accent shadow-cta shadow-accent/10 transition-colors duration-(--hover-dur) ease-(--hover-ease) hover:text-accent before:absolute before:inset-0 before:-z-10 before:bg-ink before:-translate-x-[101%] before:transition-transform before:duration-(--hover-dur) before:ease-(--hover-ease) hover:before:translate-x-0',
+          'btn-draw overflow-visible relative isolate bg-accent text-ink font-bold border-2 border-primary-edge shadow-cta shadow-accent/10 transition-colors duration-(--hover-dur) ease-(--hover-ease) hover:text-accent before:absolute before:inset-0 before:-z-10 before:bg-ink before:origin-left before:scale-x-0 before:transition-transform before:duration-(--hover-dur) before:ease-(--hover-ease) hover:before:scale-x-100',
         secondary:
           'bg-bg-elevated text-text border border-border hover:bg-bg-card hover:border-border-light',
         ghost: 'bg-transparent text-text-muted hover:text-text',
         outline:
-          'btn-draw overflow-visible bg-transparent border border-control text-text hover:text-accent focus-visible:text-accent',
+          'btn-draw btn-outline overflow-visible relative isolate bg-transparent border-2 border-button-edge text-text hover:text-accent-line focus-visible:text-accent-line',
       },
       size: {
         sm: 'h-9 px-4',

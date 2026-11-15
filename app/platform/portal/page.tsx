@@ -36,10 +36,7 @@ export default function PortalPage() {
         intro={PORTAL_HEADER.intro}
       >
         <div className='flex flex-col gap-grid-1 sm:flex-row sm:items-start sm:gap-grid-half'>
-          <BookCallButton
-            location='portal-hero'
-            className='w-full sm:w-auto md:min-w-60'
-          />
+          <BookCallButton location='portal-hero' className='w-full sm:w-auto' />
           {/* Matches the Home hero's "See our work" button. */}
           <Button
             asChild

@@ -66,7 +66,7 @@ export function CtaBand({
                   location={location}
                   secondary={secondary ? 'none' : 'note'}
                   className='w-full sm:w-auto'
-                  buttonClassName='w-full sm:min-w-60'
+                  buttonClassName='w-full sm:w-auto'
                 />
                 {secondary && (
                   <Button

@@ -163,6 +163,10 @@ Line drawings use two stroke weights and nothing else: `--stroke-structure` (1px
 One shared definition in `src/components/primitives/cta.tsx`, so every place matches:
 
 - **`BookCallButton`**: the lime "Book a call" button. Goes to the calendar embedded on Contact (`/contact#call`). Header uses the small size, everywhere else large.
+- **Buttons** (`Button`, approved Nov 14): two kinds, both sized to their words (32px side padding at large size, no minimum width; full width only where a phone layout stacks them).
+  - **Edges.** 2px at rest on every button (buttons are controls, so they take the emphasis stroke): the primary's is lime on dark and ink on light (`border-primary-edge`); the outline button's is the control gray on dark and ink on light (`border-button-edge`). Labels: ink on lime; the outline button's label is the text color on both bands, never lime on light.
+  - **Hover and keyboard focus.** One left-to-right motion, in the button hover timing (250ms, ease-out): a 2px accent-line stroke draws over the edge (left side from its middle out, top and bottom left to right together, right side closing), and the primary's dark fill grows in from the left at the same time. On light bands the drawn ink stroke would land on an ink edge, so the outline button also fills ink from the left and its label turns light.
+  - **Reduced motion** shows the end state at once.
 - **`AuditLink`**: the "Take the free audit" action link, never a button.
 - **`NoteLink`**: the "send us a note" action link, to the Contact message form (`/contact#message`).
 - **`BookCallGroup`**: the button with one line centered under it (24px gap, 12px mono caps, "or" muted). `secondary` picks the line: `audit` ("or Take the free audit", the default), `note` ("or send us a note", the closing bands) or `none` (when a second button stands beside it).
@@ -333,7 +337,7 @@ Approved Nov 10.
 2. **Focus.** The one focus ring from Interaction states, 3:1 on dark and light bands.
 3. **Skip to content.** `SkipLink` (`primitives/skip-link.tsx`) is the first element in `<body>`: the first Tab stop on every page, shown only on keyboard focus, jumping to `<main id='main'>`. Every page's `<main>` carries that id.
 4. **Checked, not hoped.** `npm run test:a11y` (`scripts/a11y.mjs`) runs axe-core (WCAG 2.2 A and AA) on every page at 390 and 1440 and fails on serious or critical issues. It also fails a page without exactly one h1, a skipped heading level, an id used twice, or a skip link that isn't the first Tab stop.
-5. **Lines that matter.** Decorative lines (`border`, `rule`) stay soft. The edge of anything you click or type into (`Input`, `Textarea`, `Select`, `Checkbox`, the outline button, the audit's check boxes) uses `border-control`, which reaches 3:1 against the page and the field fill on both bands; `npm run test:contrast` requires it. Disabled controls drop back to `border-border`.
+5. **Lines that matter.** Decorative lines (`border`, `rule`) stay soft. The edge of anything you click or type into (`Input`, `Textarea`, `Select`, `Checkbox`, the audit's check boxes) uses `border-control`, and buttons use their 2px edges (Calls to action), which reaches 3:1 against the page and the field fill on both bands; `npm run test:contrast` requires it. Disabled controls drop back to `border-border`.
 
 Also: reading text never under 14px (lint); every animation has a reduced-motion end state.
 

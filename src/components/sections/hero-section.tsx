@@ -12,7 +12,7 @@ export function HeroSection() {
     <section
       id='home'
       data-pts-hero
-      className='relative flex flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--spacing-grid-2)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
+      className='relative flex flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
       <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2'>
         {/* The hero's gaps: under the nav, between the headline and the
@@ -76,7 +76,7 @@ export function HeroSection() {
               with the headline's 24px once its glyph spacing is counted.
               Stacked, neither is inset, the text centers and the button runs
               full width up to 448px. */}
-          <div className='flex flex-col gap-grid-2 md:flex-row md:items-center md:gap-grid-2 lg:gap-grid-3'>
+          <div className='flex flex-col gap-grid-1 md:flex-row md:items-center md:gap-grid-2 lg:gap-grid-3'>
             {/* Side by side, the text column stretches to the row's height and
                 splits the free space 1:3 above and below its content, so the
                 text sits a touch above center but never higher than the
@@ -89,12 +89,13 @@ export function HeroSection() {
                   style={{ animationDelay: '0.85s' }}
                 >
                   <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-xl lg:gap-grid-1'>
+                    {/* The bold lead on its own line, then the sentence under it. */}
                     {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
-                    <p className='text-base text-balance text-text lg:text-xl'>
-                      <strong className='font-semibold'>
+                    <p className='flex flex-col gap-grid-half text-base text-text lg:text-xl'>
+                      <strong className='font-semibold text-balance'>
                         {HOME_HERO.lead}
-                      </strong>{' '}
-                      {HOME_HERO.rest}
+                      </strong>
+                      <span className='text-pretty'>{HOME_HERO.rest}</span>
                     </p>
                   </div>
                 </div>
@@ -114,7 +115,7 @@ export function HeroSection() {
                         location='hero'
                         secondary='none'
                         className='w-full'
-                        buttonClassName='w-full md:min-w-60'
+                        buttonClassName='w-full'
                         data-pts-hero-cta
                       />
                       <p className='-mr-[0.1em] font-mono text-xs tracking-[0.1em] whitespace-nowrap text-text-muted uppercase sm:w-0'>
@@ -125,7 +126,7 @@ export function HeroSection() {
                       asChild
                       size='lg'
                       variant='outline'
-                      className='w-full border-2 sm:w-auto'
+                      className='w-full sm:w-auto'
                     >
                       <TrackedLink href='/#results' location='hero'>
                         See our work
@@ -153,8 +154,11 @@ export function HeroSection() {
                   column on each other at every width. On laptops the
                   max-width sizes the drawing so the hero fills the screen: the
                   space left after the nav, headline and gaps, times the
-                  drawing's width-to-height ratio (274 / 183.3). */}
-              <div className='mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4948),100%)]'>
+                  drawing's width-to-height ratio (274 / 191.3). */}
+              {/* On phones (below sm), the drawing's width follows the window
+                  height too (23svh tall at most), so the hero's content,
+                  "See our work" included, fits one phone screen. */}
+              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(23svh*1.4323))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4323),100%)]'>
                 <HeroGraphic className='w-full' />
               </div>
             </HeroDrawingSlot>
