@@ -150,7 +150,7 @@ export function HeroSection() {
                 window height (minus the nav, the headline, which shrinks on
                 short screens, and the hero's gaps), so short screens still
                 show the whole drawing, database included. */}
-            <HeroDrawingSlot className='max-md:order-1 md:flex md:flex-1 md:justify-center md:pr-grid-half'>
+            <HeroDrawingSlot className='max-md:order-1 md:flex md:flex-1 md:justify-center md:pr-grid-half lg:pr-grid-2 xl:pr-grid-half'>
               {/* The drawing's viewBox ends at the database, so its box is its
                   ink. Side by side, the row centers the drawing and the text
                   column on each other at every width. On laptops the

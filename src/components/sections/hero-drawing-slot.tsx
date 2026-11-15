@@ -2,6 +2,10 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
 
+/** How much further in the drawing sits than the text's mirror image: a
+ *  smidge, half a grid step (Jason, Nov 14). */
+const EXTRA_RIGHT = 12
+
 /** The clean app window's outer edge, as a share of the drawing's width
  *  (x 176 + w 92 of the 274-unit viewBox, plus half its stroke). */
 const APP_RIGHT = 268.4 / 274
@@ -12,8 +16,8 @@ const WINDOW_TOP = 0.155
 
 /**
  * The hero drawing's column. Side by side, it slides the drawing so the
- * clean app's outer edge sits as far inside the hero frame's right line
- * (the right corner mark) as the body text sits inside its left one
+ * clean app's outer edge sits inside the hero frame's right line (the right
+ * corner mark) by the body text's inset from its left one, plus 12px
  * (Jason, Nov 14). CSS can't do this alone: the drawing's viewBox
  * has room to the right of the app, and the slot centers it.
  *
@@ -54,14 +58,14 @@ export function HeroDrawingSlot({
         '--draw-top',
         `${drawing.top - row.getBoundingClientRect().top + drawing.height * WINDOW_TOP}px`
       )
-      // The clean app's outer edge sits as far inside the frame's right
-      // line (the right corner mark) as the body text sits inside its left
-      // one, so the row is symmetric (Jason, Nov 14). Never closer to the
+      // The clean app's outer edge sits inside the frame's right line (the
+      // right corner mark) by the body text's inset from the left one, plus
+      // half a grid step (Jason, Nov 14). Never closer to the
       // text than the row's gap.
       const textEnd = inkRight(text)
       const frameBox = frame.getBoundingClientRect()
       const body = text.querySelector('p')?.getBoundingClientRect()
-      const inset = body ? body.left - frameBox.left : 0
+      const inset = (body ? body.left - frameBox.left : 0) + EXTRA_RIGHT
       const appRight = drawing.left + drawing.width * APP_RIGHT
       const want = frameBox.right - inset - appRight
       const furthestLeft =
