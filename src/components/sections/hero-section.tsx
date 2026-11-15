@@ -105,23 +105,22 @@ export function HeroSection() {
                   style={{ animationDelay: '1s' }}
                 >
                   <div className='flex flex-col gap-grid-1 sm:flex-row sm:items-start sm:gap-grid-half'>
-                    {/* The one button (Book a call) and "Not ready to
-                        talk? Take the free audit ->" in the mono line style of
-                        BookCallGroup's "or …" line. Phones: one line, centered
-                        under the full-width button. From sm up: beside the
-                        button, 24px off it, on two lines centered on it, the
-                        arrow ending the second. */}
-                    <div className='flex w-full flex-col items-center gap-grid-1 sm:w-auto sm:flex-row'>
+                    {/* The one button (Book a call) with "Not ready to
+                        talk? Take the free audit." under it, in the same mono
+                        line style as BookCallGroup's "or …" line: centered on
+                        phones, and from sm up on one line from the button's
+                        left edge (w-0, so the line never widens the
+                        button). */}
+                    <div className='flex w-full flex-col items-center gap-grid-1 sm:w-auto sm:items-start'>
                       <BookCallGroup
                         location='hero'
                         secondary='none'
-                        className='w-full sm:w-auto'
+                        className='w-full'
                         buttonClassName='w-full'
                         data-pts-hero-cta
                       />
-                      <p className='-mr-[0.1em] flex flex-wrap justify-center gap-x-[0.6em] font-mono text-xs tracking-[0.1em] whitespace-nowrap text-text-muted uppercase sm:mr-0 sm:flex-col sm:items-start sm:gap-y-[0.6em]'>
-                        <span>{HOME_HERO.auditLead}</span>
-                        <AuditLink location='hero' />
+                      <p className='-mr-[0.1em] font-mono text-xs tracking-[0.1em] whitespace-nowrap text-text-muted uppercase sm:w-0'>
+                        {HOME_HERO.auditLead} <AuditLink location='hero' />
                       </p>
                     </div>
                   </div>
