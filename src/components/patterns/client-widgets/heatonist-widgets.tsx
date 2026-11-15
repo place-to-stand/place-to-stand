@@ -7,7 +7,7 @@ import type { CSSProperties } from 'react'
  * filter group and the 10 Pack (Season 31) product card. Each scales as one object:
  * every size is a share of its width (u), so text stays sharp at any size.
  * Both sit on the shared object treatment (their 8px radius, a hairline, a
- * solid red top rule, the composition's shadow).
+ * the composition's shadow).
  */
 const RED = '#DC1F26'
 const u = (px: number) => `calc(${px} * var(--ht-u))`
@@ -33,7 +33,9 @@ function Shell({
         className={`overflow-hidden rounded-[3.2cqw] border border-black/10 bg-white shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.6)] ${fill ? 'flex h-full flex-col' : ''}`}
         style={{ '--ht-u': `calc(100cqw / ${base})` } as CSSProperties}
       >
-        <div style={{ height: u(3), backgroundColor: '#ce2a39' }} />
+        {/* Was a red top rule (removed Nov 15); the space stays so heights
+            and the callout dots don't move. */}
+        <div style={{ height: u(3) }} />
         {children}
       </div>
     </div>

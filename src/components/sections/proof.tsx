@@ -51,105 +51,12 @@ const LABEL_INK = 'rgba(255,255,255,0.92)'
  *  nearest is column 8's right edge at 36⅓), so it is its own line. */
 const SEAM = 106 / 3
 
-/** The three callouts sit 4.5 rows apart, centered on the panel's middle
- *  (Jason, Nov 15): at 5, 9.5 and 14 units down. */
-const LABEL_STEP = 4.5
+/** The three callouts sit 5.5 rows apart, centered on the panel's middle
+ *  (Jason, Nov 15): at 4, 9.5 and 15 units down. */
+const LABEL_STEP = 5.5
 
 /** The Heat filter: two columns and a gutter wide (columns 2-3). */
 const FILTER_W = 2 * COL + 1
-
-/** A label left-aligned on a column line with its leader running right
- *  from the label's end to a piece's edge (the flip cards). */
-function LabelThenLeader({
-  at,
-  to,
-  y,
-  title,
-  detail,
-}: {
-  at: number
-  to: number
-  y: number
-  title: string
-  detail: string
-}) {
-  return (
-    <div
-      aria-hidden
-      className='pointer-events-none absolute z-30 flex items-center gap-grid-half pl-grid-half'
-      style={{
-        left: g(at),
-        width: g(to - at),
-        top: g(y),
-        transform: 'translateY(-50%)',
-        color: LABEL_INK,
-      }}
-    >
-      <span className='flex max-w-[13em] flex-col gap-0.5 font-mono text-xs leading-tight tracking-[0.1em] uppercase'>
-        <span className='font-semibold'>{title}</span>
-        <span className='opacity-75'>{detail}</span>
-      </span>
-      {/* Line and dot in one run, so the line always ends at the dot. */}
-      <span className='flex flex-1 items-center'>
-        <span className='h-px flex-1' style={{ backgroundColor: LABEL_INK }} />
-        <span
-          className='size-[7px] shrink-0 rounded-full'
-          style={{ backgroundColor: LABEL_INK, marginRight: -3.5 }}
-        />
-      </span>
-    </div>
-  )
-}
-
-/** A callout on the grid: a dot on a piece's edge, a 1px leader to the
- *  label's column line, and the label on that line (12px off it). */
-function GridCallout({
-  from,
-  to,
-  y,
-  title,
-  detail,
-}: {
-  /** The dot (on the piece) and the label's column line, in g. When `to`
-   *  is left of `from`, the label sits left of the line, right-aligned. */
-  from: number
-  to: number
-  y: number
-  title: string
-  detail: string
-}) {
-  const left = Math.min(from, to)
-  const labelLeft = to > from
-  return (
-    <div
-      aria-hidden
-      className='pointer-events-none absolute z-30 flex items-center'
-      style={{
-        left: g(left),
-        width: g(Math.abs(to - from)),
-        top: g(y),
-        transform: 'translateY(-50%)',
-        color: LABEL_INK,
-        flexDirection: labelLeft ? 'row' : 'row-reverse',
-      }}
-    >
-      <span
-        className='size-[7px] shrink-0 rounded-full'
-        style={{
-          backgroundColor: LABEL_INK,
-          [labelLeft ? 'marginLeft' : 'marginRight']: -3.5,
-        }}
-      />
-      <span className='h-px flex-1' style={{ backgroundColor: LABEL_INK }} />
-      <span
-        className={`absolute flex flex-col gap-0.5 font-mono text-xs leading-tight tracking-[0.1em] whitespace-nowrap uppercase ${labelLeft ? 'left-full items-start pl-grid-half' : 'right-full items-end pr-grid-half'}`}
-      >
-        <span className='font-semibold'>{title}</span>
-        <span className='opacity-75'>{detail}</span>
-      </span>
-    </div>
-  )
-}
 
 /** Columns, gutters and margins, drawn when <html> has data-grid
  *  (for checking the layout). */
@@ -171,6 +78,69 @@ function GridOverlay() {
           }}
         />
       ))}
+    </div>
+  )
+}
+
+/** The label column: one shared left edge, centered (by the widest
+ *  label, 156px) in the black between the filter's right edge and #2's
+ *  leftmost tilted point (measured at 31.49 units) (Jason, Nov 15). */
+const LABEL_W = 156
+const GAP_LEFT = colX(3) - 2 + FILTER_W
+const GAP_RIGHT = 31.49
+const LABEL_X = `calc(${(GAP_LEFT + GAP_RIGHT) / 2} * 100cqw / ${PANEL_W} - ${LABEL_W / 2}px)`
+
+/** A callout: the label on the shared column, a 1px leader level with it,
+ *  and a dot on its piece's edge. `side` says which side of the column the
+ *  piece is on; the leader runs from the dot's center to 12px off the
+ *  label. */
+function Callout({
+  dot,
+  side,
+  y,
+  title,
+  detail,
+}: {
+  /** The dot's x on the piece, in units. */
+  dot: number
+  side: 'left' | 'right'
+  y: number
+  title: string
+  detail: string
+}) {
+  const line =
+    side === 'left'
+      ? { left: g(dot), width: `calc(${LABEL_X} - 12px - ${g(dot)})` }
+      : {
+          left: `calc(${LABEL_X} + ${LABEL_W + 12}px)`,
+          width: `calc(${g(dot)} - ${LABEL_X} - ${LABEL_W + 12}px)`,
+        }
+  return (
+    <div aria-hidden className='pointer-events-none absolute inset-0 z-30'>
+      <span
+        className='absolute h-px'
+        style={{ ...line, top: g(y), backgroundColor: LABEL_INK }}
+      />
+      <span
+        className='absolute size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full'
+        style={{
+          left: g(dot),
+          top: `calc(${g(y)} + 0.5px)`,
+          backgroundColor: LABEL_INK,
+        }}
+      />
+      <span
+        className='absolute flex -translate-y-1/2 flex-col gap-0.5 font-mono text-xs leading-tight tracking-[0.1em] uppercase'
+        style={{
+          left: LABEL_X,
+          width: LABEL_W,
+          top: `calc(${g(y)} + 0.5px)`,
+          color: LABEL_INK,
+        }}
+      >
+        <span className='font-semibold'>{title}</span>
+        <span className='opacity-75'>{detail}</span>
+      </span>
     </div>
   )
 }
@@ -274,21 +244,21 @@ export function ProofSection() {
               spaced and centered on the panel's middle (LABEL_STEP); each
               leader runs level to a dot on its piece's edge: the 10 Pack
               card, the filter, and #2's left edge. */}
-              <GridCallout
-                from={colR(2)}
-                to={colX(5)}
+              <Callout
+                dot={colR(2)}
+                side='left'
                 y={PANEL_H / 2 - LABEL_STEP}
                 {...CALLOUTS[2]}
               />
-              <GridCallout
-                from={colX(3) - 2 + FILTER_W}
-                to={colX(5)}
+              <Callout
+                dot={GAP_LEFT}
+                side='left'
                 y={PANEL_H / 2}
                 {...CALLOUTS[1]}
               />
-              <LabelThenLeader
-                at={colX(5)}
-                to={colX(8) + 0.6}
+              <Callout
+                dot={colX(8) + 0.6}
+                side='right'
                 y={PANEL_H / 2 + LABEL_STEP}
                 {...CALLOUTS[0]}
               />
