@@ -51,6 +51,10 @@ const LABEL_INK = 'rgba(255,255,255,0.92)'
  *  nearest is column 8's right edge at 36⅓), so it is its own line. */
 const SEAM = 106 / 3
 
+/** The three callouts sit 4.5 rows apart, centered on the panel's middle
+ *  (Jason, Nov 15): at 5, 9.5 and 14 units down. */
+const LABEL_STEP = 4.5
+
 /** The Heat filter: two columns and a gutter wide (columns 2-3). */
 const FILTER_W = 2 * COL + 1
 
@@ -266,52 +270,28 @@ export function ProofSection() {
               {/* Labels: the two Heatonist ones share the column-5 line; the
               flip-cards one is right-aligned to the column-7 line, its
               leader on the top margin, above #5. */}
-              {/* All three labels left-aligned on the column-5 line, stacked:
-              bundles at the 10 Pack card's top, the filter at its middle, the
-              flip cards low, its leader running right to #5's edge. */}
+              {/* All three labels left-aligned on the column-5 line, evenly
+              spaced and centered on the panel's middle (LABEL_STEP); each
+              leader runs level to a dot on its piece's edge: the 10 Pack
+              card, the filter, and #2's left edge. */}
               <GridCallout
                 from={colR(2)}
                 to={colX(5)}
-                y={MARGIN + 0.5}
+                y={PANEL_H / 2 - LABEL_STEP}
                 {...CALLOUTS[2]}
               />
               <GridCallout
                 from={colX(3) - 2 + FILTER_W}
                 to={colX(5)}
-                y={MARGIN + 7.5}
+                y={PANEL_H / 2}
                 {...CALLOUTS[1]}
               />
               <LabelThenLeader
                 at={colX(5)}
                 to={colX(8) + 0.6}
-                y={MARGIN + 12}
+                y={PANEL_H / 2 + LABEL_STEP}
                 {...CALLOUTS[0]}
               />
-              {/* Site credits on the margin, one per half. */}
-              <span
-                aria-hidden
-                className='absolute font-mono text-xs tracking-[0.1em] uppercase'
-                style={{
-                  color: 'rgba(255,255,255,0.72)',
-                  left: g(MARGIN),
-                  bottom: g(MARGIN / 2),
-                  transform: 'translateY(50%)',
-                }}
-              >
-                Heatonist.com
-              </span>
-              <span
-                aria-hidden
-                className='absolute font-mono text-xs tracking-[0.1em] uppercase'
-                style={{
-                  color: 'rgba(14,15,17,0.78)',
-                  right: g(MARGIN),
-                  bottom: g(MARGIN / 2),
-                  transform: 'translateY(50%)',
-                }}
-              >
-                Hotones.com
-              </span>
               <GridOverlay />
             </div>
 
@@ -332,13 +312,6 @@ export function ProofSection() {
                     autoFlip
                     className='w-[58%] max-w-[18rem] rotate-[3deg]'
                   />
-                  <span
-                    aria-hidden
-                    className='self-end font-mono text-xs tracking-[0.1em] uppercase'
-                    style={{ color: 'rgba(14,15,17,0.78)' }}
-                  >
-                    Hotones.com
-                  </span>
                 </div>
               </div>
               <ul className='flex flex-col border-x border-b border-border bg-bg-card'>
@@ -359,12 +332,6 @@ export function ProofSection() {
                   <BundleCard className='w-[44%] max-w-[15rem]' />
                   <HeatFilter className='mt-grid-2 w-[44%] max-w-[15rem]' />
                 </div>
-                <span
-                  aria-hidden
-                  className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase'
-                >
-                  Heatonist.com
-                </span>
               </div>
             </div>
           </figure>
