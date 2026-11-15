@@ -202,7 +202,7 @@ export function ProofA3() {
           Heatonist.com · Hotones.com
         </figcaption>
       </figure>
-      <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1 lg:-mt-grid-1'>
+      <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
         {HOME_PROOF.links.map(link => (
           <ArrowLink key={link.href} href={link.href as Route}>
             {link.label}
