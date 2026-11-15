@@ -49,7 +49,7 @@ export function PageHeader({
       <div
         className={cn('flex flex-col gap-eyebrow', centered && 'items-center')}
       >
-        <span className='bp-label bp-chip font-mono'>{label}</span>
+        <span className='bp-label font-mono'>{label}</span>
         <h1
           className={cn(
             'max-w-4xl type-page-title text-balance',
@@ -113,7 +113,7 @@ export function SectionHeading({
   return (
     <div className={cn('flex flex-col gap-intro', className)}>
       <div className='flex flex-col items-start gap-eyebrow'>
-        <span className='bp-label bp-chip font-mono'>{label}</span>
+        <span className='bp-label font-mono'>{label}</span>
         <h2 className='max-w-3xl type-section-title text-balance'>{title}</h2>
       </div>
       {intro && <p className='max-w-2xl type-intro text-balance'>{intro}</p>}
