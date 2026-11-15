@@ -96,13 +96,9 @@ export function HeroSection() {
                   style={{ animationDelay: '0.85s' }}
                 >
                   <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-xl lg:gap-grid-1'>
-                    {/* The bold lead on its own line, then the sentence under it. */}
                     {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
-                    <p className='flex flex-col gap-grid-half text-base text-text lg:text-xl'>
-                      <strong className='font-semibold text-balance'>
-                        {HOME_HERO.lead}
-                      </strong>
-                      <span className='text-pretty'>{HOME_HERO.rest}</span>
+                    <p className='text-base text-pretty text-text lg:text-xl'>
+                      {HOME_HERO.sub}
                     </p>
                   </div>
                 </div>

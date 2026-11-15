@@ -6,8 +6,7 @@
  */
 
 export const HOME_HERO = {
-  lead: 'Stop bending your business to fit your software.',
-  rest: 'Our senior engineers build the software your business runs on and keep building on it after launch, for as long as you want. You own the code and the data, with no per-user fees.',
+  sub: 'Our senior engineers build the software your business runs on and keep building on it after launch, for as long as you want. You own the code and the data, with no per-user fees.',
   auditLead: 'Not ready to talk?',
 } as const
 
@@ -23,7 +22,9 @@ export const HOME_PROOF = {
 
 export const SOUND_FAMILIAR = {
   label: 'Sound Familiar?',
-  title: 'Most clients start with one of these.',
+  /** Moved here from the hero (Nov 14) while the hero tries the logos. */
+  title: 'Stop bending your business to fit your software.',
+  intro: 'Most clients start with one of these.',
   groups: [
     {
       name: 'Run your business',

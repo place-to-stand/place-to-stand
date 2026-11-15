@@ -17,6 +17,7 @@ export function SoundFamiliarSection() {
         <SectionHeading
           label={SOUND_FAMILIAR.label}
           title={SOUND_FAMILIAR.title}
+          intro={SOUND_FAMILIAR.intro}
         />
       </Reveal>
       <Reveal index={1}>
