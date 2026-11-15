@@ -27,8 +27,6 @@ const color = {
   text: '#e8e6e3',
   textMuted: '#a8a8ac',
   accent: '#b5f542',
-  // Corner marks: 2px in the faint accent (accent-subtle), as on the site.
-  accentSubtle: 'rgba(181, 245, 66, 0.6)',
   gridDot: '#33343c',
 }
 
@@ -79,7 +77,8 @@ function CornerMark({ top, left }: { top?: boolean; left?: boolean }) {
   const border = {
     width: 2,
     style: 'solid',
-    color: color.accentSubtle,
+    // Solid accent, as the site's corner marks on dark bands.
+    color: color.accent,
   } as const
   if (top) {
     style.top = FRAME

@@ -115,8 +115,8 @@ Lime only appears on light bands as a fill behind dark text: the label marker an
 
 #### Accent lines
 
-Two strengths only: **`accent-subtle`** for borders, focus rings, link underlines and the corner marks (2px), and **`accent`** (strong) for
-active states and highlighted panels. Do not use other opacities (`border-accent/50` etc.).
+Two strengths only: **`accent-subtle`** for borders, focus rings and link underlines, and **`accent`** (strong) for
+active states and highlighted panels. The corner marks (2px) are solid: `accent-line`, lime on dark bands and ink on light ones. Do not use other opacities (`border-accent/50` etc.).
 
 ### Motion
 
@@ -187,22 +187,22 @@ Cards that are links (client photos, stat tiles, blog rows) are not text links: 
 
 ### Logo
 
-`LogoLockup` (`src/components/primitives/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2px), so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
+`LogoLockup` (`src/components/primitives/logo-mark.tsx`) is the mark + name, used in the header (a link home) and footer. The outer square uses the emphasis stroke (2px) in solid `accent`, the same lime as the inner square, so the mark follows the drawing rule. On hover or keyboard focus the outline and the inner square each turn 180° in opposite directions with a small overshoot, always finishing the turn.
 
 ## 3. Boxes
 
 Every box on the site is one of the components in `src/components/boxes`, and each one owns its stroke. Box lines are 1px; 2px is only for selected and focus states. Pages never draw a border themselves: `design/no-raw-border` fails lint outside the boxes, site chrome (header, footer, hero rule, logo), form controls, the audit tool and /design.
 
-| Component              | Stroke                                                             | Fill       | Use for                                                 |
-| ---------------------- | ------------------------------------------------------------------ | ---------- | ------------------------------------------------------- |
-| `Card`                 | 1px `border`                                                       | `bg-card`  | Modules, steps, facets, after-launch, anything compared |
-| `LinkCard`             | 1px `border`; hover changes fill only                              | `bg-card`  | A whole card that is one link (Contact options)         |
-| `StatTile`             | a `Card`                                                           | `bg-card`  | A number and what it counts, everywhere                 |
-| `Callout`              | none; 20px corner marks, 2px in `accent-subtle` (`band` adds dots) | `bg-card`  | The page's one ask, a quote, the newsletter box         |
-| `Panel`                | none                                                               | `bg-panel` | Holds a form or a tool (contact form, audit results)    |
-| `RuledRow`/`RuledList` | 1px top rule in `rule` (accent only for ownership)                 | none       | Lists of rows: steps, FAQ, posts, legal clauses         |
-| `SideNote`             | 2px left bar in `accent-line` (the emphasis stroke)                | none       | A short aside: the billing promise, the proof line      |
-| `Chip`                 | 1px `border`                                                       | none       | Short tags: tools, clients, a rank                      |
+| Component              | Stroke                                                              | Fill       | Use for                                                 |
+| ---------------------- | ------------------------------------------------------------------- | ---------- | ------------------------------------------------------- |
+| `Card`                 | 1px `border`                                                        | `bg-card`  | Modules, steps, facets, after-launch, anything compared |
+| `LinkCard`             | 1px `border`; hover changes fill only                               | `bg-card`  | A whole card that is one link (Contact options)         |
+| `StatTile`             | a `Card`                                                            | `bg-card`  | A number and what it counts, everywhere                 |
+| `Callout`              | none; 20px corner marks, 2px solid `accent-line` (`band` adds dots) | `bg-card`  | The page's one ask, a quote, the newsletter box         |
+| `Panel`                | none                                                                | `bg-panel` | Holds a form or a tool (contact form, audit results)    |
+| `RuledRow`/`RuledList` | 1px top rule in `rule` (accent only for ownership)                  | none       | Lists of rows: steps, FAQ, posts, legal clauses         |
+| `SideNote`             | 2px left bar in `accent-line` (the emphasis stroke)                 | none       | A short aside: the billing promise, the proof line      |
+| `Chip`                 | 1px `border`                                                        | none       | Short tags: tools, clients, a rank                      |
 
 `rule` is one color per tone: `#2a2b30` on dark, `#cbcac4` on light.
 
