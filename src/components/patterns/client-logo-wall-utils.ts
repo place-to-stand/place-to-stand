@@ -1,6 +1,10 @@
 /** Cells in the homepage logo grid at its widest (5×2 from 1280px). */
 export const LOGO_SLOTS = 10
 
+/** The first two cells (Hot Ones and Heatonist, first in src/lib/clients.ts)
+ * never swap out (Jason, Nov 14). */
+export const PINNED_SLOTS = 2
+
 /** Cells showing at each width: three rows of two on phones, then two rows of
  * three from 576px wide, four from 800px and five from 1280px. Must match the grid classes and the
  * `slotVisibility` classes in client-logo-wall.tsx. */
@@ -33,7 +37,10 @@ export function nextSwap(
   total: number,
   lastSlot: number | null,
   held: number | null,
-  random: () => number = Math.random
+  random: () => number = Math.random,
+  /** Leading cells that never swap out (Hot Ones and Heatonist). They
+   *  always show, so they're never picked as the incoming client either. */
+  pinned = PINNED_SLOTS
 ): { slot: number; client: number } {
   const hidden = []
   for (let i = 0; i < total; i++) if (!shown.includes(i)) hidden.push(i)
@@ -42,7 +49,9 @@ export function nextSwap(
   // turn, the one that left the grid longest ago comes back first.
   const client = hidden.sort((a, b) => lastSeen(a) - lastSeen(b))[0]
 
-  const slots = shown.map((_, i) => i).filter(i => i !== lastSlot && i !== held)
+  const slots = shown
+    .map((_, i) => i)
+    .filter(i => i >= pinned && i !== lastSlot && i !== held)
   const slot =
     lastSlot === null && held !== shown.length - 1
       ? shown.length - 1
