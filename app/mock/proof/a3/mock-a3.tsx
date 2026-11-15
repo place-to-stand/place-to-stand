@@ -75,6 +75,49 @@ function Callout({
   )
 }
 
+/** The flip-cards callout runs from a point on the hero back to the
+ *  black/yellow seam, so its label always ends on the black whatever the
+ *  composition's size: its leader is a share of the composition, not px. */
+function SeamCallout({
+  from,
+  to,
+  y,
+  title,
+  detail,
+}: {
+  /** The dot on the hero, and the label's right end, in percent. */
+  from: number
+  to: number
+  y: number
+  title: string
+  detail: string
+}) {
+  const ink = 'rgba(255,255,255,0.92)'
+  return (
+    <div
+      aria-hidden
+      className='pointer-events-none absolute z-30 flex items-center'
+      style={{
+        left: `${to}%`,
+        width: `${from - to}%`,
+        top: `${y}%`,
+        transform: 'translateY(-50%)',
+        color: ink,
+      }}
+    >
+      <span className='absolute right-full flex flex-col items-end gap-0.5 pr-grid-half font-mono text-xs leading-tight tracking-[0.1em] whitespace-nowrap uppercase'>
+        <span className='font-semibold'>{title}</span>
+        <span className='opacity-75'>{detail}</span>
+      </span>
+      <span className='h-px flex-1' style={{ backgroundColor: ink }} />
+      <span
+        className='size-[7px] shrink-0 rounded-full'
+        style={{ backgroundColor: ink, marginRight: -3.5 }}
+      />
+    </div>
+  )
+}
+
 const CALLOUTS = [
   { title: 'Flip cards', detail: 'Tasting notes + heat level' },
   { title: 'Heat filter', detail: '4 levels' },
@@ -129,31 +172,31 @@ export function ProofA3() {
               height: 'min(100cqh, 42.857cqw)',
             }}
           >
-            <TrioCard className='absolute top-[14%] left-[5.4%] w-[13.5%]' />
-            <HeatFilter className='absolute top-[34%] left-[14%] z-10 w-[14.5%]' />
+            <TrioCard className='absolute top-[19.25%] left-[5.4%] w-[13.5%]' />
+            <HeatFilter className='absolute top-[39.25%] left-[14%] z-10 w-[14.5%]' />
             {/* Card #3, leaning left across the seam, under the hero. */}
             <HotOnesCard
               {...BEACH_BONNET}
-              className='absolute top-[34%] left-[48%] z-10 w-[14%] -rotate-[7deg] brightness-[0.94]'
+              className='absolute top-[34%] left-[53%] z-10 w-[14%] -rotate-[7deg] brightness-[0.94]'
             />
             {/* The hero, leaning right, rising out of the panel's top into
                 the space beside the section's copy. */}
             <HotOnesCard
               {...HOUSE_SAUCE}
               autoFlip
-              className='absolute -top-[10%] left-[60%] z-20 w-[22%] rotate-[5deg] xl:-top-[30%]'
+              className='absolute -top-[10%] left-[65%] z-20 w-[22%] rotate-[5deg] xl:-top-[30%]'
             />
-            <Callout x={61} y={14} dir='left' tone='light' {...CALLOUTS[0]} />
+            <SeamCallout from={66} to={56} y={14} {...CALLOUTS[0]} />
             <Callout
               x={28.5}
-              y={44}
+              y={49.25}
               dir='right'
               tone='light'
               {...CALLOUTS[1]}
             />
             <Callout
               x={18.9}
-              y={22}
+              y={27.25}
               dir='right'
               tone='light'
               {...CALLOUTS[2]}
