@@ -110,7 +110,7 @@ export function SoundFamiliarSection() {
             {/* A plain block inset like the chat's own content, so it
                 lines up with the avatars on the left and the messages on
                 the right. */}
-            <div className='flex h-full flex-col gap-grid-half px-grid-1'>
+            <div className='flex h-full flex-col gap-grid-1 px-grid-1'>
               <p className='text-base text-text'>{group.build}</p>
               {/* Lime on the dark band, so it reads as the action. */}
               {/* Pinned to the note's bottom: the notes share a row (or
