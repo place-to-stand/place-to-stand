@@ -95,7 +95,7 @@ export function HeroSection() {
                 >
                   <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-xl lg:gap-grid-1'>
                     {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
-                    <p className='text-base text-pretty text-text lg:text-xl'>
+                    <p className='text-base text-balance text-text lg:text-xl'>
                       {HOME_HERO.sub}
                     </p>
                   </div>
