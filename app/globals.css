@@ -397,7 +397,7 @@ html {
 }
 [data-drawing]
   :is(
-    [stroke-width='1.5'],
+    [stroke-width='1.75'],
     [stroke-width='1.6'],
     [stroke-width='1.8'],
     [stroke-width='2'],
@@ -1094,7 +1094,7 @@ main {
 .bp-label {
   font-family: var(--font-plex-mono);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.125em;
   text-transform: uppercase;
   color: var(--color-accent);
@@ -1107,12 +1107,24 @@ main {
   text-box: trim-both cap alphabetic;
 }
 
+/* The terminal double chevron: an SVG mask filled with the label's own
+   color (lime on dark bands, ink on light), not a text glyph, which sat low
+   against the caps. It is 0.6em tall (a touch under the 0.7em capitals) and
+   raised 0.05em, so it centers on them; its stroke matches the 600
+   letters. Empty content, so nothing extra reaches screen readers. The gap
+   to the text is the old one (6px, after the last letter's spacing). */
 .bp-label::after {
-  content: '\00BB';
+  content: '';
+  display: inline-block;
+  width: 0.53em;
+  height: 0.6em;
   margin-left: 6px;
-  font-size: 14px;
-  letter-spacing: 0;
+  vertical-align: 0.05em;
+  background-color: currentColor;
   opacity: 0.7;
+  -webkit-mask: var(--bp-chevrons) no-repeat center / contain;
+  mask: var(--bp-chevrons) no-repeat center / contain;
+  --bp-chevrons: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 10'%3E%3Cpath d='M1 1.2 4.1 5 1 8.8M4.9 1.2 8 5 4.9 8.8' fill='none' stroke='%23000' stroke-width='1.75' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
 }
 
 /* ─── Blueprint dashed dimension line ─── */
