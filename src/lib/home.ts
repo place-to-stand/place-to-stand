@@ -40,7 +40,7 @@ export const SOUND_FAMILIAR = {
         'I have all this data and still can’t answer one simple question about my business.',
       ],
       build:
-        'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is\u00a0public.',
+        'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves.',
       link: { label: 'Run your business', href: '/platform#run' },
       chat: {
         people: [
