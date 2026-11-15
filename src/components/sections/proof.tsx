@@ -79,11 +79,11 @@ function GridOverlay() {
 
 /** The label column: one shared left edge, centered (by the widest line,
  *  "Know the flavor", 126px) in the black between the filter's right edge
- *  and the small card's leftmost tilted point (measured at 31.49 units) (Jason, Nov
+ *  and the small card's leftmost tilted point (measured at 31.08 units at its -9deg tilt) (Jason, Nov
  *  15). The gap always leaves at least 36px leaders either side, so the
  *  lines never wrap past their set two. */
 const GAP_LEFT = colX(3) - 2 + FILTER_W
-const GAP_RIGHT = 31.49
+const GAP_RIGHT = 31.08
 const LABEL_W = `min(127px, ${GAP_RIGHT - GAP_LEFT} * 100cqw / ${PANEL_W} - 72px)`
 const LABEL_X = `calc(${(GAP_LEFT + GAP_RIGHT) / 2} * 100cqw / ${PANEL_W} - ${LABEL_W} / 2)`
 
@@ -221,7 +221,7 @@ export function ProofSection() {
               <HotOnesCard
                 {...LOS_CALIENTES_ROJO}
                 autoFlip
-                className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
+                className='absolute z-10 origin-bottom -rotate-[9deg] brightness-[0.94]'
                 style={{
                   left: g(colX(8)),
                   width: g(2 * COL + 1),
@@ -234,7 +234,7 @@ export function ProofSection() {
                 // that, where the intro runs wide and the card would cover
                 // its last line. Below 1280 it also sits 1 unit right, so
                 // it clears the small card's HEAT LEVEL slab.
-                className='absolute z-20 rotate-[5deg] [--rise:2] [--shift:1] xl:[--rise:5] xl:[--shift:0]'
+                className='absolute z-20 rotate-[6deg] [--rise:2] [--shift:1] xl:[--rise:5] xl:[--shift:0]'
                 style={{
                   left: `calc(${g(colX(9) + COL / 2)} + var(--shift) * 100cqw / ${PANEL_W})`,
                   width: g(colR(11) - colX(9)),
@@ -258,7 +258,7 @@ export function ProofSection() {
                 {...CALLOUTS[1]}
               />
               <Callout
-                dot={colX(8) + 0.6}
+                dot={colX(8) - 0.42}
                 side='right'
                 y={PANEL_H / 2 + LABEL_STEP}
                 {...CALLOUTS[0]}
