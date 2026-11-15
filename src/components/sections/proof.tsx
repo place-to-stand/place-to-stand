@@ -249,10 +249,11 @@ export function ProofSection() {
                 {...HOUSE_SAUCE}
                 // Rises 5 rows out of the panel from 1280px up; 2 rows below
                 // that, where the intro runs wide and the card would cover
-                // its last line.
-                className='absolute z-20 rotate-[5deg] [--rise:2] xl:[--rise:5]'
+                // its last line. Below 1280 it also sits 1 unit right, so
+                // it clears the small card's HEAT LEVEL slab.
+                className='absolute z-20 rotate-[5deg] [--rise:2] [--shift:1] xl:[--rise:5] xl:[--shift:0]'
                 style={{
-                  left: g(colX(9) + COL / 2),
+                  left: `calc(${g(colX(9) + COL / 2)} + var(--shift) * 100cqw / ${PANEL_W})`,
                   width: g(colR(11) - colX(9)),
                   top: `calc(var(--rise) * -100cqw / ${PANEL_W})`,
                 }}
