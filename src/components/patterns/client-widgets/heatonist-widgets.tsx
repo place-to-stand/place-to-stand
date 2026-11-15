@@ -127,7 +127,8 @@ export function HeatFilter({
               style={{
                 width: u(14),
                 height: u(14),
-                border: `${u(2)} solid #474747`,
+                // 2px at 1440 (Jason, Nov 15), scaling down, never under 1px.
+                border: `max(1px, ${u(2.75)}) solid #474747`,
                 background: '#fff',
                 flexShrink: 0,
               }}

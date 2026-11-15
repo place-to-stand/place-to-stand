@@ -25,7 +25,7 @@ export function ResultsSection() {
             intro={cs.intro}
           />
           <ArrowLink href={cs.path as Route}>
-            Read the Heatonist story
+            Read the Heatonist case study
           </ArrowLink>
         </Reveal>
         <Reveal index={1} className='lg:col-span-6'>
