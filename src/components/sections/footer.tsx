@@ -62,7 +62,7 @@ export async function Footer() {
         <div className='flex flex-col gap-grid-1 sm:col-span-2 lg:col-span-6 xl:col-span-3 xl:pr-grid-1'>
           <LogoLockup className='w-fit' />
           <p className='max-w-sm text-base text-text-muted'>
-            Your engineering team, by the hour. Senior engineers who build
+            Your engineering team, by the hour. Experienced engineers who build
             software you own.
           </p>
           <p className='type-fine'>Austin, TX &middot; Brooklyn, NY</p>
