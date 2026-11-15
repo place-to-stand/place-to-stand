@@ -22,7 +22,8 @@ export type Client = {
   logoNudge?: number
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
-   * color fills (they'd flatten to a blob) opt into a gray version instead. */
+   * color fills (they'd flatten to a blob) opt into 'gray': white by
+   * brightness, so a black outline drops out (#logo-lum, logo-filters.tsx). */
   logoTone?: 'gray'
 }
 
@@ -30,7 +31,7 @@ export type Client = {
  * wherever logos appear, so brand colors never fight the site palette. */
 export function logoToneClass(client: Client): string {
   return client.logoTone === 'gray'
-    ? 'brightness-150 grayscale'
+    ? '[filter:url(#logo-lum)]'
     : 'brightness-0 invert'
 }
 

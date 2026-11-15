@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { LogoFilters } from '@/src/components/primitives/logo-filters'
 import { Suspense, type ReactNode } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
@@ -97,6 +98,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
       >
         <SkipLink />
+        <LogoFilters />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={webSiteJsonLd} />
         <noscript>
