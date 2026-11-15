@@ -17,8 +17,8 @@ export type Client = {
    * up), so the mark's visual center sits on the row's center line. Measured
    * from the file's ink: the shift that would put the ink's center of mass in
    * the middle, taken at 75% so text-heavy marks don't overshoot. A small
-   * superscript, like Hot Ones' "First We Feast presents", otherwise drags the
-   * box up and leaves the heavy part sitting low. */
+   * superscript, like Hot Ones' flame, otherwise drags the box up and leaves
+   * the heavy part sitting low. */
   logoNudge?: number
   /** The logo grid shows every mark as a flat white silhouette so client brand
    * colors don't fight the site palette. Marks whose detail lives in their
@@ -41,15 +41,15 @@ export const clients: Client[] = [
     title: 'Hot Ones',
     href: 'https://hotones.com',
     logo: '/logos/hot-ones.png',
-    logoScale: 0.72,
-    logoNudge: -9,
+    logoScale: 0.68,
+    logoNudge: -5,
     logoTone: 'gray',
   },
   {
     title: 'Heatonist',
     href: 'https://heatonist.com',
     logo: '/logos/heatonist.svg',
-    logoScale: 0.48,
+    logoScale: 0.45,
   },
   {
     title: 'Blake Brown Beauty',
@@ -61,47 +61,47 @@ export const clients: Client[] = [
     title: 'Florence by Mills Beauty',
     href: 'https://florencebymillsbeauty.com',
     logo: '/logos/florence-by-mills-beauty.png',
-    logoScale: 0.62,
+    logoScale: 0.56,
     logoNudge: 8,
   },
   {
     title: 'Betsy & Adam',
     href: 'https://www.betsyandadam.com',
     logo: '/logos/betsy-and-adam.png',
-    logoScale: 0.48,
+    logoScale: 0.42,
   },
   {
     title: 'Xscape Evenings',
     href: 'https://xscapeevenings.com',
     logo: '/logos/xscape-evenings.png',
-    logoScale: 0.43,
+    logoScale: 0.36,
   },
   {
     title: 'Blondie Nites',
     href: 'https://blondienites.com',
     logo: '/logos/blondie-nites.png',
-    logoScale: 0.39,
+    logoScale: 0.34,
     logoNudge: -5,
   },
   {
     title: '9 Point Studios',
     href: 'https://9pointstudios.com',
     logo: '/logos/9-point-studios.svg',
-    logoScale: 0.6,
+    logoScale: 0.64,
     logoNudge: -2,
   },
   {
     title: 'GreenWATT USA',
     href: 'https://www.gtbsolarexchange.com',
     logo: '/logos/greenwatt-usa.png',
-    logoScale: 0.65,
+    logoScale: 0.56,
     logoNudge: 2,
   },
   {
     title: 'Officina del Bere 1397',
     href: 'https://officinadelbere1397.com',
     logo: '/logos/officina-del-bere-1397.png',
-    logoScale: 0.74,
+    logoScale: 0.62,
     logoNudge: 2.5,
   },
   {
@@ -115,26 +115,26 @@ export const clients: Client[] = [
     title: 'Jeremy Turner',
     href: 'https://jeremyturnerstudio.com',
     logo: '/logos/jeremy-turner.svg',
-    logoScale: 0.39,
+    logoScale: 0.35,
     logoNudge: 5,
   },
   {
     title: 'The Good for Nothings Club',
     href: 'https://www.thegoodfornothings.club',
     logo: '/logos/the-good-for-nothings-club.svg',
-    logoScale: 0.68,
+    logoScale: 0.58,
   },
   {
     title: 'Up the Wall',
     href: 'https://upthewall.co',
     logo: '/logos/up-the-wall.svg',
-    logoScale: 0.8,
+    logoScale: 0.66,
   },
   {
     title: 'The Rounds',
     href: 'https://www.theroundsnyc.com',
     logo: '/logos/the-rounds.png',
-    logoScale: 0.36,
+    logoScale: 0.33,
     logoNudge: -6,
   },
   {
