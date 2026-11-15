@@ -4,7 +4,7 @@ import { HOME_HERO } from '@/src/lib/home'
 import { BlueprintCorners } from '@/src/components/boxes/corners'
 import { HeroGraphic } from '@/src/components/patterns/drawings/hero-graphic'
 import { HeroDrawingSlot } from '@/src/components/sections/hero-drawing-slot'
-import { HeroProofLine } from '@/src/components/patterns/hero-proof-line'
+import { CaseStudyCard } from '@/src/components/patterns/case-study-card'
 
 export function HeroSection() {
   return (
@@ -125,10 +125,9 @@ export function HeroSection() {
                       </p>
                     </div>
                   </div>
-                  {/* Proof under the CTA row (it replaces "See our work"):
-                      the Hot Ones and Heatonist marks and a link to the case
-                      study, a separate group 48px down. */}
-                  <HeroProofLine location='hero' className='mt-grid-2' />
+                  {/* The Heatonist case study, under the audit line (it
+                      replaces "See our work"). */}
+                  <CaseStudyCard location='hero' className='mt-grid-1' />
                 </div>
               </div>
             </div>
