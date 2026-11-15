@@ -16,14 +16,14 @@ import { cn } from '@/src/lib/utils'
  * messages are the signals, and under it a side note with what we build
  * for it and one link (Nov 15).
  *
- * Laptops: three columns. The tech-team chat starts at the top right,
- * beside the heading, so that corner isn't empty; the back-office and store
- * chats sit side by side under the heading. The three "What we build" notes
- * are pinned to one bottom line, so they read as a row.
+ * Laptops (from 1280px): the heading across the top, then the three
+ * chats side by side, equal height (subgrid), with the three "What we
+ * build" notes in one row beneath.
  *
- * Phones and tablets: one chat at a time in a sideways scroll-snap row,
- * the next one peeking in, with dot buttons under it (no carousel library;
- * focusing a link in a hidden chat scrolls it into view).
+ * Phones, tablets and small laptops: one chat at a time in a sideways
+ * scroll-snap row, the next one peeking in, with dot buttons under it (no
+ * carousel library; focusing a link in a hidden chat scrolls it into view).
+ * Below 1280 three columns are too narrow for the messages.
  *
  * Tone: dark.
  */
@@ -62,8 +62,8 @@ export function SoundFamiliarSection() {
     })
 
   return (
-    <Section className='flex flex-col gap-stack lg:grid lg:grid-cols-3 lg:gap-x-grid-1 lg:gap-y-grid-2'>
-      <Reveal index={0} className='lg:col-span-2 lg:row-start-1'>
+    <Section className='flex flex-col gap-stack'>
+      <Reveal index={0}>
         <SectionHeading
           label={SOUND_FAMILIAR.label}
           title={SOUND_FAMILIAR.title}
@@ -73,7 +73,7 @@ export function SoundFamiliarSection() {
       <ul
         ref={listRef}
         aria-label='Where you hear it'
-        className='-mx-grid-1 flex snap-x snap-mandatory scroll-px-grid-1 [scrollbar-width:none] gap-grid-1 overflow-x-auto px-grid-1 lg:contents'
+        className='-mx-grid-1 flex snap-x snap-mandatory scroll-px-grid-1 [scrollbar-width:none] gap-grid-1 overflow-x-auto px-grid-1 xl:mx-0 xl:grid xl:grid-cols-3 xl:gap-x-grid-1 xl:gap-y-grid-1 xl:overflow-visible xl:px-0'
       >
         {groups.map((group, i) => (
           <li
@@ -84,20 +84,18 @@ export function SoundFamiliarSection() {
             // Tabbing into a chat that only peeks in brings it fully into
             // view (phones and tablets; on laptops all three are showing).
             onFocus={() => {
-              if (!window.matchMedia('(min-width: 64rem)').matches) show(i)
+              if (!window.matchMedia('(min-width: 80rem)').matches) show(i)
             }}
             className={cn(
-              'flex w-[85%] max-w-md shrink-0 snap-start flex-col gap-grid-1 lg:w-auto lg:max-w-none',
-              // Tech team runs the full height on the right; the other
-              // two sit side by side under the heading.
-              i === 0 && 'lg:col-start-1 lg:row-start-2',
-              i === 1 && 'lg:col-start-2 lg:row-start-2',
-              i === 2 && 'lg:col-start-3 lg:row-span-2 lg:row-start-1'
+              // Laptops: each place spans the list's two rows (chat, note)
+              // as a subgrid, so the three chats share one height and the
+              // three notes one row.
+              'flex w-[85%] max-w-md shrink-0 snap-start flex-col gap-grid-1 xl:row-span-2 xl:grid xl:w-auto xl:max-w-none xl:grid-rows-subgrid'
             )}
           >
             <TeamChat
-              // Every window runs down to the notes row, so the three end
-              // on one line; the messages sit at the bottom, as in a chat.
+              // In the swipe row the windows fill each item, so the notes
+              // line up; on laptops the subgrid does this.
               className='flex-1'
               label={group.name}
               people={group.chat.people}
@@ -110,7 +108,7 @@ export function SoundFamiliarSection() {
               }
               typing={'typing' in group.chat ? group.chat.typing : undefined}
             />
-            <SideNote className='mt-auto flex flex-col gap-grid-half'>
+            <SideNote className='flex flex-col gap-grid-half'>
               <span className='type-fine'>What we build</span>
               <p className='text-base text-text'>{group.build}</p>
               <ArrowLink href={group.link.href as Route}>
@@ -121,7 +119,7 @@ export function SoundFamiliarSection() {
         ))}
       </ul>
       {/* Phones and tablets: which chat is showing, and a way to switch. */}
-      <div className='flex items-center justify-center gap-grid-half lg:hidden'>
+      <div className='flex items-center justify-center gap-grid-half xl:hidden'>
         {groups.map((group, i) => (
           <button
             key={group.name}
