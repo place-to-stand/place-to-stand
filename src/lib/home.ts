@@ -92,7 +92,7 @@ export const SOUND_FAMILIAR = {
         'We built it with AI and now it keeps breaking.',
       ],
       build:
-        'We pick up where others left off, or work beside your developers. When you need advice more than code, that’s technical consulting.',
+        'Engineers who stick around. We pick up where others left off, make AI-built code solid, and work beside your developers.',
       link: { label: 'Engineering help', href: '/platform#senior-help' },
       chat: {
         people: [
