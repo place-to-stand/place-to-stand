@@ -15,17 +15,17 @@ type Look = {
 }
 
 // Site palette for shirts and the tile.
-const TILE = '#2a2b30' // border
+const TILE = '#3a3b40' // border-light: a clear step up from the card (1.5:1)
 const SHIRT = {
   lime: '#b5f542', // accent
   light: '#e8e6e3', // text
   gray: '#6b6d75',
-  slate: '#3a3b40', // border-light
+  slate: '#8a8c93', // line
 }
 
 /** Who looks like what. Sam appears twice and keeps one face. */
 const LOOKS: Record<string, Look> = {
-  Dana: { skin: '#c68a62', hair: '#3b2a20', style: 'long', shirt: SHIRT.lime },
+  Dana: { skin: '#c68a62', hair: '#24170f', style: 'long', shirt: SHIRT.lime },
   Marcus: {
     skin: '#6b4430',
     hair: '#121212',
@@ -45,7 +45,7 @@ const LOOKS: Record<string, Look> = {
     style: 'short',
     shirt: SHIRT.slate,
   },
-  Sam: { skin: '#b07d55', hair: '#5a3b26', style: 'swept', shirt: SHIRT.lime },
+  Sam: { skin: '#b07d55', hair: '#7a5232', style: 'swept', shirt: SHIRT.lime },
   Jordan: {
     skin: '#4f3020',
     hair: '#101010',
