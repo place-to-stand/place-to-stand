@@ -44,6 +44,7 @@ export const DESIGN_SECTION_GROUPS = [
       { id: 'grouped-rows', label: 'Grouped ruled rows' },
       { id: 'media', label: 'FAQ, logos, media' },
       { id: 'pieces', label: 'Lifted-out UI pieces' },
+      { id: 'chat', label: 'Team chat' },
       { id: 'split', label: 'Split section (proposed)' },
     ],
   },

@@ -36,6 +36,7 @@ import Image from 'next/image'
 import { DesignIndex } from './_components/design-index'
 import { DesignGroup, DesignSection, Specimen } from './_components/specimen'
 import { SplitSection } from '@/src/components/patterns/split-section'
+import { TeamChat } from '@/src/components/patterns/team-chat'
 import {
   Callout,
   Card,
@@ -633,11 +634,55 @@ export default function DesignPage() {
           </DesignSection>
 
           <DesignSection
+            id='chat'
+            label='Patterns'
+            title='Team chat'
+            when='A short team chat in our own plain chat UI, for showing what people say at work (Home’s warning signs). Room and head count on top, then messages with initials, name, role and time; reactions, replies, a New divider and a typing line are optional. Messages appear one by one on first view.'
+          >
+            <Specimen
+              names={['TeamChat', 'SideNote']}
+              note='the fix sits under it'
+            >
+              <div className='flex max-w-md flex-col gap-grid-1'>
+                <TeamChat
+                  label='In your store'
+                  room='store'
+                  people={[
+                    { name: 'Priya', role: 'Marketing' },
+                    { name: 'Leo', role: 'Support' },
+                  ]}
+                  messages={[
+                    {
+                      by: 0,
+                      time: '2:03 PM',
+                      text: 'Our Shopify store can’t do the thing we need.',
+                      reactions: [['👀', 4]],
+                    },
+                    {
+                      by: 1,
+                      time: '2:05 PM',
+                      text: 'Orders come in by DM, text and phone, and we lose track of them.',
+                    },
+                  ]}
+                  newBefore={1}
+                  typing={0}
+                />
+                <SideNote className='flex flex-col gap-grid-half'>
+                  <span className='type-fine'>What we build</span>
+                  <p className='text-base text-text'>
+                    Custom stores and marketplaces, on Shopify when it fits.
+                  </p>
+                </SideNote>
+              </div>
+            </Specimen>
+          </DesignSection>
+
+          <DesignSection
             id='split'
             label='Patterns'
             title='Split section'
             proposed
-            when='One statement held still on the left, a long run of content on the right: columns 1-5 and 7-12, with column 6 as air. Below lg the two stack and nothing sticks. On /mock/signals as option F; not on any live page yet.'
+            when='One statement held still on the left, a long run of content on the right: columns 1-5 and 7-12, with column 6 as air. Below lg the two stack and nothing sticks. Not used on any page yet.'
           >
             <Specimen
               names={['SplitSection', 'type-voice']}

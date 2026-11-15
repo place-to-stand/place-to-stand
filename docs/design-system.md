@@ -79,7 +79,7 @@ role; add only layout classes (margins, max-width, `text-balance`, `uppercase`).
 
 The home hero headline is the one exception: it is sized to the window.
 
-`type-voice` (proposed, Nov 15, on `/mock/signals` only): things people say, set apart from both body text and
+`type-voice` (proposed Nov 15, not yet used on any page; shown on /design): things people say, set apart from both body text and
 headings. Plex Sans Light, balanced lines, and a `-0.4em` first-line indent so the opening “ hangs in the margin
 and the words line up with the label above. Lead each block with “. Keep it one level below the section title and
 above everything else in its section; don't pair it with bold item titles or boxes.
@@ -234,7 +234,12 @@ Other patterns:
   (`heatonist.tsx`, `platform.tsx`, `portal.tsx`): plain HTML made of site tokens, sample data only, no links,
   buttons or headings inside.
 - **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
-- **`SplitSection`** (`patterns/split-section.tsx`, proposed Nov 15, on `/mock/signals` only): the asymmetric
+- **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or
+  name): a header with the room and how many people are in it, then messages with an initials avatar, name, role,
+  time, and optional reactions and replies; a "New" divider above one message and a typing line at the end are
+  optional. Messages appear one by one on first view; reduced motion shows them at once. Used by Home's warning
+  signs, one chat per place, with the fix under each in a `SideNote`.
+- **`SplitSection`** (`patterns/split-section.tsx`, proposed Nov 15, not yet used on any page; shown on /design): the asymmetric
   split. The aside (usually a `SectionHeading`) takes columns 1-5 and sticks under the nav; the content takes columns
   7-12, with column 6 left as air (at 1440: 546px, a 138px gap, 636px). Below `lg` they stack and nothing sticks.
   Use it for one statement plus a long run of content, not for equal pieces (a grid of `Card`s).
