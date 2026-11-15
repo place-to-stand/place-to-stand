@@ -115,11 +115,13 @@ export function HotOnesCard({
           touched.current = true
           setFlipped(f => !f)
         }}
-        className='group block aspect-[266/405] w-full cursor-pointer [perspective:1400px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white'
+        className='block aspect-[266/405] w-full cursor-pointer transition-transform duration-(--hover-dur) ease-(--hover-ease) [perspective:1400px] hover:-translate-y-[2%] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white motion-reduce:transition-none'
         style={{ '--ho-u': 'calc(100cqw / 266)' } as CSSProperties}
       >
         <span
-          className={`relative block size-full transition-transform duration-[800ms] ease-(--ease-enter) [transform-style:preserve-3d] group-hover:-translate-y-[2%] motion-reduce:transition-none ${flipped ? '[transform:rotateY(180deg)]' : ''} ${flipped ? 'group-hover:[transform:rotateY(180deg)_translateY(-2%)]' : ''}`}
+          // Only the turn lives here; the hover lift is on the button, so it
+          // is the same on either face.
+          className={`relative block size-full transition-transform duration-[800ms] ease-(--ease-enter) [transform-style:preserve-3d] motion-reduce:transition-none ${flipped ? '[transform:rotateY(180deg)]' : ''}`}
         >
           {/* Front */}
           <span
