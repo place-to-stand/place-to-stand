@@ -65,7 +65,7 @@ const SHADOW_LOW = 'shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.6)]'
 const SHADOW_MID = 'shadow-[14px_22px_40px_-12px_rgba(0,0,0,0.6)]'
 
 /** A Heatonist piece as an object, not a screenshot: heatonist.com's 8px
- *  card radius, its red-to-orange top rule (the line across the top of
+ *  card radius, its red top rule (from the line across the top of
  *  their site), a hairline edge and the shared shadow. */
 function HeatonistPiece({
   src,
@@ -82,10 +82,7 @@ function HeatonistPiece({
     <div
       className={`absolute overflow-hidden rounded-lg border border-black/10 bg-white ${shadow} ${className}`}
     >
-      <div
-        className='h-[3px]'
-        style={{ backgroundImage: 'linear-gradient(90deg, #ce2a39, #f7941d)' }}
-      />
+      <div className='h-[3px]' style={{ backgroundColor: '#ce2a39' }} />
       <img src={src} alt={alt} className='block h-auto w-full' />
     </div>
   )
