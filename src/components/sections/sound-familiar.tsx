@@ -8,7 +8,7 @@ import { SOUND_FAMILIAR } from '@/src/lib/home'
 /**
  * Home's "Sound familiar?": three groups of things clients say, in their own
  * words, each closed by what we build for it and where to read more.
- * Tone: light.
+ * Tone: dark (Nov 14).
  */
 export function SoundFamiliarSection() {
   return (
@@ -63,4 +63,4 @@ export function SoundFamiliarSection() {
     </Section>
   )
 }
-SoundFamiliarSection.tone = 'light' as const
+SoundFamiliarSection.tone = 'dark' as const

@@ -9,7 +9,7 @@ import { BILLING, STEPS } from '@/src/lib/offers'
  * - cards: a grid of step cards, optionally with the billing promise and a
  *   link to Process (Home, /design).
  * - rows: one ruled row per step with its full detail (Process).
- * Tone: light.
+ * Tone: light on Process, dark on Home (Nov 14).
  */
 export function StepsSection({
   variant = 'cards',
@@ -27,6 +27,7 @@ export function StepsSection({
     <StepsCards showLink={showLink} showBilling={showBilling} />
   )
 }
+/** Light on Process; dark on Home (Nov 14). */
 StepsSection.tone = 'light' as const
 
 function StepsCards({

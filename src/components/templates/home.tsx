@@ -8,30 +8,33 @@ import { OwnershipSection } from '@/src/components/sections/ownership'
 import { Band } from '@/src/components/patterns/section'
 import { CtaBand } from '@/src/components/sections/cta-band'
 
-/** The Home page (approved Nov 13): hero, logos and proof, then light and
- *  dark bands of sections and the closing band. */
+/** The Home page: hero and logos on dark, then alternating light and dark
+ *  bands from the proof on (Nov 14), and the closing band. */
 export function HomeTemplate() {
   return (
     <main id='main' className='flex-1'>
       <Hero variant='home' />
-      {/* The logos and the Heatonist proof share the dark under the hero,
-          then the bands alternate: light for reading sections, dark for the
-          founders and ownership. Bands pad themselves by the section role,
-          so content-to-content spacing is the same everywhere. */}
+      {/* The logos stay on the hero's dark, then the bands alternate from
+          the proof on (Jason, Nov 14: no three dark sections in a row):
+          light, dark, light, dark, light, and the dark closing band. Bands
+          pad themselves by the section role, so content-to-content spacing
+          is the same everywhere. */}
       <Band tone='dark' className='pt-edge'>
         <ClientLogosSection />
+      </Band>
+      <Band tone='light'>
         <ProofSection />
       </Band>
-      <Band tone='light'>
+      <Band tone='dark'>
         <SoundFamiliarSection />
       </Band>
-      <Band tone='dark'>
+      <Band tone='light'>
         <WhoYouWorkWithSection />
       </Band>
-      <Band tone='light'>
+      <Band tone='dark'>
         <StepsSection showBilling />
       </Band>
-      <Band tone='dark'>
+      <Band tone='light'>
         <OwnershipSection variant='short' />
       </Band>
       <CtaBand location='home-cta-block' />

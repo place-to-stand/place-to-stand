@@ -63,4 +63,5 @@ export function OwnershipSection({
     </Section>
   )
 }
+/** Dark on the offer pages; light on Home (Nov 14). */
 OwnershipSection.tone = 'dark' as const

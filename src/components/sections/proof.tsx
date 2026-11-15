@@ -13,7 +13,7 @@ import { HOME_PROOF } from '@/src/lib/home'
  * Hot Ones lineup. The
  * columns follow the two crops' proportions, so both stages are the same
  * height. Captured at 2x from heatonist.com and hotones.com (Nov 14).
- * Tone: dark.
+ * Tone: light (Nov 14).
  */
 export function ProofSection() {
   return (
@@ -70,4 +70,4 @@ export function ProofSection() {
     </Section>
   )
 }
-ProofSection.tone = 'dark' as const
+ProofSection.tone = 'light' as const
