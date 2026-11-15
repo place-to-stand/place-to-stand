@@ -9,7 +9,8 @@ import { HOME_PROOF } from '@/src/lib/home'
 /**
  * Home's proof: the Heatonist and Hot Ones work (#results, the hero's "See
  * our work"). The copy and links, then two real crops of the live stores side
- * by side from laptop up: the Heatonist cart and the Hot Ones lineup. The
+ * by side from laptop up: Heatonist's search and filters (our build) and the
+ * Hot Ones lineup. The
  * columns follow the two crops' proportions, so both stages are the same
  * height. Captured at 2x from heatonist.com and hotones.com (Nov 14).
  * Tone: dark.
@@ -34,20 +35,20 @@ export function ProofSection() {
           ))}
         </div>
       </Reveal>
-      <Reveal index={1} className='grid gap-grid-1 lg:grid-cols-[1.2fr_1.93fr]'>
+      <Reveal index={1} className='grid gap-grid-1 lg:grid-cols-[1.8fr_1.93fr]'>
         <UiPiece
           screenshot
           compact
           width='full'
-          alt='The Heatonist cart: Hot Ones House Sauce in the cart, a bar counting down to free shipping, and the Join the Club offer.'
-          caption='Cart · heatonist.com'
+          alt='A Heatonist collection page: the filter panel (heat from Mild to Hottest, then type, diet, fruit, garlic and more) beside Hot Ones packs with their prices.'
+          caption='Search and filters · heatonist.com'
         >
           <Image
-            src='/work/heatonist-cart-drawer.webp'
+            src='/work/heatonist-filters.webp'
             alt=''
-            width={1000}
-            height={836}
-            sizes='(min-width: 1440px) 460px, (min-width: 1024px) 34vw, (min-width: 768px) 90vw, 75vw'
+            width={1600}
+            height={890}
+            sizes='(min-width: 1440px) 640px, (min-width: 1024px) 47vw, (min-width: 768px) 90vw, 75vw'
           />
         </UiPiece>
         <UiPiece
@@ -62,7 +63,7 @@ export function ProofSection() {
             alt=''
             width={1600}
             height={828}
-            sizes='(min-width: 1440px) 820px, (min-width: 1024px) 60vw, (min-width: 768px) 90vw, 75vw'
+            sizes='(min-width: 1440px) 680px, (min-width: 1024px) 50vw, (min-width: 768px) 90vw, 75vw'
           />
         </UiPiece>
       </Reveal>

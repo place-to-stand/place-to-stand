@@ -2,11 +2,11 @@ import { UiPiece } from '@/src/components/patterns/ui-piece'
 import { cn } from '@/src/lib/utils'
 
 /**
- * Four pieces of the Heatonist and Hot Ones stores, lifted out for UiPiece
- * (Home proof, the case study): a product card, the cart with its checkout
- * rules, the Hot Ones lineup and a strip of the change log. Facts come from
- * the approved case study (src/lib/case-study-heatonist.ts); no prices,
- * order counts or traffic.
+ * Three pieces of the Heatonist and Hot Ones stores, lifted out for UiPiece
+ * (the case study, Clients, /design): a product card, the Hot Ones lineup and
+ * a strip of the change log. No cart: Heatonist's cart is a third-party app
+ * (Rebuy), not our work. Facts come from the approved case study
+ * (src/lib/case-study-heatonist.ts); no prices, order counts or traffic.
  *
  * Bottles are drawn as line work, the site's drawing language, not photos.
  */
@@ -83,56 +83,6 @@ export function ProductCardPiece({ className, compact }: PieceProps) {
           </span>
           <span className='mt-grid-half bg-accent py-grid-half text-center font-mono text-xs tracking-[0.1em] text-text uppercase'>
             Add to cart
-          </span>
-        </div>
-      </div>
-    </UiPiece>
-  )
-}
-
-const CART = [
-  { name: 'Hot Ones Season 31 Lineup', note: '10 sauces', qty: 1 },
-  { name: 'The Last Dab: Apollo', note: 'Limit 2 during Heat Week', qty: 2 },
-]
-
-export function CartPiece({ className, compact }: PieceProps) {
-  return (
-    <UiPiece
-      alt='The Heatonist cart: two items, a Heat Week purchase limit enforced by our checkout rule, and a Checkout button.'
-      caption='Cart and checkout rules · heatonist.com'
-      width='md'
-      compact={compact}
-      className={className}
-    >
-      <div className='flex flex-col'>
-        <div className='flex items-center justify-between border-b border-border px-grid-1 py-grid-half'>
-          <span className='type-fine'>Your cart</span>
-          <span className='type-fine'>3 items</span>
-        </div>
-        <ul className='flex flex-col'>
-          {CART.map(item => (
-            <li
-              key={item.name}
-              className='flex items-center gap-grid-half border-b border-border px-grid-1 py-grid-half'
-            >
-              <Bottle className='h-12 w-auto shrink-0' />
-              <span className='flex min-w-0 flex-1 flex-col'>
-                <span className='text-sm font-semibold'>{item.name}</span>
-                <span className='text-sm text-text-muted'>{item.note}</span>
-              </span>
-              <span className='border border-border px-2 font-mono text-xs'>
-                {item.qty}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <div className='flex flex-col gap-grid-half p-grid-1'>
-          <span className='flex items-center gap-2 bg-accent-muted px-grid-half py-2 text-sm'>
-            <span className='size-2 shrink-0 bg-text' />
-            Heat Week: 2 per order on limited sauces
-          </span>
-          <span className='bg-text py-grid-half text-center font-mono text-xs tracking-[0.1em] text-bg uppercase'>
-            Checkout
           </span>
         </div>
       </div>

@@ -28,7 +28,7 @@ import { ClientsSection } from '@/src/components/sections/clients-section'
 import { FAQ } from '@/src/lib/offers'
 import { team } from '@/src/lib/team'
 import {
-  CartPiece,
+  ChangeLogPiece,
   ProductCardPiece,
 } from '@/src/components/patterns/pieces/heatonist'
 import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
@@ -612,7 +612,7 @@ export default function DesignPage() {
             >
               <div className='grid gap-grid-1 md:grid-cols-2'>
                 <ProductCardPiece />
-                <CartPiece />
+                <ChangeLogPiece />
               </div>
             </Specimen>
           </DesignSection>

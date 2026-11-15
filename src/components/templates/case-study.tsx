@@ -2,7 +2,6 @@ import { Reveal } from '@/src/components/primitives/animated-section'
 import { Section } from '@/src/components/patterns/section'
 import { Callout, Card, RuledRow } from '@/src/components/boxes'
 import {
-  CartPiece,
   ChangeLogPiece,
   LineupPiece,
   ProductCardPiece,
@@ -155,15 +154,14 @@ export function CaseStudyTemplate() {
           </div>
         </Section>
 
-        {/* Beyond Shopify, beside the cart and its checkout rules */}
+        {/* Beyond Shopify: the four custom builds */}
         <Section className='flex flex-col gap-stack'>
           <div className='flex flex-col gap-intro'>
             <SpecRow label='Custom builds' title='Beyond what Shopify offers' />
             <p className='type-intro'>{cs.beyondShopifyIntro}</p>
           </div>
-          <div className='grid gap-stack lg:grid-cols-12 lg:gap-x-grid-1'>
-            <CartPiece className='lg:col-span-5' />
-            <ul className='grid gap-grid-1 md:grid-cols-2 lg:col-span-7'>
+          <div>
+            <ul className='grid gap-grid-1 md:grid-cols-2 lg:grid-cols-4'>
               {cs.beyondShopify.map(item => (
                 <Card
                   as='li'
