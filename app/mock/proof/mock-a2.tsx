@@ -64,6 +64,33 @@ function Callout({
 const SHADOW_LOW = 'shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.6)]'
 const SHADOW_MID = 'shadow-[14px_22px_40px_-12px_rgba(0,0,0,0.6)]'
 
+/** A Heatonist piece as an object, not a screenshot: heatonist.com's 8px
+ *  card radius, its red-to-orange top rule (the line across the top of
+ *  their site), a hairline edge and the shared shadow. */
+function HeatonistPiece({
+  src,
+  alt,
+  className,
+  shadow,
+}: {
+  src: string
+  alt: string
+  className: string
+  shadow: string
+}) {
+  return (
+    <div
+      className={`absolute overflow-hidden rounded-lg border border-black/10 bg-white ${shadow} ${className}`}
+    >
+      <div
+        className='h-[3px]'
+        style={{ backgroundImage: 'linear-gradient(90deg, #ce2a39, #f7941d)' }}
+      />
+      <img src={src} alt={alt} className='block h-auto w-full' />
+    </div>
+  )
+}
+
 const CALLOUTS = {
   flip: { title: 'Flip cards', detail: 'Tasting notes + heat level' },
   heat: { title: 'Heat filter', detail: '4 levels' },
@@ -96,17 +123,26 @@ export function MockA2() {
             className='absolute top-[9%] left-[5%] w-[38%] opacity-95'
           />
           {/* Secondary: the Trio Pack card, the Heat filter over its edge. */}
-          <img
+          <HeatonistPiece
             src='/mock/trio-card.webp'
             alt='Heatonist product card: Hot Ones Hot Sauce Trio Pack, Season 31, $40.'
-            className={`absolute top-[27%] left-[15%] w-[14.5%] bg-white ${SHADOW_LOW}`}
+            className='top-[27%] left-[15%] w-[14.5%]'
+            shadow={SHADOW_LOW}
           />
-          <img
+          <HeatonistPiece
             src='/mock/heat-filter.webp'
             alt='Heatonist filter: Heat, from Mild to Hottest.'
-            className={`absolute top-[54%] left-[25.5%] z-10 w-[15%] bg-white ${SHADOW_MID}`}
+            className='top-[54%] left-[25.5%] z-10 w-[15%]'
+            shadow={SHADOW_MID}
           />
           {/* Hero: card #2 across the black/yellow seam, out of the top. */}
+          {/* Card #3 tucked behind, lower right: smaller, deeper, a
+              touch dimmer, so the hero stays the hero. */}
+          <img
+            src='/mock/card3-front.webp'
+            alt='Hot Ones lineup card #3: Double Comfort Beach Bonnet.'
+            className='absolute top-[48%] left-[67%] z-10 w-[15%] rotate-[7deg] rounded-[5%/3.3%] shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.45)] brightness-[0.9]'
+          />
           <div className='absolute -top-[9%] left-[47%] z-20 w-[25%] -rotate-[4deg]'>
             <FlipCard />
           </div>
@@ -173,12 +209,12 @@ export function MockA2() {
           <img
             src='/mock/trio-card.webp'
             alt=''
-            className={`w-[44%] border border-border bg-white`}
+            className={`w-[44%] rounded-lg border border-black/10 bg-white shadow-[6px_10px_20px_-8px_rgba(0,0,0,0.35)]`}
           />
           <img
             src='/mock/heat-filter.webp'
             alt=''
-            className={`mt-grid-2 w-[44%] border border-border bg-white`}
+            className={`mt-grid-2 w-[44%] rounded-lg border border-black/10 bg-white shadow-[6px_10px_20px_-8px_rgba(0,0,0,0.35)]`}
           />
         </div>
       </div>
