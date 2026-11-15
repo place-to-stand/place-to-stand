@@ -1447,44 +1447,58 @@ main {
   }
 }
 
-/* Outline (secondary) buttons: on hover or keyboard focus, accent-line
-   strokes draw along the top and bottom edges at once, left to right, over
-   the faint resting border (approved Nov 14). */
+/* Outline (secondary) buttons: on hover or keyboard focus an accent-line
+   stroke draws around the button, left to right like the primary button's
+   fill and the links' bar (approved Nov 14): the left side grows from its
+   middle out, the top and bottom edges run left to right together, then the
+   right side closes from both ends to the middle. One registered property,
+   --draw, runs 0 to 1 over the primary's duration and easing; each stroke
+   takes its own slice, sized for a typical 240x48 button (each half side
+   ~8%, the long edges ~84%) so the line moves at an even speed. The strokes
+   are five solid fills on one layer over the faint resting border. */
+@property --draw {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
 .btn-draw {
   position: relative;
-  transition: color var(--link-dur) var(--hover-ease);
+  --draw: 0;
+  --side: clamp(0, var(--draw) / 0.0833, 1);
+  --edge: clamp(0, (var(--draw) - 0.0833) / 0.8334, 1);
+  --close: clamp(0, (var(--draw) - 0.9167) / 0.0833, 1);
+  transition:
+    --draw var(--hover-dur) var(--hover-ease),
+    color var(--link-dur) var(--hover-ease);
 }
-/* Same direction, duration and easing as the primary button's fill and the
-   links' bar. */
-.btn-draw::before,
-.btn-draw::after {
-  content: '';
-  position: absolute;
-  left: -1px;
-  right: -1px;
-  height: 2px;
-  background: var(--color-accent-line);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--hover-dur) var(--hover-ease);
-  pointer-events: none;
+.btn-draw:hover,
+.btn-draw:focus-visible {
+  --draw: 1;
 }
 .btn-draw::before {
-  top: -1px;
-}
-.btn-draw::after {
-  bottom: -1px;
-}
-.btn-draw:hover::before,
-.btn-draw:hover::after,
-.btn-draw:focus-visible::before,
-.btn-draw:focus-visible::after {
-  transform: scaleX(1);
+  content: '';
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  --line: linear-gradient(var(--color-accent-line), var(--color-accent-line));
+  background-image:
+    var(--line), var(--line), var(--line), var(--line), var(--line);
+  background-repeat: no-repeat;
+  background-position:
+    0 50%,
+    0 0,
+    0 100%,
+    100% 0,
+    100% 100%;
+  background-size:
+    2px calc(var(--side) * 100%),
+    calc(var(--edge) * 100%) 2px,
+    calc(var(--edge) * 100%) 2px,
+    2px calc(var(--close) * 50%),
+    2px calc(var(--close) * 50%);
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn-draw,
-  .btn-draw::before,
-  .btn-draw::after {
+  .btn-draw {
     transition: none;
   }
 }
