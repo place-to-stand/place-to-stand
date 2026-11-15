@@ -27,13 +27,13 @@ const BEACH_BONNET = {
 }
 
 /**
- * The laptop composition's grid (Nov 15). The panel is 56 x 16 units, one
+ * The laptop composition's grid (Nov 15). The panel is 56 x 19 units, one
  * unit (g) being 24px at the 1344px content width and scaling with the
  * panel (container units). Inside: a 2g margin on all four sides and 12
  * columns with 1g gutters. Every piece and label sits on these lines.
  */
 const PANEL_W = 56
-const PANEL_H = 16
+const PANEL_H = 19
 const MARGIN = 2
 const COL = (PANEL_W - 2 * MARGIN - 11) / 12
 const g = (n: number) => `calc(${n} * 100cqw / ${PANEL_W})`
@@ -179,12 +179,12 @@ export function ProofA3() {
         title={HOME_PROOF.title}
         intro={HOME_PROOF.body}
       />
-      <figure className={`flex flex-col gap-grid-half ${CLIENT_FONTS}`}>
+      <figure className={`flex flex-col ${CLIENT_FONTS}`}>
         {/* Laptops: the composition on its grid (see PANEL_W). The panel's
-            height is its own 56:16 shape: 384px at the 1344px content
+            height is its own 56:19 shape: 456px at the 1344px content
             width. */}
         <div
-          className='[container-type:inline-size] relative hidden aspect-[56/16] lg:block'
+          className='[container-type:inline-size] relative hidden aspect-[56/19] lg:block'
           style={{
             backgroundColor: HO_BLACK,
             // Let the hero rise out of the top; clip the sides.
@@ -206,21 +206,19 @@ export function ProofA3() {
               margin; the filter in columns 2-3 over the right half of its
               photo, one row down, clear of its text. */}
           <TrioCard
-            fill
             className='absolute'
             style={{
               left: g(colX(1)),
               width: g(colR(2) - colX(1)),
               top: g(MARGIN),
-              height: g(PANEL_H - 2 * MARGIN),
             }}
           />
           <HeatFilter
             className='absolute z-10'
             style={{
-              left: g(colX(2)),
+              left: g(colX(3) - 2),
               width: g(FILTER_W),
-              top: g(MARGIN + 1),
+              top: g(MARGIN + 3),
             }}
           />
           {/* Hot Ones: #3 across the seam (columns 8-9), its bottom on the
@@ -229,8 +227,8 @@ export function ProofA3() {
             {...BEACH_BONNET}
             className='absolute z-10 origin-bottom -rotate-[7deg] brightness-[0.94]'
             style={{
-              left: g(colX(8)),
-              width: g(colR(9) - colX(8)),
+              left: g(colX(8) - COL / 2),
+              width: g(2 * COL + 1),
               bottom: g(MARGIN),
             }}
           />
@@ -239,8 +237,8 @@ export function ProofA3() {
             autoFlip
             className='absolute z-20 rotate-[5deg]'
             style={{
-              left: g(colX(10)),
-              width: g(colR(12) - colX(10)),
+              left: g(colX(9)),
+              width: g(colR(11) - colX(9)),
               top: g(-4),
             }}
           />
@@ -257,17 +255,42 @@ export function ProofA3() {
             {...CALLOUTS[2]}
           />
           <GridCallout
-            from={colX(2) + FILTER_W}
+            from={colX(3) - 2 + FILTER_W}
             to={colX(5)}
-            y={MARGIN + 4}
+            y={MARGIN + 6.5}
             {...CALLOUTS[1]}
           />
           <LabelThenLeader
             at={colX(5)}
-            to={colX(8) + 0.6}
-            y={MARGIN + 10.5}
+            to={colX(8) - COL / 2 + 0.6}
+            y={MARGIN + 12}
             {...CALLOUTS[0]}
           />
+          {/* Site credits on the margin, one per half. */}
+          <span
+            aria-hidden
+            className='absolute font-mono text-xs tracking-[0.1em] uppercase'
+            style={{
+              color: 'rgba(255,255,255,0.72)',
+              left: g(MARGIN),
+              bottom: g(MARGIN / 2),
+              transform: 'translateY(50%)',
+            }}
+          >
+            Heatonist.com
+          </span>
+          <span
+            aria-hidden
+            className='absolute font-mono text-xs tracking-[0.1em] uppercase'
+            style={{
+              color: 'rgba(14,15,17,0.78)',
+              right: g(MARGIN),
+              bottom: g(MARGIN / 2),
+              transform: 'translateY(50%)',
+            }}
+          >
+            Hotones.com
+          </span>
           <GridOverlay />
         </div>
 
@@ -288,6 +311,13 @@ export function ProofA3() {
                 autoFlip
                 className='w-[58%] max-w-[18rem] rotate-[3deg]'
               />
+              <span
+                aria-hidden
+                className='self-end font-mono text-xs tracking-[0.1em] uppercase'
+                style={{ color: 'rgba(14,15,17,0.78)' }}
+              >
+                Hotones.com
+              </span>
             </div>
           </div>
           <ul className='flex flex-col border-x border-b border-border bg-bg-card'>
@@ -303,14 +333,19 @@ export function ProofA3() {
               </li>
             ))}
           </ul>
-          <div className='flex items-start justify-center gap-grid-1 border-x border-b border-border bg-bg-card p-grid-1'>
-            <TrioCard className='w-[44%] max-w-[15rem]' />
-            <HeatFilter className='mt-grid-2 w-[44%] max-w-[15rem]' />
+          <div className='flex flex-col gap-grid-1 border-x border-b border-border bg-bg-card p-grid-1'>
+            <div className='flex items-start justify-center gap-grid-1'>
+              <TrioCard className='w-[44%] max-w-[15rem]' />
+              <HeatFilter className='mt-grid-2 w-[44%] max-w-[15rem]' />
+            </div>
+            <span
+              aria-hidden
+              className='font-mono text-xs tracking-[0.1em] text-text-muted uppercase'
+            >
+              Heatonist.com
+            </span>
           </div>
         </div>
-        <figcaption className='type-fine'>
-          Heatonist.com · Hotones.com
-        </figcaption>
       </figure>
       <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
         {HOME_PROOF.links.map(link => (

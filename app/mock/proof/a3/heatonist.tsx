@@ -145,7 +145,7 @@ export function TrioCard({
               }
             : {}),
           position: 'relative',
-          padding: `${u(16)} ${u(16)} ${u(4)}`,
+          padding: `${u(16)} ${u(16)} 0`,
           fontFamily: 'var(--font-open-sans)',
         }}
       >
@@ -184,7 +184,7 @@ export function TrioCard({
         </span>
         <div
           style={{
-            padding: `${u(12)} ${u(10)} ${u(14)}`,
+            padding: `${u(10)} ${u(10)} ${u(12)}`,
             textAlign: 'center',
           }}
         >
