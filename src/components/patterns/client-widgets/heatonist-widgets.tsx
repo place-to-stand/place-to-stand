@@ -18,11 +18,14 @@ function Shell({
   style,
   children,
   fill = false,
+  shadow = '10px 16px 32px -10px rgba(0,0,0,0.6)',
 }: {
   /** The piece's width on heatonist.com, in px. */
   base: number
   /** Take the outer box's height (set by the composition). */
   fill?: boolean
+  /** The piece's box-shadow (the composition's by default). */
+  shadow?: string
   className?: string
   style?: CSSProperties
   children: React.ReactNode
@@ -30,8 +33,13 @@ function Shell({
   return (
     <div className={`@container ${className ?? ''}`} style={style}>
       <div
-        className={`overflow-hidden rounded-[3.2cqw] border border-black/10 bg-white shadow-[10px_16px_32px_-10px_rgba(0,0,0,0.6)] ${fill ? 'flex h-full flex-col' : ''}`}
-        style={{ '--ht-u': `calc(100cqw / ${base})` } as CSSProperties}
+        className={`overflow-hidden rounded-[3.2cqw] border border-black/10 bg-white ${fill ? 'flex h-full flex-col' : ''}`}
+        style={
+          {
+            '--ht-u': `calc(100cqw / ${base})`,
+            boxShadow: shadow,
+          } as CSSProperties
+        }
       >
         {/* Was a red top rule (removed Nov 15); the space stays so heights
             and the callout dots don't move. */}
@@ -41,6 +49,9 @@ function Shell({
     </div>
   )
 }
+
+const FILTER_SHADOW =
+  '0 1cqw 3cqw rgba(0,0,0,0.18), -5cqw 6cqw 16cqw -2cqw rgba(0,0,0,0.4)'
 
 const LEVELS = [
   ['Mild', 15],
@@ -57,7 +68,15 @@ export function HeatFilter({
   style?: CSSProperties
 }) {
   return (
-    <Shell base={254} className={className} style={style}>
+    <Shell
+      base={254}
+      className={className}
+      style={style}
+      // It overlaps the 10 Pack card, white on white, so it lifts more: a
+      // tight contact shadow plus a large soft one cast left onto the card,
+      // both in the filter's own width so they scale with it (Jason, Nov 15).
+      shadow={FILTER_SHADOW}
+    >
       <div
         aria-hidden
         style={{
