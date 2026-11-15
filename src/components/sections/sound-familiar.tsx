@@ -96,6 +96,9 @@ export function SoundFamiliarSection() {
             )}
           >
             <TeamChat
+              // Every window runs down to the notes row, so the three end
+              // on one line; the messages sit at the bottom, as in a chat.
+              className='flex-1'
               label={group.name}
               people={group.chat.people}
               messages={group.chat.messages.map((m, k) => ({

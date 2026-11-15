@@ -20,7 +20,9 @@ export type ChatMessage = {
  * messages, each with an initials avatar, name, role and time. Optional: a
  * "New" divider above one message and a typing line at the end.
  *
- * The messages appear one by one the first time the window scrolls into
+ * The messages sit at the bottom of the window, as in any chat, so a
+ * window stretched taller than its messages leaves the space above them.
+ * They appear one by one the first time the window scrolls into
  * view (or is swiped into view); with reduced motion they're simply there.
  */
 export function TeamChat({
@@ -85,7 +87,9 @@ export function TeamChat({
         <span className='text-text'>{label}</span>
         <span className='text-text-muted'>{people.length} people</span>
       </figcaption>
-      <ol className='flex flex-col gap-grid-half px-grid-1 py-grid-1'>
+      {/* Anchored to the bottom, like any chat: if the window is taller
+          than its messages, the space sits above them. */}
+      <ol className='mt-auto flex flex-col gap-grid-half px-grid-1 py-grid-1'>
         {messages.map((m, i) => {
           const person = people[m.by]
           const divider = i === newBefore ? reveal() : null
