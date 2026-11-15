@@ -21,14 +21,14 @@ export const HOME_PROOF = {
 } as const
 
 export const SOUND_FAMILIAR = {
-  label: 'Sound Familiar?',
-  /** Moved here from the hero (Nov 14) while the hero tries the logos. */
-  title: 'Stop bending your business to fit your software.',
-  intro: 'Most clients start with one of these.',
+  label: 'Warning Signs',
+  /** Proposal (Nov 15): the signs to listen for in your own company. */
+  title: "If your team is saying these, it's time to call.",
+  intro: 'Each one means your software is holding the business back.',
   // No-break spaces keep "can't do" and "for us" together.
   groups: [
     {
-      name: 'Run your business',
+      name: 'In the back office',
       quotes: [
         "We run this on spreadsheets and it's breaking.",
         "We pay for five tools that don't talk to each other.",
@@ -39,7 +39,7 @@ export const SOUND_FAMILIAR = {
       link: { label: 'See Run your business', href: '/platform#run' },
     },
     {
-      name: 'Sell online',
+      name: 'In your store',
       quotes: [
         "Our Shopify store can't\u00a0do the thing we need.",
         'Orders come in by DM, text and phone, and we lose track of them.',
@@ -50,7 +50,7 @@ export const SOUND_FAMILIAR = {
       link: { label: 'See Sell online', href: '/platform#sell' },
     },
     {
-      name: 'Senior help',
+      name: 'On your tech team',
       quotes: [
         "We need a developer but can't hire one full-time.",
         'Someone built this for\u00a0us and disappeared.',

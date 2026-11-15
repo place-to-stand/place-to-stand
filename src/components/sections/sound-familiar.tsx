@@ -6,8 +6,9 @@ import { Card, RuledRow } from '@/src/components/boxes'
 import { SOUND_FAMILIAR } from '@/src/lib/home'
 
 /**
- * Home's "Sound familiar?": three groups of things clients say, in their own
- * words, each closed by what we build for it and where to read more.
+ * Home's warning signs: three places a team hears that its software is
+ * holding the business back, each a checklist of the things people say,
+ * closed by what we build for it and one link to read more.
  * Tone: dark (Nov 14).
  */
 export function SoundFamiliarSection() {
@@ -33,12 +34,24 @@ export function SoundFamiliarSection() {
               className='flex flex-col gap-grid-1 lg:row-span-3 lg:grid lg:grid-rows-subgrid'
             >
               <div className='flex flex-col gap-grid-1'>
-                <h3 className='type-card-title'>{group.name}</h3>
-                {/* The visitor's own words, so they read as quotes. */}
+                <h3 className='type-item-title'>{group.name}</h3>
+                {/* The signals, in the words a team would say them: a
+                    checklist, each row marked with the logo's lime square,
+                    centered on its first line. */}
                 <ul className='flex flex-col'>
                   {group.quotes.map(quote => (
-                    <RuledRow key={quote} className='py-grid-half'>
-                      <blockquote className='type-lead text-balance'>
+                    <RuledRow
+                      key={quote}
+                      className='flex gap-grid-half py-grid-half type-lead'
+                    >
+                      <span
+                        aria-hidden
+                        className='flex shrink-0 items-center'
+                        style={{ height: '1lh' }}
+                      >
+                        <span className='size-2 bg-accent' />
+                      </span>
+                      <blockquote className='text-balance'>
                         &ldquo;{quote}&rdquo;
                       </blockquote>
                     </RuledRow>
