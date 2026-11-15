@@ -1,4 +1,5 @@
 import { Hero } from '@/src/components/sections/hero'
+import { ClientLogosSection } from '@/src/components/sections/client-logos-section'
 import { ProofSection } from '@/src/components/sections/proof'
 import { SoundFamiliarSection } from '@/src/components/sections/sound-familiar'
 import { WhoYouWorkWithSection } from '@/src/components/sections/who-you-work-with'
@@ -13,11 +14,12 @@ export function HomeTemplate() {
   return (
     <main id='main' className='flex-1'>
       <Hero variant='home' />
-      {/* The client logos sit at the bottom of the hero; the Heatonist proof
-          takes the dark under it, then the bands alternate: light for reading sections, dark for the
+      {/* The logos and the Heatonist proof share the dark under the hero,
+          then the bands alternate: light for reading sections, dark for the
           founders and ownership. Bands pad themselves by the section role,
           so content-to-content spacing is the same everywhere. */}
       <Band tone='dark' className='pt-edge'>
+        <ClientLogosSection />
         <ProofSection />
       </Band>
       <Band tone='light'>

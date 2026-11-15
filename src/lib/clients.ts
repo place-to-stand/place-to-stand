@@ -34,9 +34,8 @@ export function logoToneClass(client: Client): string {
     : 'brightness-0 invert'
 }
 
-/** Biggest names first, Hot Ones and Heatonist leading (Jason, Nov 14): the
- * homepage logo row opens on the first few and swaps the rest in one at a
- * time, the first two always showing; the audit page shows the first six. */
+/** Biggest names first: the homepage logo grid opens on the first ten and
+ * swaps the rest in one at a time; the audit page shows the first six. */
 export const clients: Client[] = [
   {
     title: 'Hot Ones',
@@ -45,12 +44,6 @@ export const clients: Client[] = [
     logoScale: 0.72,
     logoNudge: -9,
     logoTone: 'gray',
-  },
-  {
-    title: 'Heatonist',
-    href: 'https://heatonist.com',
-    logo: '/logos/heatonist.svg',
-    logoScale: 0.48,
   },
   {
     title: 'Blake Brown Beauty',
@@ -64,6 +57,12 @@ export const clients: Client[] = [
     logo: '/logos/florence-by-mills-beauty.png',
     logoScale: 0.62,
     logoNudge: 8,
+  },
+  {
+    title: 'Heatonist',
+    href: 'https://heatonist.com',
+    logo: '/logos/heatonist.svg',
+    logoScale: 0.48,
   },
   {
     title: 'Betsy & Adam',

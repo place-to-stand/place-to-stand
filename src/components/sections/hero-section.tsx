@@ -6,16 +6,15 @@ import { HOME_HERO } from '@/src/lib/home'
 import { BlueprintCorners } from '@/src/components/boxes/corners'
 import { HeroGraphic } from '@/src/components/patterns/drawings/hero-graphic'
 import { HeroDrawingSlot } from '@/src/components/sections/hero-drawing-slot'
-import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
 
 export function HeroSection() {
   return (
     <section
       id='home'
       data-pts-hero
-      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] [--hero-proof:7rem] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(1.5rem,calc(1.5rem+(100svh-50rem)*0.24),3rem)] lg:[--hero-pad:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)]'
+      className='relative flex min-h-[clamp(600px,100svh,1200px)] flex-col overflow-hidden border-b border-(--dots-rule) [--hero-gap:var(--space-page-top)] [--hero-pad:var(--spacing-grid-2)] md:[--hero-gap:var(--space-page-top)] md:[--hero-pad:var(--space-page-top)] lg:[--hero-gap:clamp(3rem,calc(3rem+(100svh-50rem)*0.24),4.5rem)] lg:[--hero-pad:clamp(4.5rem,calc(4.5rem+(100svh-50rem)*0.24),6rem)]'
     >
-      <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-grid-1 [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2'>
+      <div className='dots-hero mx-auto flex w-full max-w-content flex-1 flex-col px-grid-1 pt-[calc(var(--nav-height)+var(--hero-top,var(--hero-pad)))] pb-(--hero-pad) [--dots-top:0px] max-md:[--hero-top:var(--space-page-top)] lg:px-grid-2'>
         {/* The hero's gaps: under the nav, between the headline and the
             row below, and under the content. Phones and tablets use 48px for
             all three. On laptops and up the top and bottom are 72px on
@@ -47,7 +46,7 @@ export function HeroSection() {
             {/* Hero keeps the full-strength accent corners — the muted default
                 is for content cards further down the page. */}
             <BlueprintCorners size={20} />
-            <h1 className='px-grid-half py-grid-half text-center font-headline text-[clamp(2.25rem,min(7vw,max(10.5svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pr-0 md:pl-grid-1 md:text-left'>
+            <h1 className='px-grid-half py-grid-half text-center font-headline text-[clamp(2.25rem,min(7vw,max(11svh,5.5rem)),6.5rem)] leading-[0.88] font-bold tracking-tight text-text md:pr-0 md:pl-grid-1 md:text-left'>
               <span
                 className='hero-line block'
                 style={{ '--hero-delay': '0s' } as CSSProperties}
@@ -161,24 +160,11 @@ export function HeroSection() {
               {/* On phones (below sm), the drawing's width follows the window
                   height too (21svh tall at most), so the hero's content,
                   "See our work" included, fits one phone screen. */}
-              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(21svh*1.4629))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-proof)-var(--hero-gap)-var(--hero-pad)-1.5rem-2.64*min(7vw,max(10.5svh,5.5rem),6.5rem))*1.4629),100%)]'>
+              <div className='mx-auto w-full max-w-md max-sm:max-w-[min(28rem,calc(21svh*1.4629))] md:mx-0 md:max-w-none lg:max-w-[clamp(20rem,calc((max(100svh,50rem)-6.3125rem-var(--hero-gap)-2*var(--hero-pad)-2.64*min(7vw,max(11svh,5.5rem),6.5rem))*1.4629),100%)]'>
                 <HeroGraphic className='w-full' />
               </div>
             </HeroDrawingSlot>
           </div>
-        </div>
-
-        {/* Proof on the first screen: a quiet row of client logos pinned to
-            the bottom of the hero, Hot Ones and Heatonist first and always
-            showing; the rest swap in one at a time. Its height
-            (--hero-proof) comes out of the laptop drawing's size so the
-            hero still fits one screen. */}
-        <div
-          className='hero-reveal flex flex-col gap-grid-half pt-grid-2'
-          style={{ animationDelay: '1.15s' }}
-        >
-          <span className='bp-label font-mono'>Trusted by</span>
-          <ClientLogoWall variant='row' />
         </div>
       </div>
     </section>

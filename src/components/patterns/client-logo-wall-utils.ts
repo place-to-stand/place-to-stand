@@ -1,16 +1,5 @@
-/** Cells in the logo grid at its widest (5×2 from 1280px). */
+/** Cells in the homepage logo grid at its widest (5×2 from 1280px). */
 export const LOGO_SLOTS = 10
-
-/** The hero's one-row variant: four on phones, five from 576px, six from
- * 800px and seven from 1280px. Must match ROW_LAYOUT in client-logo-wall.tsx.
- * The first `ROW_PINNED` (Hot Ones and Heatonist) never swap out. */
-export const ROW_SLOTS = {
-  phone: 4,
-  tablet: 5,
-  wideTablet: 6,
-  laptop: 7,
-} as const
-export const ROW_PINNED = 2
 
 /** Cells showing at each width: three rows of two on phones, then two rows of
  * three from 576px wide, four from 800px and five from 1280px. Must match the grid classes and the
@@ -44,9 +33,7 @@ export function nextSwap(
   total: number,
   lastSlot: number | null,
   held: number | null,
-  random: () => number = Math.random,
-  /** Leading cells that never swap (the row's big names). */
-  pinned = 0
+  random: () => number = Math.random
 ): { slot: number; client: number } {
   const hidden = []
   for (let i = 0; i < total; i++) if (!shown.includes(i)) hidden.push(i)
@@ -55,9 +42,7 @@ export function nextSwap(
   // turn, the one that left the grid longest ago comes back first.
   const client = hidden.sort((a, b) => lastSeen(a) - lastSeen(b))[0]
 
-  const slots = shown
-    .map((_, i) => i)
-    .filter(i => i >= pinned && i !== lastSlot && i !== held)
+  const slots = shown.map((_, i) => i).filter(i => i !== lastSlot && i !== held)
   const slot =
     lastSlot === null && held !== shown.length - 1
       ? shown.length - 1
