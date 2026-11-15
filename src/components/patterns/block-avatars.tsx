@@ -1,7 +1,7 @@
 /**
  * Tiny geometric portraits for the made-up people in TeamChat: built from
  * basic shapes on a square tile (a circle head, rounded hair shapes,
- * rounded shoulders), flat fills, no outlines or gradients, and no facial
+ * rounded shoulders) on a gray tile, flat fills, no outlines or gradients, and no facial
  * features: people differ by hair and skin. Simple and friendly, not
  * identicons.
  */
@@ -14,43 +14,39 @@ type Look = {
   shirt: string
 }
 
-// Site palette for shirts and the tile.
-const TILE = '#3a3b40' // border-light: a clear step up from the card (1.5:1)
+// Site palette for the tile and the clothes; no lime, so the portraits
+// never compete with the accent.
+const TILE = '#69696c' // a quarter of the way from border-light #3a3b40 to the light band #f4f3ef
 const SHIRT = {
-  lime: '#b5f542', // accent
+  ink: '#1a1b1f', // card
+  coal: '#2a2b30', // border
+  slate: '#3a3b40', // border-light
   light: '#e8e6e3', // text
-  gray: '#6b6d75',
-  slate: '#8a8c93', // line
 }
 
 /** Who looks like what. Sam appears twice and keeps one face. */
 const LOOKS: Record<string, Look> = {
-  Dana: { skin: '#c68a62', hair: '#24170f', style: 'long', shirt: SHIRT.lime },
+  Dana: { skin: '#c68a62', hair: '#24170f', style: 'long', shirt: SHIRT.ink },
   Marcus: {
     skin: '#6b4430',
     hair: '#121212',
     style: 'buzz',
     shirt: SHIRT.light,
   },
-  Rachel: { skin: '#f1c7a3', hair: '#8e3b1f', style: 'bun', shirt: SHIRT.gray },
+  Rachel: { skin: '#e9b48e', hair: '#d0682f', style: 'bun', shirt: SHIRT.coal },
   Priya: {
     skin: '#a86d48',
     hair: '#141414',
     style: 'long',
-    shirt: SHIRT.light,
-  },
-  Leo: {
-    skin: '#e0ac83',
-    hair: '#d9b45f',
-    style: 'short',
     shirt: SHIRT.slate,
   },
-  Sam: { skin: '#b07d55', hair: '#7a5232', style: 'swept', shirt: SHIRT.lime },
+  Leo: { skin: '#dba27a', hair: '#c99a3e', style: 'short', shirt: SHIRT.ink },
+  Sam: { skin: '#b07d55', hair: '#3a2416', style: 'swept', shirt: SHIRT.light },
   Jordan: {
     skin: '#4f3020',
     hair: '#101010',
     style: 'curly',
-    shirt: SHIRT.gray,
+    shirt: SHIRT.slate,
   },
 }
 

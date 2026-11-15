@@ -109,7 +109,9 @@ export function TeamChat({
                   {/* Plain wrapping, not the site's "pretty" wrap, so a
                       message uses the window's full width. */}
                   <p className='text-base leading-[1.3] text-wrap text-text'>
-                    {m.text}
+                    {/* The last two words travel together, so no line ends
+                        on one word. */}
+                    {m.text.replace(/ (\S+)$/, '\u00a0$1')}
                   </p>
                   {(m.reactions || m.replies) && (
                     <div className='flex flex-wrap items-center gap-2 pt-2'>
@@ -169,18 +171,23 @@ function Reaction({ emoji, count }: { emoji: string; count: number }) {
         setBumps(b => b + 1)
       }}
       className={cn(
-        'cursor-pointer touch-manipulation border px-2 text-sm leading-6 text-text tabular-nums transition-colors duration-(--motion-fast) ease-(--ease-standard)',
+        'inline-flex h-grid-1 cursor-pointer touch-manipulation items-center gap-1.5 border px-2 text-sm leading-none text-text transition-colors duration-(--motion-fast) ease-(--ease-standard)',
         mine
           ? 'border-accent bg-accent-muted'
           : 'border-border-light bg-bg-elevated hover:border-text-muted'
       )}
     >
-      <span aria-hidden>{emoji}</span>{' '}
-      {/* Remounts on each click so the count bumps; not on first view. */}
+      <span aria-hidden>{emoji}</span>
+      {/* 12px mono figures (the smallest size the type rules allow), centered
+          on the emoji. Remounts on each click so the count bumps; not on
+          first view. */}
       <span
         key={bumps}
         aria-hidden
-        className={cn('inline-block min-w-[1ch]', bumps > 0 && 'chip-bump')}
+        className={cn(
+          'inline-block min-w-[1ch] font-mono text-xs leading-none tabular-nums',
+          bumps > 0 && 'chip-bump'
+        )}
       >
         {total}
       </span>
@@ -202,7 +209,7 @@ function TypingRow({
       style={style}
       className={cn(
         className,
-        'flex items-center gap-2 pl-grid-2 font-mono text-xs text-text-muted'
+        'flex items-center gap-2 pl-grid-2 text-sm text-text-muted'
       )}
     >
       <span aria-hidden className='flex gap-1'>

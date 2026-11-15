@@ -36,11 +36,11 @@ export const SOUND_FAMILIAR = {
       name: 'In the back office',
       quotes: [
         'We run this on spreadsheets and it’s breaking.',
-        'We pay for five tools that don’t talk to each other.',
+        'We pay for five tools that don’t talk to each\u00a0other.',
         'I have all this data and still can’t answer one simple question about my business.',
       ],
       build:
-        'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is public.',
+        'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is\u00a0public.',
       link: { label: 'Run your business', href: '/platform#run' },
       chat: {
         people: [
@@ -94,7 +94,7 @@ export const SOUND_FAMILIAR = {
       ],
       build:
         'We pick up where others left off, or work beside your developers. When you need advice more than code, that’s technical consulting.',
-      link: { label: 'Senior help', href: '/platform#senior-help' },
+      link: { label: 'Engineering help', href: '/platform#senior-help' },
       chat: {
         people: [
           { name: 'Sam', role: 'Founder' },

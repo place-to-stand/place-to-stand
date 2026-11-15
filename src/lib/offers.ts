@@ -42,9 +42,9 @@ export const DATA_HOME = {
   body: 'Everything we build shares one source of data, so you can answer questions about your business in one place. Your own AI tools can work with it too, and each person’s tools see only what their role allows.',
 }
 
-/** "Senior help for your team" on Platform (#senior-help, approved Nov 13). */
+/** "Senior engineers for your team" on Platform (#senior-help; renamed Nov 15). */
 export const SENIOR_HELP = {
-  name: 'Senior help for your team',
+  name: 'Senior engineers for your team',
   summary:
     'For teams that already have code, and sometimes developers, and need someone senior beside them.',
   quotes: [
