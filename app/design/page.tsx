@@ -442,7 +442,7 @@ export default function DesignPage() {
               tones
               stack
             >
-              <div className='grid gap-grid-1 md:grid-cols-3'>
+              <div className='grid gap-grid-1 sm:grid-cols-2 xl:grid-cols-3'>
                 <Card className='flex flex-col gap-grid-half'>
                   <span className='type-card-title'>Card</span>
                   <span className='text-base text-text-muted'>
@@ -523,7 +523,10 @@ export default function DesignPage() {
             title='Page and section headings'
             when='PageHeader opens a page (with the dots); SectionHeading opens a section.'
           >
-            <Specimen names={['PageHeader']}>
+            <Specimen
+              names={['PageHeader']}
+              className='relative overflow-hidden'
+            >
               <PageHeader
                 label='Platform'
                 title='Software you own.'
