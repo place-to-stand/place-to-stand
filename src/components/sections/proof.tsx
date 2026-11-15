@@ -46,6 +46,11 @@ const colX = (k: number) => MARGIN + (k - 1) * (COL + 1)
 const colR = (k: number) => colX(k) + COL
 
 const LABEL_INK = 'rgba(255,255,255,0.92)'
+/** The black/yellow seam, 35⅓ units in (Jason, Nov 15, set in the
+ *  browser). No column or gutter line sits within half a unit of it (the
+ *  nearest is column 8's right edge at 36⅓), so it is its own line. */
+const SEAM = 106 / 3
+
 /** The Heat filter: two columns and a gutter wide (columns 2-3). */
 const FILTER_W = 2 * COL + 1
 
@@ -207,11 +212,11 @@ export function ProofSection() {
                 clipPath: 'inset(-600px 0 0 0)',
               }}
             >
-              {/* Yellow from the column-9 line to the panel's right edge. */}
+              {/* Yellow from the seam to the panel's right edge. */}
               <div
                 className='absolute inset-y-0 right-0'
                 style={{
-                  left: g(colX(9)),
+                  left: g(SEAM),
                   backgroundColor: HO_YELLOW,
                   backgroundImage:
                     'radial-gradient(rgba(14,15,17,0.14) 1px, transparent 1.2px)',
@@ -234,7 +239,7 @@ export function ProofSection() {
                 style={{
                   left: g(colX(3) - 2),
                   width: g(FILTER_W),
-                  top: g(MARGIN + 3),
+                  top: g(MARGIN + 4),
                 }}
               />
               {/* Hot Ones: #5 across the seam (columns 8-9), its bottom on the
@@ -273,7 +278,7 @@ export function ProofSection() {
               <GridCallout
                 from={colX(3) - 2 + FILTER_W}
                 to={colX(5)}
-                y={MARGIN + 6.5}
+                y={MARGIN + 7.5}
                 {...CALLOUTS[1]}
               />
               <LabelThenLeader
