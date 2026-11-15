@@ -1447,63 +1447,44 @@ main {
   }
 }
 
-/* Outline (secondary) buttons: on hover or keyboard focus a line in the
-   accent-line color draws around the button as one continuous stroke,
-   starting at the top-left corner: top edge left to right, down the right
-   side, bottom edge right to left, up the left side. One registered
-   property, --draw, runs 0 to 1 with a single easing (the shared hover
-   timing), and each edge maps its own slice of that run, so there is no
-   pause at the corners. The slices follow a typical 240x48 button (top and
-   bottom ~42% each, the sides ~8%), so the line moves at an even speed. It
-   retracts along the same path. ::before draws top + right, ::after bottom +
-   left, 2px outside the faint resting border, which stays underneath. */
-@property --draw {
-  syntax: '<number>';
-  inherits: true;
-  initial-value: 0;
-}
+/* Outline (secondary) buttons: on hover or keyboard focus, accent-line
+   strokes draw along the top and bottom edges at once, left to right, over
+   the faint resting border (approved Nov 14). */
 .btn-draw {
   position: relative;
-  --draw: 0;
-  transition:
-    --draw var(--hover-dur) var(--hover-ease),
-    color var(--link-dur) var(--hover-ease);
+  transition: color var(--link-dur) var(--hover-ease);
 }
-.btn-draw:hover,
-.btn-draw:focus-visible {
-  --draw: 1;
-}
+/* Same direction, duration and easing as the primary button's fill and the
+   links' bar. */
 .btn-draw::before,
 .btn-draw::after {
   content: '';
   position: absolute;
-  border: 0 solid var(--color-accent-line);
+  left: -1px;
+  right: -1px;
+  height: 2px;
+  background: var(--color-accent-line);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--hover-dur) var(--hover-ease);
   pointer-events: none;
 }
 .btn-draw::before {
-  left: -2px;
-  top: -2px;
-  border-top-width: 2px;
-  border-right-width: 2px;
-  width: calc(clamp(0, var(--draw) / 0.4167, 1) * (100% + 4px));
-  height: calc(
-    2px + clamp(0, (var(--draw) - 0.4167) / 0.0833, 1) * (100% + 2px)
-  );
-  opacity: clamp(0, var(--draw) * 1000, 1);
+  top: -1px;
 }
 .btn-draw::after {
-  right: -2px;
-  bottom: -2px;
-  border-bottom-width: 2px;
-  border-left-width: 2px;
-  width: calc(clamp(0, (var(--draw) - 0.5) / 0.4167, 1) * (100% + 4px));
-  height: calc(
-    2px + clamp(0, (var(--draw) - 0.9167) / 0.0833, 1) * (100% + 2px)
-  );
-  opacity: clamp(0, (var(--draw) - 0.5) * 1000, 1);
+  bottom: -1px;
+}
+.btn-draw:hover::before,
+.btn-draw:hover::after,
+.btn-draw:focus-visible::before,
+.btn-draw:focus-visible::after {
+  transform: scaleX(1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .btn-draw {
+  .btn-draw,
+  .btn-draw::before,
+  .btn-draw::after {
     transition: none;
   }
 }
