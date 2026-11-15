@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/src/lib/utils'
+import { BlockAvatar, hasBlockAvatar } from './block-avatars'
 
 export type ChatPerson = { name: string; role: string }
 export type ChatMessage = {
@@ -17,7 +18,7 @@ export type ChatMessage = {
 /**
  * A short team chat, in our own plain chat UI (not any real product's look
  * or name): a header with where it happens, then the
- * messages, each with an initials avatar, name, role and time. Optional: a
+ * messages, each with a block portrait (or initials), name, role and time. Optional: a
  * "New" divider above one message and a typing line at the end.
  *
  * The messages sit at the bottom of the window, newest last, as in any
@@ -83,12 +84,12 @@ export function TeamChat({
       aria-label={`${label}: a team chat`}
       className={cn('flex flex-col border border-border bg-bg-card', className)}
     >
-      <figcaption className='border-b border-border px-grid-1 py-grid-half font-mono text-xs tracking-[0.05em] uppercase'>
-        <span className='text-text'>{label}</span>
+      <figcaption className='border-b border-border bg-bg-elevated px-grid-1 py-grid-half text-base font-semibold text-text'>
+        {label}
       </figcaption>
       {/* Anchored to the bottom, like any chat: if the window is taller
           than its messages, the space sits above them. */}
-      <ol className='mt-auto flex flex-col gap-grid-half px-grid-1 py-grid-1'>
+      <ol className='mt-auto flex flex-col gap-grid-1 px-grid-1 py-grid-1'>
         {messages.map((m, i) => {
           const person = people[m.by]
           const divider = i === newBefore ? reveal() : null
@@ -97,29 +98,32 @@ export function TeamChat({
               <div className='flex gap-grid-half'>
                 <Avatar name={person.name} tone={m.by} />
                 <div className='flex min-w-0 flex-col gap-1'>
-                  <p className='flex flex-wrap items-baseline gap-x-2 text-sm'>
-                    <span className='font-semibold text-text'>
+                  <p className='flex flex-wrap items-baseline gap-x-2 leading-snug'>
+                    <span className='text-base font-semibold text-text'>
                       {person.name}
                     </span>
-                    <span className='text-text-muted'>{person.role}</span>
-                    <span className='font-mono text-xs text-text-muted'>
-                      {m.time}
+                    <span className='text-sm text-text-muted'>
+                      {person.role} · {m.time}
                     </span>
                   </p>
-                  <p className='text-base text-text'>{m.text}</p>
+                  {/* Plain wrapping, not the site's "pretty" wrap, so a
+                      message uses the window's full width. */}
+                  <p className='text-base leading-snug text-wrap text-text'>
+                    {m.text}
+                  </p>
                   {(m.reactions || m.replies) && (
                     <div className='flex flex-wrap items-center gap-2 pt-1'>
                       {m.reactions?.map(([emoji, n]) => (
                         <span
                           key={emoji}
-                          className='border border-border px-1.5 font-mono text-xs leading-5 text-text-muted'
+                          className='border border-border-light bg-bg-elevated px-2 text-sm leading-6 text-text'
                         >
                           <span aria-hidden>{emoji}</span>
                           <span className='sr-only'>Reaction:</span> {n}
                         </span>
                       ))}
                       {m.replies && (
-                        <span className='font-mono text-xs text-accent'>
+                        <span className='text-sm font-semibold text-accent'>
                           {m.replies} replies
                         </span>
                       )}
@@ -186,7 +190,10 @@ function TypingRow({
 }
 
 function Avatar({ name, tone }: { name: string; tone: number }) {
-  // Three quiet fills from the tokens tell people apart without new colors.
+  // A block portrait when the person has one; otherwise initials on one of
+  // three quiet token fills.
+  if (hasBlockAvatar(name))
+    return <BlockAvatar name={name} className='mt-0.5 size-8 shrink-0' />
   const fills = ['bg-bg-elevated', 'bg-accent-muted', 'bg-border']
   return (
     <span

@@ -40,7 +40,7 @@ export const SOUND_FAMILIAR = {
       ],
       build:
         'One system for the work behind the scenes, built around how you work, with all your data in one place. We run Place To Stand on it ourselves, and the code is public.',
-      link: { label: 'See Run your business', href: '/platform#run' },
+      link: { label: 'Run your business', href: '/platform#run' },
       chat: {
         people: [
           { name: 'Dana', role: 'Ops lead' },
@@ -64,7 +64,7 @@ export const SOUND_FAMILIAR = {
       ],
       build:
         'Custom stores and marketplaces, on Shopify when it fits. Or one order form that sends every request, files and all, to a single queue.',
-      link: { label: 'See Sell online', href: '/platform#sell' },
+      link: { label: 'Sell online', href: '/platform#sell' },
       chat: {
         people: [
           { name: 'Priya', role: 'Marketing' },
@@ -87,13 +87,13 @@ export const SOUND_FAMILIAR = {
     {
       name: 'On your tech team',
       quotes: [
-        'We need a developer but can’t hire one full-time.',
+        'We need a developer but can’t hire one full\u2011time.',
         'Someone built this for\u00a0us and disappeared.',
         'We built it with AI and now it keeps breaking.',
       ],
       build:
         'We pick up where others left off, or work beside your developers. When you need advice more than code, that’s technical consulting.',
-      link: { label: 'See Senior help', href: '/platform#senior-help' },
+      link: { label: 'Senior help', href: '/platform#senior-help' },
       chat: {
         people: [
           { name: 'Sam', role: 'Founder' },

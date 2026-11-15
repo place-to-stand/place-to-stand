@@ -6,15 +6,14 @@ import { Reveal } from '@/src/components/primitives/animated-section'
 import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { TeamChat } from '@/src/components/patterns/team-chat'
-import { SideNote } from '@/src/components/boxes'
 import { SOUND_FAMILIAR } from '@/src/lib/home'
 import { cn } from '@/src/lib/utils'
 
 /**
  * Home's warning signs: "If your team is saying these", so the team says
  * them. Each place (back office, store, tech team) is a short chat whose
- * messages are the signals, and under it a side note with what we build
- * for it and one link (Nov 15).
+ * messages are the signals, and under it what we build for it and one
+ * lime link (Nov 15).
  *
  * Laptops (from 1280px): the heading across the top, then the three
  * chats side by side, equal height (subgrid), with the three "What we
@@ -108,13 +107,19 @@ export function SoundFamiliarSection() {
               }
               typing={'typing' in group.chat ? group.chat.typing : undefined}
             />
-            <SideNote className='flex flex-col gap-grid-half'>
-              <span className='type-fine'>What we build</span>
+            {/* A plain block inset like the chat's own content, so it
+                lines up with the avatars on the left and the messages on
+                the right. */}
+            <div className='flex flex-col gap-grid-half px-grid-1'>
               <p className='text-base text-text'>{group.build}</p>
-              <ArrowLink href={group.link.href as Route}>
+              {/* Lime on the dark band, so it reads as the action. */}
+              <ArrowLink
+                href={group.link.href as Route}
+                className='text-accent'
+              >
                 {group.link.label}
               </ArrowLink>
-            </SideNote>
+            </div>
           </li>
         ))}
       </ul>

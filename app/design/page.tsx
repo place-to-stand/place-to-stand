@@ -38,6 +38,10 @@ import { DesignGroup, DesignSection, Specimen } from './_components/specimen'
 import { SplitSection } from '@/src/components/patterns/split-section'
 import { TeamChat } from '@/src/components/patterns/team-chat'
 import {
+  BLOCK_AVATAR_NAMES,
+  BlockAvatar,
+} from '@/src/components/patterns/block-avatars'
+import {
   Callout,
   Card,
   Chip,
@@ -640,7 +644,7 @@ export default function DesignPage() {
             when='A short team chat in our own plain chat UI, for showing what people say at work (Home’s warning signs). Where it happens on top, then messages with initials, name, role and time; reactions, replies, a New divider and a typing line are optional. Messages appear one by one on first view.'
           >
             <Specimen
-              names={['TeamChat', 'SideNote']}
+              names={['TeamChat', 'BlockAvatar']}
               note='the fix sits under it'
             >
               <div className='flex max-w-md flex-col gap-grid-1'>
@@ -666,12 +670,24 @@ export default function DesignPage() {
                   newBefore={1}
                   typing={0}
                 />
-                <SideNote className='flex flex-col gap-grid-half'>
-                  <span className='type-fine'>What we build</span>
+                <div className='flex flex-wrap gap-grid-half'>
+                  {BLOCK_AVATAR_NAMES.map(name => (
+                    <span
+                      key={name}
+                      className='flex flex-col items-center gap-1'
+                    >
+                      <BlockAvatar name={name} className='size-12' />
+                      <span className='font-mono text-xs text-text-muted'>
+                        {name}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+                <div className='flex flex-col gap-grid-half px-grid-1'>
                   <p className='text-base text-text'>
                     Custom stores and marketplaces, on Shopify when it fits.
                   </p>
-                </SideNote>
+                </div>
               </div>
             </Specimen>
           </DesignSection>

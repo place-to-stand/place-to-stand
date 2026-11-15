@@ -235,10 +235,11 @@ Other patterns:
   buttons or headings inside.
 - **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
 - **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or
-  name): a header with where it happens, then messages with an initials avatar, name, role,
+  name): a header with where it happens, then messages with a small geometric portrait (`block-avatars.tsx`: circle head, rounded hair and shoulders, flat fills; initials as a fallback), name, role,
   time, and optional reactions and replies; a "New" divider above one message and a typing line at the end are
   optional. Messages appear one by one on first view; reduced motion shows them at once. Used by Home's warning
-  signs, one chat per place, with the fix under each in a `SideNote`.
+  signs, one chat per place, with the fix under each as a plain block inset to the chat's content edges and a lime
+  link.
 - **`SplitSection`** (`patterns/split-section.tsx`, proposed Nov 15, not yet used on any page; shown on /design): the asymmetric
   split. The aside (usually a `SectionHeading`) takes columns 1-5 and sticks under the nav; the content takes columns
   7-12, with column 6 left as air (at 1440: 546px, a 138px gap, 636px). Below `lg` they stack and nothing sticks.
