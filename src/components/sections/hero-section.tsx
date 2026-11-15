@@ -94,9 +94,9 @@ export function HeroSection() {
                   className='hero-reveal flex gap-grid-half self-center md:self-start'
                   style={{ animationDelay: '0.85s' }}
                 >
-                  <div className='flex max-w-lg flex-col gap-grid-1'>
+                  <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-[35rem]'>
                     {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
-                    <p className='text-base text-pretty text-text lg:text-xl'>
+                    <p className='text-base text-pretty text-text lg:text-[1.375rem] lg:leading-[1.875rem]'>
                       {HOME_HERO.sub}
                     </p>
                   </div>
