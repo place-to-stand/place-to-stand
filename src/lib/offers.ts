@@ -39,7 +39,7 @@ export const PLATFORM_HEADER = {
 export const DATA_HOME = {
   label: 'Your Data, Ready for AI',
   title: 'One home for your data.',
-  body: "Everything we build shares one source of data, so you can answer questions about your business in one place. Your own AI tools can work with it too, and each person's tools see only what their role allows.",
+  body: 'Everything we build shares one source of data, so you can answer questions about your business in one place. Your own AI tools can work with it too, and each person’s tools see only what their role allows.',
 }
 
 /** "Senior help for your team" on Platform (#senior-help, approved Nov 13). */
@@ -235,9 +235,9 @@ export const STEPS: Step[] = [
     name: 'Intro call',
     time: '30 min, free',
     summary:
-      "Tell us what's wrong and we'll say plainly if we're the right fit.",
+      'Tell us what’s wrong and we’ll say plainly if we’re the right fit.',
     detail:
-      "Tell us what's wrong and roughly how big it is. We'll say plainly if we're the right fit.",
+      'Tell us what’s wrong and roughly how big it is. We’ll say plainly if we’re the right fit.',
   },
   {
     number: '02',
@@ -295,11 +295,11 @@ export const AFTER_LAUNCH = [
 
 /** The billing promise under the steps on Home (approved Nov 13). */
 export const BILLING =
-  "You pay for people's time, nothing else. Hours come in prepaid blocks, five to start, and they never expire. AI costs nothing extra, and neither do features our portal already has. Walk away any time."
+  'You pay for people’s time, nothing else. Hours come in prepaid blocks, five to start, and they never expire. AI costs nothing extra, and neither do features our portal already has. Walk away any time.'
 
 /** "How you pay" on Process (approved Nov 13). */
 export const PAYMENT = {
-  title: "You pay for people's time. Nothing else.",
+  title: 'You pay for people’s time. Nothing else.',
   body: 'We bill only for the hours a person spends on your work. Hours come in prepaid blocks, five to start, and they never expire. AI tools and agents cost nothing extra, and neither do features our portal already has: you pay only for the time to set them up and shape them. No contract. Walk away any time.',
 }
 
@@ -313,12 +313,12 @@ export const FAQ = [
     a: 'No. We start with what hurts and connect to the tools that work.',
   },
   {
-    q: "How much of my team's time does it take?",
+    q: 'How much of my team’s time does it take?',
     a: 'A few hours in the first two weeks, then a short check-in every week or two.',
   },
   {
     q: 'We built it with AI and now it keeps breaking. Can you help?',
-    a: "Yes. We read what you have, tell you plainly what's wrong, then fix it or rebuild the parts that need it.",
+    a: 'Yes. We read what you have, tell you plainly what’s wrong, then fix it or rebuild the parts that need it.',
   },
   {
     q: 'We have developers. Can you work with them?',
@@ -331,14 +331,14 @@ export const FAQ = [
   { q: 'Does my data train AI?', a: 'No. Never.' },
   {
     q: 'How do you charge?',
-    a: "Only for the hours a person works on your project. You buy hours in prepaid blocks. They aren't refunded, but they never expire.",
+    a: 'Only for the hours a person works on your project. You buy hours in prepaid blocks. They aren’t refunded, but they never expire.',
   },
   {
     q: 'What happens after launch?',
-    a: "You choose. If you want, we keep it running for an agreed price, with a shared channel for your team. We can teach your team to change it, and we start the next fix when you're ready. Either way, we're always an email or a message away.",
+    a: 'You choose. If you want, we keep it running for an agreed price, with a shared channel for your team. We can teach your team to change it, and we start the next fix when you’re ready. Either way, we’re always an email or a message away.',
   },
   {
     q: 'Can I leave?',
-    a: "Any time. There's no contract to get out of. Hours you haven't used never expire, so they're there if you come back, and you keep everything we built.",
+    a: 'Any time. There’s no contract to get out of. Hours you haven’t used never expire, so they’re there if you come back, and you keep everything we built.',
   },
 ]

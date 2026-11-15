@@ -1,6 +1,7 @@
 /**
  * Voice check (docs/design-system.md, Guidelines > Voice): fails on the
- * banned phrases and on British spellings anywhere in the site's text, in
+ * banned phrases, on British spellings, and on straight quotes in copy
+ * (scripts/quotes-check.mjs) anywhere in the site's text, in
  * app/, src/, public/ (llms.txt and other text files) and content/ (blog
  * posts). Runs as part of `npm run lint`.
  *
@@ -11,6 +12,7 @@
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
+import { quoteProblems } from './quotes-check.mjs'
 
 const ROOTS = ['app', 'src', 'public', 'content']
 const SKIP = [/^app\/design\//]
@@ -66,7 +68,7 @@ const BRITISH = [
 ]
 // Quoted third-party text in files that can't hold a voice-ok comment (JSON).
 const ALLOW = [
-  /UK Adults' Behaviour and Attitudes/,
+  /UK Adults[’'] Behaviour and Attitudes/,
   /adults-behaviour-and-attitudes/,
 ]
 
@@ -100,6 +102,7 @@ for (const file of ROOTS.flatMap(root => walk(root))) {
         if (m) problems.push(`${file}:${i + 1}  British spelling: "${m[0]}"`)
       }
     })
+  problems.push(...quoteProblems(file))
 }
 
 if (problems.length) {
@@ -108,4 +111,6 @@ if (problems.length) {
   )
   process.exit(1)
 }
-console.log('Voice check: no banned phrases or British spellings.')
+console.log(
+  'Voice check: no banned phrases, British spellings or straight quotes.'
+)

@@ -31,7 +31,7 @@ export type ContactActionResult =
 
 /** Shown whenever the portal did not take the submission. */
 const DELIVERY_FAILED_MESSAGE =
-  "We couldn't send your message. Please email hello@placetostandagency.com and we'll get right back to you."
+  'We couldn’t send your message. Please email hello@placetostandagency.com and we’ll get right back to you.'
 
 function normalizeUrl(value: string): string {
   const trimmed = value.trim()
@@ -90,7 +90,7 @@ export async function sendContact(
       return {
         success: false,
         message:
-          "We couldn't verify your request. Please refresh and try again.",
+          'We couldn’t verify your request. Please refresh and try again.',
       } as const
     }
   } catch (error) {

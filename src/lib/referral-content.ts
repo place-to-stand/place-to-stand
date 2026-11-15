@@ -58,15 +58,15 @@ export const referralContent = {
       },
     ],
     quotesLabel: 'Signals',
-    leadIn: "You'll know one when you hear them say:",
+    leadIn: 'You’ll know one when you hear them say:',
     quotes: [
-      "We run this on spreadsheets and it's breaking.",
-      "We pay for five tools that don't talk to each other.",
-      "Per-seat pricing is killing us. We can't add people without the software bill doubling.",
-      "One admin task eats my week and I can't grow the business around it.",
-      "I have all this data and still can't answer one simple question about my business.",
-      "Our Shopify store can't do the thing we need.",
-      "We need a developer but can't hire one full-time.",
+      'We run this on spreadsheets and it’s breaking.',
+      'We pay for five tools that don’t talk to each other.',
+      'Per-seat pricing is killing us. We can’t add people without the software bill doubling.',
+      'One admin task eats my week and I can’t grow the business around it.',
+      'I have all this data and still can’t answer one simple question about my business.',
+      'Our Shopify store can’t do the thing we need.',
+      'We need a developer but can’t hire one full-time.',
       'Someone built this for us and disappeared.',
     ],
   },
@@ -77,12 +77,12 @@ export const referralContent = {
       {
         number: '01',
         title: 'Intro us by email.',
-        body: 'One line is enough: "You two should talk." Copy hello@placetostandagency.com.',
+        body: 'One line is enough: “You two should talk.” Copy hello@placetostandagency.com.',
       },
       {
         number: '02',
         title: 'We take it from there.',
-        body: "A free intro call, then a written plan. You don't manage anything.",
+        body: 'A free intro call, then a written plan. You don’t manage anything.',
       },
       {
         number: '03',
@@ -119,7 +119,7 @@ export const referralContent = {
   },
 
   audit: {
-    heading: "Not sure if someone's a fit?",
+    heading: 'Not sure if someone’s a fit?',
     body: 'Send them the free two-minute audit: a preview on screen, the full results by email.',
     buttonLabel: 'Start the free audit',
     href: '/audit',

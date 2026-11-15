@@ -21,7 +21,7 @@ export function PortalSection() {
           <SectionHeading
             label='How We Build'
             title='Humans decide. Agents build. We check.'
-            intro="We plan each change in our own portal, with AI helping draft the plan and a person deciding. AI agents then write the code in a sealed-off cloud workspace, and nothing ships until one of us has checked it. That's how we work up to 5x faster than a traditional team. You can sign in any time to see the work, your hours left and your invoices."
+            intro='We plan each change in our own portal, with AI helping draft the plan and a person deciding. AI agents then write the code in a sealed-off cloud workspace, and nothing ships until one of us has checked it. That’s how we work up to 5x faster than a traditional team. You can sign in any time to see the work, your hours left and your invoices.'
           />
           <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
             <ArrowLink href={'/platform/portal' as Route}>

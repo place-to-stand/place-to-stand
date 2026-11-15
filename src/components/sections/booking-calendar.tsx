@@ -20,7 +20,7 @@ const CALENDAR_EMBED_URL =
 const CALL = [
   {
     label: 'What happens',
-    body: "Tell us what's wrong and roughly how big it is. We'll say plainly if we're the right fit.",
+    body: 'Tell us what’s wrong and roughly how big it is. We’ll say plainly if we’re the right fit.',
   },
   {
     label: 'Who you meet',

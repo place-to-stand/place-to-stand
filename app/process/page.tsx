@@ -19,7 +19,7 @@ import { BookCallGroup } from '@/src/components/primitives/cta'
 export const metadata: Metadata = pageMetadata({
   title: 'Process',
   description:
-    "How we work: a free 30-minute intro call, a one-hour discovery session, time with your team, the biggest pain fixed first, then the next. You pay only for people's time.",
+    'How we work: a free 30-minute intro call, a one-hour discovery session, time with your team, the biggest pain fixed first, then the next. You pay only for people’s time.',
   path: '/process',
 })
 
@@ -96,7 +96,7 @@ export default function ProcessPage() {
             <SectionHeading
               label='Our Stack'
               title='Our usual stack.'
-              intro="The tools we reach for first, because they're fast, safe and cheap to run."
+              intro='The tools we reach for first, because they’re fast, safe and cheap to run.'
             />
           </Reveal>
           <Reveal index={1} className='flex flex-col gap-stack'>

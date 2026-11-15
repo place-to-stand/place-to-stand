@@ -165,7 +165,7 @@ export function ContactSection() {
       <SectionHeading
         label='Or Send Us a Message'
         title='Prefer to write?'
-        intro="Send a note and we'll get back to you within one business day."
+        intro='Send a note and we’ll get back to you within one business day.'
       />
       <Suspense fallback={null}>
         <SubjectPrefill onSubject={applySubjectFromQuery} />
@@ -253,7 +253,7 @@ export function ContactSection() {
               <Input
                 id='subjectOther'
                 aria-label='Subject'
-                placeholder="Tell us what it's about"
+                placeholder='Tell us what it’s about'
                 {...form.register('subjectOther')}
                 aria-invalid={!!form.formState.errors.subjectOther}
               />
@@ -291,9 +291,9 @@ export function ContactSection() {
               htmlFor='marketingConsent'
               className='text-base leading-snug font-normal tracking-normal text-text-muted normal-case'
             >
-              Send me occasional updates about Place To Stand&apos;s work. We
-              will reply to your message either way, and you can unsubscribe at
-              any time.
+              Send me occasional updates about Place To Stand’s work. We will
+              reply to your message either way, and you can unsubscribe at any
+              time.
             </Label>
           </div>
           <div className='mt-auto pt-grid-half'>
@@ -313,8 +313,8 @@ export function ContactSection() {
           <div className='pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-grid-1 bg-bg-card/95 text-center'>
             <h3 className='type-card-title uppercase'>Thank you!</h3>
             <p className='max-w-md text-base text-balance text-text-muted'>
-              Your message has been sent. We&apos;ll reach out within one
-              business day.
+              Your message has been sent. We’ll reach out within one business
+              day.
             </p>
             <Button
               type='button'

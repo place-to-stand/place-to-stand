@@ -15,7 +15,7 @@ export function FooterSubscribe() {
       <span className='bp-label font-mono'>Newsletter</span>
       {state.status === 'success' ? (
         <p className='text-sm text-text' role='status'>
-          You&apos;re subscribed. Thanks for reading.
+          You’re subscribed. Thanks for reading.
         </p>
       ) : (
         <form onSubmit={onSubmit} className='flex flex-col gap-grid-half'>

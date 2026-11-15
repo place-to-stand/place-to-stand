@@ -51,7 +51,7 @@ export const PORTAL_MODULES: PortalModule[] = [
   {
     id: 'time',
     title: 'Time and hours',
-    body: "Log time against tasks and watch each client's prepaid hours count down.",
+    body: 'Log time against tasks and watch each client’s prepaid hours count down.',
     insteadOf: 'Harvest, spreadsheets',
   },
   {
@@ -63,7 +63,7 @@ export const PORTAL_MODULES: PortalModule[] = [
   {
     id: 'reports',
     title: 'Reports',
-    body: "The month's numbers closed in one place, from your own data.",
+    body: 'The month’s numbers closed in one place, from your own data.',
     insteadOf: 'exported spreadsheets',
   },
   {
@@ -119,18 +119,18 @@ export const PORTAL_SCREENS = {
 export const PORTAL_BUILD = {
   label: 'How We Build With It',
   title: 'Humans decide. Agents build. We check.',
-  body: "Every change starts as a task in the portal. AI agents write the code in a sealed-off cloud workspace, and nothing ships until one of us has checked it. It's how we work up to 5x faster than a traditional team, and your system gets the same setup.",
+  body: 'Every change starts as a task in the portal. AI agents write the code in a sealed-off cloud workspace, and nothing ships until one of us has checked it. It’s how we work up to 5x faster than a traditional team, and your system gets the same setup.',
 }
 
 export const PORTAL_OWNERSHIP = {
   label: 'Yours, Not a Subscription',
   title: 'You own your copy.',
   lines: [
-    "It starts as a copy of ours, with the parts you don't need taken out before your team signs in.",
+    'It starts as a copy of ours, with the parts you don’t need taken out before your team signs in.',
     'It runs on your own infrastructure, in accounts in your name.',
     'Features that already exist cost nothing. You pay only for the hours to install and change it.',
     'No seat fees. Add people without paying more.',
-    "The code is public, so you can see what you're getting before you start.",
+    'The code is public, so you can see what you’re getting before you start.',
   ],
 }
 

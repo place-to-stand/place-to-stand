@@ -196,9 +196,9 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
             </div>
             <p className='mx-auto max-w-xl type-intro text-balance'>
               Place To Stand builds custom software for businesses that have
-              outgrown a stack of tools that don&apos;t talk to each other. Take
-              our free, 2-minute audit: see a preview on screen, then get the
-              full results by email.
+              outgrown a stack of tools that don’t talk to each other. Take our
+              free, 2-minute audit: see a preview on screen, then get the full
+              results by email.
             </p>
             <Button
               type='button'
@@ -294,7 +294,7 @@ export function AuditLandingContent({ onStart }: AuditLandingProps) {
         <Reveal index={2}>
           <div className='flex flex-col gap-stack'>
             <div className='flex flex-col gap-eyebrow'>
-              <span className='bp-label font-mono'>What You&apos;ll Learn</span>
+              <span className='bp-label font-mono'>What You’ll Learn</span>
               <h2 className='type-section-title'>What the audit covers</h2>
             </div>
             {/* Four open columns under a shared rule: no boxed cards */}

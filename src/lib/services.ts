@@ -36,7 +36,7 @@ export const services: Service[] = [
     title: 'Sell online',
     tagline: 'Custom stores and marketplaces, on Shopify when it fits',
     description:
-      "Custom stores and marketplaces for things standard store tools can't sell well, on Shopify when it fits. Built for brands like Hot Ones and Heatonist.",
+      'Custom stores and marketplaces for things standard store tools can’t sell well, on Shopify when it fits. Built for brands like Hot Ones and Heatonist.',
     icon: 'Code2',
     features: [
       'Custom marketplaces',

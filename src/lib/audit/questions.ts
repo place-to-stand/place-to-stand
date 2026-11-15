@@ -25,7 +25,7 @@ export const SECTIONS: AuditSection[] = [
   {
     id: 'challenges',
     title: 'Challenges & Goals',
-    subtitle: "Where it hurts, and where you're headed.",
+    subtitle: 'Where it hurts, and where you’re headed.',
   },
   {
     id: 'readiness',
@@ -358,7 +358,7 @@ export const QUESTIONS: AuditQuestion[] = [
     options: [
       {
         id: 'havent-tried',
-        label: "Haven't really tried it yet",
+        label: 'Haven’t really tried it yet',
         phaseWeights: { foundation: 1 },
       },
       {
@@ -374,13 +374,13 @@ export const QUESTIONS: AuditQuestion[] = [
       },
       {
         id: 'doesnt-fit',
-        label: "It doesn't fit how we work",
+        label: 'It doesn’t fit how we work',
         phaseWeights: { growth: 1 },
         serviceWeights: { 'internal-tools': 2, 'workflow-automation': 1 },
       },
       {
         id: 'outgrown',
-        label: "We've outgrown it",
+        label: 'We’ve outgrown it',
         phaseWeights: { optimization: 1, transformation: 2 },
         serviceWeights: {
           'legacy-modernization': 2,
@@ -394,7 +394,7 @@ export const QUESTIONS: AuditQuestion[] = [
     id: 'budget',
     sectionId: 'readiness',
     type: 'single',
-    prompt: "What's your appetite for investing in custom software?",
+    prompt: 'What’s your appetite for investing in custom software?',
     required: true,
     options: [
       {

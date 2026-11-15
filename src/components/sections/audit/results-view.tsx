@@ -300,9 +300,7 @@ export function ResultsView({
           <div className='mb-grid-1 flex items-end justify-between'>
             <div className='flex flex-col gap-grid-half md:gap-grid-half'>
               <span className='bp-label font-mono'>The Blueprint</span>
-              <h2 className='type-card-title uppercase'>
-                Where we&apos;d start
-              </h2>
+              <h2 className='type-card-title uppercase'>Where we’d start</h2>
             </div>
             <span className='hidden font-mono text-sm tracking-[0.15em] text-text-muted uppercase sm:inline'>
               {recommendations.length} opportunities
@@ -370,10 +368,10 @@ export function ResultsView({
               </h2>
               <p className='mt-2 text-base text-text-muted'>
                 {lockedCount > 0
-                  ? "Get every opportunity, ranked by where we'd start, sent to your inbox. They unlock here too."
-                  : "Get your result sent to your inbox so it's there when you need it."}{' '}
-                Reply to the email any time to talk to the engineers who&apos;d
-                build it.
+                  ? 'Get every opportunity, ranked by where we’d start, sent to your inbox. They unlock here too.'
+                  : 'Get your result sent to your inbox so it’s there when you need it.'}{' '}
+                Reply to the email any time to talk to the engineers who’d build
+                it.
               </p>
             </div>
             <EmailCaptureForm
@@ -497,8 +495,8 @@ function CapturedPanel({
               {/* The portal emails the team a follow-up when a captured audit
                   gains these details (place-to-stand-portal#259). */}
               <p className='mt-1 mb-grid-half text-base text-text-muted'>
-                Optional. We&apos;ll send it to the team with your audit, so we
-                can come to the first conversation with ideas, not questions.
+                Optional. We’ll send it to the team with your audit, so we can
+                come to the first conversation with ideas, not questions.
               </p>
               <LeadDetailsForm
                 result={result}

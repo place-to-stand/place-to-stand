@@ -13,7 +13,7 @@ export function PortalModulesSection() {
   return (
     <Section className='flex flex-col gap-stack'>
       <Reveal index={0}>
-        <SectionHeading label='Modules' title="What's inside." />
+        <SectionHeading label='Modules' title='What’s inside.' />
       </Reveal>
       <Reveal index={1}>
         <ul className='grid grid-cols-1 gap-x-grid-1 gap-y-grid-3 md:grid-cols-2 xl:grid-cols-3'>

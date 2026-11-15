@@ -14,7 +14,7 @@ export const heatonistCaseStudy = {
     'How Place To Stand runs engineering for Heatonist and hotones.com: two busy Shopify stores, no full-time hire, and hotones.com built in under three months.',
   headline: 'Their engineering team, by the hour.',
   intro:
-    "Heatonist and its long-time partner, Hot Ones, sell hot sauce to fans everywhere. Since 2023 we've run engineering for both of their Shopify stores, and Heatonist pays only for the hours we work.",
+    'Heatonist and its long-time partner, Hot Ones, sell hot sauce to fans everywhere. Since 2023 we’ve run engineering for both of their Shopify stores, and Heatonist pays only for the hours we work.',
   /** Words in `intro` that link out, once. */
   introLink: { text: 'Hot Ones', href: 'https://hotones.com' },
   stats: [
@@ -23,7 +23,7 @@ export const heatonistCaseStudy = {
     { value: '< 3 mo', label: 'To build and launch hotones.com' },
   ],
   problem:
-    "In 2023 Heatonist's long-time developer was moving on, and no one was there to take over. The business needed steady engineering every week: promotions, search, tracking, checkout changes, and new pages for each season of the show. Hiring a full-time engineer would mean salary, benefits, months of searching, and someone to manage them.",
+    'In 2023 Heatonist’s long-time developer was moving on, and no one was there to take over. The business needed steady engineering every week: promotions, search, tracking, checkout changes, and new pages for each season of the show. Hiring a full-time engineer would mean salary, benefits, months of searching, and someone to manage them.',
   howWeWork:
     'Heatonist pays for the hours we work, never a salary. We log every hour and keep them posted as we go, so they can speed up for a big launch or slow down in a quiet month. Because Heatonist pays for work done, not time at a desk, every hour goes into something that ships.',
   whatWeDidIntro:
@@ -43,7 +43,7 @@ export const heatonistCaseStudy = {
     },
     {
       title: 'Tracking and ads',
-      body: "We set up analytics events and ad pixels, so Heatonist's ad agency works in its own dashboards instead of waiting on code.",
+      body: 'We set up analytics events and ad pixels, so Heatonist’s ad agency works in its own dashboards instead of waiting on code.',
     },
     {
       title: 'Testing',
@@ -51,7 +51,7 @@ export const heatonistCaseStudy = {
     },
     {
       title: 'Design to code',
-      body: "We turn the team's designs into working pages that match the mockups.",
+      body: 'We turn the team’s designs into working pages that match the mockups.',
     },
     {
       title: 'Behind the scenes',
@@ -67,15 +67,15 @@ export const heatonistCaseStudy = {
     },
     {
       title: 'Cart rules',
-      body: "Our checkout function enforces Heatonist's rules for each shopper: purchase limits during Heat Week, one subscription box per order, and case minimums for wholesale buyers.",
+      body: 'Our checkout function enforces Heatonist’s rules for each shopper: purchase limits during Heat Week, one subscription box per order, and case minimums for wholesale buyers.',
     },
     {
       title: 'Checkout and order pages',
       body: 'We added links so customers can view and manage their orders, and a text-message sign-up, right on the order confirmation pages.',
     },
     {
-      title: "Heatonist's own server",
-      body: "Heatonist also ran a custom server for jobs Shopify couldn't do. We moved everything we could onto Shopify's own features, so there's less to maintain, and keep the server running for the rest.",
+      title: 'Heatonist’s own server',
+      body: 'Heatonist also ran a custom server for jobs Shopify couldn’t do. We moved everything we could onto Shopify’s own features, so there’s less to maintain, and keep the server running for the rest.',
     },
   ],
   hotOnes:

@@ -933,8 +933,7 @@ export default function DesignPage() {
                 >
                   <dt className='type-card-title'>5. Alt text.</dt>
                   <dd className='text-base text-text-muted'>
-                    Describe what the work shows; alt=&quot;&quot; only for pure
-                    texture.
+                    Describe what the work shows; alt=”” only for pure texture.
                   </dd>
                 </RuledRow>
                 <RuledRow

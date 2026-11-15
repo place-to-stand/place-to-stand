@@ -9,7 +9,7 @@ import { Hero } from '@/src/components/sections/hero'
 export const metadata: Metadata = pageMetadata({
   title: 'Clients',
   description:
-    "Some of the brands we've built software for: Shopify stores, custom marketplaces, and the systems that run them.",
+    'Some of the brands we’ve built software for: Shopify stores, custom marketplaces, and the systems that run them.',
   path: '/clients',
 })
 
@@ -21,7 +21,7 @@ export default function ClientsPage() {
         sectionClassName='pb-section'
         label='Clients'
         title='Who we build for.'
-        intro="Stores, marketplaces and the systems behind them, for brands you know and some you'll meet here first."
+        intro='Stores, marketplaces and the systems behind them, for brands you know and some you’ll meet here first.'
       />
       {/* Proof first: the case study, dark, then the client rows in three
           groups on a light band. */}

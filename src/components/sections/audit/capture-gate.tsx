@@ -86,8 +86,7 @@ export function CaptureGate({
         </div>
 
         <p className='mt-grid-1 border-t border-border pt-grid-half text-sm text-text-muted'>
-          Reply to the email any time to talk to the engineers who&apos;d build
-          it.
+          Reply to the email any time to talk to the engineers who’d build it.
         </p>
       </div>
     </div>

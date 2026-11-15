@@ -847,7 +847,7 @@ const MODULE_PIECES: Record<
     part: ReportsPart,
   },
   client: {
-    alt: "The client's own view: 14.5 of 40 prepaid hours left, an open project and two invoices, one sent and one paid.",
+    alt: 'The client’s own view: 14.5 of 40 prepaid hours left, an open project and two invoices, one sent and one paid.',
     part: ClientPart,
   },
   forms: {
@@ -863,11 +863,11 @@ const MODULE_PIECES: Record<
     part: RolesPart,
   },
   activity: {
-    alt: "Today's activity log: who moved a task, logged time, sent an invoice and opened it, each with the time.",
+    alt: 'Today’s activity log: who moved a task, logged time, sent an invoice and opened it, each with the time.',
     part: ActivityPart,
   },
   search: {
-    alt: 'The search box with "north" typed in, finding a lead, a task, an invoice and a contact for Northwind Studio.',
+    alt: 'The search box with “north” typed in, finding a lead, a task, an invoice and a contact for Northwind Studio.',
     part: SearchPart,
   },
   undo: {
@@ -1165,7 +1165,7 @@ const SCREENS = [
     screen: ProjectTasksScreen,
   },
   {
-    alt: "The time log: this week's entries by date, task, person and hours, with each client's prepaid hours left beside it.",
+    alt: 'The time log: this week’s entries by date, task, person and hours, with each client’s prepaid hours left beside it.',
     screen: TimeLogScreen,
   },
   {
@@ -1173,7 +1173,7 @@ const SCREENS = [
     screen: InvoiceScreen,
   },
   {
-    alt: "October's monthly close: hours logged, invoices sent, paid and open, a close checklist and hours by client.",
+    alt: 'October’s monthly close: hours logged, invoices sent, paid and open, a close checklist and hours by client.',
     screen: MonthlyCloseScreen,
   },
 ]

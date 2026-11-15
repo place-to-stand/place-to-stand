@@ -220,7 +220,7 @@ export function EmailCaptureForm({
           htmlFor={consentId}
           className='text-base leading-snug font-normal tracking-normal text-text-muted normal-case'
         >
-          Also send me occasional updates about Place To Stand&apos;s work.
+          Also send me occasional updates about Place To Stand’s work.
           Unsubscribe any time.
         </Label>
       </div>
@@ -346,7 +346,7 @@ export function LeadDetailsForm({
           id='audit-details-message'
           rows={3}
           className='min-h-24 p-grid-half'
-          placeholder="What you're looking for, or what's not working today."
+          placeholder='What you’re looking for, or what’s not working today.'
           {...form.register('message')}
           aria-invalid={!!errors.message}
         />

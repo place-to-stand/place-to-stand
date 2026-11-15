@@ -14,7 +14,7 @@ export const HOME_PROOF = {
   label: 'Client Results',
   // A no-break space keeps "Hot Ones" on one line.
   title: 'Building the Hot\u00a0Ones and Heatonist stores since 2023.',
-  body: "Online stores and Shopify apps for Heatonist and its long-time partner, Hot Ones. Over 1,400 changes shipped so far, and we're still on the team.",
+  body: 'Online stores and Shopify apps for Heatonist and its long-time partner, Hot Ones. Over 1,400 changes shipped so far, and we’re still on the team.',
   links: [
     { label: 'Read the Heatonist case study', href: '/clients/heatonist' },
   ],
@@ -66,7 +66,7 @@ export const SOUND_FAMILIAR = {
 export const WHO_YOU_WORK_WITH_HOME = {
   label: 'Who You Work With',
   title: 'The people on the call build it.',
-  body: "No account managers and no handoffs. Humans decide what to build, AI agents write much of the code, and nothing ships until one of us has checked it. That's how we work up to 5x faster than a traditional team.",
+  body: 'No account managers and no handoffs. Humans decide what to build, AI agents write much of the code, and nothing ships until one of us has checked it. That’s how we work up to 5x faster than a traditional team.',
   /** Home's one line per founder, matched to src/lib/team.ts by name. */
   founders: {
     'Jason Desiderio':

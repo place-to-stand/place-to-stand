@@ -39,8 +39,8 @@ export default function BlogPage() {
             </p>
           </div>
           <p className='type-lead text-pretty lg:col-span-4 lg:col-start-9 lg:self-end'>
-            AI can produce an answer to anything now. What it can&apos;t give
-            you is a point of view. These are ours.
+            AI can produce an answer to anything now. What it can’t give you is
+            a point of view. These are ours.
           </p>
         </div>
       </Section>

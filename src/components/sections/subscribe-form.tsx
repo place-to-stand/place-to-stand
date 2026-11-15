@@ -23,8 +23,7 @@ export function SubscribeForm() {
       <div className='flex flex-col gap-grid-half lg:col-span-6 lg:col-start-7 lg:justify-center'>
         {state.status === 'success' ? (
           <p className='type-lead' role='status'>
-            You&apos;re subscribed. We&apos;ll email you when the next post is
-            up.
+            You’re subscribed. We’ll email you when the next post is up.
           </p>
         ) : (
           <form onSubmit={onSubmit} className='flex flex-col gap-grid-half'>

@@ -12,7 +12,7 @@ export const SERVICES: Record<ServiceId, ServiceDefinition> = {
     name: 'Workflows and automations',
     tagline: 'Stop doing by hand what software should do',
     description:
-      "Automate the repetitive, error-prone tasks eating your team's time.",
+      'Automate the repetitive, error-prone tasks eating your team’s time.',
     icon: 'Workflow',
   },
   'internal-tools': {
@@ -72,7 +72,7 @@ export const SERVICES: Record<ServiceId, ServiceDefinition> = {
     id: 'analytics-bi',
     name: 'Team workspace and Reports',
     tagline: 'Turn your data into decisions',
-    description: "One trustworthy view of what's happening and why.",
+    description: 'One trustworthy view of what’s happening and why.',
     icon: 'BarChart3',
   },
   'legacy-modernization': {

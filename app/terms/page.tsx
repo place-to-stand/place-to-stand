@@ -134,11 +134,11 @@ export default function TermsPage() {
 
             <LegalSection index={8} title='Confidentiality'>
               <p>
-                Each party will protect the other&apos;s confidential
-                information, use it only for the purpose of the engagement, and
-                not disclose it to anyone who does not need it. This does not
-                apply to information that is public, already known, or
-                independently developed, or where disclosure is required by law.
+                Each party will protect the other’s confidential information,
+                use it only for the purpose of the engagement, and not disclose
+                it to anyone who does not need it. This does not apply to
+                information that is public, already known, or independently
+                developed, or where disclosure is required by law.
               </p>
             </LegalSection>
 
@@ -163,12 +163,11 @@ export default function TermsPage() {
 
             <LegalSection index={11} title='Disclaimers'>
               <p>
-                This website and the Opportunity Audit are provided &quot;as
-                is&quot; and &quot;as available&quot;, without warranties of any
-                kind, whether express or implied, including implied warranties
-                of merchantability, fitness for a particular purpose, and
-                non-infringement. We do not warrant that the site will be
-                uninterrupted or error free.
+                This website and the Opportunity Audit are provided “as is” and
+                “as available”, without warranties of any kind, whether express
+                or implied, including implied warranties of merchantability,
+                fitness for a particular purpose, and non-infringement. We do
+                not warrant that the site will be uninterrupted or error free.
               </p>
               <p>
                 Warranties covering client deliverables, if any, are set out in
@@ -197,8 +196,8 @@ export default function TermsPage() {
               <p>
                 You agree to indemnify Place To Stand against claims, losses,
                 and reasonable costs arising from your misuse of this site, your
-                breach of these terms, or your infringement of a third
-                party&apos;s rights through material you provide to us.
+                breach of these terms, or your infringement of a third party’s
+                rights through material you provide to us.
               </p>
             </LegalSection>
 

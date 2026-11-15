@@ -213,7 +213,7 @@ export const CLIENT_GROUPS: ReadonlyArray<{
       {
         name: 'Betsy & Adam, Blondie Nites and Xscape Evenings',
         who: 'Three eveningwear brands under one owner.',
-        built: "We're the engineering team for all three Shopify stores.",
+        built: 'We’re the engineering team for all three Shopify stores.',
         sites: [
           site('Betsy & Adam'),
           site('Blondie Nites'),
@@ -281,7 +281,7 @@ export const CLIENT_GROUPS: ReadonlyArray<{
         name: 'Jeremy Turner',
         who: 'A composer for film and stage.',
         built:
-          "We built his studio's site and sites for two of his projects, Echo & Wave and Small Isles.",
+          'We built his studio’s site and sites for two of his projects, Echo & Wave and Small Isles.',
         sites: [site('Jeremy Turner')],
       },
       {

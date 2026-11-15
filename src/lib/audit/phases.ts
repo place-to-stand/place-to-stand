@@ -10,7 +10,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     name: 'Foundation',
     tagline: 'Validating the idea',
     description:
-      "You're early. The job is proving the concept, not building heavy systems yet.",
+      'You’re early. The job is proving the concept, not building heavy systems yet.',
     signals: [
       'Pre-revenue or first customers',
       'Running on notes and a few apps',
@@ -27,7 +27,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     name: 'Launch & Early Traction',
     tagline: 'Real customers, manual processes',
     description:
-      "It works, but it runs on spreadsheets and hustle, and it won't scale.",
+      'It works, but it runs on spreadsheets and hustle, and it won’t scale.',
     signals: [
       'Revenue, but everything is manual',
       'Spreadsheets and email run the show',
@@ -61,7 +61,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     name: 'Optimization & Efficiency',
     tagline: 'Ready to sharpen the engine',
     description:
-      "Systems are in place. Now it's about efficiency, data, and experience.",
+      'Systems are in place. Now it’s about efficiency, data, and experience.',
     signals: [
       'Established revenue, mature team',
       'Systems exist but could work harder',

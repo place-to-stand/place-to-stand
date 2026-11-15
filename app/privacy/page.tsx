@@ -38,7 +38,7 @@ export default function PrivacyPage() {
               </p>
               <p>
                 It does not cover work we perform under a signed client
-                agreement. Data we process on a client&apos;s behalf during an
+                agreement. Data we process on a client’s behalf during an
                 engagement is governed by that agreement, not by this policy.
               </p>
             </LegalSection>
@@ -105,11 +105,11 @@ export default function PrivacyPage() {
                 your submission rather than kept separate. That includes the
                 campaign or link that brought you to the site, such as UTM
                 parameters, a Google Ads click identifier, and the referring
-                page; your browser&apos;s user agent, screen size, time zone,
-                and language; and the identifiers our analytics tool uses for
-                that visit. Those identifiers include a link to a session
-                recording of the visit. If you later give us your email address,
-                it is held on the same record as all of the above.
+                page; your browser’s user agent, screen size, time zone, and
+                language; and the identifiers our analytics tool uses for that
+                visit. Those identifiers include a link to a session recording
+                of the visit. If you later give us your email address, it is
+                held on the same record as all of the above.
               </p>
               <p>
                 We also run automated bot detection on form submissions to block
@@ -245,7 +245,7 @@ export default function PrivacyPage() {
                 from, so we keep it for three years from the date you took it.
                 The copy saved in your own browser expires after seven days.
                 Mailing list entries are kept until you unsubscribe. Analytics
-                data is kept according to our providers&apos; standard retention
+                data is kept according to our providers’ standard retention
                 periods. Records we need for tax and accounting are kept as long
                 as the law requires.
               </p>
@@ -303,7 +303,7 @@ export default function PrivacyPage() {
               </p>
             </LegalSection>
 
-            <LegalSection index={12} title="Children's privacy">
+            <LegalSection index={12} title='Children’s privacy'>
               <p>
                 This site is intended for businesses and is not directed at
                 anyone under 16. We do not knowingly collect information from
