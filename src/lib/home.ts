@@ -86,7 +86,7 @@ export const SOUND_FAMILIAR = {
       },
     },
     {
-      name: 'On your tech team',
+      name: 'On the tech side',
       quotes: [
         'We need a developer but can’t hire one full\u2011time.',
         'Someone built this for\u00a0us and disappeared.',

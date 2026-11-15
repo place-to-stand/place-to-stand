@@ -11,7 +11,7 @@ import { cn } from '@/src/lib/utils'
 
 /**
  * Home's warning signs: "If your team is saying these", so the team says
- * them. Each place (back office, store, tech team) is a short chat whose
+ * them. Each place (back office, store, tech side) is a short chat whose
  * messages are the signals, and under it what we build for it and one
  * lime link (Nov 15).
  *
