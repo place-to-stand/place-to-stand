@@ -235,7 +235,7 @@ Other patterns:
   buttons or headings inside.
 - **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
 - **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or
-  name): a header with where it happens and how many people are in it, then messages with an initials avatar, name, role,
+  name): a header with where it happens, then messages with an initials avatar, name, role,
   time, and optional reactions and replies; a "New" divider above one message and a typing line at the end are
   optional. Messages appear one by one on first view; reduced motion shows them at once. Used by Home's warning
   signs, one chat per place, with the fix under each in a `SideNote`.

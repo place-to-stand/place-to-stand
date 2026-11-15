@@ -16,7 +16,7 @@ export type ChatMessage = {
 
 /**
  * A short team chat, in our own plain chat UI (not any real product's look
- * or name): a header with where it happens and how many people are in it, then the
+ * or name): a header with where it happens, then the
  * messages, each with an initials avatar, name, role and time. Optional: a
  * "New" divider above one message and a typing line at the end.
  *
@@ -81,9 +81,8 @@ export function TeamChat({
       aria-label={`${label}: a team chat`}
       className={cn('flex flex-col border border-border bg-bg-card', className)}
     >
-      <figcaption className='flex items-center justify-between gap-grid-half border-b border-border px-grid-1 py-grid-half font-mono text-xs tracking-[0.05em] uppercase'>
+      <figcaption className='border-b border-border px-grid-1 py-grid-half font-mono text-xs tracking-[0.05em] uppercase'>
         <span className='text-text'>{label}</span>
-        <span className='text-text-muted'>{people.length} people</span>
       </figcaption>
       <ol className='flex flex-col gap-grid-half px-grid-1 py-grid-1'>
         {messages.map((m, i) => {
