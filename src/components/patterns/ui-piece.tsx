@@ -25,6 +25,9 @@ const WIDTH = {
   md: 'max-w-sm',
   lg: 'max-w-md',
   full: 'max-w-none',
+  /** Home's Hot Ones lineup: 800/846 of the frame, so it matches the
+   *  Heatonist crop's scale beside it. */
+  lineup: 'max-w-[94.6%]',
 } as const
 
 export function UiPiece({
@@ -33,6 +36,7 @@ export function UiPiece({
   width = 'md',
   compact = false,
   screenshot = false,
+  tight = false,
   className,
   children,
 }: {
@@ -46,6 +50,9 @@ export function UiPiece({
   compact?: boolean
   /** A real screen capture, not HTML: no light surface around it. */
   screenshot?: boolean
+  /** Less padding on the stage, so a screenshot fills most of it (Home's
+   *  proof pair). */
+  tight?: boolean
   className?: string
   children: ReactNode
 }) {
@@ -55,8 +62,13 @@ export function UiPiece({
         role='img'
         aria-label={alt}
         className={cn(
-          'relative flex flex-1 items-center justify-center bg-bg-card px-card py-grid-2 md:px-grid-2',
-          compact ? 'md:py-grid-2' : 'md:py-grid-3'
+          'relative flex flex-1 items-center justify-center bg-bg-card',
+          tight
+            ? 'p-grid-1'
+            : cn(
+                'px-card py-grid-2 md:px-grid-2',
+                compact ? 'md:py-grid-2' : 'md:py-grid-3'
+              )
         )}
       >
         <BlueprintCorners size={20} all />

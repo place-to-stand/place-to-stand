@@ -35,10 +35,13 @@ export function ProofSection() {
           ))}
         </div>
       </Reveal>
-      <Reveal index={1} className='grid gap-grid-1 lg:grid-cols-[1.8fr_1.93fr]'>
+      {/* A matched pair: equal frames, the same tight padding, and both
+          crops at the same scale (Heatonist's is 846px of its page, Hot
+          Ones' 800px, so the lineup runs at 800/846 of the frame). */}
+      <Reveal index={1} className='grid gap-grid-1 lg:grid-cols-2'>
         <UiPiece
           screenshot
-          compact
+          tight
           width='full'
           alt='A Heatonist collection page: the filter panel (heat from Mild to Hottest, then availability, type, diet, fruit, garlic and more) beside the Hot Ones 10 pack and trio pack with their prices.'
           caption='Search and filters · heatonist.com'
@@ -48,13 +51,13 @@ export function ProofSection() {
             alt=''
             width={1692}
             height={1214}
-            sizes='(min-width: 1440px) 640px, (min-width: 1024px) 47vw, (min-width: 768px) 90vw, 75vw'
+            sizes='(min-width: 1440px) 612px, (min-width: 1024px) 45vw, (min-width: 768px) 90vw, 85vw'
           />
         </UiPiece>
         <UiPiece
           screenshot
-          compact
-          width='full'
+          tight
+          width='lineup'
           alt='The Hot Ones lineup on hotones.com: the first five sauces of the Season 31 pack, numbered by heat.'
           caption='The lineup · hotones.com'
         >
@@ -63,7 +66,7 @@ export function ProofSection() {
             alt=''
             width={1600}
             height={828}
-            sizes='(min-width: 1440px) 680px, (min-width: 1024px) 50vw, (min-width: 768px) 90vw, 75vw'
+            sizes='(min-width: 1440px) 580px, (min-width: 1024px) 43vw, (min-width: 768px) 85vw, 80vw'
           />
         </UiPiece>
       </Reveal>
