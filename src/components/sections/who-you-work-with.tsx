@@ -44,7 +44,7 @@ export function WhoYouWorkWithSection() {
                   className='object-cover'
                 />
               </MediaFrame>
-              <div className='flex flex-col gap-grid-half'>
+              <div className='flex flex-col gap-2'>
                 <h3 className='type-card-title'>{member.name}</h3>
                 <span className='type-fine'>{member.title}</span>
               </div>
