@@ -92,7 +92,7 @@ export const SOUND_FAMILIAR = {
         'We built it with AI and now it keeps breaking.',
       ],
       build:
-        'Senior engineers who stick around. We can pick up where others left off, make AI-built code solid, and work beside your\u00a0developers.',
+        'Senior engineers who stick around. We’re able to pick up where others left off, make AI-built code solid, and work alongside your\u00a0developers.',
       link: { label: 'Engineering help', href: '/platform#senior-help' },
       chat: {
         people: [
