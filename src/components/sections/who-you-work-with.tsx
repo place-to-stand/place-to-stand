@@ -24,32 +24,35 @@ export function WhoYouWorkWithSection() {
         className='flex flex-col gap-grid-1 lg:col-span-5 lg:gap-grid-2'
       >
         <SectionHeading label={WHO.label} title={WHO.title} intro={WHO.body} />
-        {/* Proof: two clients in their own words (public Google reviews),
-            at the intro's size and width so the column keeps one right
-            edge, each credited with a link to read it on Google. About us
-            is the one action. */}
-        <ul className='flex flex-col gap-grid-1'>
-          {WHO.reviews.picks.map(r => (
-            <li key={r.name} className='flex flex-col gap-2'>
-              <blockquote className='max-w-2xl type-intro text-balance text-text'>
-                &ldquo;{r.text}&rdquo;
-              </blockquote>
-              <p className='flex flex-wrap items-baseline gap-x-grid-1 gap-y-1'>
-                <span className='type-fine'>{r.name}</span>
-                <TrackedLink
-                  href={WHO.reviews.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  location='home-who-reviews'
-                  className='link-nav'
-                >
-                  Read on Google ↗
-                  <span className='sr-only'> (opens in a new tab)</span>
-                </TrackedLink>
-              </p>
-            </li>
-          ))}
-        </ul>
+        {/* Two groups: the promise, then the proof. What clients say, in
+            a lighter weight than the intro, each
+            credited with a link to read it on Google. About us is the one
+            action. */}
+        <div className='flex flex-col gap-grid-1'>
+          <span className='type-fine'>What clients say</span>
+          <ul className='flex flex-col gap-grid-1'>
+            {WHO.reviews.picks.map(r => (
+              <li key={r.name} className='flex flex-col gap-2'>
+                <blockquote className='max-w-2xl type-lead font-light text-balance'>
+                  &ldquo;{r.text}&rdquo;
+                </blockquote>
+                <p className='flex flex-wrap items-baseline gap-x-grid-1 gap-y-1'>
+                  <span className='type-fine'>{r.name}</span>
+                  <TrackedLink
+                    href={WHO.reviews.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    location='home-who-reviews'
+                    className='link-nav'
+                  >
+                    Read on Google ↗
+                    <span className='sr-only'> (opens in a new tab)</span>
+                  </TrackedLink>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
         <ArrowLink href='/about'>About us</ArrowLink>
       </Reveal>
       <Reveal index={1} className='lg:col-span-7'>
