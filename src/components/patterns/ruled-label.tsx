@@ -5,8 +5,8 @@ import { cn } from '@/src/lib/utils'
  * A blueprint-style annotation over a group: a short mono caps label in the
  * text color, then a 1px hairline in the structure line color running from
  * the label's end to the group's right edge, centered on the text. It names
- * a group inside a section (for example the quotes in Home's "Who you work
- * with"); it is not a section label (that's the lime `bp-label`).
+ * a group inside a section (for example a group of quotes, as on /design);
+ * it is not a section label (that's the lime `bp-label`).
  */
 export function RuledLabel({
   as: Tag = 'h3',

@@ -241,7 +241,7 @@ Other patterns:
   Google ↗", words in `link-label` so the bar runs under them only and the arrow nudges on hover). The mark and stars use `accent-line`: ink on light bands, lime on dark. No box, bar or rule; stack
   quotes `gap-grid-1` apart. Used by Home's "Who you work with".
 - **`RuledLabel`** (`patterns/ruled-label.tsx`): a blueprint-style annotation that names a group inside a section,
-  such as the quotes in Home's "Who you work with". A mono caps label (`type-fine` in the text color, an `h3` by
+  such as a group of quotes (shown on /design). A mono caps label (`type-fine` in the text color, an `h3` by
   default) and a 1px hairline in the `border` color running from the label's end to the group's right edge, centered
   on the text, `grid-half` apart. Not a section label (that's the lime `bp-label`).
 - **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or

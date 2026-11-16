@@ -5,7 +5,6 @@ import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { Card } from '@/src/components/boxes'
 import { Quote } from '@/src/components/patterns/quote'
-import { RuledLabel } from '@/src/components/patterns/ruled-label'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { team } from '@/src/lib/team'
 import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
@@ -36,7 +35,6 @@ export function WhoYouWorkWithSection() {
             className='[&>p]:max-w-[26.5rem] [&>p]:text-pretty'
           />
           <div className='flex max-w-[26.5rem] flex-col gap-grid-1 xl:mt-auto xl:mb-grid-1'>
-            <RuledLabel>Don’t just take our word for&nbsp;it</RuledLabel>
             <ul className='flex flex-col gap-grid-1'>
               {WHO.reviews.picks.map(r => (
                 <li key={r.name}>
