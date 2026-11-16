@@ -71,13 +71,7 @@ export function SoundFamiliarSection() {
               {line}
             </span>
           ))}
-          // The first sentence stands on its own line; the rest starts a
-          // new one.
-          intro={SOUND_FAMILIAR.intro.split(/(?<=\.) (?=Each)/).map(part => (
-            <span key={part} className='block'>
-              {part}
-            </span>
-          ))}
+          intro={SOUND_FAMILIAR.intro}
         />
       </Reveal>
       <ul
