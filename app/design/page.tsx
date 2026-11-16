@@ -676,7 +676,7 @@ export default function DesignPage() {
             id='chat'
             label='Patterns'
             title='Team chat'
-            when='A short team chat in our own plain chat UI, for showing what people say at work (Home’s warning signs). Where it happens on top, then messages with initials, name, role and time; reactions, replies, a New divider and a typing line are optional. Messages appear one by one on first view.'
+            when='A short team chat in our own plain chat UI, for showing what people say at work (Home’s warning signs). Where it happens on top, then messages with initials, name, role and time; reactions, replies, a New divider and a typing line are optional. On first view the messages arrive one by one at the bottom and push the earlier ones up, as in Slack.'
           >
             <Specimen
               names={['TeamChat', 'BlockAvatar']}

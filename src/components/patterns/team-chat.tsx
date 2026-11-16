@@ -1,7 +1,7 @@
 /* eslint-disable design/no-raw-border -- a chat window rebuilt in HTML (Home's warning signs): its header rule, avatars, reaction chips and "New" divider are the UI being shown, like the client widgets. */
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { cn } from '@/src/lib/utils'
 import { BlockAvatar, hasBlockAvatar } from './block-avatars'
 
@@ -23,9 +23,14 @@ export type ChatMessage = {
  *
  * The messages sit at the bottom of the window, newest last, as in any
  * chat, so a window taller than its messages leaves the space above them.
- * They appear one by one the first time the window scrolls into
- * view (or is swiped into view); with reduced motion they're simply there.
+ * The first time the window scrolls (or is swiped) into view the chat plays
+ * like Slack: each message arrives at the bottom and pushes the ones above
+ * it up, its reactions landing a beat later. Transform only, so the window
+ * never changes size; with reduced motion every message is simply there.
  */
+/** Time between arrivals, Slack-quick but slow enough to read along. */
+const STEP = 650
+
 export function TeamChat({
   label,
   people,
@@ -46,15 +51,30 @@ export function TeamChat({
   className?: string
 }) {
   const ref = useRef<HTMLElement>(null)
-  const [shown, setShown] = useState(false)
+  const listRef = useRef<HTMLOListElement>(null)
+  // How many rows (the New divider, messages, the typing line) have
+  // arrived; -1 until the window first comes into view.
+  const total =
+    messages.length +
+    (newBefore !== undefined ? 1 : 0) +
+    (typing !== undefined ? 1 : 0)
+  const [count, setCount] = useState(-1)
+  const [offset, setOffset] = useState(0)
 
+  // Start playing the first time the window is at least a third on screen
+  // (this fires at once if it already is on load). Reduced motion: every
+  // row is simply there.
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const id = requestAnimationFrame(() => setCount(total))
+      return () => cancelAnimationFrame(id)
+    }
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setShown(true)
+          setCount(0)
           io.disconnect()
         }
       },
@@ -62,19 +82,57 @@ export function TeamChat({
     )
     io.observe(el)
     return () => io.disconnect()
-  }, [])
+  }, [total])
 
-  // Each row (message, divider, typing line) fades in after the one before.
+  // Then one row arrives every STEP ms, Slack style.
+  useEffect(() => {
+    if (count < 0 || count >= total) return
+    const t = setTimeout(() => setCount(c => c + 1), count === 0 ? 150 : STEP)
+    return () => clearTimeout(t)
+  }, [count, total])
+
+  // The list sits at the window's bottom; rows that haven't arrived are
+  // pushed below it (clipped), so each arrival slides the list up by one
+  // row: the new one rises in at the bottom and the rest move up. Measured
+  // from layout (offsetTop ignores transforms), redone on resize.
+  useLayoutEffect(() => {
+    const measure = () => {
+      const r = Array.from(
+        listRef.current?.querySelectorAll<HTMLElement>(':scope > [data-row]') ??
+          []
+      )
+      const last = r[total - 1]
+      if (!last || count >= total) return setOffset(0)
+      const end = last.offsetTop + last.offsetHeight
+      if (count <= 0) {
+        const first = r[0]
+        const list = listRef.current
+        return setOffset(
+          end - (first ? first.offsetTop : 0) + (list ? list.offsetHeight : 0)
+        )
+      }
+      const shownLast = r[count - 1]
+      setOffset(
+        shownLast ? end - (shownLast.offsetTop + shownLast.offsetHeight) : 0
+      )
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [count, total])
+
+  // Each row fades in as it arrives; its reactions land a beat later.
   let step = 0
   const reveal = () => {
-    const delay = step++ * 380
+    const i = step++
+    const here = count > i
     return {
+      'data-row': '',
+      here,
       className: cn(
-        'transition-[opacity,translate] duration-(--motion-enter) ease-(--ease-standard)',
-        shown ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-0',
-        'motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none'
+        'transition-opacity duration-(--motion-base) ease-(--ease-enter) motion-reduce:transition-none',
+        here ? 'opacity-100' : 'opacity-0'
       ),
-      style: { transitionDelay: shown ? `${delay}ms` : '0ms' },
     }
   }
 
@@ -89,67 +147,85 @@ export function TeamChat({
       </figcaption>
       {/* Anchored to the bottom, like any chat: if the window is taller
           than its messages, the space sits above them. */}
-      <ol className='mt-auto flex flex-col gap-grid-1 px-grid-1 py-grid-1'>
-        {messages.map((m, i) => {
-          const person = people[m.by]
-          const divider = i === newBefore ? reveal() : null
-          const row = (
-            <li key={i} {...reveal()}>
-              <div className='flex gap-grid-half'>
-                <Avatar name={person.name} tone={m.by} />
-                <div className='flex min-w-0 flex-col gap-1.5'>
-                  <p className='flex flex-wrap items-baseline gap-x-2 leading-snug'>
-                    <span className='text-base font-semibold text-text'>
-                      {person.name}
-                    </span>
-                    <span className='text-sm text-text-muted'>
-                      {person.role} · {m.time}
-                    </span>
-                  </p>
-                  {/* Plain wrapping, not the site's "pretty" wrap, so a
+      {/* The clip: rows that haven't arrived wait below the list, out of
+          sight. Around the list only, so the window keeps its size. */}
+      <div className='mt-auto overflow-hidden'>
+        <ol
+          ref={listRef}
+          style={{ transform: `translateY(${offset}px)` }}
+          className='flex flex-col gap-grid-1 px-grid-1 py-grid-1 transition-transform duration-(--motion-base) ease-(--ease-enter) motion-reduce:transition-none'
+        >
+          {messages.map((m, i) => {
+            const person = people[m.by]
+            const divider = i === newBefore ? reveal() : null
+            const { here, ...rowProps } = reveal()
+            const row = (
+              <li key={i} {...rowProps}>
+                <div className='flex gap-grid-half'>
+                  <Avatar name={person.name} tone={m.by} />
+                  <div className='flex min-w-0 flex-col gap-1.5'>
+                    <p className='flex flex-wrap items-baseline gap-x-2 leading-snug'>
+                      <span className='text-base font-semibold text-text'>
+                        {person.name}
+                      </span>
+                      <span className='text-sm text-text-muted'>
+                        {person.role} · {m.time}
+                      </span>
+                    </p>
+                    {/* Plain wrapping, not the site's "pretty" wrap, so a
                       message uses the window's full width. */}
-                  <p className='text-base leading-[1.3] text-wrap text-text'>
-                    {/* The last two words travel together, so no line ends
+                    <p className='text-base leading-[1.3] text-wrap text-text'>
+                      {/* The last two words travel together, so no line ends
                         on one word. */}
-                    {m.text.replace(/ (\S+)$/, '\u00a0$1')}
-                  </p>
-                  {(m.reactions || m.replies) && (
-                    <div className='flex flex-wrap items-center gap-2 pt-2'>
-                      {m.reactions?.map(([emoji, n]) => (
-                        <Reaction key={emoji} emoji={emoji} count={n} />
-                      ))}
-                      {m.replies && (
-                        <span className='text-sm font-semibold text-accent'>
-                          {m.replies} replies
-                        </span>
-                      )}
-                    </div>
-                  )}
+                      {m.text.replace(/ (\S+)$/, '\u00a0$1')}
+                    </p>
+                    {(m.reactions || m.replies) && (
+                      <div
+                        className={cn(
+                          'flex flex-wrap items-center gap-2 pt-2 transition-opacity delay-(--motion-base) duration-(--motion-base) ease-(--ease-enter) motion-reduce:transition-none',
+                          here ? 'opacity-100' : 'opacity-0'
+                        )}
+                      >
+                        {m.reactions?.map(([emoji, n]) => (
+                          <Reaction key={emoji} emoji={emoji} count={n} />
+                        ))}
+                        {m.replies && (
+                          <span className='text-sm font-semibold text-accent'>
+                            {m.replies} replies
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </li>
-          )
-          if (!divider) return row
-          return [
-            <li
-              key={`new-${i}`}
-              aria-label='New messages'
-              style={divider.style}
-              className={cn(
-                divider.className,
-                'flex items-center gap-2 font-mono text-xs text-accent'
-              )}
-            >
-              <span aria-hidden className='h-px flex-1 bg-accent-line' />
-              <span aria-hidden>New</span>
-            </li>,
-            row,
-          ]
-        })}
-        {typing !== undefined && (
-          <TypingRow {...reveal()} name={people[typing].name} />
-        )}
-      </ol>
+              </li>
+            )
+            if (!divider) return row
+            return [
+              <li
+                key={`new-${i}`}
+                data-row=''
+                aria-label='New messages'
+                className={cn(
+                  divider.className,
+                  'flex items-center gap-2 font-mono text-xs text-accent'
+                )}
+              >
+                <span aria-hidden className='h-px flex-1 bg-accent-line' />
+                <span aria-hidden>New</span>
+              </li>,
+              row,
+            ]
+          })}
+          {typing !== undefined &&
+            (() => {
+              const { className } = reveal()
+              return (
+                <TypingRow className={className} name={people[typing].name} />
+              )
+            })()}
+        </ol>
+      </div>
     </figure>
   )
 }
@@ -195,18 +271,10 @@ function Reaction({ emoji, count }: { emoji: string; count: number }) {
   )
 }
 
-function TypingRow({
-  name,
-  className,
-  style,
-}: {
-  name: string
-  className: string
-  style: React.CSSProperties
-}) {
+function TypingRow({ name, className }: { name: string; className: string }) {
   return (
     <li
-      style={style}
+      data-row=''
       className={cn(
         className,
         'flex items-center gap-2 pl-grid-2 text-sm text-text-muted'

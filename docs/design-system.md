@@ -247,7 +247,7 @@ Other patterns:
 - **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or
   name): a header with where it happens, then messages with a small geometric portrait (`block-avatars.tsx`: circle head, rounded hair and shoulders, flat fills; initials as a fallback), name, role,
   time, and optional reactions and replies; a "New" divider above one message and a typing line at the end are
-  optional. Messages appear one by one on first view; reduced motion shows them at once. Used by Home's warning
+  optional. On first view the chat plays like Slack: each message arrives at the bottom (250ms, ease-enter, 650ms apart) and pushes the earlier ones up, its reactions landing a beat later; transform only, so the window never changes size. Reduced motion shows them at once. Used by Home's warning
   signs, one chat per place, with the fix under each as a plain block inset to the chat's content edges and a lime
   link.
 - **`SplitSection`** (`patterns/split-section.tsx`, proposed Nov 15, not yet used on any page; shown on /design): the asymmetric
