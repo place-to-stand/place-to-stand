@@ -113,7 +113,7 @@ export const SOUND_FAMILIAR = {
 export const WHO_YOU_WORK_WITH_HOME = {
   label: 'Who You Work With',
   title: 'The people on the call build it.',
-  body: 'No account managers or project managers in between. You talk to the engineers who build it, so nothing gets lost along the way.',
+  body: 'No account managers and no middlemen. You talk to the engineers who build it, so nothing gets lost along the way.',
   /** Home's one line per founder, matched to src/lib/team.ts by name. */
   founders: {
     'Jason Desiderio':
