@@ -5,6 +5,7 @@ import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { Card } from '@/src/components/boxes'
 import { Quote } from '@/src/components/patterns/quote'
+import { RuledLabel } from '@/src/components/patterns/ruled-label'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { team } from '@/src/lib/team'
 import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
@@ -24,17 +25,18 @@ export function WhoYouWorkWithSection() {
             promise at the top, the quotes pinned to the bottom so the last
             credit lines up with the cards' bottom edge. The intro and the
             quotes share one measure, so the column has one right edge. */}
-        <Reveal index={0} className='flex flex-col gap-grid-2 xl:col-span-5'>
+        <Reveal
+          index={0}
+          className='flex flex-col gap-grid-2 xl:col-span-5 xl:gap-grid-1'
+        >
           <SectionHeading
             label={WHO.label}
             title={WHO.title}
             intro={WHO.body}
             className='[&>p]:max-w-[26.5rem] [&>p]:text-pretty'
           />
-          <div className='flex max-w-[26.5rem] flex-col gap-grid-1 xl:mt-auto'>
-            <h3 className='type-card-title text-balance text-text'>
-              Don’t just take our word for&nbsp;it
-            </h3>
+          <div className='flex max-w-[26.5rem] flex-col gap-grid-1 xl:mt-auto xl:mb-grid-1'>
+            <RuledLabel>Don’t just take our word for&nbsp;it</RuledLabel>
             <ul className='flex flex-col gap-grid-1'>
               {WHO.reviews.picks.map(r => (
                 <li key={r.name}>
@@ -48,7 +50,7 @@ export function WhoYouWorkWithSection() {
                         target='_blank'
                         rel='noopener noreferrer'
                         location='home-who-reviews'
-                        className='link-action'
+                        className='link-action text-text-muted hover:text-text'
                       >
                         <span className='link-label'>Read on Google</span>{' '}
                         <span aria-hidden className='link-out'>

@@ -236,10 +236,14 @@ Other patterns:
 - **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
 - **`Quote`** (`patterns/quote.tsx`): a client in their own words. A large opening quote mark (Space Grotesk, the
   section-title size) sits about 12px above the quote's first line, which is medium-weight body text (`text-base`, 500) with no quote
-  marks of its own and no closing mark. Then a credit line: the name in `type-fine`, optional `rating` (that many
-  small solid stars, read out once as "N out of 5 stars") and an optional `source` (e.g. a `link-action` "Read on
+  marks of its own and no closing mark. Then a credit line: the name in `type-fine` in the text color (the strongest part of the line), optional `rating` (that many
+  small solid stars, read out once as "N out of 5 stars") and an optional `source` (e.g. a muted `link-action` "Read on
   Google ↗", words in `link-label` so the bar runs under them only and the arrow nudges on hover). The mark and stars use `accent-line`: ink on light bands, lime on dark. No box, bar or rule; stack
   quotes `gap-grid-1` apart. Used by Home's "Who you work with".
+- **`RuledLabel`** (`patterns/ruled-label.tsx`): a blueprint-style annotation that names a group inside a section,
+  such as the quotes in Home's "Who you work with". A mono caps label (`type-fine` in the text color, an `h3` by
+  default) and a 1px hairline in the `border` color running from the label's end to the group's right edge, centered
+  on the text, `grid-half` apart. Not a section label (that's the lime `bp-label`).
 - **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or
   name): a header with where it happens, then messages with a small geometric portrait (`block-avatars.tsx`: circle head, rounded hair and shoulders, flat fills; initials as a fallback), name, role,
   time, and optional reactions and replies; a "New" divider above one message and a typing line at the end are

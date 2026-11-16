@@ -38,6 +38,7 @@ import { DesignGroup, DesignSection, Specimen } from './_components/specimen'
 import { SplitSection } from '@/src/components/patterns/split-section'
 import { TeamChat } from '@/src/components/patterns/team-chat'
 import { Quote } from '@/src/components/patterns/quote'
+import { RuledLabel } from '@/src/components/patterns/ruled-label'
 import {
   BLOCK_AVATAR_NAMES,
   BlockAvatar,
@@ -642,16 +643,24 @@ export default function DesignPage() {
             id='quote'
             label='Patterns'
             title='Quote'
-            when='A client in their own words: a large opening quote mark, the quote in medium-weight body text, then a mono name with optional stars and a source link. The mark and stars use accent-line, ink on light and lime on dark. No box, bar or rule; stack quotes 24px apart.'
+            when='A client in their own words: a large opening quote mark, the quote in medium-weight body text, then the name (mono, text color) with optional stars and a quieter source link. A group of quotes can open with a RuledLabel: a mono caps label and a 1px hairline to the group’s right edge. The mark and stars use accent-line, ink on light and lime on dark. No box, bar or rule; stack quotes 24px apart.'
           >
-            <Specimen names={['Quote', 'rating', 'source']} tones stack>
-              <div className='max-w-xl'>
+            <Specimen
+              names={['Quote', 'rating', 'source', 'RuledLabel']}
+              tones
+              stack
+            >
+              <div className='flex max-w-xl flex-col gap-grid-1'>
+                <RuledLabel>Don’t just take our word for&nbsp;it</RuledLabel>
                 <Quote
                   text='They ask the right questions, understand not just what needs to be built, but why.'
                   name='Dan A.'
                   rating={5}
                   source={
-                    <a href='#quote' className='link-action'>
+                    <a
+                      href='#quote'
+                      className='link-action text-text-muted hover:text-text'
+                    >
                       <span className='link-label'>Read on Google</span>{' '}
                       <span aria-hidden className='link-out'>
                         ↗

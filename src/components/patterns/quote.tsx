@@ -34,7 +34,7 @@ export function Quote({
         {text}
       </blockquote>
       <figcaption className='flex flex-wrap items-baseline gap-x-2 gap-y-1'>
-        <span className='type-fine'>{name}</span>
+        <span className='type-fine text-text'>{name}</span>
         {rating !== undefined && (
           <span
             role='img'
