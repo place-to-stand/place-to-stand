@@ -15,7 +15,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 
 **When not to.** Off-the-shelf software already fits, or the need is a single full-time hire.
 
-**How it works.** A free 30-minute intro call to check fit; a 1-hour discovery session; 1 to 2 weeks meeting the team, then a written plan and estimate; the biggest pain fixed in 2 to 6 weeks, built all the way and in daily use; then the next fix, in days, because the data is already in one place. Humans decide what to build, AI agents write much of the code, and nothing ships until one of the engineers has checked it, which is how the team works up to 5x faster than a traditional one.
+**How it works.** A free 30-minute intro call to check fit; a 1-hour discovery session; 1 to 2 weeks meeting the team, then a written plan and estimate; the most important piece shipped in 2 to 6 weeks, built all the way and in daily use; then further releases, each building on the last and faster because the data is already in one place. Projects can be one fix or a whole new system. Humans decide what to build, AI agents write much of the code, and nothing ships until one of the engineers has checked it, which is how the team works up to 5x faster than a traditional one.
 
 **How billing works.** Clients pay only for the hours a person spends on their work. Hours come in prepaid blocks, five to start. They aren't refunded, but they never expire. AI tools and agents cost nothing extra, and neither do features the portal already has: clients pay only for the time to set them up and change them. There is no contract: walk away any time and keep everything that was built.
 

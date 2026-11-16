@@ -258,19 +258,20 @@ export const STEPS: Step[] = [
   },
   {
     number: '04',
-    name: 'First fix',
+    name: 'First release',
     time: '2 to 6 weeks',
-    summary: 'Built all the way and in daily use, not a demo.',
+    summary:
+      'The most important piece, built all the way and in daily use. Not a demo.',
     detail:
-      'We build it all the way, connect it to the tools you keep, and put it into daily use. Not a demo.',
+      'We build the most important piece all the way, connect it to the tools you keep, and put it into daily use. Not a demo.',
   },
   {
     number: '05',
-    name: 'Then the next one',
-    time: 'Days each',
-    summary: 'Your data is already in one place, so each fix goes faster.',
+    name: 'Keep building',
+    time: 'Ongoing',
+    summary: 'Each release builds on the last, so the work speeds up.',
     detail:
-      'Your data already sits in one place, so each next fix goes faster.',
+      'Each release builds on the last, and your data already sits in one place, so the work speeds up.',
   },
 ]
 
@@ -306,7 +307,7 @@ export const PAYMENT = {
 export const FAQ = [
   {
     q: 'How soon will something work?',
-    a: 'The first fix is usually in daily use within 2 to 6 weeks.',
+    a: 'The first release is usually in daily use within 2 to 6 weeks.',
   },
   {
     q: 'Do I have to replace my software?',

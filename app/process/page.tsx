@@ -19,7 +19,7 @@ import { BookCallGroup } from '@/src/components/primitives/cta'
 export const metadata: Metadata = pageMetadata({
   title: 'Process',
   description:
-    'How we work: a free 30-minute intro call, a one-hour discovery session, time with your team, the biggest pain fixed first, then the next. You pay only for people’s time.',
+    'How we work: a free 30-minute intro call, a one-hour discovery session, time with your team, the most important piece shipped first, then more. You pay only for people’s time.',
   path: '/process',
 })
 
@@ -37,7 +37,7 @@ export default function ProcessPage() {
         sectionClassName='flex flex-col gap-stack pb-grid-2'
         label='Process'
         title='We start with the people, not a feature list.'
-        intro='Most software fails because no one asked the people who use it. So we meet them first, fix what hurts most, and grow from there.'
+        intro='Most software fails because no one asked the people who use it. So we meet them first, ship what matters most, and build from there.'
       >
         <BookCallGroup
           location='process-hero'
