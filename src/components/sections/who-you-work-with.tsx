@@ -4,6 +4,7 @@ import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { Card } from '@/src/components/boxes'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { team } from '@/src/lib/team'
 import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
 
@@ -23,7 +24,32 @@ export function WhoYouWorkWithSection() {
         className='flex flex-col gap-grid-1 lg:col-span-5 lg:gap-grid-2'
       >
         <SectionHeading label={WHO.label} title={WHO.title} intro={WHO.body} />
-        <ArrowLink href='/about'>About us</ArrowLink>
+        {/* Proof: two clients in their own words (public Google reviews),
+            then the rating as a link and About us. */}
+        <ul className='flex flex-col gap-grid-1'>
+          {WHO.reviews.picks.map(r => (
+            <li key={r.name} className='flex flex-col gap-2'>
+              <blockquote className='type-lead'>
+                &ldquo;{r.text}&rdquo;
+              </blockquote>
+              <span className='type-fine'>{r.name}</span>
+            </li>
+          ))}
+        </ul>
+        <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
+          <TrackedLink
+            href={WHO.reviews.url}
+            target='_blank'
+            rel='noopener noreferrer'
+            location='home-who-reviews'
+            className='link-action'
+          >
+            <span className='link-label'>{WHO.reviews.label}</span>{' '}
+            <span aria-hidden>→</span>
+            <span className='sr-only'> (opens in a new tab)</span>
+          </TrackedLink>
+          <ArrowLink href='/about'>About us</ArrowLink>
+        </div>
       </Reveal>
       <Reveal index={1} className='lg:col-span-7'>
         <ul className='grid gap-grid-1 md:grid-cols-2'>

@@ -121,6 +121,23 @@ export const WHO_YOU_WORK_WITH_HOME = {
     'Kris Crawford':
       'Designed physical systems built to last decades; now he builds software that holds up just as well. After ten years running his own businesses, he knows what yours needs.',
   } as Record<string, string>,
+  /** Excerpts from our public Google reviews (read Nov 15, 2026; 5.0 from
+   *  9 reviews, all 5 stars). The reviewers' own words, trimmed with an
+   *  ellipsis where marked. */
+  reviews: {
+    label: '5.0 from 9 Google reviews',
+    url: 'https://share.google/zRPxFMqfA8RshzAjR',
+    picks: [
+      {
+        text: 'They ask the right questions, understand not just what needs to be built, but why… It genuinely feels like they’re part of our team rather than an outside company.',
+        name: 'Dan A.',
+      },
+      {
+        text: 'Jason and Kris have been fantastic to work with… always responsive and willing to jump on a call to help us find the best solutions.',
+        name: 'Eric C.',
+      },
+    ],
+  },
 } as const
 
 /** Home's "How it works" intro: moved here from "Who you work with" (Nov 15)
