@@ -310,7 +310,7 @@ Voice and Imagery are agreed. The others are not yet defined: each lists what th
 Approved Nov 10:
 
 1. **Color.** Natural. No filters on photos or screenshots; logos keep their one-color treatment.
-2. **Shapes.** Three only, through MediaFrame: 16:10 for work, 1:1 for people, 21:9 for full-width moments.
+2. **Shapes.** Four only, through MediaFrame: 16:10 for work, 1:1 for people, 4:5 for people shown large (Home's founders), 21:9 for full-width moments.
 3. **What goes where.** Photos show the client’s world. Screenshots show software we built, always in a frame. Drawings explain how something works, never decoration.
 4. **Founder photos.** Matching light and background.
 5. **Alt text.** Describe what the work shows; alt="" only for pure texture.
@@ -319,7 +319,7 @@ Approved Nov 13:
 
 6. **Lifted-out pieces.** Client work and the portal are shown as lifted-out pieces of real UI (UiPiece): one piece of the screen, enlarged and layered on the blueprint, built as HTML, sample data only. No full-page screenshots or lifestyle photos in new sections.
 
-Every photo, screenshot and video sits in `MediaFrame` (`patterns/media-frame.tsx`): `shape='work'` (16:10), `'person'` (1:1) or `'wide'` (21:9), with `wideFrom` to switch to 21:9 from a breakpoint up. `design/no-raw-aspect` fails any other aspect ratio; drawings that need their own box say so in a disable comment.
+Every photo, screenshot and video sits in `MediaFrame` (`patterns/media-frame.tsx`): `shape='work'` (16:10), `'person'` (1:1), `'portrait'` (4:5) or `'wide'` (21:9), with `wideFrom` to switch to 21:9 from a breakpoint up. `design/no-raw-aspect` fails any other aspect ratio; drawings that need their own box say so in a disable comment.
 
 ### Icons
 

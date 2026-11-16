@@ -3,9 +3,10 @@ import { cn } from '@/src/lib/utils'
 
 /**
  * The one frame for photos, screenshots and video (Guidelines > Imagery).
- * Three shapes only:
+ * Four shapes only:
  * - work: 16:10, client work and screenshots.
- * - person: 1:1, people.
+ * - person: 1:1, people (small).
+ * - portrait: 4:5, people shown large (Home's founders).
  * - wide: 21:9, full-width moments.
  * `wideFrom` switches a frame to 21:9 from a breakpoint up (a full-width
  * moment that would be a sliver on a phone stays 16:10 there).
@@ -17,6 +18,7 @@ import { cn } from '@/src/lib/utils'
 const SHAPE = {
   work: 'aspect-[16/10]',
   person: 'aspect-square',
+  portrait: 'aspect-[4/5]',
   wide: 'aspect-[21/9]',
 } as const
 const WIDE_FROM = {

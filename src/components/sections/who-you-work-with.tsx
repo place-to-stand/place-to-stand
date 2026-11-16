@@ -9,8 +9,8 @@ import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
 
 /**
  * Home's "Who you work with": the promise on the left, the two founders on
- * the right, each with today's photo, title and Home's one line (not the
- * About bio).
+ * the right, each a card with a 4:5 portrait across its width, then the
+ * name, title and Home's one line (not the About bio).
  * Tone: either; Home puts it in a dark band.
  */
 export function WhoYouWorkWithSection() {
@@ -31,25 +31,26 @@ export function WhoYouWorkWithSection() {
             <Card
               as='li'
               key={member.name}
-              className='grid grid-cols-[96px_minmax(0,1fr)] content-start items-start gap-grid-1 md:grid-cols-1'
+              className='flex flex-col gap-grid-1'
             >
-              <MediaFrame shape='person' className='md:w-grid-4'>
+              {/* The photo runs the card's full content width as a 4:5
+                  portrait, then the name, role and line. */}
+              <MediaFrame shape='portrait'>
                 <Image
                   src={member.image}
                   alt={`${member.name}, ${member.title}`}
                   fill
-                  sizes='96px'
-                  loading='eager'
+                  sizes='(min-width: 1024px) 320px, (min-width: 768px) 300px, 90vw'
                   className='object-cover'
                 />
               </MediaFrame>
               <div className='flex flex-col gap-grid-half'>
                 <h3 className='type-card-title'>{member.name}</h3>
                 <span className='type-fine'>{member.title}</span>
-                <p className='pt-grid-half text-base text-text-muted'>
-                  {WHO.founders[member.name]}
-                </p>
               </div>
+              <p className='text-base text-text-muted'>
+                {WHO.founders[member.name]}
+              </p>
             </Card>
           ))}
         </ul>
