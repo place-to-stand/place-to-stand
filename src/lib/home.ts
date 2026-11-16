@@ -117,7 +117,7 @@ export const WHO_YOU_WORK_WITH_HOME = {
   /** Home's one line per founder, matched to src/lib/team.ts by name. */
   founders: {
     'Jason Desiderio':
-      'Led three teams and 25 engineers as a group engineering manager at Squarespace.',
+      'Led the teams behind Squarespace’s drag-and-drop website builder, used by millions of people with little to no training. Now he builds software that easy for your team to use.',
     'Kris Crawford':
       'Designed physical systems meant to last decades before he turned to software, and has run his own businesses for ten years.',
   } as Record<string, string>,
