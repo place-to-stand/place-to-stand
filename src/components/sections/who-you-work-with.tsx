@@ -31,8 +31,10 @@ export function WhoYouWorkWithSection() {
             intro={WHO.body}
             className='[&>p]:max-w-[26.5rem] [&>p]:text-pretty'
           />
-          <div className='flex max-w-[26.5rem] flex-col gap-grid-half xl:mt-auto'>
-            <span className='type-fine'>Don’t take our word for it</span>
+          <div className='flex max-w-[26.5rem] flex-col gap-grid-1 xl:mt-auto'>
+            <h3 className='type-card-title text-balance text-text'>
+              Don’t just take our word for&nbsp;it
+            </h3>
             <ul className='flex flex-col gap-grid-1'>
               {WHO.reviews.picks.map(r => (
                 <li key={r.name}>
