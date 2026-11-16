@@ -37,6 +37,7 @@ import { DesignIndex } from './_components/design-index'
 import { DesignGroup, DesignSection, Specimen } from './_components/specimen'
 import { SplitSection } from '@/src/components/patterns/split-section'
 import { TeamChat } from '@/src/components/patterns/team-chat'
+import { Quote } from '@/src/components/patterns/quote'
 import {
   BLOCK_AVATAR_NAMES,
   BlockAvatar,
@@ -633,6 +634,24 @@ export default function DesignPage() {
               <div className='grid gap-grid-1 md:grid-cols-2'>
                 <ProductCardPiece />
                 <ChangeLogPiece />
+              </div>
+            </Specimen>
+          </DesignSection>
+
+          <DesignSection
+            id='quote'
+            label='Patterns'
+            title='Quote'
+            when='A client in their own words: a large opening quote mark, the quote in medium-weight body text, then a mono name with optional stars and a source link. The mark and stars use accent-line, ink on light and lime on dark. No box, bar or rule; stack quotes 24px apart.'
+          >
+            <Specimen names={['Quote', 'rating', 'source']} tones stack>
+              <div className='max-w-xl'>
+                <Quote
+                  text='They ask the right questions, understand not just what needs to be built, but why.'
+                  name='Dan A.'
+                  rating={5}
+                  source={<span className='link-nav'>Read on Google ↗</span>}
+                />
               </div>
             </Specimen>
           </DesignSection>

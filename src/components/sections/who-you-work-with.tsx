@@ -4,6 +4,7 @@ import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'
 import { MediaFrame } from '@/src/components/patterns/media-frame'
 import { Card } from '@/src/components/boxes'
+import { Quote } from '@/src/components/patterns/quote'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { team } from '@/src/lib/team'
 import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
@@ -25,30 +26,30 @@ export function WhoYouWorkWithSection() {
       >
         <SectionHeading label={WHO.label} title={WHO.title} intro={WHO.body} />
         {/* Two groups: the promise, then the proof. What clients say, in
-            a lighter weight than the intro, each
-            credited with a link to read it on Google. About us is the one
-            action. */}
+            the shared Quote pattern, each with its rating and a link to
+            read it on Google. About us is the one action. */}
         <div className='flex flex-col gap-grid-1'>
           <span className='type-fine'>What clients say</span>
-          <ul className='flex flex-col gap-grid-1'>
+          <ul className='flex max-w-2xl flex-col gap-grid-1'>
             {WHO.reviews.picks.map(r => (
-              <li key={r.name} className='flex flex-col gap-2'>
-                <blockquote className='max-w-2xl type-lead font-light text-balance'>
-                  &ldquo;{r.text}&rdquo;
-                </blockquote>
-                <p className='flex flex-wrap items-baseline gap-x-grid-1 gap-y-1'>
-                  <span className='type-fine'>{r.name}</span>
-                  <TrackedLink
-                    href={r.url}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    location='home-who-reviews'
-                    className='link-nav'
-                  >
-                    Read on Google ↗
-                    <span className='sr-only'> (opens in a new tab)</span>
-                  </TrackedLink>
-                </p>
+              <li key={r.name}>
+                <Quote
+                  text={r.text}
+                  name={r.name}
+                  rating={5}
+                  source={
+                    <TrackedLink
+                      href={r.url}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      location='home-who-reviews'
+                      className='link-nav'
+                    >
+                      Read on Google ↗
+                      <span className='sr-only'> (opens in a new tab)</span>
+                    </TrackedLink>
+                  }
+                />
               </li>
             ))}
           </ul>
