@@ -25,31 +25,32 @@ export function WhoYouWorkWithSection() {
       >
         <SectionHeading label={WHO.label} title={WHO.title} intro={WHO.body} />
         {/* Proof: two clients in their own words (public Google reviews),
-            then the rating as a link and About us. */}
-        <ul className='flex flex-col gap-grid-1'>
-          {WHO.reviews.picks.map(r => (
-            <li key={r.name} className='flex flex-col gap-2'>
-              <blockquote className='type-lead'>
-                &ldquo;{r.text}&rdquo;
-              </blockquote>
-              <span className='type-fine'>{r.name}</span>
-            </li>
-          ))}
-        </ul>
-        <div className='flex flex-wrap gap-x-grid-2 gap-y-grid-1'>
+            at the intro's size and width so the column keeps one right
+            edge, then the rating as their source. About us is the one
+            action. */}
+        <div className='flex flex-col gap-grid-1'>
+          <ul className='flex flex-col gap-grid-1'>
+            {WHO.reviews.picks.map(r => (
+              <li key={r.name} className='flex flex-col gap-2'>
+                <blockquote className='max-w-2xl type-intro text-balance text-text'>
+                  &ldquo;{r.text}&rdquo;
+                </blockquote>
+                <span className='type-fine'>{r.name}</span>
+              </li>
+            ))}
+          </ul>
           <TrackedLink
             href={WHO.reviews.url}
             target='_blank'
             rel='noopener noreferrer'
             location='home-who-reviews'
-            className='link-action'
+            className='link-nav self-start'
           >
-            <span className='link-label'>{WHO.reviews.label}</span>{' '}
-            <span aria-hidden>→</span>
+            {WHO.reviews.label} ↗
             <span className='sr-only'> (opens in a new tab)</span>
           </TrackedLink>
-          <ArrowLink href='/about'>About us</ArrowLink>
         </div>
+        <ArrowLink href='/about'>About us</ArrowLink>
       </Reveal>
       <Reveal index={1} className='lg:col-span-7'>
         <ul className='grid gap-grid-1 md:grid-cols-2'>
