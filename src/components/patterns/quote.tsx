@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 
 /**
  * A client's words: a large opening quote mark in the accent line color
- * (lime on dark bands, ink on light), the quote in medium-weight body text,
+ * (lime on dark bands, ink on light), the quote in regular body text,
  * then the credit: a mono name and an optional source link (for example
  * "Read on Google"). The text carries no quote marks of its own; the mark is
  * the only one (no closing mark, as in a pull quote). No box, bar or rule.
@@ -26,13 +26,11 @@ export function Quote({
     <figure className='flex flex-col gap-grid-half'>
       <span
         aria-hidden
-        className='-mb-2 h-grid-1 type-section-title leading-none text-accent-line'
+        className='-mb-1 h-grid-half type-item-title leading-none text-accent-line'
       >
         &ldquo;
       </span>
-      <blockquote className='text-base font-medium text-text'>
-        {text}
-      </blockquote>
+      <blockquote className='text-base text-text'>{text}</blockquote>
       <figcaption className='flex flex-wrap items-baseline gap-x-2 gap-y-1'>
         <span className='type-fine text-text'>{name}</span>
         {rating !== undefined && (

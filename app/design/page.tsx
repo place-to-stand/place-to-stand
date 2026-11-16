@@ -643,7 +643,7 @@ export default function DesignPage() {
             id='quote'
             label='Patterns'
             title='Quote'
-            when='A client in their own words: a large opening quote mark, the quote in medium-weight body text, then the name (mono, text color) with optional stars and a quieter source link. A group of quotes can open with a RuledLabel: a mono caps label and a 1px hairline to the group’s right edge. The mark and stars use accent-line, ink on light and lime on dark. No box, bar or rule; stack quotes 24px apart.'
+            when='A client in their own words: a large opening quote mark, the quote in regular body text, then the name (mono, text color) with optional stars and a quieter source link. A group of quotes can open with a RuledLabel: a mono caps label and a 1px hairline to the group’s right edge. The mark and stars use accent-line, ink on light and lime on dark. No box, bar or rule; stack quotes 24px apart.'
           >
             <Specimen
               names={['Quote', 'rating', 'source', 'RuledLabel']}

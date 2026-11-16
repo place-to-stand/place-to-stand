@@ -235,7 +235,7 @@ Other patterns:
   buttons or headings inside.
 - **`MediaFrame`** (`patterns/media-frame.tsx`): the one frame for photos (Guidelines > Imagery).
 - **`Quote`** (`patterns/quote.tsx`): a client in their own words. A large opening quote mark (Space Grotesk, the
-  section-title size) sits about 12px above the quote's first line, which is medium-weight body text (`text-base`, 500) with no quote
+  item-title size) sits about 12px above the quote's first line, which is regular body text (`text-base`, 400) with no quote
   marks of its own and no closing mark. Then a credit line: the name in `type-fine` in the text color (the strongest part of the line), optional `rating` (that many
   small solid stars, read out once as "N out of 5 stars") and an optional `source` (e.g. a muted `link-action` "Read on
   Google ↗", words in `link-label` so the bar runs under them only and the arrow nudges on hover). The mark and stars use `accent-line`: ink on light bands, lime on dark. No box, bar or rule; stack
