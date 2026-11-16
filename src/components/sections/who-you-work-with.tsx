@@ -31,29 +31,32 @@ export function WhoYouWorkWithSection() {
             intro={WHO.body}
             className='[&>p]:max-w-[26.5rem] [&>p]:text-pretty'
           />
-          <ul className='flex max-w-[26.5rem] flex-col gap-grid-1 xl:mt-auto'>
-            {WHO.reviews.picks.map(r => (
-              <li key={r.name}>
-                <Quote
-                  text={r.text}
-                  name={r.name}
-                  rating={5}
-                  source={
-                    <TrackedLink
-                      href={r.url}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      location='home-who-reviews'
-                      className='link-nav'
-                    >
-                      Read on Google ↗
-                      <span className='sr-only'> (opens in a new tab)</span>
-                    </TrackedLink>
-                  }
-                />
-              </li>
-            ))}
-          </ul>
+          <div className='flex max-w-[26.5rem] flex-col gap-grid-half xl:mt-auto'>
+            <span className='type-fine'>Don’t take our word for it</span>
+            <ul className='flex flex-col gap-grid-1'>
+              {WHO.reviews.picks.map(r => (
+                <li key={r.name}>
+                  <Quote
+                    text={r.text}
+                    name={r.name}
+                    rating={5}
+                    source={
+                      <TrackedLink
+                        href={r.url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        location='home-who-reviews'
+                        className='link-nav'
+                      >
+                        Read on Google ↗
+                        <span className='sr-only'> (opens in a new tab)</span>
+                      </TrackedLink>
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
         <Reveal index={1} className='xl:col-span-7'>
           <ul className='grid gap-grid-1 md:grid-cols-2'>
