@@ -24,7 +24,7 @@ const CALL = [
   },
   {
     label: 'Who you meet',
-    body: 'The engineers who would build it. No account managers, no handoffs.',
+    body: 'The engineers who would build it. No account managers or project managers in between.',
   },
   {
     label: 'What you leave with',

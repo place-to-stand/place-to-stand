@@ -101,7 +101,7 @@ export default function AboutPage() {
           <Reveal index={0}>
             <SectionHeading
               label='How We Work'
-              title='No account managers. No handoffs.'
+              title='No middlemen. Just engineers.'
               intro='You talk to our engineers from the first call to launch and after. We decide what to build with you, AI agents write much of the code, and nothing ships until one of us has checked it.'
             />
           </Reveal>

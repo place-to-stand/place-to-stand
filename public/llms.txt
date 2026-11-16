@@ -24,7 +24,7 @@ Place To Stand at placetostandagency.com is not affiliated with other businesses
 ## Company
 
 - [Home](https://placetostandagency.com/): the team, client results, the problems clients start with, how it works and what clients own
-- [About](https://placetostandagency.com/about): the founders and how we work: no account managers, no handoffs
+- [About](https://placetostandagency.com/about): the founders and how we work: no account managers or project managers in between
 - [Clients](https://placetostandagency.com/clients): who we build for, grouped by Sell online, Run your business, and Websites and products; including Hot Ones, Heatonist, Blake Brown Beauty, Florence by Mills, GreenWATT USA, Up the Wall, 9 Point Studios and The Good for Nothings Club
 - [Heatonist case study](https://placetostandagency.com/clients/heatonist): their engineering team, by the hour, since 2023: 1,400+ changes shipped and hotones.com built and launched in under three months
 
