@@ -129,7 +129,9 @@ export function Panel<T extends ElementType = 'div'>({
   )
 }
 
-/** One row in a ruled list: a 1px top rule in the tone's rule color. */
+/** One row in a ruled list: a 1px top rule in the tone's rule color. With
+ *  `accent`, the ownership blocks' rule: 2px (the emphasis weight) in
+ *  accent-subtle. */
 export function RuledRow<T extends ElementType = 'li'>({
   as,
   accent = false,
@@ -137,15 +139,14 @@ export function RuledRow<T extends ElementType = 'li'>({
   children,
   ...props
 }: BoxProps<T> & {
-  /** The ownership block's signature rule. Nowhere else. */
+  /** The ownership blocks' signature rule (2px). Nowhere else. */
   accent?: boolean
 }) {
   const Tag = (as ?? 'li') as ElementType
   return (
     <Tag
       className={cn(
-        'border-t',
-        accent ? 'border-accent-subtle' : 'border-rule',
+        accent ? 'border-t-2 border-accent-subtle' : 'border-t border-rule',
         className
       )}
       {...props}
