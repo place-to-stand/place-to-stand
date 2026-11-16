@@ -130,10 +130,12 @@ export const WHO_YOU_WORK_WITH_HOME = {
       {
         text: 'They ask the right questions, understand not just what needs to be built, but why… It genuinely feels like they’re part of our team rather than an outside company.',
         name: 'Dan A.',
+        url: 'https://share.google/UdDwjx0vGokNHla8f',
       },
       {
         text: 'Jason and Kris have been fantastic to work with… always responsive and willing to jump on a call to help us find the best solutions.',
         name: 'Eric C.',
+        url: 'https://share.google/RxyKMm1HU8hyCZ0jo',
       },
     ],
   },

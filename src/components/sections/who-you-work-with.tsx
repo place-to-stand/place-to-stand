@@ -39,7 +39,7 @@ export function WhoYouWorkWithSection() {
                 <p className='flex flex-wrap items-baseline gap-x-grid-1 gap-y-1'>
                   <span className='type-fine'>{r.name}</span>
                   <TrackedLink
-                    href={WHO.reviews.url}
+                    href={r.url}
                     target='_blank'
                     rel='noopener noreferrer'
                     location='home-who-reviews'
