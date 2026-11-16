@@ -9,78 +9,77 @@ import { team } from '@/src/lib/team'
 import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
 
 /**
- * Home's "Who you work with": the promise on the left, the two founders on
- * the right, each a card with a 4:5 portrait across its width, then the
- * name, title and Home's one line (not the About bio).
+ * Home's "Who you work with": the heading across the top, then the two
+ * founders (a 4:5 portrait, name, title and Home's one line) and what
+ * clients say, from our public Google reviews.
  * Tone: either; Home puts it in a dark band.
  */
 export function WhoYouWorkWithSection() {
   return (
-    <Section className='grid gap-stack lg:grid-cols-12 lg:gap-x-grid-2'>
-      {/* The link follows the paragraph at the hero's intro-to-action gap
-          (24, 48 on laptops), not the section's stack gap. */}
-      <Reveal
-        index={0}
-        className='flex flex-col gap-grid-1 lg:col-span-5 lg:gap-grid-2'
-      >
+    <Section className='flex flex-col gap-stack'>
+      <Reveal index={0}>
         <SectionHeading label={WHO.label} title={WHO.title} intro={WHO.body} />
-        {/* Proof: two clients in their own words (public Google reviews),
-            at the intro's size and width so the column keeps one right
-            edge, then the rating as their source. About us is the one
-            action. */}
-        <div className='flex flex-col gap-grid-1'>
-          <ul className='flex flex-col gap-grid-1'>
+      </Reveal>
+      {/* From 1280: Jason | Kris | what clients say, on the same three
+          columns as the warning-signs chats, so the eye runs headline →
+          faces → proof. 768-1279: the cards side by side, the quotes
+          below them in two columns. Phones: stacked. */}
+      <Reveal
+        index={1}
+        className='grid gap-grid-1 md:grid-cols-2 xl:grid-cols-3'
+      >
+        {team.map(member => (
+          <Card key={member.name} className='flex flex-col gap-grid-1'>
+            {/* The photo runs the card's full content width as a 4:5
+                portrait, then the name, role and line. */}
+            <MediaFrame shape='portrait'>
+              <Image
+                src={member.image}
+                alt={`${member.name}, ${member.title}`}
+                fill
+                sizes='(min-width: 1280px) 360px, (min-width: 768px) 300px, 90vw'
+                className='object-cover'
+              />
+            </MediaFrame>
+            <div className='flex flex-col gap-2'>
+              <h3 className='type-card-title'>{member.name}</h3>
+              <span className='type-fine'>{member.title}</span>
+            </div>
+            <p className='text-base text-text-muted'>
+              {WHO.founders[member.name]}
+            </p>
+          </Card>
+        ))}
+        <div className='flex flex-col gap-grid-1 pt-grid-1 md:col-span-2 xl:col-span-1 xl:pt-0'>
+          <span className='type-fine'>What clients say</span>
+          {/* Two clients in their own words, from our public Google
+              reviews; each credit links to them on Google. */}
+          <ul className='grid gap-grid-1 md:grid-cols-2 md:gap-x-grid-2 xl:grid-cols-1'>
             {WHO.reviews.picks.map(r => (
               <li key={r.name} className='flex flex-col gap-2'>
-                <blockquote className='max-w-2xl type-intro text-balance text-text'>
+                <blockquote className='type-intro text-text'>
                   &ldquo;{r.text}&rdquo;
                 </blockquote>
-                <span className='type-fine'>{r.name}</span>
+                <p className='flex flex-wrap items-baseline gap-x-grid-1 gap-y-1'>
+                  <span className='type-fine'>{r.name}</span>
+                  <TrackedLink
+                    href={WHO.reviews.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    location='home-who-reviews'
+                    className='link-nav'
+                  >
+                    Read on Google ↗
+                    <span className='sr-only'> (opens in a new tab)</span>
+                  </TrackedLink>
+                </p>
               </li>
             ))}
           </ul>
-          <TrackedLink
-            href={WHO.reviews.url}
-            target='_blank'
-            rel='noopener noreferrer'
-            location='home-who-reviews'
-            className='link-nav self-start'
-          >
-            {WHO.reviews.label} ↗
-            <span className='sr-only'> (opens in a new tab)</span>
-          </TrackedLink>
+          <div className='pt-grid-1 xl:mt-auto'>
+            <ArrowLink href='/about'>About us</ArrowLink>
+          </div>
         </div>
-        <ArrowLink href='/about'>About us</ArrowLink>
-      </Reveal>
-      <Reveal index={1} className='lg:col-span-7'>
-        <ul className='grid gap-grid-1 md:grid-cols-2'>
-          {team.map(member => (
-            <Card
-              as='li'
-              key={member.name}
-              className='flex flex-col gap-grid-1'
-            >
-              {/* The photo runs the card's full content width as a 4:5
-                  portrait, then the name, role and line. */}
-              <MediaFrame shape='portrait'>
-                <Image
-                  src={member.image}
-                  alt={`${member.name}, ${member.title}`}
-                  fill
-                  sizes='(min-width: 1024px) 320px, (min-width: 768px) 300px, 90vw'
-                  className='object-cover'
-                />
-              </MediaFrame>
-              <div className='flex flex-col gap-2'>
-                <h3 className='type-card-title'>{member.name}</h3>
-                <span className='type-fine'>{member.title}</span>
-              </div>
-              <p className='text-base text-text-muted'>
-                {WHO.founders[member.name]}
-              </p>
-            </Card>
-          ))}
-        </ul>
       </Reveal>
     </Section>
   )

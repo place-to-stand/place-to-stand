@@ -125,7 +125,6 @@ export const WHO_YOU_WORK_WITH_HOME = {
    *  9 reviews, all 5 stars). The reviewers' own words, trimmed with an
    *  ellipsis where marked. */
   reviews: {
-    label: '5.0 from 9 Google reviews',
     url: 'https://share.google/zRPxFMqfA8RshzAjR',
     picks: [
       {
