@@ -35,7 +35,9 @@ export function PortalSection() {
               className='link-action'
             >
               <span className='link-label'>Read the code</span>{' '}
-              <span aria-hidden>↗</span>
+              <span aria-hidden className='link-out'>
+                ↗
+              </span>
               <span className='sr-only'> (opens in a new tab)</span>
             </TrackedLink>
           </div>

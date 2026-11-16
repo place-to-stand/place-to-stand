@@ -181,11 +181,11 @@ One shared definition in `src/components/primitives/cta.tsx`, so every place mat
 
 Every text link is one of three roles, defined once in `app/globals.css`:
 
-| Role        | Class                                        | Looks like                                                                                                                                  | Use                                                                                                    |
-| ----------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Nav link    | `link-nav`                                   | Mono caps 12px, muted; on hover the text lightens and an accent bar slides in under it; the current page keeps the bar                      | Header, footer, fine print, phone menu Login                                                           |
-| Action link | `link-action` (or `ArrowLink` / `AuditLink`) | Mono caps 12px in the text color, no line at rest, the same sliding bar as nav links on hover with the arrow nudging 3px right, never wraps | Standalone links: "See the platform →", "Read the case study →", "Visit site ↗", "Take the free audit" |
-| Inline link | `link-inline`                                | Text-color words with a thin, quiet underline (text color at 35%), turning to the accent line on hover; wraps with the sentence             | Links inside paragraphs: body copy, blog posts, legal pages, fine print under forms                    |
+| Role        | Class                                        | Looks like                                                                                                                                                                                                                                   | Use                                                                                                    |
+| ----------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Nav link    | `link-nav`                                   | Mono caps 12px, muted; on hover the text lightens and an accent bar slides in under it; the current page keeps the bar                                                                                                                       | Header, footer, fine print, phone menu Login                                                           |
+| Action link | `link-action` (or `ArrowLink` / `AuditLink`) | Mono caps 12px in the text color, no line at rest, the same sliding bar as nav links on hover with the arrow nudging 3px right (an outbound ↗ marked `link-out` nudges 2px up and right instead; no nudge under reduced motion), never wraps | Standalone links: "See the platform →", "Read the case study →", "Visit site ↗", "Take the free audit" |
+| Inline link | `link-inline`                                | Text-color words with a thin, quiet underline (text color at 35%), turning to the accent line on hover; wraps with the sentence                                                                                                              | Links inside paragraphs: body copy, blog posts, legal pages, fine print under forms                    |
 
 Profile icons (LinkedIn, GitHub, Clutch, X, Instagram) are the nav link role's icon variant: `SocialIcon` with the `link-icon` class, a 16px monochrome glyph in a 24px hit area, muted, turning to the accent line on hover. Used on the About founder rows and the footer bar.
 
@@ -237,8 +237,8 @@ Other patterns:
 - **`Quote`** (`patterns/quote.tsx`): a client in their own words. A large opening quote mark (Space Grotesk, the
   section-title size) sits about 12px above the quote's first line, which is medium-weight body text (`text-base`, 500) with no quote
   marks of its own and no closing mark. Then a credit line: the name in `type-fine`, optional `rating` (that many
-  small solid stars, read out once as "N out of 5 stars") and an optional `source` (e.g. a `link-nav` "Read on
-  Google ↗"). The mark and stars use `accent-line`: ink on light bands, lime on dark. No box, bar or rule; stack
+  small solid stars, read out once as "N out of 5 stars") and an optional `source` (e.g. a `link-action` "Read on
+  Google ↗", words in `link-label` so the bar runs under them only and the arrow nudges on hover). The mark and stars use `accent-line`: ink on light bands, lime on dark. No box, bar or rule; stack
   quotes `gap-grid-1` apart. Used by Home's "Who you work with".
 - **`TeamChat`** (`patterns/team-chat.tsx`): a short team chat in our own plain chat UI (no real product's look or
   name): a header with where it happens, then messages with a small geometric portrait (`block-avatars.tsx`: circle head, rounded hair and shoulders, flat fills; initials as a fallback), name, role,

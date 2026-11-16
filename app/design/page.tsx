@@ -650,7 +650,14 @@ export default function DesignPage() {
                   text='They ask the right questions, understand not just what needs to be built, but why.'
                   name='Dan A.'
                   rating={5}
-                  source={<span className='link-nav'>Read on Google ↗</span>}
+                  source={
+                    <a href='#quote' className='link-action'>
+                      <span className='link-label'>Read on Google</span>{' '}
+                      <span aria-hidden className='link-out'>
+                        ↗
+                      </span>
+                    </a>
+                  }
                 />
               </div>
             </Specimen>

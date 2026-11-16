@@ -1413,7 +1413,7 @@ main {
      ->", "Read the case study ->", "Visit site", "Take the free audit ->").
      Mono caps 12px in the text color, no line at rest (the caps and arrow
      mark it as a link), the same sliding bar as nav links on hover, and the
-     arrow nudges 3px right; with an arrow the bar runs under the words only.
+     arrow nudges 3px right (↗ up-right); with an arrow the bar runs under the words only.
      Never wraps, so an arrow can't drop onto its own line.
    - .link-inline: a link inside running text. Plain text-color words with a
      thin, quiet underline (the text color at 35%) that turns to the accent
@@ -1450,6 +1450,21 @@ main {
   .link-action:hover > [aria-hidden],
   .link-action:focus-visible > [aria-hidden] {
     transform: translateX(3px);
+  }
+  /* An outbound link (new tab) ends in ↗ with .link-out, and that arrow
+     moves the way it points: up and to the right. */
+  .link-action:hover > .link-out,
+  .link-action:focus-visible > .link-out {
+    transform: translate(2px, -2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .link-action > [aria-hidden] {
+      transition: none;
+    }
+    .link-action:hover > [aria-hidden],
+    .link-action:focus-visible > [aria-hidden] {
+      transform: none;
+    }
   }
   .link-nav::after,
   .link-action::after {

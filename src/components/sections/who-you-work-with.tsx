@@ -48,9 +48,12 @@ export function WhoYouWorkWithSection() {
                         target='_blank'
                         rel='noopener noreferrer'
                         location='home-who-reviews'
-                        className='link-nav'
+                        className='link-action'
                       >
-                        Read on Google ↗
+                        <span className='link-label'>Read on Google</span>{' '}
+                        <span aria-hidden className='link-out'>
+                          ↗
+                        </span>
                         <span className='sr-only'> (opens in a new tab)</span>
                       </TrackedLink>
                     }
