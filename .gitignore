@@ -54,3 +54,7 @@ coverage/
 # Generated files (Next.js / TypeScript rewrite these constantly)
 next-env.d.ts
 *.tsbuildinfo
+
+# Visual check output (baselines in tests/visual/baselines are committed)
+/tests/visual/current/
+/tests/visual/diff/

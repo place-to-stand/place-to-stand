@@ -74,7 +74,12 @@ function CornerMark({ top, left }: { top?: boolean; left?: boolean }) {
     width: CORNER,
     height: CORNER,
   }
-  const border = { width: 2, style: 'solid', color: color.accent } as const
+  const border = {
+    width: 2,
+    style: 'solid',
+    // Solid accent, as the site's corner marks on dark bands.
+    color: color.accent,
+  } as const
   if (top) {
     style.top = FRAME
     style.borderTopWidth = border.width

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Section } from '@/src/components/layout/section'
+import { Section } from '@/src/components/patterns/section'
 import {
   LegalHeader,
   LegalList,
   LegalSection,
-} from '@/src/components/legal/legal-prose'
+} from '@/src/components/patterns/legal-prose'
 
 const UPDATED = 'July 29, 2026'
 const CONTACT_EMAIL = 'hello@placetostandagency.com'
@@ -22,7 +22,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function TermsPage() {
   return (
-    <main className='flex-1 pt-page-start pb-section'>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
       <Section priority>
         <div className='flex flex-col gap-header'>
           <LegalHeader
@@ -48,8 +48,8 @@ export default function TermsPage() {
                 design, and software development services to businesses. This
                 website describes those services and lets you get in touch or
                 request an Opportunity Audit. Nothing on this site is an offer
-                to enter into a contract, and no engagement begins until both
-                parties sign a written agreement.
+                of services. Work begins once you accept our terms of engagement
+                in writing and buy your first block of prepaid hours.
               </p>
             </LegalSection>
 
@@ -89,7 +89,7 @@ export default function TermsPage() {
                 statement of work. Unless stated otherwise, invoices are due
                 within 15 days of receipt. We may pause work on overdue accounts
                 after giving written notice. Fees are exclusive of taxes and of
-                third-party costs such as hosting and software licences, which
+                third-party costs such as hosting and software licenses, which
                 are your responsibility unless we agree otherwise in writing.
               </p>
             </LegalSection>
@@ -122,30 +122,30 @@ export default function TermsPage() {
                 predates it or that we develop for general use, including our
                 internal tools, libraries, frameworks, and know-how. Where those
                 components are embedded in your deliverables, we grant you a
-                perpetual, worldwide, non-exclusive licence to use them as part
+                perpetual, worldwide, non-exclusive license to use them as part
                 of those deliverables.
               </p>
               <p>
                 Third-party and open-source components remain subject to their
-                own licences. We may describe the work publicly and include it
+                own licenses. We may describe the work publicly and include it
                 in our portfolio unless you ask us in writing not to.
               </p>
             </LegalSection>
 
             <LegalSection index={8} title='Confidentiality'>
               <p>
-                Each party will protect the other&apos;s confidential
-                information, use it only for the purpose of the engagement, and
-                not disclose it to anyone who does not need it. This does not
-                apply to information that is public, already known, or
-                independently developed, or where disclosure is required by law.
+                Each party will protect the other’s confidential information,
+                use it only for the purpose of the engagement, and not disclose
+                it to anyone who does not need it. This does not apply to
+                information that is public, already known, or independently
+                developed, or where disclosure is required by law.
               </p>
             </LegalSection>
 
             <LegalSection index={9} title='Acceptable use of this site'>
               <p>
                 Do not use this site to break the law, interfere with its
-                operation, attempt to gain unauthorised access, scrape it at a
+                operation, attempt to gain unauthorized access, scrape it at a
                 volume that degrades service, or submit false information
                 through our forms. We may block access for any of these reasons.
               </p>
@@ -163,12 +163,11 @@ export default function TermsPage() {
 
             <LegalSection index={11} title='Disclaimers'>
               <p>
-                This website and the Opportunity Audit are provided &quot;as
-                is&quot; and &quot;as available&quot;, without warranties of any
-                kind, whether express or implied, including implied warranties
-                of merchantability, fitness for a particular purpose, and
-                non-infringement. We do not warrant that the site will be
-                uninterrupted or error free.
+                This website and the Opportunity Audit are provided “as is” and
+                “as available”, without warranties of any kind, whether express
+                or implied, including implied warranties of merchantability,
+                fitness for a particular purpose, and non-infringement. We do
+                not warrant that the site will be uninterrupted or error free.
               </p>
               <p>
                 Warranties covering client deliverables, if any, are set out in
@@ -197,8 +196,8 @@ export default function TermsPage() {
               <p>
                 You agree to indemnify Place To Stand against claims, losses,
                 and reasonable costs arising from your misuse of this site, your
-                breach of these terms, or your infringement of a third
-                party&apos;s rights through material you provide to us.
+                breach of these terms, or your infringement of a third party’s
+                rights through material you provide to us.
               </p>
             </LegalSection>
 
@@ -226,10 +225,7 @@ export default function TermsPage() {
             <LegalSection index={16} title='Contact us'>
               <p>
                 Questions about these terms can go to{' '}
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className='text-accent underline-offset-4 hover:underline'
-                >
+                <a href={`mailto:${CONTACT_EMAIL}`} className='link-inline'>
                   {CONTACT_EMAIL}
                 </a>
                 .

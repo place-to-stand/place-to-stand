@@ -1,6 +1,9 @@
 export type TeamMember = {
   name: string
   title: string
+  /** Where they work from, e.g. 'Austin, TX'. */
+  city: { name: string; region: string }
+  /** The About page bio, word for word as approved (Nov 13). */
   bio: string
   image: string
   socials: {
@@ -14,8 +17,9 @@ export type TeamMember = {
 export const team: TeamMember[] = [
   {
     name: 'Jason Desiderio',
-    title: 'Principal Engineer',
-    bio: 'Spent over a decade as a Senior Engineer at Squarespace, shipping systems that served millions of users. Brings that large-scale platform discipline to every project, architecting apps built to perform under real-world load.',
+    title: 'Co-founder, engineer',
+    city: { name: 'Austin', region: 'TX' },
+    bio: 'Spent almost six years at Squarespace, rising from senior engineer to group engineering manager, on systems used by millions of people. Outside client work he runs The Good for Nothings Club, a creators club in Austin, and plays and records music.',
     image: '/1652631488914.jpeg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/jmdesiderio/',
@@ -26,8 +30,9 @@ export const team: TeamMember[] = [
   },
   {
     name: 'Kris Crawford',
-    title: 'Software Engineer & AI Technologist',
-    bio: 'Software engineer with five years of building applications, grounded in a prior career designing physical systems meant to last decades. That same rigor, measure twice and build once, carries into every line of code. He also has a decade of entrepreneurship under his belt.',
+    title: 'Co-founder, engineer',
+    city: { name: 'Brooklyn', region: 'NY' },
+    bio: 'Designed physical systems meant to last decades before he turned to software. He has also run his own businesses for ten years, so he builds the way an owner thinks.',
     image: '/259858081_219018533698595_237774923102850579_n.jpg',
     socials: {
       linkedin: 'https://www.linkedin.com/in/kristopher-crawford-1177439a/',

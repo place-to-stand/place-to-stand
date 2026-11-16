@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Section } from '@/src/components/layout/section'
-import { BlueprintCorners } from '@/src/components/layout/dot-grid-background'
-import { Button } from '@/src/components/ui/button'
-import { TrackedLink } from '@/src/components/tracked-link'
+import { Section } from '@/src/components/patterns/section'
+import { Callout, Card, RuledRow } from '@/src/components/boxes'
+import { Button } from '@/src/components/primitives/button'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { referralContent as c } from '@/src/lib/referral-content'
 
 export const metadata: Metadata = pageMetadata({
@@ -14,7 +14,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function ReferralPage() {
   return (
-    <main className='flex-1 pt-page-start pb-band'>
+    <main id='main' className='flex-1 pt-page-start pb-band'>
       <div className='flex flex-col gap-section pb-edge'>
         {/* Hero */}
         <Section priority>
@@ -27,7 +27,7 @@ export default function ReferralPage() {
                   <a
                     href='#referral-terms'
                     aria-label='See referral program terms'
-                    className='ml-1 align-super font-mono text-[0.45em] font-normal text-accent transition-colors hover:text-accent/80'
+                    className='link-inline ml-1 align-super font-mono text-[0.45em] font-normal'
                   >
                     *
                   </a>
@@ -51,7 +51,7 @@ export default function ReferralPage() {
                 asChild
                 size='lg'
                 variant='outline'
-                className='w-full border-2 sm:w-auto'
+                className='w-full sm:w-auto'
               >
                 <a href='/referral/pdf' download>
                   {c.hero.downloadLabel}
@@ -68,33 +68,34 @@ export default function ReferralPage() {
             <h2 className='max-w-3xl type-section-title text-balance'>
               {c.whoWeAre.headline}
             </h2>
-            <p className='mt-0.75 max-w-2xl text-base text-text-muted md:mt-1'>
+            <p className='max-w-2xl text-base text-text-muted'>
               {c.whoWeAre.body}
             </p>
           </div>
           <div className='relative'>
             <ul className='flex flex-col gap-grid-half'>
               {c.whoWeAre.services.map(service => (
-                <li
+                <Card
+                  as='li'
                   key={service.name}
-                  className='grid gap-grid-half bg-bg-card p-grid-1 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-baseline md:gap-grid-1'
+                  className='grid gap-grid-half md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:items-baseline md:gap-grid-1'
                 >
                   <h3 className='type-card-title'>{service.name}</h3>
-                  <ul className='flex flex-wrap gap-x-6 gap-y-2'>
+                  <ul className='flex flex-wrap gap-x-grid-1 gap-y-2'>
                     {service.items.map(item => (
                       <li
                         key={item}
                         className='flex items-center gap-2 text-base text-text-muted'
                       >
                         <span
-                          className='h-1.5 w-1.5 shrink-0 bg-accent'
+                          className='h-1.5 w-1.5 shrink-0 bg-accent-line'
                           aria-hidden
                         />
                         {item}
                       </li>
                     ))}
                   </ul>
-                </li>
+                </Card>
               ))}
             </ul>
           </div>
@@ -105,13 +106,10 @@ export default function ReferralPage() {
           <h2 className='type-section-title'>{c.whoToSend.label}</h2>
           <div className='grid gap-grid-1 md:grid-cols-3'>
             {c.whoToSend.cards.map(card => (
-              <div
-                key={card.title}
-                className='relative flex flex-col gap-grid-half bg-bg-card p-grid-1'
-              >
+              <Card key={card.title} className='flex flex-col gap-grid-half'>
                 <h3 className='type-card-title'>{card.title}</h3>
                 <p className='text-base text-text-muted'>{card.body}</p>
-              </div>
+              </Card>
             ))}
           </div>
           <div className='grid gap-grid-1 pt-grid-1 md:grid-cols-12 md:gap-grid-2'>
@@ -123,17 +121,17 @@ export default function ReferralPage() {
                 {c.whoToSend.leadIn}
               </h3>
             </div>
-            <ol className='flex flex-col border-b border-border md:col-span-8'>
+            <ol className='flex flex-col md:col-span-8'>
               {c.whoToSend.quotes.map((quote, index) => (
-                <li
+                <RuledRow
                   key={quote}
-                  className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-3 border-t border-border py-3.5'
+                  className='grid grid-cols-[48px_minmax(0,1fr)] items-baseline gap-grid-half py-grid-half'
                 >
                   <span className='font-mono text-xs tracking-[0.2em] text-accent'>
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <p className='text-[17px] text-text'>&ldquo;{quote}&rdquo;</p>
-                </li>
+                  <p className='type-lead'>&ldquo;{quote}&rdquo;</p>
+                </RuledRow>
               ))}
             </ol>
           </div>
@@ -144,16 +142,17 @@ export default function ReferralPage() {
           <h2 className='type-section-title'>{c.howItWorks.label}</h2>
           <ol className='grid gap-grid-1 md:grid-cols-3'>
             {c.howItWorks.steps.map(step => (
-              <li
+              <Card
+                as='li'
                 key={step.number}
-                className='relative flex flex-col gap-grid-half bg-bg-card p-grid-1'
+                className='flex flex-col gap-grid-half'
               >
-                <span className='inline-flex h-6 w-6 items-center justify-center border border-accent-subtle font-mono text-xs text-accent'>
+                <span className='font-mono text-sm text-text-muted'>
                   {step.number}
                 </span>
                 <h3 className='type-card-title'>{step.title}</h3>
                 <p className='text-base text-text-muted'>{step.body}</p>
-              </li>
+              </Card>
             ))}
           </ol>
         </Section>
@@ -163,13 +162,14 @@ export default function ReferralPage() {
           <h2 className='type-section-title'>{c.howWeWork.label}</h2>
           <ul className='grid gap-grid-1 md:grid-cols-3'>
             {c.howWeWork.points.map(point => (
-              <li
+              <Card
+                as='li'
                 key={point.title}
-                className='relative flex flex-col gap-grid-half bg-bg-card p-grid-1'
+                className='flex flex-col gap-grid-half'
               >
                 <h3 className='type-card-title'>{point.title}</h3>
                 <p className='text-base text-text-muted'>{point.body}</p>
-              </li>
+              </Card>
             ))}
           </ul>
         </Section>
@@ -187,7 +187,7 @@ export default function ReferralPage() {
             <TrackedLink
               href={c.join.href}
               location='referral-join-footnote'
-              className='font-semibold text-accent underline decoration-accent-subtle underline-offset-4 transition-colors hover:text-accent/80'
+              className='link-inline font-semibold'
             >
               {c.join.noteCta}
             </TrackedLink>
@@ -195,14 +195,11 @@ export default function ReferralPage() {
         </Section>
       </div>
       <Section className='pt-band'>
-        <div className='dots-band bg-bg-card p-callout'>
-          <BlueprintCorners size={20} all colorClassName='border-accent' />
+        <Callout band>
           <div className='flex flex-col gap-stack md:flex-row md:items-center md:justify-between'>
             <div className='flex flex-col gap-intro'>
               <h2 className='type-section-title'>{c.audit.heading}</h2>
-              <p className='max-w-md text-base text-text md:text-lg'>
-                {c.audit.body}
-              </p>
+              <p className='max-w-md type-lead'>{c.audit.body}</p>
             </div>
             <Button asChild size='lg' className='w-full shrink-0 sm:w-auto'>
               <TrackedLink
@@ -213,7 +210,7 @@ export default function ReferralPage() {
               </TrackedLink>
             </Button>
           </div>
-        </div>
+        </Callout>
       </Section>
     </main>
   )

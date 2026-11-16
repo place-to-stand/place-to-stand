@@ -1,6 +1,6 @@
-import { Section } from '@/src/components/layout/section'
-import { Reveal } from '@/src/components/layout/animated-section'
-import { ClientLogoWall } from './client-logo-wall'
+import { Section } from '@/src/components/patterns/section'
+import { Reveal } from '@/src/components/primitives/animated-section'
+import { ClientLogoWall } from '@/src/components/patterns/client-logo-wall'
 
 /**
  * Homepage proof bar — the client roster, directly under the hero.
@@ -16,7 +16,7 @@ import { ClientLogoWall } from './client-logo-wall'
  * object-contain, so wide wordmarks and square marks share a baseline instead
  * of a bounding box. Height alone would leave a 1:1 mark towering over an 8:1
  * wordmark, so `logoScale` (see src/lib/clients.ts) knocks the heavy marks back
- * to match optical weight. Marks render as white silhouettes (or grey, per
+ * to match optical weight. Marks render as white silhouettes (or gray, per
  * `logoTone`) so client brand colors don't fight the site's muted palette.
  */
 export function ClientLogosSection() {

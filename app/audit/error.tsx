@@ -2,10 +2,11 @@
 
 import { useEffect } from 'react'
 import { usePostHog } from 'posthog-js/react'
-import { RotateCcw } from 'lucide-react'
-import { TrackedLink } from '@/src/components/tracked-link'
-import { Button } from '@/src/components/ui/button'
+import { Icon, RotateCcw } from '@/src/components/primitives/icon'
+import { TrackedLink } from '@/src/components/primitives/tracked-link'
+import { Button } from '@/src/components/primitives/button'
 import { getAuditSessionSnapshot } from '@/src/lib/audit/session'
+import { Panel } from '@/src/components/boxes'
 
 /**
  * Recovery screen for a client-side crash anywhere in the audit page.
@@ -67,9 +68,9 @@ export default function AuditError({
   }, [error, posthog, reset])
 
   return (
-    <main className='flex-1 pt-page-start pb-section'>
-      <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
-        <div className='relative max-w-2xl bg-bg-panel p-card'>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
+      <div className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
+        <Panel className='max-w-2xl'>
           <span className='bp-label font-mono'>Audit</span>
           <h1 className='mt-grid-half type-section-title'>We hit a snag</h1>
           <p className='mt-intro text-base text-text-muted'>
@@ -79,9 +80,9 @@ export default function AuditError({
             Try again and we will take you straight to your results.
           </p>
 
-          <div className='mt-6 flex flex-wrap items-center gap-4'>
+          <div className='mt-grid-1 flex flex-wrap items-center gap-grid-half'>
             <Button type='button' onClick={reset}>
-              <RotateCcw className='mr-2 h-4 w-4' />
+              <Icon icon={RotateCcw} className='mr-2' />
               Show my results
             </Button>
             {/* The one conversion path that does not depend on the crashed
@@ -89,12 +90,12 @@ export default function AuditError({
             <TrackedLink
               href='/contact'
               location='audit-error-fallback'
-              className='text-sm text-accent underline-offset-4 hover:underline'
+              className='link-inline text-sm'
             >
               Book a call instead
             </TrackedLink>
           </div>
-        </div>
+        </Panel>
       </div>
     </main>
   )

@@ -7,78 +7,97 @@ export type Service = {
   features: string[]
 }
 
+/**
+ * The services list used by the audit page, Referral and the Services
+ * structured data. It mirrors Platform (src/lib/offers.ts): the three kinds
+ * of work, then the after-launch services. Keep the two in step, and keep
+ * the slugs: stored audit results refer to them.
+ */
 export const services: Service[] = [
   {
-    slug: 'software-development',
-    title: 'Software Development',
-    tagline: 'Applications built for scale',
+    slug: 'run-your-business',
+    title: 'Run your business',
+    tagline: 'One system for the work behind the scenes',
     description:
-      'End-to-end software development from architecture to deployment. We build web applications, APIs, and internal tools using modern frameworks and cloud infrastructure.',
-    icon: 'Code2',
-    features: [
-      'Full-stack web, desktop, and mobile applications',
-      'API design and development',
-      'Database architecture',
-      'Cloud infrastructure (AWS, Vercel)',
-      'CI/CD pipeline setup',
-    ],
-  },
-  {
-    slug: 'workflow-systems',
-    title: 'Workflow Systems',
-    tagline: 'Systematize operations, eliminate bottlenecks',
-    description:
-      'Custom workflow systems that connect your tools, automate handoffs, and give you visibility into every process. Built around how your team actually works.',
+      'One system for the work behind the scenes, built around how your team works. It starts as a copy of the portal we run on, trimmed to what you need. Every person and every AI tool sees only what their role allows.',
     icon: 'GitBranch',
     features: [
-      'Custom portal development',
-      'Task tracking and management systems',
-      'Approval and review workflows',
-      'Cross-platform integrations',
-      'Real-time dashboards and reporting',
+      'Team workspace: clients, projects, tasks and time',
+      'CRM: every lead, contact and company, with its whole history',
+      'Workflows: the steps your team repeats, done the same way every time',
+      'Automations: reports, reminders and syncing data between tools',
+      'Client portal: progress, hours and payments for your customers',
+      'Reports: live numbers from your own data',
+      'Website: your marketing site, with every form feeding the CRM',
     ],
   },
   {
-    slug: 'data-intelligence',
-    title: 'Data Intelligence',
-    tagline: 'Turn raw data into strategic advantage',
+    slug: 'sell-online',
+    title: 'Sell online',
+    tagline: 'Custom stores and marketplaces, on Shopify when it fits',
     description:
-      'We build data pipelines, analytics dashboards, and AI-powered insights that help you make better decisions faster. From data collection to actionable intelligence.',
-    icon: 'BarChart3',
+      'Custom stores and marketplaces for things standard store tools can’t sell well, on Shopify when it fits. Built for brands like Hot Ones and Heatonist.',
+    icon: 'Code2',
     features: [
-      'Data pipeline architecture',
-      'Analytics dashboard development',
-      'Business intelligence reporting',
-      'Predictive modeling',
-      'Data warehouse design',
+      'Custom marketplaces',
+      'Shopify stores and apps',
+      'Made-to-order and drop-ship',
+      'Order intake',
+      'Payments',
+      'Order routing',
     ],
   },
   {
-    slug: 'strategic-advisory',
-    title: 'Strategic Advisory',
-    tagline: 'Expert guidance for digital transformation',
+    slug: 'senior-help',
+    title: 'Senior help for your team',
+    tagline: 'Someone senior beside the team you have',
     description:
-      'Fractional CTO and strategic advisory services for businesses navigating digital transformation. We help you identify the highest-impact opportunities and build a roadmap to get there.',
-    icon: 'Compass',
+      'For teams that already have code, and sometimes developers, and need someone senior beside them.',
+    icon: 'Users',
     features: [
-      'Digital transformation roadmapping',
-      'Technology stack evaluation',
-      'AI readiness assessment',
-      'Process optimization consulting',
-      'Vendor evaluation and selection',
+      'Pick up where others left off',
+      'Make an AI-built first version solid',
+      'Work beside your developers',
+      'Technical consulting',
     ],
   },
   {
     slug: 'managed-services',
-    title: 'Managed Services',
-    tagline: 'Long-term support for your IT infrastructure',
+    title: 'Managed services',
+    tagline: 'We keep it running after launch',
     description:
-      'Ongoing support, monitoring, and maintenance that keeps your software running long after launch. We handle uptime, security, and updates so your team can stay focused on the business instead of babysitting infrastructure.',
+      'Security updates, error and speed checks, analytics and SEO reports, data checks and a weekly email, with a shared channel in Slack, Teams, Google Chat or Discord.',
     icon: 'ServerCog',
     features: [
-      'Uptime guarantees',
-      'Security updates & monitoring',
-      'Contingency planning',
+      'Security updates, error and speed checks',
+      'Analytics and SEO reports',
+      'Data checks and a weekly email',
+      'A shared channel where your team already works',
+    ],
+  },
+  {
+    slug: 'technical-consulting',
+    title: 'Technical consulting',
+    tagline: 'What to build, buy or hire for',
+    description:
+      'Advice from people who build every day: which tools to keep, what to build, and who to hire.',
+    icon: 'Compass',
+    features: [
+      'Stack and vendor reviews',
+      'Build, buy or hire decisions',
+      'Roadmaps sized to your stage',
+    ],
+  },
+  {
+    slug: 'training',
+    title: 'Training',
+    tagline: 'Your team on AI tools, on real work',
+    description:
+      'We teach your team to use AI tools on their own real tasks while we build, so they move faster from day one.',
+    icon: 'BarChart3',
+    features: [
+      'Small groups, real tasks from their own jobs',
+      'Starts while the build happens',
     ],
   },
 ]

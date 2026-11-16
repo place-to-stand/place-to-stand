@@ -2,20 +2,31 @@
 
 import { useLayoutEffect, useRef, type ReactNode } from 'react'
 
-/** The hero's edge inset (the text's lg:pl-7). */
-const EDGE_INSET = 28
+/** How much further in the drawing sits than the text's mirror image: a
+ *  smidge, half a grid step (Jason, Nov 14). */
+const EXTRA_RIGHT = 12
+
+/** The clean app window's outer edge, as a share of the drawing's width
+ *  (x 176 + w 92 of the 274-unit viewBox, plus half its stroke). */
+const APP_RIGHT = 268.4 / 274
+
+/** The drawings' window tops (between the stack's tilted corner and the
+ *  clean app's frame), as a share of the drawing's height. */
+const WINDOW_TOP = 0.155
 
 /**
- * The hero drawing's column. Side by side, it slides the drawing left so it
- * sits centred in all the space between the end of the text and the hero
- * frame's right edge, then one edge inset further right, instead of in its
- * own half of the row. CSS can't do this alone: the balanced description
- * leaves its lines shorter than its box, so the free space only shows once
- * the text is laid out.
+ * The hero drawing's column. Side by side, it slides the drawing so the
+ * clean app's outer edge sits inside the hero frame's right line (the right
+ * corner mark) by the body text's inset from its left one, plus 12px
+ * (Jason, Nov 14). CSS can't do this alone: the drawing's viewBox
+ * has room to the right of the app, and the slot centers it.
  *
- * It never moves the drawing right of where the layout put it (that keeps
- * its inset from the corner mark), and never closer to the text than the
- * row's gap. Stacked, it leaves the drawing alone.
+ * It never moves the drawing closer to the text than the row's gap.
+ * Stacked, it leaves the drawing alone.
+ *
+ * Side by side it also sets --draw-top on the row: how far down the
+ * drawings' windows start, so the text column can start its first line
+ * level with them (Jason, Nov 14).
  */
 export function HeroDrawingSlot({
   className,
@@ -37,14 +48,30 @@ export function HeroDrawingSlot({
       slot.style.transform = ''
       const rowStyle = getComputedStyle(row)
       const drawing = slot.firstElementChild?.getBoundingClientRect()
-      if (rowStyle.flexDirection !== 'row' || !drawing) return
+      if (rowStyle.flexDirection !== 'row' || !drawing) {
+        row.style.removeProperty('--draw-top')
+        return
+      }
+      // Where the drawings' windows start (under their titles), for the
+      // text column to line its first line up with (--draw-top).
+      row.style.setProperty(
+        '--draw-top',
+        `${drawing.top - row.getBoundingClientRect().top + drawing.height * WINDOW_TOP}px`
+      )
+      // The clean app's outer edge sits inside the frame's right line (the
+      // right corner mark) by the body text's inset from the left one, plus
+      // half a grid step (Jason, Nov 14). Never closer to the
+      // text than the row's gap.
       const textEnd = inkRight(text)
-      const centre = (textEnd + frame.getBoundingClientRect().right) / 2
-      const want = centre + EDGE_INSET - (drawing.left + drawing.right) / 2
+      const frameBox = frame.getBoundingClientRect()
+      const body = text.querySelector('p')?.getBoundingClientRect()
+      const inset = (body ? body.left - frameBox.left : 0) + EXTRA_RIGHT
+      const appRight = drawing.left + drawing.width * APP_RIGHT
+      const want = frameBox.right - inset - appRight
       const furthestLeft =
         textEnd + parseFloat(rowStyle.columnGap) - drawing.left
-      const shift = Math.min(0, Math.max(want, furthestLeft))
-      if (shift < -0.5) slot.style.transform = `translateX(${shift}px)`
+      const shift = Math.max(want, furthestLeft)
+      if (Math.abs(shift) > 0.5) slot.style.transform = `translateX(${shift}px)`
     }
 
     place()

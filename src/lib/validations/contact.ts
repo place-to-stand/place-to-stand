@@ -31,7 +31,7 @@ export const contactSchema = z
     // required in that case.
     subjectOther: optionalString,
     message: z.string().min(10, 'Message must be at least 10 characters.'),
-    // Opt-in only. Absent or false means we reply to the enquiry but never add
+    // Opt-in only. Absent or false means we reply to the inquiry but never add
     // the person to the marketing audience.
     marketingConsent: z.boolean().optional(),
     // "How did you hear about us?" Never required; "" means skipped.

@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     if (verification.isBot) {
       console.warn('BotID blocked a subscribe attempt')
       return fail(
-        "We couldn't verify your request. Please refresh and try again.",
+        'We couldn’t verify your request. Please refresh and try again.',
         403
       )
     }

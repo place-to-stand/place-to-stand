@@ -1,0 +1,131 @@
+'use client'
+
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type CSSProperties,
+  type ReactNode,
+  type SVGProps,
+} from 'react'
+import { cn } from '@/src/lib/utils'
+
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
+const subscribeReducedMotion = (onChange: () => void) => {
+  const mql = window.matchMedia(REDUCED_MOTION_QUERY)
+  mql.addEventListener('change', onChange)
+  return () => mql.removeEventListener('change', onChange)
+}
+const getReducedMotion = () => window.matchMedia(REDUCED_MOTION_QUERY).matches
+const getServerReducedMotion = () => false
+
+/**
+ * Fires when the element scrolls into view, so its draw-in can play. Under
+ * prefers-reduced-motion it resolves to true immediately and skips the
+ * observer entirely, mirroring the short-circuit in AnimatedSection.
+ *
+ * Replays every time the page comes back. Next 16 keeps visited pages alive
+ * but hidden (React Activity) instead of unmounting them, so without a reset
+ * the "already played" flag survives and the drawing returns at its end
+ * state while the CSS headline intro replays. The layout-effect cleanup runs
+ * as the page is hidden and clears the flag before the next paint, so the
+ * drawing is reset while invisible and plays again from frame one when
+ * shown. A page restored from the browser's back-forward cache (pageshow
+ * with persisted) is reset the same way.
+ */
+export function useInView<T extends Element = HTMLElement>() {
+  const ref = useRef<T>(null)
+  const [intersected, setIntersected] = useState(false)
+  const [run, setRun] = useState(0)
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotion,
+    getServerReducedMotion
+  )
+
+  useLayoutEffect(() => () => setIntersected(false), [])
+
+  useEffect(() => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return
+      setIntersected(false)
+      setRun(value => value + 1)
+    }
+    window.addEventListener('pageshow', onPageShow)
+    return () => window.removeEventListener('pageshow', onPageShow)
+  }, [])
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node || reducedMotion) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIntersected(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '0px 0px -15% 0px', threshold: 0.2 }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [reducedMotion, run])
+
+  return { ref, inView: reducedMotion || intersected }
+}
+
+interface BlueprintGraphicProps extends SVGProps<SVGSVGElement> {
+  /** The schematic body — paths, lines, and one accent `.bp-node`. */
+  children: ReactNode
+  /** Ongoing-loop variant applied once drawn in (e.g. 'bp-loop-pulse'). */
+  loop?: string
+  /**
+   * Delay (ms) before the draw-in starts once in view. The hero piece uses this
+   * to sequence its draw after the hero intro finishes.
+   */
+  drawDelayMs?: number
+}
+
+/**
+ * Client wrapper that draws a blueprint schematic in on first view, then hands
+ * off to a subtle ongoing loop. The SVG body uses a 100x100 viewBox, and its
+ * lines draw at the two stroke weights (data-drawing, see globals.css). All motion + reduced-motion handling lives in globals.css, keyed off the
+ * `bp-draw` class and the `data-visible` attribute this component toggles.
+ */
+export function BlueprintGraphic({
+  children,
+  loop,
+  drawDelayMs,
+  className,
+  style,
+  ...props
+}: BlueprintGraphicProps) {
+  const { ref, inView } = useInView<SVGSVGElement>()
+
+  return (
+    <svg
+      ref={ref}
+      viewBox='0 0 100 100'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+      aria-hidden
+      data-drawing
+      data-visible={inView ? 'true' : undefined}
+      className={cn('bp-draw', loop, className)}
+      style={
+        {
+          ...(drawDelayMs ? { '--bp-draw-base': `${drawDelayMs}ms` } : {}),
+          ...style,
+        } as CSSProperties
+      }
+      {...props}
+    >
+      {children}
+    </svg>
+  )
+}

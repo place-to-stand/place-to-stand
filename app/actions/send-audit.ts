@@ -38,7 +38,7 @@ export type AuditActionResult =
 
 /** Shown whenever the portal did not take the submission. */
 const DELIVERY_FAILED_MESSAGE =
-  "We couldn't send your audit. Please email hello@placetostandagency.com and we'll get right back to you."
+  'We couldn’t send your audit. Please email hello@placetostandagency.com and we’ll get right back to you.'
 
 /**
  * Captures the lead at the end of the Opportunity Audit.
@@ -105,7 +105,7 @@ export async function sendAudit(
         // generic: this action also serves the post-capture details form,
         // where the blueprint has already been sent.
         message:
-          "We couldn't verify your request. Please refresh and try again, or email hello@placetostandagency.com and we'll take it from there.",
+          'We couldn’t verify your request. Please refresh and try again, or email hello@placetostandagency.com and we’ll take it from there.',
       } as const
     }
   } catch (error) {

@@ -1,18 +1,14 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { ContactSection } from '@/src/components/sections/contact-section'
+import { ContactTemplate } from '@/src/components/templates/contact'
 
 export const metadata: Metadata = pageMetadata({
-  title: 'Contact',
+  title: 'Book a call',
   description:
-    'Get in touch with Place To Stand. Send a message or book a call directly.',
+    'Book a free 30-minute intro call with the engineers who would build your software, take the free audit, or send a message.',
   path: '/contact',
 })
 
 export default function ContactPage() {
-  return (
-    <main className='flex-1 pt-page-start pb-section'>
-      <ContactSection />
-    </main>
-  )
+  return <ContactTemplate />
 }

@@ -30,6 +30,16 @@ const nextConfig = {
     // 90 is for the case study storefront screenshots, which are mostly text.
     qualities: [75, 90],
   },
+  // The Nov 2026 restructure renamed three pages; Field notes folded into
+  // the blog.
+  async redirects() {
+    return [
+      { source: '/services', destination: '/platform', permanent: true },
+      { source: '/how-we-work', destination: '/process', permanent: true },
+      { source: '/team', destination: '/about', permanent: true },
+      { source: '/field-notes', destination: '/blog', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
@@ -62,7 +72,7 @@ const contentSecurityPolicy = [
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   `connect-src 'self' ${posthogHost} https://us.posthog.com https://*.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.doubleclick.net https://www.google.com https://www.googleadservices.com https://pagead2.googlesyndication.com`,
-  'frame-src https://www.googletagmanager.com https://*.doubleclick.net',
+  'frame-src https://www.googletagmanager.com https://*.doubleclick.net https://calendar.google.com',
   "worker-src 'self' blob:",
   "object-src 'none'",
   "base-uri 'self'",
@@ -72,7 +82,7 @@ const contentSecurityPolicy = [
     ? [
         // Direct to PostHog ingest: the docs don't cover CSP reports through
         // the reverse proxy. Bump `v` whenever the policy changes.
-        `report-uri https://us.i.posthog.com/report/?token=${process.env.NEXT_PUBLIC_POSTHOG_KEY}&v=1`,
+        `report-uri https://us.i.posthog.com/report/?token=${process.env.NEXT_PUBLIC_POSTHOG_KEY}&v=2`,
       ]
     : []),
 ].join('; ')

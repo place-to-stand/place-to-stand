@@ -32,7 +32,7 @@ each terminate on a grid line — that's expected.
 
 ## Design system
 
-Spacing, type, colours and accent lines all come from named roles: see **`docs/design-system.md`**. Use the
+Spacing, type, colors and accent lines all come from named roles: see **`docs/design-system.md`**. Use the
 spacing roles (`pt-page-start`, `gap-section`, `pb-edge`, `gap-header`, `gap-stack`, `gap-intro`, `p-card`,
 `p-callout`, `py-band`), the type roles (`type-page-title`, `type-section-title`, `type-card-title`, `type-intro`,
 `type-fine`, `bp-label`), and the `Section`, `PageHeader` and `CtaBand` components instead of raw sizes. Pages own

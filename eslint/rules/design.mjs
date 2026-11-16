@@ -1,0 +1,225 @@
+/**
+ * Design-system rules for the marketing site. Each rule enforces one line of
+ * docs/design-system.md so drift fails `npm run lint` instead of waiting for
+ * a review. They read class strings anywhere under a JSX `className` (string
+ * literals, template literals, cn(...) arguments) and a few JSX elements.
+ */
+
+const DOC = 'docs/design-system.md'
+
+/** Every string under a JSX attribute's value (cn('a', x && 'b'), `…`). */
+function attributeStrings(attribute) {
+  const out = []
+  const visit = node => {
+    if (!node || typeof node !== 'object') return
+    if (node.type === 'Literal' && typeof node.value === 'string') {
+      out.push({ node, value: node.value })
+    } else if (node.type === 'TemplateElement') {
+      out.push({ node, value: node.value.raw })
+    }
+    for (const key of Object.keys(node)) {
+      if (key === 'parent') continue
+      const child = node[key]
+      if (Array.isArray(child)) child.forEach(visit)
+      else if (child && typeof child.type === 'string') visit(child)
+    }
+  }
+  visit(attribute?.value)
+  return out
+}
+
+function attribute(node, name) {
+  return node.attributes.find(
+    attr => attr.type === 'JSXAttribute' && attr.name?.name === name
+  )
+}
+
+function elementName(node) {
+  const name = node.name
+  if (name.type === 'JSXIdentifier') return name.name
+  if (name.type === 'JSXMemberExpression') return name.property.name
+  return ''
+}
+
+/** The utility itself, without variants (md:, hover:, group-hover:). */
+const bare = cls => cls.split(':').pop().replace(/^!|!$/g, '')
+
+function classRule({ description, message, test, allow = () => false }) {
+  return {
+    meta: {
+      type: 'problem',
+      docs: { description },
+      schema: [],
+      messages: { bad: message },
+    },
+    create(context) {
+      return {
+        JSXOpeningElement(node) {
+          for (const { node: literal, value } of attributeStrings(
+            attribute(node, 'className')
+          )) {
+            if (allow(value)) continue
+            for (const cls of value.split(/\s+/).filter(Boolean)) {
+              if (test(bare(cls), cls)) {
+                context.report({
+                  node: literal,
+                  messageId: 'bad',
+                  data: { cls },
+                })
+              }
+            }
+          }
+        },
+      }
+    },
+  }
+}
+
+// Spacing: structure comes from the roles (gap-section, p-card, …) or the
+// grid tokens (grid-half … grid-8). Raw Tailwind steps up to 2 (8px) are
+// component micro-spacing, which CLAUDE.md allows sub-grid; anything larger,
+// and any arbitrary [..] value, must be a role or grid token.
+const SPACING =
+  /^-?(?:p|px|py|pt|pr|pb|pl|ps|pe|m|mx|my|mt|mr|mb|ml|ms|me|gap|gap-x|gap-y|space-x|space-y|inset|inset-x|inset-y|top|right|bottom|left)-(.+)$/
+const MICRO = new Set(['0', 'px', '0.5', '1', '1.5', '2', 'auto', 'full'])
+export const noRawSpacing = classRule({
+  description: 'Structural spacing uses the spacing roles or grid tokens',
+  message: `${DOC} → Spacing roles: "{{cls}}" is a raw spacing value. Use a role (gap-section, gap-stack, p-card, …) or a grid token (grid-half … grid-8). Raw steps up to 2 (8px) are allowed for micro-spacing only.`,
+  test(cls) {
+    const m = SPACING.exec(cls)
+    if (!m) return false
+    const v = m[1]
+    if (MICRO.has(v) || v.startsWith('(')) return false
+    if (v.startsWith('[')) return /\d(?:px|rem)/.test(v)
+    return /^\d+(?:\.\d+)?$/.test(v)
+  },
+})
+
+// Text sizes: headings and labels use the type roles. Body sizes text-base
+// and text-sm stay (the type floor), and 12px is allowed for short mono
+// labels (text-xs with font-mono in the same class string); everything else
+// is a role.
+export const noRawTextSize = classRule({
+  allow: value =>
+    /(?:^|\s)font-mono(?:\s|$)/.test(value) &&
+    !/(?:^|\s)(?:[\w-]+:)?text-(?:lg|xl|[2-9]xl)(?:\s|$)/.test(value),
+  description: 'Text sizes come from the type roles',
+  message: `${DOC} → Type roles: "{{cls}}" sets a raw text size. Use type-page-title, type-section-title, type-card-title, type-intro, type-stat, type-quote, type-fine or bp-label; body text is text-base (text-sm for fine print).`,
+  test: cls =>
+    /^text-(?:xs|lg|xl|[2-9]xl)$/.test(cls) ||
+    /^text-\[\d[\d.]*(?:px|rem|em)\]$/.test(cls),
+})
+
+// Colors: tokens only. No Tailwind palette colors, no hex.
+const PALETTE =
+  /^(?:text|bg|border|ring|fill|stroke|outline|decoration|from|to|via|shadow)-(?:white|black|(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3})(?:\/\d+)?$/
+export const noRawColor = classRule({
+  description: 'Colors come from the tokens',
+  message: `${DOC} → Colors: "{{cls}}" is a raw color. Use a token (text-text, bg-bg-card, border-border, accent, accent-line, …).`,
+  test: cls => PALETTE.test(cls) || /-\[#[0-9a-fA-F]{3,8}\]/.test(cls),
+})
+
+// Borders: boxes own their strokes. Card, LinkCard, StatTile, Callout,
+// Panel, RuledRow, RuledList, SideNote and Chip (src/components/boxes) carry every border on the site, so a page never draws one.
+// Turned off in eslint.config.mjs for boxes.tsx itself and for UI
+// primitives; anything else that truly needs a border says why in an
+// eslint-disable comment.
+const BORDER = /^(?:border(?:-[trblxyse])?(?:-.+)?|divide-.+)$/
+// Zero widths remove a rule (first:border-t-0), they don't draw one.
+const NOT_A_STROKE =
+  /^border-(?:collapse|separate|spacing(?:-.+)?)$|^border(?:-[trblxyse])?-0$/
+export const noRawBorder = classRule({
+  description: 'Borders come from the shared box components',
+  message: `${DOC} → Boxes: "{{cls}}" draws a border. Use Card, LinkCard, StatTile, Callout, Panel, RuledRow, RuledList, SideNote or Chip from src/components/boxes.`,
+  test: cls => BORDER.test(cls) && !NOT_A_STROKE.test(cls),
+})
+
+// Imagery: photos, screenshots and video sit in MediaFrame, which allows three
+// shapes only (16:10, 1:1, 21:9). An aspect class anywhere else is a fourth
+// shape. Drawings that need their own box say so in an eslint-disable comment.
+export const noRawAspect = classRule({
+  description: 'Media use the three MediaFrame shapes',
+  message: `${DOC} → Imagery: "{{cls}}" sets its own aspect ratio. Put media in MediaFrame (shape work 16:10, person 1:1, wide 21:9).`,
+  test: cls => /^aspect-/.test(cls),
+})
+
+// Interaction states: keyboard focus is the one global ring (focus-ring, from
+// a base :focus-visible rule), so no element sets its own ring or outline;
+// disabled is muted tokens and cursor-not-allowed, never faded with opacity.
+// An element focused only by script (a question the audit moves focus to)
+// says so in an eslint-disable comment.
+export const noRawFocus = classRule({
+  description: 'Focus and disabled states come from the shared styles',
+  message: `${DOC} → Interaction states: "{{cls}}" sets its own focus ring or disabled look. Focus comes from the global focus-ring; disabled uses muted text and line tokens with cursor-not-allowed.`,
+  test: (base, cls) =>
+    /^(?:ring|outline)(?:-|$)/.test(base) ||
+    (/(?:^|:)disabled:/.test(cls) && /^opacity-/.test(base)),
+})
+
+// Links: every text link is link-nav, link-action, link-inline or
+// link-icon. A link that styles its own underline or accent color is a
+// fourth style. Card links (whole blocks) don't set text decoration and
+// pass.
+const ROLE = /(?:^|\s)link-(?:nav|action|inline|icon)(?:\s|$)/
+const OWN_LINK_STYLE =
+  /(?:^|\s)(?:[\w-]+:)?(?:underline|decoration-[\w/-]+|underline-offset-\d+|text-accent)(?:\s|$)/
+export const linkRole = {
+  meta: {
+    type: 'problem',
+    docs: { description: 'Text links use one of the three link roles' },
+    schema: [],
+    messages: {
+      role: `${DOC} → Links: this link styles its own underline or accent color. Use link-nav, link-action, link-inline (or SocialIcon / ArrowLink / AuditLink).`,
+    },
+  },
+  create(context) {
+    return {
+      JSXOpeningElement(node) {
+        if (!['a', 'Link', 'TrackedLink'].includes(elementName(node))) return
+        const strings = attributeStrings(attribute(node, 'className')).map(
+          s => s.value
+        )
+        const all = strings.join(' ')
+        if (ROLE.test(all)) return
+        if (OWN_LINK_STYLE.test(all)) {
+          context.report({ node, messageId: 'role' })
+        }
+      },
+    }
+  },
+}
+
+// Sections: pages build sections from Section / PageHeader / CtaBand / Band.
+// A raw <section> or a direct AnimatedSection in app/ bypasses the page-owned
+// spacing.
+export const sectionComponent = {
+  meta: {
+    type: 'problem',
+    docs: { description: 'Pages use the shared section components' },
+    schema: [],
+    messages: {
+      raw: `${DOC} → Components: use Section (and PageHeader, Band, CtaBand) instead of <{{name}}> so the page owns the gaps.`,
+    },
+  },
+  create(context) {
+    return {
+      JSXOpeningElement(node) {
+        const name = elementName(node)
+        if (name === 'section' || name === 'AnimatedSection') {
+          context.report({ node, messageId: 'raw', data: { name } })
+        }
+      },
+    }
+  },
+}
+
+export const rules = {
+  'no-raw-spacing': noRawSpacing,
+  'no-raw-text-size': noRawTextSize,
+  'no-raw-color': noRawColor,
+  'no-raw-border': noRawBorder,
+  'no-raw-aspect': noRawAspect,
+  'no-raw-focus': noRawFocus,
+  'link-role': linkRole,
+  'section-component': sectionComponent,
+}

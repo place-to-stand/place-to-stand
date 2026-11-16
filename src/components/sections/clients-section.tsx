@@ -1,98 +1,85 @@
 import type { Route } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
-import { cn } from '@/src/lib/utils'
-import { clients, getClientHostname, type Client } from '@/src/lib/clients'
+import { Reveal } from '@/src/components/primitives/animated-section'
+import { ArrowLink } from '@/src/components/patterns/arrow-link'
+import { RuledList, RuledRow } from '@/src/components/boxes'
+import {
+  CLIENT_GROUPS,
+  getClientHostname,
+  type ClientRow,
+} from '@/src/lib/clients'
 
-const ROW_LINK_CLASS =
-  'mt-1 w-fit font-mono text-sm font-medium tracking-[0.1em] uppercase no-underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-subtle'
-
-/** One open row per client: a big brand photo with the name and description
- * beside it. On large screens the image takes two thirds of the width and
- * switches sides every row; below that the image sits on top. No cards, no
- * borders: large gaps separate the rows. Every photo is cut to the same 16:10
- * frame from its centre, so they match whatever size the file is. A client
- * with a case study opens it from the photo, with its own site linked below. */
-export function ClientsSection() {
-  const featured = clients.filter(
-    (client): client is Client & { image: string } => Boolean(client.image)
-  )
+/** The client rows on /clients, in three titled groups (Sell online, Run
+ * your business, Websites and products). On large screens each group's
+ * title sits in the left third and its rows run down the rest; below that
+ * the title sits on top. Each row is one ruled line: the name, who they
+ * are, what we built, and their site. `limit` shows only the first groups
+ * (/design). Tone: light. */
+export function ClientsSection({ limit }: { limit?: number } = {}) {
   return (
     <div className='flex flex-col gap-section'>
-      {featured.map((client, index) => {
-        const flipped = index % 2 === 1
-        const host = getClientHostname(client.href)
-        const imageClassName = cn(
-          'relative block aspect-[16/10] overflow-hidden bg-bg-card lg:col-span-8 lg:row-start-1',
-          flipped ? 'lg:col-start-5' : 'lg:col-start-1'
-        )
-        const image = (
-          <Image
-            src={client.image}
-            alt=''
-            fill
-            loading={index === 0 ? 'eager' : undefined}
-            sizes='(min-width: 1440px) 888px, (min-width: 1024px) 62vw, 100vw'
-            className='object-cover transition-transform duration-700 group-hover:scale-[1.02]'
-          />
-        )
-        return (
-          <article
-            key={client.title}
-            className='group grid gap-grid-1 lg:grid-cols-12 lg:items-end lg:gap-x-grid-1'
-          >
-            {client.caseStudy ? (
-              <Link
-                href={client.caseStudy as Route}
-                tabIndex={-1}
-                aria-hidden
-                className={imageClassName}
-              >
-                {image}
-              </Link>
-            ) : (
-              <a
-                href={client.href}
-                target='_blank'
-                rel='noreferrer noopener'
-                tabIndex={-1}
-                aria-hidden
-                className={imageClassName}
-              >
-                {image}
-              </a>
-            )}
-            <div
-              className={cn(
-                'flex flex-col gap-4 lg:row-start-1 lg:gap-5',
-                flipped
-                  ? 'lg:col-span-3 lg:col-start-1'
-                  : 'lg:col-span-3 lg:col-start-10'
-              )}
+      {CLIENT_GROUPS.slice(0, limit).map(group => (
+        <section
+          key={group.title}
+          aria-labelledby={groupId(group.title)}
+          className='grid gap-stack lg:grid-cols-12 lg:gap-x-grid-1'
+        >
+          <Reveal index={0} className='lg:col-span-4'>
+            <h2
+              id={groupId(group.title)}
+              className='type-section-title text-balance'
             >
-              <h2 className='type-section-title uppercase'>{client.title}</h2>
-              <p className='type-intro'>{client.description}</p>
-              {client.caseStudy && (
-                <Link
-                  href={client.caseStudy as Route}
-                  className={cn(ROW_LINK_CLASS, 'text-accent')}
-                >
-                  Read the case study <span aria-hidden>→</span>
-                </Link>
-              )}
-              <a
-                href={client.href}
-                target='_blank'
-                rel='noreferrer noopener'
-                className={cn(ROW_LINK_CLASS, 'text-text')}
-              >
-                Visit {host} <span aria-hidden>↗</span>
-                <span className='sr-only'> (opens in a new tab)</span>
-              </a>
-            </div>
-          </article>
-        )
-      })}
+              {group.title}
+            </h2>
+          </Reveal>
+          <Reveal index={1} className='lg:col-span-8'>
+            <RuledList>
+              {group.rows.map(row => (
+                <Row key={row.name} row={row} />
+              ))}
+            </RuledList>
+          </Reveal>
+        </section>
+      ))}
     </div>
   )
+}
+
+function Row({ row }: { row: ClientRow }) {
+  return (
+    <RuledRow className='grid gap-grid-half py-grid-1 md:grid-cols-8 md:gap-x-grid-1'>
+      <h3 className='type-card-title text-balance md:col-span-3'>{row.name}</h3>
+      <div className='flex flex-col gap-grid-1 md:col-span-5'>
+        <div className='flex flex-col gap-grid-half'>
+          <p className='text-base text-text-muted'>{row.who}</p>
+          <p className='text-base'>{row.built}</p>
+        </div>
+        <div className='flex flex-wrap gap-x-grid-1 gap-y-grid-half'>
+          {row.page && (
+            <ArrowLink href={row.page.href as Route}>
+              {row.page.label}
+            </ArrowLink>
+          )}
+          {row.sites?.map(href => (
+            <a
+              key={href}
+              href={href}
+              target='_blank'
+              rel='noreferrer noopener'
+              className='link-action'
+            >
+              <span className='link-label'>{getClientHostname(href)}</span>{' '}
+              <span aria-hidden className='link-out'>
+                ↗
+              </span>
+              <span className='sr-only'> (opens in a new tab)</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </RuledRow>
+  )
+}
+
+function groupId(title: string): string {
+  return `clients-${title.toLowerCase().replace(/[^a-z]+/g, '-')}`
 }

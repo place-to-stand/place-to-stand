@@ -9,22 +9,22 @@ import type { ServiceDefinition, ServiceId } from './types'
 export const SERVICES: Record<ServiceId, ServiceDefinition> = {
   'workflow-automation': {
     id: 'workflow-automation',
-    name: 'Workflow Automation',
+    name: 'Workflows and automations',
     tagline: 'Stop doing by hand what software should do',
     description:
-      "Automate the repetitive, error-prone tasks eating your team's time.",
+      'Automate the repetitive, error-prone tasks eating your team’s time.',
     icon: 'Workflow',
   },
   'internal-tools': {
     id: 'internal-tools',
-    name: 'Internal Tools & Dashboards',
+    name: 'Team workspace and Reports',
     tagline: 'Replace the spreadsheet running your business',
     description: 'Internal apps built around how your team actually works.',
     icon: 'LayoutDashboard',
   },
   'customer-portal': {
     id: 'customer-portal',
-    name: 'Customer Portals',
+    name: 'Client portal',
     tagline: 'Let customers help themselves',
     description:
       'Portals to book, track, pay, and self-serve, with less load on you.',
@@ -32,7 +32,7 @@ export const SERVICES: Record<ServiceId, ServiceDefinition> = {
   },
   'data-integration': {
     id: 'data-integration',
-    name: 'Systems Integration & APIs',
+    name: 'Workflows and automations',
     tagline: 'Make your tools talk to each other',
     description:
       'Connect your systems so data flows instead of getting copy-pasted.',
@@ -40,14 +40,14 @@ export const SERVICES: Record<ServiceId, ServiceDefinition> = {
   },
   'custom-crm': {
     id: 'custom-crm',
-    name: 'Custom CRM & Sales Tools',
+    name: 'CRM',
     tagline: 'A CRM shaped to how you sell',
     description: 'Pipeline and customer management that fits your process.',
     icon: 'Contact',
   },
   ecommerce: {
     id: 'ecommerce',
-    name: 'Online Ordering & E-commerce',
+    name: 'Sell online',
     tagline: 'Sell and transact online, your way',
     description:
       'Storefronts and ordering built around your products and pricing.',
@@ -62,22 +62,22 @@ export const SERVICES: Record<ServiceId, ServiceDefinition> = {
   },
   'ai-solutions': {
     id: 'ai-solutions',
-    name: 'AI & Intelligent Automation',
-    tagline: 'Apply AI where it moves the needle',
+    name: 'Workflows and automations',
+    tagline: 'Apply AI where it helps most',
     description:
       'Document processing, assistants, and prediction inside your workflows.',
     icon: 'Sparkles',
   },
   'analytics-bi': {
     id: 'analytics-bi',
-    name: 'Analytics & BI',
+    name: 'Team workspace and Reports',
     tagline: 'Turn your data into decisions',
-    description: "One trustworthy view of what's happening and why.",
+    description: 'One trustworthy view of what’s happening and why.',
     icon: 'BarChart3',
   },
   'legacy-modernization': {
     id: 'legacy-modernization',
-    name: 'Legacy Modernization',
+    name: 'Technical consulting',
     tagline: 'Escape the software holding you back',
     description: 'Re-platform aging systems without a risky big-bang rewrite.',
     icon: 'RefreshCw',

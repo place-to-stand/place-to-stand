@@ -8,7 +8,7 @@ import {
   type TouchEvent,
 } from 'react'
 import { cn } from '@/src/lib/utils'
-import { PortalPipeline } from '@/src/components/graphics/portal-pipeline'
+import { PortalPipeline } from '@/src/components/patterns/drawings/portal-pipeline'
 
 /**
  * The portal as one full-width set piece that plays itself. A single pipeline
@@ -121,14 +121,16 @@ function FlowRail({
   const hasNext = active < N - 1
   return (
     <div className='relative flex'>
-      {/* base line, spanning first→last station centres */}
+      {/* base line, spanning first→last station centers */}
       <div
+        // eslint-disable-next-line design/no-raw-spacing -- centers the connector line on the 12px node
         className='absolute top-[6px] h-px bg-border-light'
         style={{ left: `${50 / N}%`, right: `${50 / N}%` }}
         aria-hidden
       />
       {/* completed segments, locked in instantly as each step lands */}
       <div
+        // eslint-disable-next-line design/no-raw-spacing -- centers the connector line on the 12px node
         className='absolute top-[6px] h-px bg-line'
         style={{ left: `${50 / N}%`, width: `${active * (100 / N)}%` }}
         aria-hidden
@@ -138,6 +140,7 @@ function FlowRail({
       <div
         key={`fill-${active}`}
         onAnimationEnd={onAdvance}
+        // eslint-disable-next-line design/no-raw-spacing -- centers the connector line on the 12px node
         className='absolute top-[6px] h-px origin-left bg-line'
         style={{
           left: hasNext ? `${(0.5 + active) * (100 / N)}%` : '0%',
@@ -156,11 +159,11 @@ function FlowRail({
             onClick={() => onSelect(i)}
             aria-current={i === active ? 'step' : undefined}
             aria-label={scene.label}
-            className='group relative z-10 flex flex-1 flex-col items-center pb-1 focus-visible:outline-none'
+            className='group relative z-(--z-raised) flex flex-1 flex-col items-center pb-1'
           >
             <span
               className={cn(
-                'h-3 w-3 rounded-full border transition-colors duration-300 group-hover:border-text-muted group-focus-visible:ring-2 group-focus-visible:ring-text-muted/40',
+                'h-3 w-3 rounded-dot border transition-colors duration-300 group-hover:border-text-muted',
                 done ? 'border-line bg-line' : 'border-border-light bg-bg'
               )}
             />
@@ -186,10 +189,9 @@ function PipelineStage({
 }) {
   return (
     <div className='group relative w-full'>
-      {/* Corner marks appear only while the graphic is hovered. */}
-      <span className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'></span>
       {/* Mobile crops to one stage in a square window; desktop keeps the wide strip. */}
       <div
+        // eslint-disable-next-line design/no-raw-aspect -- a drawing's own box (the portal pipeline), not a photo
         className={mobile ? 'aspect-square w-full' : 'aspect-[159/40] w-full'}
       >
         <PortalPipeline
@@ -208,7 +210,7 @@ function PipelineStage({
  *  one-line description for the stage under the spotlight. */
 function StageNarration({ scene }: { scene: Scene }) {
   return (
-    <div className='flex flex-col items-center gap-3 text-center'>
+    <div className='flex flex-col items-center gap-grid-half text-center'>
       <span className='type-card-title text-balance text-accent uppercase'>
         {scene.status}
       </span>
@@ -226,6 +228,9 @@ export function PortalFlow() {
   const mobile = useMediaQuery(MOBILE_QUERY)
   const [inView, setInView] = useState(false)
   const [hovered, setHovered] = useState(false)
+  // Keyboard focus anywhere in the flow (its step buttons) pauses it too, so
+  // the caption holds still while someone reads it (WCAG 2.2.2).
+  const [focused, setFocused] = useState(false)
 
   // Only play while the flow is on screen.
   useEffect(() => {
@@ -241,8 +246,9 @@ export function PortalFlow() {
 
   // The rail's fill drives the advance (see FlowRail): when the current segment
   // finishes it calls this, so the countdown and the step change share one timer.
-  // Pause while the reader hovers to linger, or the flow is off screen.
-  const paused = hovered
+  // Pause while the reader hovers or focuses inside to linger, or the flow
+  // is off screen.
+  const paused = hovered || focused
   const advance = () => setActive(a => (a + 1) % N)
 
   const selectScene = (index: number) => {
@@ -275,14 +281,14 @@ export function PortalFlow() {
   }
 
   return (
-    <section className='mx-auto w-full max-w-content px-6 lg:px-12'>
+    <section className='mx-auto w-full max-w-content px-grid-1 lg:px-grid-2'>
       {reduced ? (
         mobile ? (
           // Reduced motion on mobile: a legible static card per stage — the crop
           // framed on that stage (fully lit, no pan) above its write-up.
           <div className='flex flex-col gap-stack'>
             {SCENES.map((scene, i) => (
-              <div key={scene.key} className='flex flex-col gap-6'>
+              <div key={scene.key} className='flex flex-col gap-grid-1'>
                 <PipelineStage active={null} mobile focus={i} />
                 <StageNarration scene={scene} />
               </div>
@@ -305,12 +311,17 @@ export function PortalFlow() {
           ref={rootRef}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onFocus={() => setFocused(true)}
+          onBlur={e => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+              setFocused(false)
+          }}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
           onTouchCancel={onTouchEnd}
           className='flex flex-col gap-grid-1'
         >
-          {/* Reserve height (and centre within it) so the taller/shorter captions
+          {/* Reserve height (and center within it) so the taller/shorter captions
               per stage never nudge the rail and graphic below them. */}
           <div
             key={`caption-${active}`}
@@ -324,7 +335,7 @@ export function PortalFlow() {
             onAdvance={advance}
             onSelect={selectScene}
           />
-          <div className='flex flex-col items-center gap-3'>
+          <div className='flex flex-col items-center gap-grid-half'>
             <PipelineStage active={active} paused={paused} mobile={mobile} />
             {/* Subtle hint at the interaction available on this device. */}
             <p className='text-center text-sm tracking-wide text-text-muted/60'>

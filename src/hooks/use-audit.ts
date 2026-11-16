@@ -28,7 +28,7 @@ import {
   type AuditSession,
   type AuditStatus,
 } from '@/src/lib/audit/session'
-import { toast } from '@/src/components/ui/use-toast'
+import { toast } from '@/src/components/primitives/use-toast'
 import { sendAuditProgress } from '@/src/lib/audit/track-progress'
 import type {
   AnswerValue,
@@ -184,7 +184,7 @@ export function useAudit(): UseAudit {
   // Rebuild the result for a session that was already scored but whose result is
   // no longer in memory. `runAudit` is pure over the stored answers, so this is
   // exact, not an approximation. Deliberately has no cleanup flag: under
-  // `reactStrictMode` the effect runs twice, and a `cancelled` flag combined
+  // `reactStrictMode` the effect runs twice, and a `canceled` flag combined
   // with the ref guard would permanently swallow the only in-flight restore.
   const restoreAttemptedRef = useRef(false)
   useEffect(() => {

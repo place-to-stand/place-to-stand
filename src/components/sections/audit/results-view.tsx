@@ -1,0 +1,516 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { usePostHog } from 'posthog-js/react'
+import {
+  Icon,
+  ArrowRight,
+  BarChart3,
+  CheckCircle2,
+  Contact,
+  LayoutDashboard,
+  Lock,
+  type LucideIcon,
+  Mail,
+  Network,
+  RefreshCw,
+  RotateCcw,
+  ShoppingCart,
+  Smartphone,
+  Sparkles,
+  Users,
+  Workflow,
+} from '@/src/components/primitives/icon'
+import { BookCallButton } from '@/src/components/primitives/cta'
+import {
+  FeedbackCard,
+  type FeedbackCardProps,
+} from '@/src/components/sections/audit/feedback-card'
+import {
+  EmailCaptureForm,
+  LeadDetailsForm,
+} from '@/src/components/sections/audit/lead-forms'
+import { Button } from '@/src/components/primitives/button'
+import { cn } from '@/src/lib/utils'
+import { PHASE_ORDER, PHASES } from '@/src/lib/audit/phases'
+import type {
+  AuditLeadPayload,
+  AuditProgressPayload,
+} from '@/src/lib/audit/progress-payload'
+import type { AuditResult, PhaseId } from '@/src/lib/audit/types'
+import { Chip, Panel } from '@/src/components/boxes'
+
+interface ResultsViewProps {
+  result: AuditResult
+  /** Builds the `captured` payload the server action forwards to the portal. */
+  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  /** Set once this visitor has given an email; unlocks the full blueprint. */
+  capturedLead: AuditLeadPayload | null
+  feedback: FeedbackCardProps['initial']
+  onCaptured: (lead: AuditLeadPayload) => void
+  onFeedback: FeedbackCardProps['onSubmit']
+  onRestart: () => void
+}
+
+/** Maps service icon names to their lucide components. */
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  Workflow,
+  LayoutDashboard,
+  Users,
+  Network,
+  Contact,
+  ShoppingCart,
+  Smartphone,
+  Sparkles,
+  BarChart3,
+  RefreshCw,
+}
+
+/** Anchor for the "get the full blueprint" links that point at the form. */
+const CAPTURE_ANCHOR = 'audit-blueprint'
+
+/** First word of a phase name, for compact stepper / chart labels. */
+function shortPhaseName(id: PhaseId): string {
+  return PHASES[id].name.split(' & ')[0]
+}
+
+export function ResultsView({
+  result,
+  buildCapturedPayload,
+  capturedLead,
+  feedback,
+  onCaptured,
+  onFeedback,
+  onRestart,
+}: ResultsViewProps) {
+  const posthog = usePostHog()
+  const { phase, phaseScores, recommendations } = result
+  const maxScore = Math.max(1, ...Object.values(phaseScores))
+  const isCaptured = capturedLead !== null
+  // The top pick is always shown; the rest come with the emailed blueprint.
+  const visibleRecommendations = isCaptured
+    ? recommendations
+    : recommendations.slice(0, 1)
+  const lockedCount = recommendations.length - visibleRecommendations.length
+
+  useEffect(() => {
+    posthog?.capture('audit_results_viewed', {
+      phase: phase.id,
+      recommendations_count: recommendations.length,
+      top_service: recommendations[0]?.service.id,
+      captured: isCaptured,
+    })
+    if (!isCaptured) {
+      posthog?.capture('audit_capture_viewed', {
+        placement: 'results',
+        phase: phase.id,
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const activeIndex = PHASE_ORDER.indexOf(phase.id)
+  const progressPct =
+    PHASE_ORDER.length > 1 ? (activeIndex / (PHASE_ORDER.length - 1)) * 100 : 0
+
+  return (
+    <div className='w-full sm:py-grid-2'>
+      {/* Dashboard header */}
+      <div className='mb-grid-half flex items-center justify-between'>
+        <span className='bp-label font-mono'>Audit Results</span>
+        <Button type='button' variant='ghost' size='sm' onClick={onRestart}>
+          <Icon icon={RotateCcw} className='mr-2' />
+          Start over
+        </Button>
+      </div>
+
+      {!isCaptured && (
+        <a
+          href={`#${CAPTURE_ANCHOR}`}
+          onClick={() =>
+            posthog?.capture('audit_capture_anchor_click', {
+              location: 'results-strip',
+            })
+          }
+          className='mb-grid-half flex items-center justify-between gap-grid-half border border-accent-subtle bg-accent-muted px-grid-half py-grid-half text-base text-text transition-colors hover:border-accent'
+        >
+          <span className='inline-flex items-center gap-2'>
+            <Icon icon={Mail} className='text-accent' />
+            {lockedCount > 0
+              ? `Showing your top opportunity. Get all ${recommendations.length} in your inbox.`
+              : 'Get a copy of your blueprint in your inbox.'}
+          </span>
+          <Icon icon={ArrowRight} className='text-accent' />
+        </a>
+      )}
+
+      {/* Phase progression timeline */}
+      <Panel as='section' className='p-grid-1 sm:px-grid-1'>
+        <div className='flex items-baseline justify-between'>
+          <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
+            Business phase
+          </h2>
+          <span className='font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>
+            {activeIndex + 1} / {PHASE_ORDER.length}
+          </span>
+        </div>
+
+        <ol className='relative mt-grid-1 flex items-start justify-between'>
+          {/* connector track + progress fill */}
+          <div
+            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
+            className='absolute top-[11px] right-0 left-0 h-px bg-border'
+            aria-hidden
+          />
+          <div
+            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
+            className='absolute top-[11px] left-0 h-px bg-border-light'
+            style={{ width: `${progressPct}%` }}
+            aria-hidden
+          />
+          {PHASE_ORDER.map((id: PhaseId, i) => {
+            const isActive = id === phase.id
+            const reached = i <= activeIndex
+            return (
+              <li
+                key={id}
+                className='relative flex min-w-0 flex-1 flex-col items-center gap-2 text-center'
+              >
+                <span
+                  className={cn(
+                    'grid h-6 w-6 place-items-center rounded-dot border bg-bg font-mono text-xs',
+                    isActive
+                      ? 'border-border-light bg-bg-elevated font-bold text-text'
+                      : reached
+                        ? 'border-border-light text-text-muted'
+                        : 'border-border text-text-muted'
+                  )}
+                >
+                  {i + 1}
+                </span>
+                <span
+                  className={cn(
+                    // eslint-disable-next-line design/no-raw-text-size -- phase tile labels shrink to fit five tiles on a phone
+                    'block w-full px-0.5 text-xs leading-tight tracking-wide break-words hyphens-auto uppercase sm:text-sm',
+                    isActive ? 'font-semibold text-text' : 'text-text-muted'
+                  )}
+                >
+                  {shortPhaseName(id)}
+                </span>
+              </li>
+            )
+          })}
+        </ol>
+      </Panel>
+
+      {/* Main grid: phase detail + score chart */}
+      <div className='mt-grid-1 grid gap-grid-1 lg:grid-cols-3'>
+        {/* Phase detail */}
+        <Panel as='section' className='lg:col-span-2'>
+          <span className='inline-flex bg-bg-elevated px-grid-half py-1 font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
+            Your phase
+          </span>
+          <h1 className='mt-grid-half type-section-title'>{phase.name}</h1>
+          <p className='mt-2 font-mono text-sm tracking-[0.15em] text-text-muted uppercase'>
+            {phase.tagline}
+          </p>
+          <p className='mt-intro text-base text-text-muted'>
+            {phase.description}
+          </p>
+
+          <div className='mt-grid-1 grid gap-grid-1 sm:grid-cols-2'>
+            <div>
+              <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
+                Signals
+              </h3>
+              <ul className='mt-grid-half space-y-1.5'>
+                {phase.signals.map(signal => (
+                  <li key={signal} className='flex gap-2 text-base text-text'>
+                    <Icon
+                      icon={CheckCircle2}
+                      className='mt-0.5 text-text-muted'
+                    />
+                    {signal}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
+                Next steps
+              </h3>
+              <ul className='mt-grid-half space-y-1.5'>
+                {phase.nextSteps.map(step => (
+                  <li key={step} className='flex gap-2 text-base text-text'>
+                    <Icon
+                      icon={ArrowRight}
+                      className='mt-0.5 text-text-muted'
+                    />
+                    {step}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Panel>
+
+        {/* Phase score chart */}
+        <Panel as='section'>
+          <h2 className='font-mono text-sm font-semibold tracking-[0.15em] text-text-muted uppercase'>
+            Audit score
+          </h2>
+          <div className='mt-grid-half space-y-grid-half'>
+            {PHASE_ORDER.map((id: PhaseId) => {
+              const score = phaseScores[id]
+              const pct = Math.round((score / maxScore) * 100)
+              const isWinner = id === phase.id
+              return (
+                <div key={id}>
+                  <div className='flex items-center justify-between gap-2'>
+                    <span
+                      className={cn(
+                        'text-sm',
+                        isWinner ? 'font-semibold text-text' : 'text-text-muted'
+                      )}
+                    >
+                      {shortPhaseName(id)}
+                    </span>
+                    <span className='font-mono text-sm text-text-muted tabular-nums'>
+                      {score}
+                    </span>
+                  </div>
+                  <div className='mt-1 h-2 overflow-hidden bg-bg-elevated'>
+                    <div
+                      className={cn(
+                        'h-full',
+                        isWinner ? 'bg-text-muted' : 'bg-border-light'
+                      )}
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </Panel>
+      </div>
+
+      {/* Recommendations */}
+      {recommendations.length > 0 && (
+        <section className='relative mt-grid-2 border-t border-t-accent pt-grid-2'>
+          <div className='mb-grid-1 flex items-end justify-between'>
+            <div className='flex flex-col gap-grid-half md:gap-grid-half'>
+              <span className='bp-label font-mono'>The Blueprint</span>
+              <h2 className='type-card-title uppercase'>Where we’d start</h2>
+            </div>
+            <span className='hidden font-mono text-sm tracking-[0.15em] text-text-muted uppercase sm:inline'>
+              {recommendations.length} opportunities
+            </span>
+          </div>
+          <div className='grid gap-grid-1 sm:grid-cols-2'>
+            {visibleRecommendations.map((rec, index) => {
+              const glyph = SERVICE_ICONS[rec.service.icon] ?? Sparkles
+              return (
+                <Panel
+                  as='article'
+                  key={rec.service.id}
+                  className='flex flex-col'
+                >
+                  <div className='flex items-center gap-grid-half'>
+                    <div className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text'>
+                      <Icon icon={glyph} size={24} />
+                    </div>
+                    <Chip className='ml-auto'>#{index + 1}</Chip>
+                  </div>
+                  <h3 className='mt-grid-half type-card-title uppercase'>
+                    {rec.service.name}
+                  </h3>
+                  <p className='mt-1 text-base font-medium text-text-muted'>
+                    {rec.service.tagline}
+                  </p>
+                </Panel>
+              )
+            })}
+            {Array.from({ length: lockedCount }, (_, i) => (
+              <LockedRecommendation
+                key={`locked-${i}`}
+                rank={visibleRecommendations.length + i + 1}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {capturedLead ? (
+        <CapturedPanel
+          result={result}
+          lead={capturedLead}
+          buildCapturedPayload={buildCapturedPayload}
+          onSaved={onCaptured}
+        />
+      ) : (
+        <Panel
+          as='section'
+          id={CAPTURE_ANCHOR}
+          className='mt-grid-1 scroll-mt-grid-4'
+        >
+          {/* min-w-0 on both columns: a grid item's min width is its
+              content's, so an unwrappable button would push the card past
+              the viewport on a phone. */}
+          <div className='grid gap-grid-2 md:grid-cols-2 md:items-center'>
+            <div className='min-w-0'>
+              <p className='font-mono text-sm tracking-[0.15em] text-accent uppercase'>
+                Your full blueprint
+              </p>
+              <h2 className='mt-2 type-card-title uppercase'>
+                {lockedCount > 0
+                  ? `Unlock all ${recommendations.length} opportunities`
+                  : 'Keep a copy of your blueprint'}
+              </h2>
+              <p className='mt-2 text-base text-text-muted'>
+                {lockedCount > 0
+                  ? 'Get every opportunity, ranked by where we’d start, sent to your inbox. They unlock here too.'
+                  : 'Get your result sent to your inbox so it’s there when you need it.'}{' '}
+                Reply to the email any time to talk to the engineers who’d build
+                it.
+              </p>
+            </div>
+            <EmailCaptureForm
+              result={result}
+              placement='results'
+              buildCapturedPayload={buildCapturedPayload}
+              onCaptured={onCaptured}
+              submitLabel={
+                lockedCount > 0 ? 'Email it to me' : 'Send me a copy'
+              }
+              className='min-w-0'
+            />
+          </div>
+        </Panel>
+      )}
+
+      {/* Optional feedback on the result itself. */}
+      <FeedbackCard initial={feedback} onSubmit={onFeedback} />
+    </div>
+  )
+}
+
+/**
+ * A ranked slot whose recommendation arrives with the emailed blueprint. A
+ * single compact row, so a stack of them on a phone does not push the unlock
+ * form screens away.
+ */
+function LockedRecommendation({ rank }: { rank: number }) {
+  const posthog = usePostHog()
+
+  return (
+    <a
+      href={`#${CAPTURE_ANCHOR}`}
+      onClick={() =>
+        posthog?.capture('audit_capture_anchor_click', {
+          location: 'locked-card',
+          rank,
+        })
+      }
+      className='group relative flex items-center gap-grid-half border border-dashed border-border bg-bg-panel p-grid-half transition-colors hover:border-accent'
+    >
+      <span className='sr-only'>
+        Opportunity {rank} is included in your emailed blueprint.
+      </span>
+      <div
+        aria-hidden
+        className='flex h-10 w-10 shrink-0 items-center justify-center bg-bg-elevated text-text-muted transition-colors group-hover:text-accent'
+      >
+        <Icon icon={Lock} size={24} />
+      </div>
+      <div aria-hidden className='min-w-0 flex-1'>
+        <div className='h-3 w-2/3 bg-bg-elevated' />
+        <p className='mt-2 font-mono text-sm tracking-[0.15em] text-text-muted uppercase transition-colors group-hover:text-accent'>
+          Unlocks by email
+        </p>
+      </div>
+      <span aria-hidden className='shrink-0'>
+        <Chip>#{rank}</Chip>
+      </span>
+    </a>
+  )
+}
+
+interface CapturedPanelProps {
+  result: AuditResult
+  lead: AuditLeadPayload
+  buildCapturedPayload: (lead: AuditLeadPayload) => AuditProgressPayload | null
+  onSaved: (lead: AuditLeadPayload) => void
+}
+
+/**
+ * After the capture: confirms where the blueprint went, offers the call, and
+ * asks (optionally) for the context the capture form no longer collects.
+ */
+function CapturedPanel({
+  result,
+  lead,
+  buildCapturedPayload,
+  onSaved,
+}: CapturedPanelProps) {
+  const [detailsSent, setDetailsSent] = useState(false)
+
+  return (
+    <Panel as='section' className='mt-grid-1'>
+      <div className='grid gap-grid-2 md:grid-cols-2'>
+        <div className='flex min-w-0 flex-col items-start gap-grid-half'>
+          <p className='inline-flex items-center gap-2 font-mono text-sm tracking-[0.15em] text-accent uppercase'>
+            <Icon icon={CheckCircle2} />
+            Blueprint sent
+          </p>
+          <h2 className='type-card-title uppercase'>Check your inbox</h2>
+          <p className='text-base text-text-muted'>
+            Your blueprint is on its way to{' '}
+            <span className='font-medium break-all text-text'>
+              {lead.email}
+            </span>
+            . Reply to it any time to start a conversation.
+          </p>
+          <BookCallButton
+            location='audit-capture-success'
+            className='mt-2 px-grid-1'
+          />
+        </div>
+
+        <div className='min-w-0 border-t border-border pt-grid-1 md:border-t-0 md:border-l md:pt-0 md:pl-grid-2'>
+          {detailsSent ? (
+            <div className='flex h-full flex-col justify-center gap-2'>
+              <h3 className='type-card-title uppercase'>
+                Thanks, the team has it
+              </h3>
+              <p className='text-base text-text-muted'>
+                Want to keep talking? Reply to your blueprint email and it lands
+                straight in our inbox.
+              </p>
+            </div>
+          ) : (
+            <>
+              <h3 className='type-card-title uppercase'>
+                Want us to take a look?
+              </h3>
+              {/* The portal emails the team a follow-up when a captured audit
+                  gains these details (place-to-stand-portal#259). */}
+              <p className='mt-1 mb-grid-half text-base text-text-muted'>
+                Optional. We’ll send it to the team with your audit, so we can
+                come to the first conversation with ideas, not questions.
+              </p>
+              <LeadDetailsForm
+                result={result}
+                lead={lead}
+                buildCapturedPayload={buildCapturedPayload}
+                onSaved={saved => {
+                  setDetailsSent(true)
+                  onSaved(saved)
+                }}
+              />
+            </>
+          )}
+        </div>
+      </div>
+    </Panel>
+  )
+}

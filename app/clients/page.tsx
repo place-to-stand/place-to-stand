@@ -1,29 +1,38 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { PageHeader, Section } from '@/src/components/layout/section'
-import { CtaBand } from '@/src/components/layout/cta-band'
+import { Band, Section } from '@/src/components/patterns/section'
+import { CtaBand } from '@/src/components/sections/cta-band'
 import { ClientsSection } from '@/src/components/sections/clients-section'
+import { ResultsSection } from '@/src/components/sections/results'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = pageMetadata({
   title: 'Clients',
   description:
-    "A selection of the brands we've partnered with to design, build, and ship software that earns its keep.",
+    'Some of the brands we’ve built software for: Shopify stores, custom marketplaces, and the systems that run them.',
   path: '/clients',
 })
 
 export default function ClientsPage() {
   return (
-    <main className='flex-1 pt-page-start'>
-      <div className='pb-edge'>
-        <Section priority id='clients' className='flex flex-col gap-header'>
-          <PageHeader
-            label='Selected Clients'
-            title='Who we build for'
-            intro="A selection of the brands we've partnered with to design, build, and ship software that earns its keep."
-          />
+    <main id='main' className='flex-1 pt-page-start'>
+      <Hero
+        variant='page'
+        sectionClassName='pb-section'
+        label='Clients'
+        title='Who we build for.'
+        intro='Stores, marketplaces and the systems behind them, for brands you know and some you’ll meet here first.'
+      />
+      {/* Proof first: the case study, dark, then the client rows in three
+          groups on a light band. */}
+      <Section id='case-study' className='scroll-mt-24 pb-band-pad'>
+        <ResultsSection />
+      </Section>
+      <Band tone='light'>
+        <Section id='clients' className='scroll-mt-24'>
           <ClientsSection />
         </Section>
-      </div>
+      </Band>
       <CtaBand location='clients-cta-block' />
     </main>
   )

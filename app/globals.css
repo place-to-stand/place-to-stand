@@ -5,6 +5,18 @@
    tokens: Tailwind v4 generates both the utility classes (bg-bg, text-text,
    p-grid-2, max-w-content, …) and the :root CSS variables from this block. */
 @theme {
+  /* Drawing strokes: two weights only. Structure for line-work, emphasis
+     for what the eye should land on (and the logo's outer square). */
+  --stroke-structure: 1px;
+  --stroke-emphasis: 2px;
+  /* Corners are square everywhere; dot is the one round shape (avatars,
+     step dots, radio marks). */
+  --radius-dot: 9999px;
+  /* One shadow: the primary button's lift (tinted per use, e.g.
+     shadow-accent/10). Nothing else casts a shadow. */
+  --shadow-cta:
+    0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)),
+    0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
   /* Reading text line height, site-wide: every text size from sm to xl uses
      1.375, so paragraphs need no leading-* class of their own. */
   --text-sm--line-height: 1.375;
@@ -24,14 +36,34 @@
   /* Accent lines come in two strengths only: accent-subtle (borders, focus
      rings, link underlines) and accent itself (strong: active states, corner
      marks, highlighted panels). */
-  --color-accent-subtle: rgba(181, 245, 66, 0.4);
+  --color-accent-subtle: #b5f54299;
+  /* Lines, bullets and underlines that should read as the accent: lime on
+     dark bands, ink on light ones (.theme-light), where lime only ever
+     appears as a fill behind dark text. */
+  --color-accent-line: #b5f542;
+  /* Keyboard focus ring (focus-ring): accent-subtle on dark bands, solid ink
+     on light ones (.theme-light) so it reaches 3:1 there. */
+  --color-focus: #b5f54299;
   --color-accent-secondary: #b4b4b4;
+  /* Form errors. */
+  --color-danger: #f87171;
   --color-border: #2a2b30;
   --color-border-light: #3a3b40;
-  /* Mid-grey for schematic line-work — readable on card backgrounds,
+  /* Ruled rows: one rule color per tone (RuledRow). */
+  --color-rule: #2a2b30;
+  /* Mid-gray for schematic line-work — readable on card backgrounds,
      where border-light is too dark to see. */
   --color-line: #6e7078;
-  /* Old tokens kept as aliases for backward compatibility */
+  /* The edge of something you can click or type into (fields, checkboxes,
+     outline buttons): 3:1 against the page and cards, where decorative
+     lines (border, rule) stay soft. Same value as line, set per band. */
+  --color-control: #6e7078;
+  /* Button edges, 2px at rest (Nov 14): the outline button's and the primary
+     button's. Per band: gray and lime on dark, ink on light. */
+  --color-button-edge: #6e7078;
+  --color-primary-edge: #b5f542;
+  /* ink: the dark site color in every band. The primary button uses it so
+     its text and hover fill stay dark inside light bands too. */
   --color-ink: #0e0f11;
   --color-ink-light: #e8e6e3;
 
@@ -53,6 +85,7 @@
   --spacing-page-top: var(--space-page-top);
   --spacing-page-start: calc(var(--nav-height) + var(--space-page-top));
   --spacing-section: var(--space-section);
+  --spacing-band-pad: calc(var(--space-section) / 2);
   --spacing-edge: var(--space-edge);
   --spacing-header: var(--space-header);
   --spacing-stack: var(--space-stack);
@@ -99,7 +132,7 @@
   --space-eyebrow: 24px;
   --space-card: 24px;
   --space-callout: 24px;
-  --space-band: 84px;
+  --space-band: 72px;
 }
 @media (min-width: 48rem) {
   :root {
@@ -109,14 +142,14 @@
     --space-edge: 96px;
     --space-header: 72px;
     --space-callout: 48px;
-    --space-band: 108px;
+    --space-band: 96px;
   }
 }
 @media (min-width: 64rem) {
   :root {
     --nav-height: 69px;
     --space-page-top: 72px;
-    --space-section: 168px;
+    --space-section: 192px;
     --space-edge: 120px;
     --space-header: 96px;
     --space-stack: 72px;
@@ -153,6 +186,19 @@
     font-size: 3rem; /* 48 */
   }
 }
+/* Titles of list items and big cards: offer names, process steps, blog
+   rows, the phone menu. Between the section and card titles. */
+@utility type-item-title {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.5rem; /* 24 */
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 1.875rem; /* 30 */
+  }
+}
 @utility type-card-title {
   font-family: var(--font-space-grotesk);
   font-size: 1.25rem; /* 20 */
@@ -165,6 +211,57 @@
   font-size: 1rem; /* 16 */
   line-height: 1.375;
   color: var(--color-text-muted);
+  @media (width >= 48rem) {
+    font-size: 1.125rem; /* 18 */
+  }
+}
+/* Big numbers in stat tiles and the case study's "At a glance". */
+@utility type-stat {
+  font-family: var(--font-space-grotesk);
+  font-size: 3rem; /* 48 */
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  white-space: nowrap;
+  @media (width >= 48rem) {
+    font-size: 3.75rem; /* 60 */
+  }
+}
+/* A pull quote. */
+@utility type-quote {
+  font-family: var(--font-space-grotesk);
+  font-size: 1.875rem; /* 30 */
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 3rem; /* 48 */
+  }
+}
+/* Spoken words: the things people say, set apart from body text and
+   headings. Light and large, with the opening quote mark hung into the
+   margin (a negative first-line indent) so the words, not the mark, line up
+   with the text around it. Lead each block with “. */
+@utility type-voice {
+  font-family: var(--font-plex-sans);
+  font-size: 1.375rem; /* 22 */
+  font-weight: 300;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  text-indent: -0.4em;
+  text-wrap: balance;
+  color: var(--color-text);
+  @media (width >= 48rem) {
+    font-size: 1.75rem; /* 28 */
+  }
+}
+/* Reading text one step up, in the text color: blog bodies, quotes,
+   statements. type-intro is the same size, muted. */
+@utility type-lead {
+  font-size: 1rem; /* 16 */
+  line-height: 1.5;
+  color: var(--color-text);
   @media (width >= 48rem) {
     font-size: 1.125rem; /* 18 */
   }
@@ -229,6 +326,22 @@ html {
     line-height: 1.375;
     overflow-x: hidden;
   }
+
+  /* No lone last words: reading text wraps "pretty" and headings balance
+     their lines (Nov 14). A text-balance or text-pretty class still wins. */
+  p,
+  li,
+  dd,
+  figcaption,
+  blockquote {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
 }
 
 /* Blueprint dots live in two places only: behind each page's hero and behind
@@ -264,13 +377,13 @@ html {
   );
   background-size: 18px 18px;
   background-position: center;
-  /* Centre on the area inside the rule line, so the cut above the first row
+  /* Center on the area inside the rule line, so the cut above the first row
      matches the cut below the last. */
   background-origin: padding-box;
 }
 /* The home hero draws its own bottom rule (on the section, which also clips
    it), so its dot layer stops exactly at that edge: otherwise the pattern is
-   centred on a box that runs past what's visible. */
+   centered on a box that runs past what's visible. */
 [data-pts-hero] .dots-hero::before {
   bottom: 0;
   border-bottom: 0;
@@ -287,8 +400,33 @@ html {
   bottom: calc(-1 * var(--spacing-grid-2));
   border-bottom: 1px solid var(--dots-rule);
 }
+/* Drawings: two stroke weights, at the same pixel width at every size.
+   Every drawing root carries data-drawing (BlueprintGraphic and the portal
+   and process drawings). Lines don't scale with the drawing; a line the
+   drawing marks 1.5 or heavier is emphasis (2px), anything lighter is
+   structure (1px). data-stroke='solid' opts out a shape drawn as a thick
+   line, like the hero's bars. */
+[data-drawing] *:not([data-stroke='solid']) {
+  vector-effect: non-scaling-stroke;
+}
+[data-drawing] [stroke-width]:not([data-stroke='solid']) {
+  stroke-width: var(--stroke-structure);
+}
+[data-drawing]
+  :is(
+    [stroke-width='1.75'],
+    [stroke-width='1.6'],
+    [stroke-width='1.8'],
+    [stroke-width='2'],
+    [stroke-width='2.4'],
+    [stroke-width='2.5']
+  ):not([data-stroke='solid']) {
+  stroke-width: var(--stroke-emphasis);
+}
 /* Closing callout: --band-pad of dots above the box and the same under it,
-   down to the footer. Each page ends <main> --band-pad under the box. */
+   down to the footer. Each page ends <main> --band-pad under the box.
+   --band-pad must equal the padding of the section around the box, or the
+   dots spill past it into the section above. */
 .dots-band {
   --band-pad: var(--space-band);
 }
@@ -297,7 +435,7 @@ html {
   top: calc(-1 * var(--band-pad));
   /* The band ends --band-pad under the box, which is where <main> ends on
      every page with a callout, so the layer spans exactly rule to footer and
-     the dots can be centred on it: the cut under the rule matches the cut
+     the dots can be centered on it: the cut under the rule matches the cut
      at the footer whatever the box height. */
   bottom: calc(-1 * var(--band-pad));
   border-top: 1px solid var(--dots-rule);
@@ -331,16 +469,20 @@ main {
   }
 }
 .sheet-panel[data-state='open'] {
-  animation: sheet-in 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  animation:
+    sheet-in 220ms var(--ease-enter),
+    overlay-in 220ms ease-out;
 }
 .sheet-panel[data-state='closed'] {
-  animation: sheet-out 250ms cubic-bezier(0.7, 0, 0.84, 0);
+  animation:
+    sheet-out 180ms var(--ease-exit),
+    overlay-out 180ms ease-in;
 }
 .sheet-overlay[data-state='open'] {
-  animation: overlay-in 350ms ease-out;
+  animation: overlay-in 220ms ease-out;
 }
 .sheet-overlay[data-state='closed'] {
-  animation: overlay-out 250ms ease-in;
+  animation: overlay-out 180ms ease-in;
 }
 @media (prefers-reduced-motion: reduce) {
   .sheet-panel,
@@ -385,11 +527,35 @@ main {
 }
 
 .pts-header-pop {
-  animation: pts-header-pop 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: pts-header-pop 260ms var(--ease-enter) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pts-header-pop {
+    animation: none;
+  }
+}
+
+/* A reaction count's bump when it changes (TeamChat). */
+@keyframes chip-bump {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.chip-bump {
+  display: inline-block;
+  animation: chip-bump var(--motion-fast) var(--ease-enter);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip-bump {
     animation: none;
   }
 }
@@ -452,7 +618,7 @@ main {
 /* Animate the BlueprintCorners (direct <span> children) of the framed headline.
    The frame draws in first (with the pitch label) so the headline wipes into it. */
 .hero-frame > span {
-  animation: hero-corner 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
+  animation: hero-corner 0.4s var(--ease-enter) 0s both;
 }
 
 /* --hero-delay is set inline per line (see hero-section.tsx) and drives both the
@@ -460,8 +626,7 @@ main {
    because the curtain is a pseudo-element and needs to inherit the same value. */
 .hero-line {
   position: relative;
-  animation: hero-line-settle 0.5s cubic-bezier(0.16, 1, 0.3, 1)
-    var(--hero-delay, 0s) both;
+  animation: hero-line-settle 0.5s var(--ease-enter) var(--hero-delay, 0s) both;
   /* The curtain covers the box; pad the bottom so glyph descenders (e.g. "y")
      stay covered, then cancel the padding with negative margin to keep leading tight. */
   padding-bottom: 0.2em;
@@ -474,13 +639,12 @@ main {
   inset: 0;
   background-color: var(--color-bg);
   transform-origin: right center;
-  animation: hero-curtain 0.5s cubic-bezier(0.16, 1, 0.3, 1)
-    var(--hero-delay, 0s) both;
+  animation: hero-curtain 0.5s var(--ease-enter) var(--hero-delay, 0s) both;
   pointer-events: none;
 }
 
 .hero-reveal {
-  animation: hero-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-rise 0.6s var(--ease-enter) both;
 }
 
 @keyframes hero-slide-left {
@@ -495,7 +659,7 @@ main {
 }
 
 .hero-slide-in {
-  animation: hero-slide-left 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hero-slide-left 1.3s var(--ease-enter) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -612,7 +776,7 @@ main {
 .bp-draw .bp-line {
   stroke-dasharray: 200;
   stroke-dashoffset: 200;
-  transition: stroke-dashoffset 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: stroke-dashoffset 900ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms);
 }
 .bp-draw[data-visible='true'] .bp-line {
@@ -626,7 +790,7 @@ main {
   transform-origin: center;
   transition:
     opacity 400ms ease-out,
-    transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 460ms var(--ease-enter);
   transition-delay: calc(
     var(--bp-draw-base, 0ms) + var(--draw-i, 0) * 120ms + 640ms
   );
@@ -757,7 +921,7 @@ main {
   transform: translateY(12px);
   transition:
     opacity 328ms ease,
-    transform 380ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 380ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
 }
 .hero-compare[data-visible='true'] .cmp-in {
@@ -771,7 +935,7 @@ main {
   transform: translateX(-14px);
   transition:
     opacity 252ms ease,
-    transform 328ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 328ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
 }
 .hero-compare[data-visible='true'] .cmp-arrow {
@@ -785,7 +949,7 @@ main {
   transform: translateX(52px);
   transition:
     opacity 328ms ease,
-    transform 456ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 456ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--cmp-delay, 0ms));
 }
 .hero-compare[data-visible='true'] .cmp-slide {
@@ -819,7 +983,7 @@ main {
   transform-box: fill-box;
   transform-origin: 50% 100%;
   transform: scaleY(0);
-  transition: transform 520ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 520ms var(--ease-enter);
   transition-delay: calc(var(--bp-draw-base, 0ms) + var(--bar-delay, 0ms));
 }
 .hero-compare .cmp-bar-last {
@@ -843,7 +1007,7 @@ main {
 }
 
 /* On mobile the graphic renders narrower, so its titles shrink with it — bump
-   the "Turn all of this" / "Into one source of truth" headings up a touch
+   the "Turn your scattered tools and data" / "Into one system you own" headings up a touch
    (font-size is in SVG user units, so this scales relative to the viewBox). */
 @media (max-width: 767px) {
   .hero-compare .cmp-title {
@@ -858,7 +1022,7 @@ main {
 [data-hero-story] .hs-anim {
   transition:
     opacity 600ms ease,
-    transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 850ms var(--ease-enter);
 }
 
 @keyframes hs-breathe {
@@ -966,71 +1130,42 @@ main {
   display: none;
 }
 
-/* ─── Blueprint corner marks ───
-   Architectural registration marks on elements.
-   Apply .bp-corners for TL + BR accent corner marks.
-*/
-.bp-corners {
-  position: relative;
-}
-
-.bp-corners::before,
-.bp-corners::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bp-corners::before {
-  top: -1px;
-  left: -1px;
-  width: 12px;
-  height: 12px;
-  border-top: 1px solid var(--color-accent);
-  border-left: 1px solid var(--color-accent);
-}
-
-.bp-corners::after {
-  bottom: -1px;
-  right: -1px;
-  width: 12px;
-  height: 12px;
-  border-bottom: 1px solid var(--color-accent);
-  border-right: 1px solid var(--color-accent);
-}
-
-.bp-corners-lg::before {
-  width: 20px;
-  height: 20px;
-}
-
-.bp-corners-lg::after {
-  width: 20px;
-  height: 20px;
-}
-
 /* ─── Blueprint section annotation label ───
    Callout label with a double-chevron terminal mark. */
 .bp-label {
   font-family: var(--font-plex-mono);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.125em;
   text-transform: uppercase;
   color: var(--color-accent);
   /* inline-block (not flex) so text-box can trim it to its letters, like
      headings, so the gaps around a label measure to the visible caps. */
   display: inline-block;
+  /* Never stretch to the column: in a light band the label carries a lime
+     marker that should hug the text. */
+  width: fit-content;
   text-box: trim-both cap alphabetic;
 }
 
+/* The terminal double chevron: an SVG mask filled with the label's own
+   color (lime on dark bands, ink on light), not a text glyph, which sat low
+   against the caps. It is 0.6em tall (a touch under the 0.7em capitals) and
+   raised 0.05em, so it centers on them; its stroke matches the 600
+   letters. Empty content, so nothing extra reaches screen readers. The gap
+   to the text is the old one (6px, after the last letter's spacing). */
 .bp-label::after {
-  content: '\00BB';
+  content: '';
+  display: inline-block;
+  width: 0.53em;
+  height: 0.6em;
   margin-left: 6px;
-  font-size: 14px;
-  letter-spacing: 0;
+  vertical-align: 0.05em;
+  background-color: currentColor;
   opacity: 0.7;
+  -webkit-mask: var(--bp-chevrons) no-repeat center / contain;
+  mask: var(--bp-chevrons) no-repeat center / contain;
+  --bp-chevrons: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 10'%3E%3Cpath d='M1 1.2 4.1 5 1 8.8M4.9 1.2 8 5 4.9 8.8' fill='none' stroke='%23000' stroke-width='1.75' stroke-linecap='square' stroke-linejoin='miter'/%3E%3C/svg%3E");
 }
 
 /* ─── Blueprint dashed dimension line ─── */
@@ -1102,11 +1237,11 @@ main {
 }
 
 .logo-swap-in {
-  animation: logo-scan-in 900ms cubic-bezier(0.65, 0, 0.35, 1) backwards;
+  animation: logo-scan-in 900ms var(--ease-in-out) backwards;
 }
 
 .logo-swap-line {
-  animation: logo-scan-line 900ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: logo-scan-line 900ms var(--ease-in-out) both;
 }
 
 @keyframes logo-scan-in {
@@ -1126,8 +1261,8 @@ main {
 .logo-hover {
   opacity: 0.8;
   transition:
-    transform 1400ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 1400ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform 1400ms var(--ease-enter),
+    opacity 1400ms var(--ease-enter);
 }
 
 @media (hover: hover) {
@@ -1167,5 +1302,396 @@ main {
   }
   .logo-swap-line {
     display: none;
+  }
+}
+
+/* ─── Light sections ───
+   The site mixes dark and light bands: the hero, client proof and closing
+   callout stay dark; reading sections sit on a light band. .theme-light
+   redefines the color tokens for everything inside it, so every utility
+   (text-text, bg-bg-card, border-border, …) flips without per-component
+   variants. Wrap sections in <Band tone='light'> rather than using the class
+   directly. Lime can't carry text on a light background, so inside a light
+   band the accent stays lime only as a fill: labels get a lime marker with
+   black text, and accent-colored text (links, arrows) turns black with a
+   lime underline. No second color. */
+.theme-light {
+  color-scheme: light;
+  --color-bg: #f4f3ef;
+  --color-bg-card: #ffffff;
+  --color-bg-elevated: #ebeae5;
+  --color-bg-panel: rgba(255, 255, 255, 0.92);
+  --color-text: #0e0f11;
+  --color-text-muted: #55565c;
+  --color-accent-secondary: #55565c;
+  --color-border: #dddcd6;
+  --color-border-light: #cbcac4;
+  --color-rule: #cbcac4;
+  --color-line: #8a8c93;
+  --color-control: #8a8c93;
+  --color-button-edge: #0e0f11;
+  --color-primary-edge: #0e0f11;
+  --grid-dot: #d4d3cd;
+  --color-accent-line: #0e0f11;
+  --color-accent-subtle: rgba(14, 15, 17, 0.4);
+  --color-focus: #0e0f11;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+.theme-light .bp-label {
+  background-color: var(--color-accent);
+  color: #0e0f11;
+  padding: 6px 8px;
+}
+.theme-light .text-accent {
+  color: var(--color-text);
+}
+.theme-light .bg-accent-muted {
+  background-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+/* Motion tokens. Durations by role: fast (links), base (hovers), enter (one
+   element arriving), slow (a drawing building), spin (the logo). Easings by
+   role: standard for hovers, enter for things arriving (fast start, long
+   settle), in-out for loops, exit for things leaving. Every animation and
+   transition on the site uses these; prefers-reduced-motion shows the end
+   state (see each block's reduced-motion rule). */
+:root {
+  --motion-fast: 180ms;
+  --motion-base: 250ms;
+  --motion-enter: 500ms;
+  --motion-slow: 900ms;
+  --motion-spin: 550ms;
+  --ease-standard: ease-out;
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
+  /* Stacking: raised (corner marks over their box), sticky (the audit's
+     bottom bar), overlay (header, menu sheet), toast. */
+  --z-raised: 10;
+  --z-sticky: 40;
+  --z-overlay: 50;
+  --z-toast: 100;
+}
+
+/* Keyboard focus: one ring everywhere (Guidelines > Interaction states), 2px
+   with a 2px gap, on :focus-visible only, so a mouse click never shows it.
+   Every focusable element gets it from the base rule below; components don't
+   set their own rings or outlines (lint: design/no-raw-focus). */
+@utility focus-ring {
+  outline: var(--stroke-emphasis) solid var(--color-focus);
+  outline-offset: 2px;
+}
+@layer base {
+  /* The ring color is set on everything up front: elements with a color
+     transition would otherwise fade the ring in from their text color. */
+  *,
+  ::before,
+  ::after {
+    outline-color: var(--color-focus);
+  }
+  :focus-visible {
+    @apply focus-ring;
+  }
+}
+
+/* Hover timing, shared by every hover on the site: buttons (primary fill,
+   secondary outline) use --hover-dur; links use the shorter --link-dur. One
+   easing for all. The logo spin has its own --spin-dur below. */
+:root {
+  --hover-dur: var(--motion-base);
+  --link-dur: var(--motion-fast);
+  --hover-ease: var(--ease-standard);
+}
+
+/* Links come in three roles, and every text link on the site is one of
+   them (see docs/design-system.md):
+   - .link-nav: header, footer and fine-print navigation. Mono caps 12px,
+     muted; on hover the text lightens and an accent bar slides in under it
+     from the left. The current page keeps the bar.
+   - .link-action: a standalone link that does something ("See the platform
+     ->", "Read the case study ->", "Visit site", "Take the free audit ->").
+     Mono caps 12px in the text color, no line at rest (the caps and arrow
+     mark it as a link), the same sliding bar as nav links on hover, and the
+     arrow nudges 3px right (↗ up-right); with an arrow the bar runs under the words only.
+     Never wraps, so an arrow can't drop onto its own line.
+   - .link-inline: a link inside running text. Plain text-color words with a
+     thin, quiet underline (the text color at 35%) that turns to the accent
+     line on hover. It wraps with the sentence, so no sliding bar.
+   The accent is --color-accent-line: lime on dark bands, ink on light ones.
+   The slide uses the shared link timing. */
+@layer components {
+  .link-nav,
+  .link-action {
+    position: relative;
+    font-family: var(--font-plex-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color var(--link-dur) var(--hover-ease);
+  }
+  .link-nav {
+    color: var(--color-text-muted);
+  }
+  .link-action {
+    display: inline-flex;
+    width: fit-content;
+    align-items: baseline;
+    gap: 0.5em;
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--color-text);
+  }
+  /* The arrow nudges right as the bar slides in. */
+  .link-action > [aria-hidden] {
+    transition: transform var(--link-dur) var(--hover-ease);
+  }
+  .link-action:hover > [aria-hidden],
+  .link-action:focus-visible > [aria-hidden] {
+    transform: translateX(3px);
+  }
+  /* An outbound link (new tab) ends in ↗ with .link-out, and that arrow
+     moves the way it points: up and to the right. */
+  .link-action:hover > .link-out,
+  .link-action:focus-visible > .link-out {
+    transform: translate(2px, -2px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .link-action > [aria-hidden] {
+      transition: none;
+    }
+    .link-action:hover > [aria-hidden],
+    .link-action:focus-visible > [aria-hidden] {
+      transform: none;
+    }
+  }
+  .link-nav::after,
+  .link-action::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background-color: var(--color-accent-line);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--link-dur) var(--hover-ease);
+  }
+  /* With an arrow, the bar runs under the words only: the label span carries
+     it and the link's own bar is off. Its right edge stops at the last
+     letter's ink, not its trailing letter-spacing. */
+  .link-action > .link-label {
+    position: relative;
+  }
+  .link-action:has(> .link-label)::after {
+    content: none;
+  }
+  .link-action > .link-label::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0.1em;
+    bottom: -4px;
+    height: 2px;
+    background-color: var(--color-accent-line);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--link-dur) var(--hover-ease);
+  }
+  .link-action:hover > .link-label::after,
+  .link-action:focus-visible > .link-label::after {
+    transform: scaleX(1);
+  }
+  .link-nav:hover,
+  .link-nav:focus-visible,
+  .link-nav[aria-current='page'] {
+    color: var(--color-text);
+  }
+  .link-nav:hover::after,
+  .link-nav:focus-visible::after,
+  .link-nav[aria-current='page']::after,
+  .link-action:hover::after,
+  .link-action:focus-visible::after {
+    transform: scaleX(1);
+  }
+  /* Nav link, icon variant: a 24px hit area around a 14px glyph (about the
+     visual weight of 12px mono caps), muted, accent line on hover. */
+  .link-icon {
+    display: inline-flex;
+    /* Top-aligned so the 24px box never picks up a line's descender space. */
+    vertical-align: top;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transition: color var(--link-dur) var(--hover-ease);
+  }
+  .link-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  .link-icon:hover,
+  .link-icon:focus-visible {
+    color: var(--color-accent-line);
+  }
+  .link-inline {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color var(--link-dur) var(--hover-ease);
+  }
+  .link-inline:hover,
+  .link-inline:focus-visible {
+    text-decoration-color: var(--color-accent-line);
+    text-decoration-thickness: 2px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-nav,
+  .link-action,
+  .link-nav::after,
+  .link-action::after,
+  .link-action > .link-label::after,
+  .link-action > [aria-hidden],
+  .link-icon {
+    transition: none;
+  }
+}
+
+/* Outline (secondary) buttons: on hover or keyboard focus an accent-line
+   stroke draws around the button, left to right like the primary button's
+   fill and the links' bar (approved Nov 14): the left side grows from its
+   middle out, the top and bottom edges run left to right together, then the
+   right side closes from both ends to the middle. One registered property,
+   --draw, runs 0 to 1 over the primary's duration and easing; each stroke
+   takes its own slice, sized for a typical 240x48 button (each half side
+   ~8%, the long edges ~84%) so the line moves at an even speed. The strokes
+   are five solid fills on one layer (::after) over the resting border. The
+   primary button draws the same stroke while its fill slides in (::before). */
+@property --draw {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+.btn-draw {
+  position: relative;
+  --draw: 0;
+  --side: clamp(0, var(--draw) / 0.0833, 1);
+  --edge: clamp(0, (var(--draw) - 0.0833) / 0.8334, 1);
+  --close: clamp(0, (var(--draw) - 0.9167) / 0.0833, 1);
+  transition:
+    --draw var(--hover-dur) var(--hover-ease),
+    color var(--link-dur) var(--hover-ease),
+    border-color var(--hover-dur) var(--hover-ease);
+}
+.btn-draw:hover,
+.btn-draw:focus-visible {
+  --draw: 1;
+}
+.btn-draw::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+  --line: linear-gradient(var(--color-accent-line), var(--color-accent-line));
+  background-image:
+    var(--line), var(--line), var(--line), var(--line), var(--line);
+  background-repeat: no-repeat;
+  background-position:
+    0 50%,
+    0 0,
+    0 100%,
+    100% 0,
+    100% 100%;
+  background-size:
+    2px calc(var(--side) * 100%),
+    calc(var(--edge) * 100%) 2px,
+    calc(var(--edge) * 100%) 2px,
+    2px calc(var(--close) * 50%),
+    2px calc(var(--close) * 50%);
+}
+/* On light bands the drawn ink stroke would land on an ink edge and not
+   show, so the outline button also fills ink from the left, like the
+   primary, and its label turns light. */
+.theme-light .btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--hover-dur) var(--hover-ease);
+}
+.theme-light .btn-outline:hover::before,
+.theme-light .btn-outline:focus-visible::before {
+  transform: scaleX(1);
+}
+.theme-light .btn-outline:hover,
+.theme-light .btn-outline:focus-visible {
+  color: var(--color-bg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-draw,
+  .theme-light .btn-outline::before {
+    transition: none;
+  }
+}
+
+/* Logo spin (LogoMark adds .is-spinning when the pointer enters the logo
+   or it gets keyboard focus, and clears it when the spin ends). The inner
+   square turns a half turn clockwise and the outline a half turn
+   anticlockwise, both starting together so the middle mirrors the outline
+   frame for frame. A
+   square looks the same after a half turn, so nothing visibly jumps when
+   the class comes off. Each overshoots by 12deg, then settles back (550ms,
+   ease-out into the overshoot and ease-in-out back). The inner square sits
+   inside the outline, so its own keyframes add the outline's turn back in:
+   +360deg against the outline's -180deg shows as a net clockwise half
+   turn. */
+:root {
+  --spin-dur: var(--motion-spin);
+}
+@keyframes logo-spin-outer {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: ease-out;
+  }
+  70% {
+    transform: rotate(-192deg);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: rotate(-180deg);
+  }
+}
+@keyframes logo-spin-inner {
+  0% {
+    transform: rotate(0deg);
+    animation-timing-function: ease-out;
+  }
+  70% {
+    transform: rotate(384deg);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.logo-mark.is-spinning {
+  animation: logo-spin-outer var(--spin-dur) both;
+}
+.logo-mark.is-spinning .logo-mark-inner {
+  animation: logo-spin-inner var(--spin-dur) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark.is-spinning,
+  .logo-mark.is-spinning .logo-mark-inner {
+    animation: none;
   }
 }

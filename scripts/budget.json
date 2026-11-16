@@ -1,0 +1,23 @@
+{
+  "_note": "Limits just above the measured Home numbers on Nov 10 2026 (production build, median of 3). Timings in ms, sizes in KB transferred up to the load event.",
+  "desktop": {
+    "fcp": 200,
+    "lcp": 200,
+    "cls": 0.05,
+    "jsKB": 340,
+    "cssKB": 25,
+    "fontKB": 120,
+    "imageKB": 630,
+    "totalKB": 1150
+  },
+  "mobile": {
+    "fcp": 1300,
+    "lcp": 1300,
+    "cls": 0.05,
+    "jsKB": 800,
+    "cssKB": 25,
+    "fontKB": 120,
+    "imageKB": 210,
+    "totalKB": 1200
+  }
+}

@@ -21,7 +21,7 @@ import {
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`
 
 function personId(member: TeamMember): string {
-  return `${SITE_URL}/team#${member.name.toLowerCase().replace(/\s+/g, '-')}`
+  return `${SITE_URL}/about#${member.name.toLowerCase().replace(/\s+/g, '-')}`
 }
 
 function personJsonLd(member: TeamMember) {
@@ -30,9 +30,18 @@ function personJsonLd(member: TeamMember) {
     '@id': personId(member),
     name: member.name,
     jobTitle: member.title,
+    workLocation: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: member.city.name,
+        addressRegion: member.city.region,
+        addressCountry: 'US',
+      },
+    },
     description: member.bio,
     image: absoluteUrl(member.image),
-    url: absoluteUrl('/team'),
+    url: absoluteUrl('/about'),
     worksFor: { '@id': ORGANIZATION_ID },
     sameAs: Object.values(member.socials).filter(Boolean),
   }

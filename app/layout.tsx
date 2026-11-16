@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from 'next'
+import { LogoFilters } from '@/src/components/primitives/logo-filters'
 import { Suspense, type ReactNode } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { Space_Grotesk, IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 import { cn } from '@/src/lib/utils'
-import { Toaster } from '@/src/components/ui/use-toast'
-import { Header } from '@/src/components/layout/header'
-import { Footer } from '@/src/components/layout/footer'
+import { Toaster } from '@/src/components/primitives/use-toast'
+import { Header } from '@/src/components/sections/header'
+import { SkipLink } from '@/src/components/primitives/skip-link'
+import { Footer } from '@/src/components/sections/footer'
 import { PostHogProvider } from '@/src/components/posthog-provider'
 import { ScrollDepthTracker } from '@/src/components/scroll-depth-tracker'
 import { AttributionCapture } from '@/src/components/attribution-capture'
@@ -37,15 +39,15 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://placetostandagency.com/'),
   title: {
-    default: 'Place To Stand Agency | Custom Software & AI Development',
+    default: 'Custom Software & AI Development | Place To Stand Agency',
     template: '%s | Place To Stand Agency',
   },
   description:
-    'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
+    'Custom software, automation and online stores, shaped to how your business runs. Built by the engineers you talk to, and yours to keep.',
   openGraph: {
-    title: 'Place To Stand Agency | Custom Software & AI Development',
+    title: 'Custom Software & AI Development | Place To Stand Agency',
     description:
-      'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
+      'Custom software, automation and online stores, shaped to how your business runs. Built by the engineers you talk to, and yours to keep.',
     url: 'https://placetostandagency.com/',
     siteName: 'Place To Stand Agency',
     locale: 'en_US',
@@ -62,9 +64,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Place To Stand Agency | Custom Software & AI Development',
+    title: 'Custom Software & AI Development | Place To Stand Agency',
     description:
-      'Off-the-shelf software is made for everyone. We build custom software, automation, and AI around how your business actually works.',
+      'Custom software, automation and online stores, shaped to how your business runs. Built by the engineers you talk to, and yours to keep.',
   },
 }
 
@@ -89,12 +91,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <GoogleTagManager gtmId={GTM_ID} />
       <body
         className={cn(
-          'min-h-screen overflow-x-hidden bg-bg text-text',
+          'min-h-screen overflow-x-clip bg-bg text-text',
           spaceGrotesk.variable,
           plexSans.variable,
           plexMono.variable
         )}
       >
+        <SkipLink />
+        <LogoFilters />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={webSiteJsonLd} />
         <noscript>
@@ -114,14 +118,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AttributionCapture />
         </Suspense>
         <PostHogProvider>
-          <div className='relative flex min-h-screen flex-col overflow-x-hidden'>
+          <div className='relative flex min-h-screen flex-col overflow-x-clip'>
             <Header />
             {children}
             <Footer />
           </div>
           <Toaster />
           <ScrollDepthTracker />
-          <Analytics />
+          {/* The analytics script is served only by Vercel's hosting
+              (/_vercel/insights); anywhere else it 404s in the console. */}
+          {process.env.VERCEL ? <Analytics /> : null}
         </PostHogProvider>
       </body>
     </html>

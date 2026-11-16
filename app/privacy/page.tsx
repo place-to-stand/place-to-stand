@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import { pageMetadata } from '@/src/lib/page-metadata'
-import { Section } from '@/src/components/layout/section'
+import { Section } from '@/src/components/patterns/section'
 import {
   LegalHeader,
   LegalList,
   LegalSection,
-} from '@/src/components/legal/legal-prose'
+} from '@/src/components/patterns/legal-prose'
 
 const UPDATED = 'August 25, 2026'
 const CONTACT_EMAIL = 'hello@placetostandagency.com'
@@ -19,7 +19,7 @@ export const metadata: Metadata = pageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <main className='flex-1 pt-page-start pb-section'>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
       <Section priority>
         <div className='flex flex-col gap-header'>
           <LegalHeader
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
               </p>
               <p>
                 It does not cover work we perform under a signed client
-                agreement. Data we process on a client&apos;s behalf during an
+                agreement. Data we process on a client’s behalf during an
                 engagement is governed by that agreement, not by this policy.
               </p>
             </LegalSection>
@@ -105,11 +105,11 @@ export default function PrivacyPage() {
                 your submission rather than kept separate. That includes the
                 campaign or link that brought you to the site, such as UTM
                 parameters, a Google Ads click identifier, and the referring
-                page; your browser&apos;s user agent, screen size, time zone,
-                and language; and the identifiers our analytics tool uses for
-                that visit. Those identifiers include a link to a session
-                recording of the visit. If you later give us your email address,
-                it is held on the same record as all of the above.
+                page; your browser’s user agent, screen size, time zone, and
+                language; and the identifiers our analytics tool uses for that
+                visit. Those identifiers include a link to a session recording
+                of the visit. If you later give us your email address, it is
+                held on the same record as all of the above.
               </p>
               <p>
                 We also run automated bot detection on form submissions to block
@@ -141,7 +141,7 @@ export default function PrivacyPage() {
                   <>
                     <strong className='text-text'>Advertising:</strong> Google
                     Tag Manager loads a Google Ads conversion tag, used to
-                    attribute enquiries to the ads that produced them. When you
+                    attribute inquiries to the ads that produced them. When you
                     successfully submit the contact form or the audit, the email
                     address you entered is hashed in your browser and the hash
                     is sent to Google to improve that matching (Google calls
@@ -162,9 +162,9 @@ export default function PrivacyPage() {
             <LegalSection index={5} title='How we use your information'>
               <LegalList
                 items={[
-                  'To reply to your enquiry and send you a copy of what you submitted.',
+                  'To reply to your inquiry and send you a copy of what you submitted.',
                   'To generate and deliver your Opportunity Audit results.',
-                  'To evaluate whether we are a good fit for your project and to prepare a proposal.',
+                  'To evaluate whether we are a good fit for your project and to plan the work.',
                   'To send occasional updates about our work, if you have opted in.',
                   'To understand how the site is used and improve it.',
                   'To see where the Opportunity Audit loses people, including from responses that were never finished, so we can make it clearer.',
@@ -207,9 +207,9 @@ export default function PrivacyPage() {
                     <strong className='text-text'>
                       Our own client portal:
                     </strong>{' '}
-                    infrastructure we operate to record enquiries and audit
+                    infrastructure we operate to record inquiries and audit
                     responses, including unfinished ones, and to track them
-                    through to proposal.
+                    until work begins.
                   </>,
                 ]}
               />
@@ -226,12 +226,12 @@ export default function PrivacyPage() {
                 We add your name and email address to our mailing list only if
                 you tick the opt-in box on the contact form or the audit. The
                 box is unticked by default, and leaving it that way has no
-                effect on your enquiry or your audit results.
+                effect on your inquiry or your audit results.
               </p>
               <p>
                 Every marketing email includes an unsubscribe link, and
                 unsubscribing takes effect immediately. Unsubscribing does not
-                stop transactional messages such as replies to your enquiry or
+                stop transactional messages such as replies to your inquiry or
                 your audit results. You can ask us to remove you entirely by
                 emailing {CONTACT_EMAIL}.
               </p>
@@ -239,13 +239,13 @@ export default function PrivacyPage() {
 
             <LegalSection index={8} title='How long we keep it'>
               <p>
-                Enquiry and completed audit records are kept for three years
+                Inquiry and completed audit records are kept for three years
                 from your last contact with us, so we have context if you
                 return. An unfinished audit response has no contact to measure
                 from, so we keep it for three years from the date you took it.
                 The copy saved in your own browser expires after seven days.
                 Mailing list entries are kept until you unsubscribe. Analytics
-                data is kept according to our providers&apos; standard retention
+                data is kept according to our providers’ standard retention
                 periods. Records we need for tax and accounting are kept as long
                 as the law requires.
               </p>
@@ -268,7 +268,7 @@ export default function PrivacyPage() {
                 of your consent (for marketing and non-essential cookies), our
                 legitimate interest in operating and improving our business (for
                 analytics, for recording audit responses including unfinished
-                ones, and for responding to enquiries), and our legal
+                ones, and for responding to inquiries), and our legal
                 obligations.
               </p>
               <p>
@@ -295,15 +295,15 @@ export default function PrivacyPage() {
             <LegalSection index={11} title='Security'>
               <p>
                 Data is transmitted over encrypted connections and held with
-                established providers that maintain their own security
-                programmes. Access within our team is limited to the people who
-                need it. No system is perfectly secure, and we cannot guarantee
-                absolute security, but we will notify affected people and
-                regulators as required if a breach occurs.
+                established providers that maintain their own security programs.
+                Access within our team is limited to the people who need it. No
+                system is perfectly secure, and we cannot guarantee absolute
+                security, but we will notify affected people and regulators as
+                required if a breach occurs.
               </p>
             </LegalSection>
 
-            <LegalSection index={12} title="Children's privacy">
+            <LegalSection index={12} title='Children’s privacy'>
               <p>
                 This site is intended for businesses and is not directed at
                 anyone under 16. We do not knowingly collect information from
@@ -324,10 +324,7 @@ export default function PrivacyPage() {
               <p>
                 Questions about this policy or a request about your data can go
                 to{' '}
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className='text-accent underline-offset-4 hover:underline'
-                >
+                <a href={`mailto:${CONTACT_EMAIL}`} className='link-inline'>
                   {CONTACT_EMAIL}
                 </a>
                 .

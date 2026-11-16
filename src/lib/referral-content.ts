@@ -3,6 +3,9 @@
  * page and the downloadable PDF (/referral/pdf). Edit strings here; never
  * duplicate them in either renderer.
  */
+import { OFFERS } from './offers'
+import { WHO_YOU_WORK_WITH_HOME } from './home'
+import { services } from './services'
 export const referralContent = {
   meta: {
     title: 'Referral Program',
@@ -13,78 +16,28 @@ export const referralContent = {
   hero: {
     label: 'Referral Program',
     headline: 'Send us a client. Earn 10% of everything they ever pay us.',
-    body: 'Not 10% of the first project. Ten percent of their lifetime billing, for as long as they stay a client. A $20k build that turns into $60k of work over time pays you $6,000.',
+    body: 'Not 10% of the first project. Ten percent of their lifetime billing, for as long as they stay a client.',
     downloadLabel: 'Download PDF One-pager',
     joinLabel: 'Join the referral program',
   },
 
   whoWeAre: {
     label: 'Who we are',
-    headline: 'Off-the-shelf software is built for everyone. We build for you.',
-    body: 'Place To Stand builds custom software shaped to how a business actually runs, for companies that have real processes but no engineering team. The engineer who scopes the work is the one who builds it. No account managers, no handoffs.',
+    // Home's "Who you work with" title and body.
+    headline: WHO_YOU_WORK_WITH_HOME.title,
+    body: WHO_YOU_WORK_WITH_HOME.body,
+    // The same lists as Platform: the two offers' modules, Senior help, then
+    // the after-launch services.
     services: [
-      {
-        name: 'Software development',
-        items: [
-          'Web, mobile, and desktop apps',
-          'E-commerce and Shopify',
-          'APIs',
-          'Internal tools',
-          'Legacy system rebuilds',
-        ],
-      },
-      {
-        name: 'Workflow systems',
-        items: [
-          'Portals',
-          'CRM',
-          'ERP',
-          'Inventory',
-          'Scheduling and booking',
-          'Quoting and invoicing',
-          'Task tracking',
-          'Approvals',
-          'Integrations',
-          'Live dashboards',
-        ],
-      },
-      {
-        name: 'Automation and AI',
-        items: [
-          'Workflow automation',
-          'AI agents',
-          'Chatbots',
-          'Document processing',
-        ],
-      },
-      {
-        name: 'Data intelligence',
-        items: [
-          'Pipelines',
-          'Analytics',
-          'Forecasting',
-          'AI-powered reporting',
-        ],
-      },
-      {
-        name: 'Strategic advisory',
-        items: [
-          'Fractional CTO',
-          'Roadmaps',
-          'AI readiness',
-          'Tool and vendor selection',
-        ],
-      },
-      {
-        name: 'Managed services',
-        items: [
-          'Hosting',
-          'Uptime',
-          'Security',
-          'Updates after launch',
-          'Ongoing support',
-        ],
-      },
+      ...OFFERS.map(offer => ({
+        name: offer.name,
+        items: offer.modules.map(module => module.name),
+      })),
+      ...services
+        .filter(service =>
+          ['senior-help', 'managed-services', 'training'].includes(service.slug)
+        )
+        .map(service => ({ name: service.title, items: service.features })),
     ],
   },
 
@@ -105,15 +58,15 @@ export const referralContent = {
       },
     ],
     quotesLabel: 'Signals',
-    leadIn: "You'll know one when you hear them say:",
+    leadIn: 'You’ll know one when you hear them say:',
     quotes: [
-      "We run this on spreadsheets and it's breaking.",
-      "We pay for five tools that don't talk to each other.",
-      "Per-seat pricing is killing us. We can't add people without the software bill doubling.",
-      "One admin task eats my week and I can't grow the business around it.",
-      "I have all this data and still can't answer one simple question about my business.",
-      "Our Shopify store can't do the thing we need.",
-      "We need a developer but can't hire one full-time.",
+      'We run this on spreadsheets and it’s breaking.',
+      'We pay for five tools that don’t talk to each other.',
+      'Per-seat pricing is killing us. We can’t add people without the software bill doubling.',
+      'One admin task eats my week and I can’t grow the business around it.',
+      'I have all this data and still can’t answer one simple question about my business.',
+      'Our Shopify store can’t do the thing we need.',
+      'We need a developer but can’t hire one full-time.',
       'Someone built this for us and disappeared.',
     ],
   },
@@ -124,16 +77,16 @@ export const referralContent = {
       {
         number: '01',
         title: 'Intro us by email.',
-        body: 'One line is enough: "You two should talk." Copy hello@placetostandagency.com.',
+        body: 'One line is enough: “You two should talk.” Copy hello@placetostandagency.com.',
       },
       {
         number: '02',
         title: 'We take it from there.',
-        body: "Discovery call, scope, proposal. You don't manage anything.",
+        body: 'A free intro call, then a written plan. You don’t manage anything.',
       },
       {
         number: '03',
-        title: 'They sign, you get paid.',
+        title: 'They buy hours, you get paid.',
         body: 'On the 15th of each month we pay you 10% of everything they paid us the month before. No cap, no expiration.',
       },
     ],
@@ -143,8 +96,8 @@ export const referralContent = {
     label: 'How we work',
     points: [
       {
-        title: '$1k minimum to start.',
-        body: 'That buys a five-hour block. Hours belong to the client, never expire, and can be spent across any project.',
+        title: 'Five-hour minimum to start.',
+        body: 'Hours belong to the client, never expire, and can be spent on any project.',
       },
       {
         title: 'No surprise bills.',
@@ -161,13 +114,13 @@ export const referralContent = {
     note: 'Payouts require referrers to be accepted into the program and set up as 1099 contractors.',
     noteCta: 'Contact us to join.',
     pdfCta: 'Join at placetostandagency.com/contact.',
-    href: '/contact?subject=Referral%20Program',
-    url: 'https://placetostandagency.com/contact?subject=Referral%20Program',
+    href: '/contact?subject=Referral%20program',
+    url: 'https://placetostandagency.com/contact?subject=Referral%20program',
   },
 
   audit: {
-    heading: "Not sure if someone's a fit?",
-    body: 'Send them the free two-minute audit. No email required, results on screen.',
+    heading: 'Not sure if someone’s a fit?',
+    body: 'Send them the free two-minute audit: a preview on screen, the full results by email.',
     buttonLabel: 'Start the free audit',
     href: '/audit',
     url: 'https://placetostandagency.com/audit',

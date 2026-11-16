@@ -10,16 +10,16 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     name: 'Foundation',
     tagline: 'Validating the idea',
     description:
-      "You're early. The job is proving the concept, not building heavy systems yet.",
+      'You’re early. The job is proving the concept, not building heavy systems yet.',
     signals: [
       'Pre-revenue or first customers',
       'Running on notes and a few apps',
       'Workflow still taking shape',
     ],
     nextSteps: [
-      'Ship a lean MVP to test demand',
-      'Keep tooling cheap and disposable',
-      'Spot the one thing worth automating later',
+      'Prove demand before building anything heavy',
+      'Book an hour of technical consulting to plan the first version',
+      'Join our newsletter for what to build when you are ready',
     ],
   },
   launch: {
@@ -27,7 +27,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     name: 'Launch & Early Traction',
     tagline: 'Real customers, manual processes',
     description:
-      "It works, but it runs on spreadsheets and hustle, and it won't scale.",
+      'It works, but it runs on spreadsheets and hustle, and it won’t scale.',
     signals: [
       'Revenue, but everything is manual',
       'Spreadsheets and email run the show',
@@ -53,7 +53,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     nextSteps: [
       'Connect your core systems',
       'Automate the high-volume bottlenecks',
-      'Add dashboards for real visibility',
+      'Add live reports for real visibility',
     ],
   },
   optimization: {
@@ -61,7 +61,7 @@ export const PHASES: Record<PhaseId, PhaseDefinition> = {
     name: 'Optimization & Efficiency',
     tagline: 'Ready to sharpen the engine',
     description:
-      "Systems are in place. Now it's about efficiency, data, and experience.",
+      'Systems are in place. Now it’s about efficiency, data, and experience.',
     signals: [
       'Established revenue, mature team',
       'Systems exist but could work harder',

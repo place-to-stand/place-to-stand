@@ -124,7 +124,7 @@ function writeStoredAttribution(attribution: StoredAttribution): void {
   } catch {
     // Private mode, quota exceeded, or storage disabled. Attribution falls back
     // to whatever the submitting page's own URL carries, which is exactly the
-    // behaviour that shipped before this module existed.
+    // behavior that shipped before this module existed.
   }
 }
 

@@ -1,37 +1,34 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Button } from '@/src/components/ui/button'
+import { Button } from '@/src/components/primitives/button'
+import { Hero } from '@/src/components/sections/hero'
 
 export const metadata: Metadata = {
   title: 'Page Not Found',
+  description:
+    'This page doesn’t exist. Head back to Place To Stand’s home page.',
 }
 
 export default function NotFound() {
   return (
-    <main className='flex-1 pt-page-start pb-section'>
-      <div className='mx-auto w-full max-w-content px-6 lg:px-12'>
-        <div className='relative max-w-2xl bg-bg-panel p-card'>
-          <span className='bp-label font-mono'>404</span>
-          <h1 className='mt-grid-half type-section-title'>
-            Nothing stands here
-          </h1>
-          <p className='mt-intro text-base text-text-muted'>
-            The page you were looking for has moved or never existed.
-          </p>
-
-          <div className='mt-6 flex flex-wrap items-center gap-4'>
-            <Button asChild>
-              <Link href='/'>Back to home</Link>
-            </Button>
-            <Link
-              href='/contact'
-              className='text-sm text-accent underline-offset-4 hover:underline'
-            >
-              Get in touch
-            </Link>
-          </div>
+    <main id='main' className='flex-1 pt-page-start pb-section'>
+      <Hero
+        variant='page'
+        sectionClassName='flex flex-col gap-header'
+        label='404'
+        title='Nothing stands here'
+        intro='The page you were looking for has moved or never existed.'
+      >
+        <div className='flex flex-wrap items-center gap-grid-1'>
+          <Button asChild size='lg'>
+            <Link href='/'>Back to home</Link>
+          </Button>
+          <Link href='/contact' className='link-action'>
+            <span className='link-label'>Get in touch</span>{' '}
+            <span aria-hidden>→</span>
+          </Link>
         </div>
-      </div>
+      </Hero>
     </main>
   )
 }

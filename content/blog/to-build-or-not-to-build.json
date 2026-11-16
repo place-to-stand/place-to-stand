@@ -14,7 +14,7 @@
     },
     {
       "type": "paragraph",
-      "text": "For a second let’s assume AI continues to progress and automates this entire process I just laid out above. It still doesn’t answer the question of *should* you build it and *how* it's executed. *Should* and *How* are opinions, also known as taste, and they’re at the heart of engineering. AI agents can help guide your opinions (and they should) but at the end of the day you, the human, have to be accountable for your decisions on if you *should* build it and *how* the end-user experiences it."
+      "text": "For a second let’s assume AI continues to progress and automates this entire process I just laid out above. It still doesn’t answer the question of *should* you build it and *how* it’s executed. *Should* and *How* are opinions, also known as taste, and they’re at the heart of engineering. AI agents can help guide your opinions (and they should) but at the end of the day you, the human, have to be accountable for your decisions on if you *should* build it and *how* the end-user experiences it."
     },
     {
       "type": "paragraph",
@@ -22,7 +22,7 @@
     },
     {
       "type": "paragraph",
-      "text": "At Place To Stand, we built our own business portal ([repo](https://github.com/place-to-stand/place-to-stand-portal)). During this ongoing process we've had multiple features that we thought would be huge time savers in theory but in practice they didn’t move the needle the way we thought. I have to largely credit our co-founder Jason for championing the philosophy of removing features to keep the UI/UX clean. Implementing an update that removes one of the features you spent many hours on is a humbling experience but in the long run saves us and the business a lot of time. As a result our interface is clean and addresses our needs directly, no bloat, very little learning curve, and is a truly bespoke solution. There is never a question of where things are because we don’t have to visually navigate noise to find the tools we need. This is the major win when you build custom. As opposed to 3rd party software which is rife with UI noise and is not aligned with your needs directly. I’ll speak more about 3rd party vs custom apps in a future blog."
+      "text": "At Place To Stand, we built our own business portal ([repo](https://github.com/place-to-stand/place-to-stand-portal)). During this ongoing process we’ve had multiple features that we thought would be huge time savers in theory but in practice they didn’t save the time we thought they would. I have to largely credit our co-founder Jason for championing the philosophy of removing features to keep the UI/UX clean. Implementing an update that removes one of the features you spent many hours on is a humbling experience but in the long run saves us and the business a lot of time. As a result our interface is clean and addresses our needs directly, no bloat, very little learning curve, and is a truly bespoke solution. There is never a question of where things are because we don’t have to visually navigate noise to find the tools we need. This is the major win when you build custom. As opposed to 3rd party software which is rife with UI noise and is not aligned with your needs directly. I’ll speak more about 3rd party vs custom apps in a future blog."
     },
     {
       "type": "paragraph",
