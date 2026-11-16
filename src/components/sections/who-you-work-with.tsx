@@ -29,7 +29,7 @@ export function WhoYouWorkWithSection() {
             label={WHO.label}
             title={WHO.title}
             intro={WHO.body}
-            className='[&>p]:max-w-[26.5rem]'
+            className='[&>p]:max-w-[26.5rem] [&>p]:text-pretty'
           />
           <ul className='flex max-w-[26.5rem] flex-col gap-grid-1 xl:mt-auto'>
             {WHO.reviews.picks.map(r => (
