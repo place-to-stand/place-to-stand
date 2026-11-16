@@ -144,4 +144,4 @@ export const WHO_YOU_WORK_WITH_HOME = {
 /** Home's "How it works" intro: moved here from "Who you work with" (Nov 15)
  *  so the AI workflow and the 5x stay on Home. */
 export const HOW_IT_WORKS_HOME_INTRO =
-  'Humans decide what to build, AI agents write much of the code, and nothing ships until one of us has checked it. That’s how we work up to 5x faster than a traditional team.'
+  'We fix your worst problem first, all the way, then move to the next. Humans decide what to build, AI writes much of the code, and one of us checks every change, so it all moves up to 5x faster than a traditional team.'

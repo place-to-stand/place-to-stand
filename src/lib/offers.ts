@@ -249,7 +249,7 @@ export const STEPS: Step[] = [
   },
   {
     number: '03',
-    name: 'Meet your team',
+    name: 'The plan',
     time: '1 to 2 weeks',
     summary:
       'We sit with the people who feel the problem, then send a written plan and estimate.',
@@ -258,7 +258,7 @@ export const STEPS: Step[] = [
   },
   {
     number: '04',
-    name: 'Fix the biggest pain',
+    name: 'First fix',
     time: '2 to 6 weeks',
     summary: 'Built all the way and in daily use, not a demo.',
     detail:
@@ -267,7 +267,7 @@ export const STEPS: Step[] = [
   {
     number: '05',
     name: 'Then the next one',
-    time: 'Days, not months',
+    time: 'Days each',
     summary: 'Your data is already in one place, so each fix goes faster.',
     detail:
       'Your data already sits in one place, so each next fix goes faster.',
