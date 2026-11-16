@@ -77,7 +77,7 @@ export function SoundFamiliarSection() {
       <ul
         ref={listRef}
         aria-label='Where you hear it'
-        className='-mx-grid-1 flex snap-x snap-mandatory scroll-px-grid-1 [scrollbar-width:none] gap-grid-1 overflow-x-auto px-grid-1 xl:mx-0 xl:grid xl:grid-cols-3 xl:gap-x-grid-1 xl:gap-y-grid-1 xl:overflow-visible xl:px-0'
+        className='-mx-grid-1 flex snap-x snap-mandatory scroll-px-grid-1 [scrollbar-width:none] gap-grid-1 overflow-x-auto px-grid-1 xl:mx-0 xl:grid xl:grid-cols-3 xl:gap-x-grid-1 xl:gap-y-grid-2 xl:overflow-visible xl:px-0'
       >
         {groups.map((group, i) => (
           <li
@@ -94,7 +94,7 @@ export function SoundFamiliarSection() {
               // Laptops: each place spans the list's two rows (chat, note)
               // as a subgrid, so the three chats share one height and the
               // three notes one row.
-              'flex w-[85%] max-w-md shrink-0 snap-start flex-col gap-grid-1 xl:row-span-2 xl:grid xl:w-auto xl:max-w-none xl:grid-rows-subgrid'
+              'flex w-[85%] max-w-md shrink-0 snap-start flex-col gap-grid-2 xl:row-span-2 xl:grid xl:w-auto xl:max-w-none xl:grid-rows-subgrid'
             )}
           >
             <TeamChat
