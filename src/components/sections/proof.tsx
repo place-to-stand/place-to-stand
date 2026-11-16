@@ -195,6 +195,15 @@ export function ProofSection() {
                 clipPath: 'inset(-600px 0 0 0)',
               }}
             >
+              {/* The callouts below are drawn (aria-hidden); this is what
+                  screen readers get on laptops, the same list phones show. */}
+              <ul className='sr-only'>
+                {CALLOUTS.map(c => (
+                  <li key={c.title}>
+                    {c.title}: {c.detail.join(' ')}
+                  </li>
+                ))}
+              </ul>
               {/* Heatonist: the 10 Pack card in columns 1-2, top margin to bottom
               margin; the filter in columns 2-3 over the right half of its
               photo, one row down, clear of its text. */}

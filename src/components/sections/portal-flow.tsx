@@ -228,6 +228,9 @@ export function PortalFlow() {
   const mobile = useMediaQuery(MOBILE_QUERY)
   const [inView, setInView] = useState(false)
   const [hovered, setHovered] = useState(false)
+  // Keyboard focus anywhere in the flow (its step buttons) pauses it too, so
+  // the caption holds still while someone reads it (WCAG 2.2.2).
+  const [focused, setFocused] = useState(false)
 
   // Only play while the flow is on screen.
   useEffect(() => {
@@ -243,8 +246,9 @@ export function PortalFlow() {
 
   // The rail's fill drives the advance (see FlowRail): when the current segment
   // finishes it calls this, so the countdown and the step change share one timer.
-  // Pause while the reader hovers to linger, or the flow is off screen.
-  const paused = hovered
+  // Pause while the reader hovers or focuses inside to linger, or the flow
+  // is off screen.
+  const paused = hovered || focused
   const advance = () => setActive(a => (a + 1) % N)
 
   const selectScene = (index: number) => {
@@ -307,6 +311,11 @@ export function PortalFlow() {
           ref={rootRef}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
+          onFocus={() => setFocused(true)}
+          onBlur={e => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+              setFocused(false)
+          }}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
           onTouchCancel={onTouchEnd}

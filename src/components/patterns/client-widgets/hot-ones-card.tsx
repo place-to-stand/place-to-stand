@@ -110,7 +110,9 @@ export function HotOnesCard({
         ref={ref}
         type='button'
         aria-pressed={flipped}
-        aria-label={`Flip ${name} card`}
+        // The faces are drawn for the eye; the name says what's on the
+        // card (both sides), then what pressing does.
+        aria-label={`${name}${maker ? `, ${maker}` : ''}: ${notes.join(', ')}; heat level ${level} of 10. Flip card`}
         onClick={() => {
           touched.current = true
           setFlipped(f => !f)

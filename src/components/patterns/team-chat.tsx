@@ -128,6 +128,9 @@ export function TeamChat({
     const here = count > i
     return {
       'data-row': '',
+      // Not arrived yet: invisible, so out of the tab order and the
+      // accessibility tree too (its reaction buttons included).
+      inert: !here,
       here,
       className: cn(
         'transition-opacity duration-(--motion-base) ease-(--ease-enter) motion-reduce:transition-none',
@@ -205,6 +208,7 @@ export function TeamChat({
               <li
                 key={`new-${i}`}
                 data-row=''
+                inert={divider.inert}
                 aria-label='New messages'
                 className={cn(
                   divider.className,
