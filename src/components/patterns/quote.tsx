@@ -26,7 +26,7 @@ export function Quote({
     <figure className='flex flex-col gap-grid-half'>
       <span
         aria-hidden
-        className='h-grid-1 type-section-title leading-none text-accent-line'
+        className='-mb-grid-half h-grid-1 type-section-title leading-none text-accent-line'
       >
         &ldquo;
       </span>
