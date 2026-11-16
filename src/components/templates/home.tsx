@@ -39,7 +39,7 @@ export function HomeTemplate() {
         <StepsSection showBilling intro={HOW_IT_WORKS_HOME_INTRO} />
       </Band>
       <Band tone='light'>
-        <OwnershipSection variant='short' />
+        <OwnershipSection />
       </Band>
       <CtaBand location='home-cta-block' />
     </main>

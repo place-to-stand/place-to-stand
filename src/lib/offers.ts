@@ -166,8 +166,8 @@ export const OFFERS: Offer[] = [
   },
 ]
 
-/** The ownership promise (approved Nov 13). The full six lines live only on
- *  Platform (#own); Home shows the short version and links there. */
+/** The ownership promise (approved Nov 13). The full six lines show on
+ *  Platform (#own) and Home (Nov 16). */
 export const OWNERSHIP_TITLE = 'You own all of it.'
 
 export const OWNERSHIP = [

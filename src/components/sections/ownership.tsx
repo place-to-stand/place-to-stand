@@ -7,8 +7,8 @@ import { cn } from '@/src/lib/utils'
 
 /**
  * The ownership promise as a set piece, in a dark band. Variants:
- * - full: the six lines (Platform, #own). The only full ownership block.
- * - short: the title, one line and a link to the full list (Home).
+ * - full: the six lines (Platform #own, and Home since Nov 16).
+ * - short: the title, one line and a link to the full list (unused since Nov 16).
  */
 export function OwnershipSection({
   variant = 'full',
