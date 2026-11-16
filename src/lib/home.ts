@@ -119,7 +119,7 @@ export const WHO_YOU_WORK_WITH_HOME = {
     'Jason Desiderio':
       'Led the teams behind Squarespace’s drag-and-drop website builder, used by millions of people with little to no training. Now he builds software just as easy for your team to use.',
     'Kris Crawford':
-      'Designed physical systems meant to last decades before he turned to software, and has run his own businesses for ten years.',
+      'Designed physical systems built to last decades and has run his own businesses for ten years. Now he builds software that lasts.',
   } as Record<string, string>,
 } as const
 
