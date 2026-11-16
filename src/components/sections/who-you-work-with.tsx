@@ -16,7 +16,12 @@ import { WHO_YOU_WORK_WITH_HOME as WHO } from '@/src/lib/home'
 export function WhoYouWorkWithSection() {
   return (
     <Section className='grid gap-stack lg:grid-cols-12 lg:gap-x-grid-2'>
-      <Reveal index={0} className='flex flex-col gap-stack lg:col-span-5'>
+      {/* The link follows the paragraph at the hero's intro-to-action gap
+          (24, 48 on laptops), not the section's stack gap. */}
+      <Reveal
+        index={0}
+        className='flex flex-col gap-grid-1 lg:col-span-5 lg:gap-grid-2'
+      >
         <SectionHeading label={WHO.label} title={WHO.title} intro={WHO.body} />
         <ArrowLink href='/about'>About us</ArrowLink>
       </Reveal>
@@ -26,7 +31,7 @@ export function WhoYouWorkWithSection() {
             <Card
               as='li'
               key={member.name}
-              className='grid grid-cols-[96px_minmax(0,1fr)] items-start gap-grid-1 md:grid-cols-1'
+              className='grid grid-cols-[96px_minmax(0,1fr)] content-start items-start gap-grid-1 md:grid-cols-1'
             >
               <MediaFrame shape='person' className='md:w-grid-4'>
                 <Image
