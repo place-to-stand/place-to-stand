@@ -15,16 +15,19 @@ export function StepsSection({
   variant = 'cards',
   showLink = true,
   showBilling = false,
+  intro,
 }: {
   variant?: 'cards' | 'rows'
   showLink?: boolean
   /** Close the steps with the billing promise (cards, Home). */
   showBilling?: boolean
+  /** A line under the title (cards; Home). */
+  intro?: string
 }) {
   return variant === 'rows' ? (
     <StepsRows />
   ) : (
-    <StepsCards showLink={showLink} showBilling={showBilling} />
+    <StepsCards showLink={showLink} showBilling={showBilling} intro={intro} />
   )
 }
 /** Light on Process; dark on Home (Nov 14). */
@@ -33,10 +36,12 @@ StepsSection.tone = 'light' as const
 function StepsCards({
   showLink = true,
   showBilling = false,
+  intro,
 }: {
   showLink?: boolean
   /** Close the steps with the billing promise (Home). */
   showBilling?: boolean
+  intro?: string
 }) {
   return (
     <Section className='flex flex-col gap-stack'>
@@ -44,6 +49,7 @@ function StepsCards({
         <SectionHeading
           label='How It Works'
           title='Start where it hurts most.'
+          intro={intro}
         />
       </Reveal>
       <Reveal index={1}>

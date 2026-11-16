@@ -113,7 +113,7 @@ export const SOUND_FAMILIAR = {
 export const WHO_YOU_WORK_WITH_HOME = {
   label: 'Who You Work With',
   title: 'The people on the call build it.',
-  body: 'No account managers and no handoffs. Humans decide what to build, AI agents write much of the code, and nothing ships until one of us has checked it. That’s how we work up to 5x faster than a traditional team.',
+  body: 'No account managers and no handoffs. The engineers who plan your project with you are the ones who build it, so nothing gets lost along the way.',
   /** Home's one line per founder, matched to src/lib/team.ts by name. */
   founders: {
     'Jason Desiderio':
@@ -122,3 +122,8 @@ export const WHO_YOU_WORK_WITH_HOME = {
       'Designed physical systems meant to last decades before he turned to software, and has run his own businesses for ten years.',
   } as Record<string, string>,
 } as const
+
+/** Home's "How it works" intro: moved here from "Who you work with" (Nov 15)
+ *  so the AI workflow and the 5x stay on Home. */
+export const HOW_IT_WORKS_HOME_INTRO =
+  'Humans decide what to build, AI agents write much of the code, and nothing ships until one of us has checked it. That’s how we work up to 5x faster than a traditional team.'

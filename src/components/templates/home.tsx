@@ -7,6 +7,7 @@ import { StepsSection } from '@/src/components/sections/process'
 import { OwnershipSection } from '@/src/components/sections/ownership'
 import { Band } from '@/src/components/patterns/section'
 import { CtaBand } from '@/src/components/sections/cta-band'
+import { HOW_IT_WORKS_HOME_INTRO } from '@/src/lib/home'
 
 /** The Home page: hero and logos on dark, then alternating light and dark
  *  bands from the proof on (Nov 14), and the closing band. */
@@ -35,7 +36,7 @@ export function HomeTemplate() {
         <WhoYouWorkWithSection />
       </Band>
       <Band tone='dark'>
-        <StepsSection showBilling />
+        <StepsSection showBilling intro={HOW_IT_WORKS_HOME_INTRO} />
       </Band>
       <Band tone='light'>
         <OwnershipSection variant='short' />
