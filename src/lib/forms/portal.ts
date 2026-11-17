@@ -91,7 +91,8 @@ export async function postToPortal(
 const SUBMIT_TIMEOUT_MS = 15_000
 
 export type PortalSubmitResult =
-  { ok: true } | { ok: false; reason: 'portal_rejected' | 'portal_unreachable' }
+  | { ok: true }
+  | { ok: false; reason: 'portal_rejected' | 'portal_unreachable' }
 
 /**
  * POST a form submission and report whether the portal accepted it. Never

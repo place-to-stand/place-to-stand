@@ -38,7 +38,7 @@ export function CaptureGate({
       placement: 'gate',
       phase: result.phase.id,
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [])
 
   return (

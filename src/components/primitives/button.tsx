@@ -1,8 +1,9 @@
 'use client'
 
-import { Slot } from '@radix-ui/react-slot'
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { forwardRef, type ButtonHTMLAttributes } from 'react'
+import { forwardRef, type ButtonHTMLAttributes, type ReactElement } from 'react'
 import { cn } from '@/src/lib/utils'
 import { Icon, Loader2 } from '@/src/components/primitives/icon'
 
@@ -66,29 +67,38 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loadingLabel,
       disabled,
       children,
+      type,
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : 'button'
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size }), className)}
-        ref={ref}
-        disabled={disabled || loading}
-        aria-busy={loading || undefined}
-        {...props}
-      >
-        {loading ? (
-          <>
-            <Icon icon={Loader2} className='mr-2 animate-spin' />
-            {loadingLabel ?? children}
-          </>
-        ) : (
-          children
-        )}
-      </Comp>
+    // asChild: the child element (a link, say) renders in place of the
+    // button, taking its classes and keeping its own content. Handed to
+    // Base UI as is, so it can unwrap the lazy element a Server Component
+    // child arrives as. A loading spinner needs a real button.
+    const render = asChild ? (children as ReactElement) : undefined
+    const content = loading ? (
+      <>
+        <Icon icon={Loader2} className='mr-2 animate-spin' />
+        {loadingLabel ?? children}
+      </>
+    ) : (
+      children
     )
+    return useRender({
+      defaultTagName: 'button',
+      render,
+      ref,
+      props: mergeProps<'button'>(props, {
+        className: cn(buttonVariants({ variant, size }), className),
+        // A <button> submits unless told otherwise; Base UI defaults to
+        // type="button", so keep the HTML default for buttons in forms.
+        type: render ? type : (type ?? 'submit'),
+        disabled: disabled || loading,
+        'aria-busy': loading || undefined,
+        ...(render ? {} : { children: content }),
+      }),
+    })
   }
 )
 

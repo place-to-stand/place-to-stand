@@ -1,4 +1,4 @@
-/* eslint-disable design/no-raw-aspect, design/no-raw-border -- the proof panel is drawn in the clients' own colors on its own grid (see PANEL_W) */
+/* oxlint-disable design/no-raw-aspect, design/no-raw-border -- the proof panel is drawn in the clients' own colors on its own grid (see PANEL_W) */
 import type { Route } from 'next'
 import { Section, SectionHeading } from '@/src/components/patterns/section'
 import { ArrowLink } from '@/src/components/patterns/arrow-link'

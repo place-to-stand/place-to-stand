@@ -77,7 +77,7 @@ export function AuditLogoMarquee() {
               aria-hidden={copy || undefined}
               className='flex h-grid-2 shrink-0 items-center px-grid-half md:h-grid-3 md:px-grid-1'
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* oxlint-disable-next-line next-js/no-img-element */}
               <img
                 src={client.logo}
                 alt={copy ? '' : `${client.title} logo`}

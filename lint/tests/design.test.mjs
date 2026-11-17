@@ -1,18 +1,17 @@
 import { describe, it } from 'node:test'
 
-import { RuleTester } from 'eslint'
+import { RuleTester } from 'oxlint/plugins-dev'
 import { design } from '../plugin.mjs'
 
 RuleTester.describe = describe
 RuleTester.it = it
 
+// Oxlint's RuleTester, so each case runs the rule the way `npm run lint`
+// does. `eslintCompat` keeps ESLint's 1-based columns the cases were
+// written against.
 const tester = new RuleTester({
-  // The rules only read JSX, so ESLint's default parser is enough.
-  languageOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    parserOptions: { ecmaFeatures: { jsx: true } },
-  },
+  eslintCompat: true,
+  languageOptions: { sourceType: 'module', parserOptions: { lang: 'tsx' } },
 })
 
 const run = (id, cases) => tester.run(id, design.rules[id], cases)

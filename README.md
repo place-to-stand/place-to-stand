@@ -20,14 +20,14 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 
 ## Tech Stack
 
-| Concern              | Tooling                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------- |
-| Framework            | Next.js (App Router, TypeScript)                                                             |
-| Styling              | Tailwind CSS + shadcn/ui                                                                     |
-| Forms & Validation   | React Hook Form + Zod                                                                        |
-| Email Delivery       | Sent by the portal (Resend); this site sends no email                                        |
-| Analytics            | Vercel Analytics                                                                             |
-| Linting & Formatting | ESLint (`eslint-config-next`, `eslint-plugin-react`, `eslint-plugin-react-hooks`) + Prettier |
+| Concern              | Tooling                                                                       |
+| -------------------- | ----------------------------------------------------------------------------- |
+| Framework            | Next.js (App Router, TypeScript)                                              |
+| Styling              | Tailwind CSS + shadcn/ui                                                      |
+| Forms & Validation   | React Hook Form + Zod                                                         |
+| Email Delivery       | Sent by the portal (Resend); this site sends no email                         |
+| Analytics            | Vercel Analytics                                                              |
+| Linting & Formatting | Oxlint (Next.js's recommended rules plus the design rules in `lint/`) + oxfmt |
 
 ## Design & Brand Highlights
 
@@ -108,9 +108,10 @@ intake token in the client bundle would publish a portal secret.
 1. Branch from `main` with `feat/<short-description>` naming.
 2. Implement changes alongside unit/visual coverage when applicable.
 3. Run quality gates:
+   - `npm run format`
    - `npm run lint`
-   - `npm run test` (if tests exist)
    - `npm run type-check`
+   - `npm run build`
 4. Submit a PR referencing relevant spec sections.
 
 ## Section Contracts

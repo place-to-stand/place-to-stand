@@ -200,7 +200,7 @@ export function AuditWizard({
       className={cn(
         'flex items-center justify-between',
         isPhone
-          ? // eslint-disable-next-line design/no-raw-spacing -- keeps the sticky bar clear of the phone home indicator (safe area)
+          ? // oxlint-disable-next-line design/no-raw-spacing -- keeps the sticky bar clear of the phone home indicator (safe area)
             'fixed inset-x-0 bottom-0 z-(--z-sticky) border-t border-border bg-bg/95 px-grid-1 pt-grid-half pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md'
           : 'mt-grid-1'
       )}
@@ -258,8 +258,8 @@ export function AuditWizard({
           key={question.id}
           ref={questionRef}
           tabIndex={-1}
-          // eslint-disable-next-line design/no-raw-focus -- focused only by script, to announce the next question; not a control
-          className='duration-300 animate-in outline-none fade-in slide-in-from-right-2 motion-reduce:animate-none'
+          // oxlint-disable-next-line design/no-raw-focus -- focused only by script, to announce the next question; not a control
+          className='animate-in duration-300 outline-none fade-in slide-in-from-right-2 motion-reduce:animate-none'
         >
           <QuestionField
             question={question}

@@ -12,7 +12,11 @@
 
 /** The five phases a business can land in, ordered by maturity. */
 export type PhaseId =
-  'foundation' | 'launch' | 'growth' | 'optimization' | 'transformation'
+  | 'foundation'
+  | 'launch'
+  | 'growth'
+  | 'optimization'
+  | 'transformation'
 
 /** The custom-software opportunity areas the agency can deliver. */
 export type ServiceId =

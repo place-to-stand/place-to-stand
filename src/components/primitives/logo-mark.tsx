@@ -73,7 +73,7 @@ export function LogoLockup({
       <LogoMark />
       <span
         className={cn(
-          // eslint-disable-next-line design/no-raw-text-size -- the wordmark is part of the logo, not a type role
+          // oxlint-disable-next-line design/no-raw-text-size -- the wordmark is part of the logo, not a type role
           'font-headline text-xl font-bold tracking-tight text-text',
           href && 'transition-colors group-hover:text-accent'
         )}

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+
+# The portal's checks in one job: this site is small enough that a second
+# job's setup would cost more than it saves.
+jobs:
+  check:
+    name: Format, lint, type-check, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      # node_modules from the cache; npm ci only when the lockfile changes.
+      - id: modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: node-modules-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('.nvmrc', 'package-lock.json') }}
+      - if: steps.modules.outputs.cache-hit != 'true'
+        run: npm ci
+      - uses: actions/cache@v4
+        with:
+          # Next's build cache.
+          path: .next/cache
+          key: checks-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
+          restore-keys: checks-${{ hashFiles('package-lock.json') }}-
+      - run: npm run format
+      - run: npm run lint
+      - run: npm run type-check
+      # postbuild's IndexNow ping runs only on Vercel production builds.
+      - run: npm run build

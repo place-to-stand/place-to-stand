@@ -21,7 +21,7 @@ export function Hero(
   props: { variant: 'home' } | ({ variant: 'page' } & PageHeroProps)
 ) {
   if (props.variant === 'home') return <HeroSection />
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- variant is consumed above
+  // oxlint-disable-next-line ts-js/no-unused-vars -- variant is consumed above
   const { variant, sectionClassName, children, ...header } = props
   return (
     <Section priority className={sectionClassName}>

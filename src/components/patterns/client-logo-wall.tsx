@@ -194,7 +194,7 @@ function LogoCell({
         <span
           className={`logo-hover flex h-full w-full items-center justify-center`}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* oxlint-disable-next-line next-js/no-img-element */}
           <img
             src={client.logo}
             alt={`${client.title} logo`}
