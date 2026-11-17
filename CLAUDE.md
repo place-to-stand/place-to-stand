@@ -56,8 +56,10 @@ labels, dates and badges, used sparingly. Nothing under 12px.
 
 - **CI** (`.github/workflows/ci.yml`) runs `npm run format`, `npm run lint`, `npm run type-check` and
   `npm run build` on every pull request and push to `main`, on the Node version in `.nvmrc`, with
-  `node_modules` and Next's `.next/cache` restored from the cache. Prettier runs uncached (about 3s): its cache
-  would miss class-order changes that come from `app/globals.css`.
+  `node_modules` and Next's `.next/cache` restored from the cache.
+- **Formatting is oxfmt** (`.oxfmtrc.json`, migrated from the old Prettier config). It sorts Tailwind classes
+  against `app/globals.css` (`sortTailwindcss.stylesheet`), as prettier-plugin-tailwindcss did, and checks the
+  whole repo in well under a second. `npm run format` checks, `npm run format:write` fixes.
 - **Lint is Oxlint.** Rules live in `lint/config.mjs` (ESLint's flat format: Next's recommended presets from
   `lint/presets.json`, then the design rules in `lint/rules/design.mjs`); `lint/to-oxlint.mjs` turns it into
   Oxlint's config. Rules Oxlint implements identically run natively; the rest run from their original ESLint

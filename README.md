@@ -20,14 +20,14 @@ Place To Stand is a single-page brochure site for a boutique digital agency. The
 
 ## Tech Stack
 
-| Concern              | Tooling                                                                          |
-| -------------------- | -------------------------------------------------------------------------------- |
-| Framework            | Next.js (App Router, TypeScript)                                                 |
-| Styling              | Tailwind CSS + shadcn/ui                                                         |
-| Forms & Validation   | React Hook Form + Zod                                                            |
-| Email Delivery       | Sent by the portal (Resend); this site sends no email                            |
-| Analytics            | Vercel Analytics                                                                 |
-| Linting & Formatting | Oxlint (Next.js's recommended rules plus the design rules in `lint/`) + Prettier |
+| Concern              | Tooling                                                                       |
+| -------------------- | ----------------------------------------------------------------------------- |
+| Framework            | Next.js (App Router, TypeScript)                                              |
+| Styling              | Tailwind CSS + shadcn/ui                                                      |
+| Forms & Validation   | React Hook Form + Zod                                                         |
+| Email Delivery       | Sent by the portal (Resend); this site sends no email                         |
+| Analytics            | Vercel Analytics                                                              |
+| Linting & Formatting | Oxlint (Next.js's recommended rules plus the design rules in `lint/`) + oxfmt |
 
 ## Design & Brand Highlights
 

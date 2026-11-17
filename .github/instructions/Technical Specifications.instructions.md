@@ -52,7 +52,7 @@ applyTo: '**'
 ### **1.3 Tooling & Testing**
 
 - **Linting:** Oxlint running Next.js's recommended rules (eslint-config-next's presets) plus the site's design rules, configured in `lint/config.mjs`
-- **Formatting:** Prettier (project config)
+- **Formatting:** oxfmt (`.oxfmtrc.json`)
 - **Unit & Integration Tests:** Vitest + Testing Library (React)
 - **End-to-End Tests:** Playwright
 - **Static Analysis:** TypeScript `tsc --noEmit`, optional `spectral` or custom scripts when available
