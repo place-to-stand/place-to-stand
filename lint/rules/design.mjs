@@ -121,9 +121,9 @@ export const noRawColor = classRule({
 
 // Borders: boxes own their strokes. Card, LinkCard, StatTile, Callout,
 // Panel, RuledRow, RuledList, SideNote and Chip (src/components/boxes) carry every border on the site, so a page never draws one.
-// Turned off in eslint.config.mjs for boxes.tsx itself and for UI
-// primitives; anything else that truly needs a border says why in an
-// eslint-disable comment.
+// Turned off in lint/config.mjs for boxes.tsx itself and for UI
+// primitives; anything else that truly needs a border says why in a
+// disable comment.
 const BORDER = /^(?:border(?:-[trblxyse])?(?:-.+)?|divide-.+)$/
 // Zero widths remove a rule (first:border-t-0), they don't draw one.
 const NOT_A_STROKE =
@@ -136,7 +136,7 @@ export const noRawBorder = classRule({
 
 // Imagery: photos, screenshots and video sit in MediaFrame, which allows three
 // shapes only (16:10, 1:1, 21:9). An aspect class anywhere else is a fourth
-// shape. Drawings that need their own box say so in an eslint-disable comment.
+// shape. Drawings that need their own box say so in an oxlint-disable comment.
 export const noRawAspect = classRule({
   description: 'Media use the three MediaFrame shapes',
   message: `${DOC} → Imagery: "{{cls}}" sets its own aspect ratio. Put media in MediaFrame (shape work 16:10, person 1:1, wide 21:9).`,
@@ -147,7 +147,7 @@ export const noRawAspect = classRule({
 // a base :focus-visible rule), so no element sets its own ring or outline;
 // disabled is muted tokens and cursor-not-allowed, never faded with opacity.
 // An element focused only by script (a question the audit moves focus to)
-// says so in an eslint-disable comment.
+// says so in an oxlint-disable comment.
 export const noRawFocus = classRule({
   description: 'Focus and disabled states come from the shared styles',
   message: `${DOC} → Interaction states: "{{cls}}" sets its own focus ring or disabled look. Focus comes from the global focus-ring; disabled uses muted text and line tokens with cursor-not-allowed.`,

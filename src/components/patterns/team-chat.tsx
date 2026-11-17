@@ -1,4 +1,4 @@
-/* eslint-disable design/no-raw-border -- a chat window rebuilt in HTML (Home's warning signs): its header rule, avatars, reaction chips and "New" divider are the UI being shown, like the client widgets. */
+/* oxlint-disable design/no-raw-border -- a chat window rebuilt in HTML (Home's warning signs): its header rule, avatars, reaction chips and "New" divider are the UI being shown, like the client widgets. */
 'use client'
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'

@@ -7,7 +7,7 @@
     "build": "next build",
     "postbuild": "node scripts/indexnow.mjs",
     "start": "next start",
-    "lint": "eslint . && node --test eslint/tests/ && node scripts/voice.mjs",
+    "lint": "oxlint -c oxlint.config.mjs --report-unused-disable-directives-severity=error && node --test lint/tests/ && node scripts/voice.mjs",
     "perf": "node scripts/lighthouse.mjs",
     "perf:lcp": "node scripts/lcp.mjs",
     "test:visual": "node scripts/visual.mjs",
@@ -16,10 +16,10 @@
     "test:budget": "node scripts/budget.mjs",
     "test:a11y": "node scripts/a11y.mjs",
     "test:design": "npm run test:contrast && npm run test:a11y && npm run test:visual && npm run test:budget",
-    "format": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
-    "format:write": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
-    "type-check": "tsc --noEmit",
-    "test:lint-rules": "node --test eslint/tests/"
+    "format": "prettier --check --cache --cache-location=.cache/prettier \"**/*.{ts,tsx,js,json,md}\"",
+    "format:write": "prettier --write --cache --cache-location=.cache/prettier \"**/*.{ts,tsx,js,json,md}\"",
+    "type-check": "next typegen && node node_modules/typescript-7/bin/tsc --noEmit",
+    "test:lint-rules": "node --test lint/tests/"
   },
   "dependencies": {
     "@hookform/resolvers": "6.0.0",
@@ -45,23 +45,27 @@
     "zod": "4.6.7"
   },
   "devDependencies": {
-    "@eslint/js": "9.39.5",
+    "@next/eslint-plugin-next": "16.4.3",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.6.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
+    "@typescript-eslint/eslint-plugin": "8.72.0",
     "axe-core": "4.13.0",
     "chrome-launcher": "1.2.2",
-    "eslint": "9.39.5",
-    "eslint-config-next": "16.4.3",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react": "7.37.5",
+    "eslint-plugin-react-hooks": "7.1.1",
     "lighthouse": "13.5.0",
+    "oxlint": "1.93.0",
     "postcss": "8.5.31",
     "prettier": "3.9.10",
     "prettier-plugin-tailwindcss": "0.8.1",
     "puppeteer-core": "25.14.0",
     "tailwindcss": "4.3.3",
     "tailwindcss-animate": "1.0.7",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "typescript-7": "npm:typescript@7.0.2"
   },
   "packageManager": "npm@10.8.2"
 }

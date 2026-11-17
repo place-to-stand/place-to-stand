@@ -51,7 +51,7 @@ applyTo: '**'
 
 ### **1.3 Tooling & Testing**
 
-- **Linting:** ESLint with eslint-config-next, eslint-plugin-react, eslint-plugin-react-hooks, and Tailwind plugin
+- **Linting:** Oxlint running Next.js's recommended rules (eslint-config-next's presets) plus the site's design rules, configured in `lint/config.mjs`
 - **Formatting:** Prettier (project config)
 - **Unit & Integration Tests:** Vitest + Testing Library (React)
 - **End-to-End Tests:** Playwright

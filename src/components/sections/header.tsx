@@ -125,7 +125,7 @@ export function Header() {
                 </Dialog.Description>
                 <nav className='mt-grid-2 flex flex-col'>
                   {NAV_LINKS.map(item => (
-                    // eslint-disable-next-line design/link-role -- the phone menu lists pages in large type for touch
+                    // oxlint-disable-next-line design/link-role -- the phone menu lists pages in large type for touch
                     <Link
                       key={item.href}
                       href={item.href}
@@ -140,7 +140,7 @@ export function Header() {
                   ))}
                   {/* Login is a menu row like the pages, in the muted color so
                       it reads as the client door rather than a page. */}
-                  {/* eslint-disable-next-line design/link-role -- the phone menu lists pages in large type for touch */}
+                  {/* oxlint-disable-next-line design/link-role -- the phone menu lists pages in large type for touch */}
                   <TrackedLink
                     href={CLIENT_PORTAL_URL}
                     rel='nofollow'

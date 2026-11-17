@@ -87,7 +87,7 @@ export function HeroSection() {
                 drops its first line level with the drawings' windows, under
                 their titles (--draw-top, set by HeroDrawingSlot; 48px until
                 it has measured), less the line's half-leading. */}
-            {/* eslint-disable-next-line design/no-raw-spacing -- a measured offset, not a spacing role */}
+            {/* oxlint-disable-next-line design/no-raw-spacing -- a measured offset, not a spacing role */}
             <div className='flex flex-col max-md:order-2 md:flex-1 md:pt-[calc(var(--draw-top,3rem)-0.25rem)] lg:pl-grid-1'>
               <div className='flex flex-col gap-grid-1 text-center md:text-left lg:gap-grid-2'>
                 <div
@@ -95,7 +95,7 @@ export function HeroSection() {
                   style={{ animationDelay: '0.85s' }}
                 >
                   <div className='flex max-w-lg flex-col gap-grid-1 lg:max-w-[35rem]'>
-                    {/* eslint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
+                    {/* oxlint-disable-next-line design/no-raw-text-size -- the home hero is sized to the window (see docs/design-system.md) */}
                     <p className='text-base text-pretty text-text lg:text-[1.375rem] lg:leading-[1.875rem]'>
                       {HOME_HERO.sub}
                     </p>

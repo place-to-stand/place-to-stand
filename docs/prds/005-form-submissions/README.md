@@ -15,16 +15,16 @@ both actions.
 
 ## What was built
 
-| File | Role |
-|---|---|
-| `src/lib/forms/context.ts` | Shared envelope: UTM/referrer, device/locale, PostHog ids, UUID minting |
-| `src/lib/forms/portal.ts` | Server-only endpoint resolution and best-effort POST. Holds the tokens |
-| `src/lib/forms/contact-payload.ts` | Contact wire contract and builder |
-| `src/lib/audit/session.ts` | Audit session identity, localStorage persistence, TTL, resume gate |
-| `src/lib/audit/progress-payload.ts` | Audit wire contract and builder |
-| `src/lib/audit/track-progress.ts` | Browser transport: `sendBeacon`, or `fetch` with `keepalive` |
-| `app/api/audit-progress/route.ts` | Same-origin proxy. Validates, injects user agent, forwards |
-| `src/hooks/use-audit.ts` | Orchestrates the audit session and its pushes |
+| File                                 | Role                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------- |
+| `src/lib/forms/context.ts`           | Shared envelope: UTM/referrer, device/locale, PostHog ids, UUID minting   |
+| `src/lib/forms/portal.ts`            | Server-only endpoint resolution and best-effort POST. Holds the tokens    |
+| `src/lib/forms/contact-payload.ts`   | Contact wire contract and builder                                         |
+| `src/lib/audit/session.ts`           | Audit session identity, localStorage persistence, TTL, resume gate        |
+| `src/lib/audit/progress-payload.ts`  | Audit wire contract and builder                                           |
+| `src/lib/audit/track-progress.ts`    | Browser transport: `sendBeacon`, or `fetch` with `keepalive`              |
+| `app/api/audit-progress/route.ts`    | Same-origin proxy. Validates, injects user agent, forwards                |
+| `src/hooks/use-audit.ts`             | Orchestrates the audit session and its pushes                             |
 | `src/lib/audit/summarize-answers.ts` | `describeAnswers()` resolves option ids to labels, shared with the emails |
 
 ### Why the audit needs a proxy route and contact does not
@@ -44,14 +44,14 @@ Both paths set `client.userAgent` from the incoming request header rather than `
 
 ### When the audit pushes
 
-| Trigger | Status | Fired from |
-|---|---|---|
-| `started` | `in_progress` | `start()` |
-| `step_completed` | `in_progress` | `completeStep()`, once per wizard section |
-| `scored` | `completed` | `submit()`, after the engine runs |
-| `captured` | `captured` | `markCaptured()`, after the email form succeeds |
-| `abandoned` | `abandoned` | `reset()`, only when leaving from the wizard |
-| `pagehide` | `in_progress` | Beacon on tab close, only if answers changed since the last push |
+| Trigger          | Status        | Fired from                                                       |
+| ---------------- | ------------- | ---------------------------------------------------------------- |
+| `started`        | `in_progress` | `start()`                                                        |
+| `step_completed` | `in_progress` | `completeStep()`, once per wizard section                        |
+| `scored`         | `completed`   | `submit()`, after the engine runs                                |
+| `captured`       | `captured`    | `markCaptured()`, after the email form succeeds                  |
+| `abandoned`      | `abandoned`   | `reset()`, only when leaving from the wizard                     |
+| `pagehide`       | `in_progress` | Beacon on tab close, only if answers changed since the last push |
 
 `pagehide` deliberately does not claim `abandoned`: a tab switch is indistinguishable from a close. The
 portal infers real abandonment from `in_progress` plus a stale `updatedAt`.
@@ -77,10 +77,10 @@ server-rendered tree without a hydration mismatch.
 
 ## Environment
 
-| Variable | Purpose |
-|---|---|
-| `PORTAL_API_BASE_URL` | Portal host, e.g. `https://portal.placetostandagency.com`. Paths are appended |
-| `AUDIT_INTAKE_TOKEN` | Bearer token for `/api/integrations/audit-responses` |
+| Variable               | Purpose                                                                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PORTAL_API_BASE_URL`  | Portal host, e.g. `https://portal.placetostandagency.com`. Paths are appended                                                                                           |
+| `AUDIT_INTAKE_TOKEN`   | Bearer token for `/api/integrations/audit-responses`                                                                                                                    |
 | `CONTACT_INTAKE_TOKEN` | Bearer token for `/api/integrations/contact-submissions`, and for `/api/integrations/subscribe-submissions` (blog and footer signups, via this site's `/api/subscribe`) |
 
 `PORTAL_LEADS_ENDPOINT` and `PORTAL_LEADS_TOKEN` are no longer read by any code and should be removed

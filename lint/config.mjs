@@ -1,7 +1,11 @@
-import { defineConfig, globalIgnores } from 'eslint/config'
-import nextVitals from 'eslint-config-next/core-web-vitals'
-import nextTs from 'eslint-config-next/typescript'
-import { design } from './eslint/plugin.mjs'
+/**
+ * The site's lint config, in ESLint's flat format; Oxlint runs it through
+ * to-oxlint.mjs (oxlint.config.mjs). Next's presets are plain data in
+ * presets.json, captured from eslint-config-next 16.4.3.
+ */
+import presets from './presets.json' with { type: 'json' }
+
+const { nextCoreWebVitals: nextVitals, nextTypescript: nextTs } = presets
 
 const ICON_PRIMITIVE = 'src/components/primitives/icon.tsx'
 const LUCIDE = {
@@ -10,13 +14,12 @@ const LUCIDE = {
     'Use the Icon primitive (@/src/components/primitives/icon): it fixes icon size and line width.',
 }
 
-const eslintConfig = defineConfig([
+const config = [
   ...nextVitals,
   ...nextTs,
-  // Design-system rules (eslint/rules/design.mjs, docs/design-system.md).
+  // Design-system rules (lint/rules/design.mjs, docs/design-system.md).
   {
     files: ['app/**/*.tsx', 'src/**/*.tsx'],
-    plugins: { design },
     rules: {
       'design/no-raw-spacing': 'error',
       'design/no-raw-text-size': 'error',
@@ -31,7 +34,6 @@ const eslintConfig = defineConfig([
   // Components may use a semantic <section> inside themselves.
   {
     files: ['app/**/*.tsx'],
-    plugins: { design },
     rules: { 'design/section-component': 'error' },
   },
   // shadcn-style UI primitives: their internal sizes and offsets are their
@@ -115,15 +117,17 @@ const eslintConfig = defineConfig([
     ]
   }),
   // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    '.next/**',
-    'out/**',
-    'build/**',
-    'next-env.d.ts',
-    // Other Claude worktrees checked out inside this repo.
-    '.claude/**',
-  ]),
-])
+  {
+    ignores: [
+      // Default ignores of eslint-config-next:
+      '.next/**',
+      'out/**',
+      'build/**',
+      'next-env.d.ts',
+      // Other Claude worktrees checked out inside this repo.
+      '.claude/**',
+    ],
+  },
+]
 
-export default eslintConfig
+export default config

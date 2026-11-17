@@ -58,3 +58,6 @@ next-env.d.ts
 # Visual check output (baselines in tests/visual/baselines are committed)
 /tests/visual/current/
 /tests/visual/diff/
+
+# prettier --cache (npm run format, format:write)
+.cache/

@@ -51,3 +51,18 @@ labels, dates and badges, used sparingly. Nothing under 12px.
   variables from that single block, so a token change there updates everything.
 - No gradients — solid colors only.
 - Mix alignments for visual variety; avoid center-justifying everything.
+
+## Checks and CI
+
+- **CI** (`.github/workflows/ci.yml`) runs `npm run format`, `npm run lint`, `npm run type-check` and
+  `npm run build` on every pull request and push to `main`, on the Node version in `.nvmrc`, with
+  `node_modules`, Prettier's cache and Next's `.next/cache` restored from the cache.
+- **Lint is Oxlint.** Rules live in `lint/config.mjs` (ESLint's flat format: Next's recommended presets from
+  `lint/presets.json`, then the design rules in `lint/rules/design.mjs`); `lint/to-oxlint.mjs` turns it into
+  Oxlint's config. Rules Oxlint implements identically run natively; the rest run from their original ESLint
+  plugins under an alias (`ts-js/`, `react-compiler/`, `react-js/`, `next-js/`, `jsx-a11y-js/`). A disable
+  comment names the rule as lint prints it (`// oxlint-disable-next-line next-js/no-img-element -- why`); a
+  stale one fails lint. Start comments that only mention a directive with other words: Oxlint reads
+  `// eslint-disable …` and `// oxlint-disable …` line comments as directives.
+- **Type-check is TypeScript 7** (`typescript-7`). TypeScript 6 stays installed as `typescript` for Next.js,
+  so run `npm run type-check`, not `npx tsc`.

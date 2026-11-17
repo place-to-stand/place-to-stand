@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element, design/no-raw-color, design/no-raw-border -- heatonist.com's filter and product card rebuilt in HTML for Home's proof, in their colors and sizes */
+/* oxlint-disable next-js/no-img-element, design/no-raw-color, design/no-raw-border -- heatonist.com's filter and product card rebuilt in HTML for Home's proof, in their colors and sizes */
 import type { CSSProperties } from 'react'
 
 /**

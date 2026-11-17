@@ -106,7 +106,7 @@ export function ResultsView({
         phase: phase.id,
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [])
   const activeIndex = PHASE_ORDER.indexOf(phase.id)
   const progressPct =
@@ -157,12 +157,12 @@ export function ResultsView({
         <ol className='relative mt-grid-1 flex items-start justify-between'>
           {/* connector track + progress fill */}
           <div
-            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
+            // oxlint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
             className='absolute top-[11px] right-0 left-0 h-px bg-border'
             aria-hidden
           />
           <div
-            // eslint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
+            // oxlint-disable-next-line design/no-raw-spacing -- aligns the rail to the center of the 22px step dot
             className='absolute top-[11px] left-0 h-px bg-border-light'
             style={{ width: `${progressPct}%` }}
             aria-hidden
@@ -189,7 +189,7 @@ export function ResultsView({
                 </span>
                 <span
                   className={cn(
-                    // eslint-disable-next-line design/no-raw-text-size -- phase tile labels shrink to fit five tiles on a phone
+                    // oxlint-disable-next-line design/no-raw-text-size -- phase tile labels shrink to fit five tiles on a phone
                     'block w-full px-0.5 text-xs leading-tight tracking-wide break-words hyphens-auto uppercase sm:text-sm',
                     isActive ? 'font-semibold text-text' : 'text-text-muted'
                   )}

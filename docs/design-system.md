@@ -382,7 +382,7 @@ How the site sounds (approved Nov 10):
 
 ## Checks
 
-`npm run lint` runs the design rules in `eslint/rules/design.mjs` (tests in `eslint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, no raw borders outside the boxes, every text link on a link role, pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`, and each component tier imports only from the tiers below. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
+`npm run lint` runs the design rules in `lint/rules/design.mjs` (tests in `lint/tests/`): no raw spacing above 8px micro-spacing, no raw text sizes outside the type roles (12px mono labels allowed), no raw colors, no raw borders outside the boxes, every text link on a link role, pages build sections from `Section` / `PageHeader` / `Band` / `CtaBand`, and each component tier imports only from the tiers below. Deliberate exceptions carry an `eslint-disable-next-line` comment saying why.
 
 Four more checks run against a production build (`npm run build && npm start`), together as
 `npm run test:design`, using the Chrome on the machine:

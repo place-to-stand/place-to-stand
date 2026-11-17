@@ -5,31 +5,32 @@
 **Landing page problem:** The `/audit` page currently shows a bare intro screen (headline + button). Visitors arriving from paid ads have zero context about Place To Stand — no trust signals, no company info, no reason to engage. The page needs to function as a self-contained landing page that builds trust and converts cold traffic.
 
 **Analytics gap:** The existing PostHog instrumentation covers three moments:
-| Event | Where | Properties |
-|---|---|---|
-| `audit_started` | `useAudit` hook | _(none)_ |
-| `audit_step_completed` | `AuditWizard` | `step`, `section` |
-| `audit_completed` | `useAudit` hook | `phase`, `top_service` |
-| `audit_capture_submitted` | `ResultsView` | `phase` |
+
+| Event                     | Where           | Properties             |
+| ------------------------- | --------------- | ---------------------- |
+| `audit_started`           | `useAudit` hook | _(none)_               |
+| `audit_step_completed`    | `AuditWizard`   | `step`, `section`      |
+| `audit_completed`         | `useAudit` hook | `phase`, `top_service` |
+| `audit_capture_submitted` | `ResultsView`   | `phase`                |
 
 This leaves significant blind spots: **no per-question answer tracking**, **no step abandonment events**, **no results-view engagement**, and **no landing-page CTA tracking**. For ad-driven traffic, we need a complete funnel to see where people drop off and what answers they give.
 
 ## 2. Design Decisions
 
-| Decision | Choice | Rationale |
-|---|---|---|
-| **Landing page scope** | Replace `IntroScreen` with a new `AuditLandingContent`; leave `AuditWizard` + `ResultsView` untouched structurally | The wizard and results work well. The gap is the pre-wizard experience. |
-| **New component vs. inline** | New `src/components/audit/audit-landing.tsx` | Landing content is substantial enough to warrant its own file. |
-| **Reuse existing data** | Import from `src/lib/clients.ts`, `src/lib/team.ts`, `src/lib/services.ts`; reuse `FaqAccordion` from `faq-section.tsx` | Consistent with every other page; no new abstractions needed. |
-| **Delete IntroScreen** | Yes | Fully replaced; keeping it creates dead code. |
-| **CTA placement** | Two CTAs — one hero-level, one after trust sections | Cold traffic needs CTA visible early and after scrolling trust content. |
-| **Content structure** | Hero -> Client trust strip -> Who We Are -> What The Audit Covers -> Services overview -> FAQ -> Final CTA | Proven landing page flow: hook -> credibility -> clarity -> proof -> objections -> action. |
-| **Manifesto data** | Inline the facets data in the new component | Short (3 items); avoids coupling two unrelated components. |
-| **PostHog tracking approach** | Add events to existing components (`useAudit`, `AuditWizard`, `ResultsView`); no new wrapper components | Follows established pattern (`usePostHog()` hook + `posthog?.capture()`). |
-| **Answer tracking** | Fire `audit_answer_selected` on each answer change in `useAudit.setAnswer` | Captures per-question behavior without touching `QuestionField` internals. |
-| **Abandonment tracking** | Fire `audit_abandoned` on `reset` when stage is `wizard` (user exits mid-flow) | Captures drop-off point using existing `stepIndex` via new `currentStep` state. |
-| **Results tracking** | Fire `audit_results_viewed` on mount of `ResultsView` | Captures whether users actually read their results. |
-| **Landing CTA tracking** | Use `posthog?.capture('audit_landing_cta_click', { location })` on both CTA buttons | Tracks which CTA (hero vs. bottom) drives starts for ad-traffic analysis. |
+| Decision                      | Choice                                                                                                                  | Rationale                                                                                  |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| **Landing page scope**        | Replace `IntroScreen` with a new `AuditLandingContent`; leave `AuditWizard` + `ResultsView` untouched structurally      | The wizard and results work well. The gap is the pre-wizard experience.                    |
+| **New component vs. inline**  | New `src/components/audit/audit-landing.tsx`                                                                            | Landing content is substantial enough to warrant its own file.                             |
+| **Reuse existing data**       | Import from `src/lib/clients.ts`, `src/lib/team.ts`, `src/lib/services.ts`; reuse `FaqAccordion` from `faq-section.tsx` | Consistent with every other page; no new abstractions needed.                              |
+| **Delete IntroScreen**        | Yes                                                                                                                     | Fully replaced; keeping it creates dead code.                                              |
+| **CTA placement**             | Two CTAs — one hero-level, one after trust sections                                                                     | Cold traffic needs CTA visible early and after scrolling trust content.                    |
+| **Content structure**         | Hero -> Client trust strip -> Who We Are -> What The Audit Covers -> Services overview -> FAQ -> Final CTA              | Proven landing page flow: hook -> credibility -> clarity -> proof -> objections -> action. |
+| **Manifesto data**            | Inline the facets data in the new component                                                                             | Short (3 items); avoids coupling two unrelated components.                                 |
+| **PostHog tracking approach** | Add events to existing components (`useAudit`, `AuditWizard`, `ResultsView`); no new wrapper components                 | Follows established pattern (`usePostHog()` hook + `posthog?.capture()`).                  |
+| **Answer tracking**           | Fire `audit_answer_selected` on each answer change in `useAudit.setAnswer`                                              | Captures per-question behavior without touching `QuestionField` internals.                 |
+| **Abandonment tracking**      | Fire `audit_abandoned` on `reset` when stage is `wizard` (user exits mid-flow)                                          | Captures drop-off point using existing `stepIndex` via new `currentStep` state.            |
+| **Results tracking**          | Fire `audit_results_viewed` on mount of `ResultsView`                                                                   | Captures whether users actually read their results.                                        |
+| **Landing CTA tracking**      | Use `posthog?.capture('audit_landing_cta_click', { location })` on both CTA buttons                                     | Tracks which CTA (hero vs. bottom) drives starts for ad-traffic analysis.                  |
 
 ## 3. Architecture Overview
 
@@ -65,6 +66,7 @@ New PostHog events:
 **File created:** `src/components/audit/audit-landing.tsx`
 
 **Props interface:**
+
 ```typescript
 interface AuditLandingProps {
   onStart: (location: string) => void
@@ -132,36 +134,36 @@ The `setAnswer` callback fires `audit_answer_selected` with `{ question_id, valu
 
 ## 5. Complete PostHog Event Map (after implementation)
 
-| Event | Trigger | Properties | Funnel Position |
-|---|---|---|---|
-| `$pageview` | Page load | `$current_url` | Entry |
-| `scroll_depth` | Scroll thresholds | `depth`, `path` | Engagement |
-| `audit_landing_cta_click` | **NEW** — CTA button on landing | `location` (`'hero'` / `'bottom'`) | Pre-funnel |
-| `audit_started` | "Start the audit" begins wizard | _(none)_ | Funnel start |
-| `audit_step_viewed` | **NEW** — Step renders | `step`, `section` | Step entry |
-| `audit_answer_selected` | **NEW** — Answer chosen | `question_id`, `value` | Micro-conversion |
-| `audit_step_completed` | "Continue" succeeds | `step`, `section` | Step exit |
-| `audit_abandoned` | **NEW** — Exit mid-wizard | `answers_count` | Drop-off |
-| `audit_completed` | All steps done, scored | `phase`, `top_service` | Funnel end |
-| `audit_results_viewed` | **NEW** — Results page mounts | `phase`, `recommendations_count`, `top_service` | Post-funnel |
-| `audit_capture_submitted` | Lead form submitted | `phase` | Conversion |
-| `cta_click` | "Book a call" links | `destination`, `location` | Conversion |
+| Event                     | Trigger                         | Properties                                      | Funnel Position  |
+| ------------------------- | ------------------------------- | ----------------------------------------------- | ---------------- |
+| `$pageview`               | Page load                       | `$current_url`                                  | Entry            |
+| `scroll_depth`            | Scroll thresholds               | `depth`, `path`                                 | Engagement       |
+| `audit_landing_cta_click` | **NEW** — CTA button on landing | `location` (`'hero'` / `'bottom'`)              | Pre-funnel       |
+| `audit_started`           | "Start the audit" begins wizard | _(none)_                                        | Funnel start     |
+| `audit_step_viewed`       | **NEW** — Step renders          | `step`, `section`                               | Step entry       |
+| `audit_answer_selected`   | **NEW** — Answer chosen         | `question_id`, `value`                          | Micro-conversion |
+| `audit_step_completed`    | "Continue" succeeds             | `step`, `section`                               | Step exit        |
+| `audit_abandoned`         | **NEW** — Exit mid-wizard       | `answers_count`                                 | Drop-off         |
+| `audit_completed`         | All steps done, scored          | `phase`, `top_service`                          | Funnel end       |
+| `audit_results_viewed`    | **NEW** — Results page mounts   | `phase`, `recommendations_count`, `top_service` | Post-funnel      |
+| `audit_capture_submitted` | Lead form submitted             | `phase`                                         | Conversion       |
+| `cta_click`               | "Book a call" links             | `destination`, `location`                       | Conversion       |
 
 ## 6. Critical Files Reference
 
-| File | Action | Purpose |
-|---|---|---|
-| `src/components/audit/audit-landing.tsx` | **Create** | Full landing page for cold ad traffic + CTA tracking |
-| `src/components/audit/audit-app.tsx` | **Modify** | Swap `IntroScreen` -> `AuditLandingContent` |
-| `src/components/audit/intro-screen.tsx` | **Delete** | Replaced by `audit-landing.tsx` |
-| `src/hooks/use-audit.ts` | **Modify** | Add `audit_answer_selected` + `audit_abandoned` on reset |
-| `src/components/audit/audit-wizard.tsx` | **Modify** | Add `audit_step_viewed` event |
-| `src/components/audit/results-view.tsx` | **Modify** | Add `audit_results_viewed` event |
-| `app/audit/page.tsx` | **Modify** | Enhanced metadata + page spacing |
-| `src/lib/clients.ts` | Read-only | Client data for trust strip |
-| `src/lib/team.ts` | Read-only | Team data for "Who We Are" block |
-| `src/lib/services.ts` | Read-only | Services data for overview block |
-| `src/components/sections/faq-section.tsx` | Read-only | Reuse `FaqAccordion` export |
-| `src/components/layout/animated-section.tsx` | Read-only | `AnimatedSection` + `Reveal` wrappers |
-| `src/components/layout/dot-grid-background.tsx` | Read-only | `BlueprintCorners` component |
-| `src/components/tracked-link.tsx` | Read-only | `TrackedLink` for secondary CTAs |
+| File                                            | Action     | Purpose                                                  |
+| ----------------------------------------------- | ---------- | -------------------------------------------------------- |
+| `src/components/audit/audit-landing.tsx`        | **Create** | Full landing page for cold ad traffic + CTA tracking     |
+| `src/components/audit/audit-app.tsx`            | **Modify** | Swap `IntroScreen` -> `AuditLandingContent`              |
+| `src/components/audit/intro-screen.tsx`         | **Delete** | Replaced by `audit-landing.tsx`                          |
+| `src/hooks/use-audit.ts`                        | **Modify** | Add `audit_answer_selected` + `audit_abandoned` on reset |
+| `src/components/audit/audit-wizard.tsx`         | **Modify** | Add `audit_step_viewed` event                            |
+| `src/components/audit/results-view.tsx`         | **Modify** | Add `audit_results_viewed` event                         |
+| `app/audit/page.tsx`                            | **Modify** | Enhanced metadata + page spacing                         |
+| `src/lib/clients.ts`                            | Read-only  | Client data for trust strip                              |
+| `src/lib/team.ts`                               | Read-only  | Team data for "Who We Are" block                         |
+| `src/lib/services.ts`                           | Read-only  | Services data for overview block                         |
+| `src/components/sections/faq-section.tsx`       | Read-only  | Reuse `FaqAccordion` export                              |
+| `src/components/layout/animated-section.tsx`    | Read-only  | `AnimatedSection` + `Reveal` wrappers                    |
+| `src/components/layout/dot-grid-background.tsx` | Read-only  | `BlueprintCorners` component                             |
+| `src/components/tracked-link.tsx`               | Read-only  | `TrackedLink` for secondary CTAs                         |

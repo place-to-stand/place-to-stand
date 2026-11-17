@@ -74,9 +74,9 @@ interface StoredAttribution {
   utmTerm: string | null
   utmContent: string | null
   gclid: string | null
-  referrer: string | null      // document.referrer at first touch
-  landingPath: string | null   // pathname at first touch
-  capturedAt: string           // ISO 8601, drives the TTL
+  referrer: string | null // document.referrer at first touch
+  landingPath: string | null // pathname at first touch
+  capturedAt: string // ISO 8601, drives the TTL
 }
 ```
 
@@ -128,12 +128,12 @@ Three constraints drive this:
 
 ## Changes
 
-| File | Change |
-|---|---|
-| `src/lib/forms/attribution-store.ts` | **New.** `readStoredAttribution()`, `captureAttribution()`, the TTL constant, the storage key. All storage access wrapped in try/catch, matching `src/lib/audit/session.ts:106-124` — Safari private mode throws on `setItem` and must never break a page render. |
-| `src/components/attribution-capture.tsx` | **New.** Client component. `useSearchParams()` + `usePathname()` in a `useEffect` calling `captureAttribution()`. Renders `null`. |
-| `app/layout.tsx` | Mount `<Suspense fallback={null}><AttributionCapture /></Suspense>` inside `<body>`, as a sibling of `PostHogProvider`, not a child. |
-| `src/lib/forms/context.ts` | `collectSubmissionContext()` merges current URL over stored per § Read precedence. Signature unchanged. Replace the stale limitation comment at lines 84-91 with a description of the precedence rule. |
+| File                                     | Change                                                                                                                                                                                                                                                            |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/lib/forms/attribution-store.ts`     | **New.** `readStoredAttribution()`, `captureAttribution()`, the TTL constant, the storage key. All storage access wrapped in try/catch, matching `src/lib/audit/session.ts:106-124` — Safari private mode throws on `setItem` and must never break a page render. |
+| `src/components/attribution-capture.tsx` | **New.** Client component. `useSearchParams()` + `usePathname()` in a `useEffect` calling `captureAttribution()`. Renders `null`.                                                                                                                                 |
+| `app/layout.tsx`                         | Mount `<Suspense fallback={null}><AttributionCapture /></Suspense>` inside `<body>`, as a sibling of `PostHogProvider`, not a child.                                                                                                                              |
+| `src/lib/forms/context.ts`               | `collectSubmissionContext()` merges current URL over stored per § Read precedence. Signature unchanged. Replace the stale limitation comment at lines 84-91 with a description of the precedence rule.                                                            |
 
 `src/components/sections/contact-section.tsx` and `src/lib/audit/session.ts` are untouched — they call
 `collectSubmissionContext()` and inherit the fix.
@@ -146,8 +146,8 @@ Three constraints drive this:
   in-progress audits to fix at most a handful of rows. It self-heals in a week.
 - **Storage refused.** Every read and write is best-effort. With storage unavailable the behaviour
   degrades to exactly what ships today, which is the correct floor.
-- **`landingPath` semantics change.** Rows written before this change store the *submission* path;
-  rows after store the *landing* path. Same column, two meanings, split at the deploy date. Note it
+- **`landingPath` semantics change.** Rows written before this change store the _submission_ path;
+  rows after store the _landing_ path. Same column, two meanings, split at the deploy date. Note it
   wherever the field is analysed. The new meaning is the one the name always implied.
 - **The stored `referrer` will differ from today's value** for anyone who lands, leaves the site, and
   returns before converting. First-touch referrer is the intended semantics.
