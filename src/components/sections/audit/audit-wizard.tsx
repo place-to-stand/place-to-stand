@@ -259,7 +259,7 @@ export function AuditWizard({
           ref={questionRef}
           tabIndex={-1}
           // oxlint-disable-next-line design/no-raw-focus -- focused only by script, to announce the next question; not a control
-          className='duration-300 animate-in outline-none fade-in slide-in-from-right-2 motion-reduce:animate-none'
+          className='animate-in duration-300 outline-none fade-in slide-in-from-right-2 motion-reduce:animate-none'
         >
           <QuestionField
             question={question}

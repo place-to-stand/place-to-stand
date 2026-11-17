@@ -59,5 +59,3 @@ next-env.d.ts
 /tests/visual/current/
 /tests/visual/diff/
 
-# prettier --cache (npm run format, format:write)
-.cache/

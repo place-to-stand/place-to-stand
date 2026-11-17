@@ -37,9 +37,9 @@ jobs:
         run: npm ci
       - uses: actions/cache@v4
         with:
-          path: |
-            .cache/prettier
-            .next/cache
+          # Next's build cache. Prettier runs without one: its cache misses
+          # class-order changes that come from app/globals.css.
+          path: .next/cache
           key: checks-${{ hashFiles('package-lock.json') }}-${{ github.sha }}
           restore-keys: checks-${{ hashFiles('package-lock.json') }}-
       - run: npm run format

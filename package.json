@@ -16,8 +16,8 @@
     "test:budget": "node scripts/budget.mjs",
     "test:a11y": "node scripts/a11y.mjs",
     "test:design": "npm run test:contrast && npm run test:a11y && npm run test:visual && npm run test:budget",
-    "format": "prettier --check --cache --cache-location=.cache/prettier \"**/*.{ts,tsx,js,json,md}\"",
-    "format:write": "prettier --write --cache --cache-location=.cache/prettier \"**/*.{ts,tsx,js,json,md}\"",
+    "format": "prettier --check \"**/*.{ts,tsx,js,json,md}\"",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
     "type-check": "next typegen && node node_modules/typescript-7/bin/tsc --noEmit",
     "test:lint-rules": "node --test lint/tests/"
   },

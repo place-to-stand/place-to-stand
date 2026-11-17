@@ -56,7 +56,8 @@ labels, dates and badges, used sparingly. Nothing under 12px.
 
 - **CI** (`.github/workflows/ci.yml`) runs `npm run format`, `npm run lint`, `npm run type-check` and
   `npm run build` on every pull request and push to `main`, on the Node version in `.nvmrc`, with
-  `node_modules`, Prettier's cache and Next's `.next/cache` restored from the cache.
+  `node_modules` and Next's `.next/cache` restored from the cache. Prettier runs uncached (about 3s): its cache
+  would miss class-order changes that come from `app/globals.css`.
 - **Lint is Oxlint.** Rules live in `lint/config.mjs` (ESLint's flat format: Next's recommended presets from
   `lint/presets.json`, then the design rules in `lint/rules/design.mjs`); `lint/to-oxlint.mjs` turns it into
   Oxlint's config. Rules Oxlint implements identically run natively; the rest run from their original ESLint
