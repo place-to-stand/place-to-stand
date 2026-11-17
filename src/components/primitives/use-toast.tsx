@@ -1,217 +1,72 @@
 'use client'
 
-import * as React from 'react'
-import type { ToastProps } from '@radix-ui/react-toast'
+import { Toast as ToastPrimitive } from '@base-ui/react/toast'
+import type { ReactNode } from 'react'
 import {
-  ToastAction,
+  Toast,
   ToastClose,
   ToastDescription,
-  ToastProvider,
   ToastTitle,
   ToastViewport,
-  Toast,
   type ToastVariant,
 } from '@/src/components/primitives/toast'
 
-type ToastActionElement = React.ReactElement<typeof ToastAction>
-
 const TOAST_LIMIT = 5
-const TOAST_REMOVE_DELAY = 1000
 
-const actionTypes = {
-  ADD_TOAST: 'ADD_TOAST',
-  UPDATE_TOAST: 'UPDATE_TOAST',
-  DISMISS_TOAST: 'DISMISS_TOAST',
-  REMOVE_TOAST: 'REMOVE_TOAST',
-} as const
+// One manager for the whole site, so `toast()` works from any callback,
+// inside React or not. <Toaster /> in the root layout renders what it holds.
+const toastManager = ToastPrimitive.createToastManager()
 
-type ActionType = typeof actionTypes
-
-type ToastActionType =
-  | {
-      type: ActionType['ADD_TOAST']
-      toast: ToastData
-    }
-  | {
-      type: ActionType['UPDATE_TOAST']
-      toast: Partial<ToastData>
-    }
-  | {
-      type: ActionType['DISMISS_TOAST']
-      toastId?: ToastData['id']
-    }
-  | {
-      type: ActionType['REMOVE_TOAST']
-      toastId?: ToastData['id']
-    }
-
-type State = {
-  toasts: ToastData[]
-}
-
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
-
-const addToRemoveQueue = (toastId: string) => {
-  if (toastTimeouts.has(toastId)) {
-    return
-  }
-
-  const timeout = setTimeout(() => {
-    toastTimeouts.delete(toastId)
-    dispatch({
-      type: actionTypes.REMOVE_TOAST,
-      toastId,
-    })
-  }, TOAST_REMOVE_DELAY)
-
-  toastTimeouts.set(toastId, timeout)
-}
-
-export type ToastData = ToastProps & {
-  id: string
-  title?: React.ReactNode
-  description?: React.ReactNode
-  action?: ToastActionElement
+export type ToastData = {
+  title?: ReactNode
+  description?: ReactNode
   variant?: ToastVariant
 }
 
-const toastReducer = (state: State, action: ToastActionType): State => {
-  switch (action.type) {
-    case actionTypes.ADD_TOAST:
-      return {
-        ...state,
-        toasts: [action.toast, ...state.toasts].slice(0, TOAST_LIMIT),
-      }
-
-    case actionTypes.UPDATE_TOAST:
-      return {
-        ...state,
-        toasts: state.toasts.map(toast =>
-          toast.id === action.toast.id ? { ...toast, ...action.toast } : toast
-        ),
-      }
-
-    case actionTypes.DISMISS_TOAST: {
-      const { toastId } = action
-
-      if (toastId) {
-        addToRemoveQueue(toastId)
-      } else {
-        state.toasts.forEach(toast => {
-          addToRemoveQueue(toast.id)
-        })
-      }
-
-      return {
-        ...state,
-        toasts: state.toasts.map(toast =>
-          toast.id === toastId || toastId === undefined
-            ? {
-                ...toast,
-                open: false,
-              }
-            : toast
-        ),
-      }
-    }
-
-    case actionTypes.REMOVE_TOAST:
-      if (action.toastId === undefined) {
-        return {
-          ...state,
-          toasts: [],
-        }
-      }
-      return {
-        ...state,
-        toasts: state.toasts.filter(toast => toast.id !== action.toastId),
-      }
-  }
-}
-
-const listeners: Array<React.Dispatch<React.SetStateAction<State>>> = []
-
-let memoryState: State = { toasts: [] }
-
-function dispatch(action: ToastActionType) {
-  memoryState = toastReducer(memoryState, action)
-  listeners.forEach(listener => {
-    listener(memoryState)
+export function toast({ title, description, variant }: ToastData) {
+  const id = toastManager.add({
+    title,
+    description,
+    type: variant ?? 'default',
   })
-}
-
-export function toast({ ...props }: Omit<ToastData, 'id'>) {
-  const id = crypto.randomUUID()
-
-  const update = (props: Partial<ToastData>) =>
-    dispatch({
-      type: actionTypes.UPDATE_TOAST,
-      toast: { ...props, id },
-    })
-  const dismiss = () =>
-    dispatch({ type: actionTypes.DISMISS_TOAST, toastId: id })
-
-  dispatch({
-    type: actionTypes.ADD_TOAST,
-    toast: {
-      ...props,
-      id,
-      open: true,
-      onOpenChange: open => {
-        if (!open) dismiss()
-      },
-    },
-  })
-
   return {
     id,
-    dismiss,
-    update,
-  }
-}
-
-export function useToast() {
-  const [toastState, setToastState] = React.useState<State>(memoryState)
-
-  React.useEffect(() => {
-    listeners.push(setToastState)
-    return () => {
-      const index = listeners.indexOf(setToastState)
-      if (index > -1) {
-        listeners.splice(index, 1)
-      }
-    }
-  }, [])
-
-  return {
-    ...toastState,
-    toast,
-    dismiss: (toastId?: string) =>
-      dispatch({
-        type: actionTypes.DISMISS_TOAST,
-        toastId,
+    dismiss: () => toastManager.close(id),
+    update: (next: ToastData) =>
+      toastManager.update(id, {
+        title: next.title,
+        description: next.description,
+        type: next.variant ?? undefined,
       }),
   }
 }
 
-export function Toaster() {
-  const { toasts } = useToast()
+function ToastList() {
+  const { toasts } = ToastPrimitive.useToastManager()
+  // Newest last, so a new toast lands under the ones already showing.
+  return [...toasts].reverse().map(item => (
+    <Toast
+      key={item.id}
+      toast={item}
+      variant={item.type === 'destructive' ? 'destructive' : 'default'}
+    >
+      <div className='flex w-full flex-col gap-1'>
+        {item.title ? <ToastTitle /> : null}
+        {item.description ? <ToastDescription /> : null}
+      </div>
+      <ToastClose />
+    </Toast>
+  ))
+}
 
+export function Toaster() {
   return (
-    <ToastProvider>
-      {toasts.map(({ id, title, description, action, ...props }) => (
-        <Toast key={id} {...props}>
-          <div className='flex w-full flex-col gap-1'>
-            {title ? <ToastTitle>{title}</ToastTitle> : null}
-            {description ? (
-              <ToastDescription>{description}</ToastDescription>
-            ) : null}
-          </div>
-          {action}
-          <ToastClose />
-        </Toast>
-      ))}
-      <ToastViewport />
-    </ToastProvider>
+    <ToastPrimitive.Provider toastManager={toastManager} limit={TOAST_LIMIT}>
+      <ToastPrimitive.Portal>
+        <ToastViewport>
+          <ToastList />
+        </ToastViewport>
+      </ToastPrimitive.Portal>
+    </ToastPrimitive.Provider>
   )
 }

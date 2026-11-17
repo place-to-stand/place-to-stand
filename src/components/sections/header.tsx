@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState, type MouseEvent } from 'react'
-import * as Dialog from '@radix-ui/react-dialog'
+import { Dialog } from '@base-ui/react/dialog'
 import { AuditLink, BookCallButton } from '@/src/components/primitives/cta'
 import { TrackedLink } from '@/src/components/primitives/tracked-link'
 import { cn } from '@/src/lib/utils'
@@ -97,15 +97,13 @@ export function Header() {
 
           {/* Mobile menu: a sheet that slides in from the right */}
           <Dialog.Root open={mobileOpen} onOpenChange={setMobileOpen}>
-            <Dialog.Trigger asChild>
-              <button type='button' className='lg:hidden'>
-                <span className='sr-only'>Open navigation</span>
-                <Icon icon={Menu} size={24} className='text-text' />
-              </button>
+            <Dialog.Trigger className='lg:hidden'>
+              <span className='sr-only'>Open navigation</span>
+              <Icon icon={Menu} size={24} className='text-text' />
             </Dialog.Trigger>
             <Dialog.Portal>
-              <Dialog.Overlay className='sheet-overlay fixed inset-0 z-(--z-overlay) bg-bg/70 backdrop-blur-sm lg:hidden' />
-              <Dialog.Content
+              <Dialog.Backdrop className='sheet-overlay fixed inset-0 z-(--z-overlay) bg-bg/70 backdrop-blur-sm lg:hidden' />
+              <Dialog.Popup
                 id='mobile-nav'
                 className='sheet-panel fixed inset-y-0 right-0 z-(--z-overlay) flex w-[min(20rem,85vw)] flex-col border-l border-border bg-bg-card px-grid-1 pt-grid-half pb-grid-1 lg:hidden'
               >
@@ -113,11 +111,9 @@ export function Header() {
                   <Dialog.Title className='bp-label font-mono'>
                     Menu
                   </Dialog.Title>
-                  <Dialog.Close asChild>
-                    <button type='button' className='-mr-1 p-1'>
-                      <span className='sr-only'>Close navigation</span>
-                      <Icon icon={X} size={24} className='text-text' />
-                    </button>
+                  <Dialog.Close className='-mr-1 p-1'>
+                    <span className='sr-only'>Close navigation</span>
+                    <Icon icon={X} size={24} className='text-text' />
                   </Dialog.Close>
                 </div>
                 <Dialog.Description className='sr-only'>
@@ -163,7 +159,7 @@ export function Header() {
                     onClick={navigateFromSheet}
                   />
                 </div>
-              </Dialog.Content>
+              </Dialog.Popup>
             </Dialog.Portal>
           </Dialog.Root>
         </div>

@@ -1,8 +1,16 @@
 'use client'
 
-import { Slot } from '@radix-ui/react-slot'
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { forwardRef, type ButtonHTMLAttributes } from 'react'
+import {
+  Children,
+  forwardRef,
+  isValidElement,
+  type ButtonHTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from 'react'
 import { cn } from '@/src/lib/utils'
 import { Icon, Loader2 } from '@/src/components/primitives/icon'
 
@@ -66,29 +74,39 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loadingLabel,
       disabled,
       children,
+      type,
       ...props
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : 'button'
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size }), className)}
-        ref={ref}
-        disabled={disabled || loading}
-        aria-busy={loading || undefined}
-        {...props}
-      >
-        {loading ? (
+    // asChild: the one child element (a link, say) renders in place of the
+    // button, taking the button's classes and keeping its own content.
+    const child = asChild
+      ? (Children.only(children) as ReactElement<{ children?: ReactNode }>)
+      : undefined
+    const content =
+      child && isValidElement(child) ? child.props.children : children
+    return useRender({
+      defaultTagName: 'button',
+      render: child,
+      ref,
+      props: mergeProps<'button'>(props, {
+        className: cn(buttonVariants({ variant, size }), className),
+        // A <button> submits unless told otherwise; Base UI defaults to
+        // type="button", so keep the HTML default for buttons in forms.
+        type: child ? type : (type ?? 'submit'),
+        disabled: disabled || loading,
+        'aria-busy': loading || undefined,
+        children: loading ? (
           <>
             <Icon icon={Loader2} className='mr-2 animate-spin' />
-            {loadingLabel ?? children}
+            {loadingLabel ?? content}
           </>
         ) : (
-          children
-        )}
-      </Comp>
-    )
+          content
+        ),
+      }),
+    })
   }
 )
 

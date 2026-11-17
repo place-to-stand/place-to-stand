@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin 'tailwindcss-animate';
+@import 'tw-animate-css';
 
 /* Theme tokens — Dark Blueprint Theme. Single source of truth for design
    tokens: Tailwind v4 generates both the utility classes (bg-bg, text-text,
@@ -468,20 +468,20 @@ main {
     opacity: 0;
   }
 }
-.sheet-panel[data-state='open'] {
+.sheet-panel[data-open] {
   animation:
     sheet-in 220ms var(--ease-enter),
     overlay-in 220ms ease-out;
 }
-.sheet-panel[data-state='closed'] {
+.sheet-panel[data-closed] {
   animation:
     sheet-out 180ms var(--ease-exit),
     overlay-out 180ms ease-in;
 }
-.sheet-overlay[data-state='open'] {
+.sheet-overlay[data-open] {
   animation: overlay-in 220ms ease-out;
 }
-.sheet-overlay[data-state='closed'] {
+.sheet-overlay[data-closed] {
   animation: overlay-out 180ms ease-in;
 }
 @media (prefers-reduced-motion: reduce) {
