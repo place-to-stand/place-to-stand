@@ -41,6 +41,38 @@ export interface ContactSubmissionContext {
   client: SubmissionClientInfo
 }
 
+/**
+ * What the browser saw while the visitor filled in the form. The portal uses
+ * it, with the message wording, to flag spam (see the portal's
+ * `lib/form-submissions/spam.ts`). Flagged submissions are still recorded and
+ * listed; they just send no email. So nothing here ever blocks a visitor.
+ */
+export interface ContactBotSignals {
+  /** True when the hidden trap field held any text. People never see it. */
+  honeypot: boolean
+  /** Milliseconds from the form loading to Send. Null when unknown. */
+  elapsedMs: number | null
+}
+
+/**
+ * The server action takes these from the browser, so they arrive untyped.
+ * Anything malformed is dropped rather than guessed at.
+ */
+export function sanitizeBotSignals(value: unknown): ContactBotSignals | null {
+  if (typeof value !== 'object' || value === null) return null
+  const { honeypot, elapsedMs } = value as Record<string, unknown>
+  if (typeof honeypot !== 'boolean') return null
+  return {
+    honeypot,
+    elapsedMs:
+      typeof elapsedMs === 'number' &&
+      Number.isFinite(elapsedMs) &&
+      elapsedMs >= 0
+        ? Math.round(elapsedMs)
+        : null,
+  }
+}
+
 export interface ContactSubmissionPayload {
   submissionId: string
   sourceDetail: string
@@ -54,6 +86,8 @@ export interface ContactSubmissionPayload {
    * confirmation. The site sends no email of its own.
    */
   deliver: boolean
+  /** Left out when the browser sent none. */
+  bot?: ContactBotSignals
 }
 
 /**
@@ -96,11 +130,13 @@ export function buildContactSubmissionPayload({
   contact,
   userAgent,
   deliver,
+  bot = null,
 }: {
   context: ContactSubmissionContext
   contact: ContactSubmissionFields
   userAgent: string | null
   deliver: boolean
+  bot?: ContactBotSignals | null
 }): ContactSubmissionPayload {
   return {
     submissionId: context.submissionId,
@@ -111,5 +147,6 @@ export function buildContactSubmissionPayload({
     attribution: context.attribution,
     client: { ...context.client, userAgent },
     deliver,
+    ...(bot ? { bot } : {}),
   }
 }
