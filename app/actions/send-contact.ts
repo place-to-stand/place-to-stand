@@ -11,6 +11,8 @@ import {
 import {
   buildContactSubmissionPayload,
   emptyContactSubmissionContext,
+  sanitizeBotSignals,
+  type ContactBotSignals,
   type ContactSubmissionContext,
 } from '@/src/lib/forms/contact-payload'
 import {
@@ -67,7 +69,13 @@ export async function sendContact(
    * the client could not collect it; the submission still goes to the portal
    * with an empty envelope, because the portal is now the only delivery path.
    */
-  submissionContext?: ContactSubmissionContext
+  submissionContext?: ContactSubmissionContext,
+  /**
+   * Hidden-field and timing signals for the portal's spam check. Never used
+   * to refuse a submission: the visitor sees success either way, and the
+   * portal keeps the row but sends no email when it looks like spam.
+   */
+  botSignals?: ContactBotSignals
 ): Promise<ContactActionResult> {
   const parsed = contactSchema.safeParse(values)
   if (!parsed.success) {
@@ -137,6 +145,7 @@ export async function sendContact(
     },
     userAgent,
     deliver: true,
+    bot: sanitizeBotSignals(botSignals),
   })
 
   if (!target) {

@@ -36,7 +36,10 @@ import {
 } from '@/src/lib/forms/context'
 import { pushLeadConversion } from '@/src/lib/forms/conversion-tracking'
 import { HEARD_FROM_OTHER } from '@/src/lib/forms/heard-from'
-import type { ContactSubmissionContext } from '@/src/lib/forms/contact-payload'
+import type {
+  ContactBotSignals,
+  ContactSubmissionContext,
+} from '@/src/lib/forms/contact-payload'
 import {
   CONTACT_SUBJECT_OTHER,
   CONTACT_SUBJECTS,
@@ -61,6 +64,25 @@ function SubjectPrefill({
   }, [subject, onSubject])
 
   return null
+}
+
+const HONEYPOT_NAME = 'pts_contact_ref'
+
+/**
+ * Spam signals for the portal, read from the submit event. `timeStamp` is
+ * milliseconds since the page loaded, so a bot that loads the page and sends
+ * at once shows up as too fast; a person who arrived by a link from another
+ * page only looks slower, which is the safe way to be wrong.
+ */
+function readBotSignals(event?: React.BaseSyntheticEvent): ContactBotSignals {
+  const form =
+    event?.target instanceof HTMLFormElement ? event.target : undefined
+  const trap = form?.elements.namedItem(HONEYPOT_NAME)
+  return {
+    honeypot: trap instanceof HTMLInputElement && trap.value !== '',
+    elapsedMs:
+      typeof event?.timeStamp === 'number' ? Math.round(event.timeStamp) : null,
+  }
 }
 
 export function ContactSection() {
@@ -99,7 +121,7 @@ export function ContactSection() {
     [form]
   )
 
-  const onSubmit = form.handleSubmit(values => {
+  const onSubmit = form.handleSubmit((values, event) => {
     const id = submissionId ?? createSubmissionId()
     if (!submissionId) setSubmissionId(id)
 
@@ -110,9 +132,10 @@ export function ContactSection() {
       attribution,
       client,
     }
+    const botSignals = readBotSignals(event)
 
     startTransition(() => {
-      void sendContact(values, submissionContext)
+      void sendContact(values, submissionContext, botSignals)
         .then((result: ContactActionResult) => {
           if (!result.success) {
             posthog?.capture('contact_form_failed')
@@ -138,6 +161,10 @@ export function ContactSection() {
           }
 
           form.reset()
+          // The next message is a new submission, not a retry of this one.
+          // Keeping the id would make the portal treat it as a replay and
+          // write it over this row.
+          setSubmissionId(null)
           setIsSuccess(true)
           posthog?.capture('contact_form_submitted', {
             heard_from: values.heardFrom || null,
@@ -177,6 +204,19 @@ export function ContactSection() {
           }`}
           aria-hidden={isSuccess}
         >
+          {/* Trap for form-filling bots: off screen, out of the tab order
+              and hidden from screen readers, so people never fill it. */}
+          <div aria-hidden='true' className='sr-only'>
+            <label htmlFor='pts-contact-ref'>Leave this field empty</label>
+            <input
+              id='pts-contact-ref'
+              name={HONEYPOT_NAME}
+              type='text'
+              tabIndex={-1}
+              autoComplete='off'
+              defaultValue=''
+            />
+          </div>
           <div className='flex flex-col gap-2'>
             <Label htmlFor='name'>Name</Label>
             <Input
