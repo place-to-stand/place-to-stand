@@ -204,9 +204,10 @@ export function ContactSection() {
           }`}
           aria-hidden={isSuccess}
         >
-          {/* Trap for form-filling bots: off screen, out of the tab order
-              and hidden from screen readers, so people never fill it. */}
-          <div aria-hidden='true' className='sr-only'>
+          {/* Trap for form-filling bots: visually hidden and out of the tab
+              order. Screen readers still reach it, so its label tells
+              people to leave it empty. */}
+          <div className='sr-only'>
             <label htmlFor='pts-contact-ref'>Leave this field empty</label>
             <input
               id='pts-contact-ref'
