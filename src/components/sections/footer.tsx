@@ -38,6 +38,11 @@ const PROFILES = [
     name: 'GitHub',
   },
   {
+    network: 'npm' as const,
+    href: 'https://www.npmjs.com/org/placetostand',
+    name: 'npm',
+  },
+  {
     network: 'clutch' as const,
     href: 'https://clutch.co/profile/place-stand-agency',
     name: 'Clutch',
